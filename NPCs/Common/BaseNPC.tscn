@@ -1,8 +1,9 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://NPCs/BaseNPC.gd" type="Script" id=1]
+[ext_resource path="res://NPCs/Common/BaseNPC.gd" type="Script" id=1]
 [ext_resource path="res://NPCs/Temple/Nasht.png" type="Texture" id=2]
-[ext_resource path="res://NPCs/InteractableArea.gd" type="Script" id=3]
+[ext_resource path="res://NPCs/Common/InteractableArea.gd" type="Script" id=3]
+
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 8, 8 )

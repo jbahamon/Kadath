@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "BaseNPC",
 "language": "GDScript",
-"path": "res://NPCs/BaseNPC.gd"
+"path": "res://NPCs/Common/BaseNPC.gd"
 }, {
 "base": "CanvasLayer",
 "class": "BlockingDialogBox",
@@ -32,7 +32,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "FSMState",
 "language": "GDScript",
-"path": "res://NPCs/FSMState.gd"
+"path": "res://NPCs/Common/FSMState.gd"
 } ]
 _global_script_class_icons={
 "BaseNPC": "",
