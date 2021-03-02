@@ -1,8 +1,9 @@
 extends KinematicBody2D
 
+class_name Player
 
 const walk_speed = 120
-const interaction_vector = Vector2(16, 8)
+const interaction_vector = Vector2(20, 10)
 
 
 var input_vector = Vector2.ZERO
@@ -17,8 +18,8 @@ onready var animation_state = animation_tree.get("parameters/playback")
 func _unhandled_input(event):
 	if event.is_action_pressed("interact"):
 		raycast.force_raycast_update()
-		if raycast.is_colliding() and raycast.get_collider().has_method("trigger_interaction"):
-			raycast.get_collider().trigger_interaction()
+		if raycast.is_colliding() and raycast.get_collider().has_method("on_player_interaction"):
+			raycast.get_collider().on_player_interaction(self)
 			
 			
 

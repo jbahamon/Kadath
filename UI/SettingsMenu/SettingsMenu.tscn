@@ -1,0 +1,165 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://PixelInterface/Theme.tres" type="Theme" id=1]
+[ext_resource path="res://UI/SettingsMenu/SettingsMenu.gd" type="Script" id=2]
+[ext_resource path="res://UI/SettingsMenu/ListenForInputPopup.gd" type="Script" id=3]
+[ext_resource path="res://PixelInterface/Style/Stone.tres" type="StyleBox" id=4]
+
+[node name="ScrollContainer" type="ScrollContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+follow_focus = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+margin_right = 320.0
+margin_bottom = 240.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Settings" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 44.0
+margin_top = 72.0
+margin_right = 275.0
+margin_bottom = 167.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sliders" type="GridContainer" parent="CenterContainer/Settings"]
+margin_right = 231.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+
+[node name="MusicVolumeLabel" type="Label" parent="CenterContainer/Settings/Sliders"]
+margin_top = 4.0
+margin_right = 60.0
+margin_bottom = 15.0
+text = "Music Volume:"
+
+[node name="MusicVolumeSlider" type="HSlider" parent="CenterContainer/Settings/Sliders"]
+margin_left = 64.0
+margin_right = 231.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+step = 5.0
+editable = false
+tick_count = 3
+ticks_on_borders = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SFX VolumeLabel" type="Label" parent="CenterContainer/Settings/Sliders"]
+margin_top = 28.0
+margin_right = 60.0
+margin_bottom = 39.0
+text = "SFX Volume:"
+
+[node name="SFXVolumeSlider" type="HSlider" parent="CenterContainer/Settings/Sliders"]
+margin_left = 64.0
+margin_top = 24.0
+margin_right = 231.0
+margin_bottom = 44.0
+size_flags_horizontal = 3
+step = 5.0
+editable = false
+tick_count = 3
+ticks_on_borders = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text Speed" type="Label" parent="CenterContainer/Settings/Sliders"]
+margin_top = 52.0
+margin_right = 60.0
+margin_bottom = 63.0
+text = "Text Speed:"
+
+[node name="TextSpeedSlider" type="HSlider" parent="CenterContainer/Settings/Sliders"]
+margin_left = 64.0
+margin_top = 48.0
+margin_right = 231.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+max_value = 4.0
+step = 1.0
+tick_count = 5
+ticks_on_borders = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/Settings"]
+margin_top = 72.0
+margin_right = 231.0
+margin_bottom = 76.0
+
+[node name="ConfigureLabel" type="Label" parent="CenterContainer/Settings"]
+margin_top = 80.0
+margin_right = 231.0
+margin_bottom = 91.0
+text = "Configure Input (you can use your mouse for this):"
+
+[node name="InputControls" type="GridContainer" parent="CenterContainer/Settings"]
+margin_top = 95.0
+margin_right = 231.0
+margin_bottom = 95.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+columns = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Popups" type="Node" parent="."]
+
+[node name="ListenForInputPopup" type="PopupPanel" parent="Popups"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -60.5
+margin_top = -20.0
+margin_right = 60.5
+margin_bottom = 20.0
+size_flags_horizontal = 12
+size_flags_vertical = 12
+theme = ExtResource( 1 )
+custom_styles/panel = ExtResource( 4 )
+popup_exclusive = true
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PressKeyLabel" type="Label" parent="Popups/ListenForInputPopup"]
+margin_left = 14.0
+margin_top = 14.0
+margin_right = 107.0
+margin_bottom = 26.0
+size_flags_horizontal = 13
+size_flags_vertical = 12
+text = "Press key for \"Up\"..."
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="key_pressed" from="Popups/ListenForInputPopup" to="CenterContainer/Settings" method="_on_ListenForInputPopup_key_pressed"]

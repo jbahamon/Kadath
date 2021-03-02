@@ -1,0 +1,8 @@
+{
+  "pendant": {
+    "name": "Pendant",
+    "description": "A mysterious pendant given to you by the Priests of the Cavern of Flame. Seems to help understanding different languages.",
+    "type": "quest",
+    "max_amount": 1
+  }
+}
