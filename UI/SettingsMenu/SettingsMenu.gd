@@ -3,7 +3,7 @@ extends VBoxContainer
 # Order is important here
 const labels = {
 	"ui_up": "Up",
-	"ui_accept"	: "Accept/Interact",
+	"ui_accept": "Accept/Interact",
 	"ui_down": "Down",
 	"ui_cancel": "Cancel",
 	"ui_left": "Left",
@@ -14,7 +14,7 @@ const labels = {
 
 var buttons: Dictionary
 
-onready var grid: GridContainer = $InputControls
+onready var grid: GridContainer = $InputVBox/InputControls
 onready var input_popup: Popup = $"../../Popups/ListenForInputPopup"
 
 func _ready():
@@ -35,7 +35,7 @@ func add_input_option(action: String, label_text: String):
 func add_label(label_text: String):
 	var label = Label.new()
 	label.text = label_text
-	label.align = ALIGN_END
+	label.align = Label.ALIGN_RIGHT
 	grid.add_child(label)
 	
 func add_button(action: String):

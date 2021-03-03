@@ -77,7 +77,6 @@ text = "Quit"
 [node name="Popups" type="Node" parent="."]
 
 [node name="SavesPopup" type="PopupPanel" parent="Popups"]
-visible = true
 theme = ExtResource( 3 )
 custom_styles/panel = ExtResource( 4 )
 script = ExtResource( 5 )
@@ -88,8 +87,8 @@ __meta__ = {
 [node name="Scroll" type="ScrollContainer" parent="Popups/SavesPopup"]
 margin_left = 14.0
 margin_top = 14.0
-margin_right = 32.0
-margin_bottom = 32.0
+margin_right = 14.0
+margin_bottom = 14.0
 follow_focus = true
 scroll_horizontal_enabled = false
 __meta__ = {
@@ -97,7 +96,6 @@ __meta__ = {
 }
 
 [node name="SavesList" type="VBoxContainer" parent="Popups/SavesPopup/Scroll"]
-margin_right = 18.0
 size_flags_horizontal = 3
 alignment = 1
 __meta__ = {
@@ -105,7 +103,6 @@ __meta__ = {
 }
 
 [node name="InputPopup" type="PopupPanel" parent="Popups"]
-visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3

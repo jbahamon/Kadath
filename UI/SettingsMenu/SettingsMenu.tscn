@@ -28,16 +28,12 @@ __meta__ = {
 
 [node name="Settings" type="VBoxContainer" parent="CenterContainer"]
 margin_left = 44.0
-margin_top = 72.0
+margin_top = 76.0
 margin_right = 275.0
-margin_bottom = 167.0
+margin_bottom = 163.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-alignment = 1
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Sliders" type="GridContainer" parent="CenterContainer/Settings"]
 margin_right = 231.0
@@ -65,7 +61,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SFX VolumeLabel" type="Label" parent="CenterContainer/Settings/Sliders"]
+[node name="SFXVolumeLabel" type="Label" parent="CenterContainer/Settings/Sliders"]
 margin_top = 28.0
 margin_right = 60.0
 margin_bottom = 39.0
@@ -98,28 +94,26 @@ margin_right = 231.0
 margin_bottom = 68.0
 size_flags_horizontal = 3
 max_value = 4.0
-step = 1.0
 tick_count = 5
 ticks_on_borders = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HSeparator" type="HSeparator" parent="CenterContainer/Settings"]
+[node name="InputVBox" type="VBoxContainer" parent="CenterContainer/Settings"]
 margin_top = 72.0
 margin_right = 231.0
-margin_bottom = 76.0
+margin_bottom = 87.0
 
-[node name="ConfigureLabel" type="Label" parent="CenterContainer/Settings"]
-margin_top = 80.0
+[node name="ConfigureLabel" type="Label" parent="CenterContainer/Settings/InputVBox"]
 margin_right = 231.0
-margin_bottom = 91.0
+margin_bottom = 11.0
 text = "Configure Input (you can use your mouse for this):"
 
-[node name="InputControls" type="GridContainer" parent="CenterContainer/Settings"]
-margin_top = 95.0
+[node name="InputControls" type="GridContainer" parent="CenterContainer/Settings/InputVBox"]
+margin_top = 15.0
 margin_right = 231.0
-margin_bottom = 95.0
+margin_bottom = 15.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 1 )

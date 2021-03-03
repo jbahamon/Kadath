@@ -1,4 +1,4 @@
-enum ItemCategory {CONSUMABLE, QUEST, EQUIPMENT, OTHER}
+enum ItemCategory {CONSUMABLE, WEAPON, ARMOR, ACCESSORY, QUEST, OTHER}
 
 class_name InventoryItem
 
@@ -9,6 +9,9 @@ var category: int
 
 var amount: int
 var max_amount: int
+
+var usable_outside_of_battle = false
+var usable_in_battle = false
 
 
 func _init(new_item_id, definition, n=1):
@@ -30,7 +33,9 @@ func remove(n: int):
 
 static func category_from_string(string: String):
 	match string:
-		"equipment": return ItemCategory.EQUIPMENT
+		"armor": return ItemCategory.ARMOR
+		"weapon": return ItemCategory.WEAPON
+		"accessory": return ItemCategory.ACCESSORY
 		"consumable": return ItemCategory.CONSUMABLE
 		"quest": return ItemCategory.QUEST
 		"other": return ItemCategory.OTHER

@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://UI/PauseMenu/ItemEntry.gd" type="Script" id=1]
+
+[node name="ItemEntry" type="HBoxContainer"]
+anchor_right = 1.0
+margin_bottom = 14.0
+focus_mode = 2
+size_flags_horizontal = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Icon" type="Label" parent="."]
+margin_right = 5.0
+margin_bottom = 14.0
+size_flags_horizontal = 12
+size_flags_vertical = 12
+text = "-"
+valign = 3
+
+[node name="ItemName" type="Label" parent="."]
+margin_left = 9.0
+margin_right = 297.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Pendant"
+valign = 3
+
+[node name="Amount" type="Label" parent="."]
+margin_left = 301.0
+margin_right = 320.0
+margin_bottom = 14.0
+grow_horizontal = 0
+size_flags_horizontal = 12
+size_flags_vertical = 3
+text = "x1 "
+align = 3
+valign = 1
+[connection signal="focus_entered" from="." to="." method="_on_ItemEntry_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_ItemEntry_focus_exited"]

@@ -2,7 +2,128 @@
   "pendant": {
     "name": "Pendant",
     "description": "A mysterious pendant given to you by the Priests of the Cavern of Flame. Seems to help understanding different languages.",
-    "type": "quest",
+    "category": "quest",
     "max_amount": 1
-  }
+  },
+
+  "moon-wine": {
+    "name": "Moon-wine",
+    "description": "A gourd of fermented sap from a haunted tree, grown from a seed dropt down by someone on the moon.",
+    "category": "quest",
+    "max_amount": 1
+  },
+
+  "ichor": {
+    "name": "Ichor",
+    "description": "Recovers 50HP.",
+    "category": "consumable",
+    "max_amount": 99
+  },
+
+  "essential-salts": {
+    "name": "Essential Salts",
+    "description": "Revives a fallen ally.",
+    "category": "consumable",
+    "max_amount": 99
+  },
+
+  "silver-key": {
+    "name": "The Silver Key",
+    "description": "A Key that might open something other than a gate.",
+    "category": "quest",
+    "max_amount": 1
+  },
+
+  "scimitar": {
+    "name": "Scimitar",
+    "description": "A curved, broad blade.",
+    "category": "weapon",
+    "max_amount": 99
+  },
+
+  "prismatic-robe": {
+    "name": "Prismatic Robe",
+    "description": "A robe fit for a Pharaoh.",
+    "category": "armor",
+    "max_amount": 99
+  },
+
+  "ring-of-zenig": {
+    "name": "Ring of Zenig",
+    "description": "A ring containing Zenig of Aphorat's skull.",
+    "category": "accessory",
+    "max_amount": 99
+  },
+
+  "golden-chain": {
+    "name": "Golden Chain",
+    "description": "An ornate chain that improves magic at the cost of speed.",
+    "category": "accessory",
+    "max_amount": 99
+  },
+
+
+  "pnakotic-manuscripts": {
+    "name": "Pnakotic Manuscripts",
+    "description": "The sacred texts revered by the city of Ulthar.",
+    "category": "quest",
+    "max_amount": 1
+  },
+
+
+  "books-of-hsan": {
+    "name": "Books of Hsan",
+    "description": "Books with arcane knowledge.",
+    "category": "quest",
+    "max_amount": 7
+  },
+
+
+  "ruby-bottle": {
+    "name": "Ruby bottle",
+    "description": "A bottle made from a single hollowed ruby, grotesquely carved in patterns too fabulous to be comprehended.",
+    "category": "other",
+    "max_amount": 99
+  },
+
+
+  "gravestone": {
+    "name": "Old Gravestone",
+    "description": "A heavy, old gravestone.",
+    "category": "weapon",
+    "max_amount": 99
+  },
+
+
+  "ornate-tombstone": {
+    "name": "Ornate Tombstone",
+    "description": "A tombstone with angels and cross engravings. Seems to have an effect on netherworld denizens.",
+    "category": "weapon",
+    "max_amount": 99
+  },
+
+
+  "ivory-flute": {
+    "name": "Ivory Flute",
+    "description": "A disgustingly carved flute that emits loathsome sounds. Might cause confusion.",
+    "category": "weapon",
+    "max_amount": 99
+  },
+
+
+  "ivory-claws": {
+    "name": "Ivory Claws",
+    "description": "Claws made from moon ivory. Might cause confusion.",
+    "category": "weapon",
+    "max_amount": 99
+  },
+
+
+  "milk": {
+    "name": "Milk",
+    "description": "Sweet milk from Ulthar that restores 50HP. Cats love it.",
+    "category": "consumable",
+    "max_amount": 99
+  },
+
 }
