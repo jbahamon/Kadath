@@ -5,3 +5,5 @@ func _ready():
 	set_tab_disabled(0, true)
 	set_tab_disabled(1, true)
 	set_current_tab(2)
+
+

@@ -106,7 +106,6 @@ func on_swap_input(event: InputEvent):
 		
 	get_tree().set_input_as_handled()
 
-
 func on_browse_input(event: InputEvent):
 	if event.is_action_pressed("ui_cancel"):
 		browse.disabled = false
@@ -130,6 +129,8 @@ func on_browse_input(event: InputEvent):
 		return
 		
 	get_tree().set_input_as_handled()
+	
+	
 func update_items():
 	remove_all_items()
 	add_all_items()
