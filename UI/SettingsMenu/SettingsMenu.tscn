@@ -5,13 +5,14 @@
 [ext_resource path="res://UI/SettingsMenu/ListenForInputPopup.gd" type="Script" id=3]
 [ext_resource path="res://PixelInterface/Style/Stone.tres" type="StyleBox" id=4]
 
-[node name="ScrollContainer" type="ScrollContainer"]
+[node name="SettingsMenu" type="ScrollContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 1 )
 follow_focus = true
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -33,7 +34,6 @@ margin_right = 275.0
 margin_bottom = 163.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource( 2 )
 
 [node name="Sliders" type="GridContainer" parent="CenterContainer/Settings"]
 margin_right = 231.0
@@ -54,7 +54,6 @@ margin_right = 231.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 step = 5.0
-editable = false
 tick_count = 3
 ticks_on_borders = true
 __meta__ = {
@@ -74,7 +73,6 @@ margin_right = 231.0
 margin_bottom = 44.0
 size_flags_horizontal = 3
 step = 5.0
-editable = false
 tick_count = 3
 ticks_on_borders = true
 __meta__ = {
@@ -104,6 +102,7 @@ __meta__ = {
 margin_top = 72.0
 margin_right = 231.0
 margin_bottom = 87.0
+size_flags_horizontal = 3
 
 [node name="ConfigureLabel" type="Label" parent="CenterContainer/Settings/InputVBox"]
 margin_right = 231.0
@@ -111,10 +110,11 @@ margin_bottom = 11.0
 text = "Configure Input (you can use your mouse for this):"
 
 [node name="InputControls" type="GridContainer" parent="CenterContainer/Settings/InputVBox"]
+margin_left = 115.0
 margin_top = 15.0
-margin_right = 231.0
+margin_right = 115.0
 margin_bottom = 15.0
-size_flags_horizontal = 3
+size_flags_horizontal = 4
 size_flags_vertical = 3
 theme = ExtResource( 1 )
 columns = 4

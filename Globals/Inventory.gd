@@ -42,6 +42,10 @@ func remove_item(item_id, n=1):
 				current_items.remove(i)
 			return
 
+func swap_items(i1, i2):
+	var temp_item = current_items[i1]
+	current_items[i1] = current_items[i2]
+	current_items[i2] = temp_item
 
 func has(item_id):
 	for item in current_items:

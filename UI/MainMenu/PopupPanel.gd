@@ -8,15 +8,13 @@ onready var v_box: VBoxContainer = $Scroll/SavesList
 
 func update_options(filenames):
 	
-	filenames = ["file1, file2"]
-	
 	for child in v_box.get_children():
 		v_box.remove_child(child)
 		child.queue_free()
 	
 	current_filenames = filenames
 		
-	for i in range(10):
+	for i in range(len(filenames)):
 		var new_button = Button.new()
 		
 		new_button.text = "File %d" % (i + 1)

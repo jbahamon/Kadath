@@ -1,7 +1,7 @@
 extends HBoxContainer
 
 var item: InventoryItem
-
+var _selected_while_unfocused = false
 func _ready():
 	if item != null:
 		set_item(item)
@@ -27,4 +27,10 @@ func _on_ItemEntry_focus_entered():
 
 
 func _on_ItemEntry_focus_exited():
-	$Icon.text = ""
+	if _selected_while_unfocused:
+		$Icon.text = "*"
+	else:
+		$Icon.text = ""
+	
+func set_selected_while_unfocused(val: bool):
+	_selected_while_unfocused = val

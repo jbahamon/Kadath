@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Items/InventoryItem.gd"
 }, {
+"base": "VBoxContainer",
+"class": "KeyboardBasedTabsContainer",
+"language": "GDScript",
+"path": "res://UI/PauseMenu/KeyboardBasedTabContainer/KeyboardBasedTabContainer.gd"
+}, {
 "base": "Node2D",
 "class": "LocalScene",
 "language": "GDScript",
@@ -71,6 +76,7 @@ _global_script_class_icons={
 "BlockingListSelection": "",
 "FSMState": "",
 "InventoryItem": "",
+"KeyboardBasedTabsContainer": "",
 "LocalScene": "",
 "Location": "",
 "NPCMovement": "",

@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends ScrollContainer
 
 # Order is important here
 const labels = {
@@ -14,9 +14,9 @@ const labels = {
 
 var buttons: Dictionary
 
-onready var grid: GridContainer = $InputVBox/InputControls
-onready var input_popup: Popup = $"../../Popups/ListenForInputPopup"
-
+onready var grid: GridContainer = $CenterContainer/Settings/InputVBox/InputControls
+onready var input_popup: Popup = $Popups/ListenForInputPopup
+onready var text_speed_slider = $CenterContainer/Settings/Sliders/TextSpeedSlider
 func _ready():
 	buttons = {}
 	for action in labels.keys():
@@ -64,25 +64,25 @@ func link_buttons():
 		var button: Button = buttons[keys[i]]
 		if i > 0:
 			if i % 2 != 0:
-				button.focus_neighbour_left = buttons[keys[i - 1]].get_path()
+				button.focus_neighbour_left = button.get_path_to(buttons[keys[i - 1]])
 			else:
-				button.focus_neighbour_left = button.get_path()
+				button.focus_neighbour_left = button.get_path_to(button)
 			
 		if i > 1:
-			button.focus_neighbour_top = buttons[keys[i - 2]].get_path()
+			button.focus_neighbour_top = button.get_path_to(buttons[keys[i - 2]])
 		else:
-			button.focus_neighbour_top = button.get_path()
+			button.focus_neighbour_top = button.get_path_to(text_speed_slider)
 			
 		if (i + 1) < len(keys):
 			if i % 2 == 0:
-				button.focus_neighbour_right = buttons[keys[i + 1]].get_path()
+				button.focus_neighbour_right = button.get_path_to(buttons[keys[i + 1]])
 			else:
-				button.focus_neighbour_right = button.get_path()
+				button.focus_neighbour_right = button.get_path_to(button)
 		
 		if (i + 2) < len(keys):
-			button.focus_neighbour_bottom = buttons[keys[i + 2]].get_path()
+			button.focus_neighbour_bottom = button.get_path_to(buttons[keys[i + 2]])
 		else:
-			button.focus_neighbour_bottom = button.get_path()
+			button.focus_neighbour_bottom = button.get_path_to(button)
 	
 	
 func _button_pressed(action: String):
@@ -107,4 +107,5 @@ func _on_ListenForInputPopup_key_pressed(action: String, event: InputEventKey):
 	buttons[action].grab_click_focus()
 	buttons[action].text = "<%s>" % OS.get_scancode_string(event.scancode)
 
-	
+func get_first_focusable_control():
+	return $CenterContainer/Settings/Sliders/MusicVolumeSlider
