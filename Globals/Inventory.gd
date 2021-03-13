@@ -26,7 +26,7 @@ func add_item(item_id, n=1):
 			return
 	
 	var item_definition = Constants.items[item_id]
-	current_items.push_back(ItemFactory.build_from_definition(
+	current_items.push_back(factory.build_from_definition(
 			item_id, 
 			item_definition, 
 			n
@@ -61,7 +61,6 @@ func update_test_items():
 		["scimitar", 1],
 		["ring-of-zenig", 2],
 		["essential-salts", 10],
-		["pendant", 3],
 		["milk", 5],
 		["ivory-claws", 2],
 		["ivory-flute", 1],

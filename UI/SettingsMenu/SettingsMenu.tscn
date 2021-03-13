@@ -156,4 +156,4 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="key_pressed" from="Popups/ListenForInputPopup" to="CenterContainer/Settings" method="_on_ListenForInputPopup_key_pressed"]
+[connection signal="key_pressed" from="Popups/ListenForInputPopup" to="." method="_on_ListenForInputPopup_key_pressed"]

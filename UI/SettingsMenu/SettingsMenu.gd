@@ -17,6 +17,8 @@ var buttons: Dictionary
 onready var grid: GridContainer = $CenterContainer/Settings/InputVBox/InputControls
 onready var input_popup: Popup = $Popups/ListenForInputPopup
 onready var text_speed_slider = $CenterContainer/Settings/Sliders/TextSpeedSlider
+
+
 func _ready():
 	buttons = {}
 	for action in labels.keys():

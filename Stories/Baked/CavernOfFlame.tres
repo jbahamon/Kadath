@@ -12,11 +12,80 @@ story = {
 "links": {
 
 },
-"text": "Hello, {player}."
+"text": "Hello, <player>."
 }
+}
+},
+2: {
+"nodes": {
+1: {
+"links": {
+0: 2
+},
+"text": "My name is Nasht. I am one of the main priests of the Cavern of Flame."
+},
+2: {
+"links": {
+
+},
+"text": "We were told of your arrival. This is for you."
+},
+3: {
+"links": {
+
+},
+"text": "Received [b]Amulet[/b]!"
+}
+}
+},
+3: {
+"nodes": {
+
+}
+},
+4: {
+"nodes": {
+
+}
+},
+5: {
+"nodes": {
+
+}
+},
+6: {
+"nodes": {
+
+}
+},
+7: {
+"nodes": {
+
+}
+},
+8: {
+"nodes": {
+
+}
+},
+9: {
+"nodes": {
+
+}
+},
+10: {
+"nodes": {
+
 }
 }
 }
 names = {
-"nasht_first_talk": 1
+"cavern_of_flame": 7,
+"dreamlands": 8,
+"kaman_thah_post_amulet": 4,
+"kaman_thah_pre_amulet": 3,
+"menu_tutorial": 5,
+"nasht_post_amulet": 1,
+"nasht_pre_amulet": 2,
+"priests": 6
 }

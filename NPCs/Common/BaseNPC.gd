@@ -4,21 +4,29 @@ class_name BaseNPC
 
 export (String) var npc_name
 export (Texture) var sprite_sheet
-export (int) var hframes = 4
+export (int) var hframes = 5
 export (int) var vframes = 5
 export (Vector2) var sprite_offset = Vector2(12, 33)
 export var dialog_name: String = "test_message"
-export (NodePath) var movement
+export (NodePath) var movement = null
 
 var facing = Vector2.DOWN
 
-onready var movement_node = get_node(movement)
+var movement_node 
 onready var sprite: Sprite = $Sprite
 onready var animation_tree: AnimationTree = $AnimationTree
 onready var animation_state = animation_tree.get("parameters/playback")
 onready var interactable_collision: CollisionShape2D = $InteractableArea/CollisionShape2D
 
 func _ready():
+	if movement != null:
+		movement_node = get_node(movement)
+		var base_movement = $NPCMovement
+		remove_child(base_movement)
+		base_movement.queue_free()
+	else:
+		movement_node = $NPCMovement
+		
 	sprite.texture = sprite_sheet
 	sprite.hframes = hframes
 	sprite.vframes = vframes

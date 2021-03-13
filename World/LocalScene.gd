@@ -2,7 +2,7 @@ extends Node2D
 class_name LocalScene
 
 var StoryReader = load("res://addons/EXP-System-Dialog/Reference_StoryReader/EXP_StoryReader.gd")
-var talk_speed = 3
+var talk_speed = 20.0
 var strings = { "player": "Arden", "preference": "none" }
 var current_location = null
 
@@ -34,12 +34,14 @@ func load_location(location_name):
 func talk(dialog_name):
 	var did = story_reader.get_did_via_record_name(dialog_name)
 	var pool = PoolStringArray()
+	var total_length = 0
 	for nid in story_reader.get_nids(did):
-		var text = story_reader.get_text(did, nid)
-		pool.append(text.format(strings))
+		var text = story_reader.get_text(did, nid).format(strings)
+		pool.append(text)
+		total_length += len(text)
 		
 	var total_text = pool.join("[break]")
-	dialog_box.append_text(total_text, len(total_text)/talk_speed)
+	dialog_box.append_text(total_text, total_length/talk_speed)
 	yield(dialog_box, "box_hidden")
 
 func _unhandled_input(event):
