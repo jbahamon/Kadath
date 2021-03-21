@@ -37,6 +37,7 @@ func _ready():
 			continue
 		MovementType.RANDOM_SPIN:
 			movement_node = RandomSpinMovement.instance()
+			movement_node.period += randf()
 			continue
 		MovementType.CUSTOM:
 			movement_node = get_node(custom_movement)

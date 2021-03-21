@@ -4,6 +4,9 @@ export var period: float = 2.0
 
 var time = 0
 
+func _ready():
+	time = randf() * period
+	
 func _process(delta):
 	time += delta
 	if time > period:
