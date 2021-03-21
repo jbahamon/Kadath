@@ -8,9 +8,7 @@ var current_location = null
 
 onready var world = $World
 onready var player: Player = $World/Player
-onready var dialog_box: BlockingDialogBox = $BlockingDialogBox
-onready var input_box: BlockingInputBox = $BlockingInputBox
-onready var list_selection: BlockingListSelection = $BlockingListSelection
+onready var dialog_box = $SimpleDialogBox
 onready var story_reader = StoryReader.new()
 onready var menu_popup: Popup = $MenuLayer/MenuPopup
 onready var menu = $MenuLayer/MenuPopup/PauseMenu
@@ -31,18 +29,34 @@ func load_location(location_name):
 	story_reader.read(story)
 	
 	
-func talk(dialog_name):
+func talk(source, dialog_name, from_node_id):
+	if not story_reader.has_record_name(dialog_name):
+		return
+		
 	var did = story_reader.get_did_via_record_name(dialog_name)
+	var nid = from_node_id
 	var pool = PoolStringArray()
-	var total_length = 0
-	for nid in story_reader.get_nids(did):
+	
+	while story_reader.has_nid(did, nid):
+		
 		var text = story_reader.get_text(did, nid).format(strings)
 		pool.append(text)
-		total_length += len(text)
 		
-	var total_text = pool.join("[break]")
-	dialog_box.append_text(total_text, total_length/talk_speed)
-	yield(dialog_box, "box_hidden")
+		var slots = story_reader.get_slots(did, nid)
+		
+		match len(slots):
+			0: 
+				dialog_box.queue_texts(pool)
+				yield(dialog_box, "dialog_closed")
+				return
+			1: 
+				nid = story_reader.get_nid_from_slot(did, nid, slots[0])
+			_: 
+				dialog_box.queue_texts(pool)
+				pool = PoolStringArray()
+				nid = source.get_next_nid(nid, slots)
+		
+	
 
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_menu"):

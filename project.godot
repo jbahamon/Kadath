@@ -14,21 +14,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://NPCs/Common/BaseNPC.gd"
 }, {
-"base": "CanvasLayer",
-"class": "BlockingDialogBox",
-"language": "GDScript",
-"path": "res://addons/blocking_dialog_box/blocking_dialog_box.gd"
-}, {
-"base": "CanvasLayer",
-"class": "BlockingInputBox",
-"language": "GDScript",
-"path": "res://addons/blocking_dialog_box/blocking_input_box.gd"
-}, {
-"base": "CanvasLayer",
-"class": "BlockingListSelection",
-"language": "GDScript",
-"path": "res://addons/blocking_dialog_box/blocking_list_selection.gd"
-}, {
 "base": "Reference",
 "class": "FSMState",
 "language": "GDScript",
@@ -71,9 +56,6 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "BaseNPC": "",
-"BlockingDialogBox": "",
-"BlockingInputBox": "",
-"BlockingListSelection": "",
 "FSMState": "",
 "InventoryItem": "",
 "KeyboardBasedTabsContainer": "",
@@ -109,7 +91,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "EXP-System-Dialog", "blocking_dialog_box" )
+enabled=PoolStringArray( "EXP-System-Dialog", "dialog_boxes" )
 
 [importer_defaults]
 

@@ -9,6 +9,10 @@
 [node name="Nasht" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 sprite_sheet = ExtResource( 4 )
+dialog_name = "nasht"
+
+[node name="Sprite" parent="." index="0"]
+frame = 1
 
 [node name="AnimationTree" parent="." index="3"]
 parameters/playback = SubResource( 1 )

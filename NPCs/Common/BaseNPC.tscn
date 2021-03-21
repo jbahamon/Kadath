@@ -1,9 +1,8 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://NPCs/Common/BaseNPC.gd" type="Script" id=1]
 [ext_resource path="res://NPCs/CavernOfFlame/Nasht.png" type="Texture" id=2]
 [ext_resource path="res://NPCs/Common/Interaction/InteractableArea.gd" type="Script" id=3]
-[ext_resource path="res://NPCs/Common/Movement/NPCMovement.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
@@ -221,7 +220,6 @@ texture = ExtResource( 2 )
 centered = false
 vframes = 5
 hframes = 4
-frame = 1
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -7 )
@@ -254,6 +252,3 @@ anims/walk_down = SubResource( 21 )
 anims/walk_left = SubResource( 22 )
 anims/walk_right = SubResource( 23 )
 anims/walk_up = SubResource( 24 )
-
-[node name="NPCMovement" type="Node" parent="."]
-script = ExtResource( 4 )

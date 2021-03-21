@@ -1,12 +1,18 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://NPCs/CavernOfFlame/Kaman-Thah.gd" type="Script" id=1]
+[ext_resource path="res://NPCs/CavernOfFlame/Kaman-Thah.png" type="Texture" id=2]
 [ext_resource path="res://NPCs/Common/BaseNPC.tscn" type="PackedScene" id=3]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=1]
 
 [node name="Kaman-Thah" instance=ExtResource( 3 )]
 script = ExtResource( 1 )
+sprite_sheet = ExtResource( 2 )
+dialog_name = "kaman_thah"
+
+[node name="Sprite" parent="." index="0"]
+frame = 1
 
 [node name="AnimationTree" parent="." index="3"]
 parameters/playback = SubResource( 1 )

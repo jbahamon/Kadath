@@ -10,47 +10,110 @@ story = {
 "nodes": {
 1: {
 "links": {
-
+0: 2
 },
-"text": "Hello, <player>."
-}
-}
+"text": "I am Nasht, chief Priest of the Cavern of Flame, entrance to the Dreamlands. 
+Tell me, traveler, what brings you to this sacred place?"
 },
 2: {
+"links": {
+0: 3
+},
+"text": "..."
+},
+3: {
+"links": {
+0: 4
+},
+"text": "It is a grave mistake to try and look for Kadath, traveler. There are only whispers of a single human ever coming near the Great Ones' city. 
+This will be the death of your soul. 
+Even then, I will not quench the flame of quests that burns within you."
+},
+4: {
+"links": {
+
+},
+"text": "Talk with the lesser priests. We will know when you've grasped the basics."
+},
+5: {
+"links": {
+0: 6
+},
+"text": "It seems you might be able to find your way through the Dreamlands.
+You should take this, too. It was left here for you."
+},
+6: {
+"links": {
+0: 7
+},
+"text": "Received [b]Amulet[/b]!"
+},
+7: {
+"links": {
+
+},
+"text": "You may pass. But I assure you, what you find might not be what you expect."
+}
+}
+},
+3: {
 "nodes": {
 1: {
 "links": {
 0: 2
 },
-"text": "My name is Nasht. I am one of the main priests of the Cavern of Flame."
+"text": "I am Kaman-Thah, chief Priest of the Cavern of Flame, entrance to the Dreamlands. 
+What is your reason for coming here, traveler?"
 },
 2: {
 "links": {
-
+0: 3
 },
-"text": "We were told of your arrival. This is for you."
+"text": "..."
 },
 3: {
 "links": {
-
+0: 4
 },
-"text": "Received [b]Amulet[/b]!"
-}
-}
-},
-3: {
-"nodes": {
-
-}
+"text": "Looking for Kadath? If the Great Ones don't want you there, you should respect their wishes. 
+And should your path take you to foreign dreamlands, it would do you well to know only three fully human souls have returned from such voyages...
+But oh well."
 },
 4: {
-"nodes": {
+"links": {
 
+},
+"text": "If you still want to go through, talk with the minor priests. We will know when you've grasped the basics."
+},
+5: {
+"links": {
+0: 6
+},
+"text": "Ah! You seem to be somewhat capable. We shall grant you access to the Dreamlands..
+You should take this, too. It was left here for you."
+},
+6: {
+"links": {
+0: 7
+},
+"text": "Received [b]Amulet[/b]!"
+},
+7: {
+"links": {
+
+},
+"text": "You may pass. An uncertain quest awaits you, traveler."
+}
 }
 },
 5: {
 "nodes": {
+1: {
+"links": {
 
+},
+"text": "Press <%s> to open the menu. Keeping track of your equipment and inventory is important!"
+}
 }
 },
 6: {
@@ -65,27 +128,65 @@ story = {
 },
 8: {
 "nodes": {
+1: {
+"links": {
 
-}
 },
-9: {
-"nodes": {
-
+"text": "I guess you want to enter the Dreamlands, if you're here. But they have been restless as of late."
+}
 }
 },
 10: {
 "nodes": {
+1: {
+"links": {
 
+},
+"text": "A lot of violence has erupted in the Dreamlands. Many creatures have become quite aggresive, and even some cities are in conflict. Be careful!"
+}
+}
+},
+11: {
+"nodes": {
+1: {
+"links": {
+
+},
+"text": ""
+}
+}
+},
+12: {
+"nodes": {
+1: {
+"links": {
+
+},
+"text": "During battle, you can take your time to choose your moves. You can attack your foes, use items, defend... Think before you move."
+}
+}
+},
+13: {
+"nodes": {
+1: {
+"links": {
+
+},
+"text": "This is the Elder Sign. If you see it carved upon an object, it means you can save your progress there. You will also be fully refreshed.
+The Great Ones sure are generous."
+}
 }
 }
 }
 names = {
+"battle_tutorial": 12,
 "cavern_of_flame": 7,
-"dreamlands": 8,
-"kaman_thah_post_amulet": 4,
-"kaman_thah_pre_amulet": 3,
+"dreamlands_conflict": 10,
+"dreamlands_setting": 8,
+"equipment_tutorial": 11,
+"kaman_thah": 3,
 "menu_tutorial": 5,
-"nasht_post_amulet": 1,
-"nasht_pre_amulet": 2,
-"priests": 6
+"nasht": 1,
+"priests": 6,
+"save_tutorial": 13
 }

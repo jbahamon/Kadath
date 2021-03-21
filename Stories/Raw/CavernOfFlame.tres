@@ -6,168 +6,203 @@
 script = ExtResource( 1 )
 TYPE = "EXP_Story_editor"
 names = {
+"battle_tutorial": 12,
 "cavern_of_flame": 7,
-"dreamlands": 8,
-"kaman_thah_in_approval": 4,
-"kaman_thah_pre_approval": 3,
+"dreamlands_conflict": 10,
+"dreamlands_setting": 8,
+"equipment_tutorial": 11,
+"kaman_thah": 3,
 "menu_tutorial": 5,
-"nasht_in_approval": 2,
-"nasht_post_approval": 9,
-"nasht_pre_approval": 1,
-"priests": 6
+"nasht": 1,
+"priests": 6,
+"save_tutorial": 13
 }
 story = {
 1: {
 "available_nid": [  ],
-"groups": [  ],
-"human_readable_description": "Initial Nasht dialogue. Warnings and miniquest.",
-"name": "nasht_pre_approval",
+"groups": [ "quest" ],
+"human_readable_description": "Nasht dialogue. ",
+"name": "nasht",
 "nodes": {
 1: {
-"graph_offset": Vector2( -180, -140 ),
+"graph_offset": Vector2( -180, -220 ),
 "links": {
 0: 2
 },
-"rect_size": Vector2( 654, 150 ),
+"rect_size": Vector2( 441, 194 ),
 "slot_amount": 1,
 "text": "I am Nasht, chief Priest of the Cavern of Flame, entrance to the Dreamlands. 
 Tell me, traveler, what brings you to this sacred place?",
 "type": "line"
 },
 2: {
-"graph_offset": Vector2( -180, 20 ),
+"graph_offset": Vector2( 280, -220 ),
 "links": {
 0: 3
 },
-"rect_size": Vector2( 671, 162 ),
+"rect_size": Vector2( 441, 169 ),
 "slot_amount": 1,
 "text": "...",
 "type": "line"
 },
 3: {
-"graph_offset": Vector2( -180, 180 ),
+"graph_offset": Vector2( 740, -220 ),
 "links": {
 0: 4
 },
-"rect_size": Vector2( 677, 179 ),
+"rect_size": Vector2( 441, 221.64 ),
 "slot_amount": 1,
-"text": "It is a grave mistake to try and look for Kadath, traveler. There are only whispers of a single soul ever coming near the Great Ones' city. 
-This will be the death of your soul.",
+"text": "It is a grave mistake to try and look for Kadath, traveler. There are only whispers of a single human ever coming near the Great Ones' city. 
+This will be the death of your soul. 
+Even then, I will not quench the flame of quests that burns within you.",
 "type": "line"
 },
 4: {
-"graph_offset": Vector2( -180, 360 ),
+"graph_offset": Vector2( 1220, -220 ),
 "links": {
 
 },
-"rect_size": Vector2( 679, 191 ),
+"rect_size": Vector2( 441, 228 ),
 "slot_amount": 1,
-"text": "Even then, I will not quench the flame of quests that burns within you.
-However, I cannot let you through unless you know the basics. 
-If you still desire to look for Kadath, obtain the approval of the lesser priests and talk to me afterwards.",
+"text": "Talk with the lesser priests. We will know when you've grasped the basics.",
 "type": "line"
-}
-}
 },
-2: {
-"available_nid": [ 2, 3 ],
-"groups": [  ],
-"human_readable_description": "Not all minor priests have been talked to.",
-"name": "nasht_in_approval",
-"nodes": {
-1: {
-"graph_offset": Vector2( 40, -200 ),
+5: {
+"graph_offset": Vector2( -180, 100 ),
+"links": {
+0: 6
+},
+"rect_size": Vector2( 441, 223 ),
+"slot_amount": 1,
+"text": "It seems you might be able to find your way through the Dreamlands.
+You should take this, too. It was left here for you.",
+"type": "line"
+},
+6: {
+"graph_offset": Vector2( 280, 100 ),
+"links": {
+0: 7
+},
+"rect_size": Vector2( 441, 150 ),
+"slot_amount": 1,
+"text": "Received [b]Amulet[/b]!",
+"type": "line"
+},
+7: {
+"graph_offset": Vector2( 740, 100 ),
 "links": {
 
 },
 "rect_size": Vector2( 324, 137 ),
 "slot_amount": 1,
-"text": "Talk with the lesser priests. We will know when you've grasped the basics.",
+"text": "You may pass. But I assure you, what you find might not be what you expect.",
 "type": "line"
 }
 }
 },
 3: {
 "available_nid": [  ],
-"groups": [  ],
+"groups": [ "quest" ],
 "human_readable_description": "Kaman-Thah talks about themselves and the amulet",
-"name": "kaman_thah_pre_approval",
+"name": "kaman_thah",
 "nodes": {
 1: {
 "graph_offset": Vector2( 40, 40 ),
 "links": {
 0: 2
 },
-"rect_size": Vector2( 324, 137 ),
+"rect_size": Vector2( 441, 150 ),
 "slot_amount": 1,
-"text": "I am Kaman-Thah, chief Priest of the Cavern of Flame, entrance to the
-Dreamlands. 
+"text": "I am Kaman-Thah, chief Priest of the Cavern of Flame, entrance to the Dreamlands. 
 What is your reason for coming here, traveler?",
 "type": "line"
 },
 2: {
-"graph_offset": Vector2( 40, 200 ),
+"graph_offset": Vector2( 500, 40 ),
 "links": {
 0: 3
 },
-"rect_size": Vector2( 324, 137 ),
+"rect_size": Vector2( 441, 150 ),
 "slot_amount": 1,
 "text": "...",
 "type": "line"
 },
 3: {
-"graph_offset": Vector2( 40, 360 ),
+"graph_offset": Vector2( 960, 40 ),
 "links": {
 0: 4
 },
 "rect_size": Vector2( 324, 137 ),
 "slot_amount": 1,
 "text": "Looking for Kadath? If the Great Ones don't want you there, you should respect their wishes. 
-And should your path take you to foreign dreamlands, it would do you well to know only three fully human souls have returned from such voyages...",
+And should your path take you to foreign dreamlands, it would do you well to know only three fully human souls have returned from such voyages...
+But oh well.",
 "type": "line"
 },
 4: {
-"graph_offset": Vector2( 40, 520 ),
+"graph_offset": Vector2( 1420, 40 ),
 "links": {
 
 },
 "rect_size": Vector2( 324, 137 ),
 "slot_amount": 1,
-"text": "Ah, well. If you still want to go through, talk to Nasht.",
+"text": "If you still want to go through, talk with the minor priests. We will know when you've grasped the basics.",
 "type": "line"
-}
-}
 },
-4: {
-"available_nid": [  ],
-"groups": [  ],
-"human_readable_description": "New Dialog - Enter Human Readable Description.",
-"name": "kaman_thah_in_approval",
-"nodes": {
-1: {
-"graph_offset": Vector2( 40, 40 ),
+5: {
+"graph_offset": Vector2( 40, 240 ),
+"links": {
+0: 6
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "Ah! You seem to be somewhat capable. We shall grant you access to the Dreamlands..
+You should take this, too. It was left here for you.",
+"type": "line"
+},
+6: {
+"graph_offset": Vector2( 500, 240 ),
+"links": {
+0: 7
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "Received [b]Amulet[/b]!",
+"type": "line"
+},
+7: {
+"graph_offset": Vector2( 960, 240 ),
 "links": {
 
 },
 "rect_size": Vector2( 324, 137 ),
 "slot_amount": 1,
-"text": "Talk with the lesser priests. We will know when you've grasped the basics.",
+"text": "You may pass. An uncertain quest awaits you, traveler.",
 "type": "line"
 }
 }
 },
 5: {
 "available_nid": [  ],
-"groups": [  ],
+"groups": [ "tutorial" ],
 "human_readable_description": "New Dialog - Enter Human Readable Description.",
 "name": "menu_tutorial",
 "nodes": {
+1: {
+"graph_offset": Vector2( 40, 40 ),
+"links": {
 
+},
+"rect_size": Vector2( 441, 169.2 ),
+"slot_amount": 1,
+"text": "Press <%s> to open the menu. Keeping track of your equipment and inventory is important!",
+"type": "line"
+}
 }
 },
 6: {
 "available_nid": [  ],
-"groups": [  ],
+"groups": [ "lore" ],
 "human_readable_description": "Talks about who Nasht and Kaman-Thah are",
 "name": "priests",
 "nodes": {
@@ -176,7 +211,7 @@ And should your path take you to foreign dreamlands, it would do you well to kno
 },
 7: {
 "available_nid": [  ],
-"groups": [  ],
+"groups": [ "lore" ],
 "human_readable_description": "On what this place is",
 "name": "cavern_of_flame",
 "nodes": {
@@ -184,31 +219,96 @@ And should your path take you to foreign dreamlands, it would do you well to kno
 }
 },
 8: {
-"available_nid": [  ],
-"groups": [  ],
+"available_nid": [ 2 ],
+"groups": [ "lore" ],
 "human_readable_description": "On the Dreamlands",
-"name": "dreamlands",
+"name": "dreamlands_setting",
 "nodes": {
+1: {
+"graph_offset": Vector2( 40, 40 ),
+"links": {
 
-}
 },
-9: {
-"available_nid": [  ],
-"groups": [  ],
-"human_readable_description": "New Dialog - Enter Human Readable Description.",
-"name": "nasht_post_approval",
-"nodes": {
-
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "I guess you want to enter the Dreamlands, if you're here. But they have been restless as of late.",
+"type": "line"
+}
 }
 },
 10: {
 "available_nid": [  ],
-"groups": [  ],
-"human_readable_description": "New Dialog - Enter Human Readable Description.",
+"groups": [ "lore" ],
+"human_readable_description": "About changes in the Dreamlands",
+"name": "dreamlands_conflict",
 "nodes": {
+1: {
+"graph_offset": Vector2( 100, -200 ),
+"links": {
 
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "A lot of violence has erupted in the Dreamlands. Many creatures have become quite aggresive, and even some cities are in conflict. Be careful!",
+"type": "line"
+}
+}
+},
+11: {
+"available_nid": [  ],
+"groups": [ "tutorial" ],
+"human_readable_description": "Teaching the player about equipment, and giving him the base equipment.",
+"name": "equipment_tutorial",
+"nodes": {
+1: {
+"graph_offset": Vector2( 40, 40 ),
+"links": {
+
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "",
+"type": "line"
+}
+}
+},
+12: {
+"available_nid": [  ],
+"groups": [ "tutorial" ],
+"human_readable_description": "Some tips for battle",
+"name": "battle_tutorial",
+"nodes": {
+1: {
+"graph_offset": Vector2( 40, 40 ),
+"links": {
+
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "During battle, you can take your time to choose your moves. You can attack your foes, use items, defend... Think before you move.",
+"type": "line"
+}
+}
+},
+13: {
+"available_nid": [  ],
+"groups": [ "tutorial" ],
+"human_readable_description": "Tips about save points",
+"name": "save_tutorial",
+"nodes": {
+1: {
+"graph_offset": Vector2( 40, 40 ),
+"links": {
+
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "This is the Elder Sign. If you see it carved upon an object, it means you can save your progress there. You will also be fully refreshed.
+The Great Ones sure are generous.",
+"type": "line"
 }
 }
 }
-available_dids = [  ]
-groups = [  ]
+}
+available_dids = [ 2, 4, 9, 14, 15, 16 ]
+groups = [ "quest", "lore", "tutorial" ]
