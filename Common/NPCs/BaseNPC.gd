@@ -13,7 +13,7 @@ export var dialog_name: String = "test_message"
 export var dialog_nid: int = 1
 
 enum MovementType { 
-	NONE = 0,
+	NONE = 0,	
 	RANDOM_SPIN = 1,
 	CUSTOM = 2, 
 }

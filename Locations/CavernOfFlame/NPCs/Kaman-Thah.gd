@@ -8,7 +8,7 @@ enum DialogNodes {
 }
 
 func _ready():
-	if Inventory.has("amulet"):
+	if PlayerVars.inventory.has("amulet"):
 		dialog_nid = DialogNodes.AFTER_AMULET_RECEIVED
 	else:
 		dialog_nid = DialogNodes.BEFORE_QUEST
@@ -23,6 +23,6 @@ func on_player_interaction(player: Player):
 		DialogNodes.BEFORE_QUEST:
 			dialog_nid = DialogNodes.IN_QUEST
 		DialogNodes.QUEST_DONE:
-			if not Inventory.has("amulet"):
-				Inventory.add_item("amulet")
+			if not PlayerVars.inventory.has("amulet"):
+				PlayerVars.inventory.add_item("amulet")
 			dialog_nid = DialogNodes.AFTER_AMULET_RECEIVED

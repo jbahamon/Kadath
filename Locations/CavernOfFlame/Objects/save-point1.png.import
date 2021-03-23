@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cavern_floor_32.png-deebdf2be9edff95da7f23a24e4f5bb5.stex"
+path="res://.import/save-point1.png-a3300a53d06566ecc6a267ead1f27e84.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Locations/CavernOfFlame/Map/cavern_floor_32.png"
-dest_files=[ "res://.import/cavern_floor_32.png-deebdf2be9edff95da7f23a24e4f5bb5.stex" ]
+source_file="res://Locations/CavernOfFlame/Objects/save-point1.png"
+dest_files=[ "res://.import/save-point1.png-a3300a53d06566ecc6a267ead1f27e84.stex" ]
 
 [params]
 

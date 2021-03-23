@@ -12,12 +12,17 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "BaseNPC",
 "language": "GDScript",
-"path": "res://Common/NPC/BaseNPC.gd"
+"path": "res://Common/NPCs/BaseNPC.gd"
 }, {
 "base": "Reference",
 "class": "FSMState",
 "language": "GDScript",
-"path": "res://Common/NPC/StateMachine/FSMState.gd"
+"path": "res://Common/NPCs/StateMachine/FSMState.gd"
+}, {
+"base": "Reference",
+"class": "Inventory",
+"language": "GDScript",
+"path": "res://Common/Inventory.gd"
 }, {
 "base": "Reference",
 "class": "InventoryItem",
@@ -37,12 +42,12 @@ _global_script_classes=[ {
 "base": "TileMap",
 "class": "LocationMap",
 "language": "GDScript",
-"path": "res://Common/LocationMap.gd"
+"path": "res://Common/Maps/LocationMap.gd"
 }, {
 "base": "Node",
 "class": "NPCMovement",
 "language": "GDScript",
-"path": "res://Common/NPC/Movement/NPCMovement.gd"
+"path": "res://Common/NPCs/Movement/NPCMovement.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Player",
@@ -53,17 +58,24 @@ _global_script_classes=[ {
 "class": "SaveData",
 "language": "GDScript",
 "path": "res://SaveData.gd"
+}, {
+"base": "PopupPanel",
+"class": "SavesPopup",
+"language": "GDScript",
+"path": "res://UI/SavesMenu/SavesPopup.gd"
 } ]
 _global_script_class_icons={
 "BaseNPC": "",
 "FSMState": "",
+"Inventory": "",
 "InventoryItem": "",
 "KeyboardBasedTabsContainer": "",
 "LocalScene": "",
 "LocationMap": "",
 "NPCMovement": "",
 "Player": "",
-"SaveData": ""
+"SaveData": "",
+"SavesPopup": ""
 }
 
 [application]
@@ -74,7 +86,6 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Inventory="*res://Globals/Inventory.gd"
 Constants="*res://Globals/Constants.gd"
 PlayerVars="*res://Globals/PlayerVars.gd"
 UserSettings="*res://Globals/UserSettings.gd"
@@ -203,5 +214,5 @@ quality/intended_usage/framebuffer_allocation.mobile=0
 quality/2d/use_pixel_snap=true
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
-environment/default_clear_color=Color( 0.784314, 0.721569, 0.807843, 1 )
+environment/default_clear_color=Color( 0.0745098, 0.0352941, 0.0901961, 1 )
 environment/default_environment="res://default_env.tres"

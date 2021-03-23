@@ -1,4 +1,5 @@
-extends Node
+class_name Inventory
+
 var ItemFactory = preload("res://Items/ItemFactory.gd")
 var item_factory = ItemFactory.new()
 var current_items: Array = []
@@ -71,6 +72,15 @@ func update_test_items():
 		["golden-chain", 2],
 	]
 	load_save_data(test_save_data)
+
+func get_ids_and_amounts():
+	var ids_and_amounts = []
+	
+	for item in current_items:
+		ids_and_amounts.push_back([item.item_id, item.amount])
+		
+	return ids_and_amounts
+	
 
 func sort():
 	current_items.sort_custom(ItemSorter, "sort_ascending")

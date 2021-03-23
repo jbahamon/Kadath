@@ -13,7 +13,7 @@ var index_for_swap: int = -1
 
 
 func _ready():
-	Inventory.update_test_items()
+	PlayerVars.inventory.update_test_items()
 	set_process_input(false)
 	update_items()
 
@@ -34,7 +34,7 @@ func _on_Browse_pressed():
 
 
 func _on_Autosort_pressed():
-	Inventory.sort()
+	PlayerVars.inventory.sort()
 	update_items()
 
 
@@ -53,7 +53,7 @@ func _on_swap_mode_toggled(swap_mode):
 	new_focused_item.grab_click_focus()
 	
 func perform_swap():
-	Inventory.swap_items(index_for_swap, focused_index)
+	PlayerVars.inventory.swap_items(index_for_swap, focused_index)
 	swap_item_entries(index_for_swap, focused_index)
 	index_for_swap = -1
 	
@@ -138,8 +138,8 @@ func update_items():
 
 
 func add_all_items():
-	for i in range(len(Inventory.current_items)):
-		var item = Inventory.current_items[i]
+	for i in range(len(PlayerVars.inventory.current_items)):
+		var item = PlayerVars.inventory.current_items[i]
 		var new_item_entry = item_entry_scene.instance()
 		
 		items.add_child(new_item_entry)

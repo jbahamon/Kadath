@@ -6,26 +6,34 @@ var talk_speed = 20.0
 var strings = { "player": "Arden", "preference": "none" }
 var current_location = null
 
+
+onready var player: Player
 onready var world = $World
-onready var player: Player = $World/Player
 onready var dialog_box = $SimpleDialogBox
 onready var story_reader = StoryReader.new()
 onready var menu_popup: Popup = $MenuLayer/MenuPopup
 onready var menu = $MenuLayer/MenuPopup/PauseMenu
+onready var save_popup = $MenuLayer/SavesPopup
 
 func _ready():
-	player.position =  PlayerVars.starting_position
-	var location_name = PlayerVars.starting_location_name
-	load_location(location_name)
+	self.player = PlayerVars.player
+	world.add_child(player)
+	
+	var camera = $Camera2D
+	self.remove_child(camera)
+	player.add_child(camera)
+	
+	update_location()
 	 
 	
-func load_location(location_name):
-	var location = load("res://Locations/%s/Map/%s.tscn" % [location_name, location_name]).instance()
+func update_location():
+	var location_name = PlayerVars.location_name
+	var location = load("res://Locations/%s/Maps/%s.tscn" % [location_name, location_name]).instance()
 	world.add_child(location)
 	world.move_child(location, 0)
 	
 	current_location = location
-	var story = load("res://Locations/%s/Stories/%sBaked.tres" % [current_location.story_name, current_location.story_name])
+	var story = load("res://Locations/%s/Stories/Baked.tres" % current_location.story_name)
 	story_reader.read(story)
 	
 	
@@ -63,7 +71,11 @@ func _unhandled_input(event):
 		menu_popup.popup_centered_ratio(1)
 
 
-func _on_Menu_popup_hide():
+func show_save_menu():
+	save_popup.popup_centered_ratio(1)
+
+
+func _on_menu_popup_hide():
 	player.set_process_unhandled_input(true)
 	world.set_physics_process(true)
 	world.set_process(true)
@@ -72,10 +84,11 @@ func _on_Menu_popup_hide():
 	menu.set_process_unhandled_input(false)
 
 
-func _on_Menu_about_to_show():
+func _on_menu_about_to_show():
 	player.set_process_unhandled_input(false)
 	world.set_physics_process(false)
 	world.set_process(false)
 	world.set_process_unhandled_input(false)
 	
 	menu.set_process_unhandled_input(true)
+
