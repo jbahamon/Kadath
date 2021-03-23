@@ -31,7 +31,7 @@ func update_location():
 	var location = load("res://Locations/%s/Maps/%s.tscn" % [location_name, location_name]).instance()
 	world.add_child(location)
 	world.move_child(location, 0)
-	
+		
 	current_location = location
 	var story = load("res://Locations/%s/Stories/Baked.tres" % current_location.story_name)
 	story_reader.read(story)

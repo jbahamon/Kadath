@@ -39,6 +39,7 @@ func update_options():
 		else:
 			new_button.text = "No data"
 			new_button.disabled = current_mode == Mode.LOAD
+			new_button.focus_mode = Control.FOCUS_NONE if current_mode == Mode.LOAD else Control.FOCUS_ALL
 		
 		if current_mode == Mode.SAVE or file_previews[i] != null:
 			new_button.connect("pressed", self, "_on_button_pressed", [i])
