@@ -13,7 +13,6 @@ var index_for_swap: int = -1
 
 
 func _ready():
-	PlayerVars.inventory.update_test_items()
 	set_process_input(false)
 	update_items()
 

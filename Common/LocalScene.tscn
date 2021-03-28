@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://PixelInterface/Style/Stone.tres" type="StyleBox" id=1]
-[ext_resource path="res://UI/SavesMenu/SavesPopup.gd" type="Script" id=2]
 [ext_resource path="res://UI/PauseMenu/PauseMenu.tscn" type="PackedScene" id=3]
 [ext_resource path="res://PixelInterface/Theme.tres" type="Theme" id=4]
 [ext_resource path="res://addons/dialog_boxes/dialog_box.gd" type="Script" id=5]
@@ -52,10 +51,7 @@ margin_bottom = -14.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="SavesPopup" type="PopupPanel" parent="MenuLayer" instance=ExtResource( 8 )]
-theme = ExtResource( 4 )
-custom_styles/panel = ExtResource( 1 )
-script = ExtResource( 2 )
+[node name="SavesPopup" parent="MenuLayer" instance=ExtResource( 8 )]
 current_mode = 0
 
 [node name="Camera2D" type="Camera2D" parent="."]

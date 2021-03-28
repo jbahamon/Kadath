@@ -19,6 +19,7 @@ func _unhandled_input(event):
 	if event.is_action_pressed("ui_accept"):
 		raycast.force_raycast_update()
 		if raycast.is_colliding() and raycast.get_collider().has_method("on_player_interaction"):
+			animation_state.travel("idle")
 			raycast.get_collider().on_player_interaction(self)
 			
 			
@@ -45,15 +46,13 @@ func update_velocity():
 
 
 func update_input_vector():
-	if not self.is_processing_unhandled_input():
-		return
-	
 	var old_input_vector = input_vector
+
 	input_vector = Vector2(
 			Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
 			Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-	)
-	
+	) if self.is_processing_unhandled_input() else Vector2.ZERO
+		
 	return old_input_vector == input_vector
 	
 	
