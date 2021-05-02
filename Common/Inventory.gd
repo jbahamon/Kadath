@@ -54,24 +54,7 @@ func has(item_id):
 			return true
 			
 	return false
-	
-func update_test_items():
-	var test_save_data = SaveData.new()
-	test_save_data.inventory = [
-		["silver-key", 1],
-		["scimitar", 1],
-		["ring-of-zenig", 2],
-		["essential-salts", 10],
-		["milk", 5],
-		["ivory-claws", 2],
-		["ivory-flute", 1],
-		["ruby-bottle", 1],
-		["pnakotic-manuscripts", 2],
-		["ornate-tombstone", 2],
-		["books-of-hsan", 3],
-		["golden-chain", 2],
-	]
-	load_save_data(test_save_data)
+
 
 func get_ids_and_amounts():
 	var ids_and_amounts = []

@@ -19,6 +19,7 @@ transition_time_ms = 200.0
 text_speed = 30.0
 height_percent = 0.3
 margin = 5
+bbcode_enabled = true
 theme = ExtResource( 4 )
 panel_stylebox = ExtResource( 1 )
 
@@ -57,6 +58,8 @@ current_mode = 0
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( -3.2959, -9.58014 )
 current = true
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
 [connection signal="about_to_show" from="MenuLayer/MenuPopup" to="." method="_on_menu_about_to_show"]
 [connection signal="focus_entered" from="MenuLayer/MenuPopup" to="." method="_on_MenuPopup_focus_entered"]
 [connection signal="popup_hide" from="MenuLayer/MenuPopup" to="." method="_on_menu_popup_hide"]

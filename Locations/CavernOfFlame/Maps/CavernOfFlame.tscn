@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=66 format=2]
 
 [ext_resource path="res://Locations/CavernOfFlame/Maps/cavern_floor.png" type="Texture" id=1]
 [ext_resource path="res://Locations/CavernOfFlame/NPCs/Priestess.png" type="Texture" id=2]
@@ -10,6 +10,11 @@
 [ext_resource path="res://Locations/CavernOfFlame/Maps/CavernOfFlame.gd" type="Script" id=8]
 [ext_resource path="res://Locations/CavernOfFlame/Maps/CavernTileSet.gd" type="Script" id=9]
 [ext_resource path="res://Locations/CavernOfFlame/Objects/SavePoint.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Common/NPCs/FlagSetterNPC.gd" type="Script" id=11]
+[ext_resource path="res://Locations/CavernOfFlame/NPCs/EquipmentNPC.gd" type="Script" id=12]
+[ext_resource path="res://Locations/CavernOfFlame/Objects/torch2.png" type="Texture" id=13]
+[ext_resource path="res://Locations/CavernOfFlame/Objects/torch3.png" type="Texture" id=14]
+[ext_resource path="res://Locations/CavernOfFlame/Objects/torch1.png" type="Texture" id=15]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 16, 64, 0, 64, 0, 16, 16, 16 )
@@ -493,6 +498,14 @@ points = PoolVector2Array( 16, 48, 0, 64, 0, 48, 16, 48 )
 2/z_index = 0
 script = ExtResource( 9 )
 
+[sub_resource type="SpriteFrames" id=50]
+animations = [ {
+"frames": [ ExtResource( 15 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "default",
+"speed": 4.0
+} ]
+
 [node name="CavernOfFlame" type="TileMap"]
 position = Vector2( -1, 0 )
 tile_set = SubResource( 49 )
@@ -518,11 +531,13 @@ sprite_sheet = ExtResource( 3 )
 dialog_name = "priests"
 movement_type = 1
 
-[node name="Priest7" parent="." instance=ExtResource( 7 )]
+[node name="Equipment Tut Priest" parent="." instance=ExtResource( 7 )]
 position = Vector2( -39, -168 )
-sprite_sheet = ExtResource( 3 )
+script = ExtResource( 12 )
+npc_name = "Equipment NPC"
+sprite_sheet = ExtResource( 2 )
 dialog_name = "equipment_tutorial"
-movement_type = 1
+flag = 3
 
 [node name="Priest4" parent="." instance=ExtResource( 7 )]
 position = Vector2( 41, -160 )
@@ -542,23 +557,64 @@ sprite_sheet = ExtResource( 3 )
 dialog_name = "dreamlands_conflict"
 movement_type = 1
 
-[node name="Priest1" parent="." instance=ExtResource( 7 )]
+[node name="Menu Tut Priest" parent="." instance=ExtResource( 7 )]
 position = Vector2( 73, -144 )
+script = ExtResource( 11 )
 sprite_sheet = ExtResource( 2 )
 dialog_name = "menu_tutorial"
 movement_type = 1
 
-[node name="Priest2" parent="." instance=ExtResource( 7 )]
+[node name="Battle Tut Priest" parent="." instance=ExtResource( 7 )]
 position = Vector2( -47, -32 )
-sprite_sheet = ExtResource( 2 )
+script = ExtResource( 11 )
+sprite_sheet = ExtResource( 3 )
 dialog_name = "battle_tutorial"
 movement_type = 1
+flag = 1
 
-[node name="Priest6" parent="." instance=ExtResource( 7 )]
+[node name="Save Tut Priest" parent="." instance=ExtResource( 7 )]
 position = Vector2( 94.8593, -38.8763 )
+script = ExtResource( 11 )
 sprite_sheet = ExtResource( 2 )
 dialog_name = "save_tutorial"
 movement_type = 1
+flag = 2
 
 [node name="SavePoint" parent="." instance=ExtResource( 10 )]
 position = Vector2( 76.4137, -55.4374 )
+
+[node name="Torch" type="AnimatedSprite" parent="."]
+position = Vector2( 56, -64 )
+frames = SubResource( 50 )
+centered = false
+offset = Vector2( -24, -48 )
+
+[node name="Torch2" type="AnimatedSprite" parent="."]
+position = Vector2( -56, -64 )
+frames = SubResource( 50 )
+centered = false
+offset = Vector2( -24, -48 )
+
+[node name="Torch3" type="AnimatedSprite" parent="."]
+position = Vector2( -56, -178 )
+frames = SubResource( 50 )
+centered = false
+offset = Vector2( -24, -48 )
+
+[node name="Torch4" type="AnimatedSprite" parent="."]
+position = Vector2( 56, -178 )
+frames = SubResource( 50 )
+centered = false
+offset = Vector2( -24, -48 )
+
+[node name="Torch5" type="AnimatedSprite" parent="."]
+position = Vector2( -68, -288 )
+frames = SubResource( 50 )
+centered = false
+offset = Vector2( -24, -48 )
+
+[node name="Torch6" type="AnimatedSprite" parent="."]
+position = Vector2( 68, -288 )
+frames = SubResource( 50 )
+centered = false
+offset = Vector2( -24, -48 )

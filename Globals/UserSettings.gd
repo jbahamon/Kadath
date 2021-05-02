@@ -28,7 +28,8 @@ func load_config():
 		InputMap.action_erase_events(action)
 		for event in config_file.get_value("input", action, []):
 			InputMap.action_add_event(action, event)
-	
+			PlayerVars.on_action_updated(action, event)
+			
 	text_speed = config_file.get_value("ui", "text_speed", 2)
 	
 func update_config():
@@ -39,6 +40,8 @@ func update_config():
 	for action in UI_ACTIONS:
 		var events = InputMap.get_action_list(action)
 		config_file.set_value("input", action, events)
+		for event in events:
+			PlayerVars.on_action_updated(action, event)
 		
 	config_file.set_value("ui", "text_speed", text_speed)
 	config_file.save(CONFIG_FILE_NAME)

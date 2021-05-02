@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 class_name Player
 
-const walk_speed = 120
+const walk_speed = 100
 const interaction_vector = Vector2(20, 10)
 
 

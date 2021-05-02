@@ -3,7 +3,6 @@ class_name LocalScene
 
 var StoryReader = load("res://addons/EXP-System-Dialog/Reference_StoryReader/EXP_StoryReader.gd")
 var talk_speed = 20.0
-var strings = { "player": "Arden", "preference": "none" }
 var current_location = null
 
 
@@ -31,6 +30,11 @@ func update_location():
 	var location = load("res://Locations/%s/Maps/%s.tscn" % [location_name, location_name]).instance()
 	world.add_child(location)
 	world.move_child(location, 0)
+	
+	for child in location.get_children():
+		if child is AnimatedSprite:
+			child.set_animation("default")
+			child.play()
 			
 	current_location = location
 	var story = load("res://Locations/%s/Stories/Baked.tres" % current_location.story_name)
@@ -47,7 +51,7 @@ func talk(source, dialog_name, from_node_id):
 	
 	while story_reader.has_nid(did, nid):
 		
-		var text = story_reader.get_text(did, nid).format(strings)
+		var text = story_reader.get_text(did, nid).format(PlayerVars.strings)
 		pool.append(text)
 		
 		var slots = story_reader.get_slots(did, nid)
@@ -62,7 +66,8 @@ func talk(source, dialog_name, from_node_id):
 			_: 
 				dialog_box.queue_texts(pool)
 				pool = PoolStringArray()
-				nid = source.get_next_nid(nid, slots)
+				var slot = source.get_slot(nid, slots)
+				nid = story_reader.get_nid_from_slot(did, nid, slot)
 		
 	
 

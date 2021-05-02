@@ -4,11 +4,13 @@ const FILENAME_FORMAT = "user://save_file_%d.dat"
 var player_position: Vector2 = Vector2(0, 0)
 var location_name: String = "CavernOfFlame"
 var inventory: Array = [] # for simplicity, an array of [id,  n] pairs
+var current_flags: Dictionary = {}
 
 func init_from_current_state():
 	location_name = PlayerVars.location_name
 	player_position = PlayerVars.player.position
 	inventory = PlayerVars.inventory.get_ids_and_amounts()
+	current_flags = PlayerVars.current_flags
 		
 func save_to_slot(slot_index):
 	var filename = FILENAME_FORMAT % slot_index
@@ -17,6 +19,7 @@ func save_to_slot(slot_index):
 	file.store_var(self.player_position) 
 	file.store_pascal_string(self.location_name)
 	file.store_var(self.inventory) 
+	file.store_var(self.current_flags)
 	file.close()
 
 
@@ -26,7 +29,8 @@ func init_from_slot(slot_index):
 	file.open(filename, File.READ)
 	self.player_position = file.get_var() 
 	self.location_name = file.get_pascal_string()
-	self.inventory = file.get_var() 
+	self.inventory = file.get_var()
+	self.current_flags = file.get_var()
 	file.close()
 	
 	
