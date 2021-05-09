@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://main/party.gd" type="Script" id=1]
+
+
+
+
+
+
+
+[node name="Party" type="Node2D" groups=[
+"save",
+]]
+script = ExtResource( 1 )

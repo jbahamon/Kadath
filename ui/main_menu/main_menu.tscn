@@ -1,0 +1,102 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://ui/main_menu/main_menu.gd" type="Script" id=1]
+[ext_resource path="res://ui/assets/fonts/DungeonFont.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://ui/PixelInterface/Theme.tres" type="Theme" id=3]
+[ext_resource path="res://ui/PixelInterface/Style/Stone.tres" type="StyleBox" id=4]
+[ext_resource path="res://ui/saves_menu/saves_popup.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ui/settings_menu/settings_menu.tscn" type="PackedScene" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[node name="Main Menu" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 11.0
+margin_top = 10.0
+margin_right = -9.5946
+margin_bottom = -7.0
+theme = ExtResource( 3 )
+custom_constants/separation = 10
+alignment = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+popup_path = NodePath("../PopupPanel")
+
+[node name="Title" type="Label" parent="."]
+margin_right = 299.0
+margin_bottom = 69.0
+custom_fonts/font = SubResource( 1 )
+text = "The Dream-Quest of Unknown Kadath"
+align = 1
+autowrap = true
+
+[node name="VBoxContainer" type="HBoxContainer" parent="."]
+margin_top = 79.0
+margin_right = 299.0
+margin_bottom = 223.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Menu Options" type="VBoxContainer" parent="VBoxContainer"]
+margin_left = 107.0
+margin_right = 191.0
+margin_bottom = 144.0
+alignment = 1
+
+[node name="Continue Game" type="Button" parent="VBoxContainer/Menu Options"]
+margin_right = 84.0
+margin_bottom = 33.0
+text = "Continue Game"
+
+[node name="New Game" type="Button" parent="VBoxContainer/Menu Options"]
+margin_top = 37.0
+margin_right = 84.0
+margin_bottom = 70.0
+text = "New Game"
+
+[node name="Settings" type="Button" parent="VBoxContainer/Menu Options"]
+margin_top = 74.0
+margin_right = 84.0
+margin_bottom = 107.0
+text = "Settings"
+
+[node name="Quit" type="Button" parent="VBoxContainer/Menu Options"]
+margin_top = 111.0
+margin_right = 84.0
+margin_bottom = 144.0
+text = "Quit"
+
+[node name="Popups" type="Node" parent="."]
+
+[node name="SavesPopup" parent="Popups" instance=ExtResource( 5 )]
+
+[node name="InputPopup" type="PopupPanel" parent="Popups"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+custom_styles/panel = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" parent="Popups/InputPopup" instance=ExtResource( 6 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 14.0
+margin_top = 14.0
+margin_right = 306.0
+margin_bottom = 226.0
+[connection signal="pressed" from="VBoxContainer/Menu Options/Continue Game" to="." method="_on_Continue_Game_pressed"]
+[connection signal="pressed" from="VBoxContainer/Menu Options/New Game" to="." method="_on_New_Game_pressed"]
+[connection signal="pressed" from="VBoxContainer/Menu Options/Settings" to="." method="_on_Settings_pressed"]
+[connection signal="pressed" from="VBoxContainer/Menu Options/Quit" to="." method="_on_Quit_pressed"]

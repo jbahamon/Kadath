@@ -12,60 +12,71 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "BaseNPC",
 "language": "GDScript",
-"path": "res://Common/NPCs/BaseNPC.gd"
+"path": "res://location/base_classes/npc/base_npc.gd"
+}, {
+"base": "InventoryItem",
+"class": "Equipment",
+"language": "GDScript",
+"path": "res://item/equipment.gd"
 }, {
 "base": "BaseNPC",
 "class": "FlagSetterNPC",
 "language": "GDScript",
-"path": "res://Common/NPCs/FlagSetterNPC.gd"
+"path": "res://location/base_classes/npc/flag_setter_npc.gd"
 }, {
 "base": "Reference",
 "class": "Inventory",
 "language": "GDScript",
-"path": "res://Common/Inventory.gd"
+"path": "res://main/inventory.gd"
 }, {
-"base": "Reference",
+"base": "Resource",
 "class": "InventoryItem",
 "language": "GDScript",
-"path": "res://Items/InventoryItem.gd"
+"path": "res://item/inventory_item.gd"
 }, {
 "base": "VBoxContainer",
 "class": "KeyboardBasedTabsContainer",
 "language": "GDScript",
-"path": "res://UI/PauseMenu/KeyboardBasedTabContainer/KeyboardBasedTabContainer.gd"
+"path": "res://ui/pause_menu/keyboard_based_tab_container/keyboard_based_tab_container.gd"
 }, {
 "base": "Node2D",
 "class": "LocalScene",
 "language": "GDScript",
-"path": "res://Common/LocalScene.gd"
+"path": "res://main/local_scene.gd"
 }, {
 "base": "TileMap",
 "class": "LocationMap",
 "language": "GDScript",
-"path": "res://Common/Maps/LocationMap.gd"
+"path": "res://location/base_classes/location_map.gd"
 }, {
 "base": "Node",
 "class": "NPCMovement",
 "language": "GDScript",
-"path": "res://Common/NPCs/Movement/NPCMovement.gd"
+"path": "res://location/base_classes/npc/movement/npc_movement.gd"
+}, {
+"base": "Node2D",
+"class": "Party",
+"language": "GDScript",
+"path": "res://main/party.gd"
 }, {
 "base": "KinematicBody2D",
-"class": "Player",
+"class": "PlayerProxy",
 "language": "GDScript",
-"path": "res://Characters/Arden/Arden.gd"
+"path": "res://main/player_proxy.gd"
 }, {
-"base": "Reference",
+"base": "Resource",
 "class": "SaveData",
 "language": "GDScript",
-"path": "res://SaveData.gd"
+"path": "res://main/save_data.gd"
 }, {
 "base": "PopupPanel",
 "class": "SavesPopup",
 "language": "GDScript",
-"path": "res://UI/SavesMenu/SavesPopup.gd"
+"path": "res://ui/saves_menu/saves_popup.gd"
 } ]
 _global_script_class_icons={
 "BaseNPC": "",
+"Equipment": "",
 "FlagSetterNPC": "",
 "Inventory": "",
 "InventoryItem": "",
@@ -73,7 +84,8 @@ _global_script_class_icons={
 "LocalScene": "",
 "LocationMap": "",
 "NPCMovement": "",
-"Player": "",
+"Party": "",
+"PlayerProxy": "",
 "SaveData": "",
 "SavesPopup": ""
 }
@@ -81,14 +93,16 @@ _global_script_class_icons={
 [application]
 
 config/name="Kadath"
-run/main_scene="res://UI/MainMenu/MainMenu.tscn"
+run/main_scene="res://ui/main_menu/main_menu.tscn"
 config/icon="res://icon.png"
+config/version="0.1.0"
 
 [autoload]
 
-Constants="*res://Globals/Constants.gd"
-PlayerVars="*res://Globals/PlayerVars.gd"
-UserSettings="*res://Globals/UserSettings.gd"
+PlayerVars="*res://globals/player_vars.gd"
+UserSettings="*res://globals/user_settings.gd"
+SceneSwitcher="*res://globals/scene_switcher.gd"
+SaveManager="*res://globals/save_manager.gd"
 
 [display]
 

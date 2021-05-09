@@ -1,0 +1,34 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/parchment_inactive.png-909c90fd3620b6e35190c8a58931aa4b.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://ui/assets/textures/parchment_inactive.png"
+dest_files=[ "res://.import/parchment_inactive.png-909c90fd3620b6e35190c8a58931aa4b.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=false
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0

@@ -1,0 +1,368 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://location/cavern_of_flame/npc/nasht.png" type="Texture" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends KinematicBody2D
+
+var NPCMovement = preload(\"./movement/npc_movement.tscn\")
+var RandomSpinMovement = preload(\"./movement/random_spin_movement.tscn\")
+class_name BaseNPC
+
+export (String) var npc_name
+export (Texture) var sprite_sheet
+export (int) var hframes = 5
+export (int) var vframes = 5
+export (Vector2) var sprite_offset = Vector2(12, 33)
+export var dialog_name: String = \"test_message\"
+export var dialog_nid: int = 1
+
+enum MovementType { 
+	NONE = 0,	
+	RANDOM_SPIN = 1,
+	CUSTOM = 2, 
+}
+
+export (MovementType) var movement_type: int = MovementType.NONE
+
+export (NodePath) var custom_movement = null
+
+var facing = Vector2.DOWN
+
+var movement_node 
+onready var sprite: Sprite = $Sprite
+onready var animation_tree: AnimationTree = $AnimationTree
+onready var animation_state = animation_tree.get(\"parameters/playback\")
+onready var interactable_collision: CollisionShape2D = $InteractableArea/CollisionShape2D
+
+func _ready():
+	match movement_type:
+		MovementType.NONE:
+			movement_node = NPCMovement.instance()
+			continue
+		MovementType.RANDOM_SPIN:
+			movement_node = RandomSpinMovement.instance()
+			movement_node.period += randf()
+			continue
+		MovementType.CUSTOM:
+			movement_node = get_node(custom_movement)
+		_:
+			self.add_child(movement_node)
+	
+	sprite.texture = sprite_sheet
+	sprite.hframes = hframes
+	sprite.vframes = vframes
+	sprite.offset = -sprite_offset
+
+	update_facing()
+
+func rotate_facing(angle):
+	facing = facing.rotated(angle)
+	update_facing()
+	
+	
+func update_facing():
+	animation_tree[\"parameters/idle/blend_position\"] = facing
+	animation_tree[\"parameters/move/blend_position\"] = facing
+
+
+func set_animation(animation_name):
+	animation_state.travel(animation_name)
+
+
+func on_player_interaction(player_proxy: PlayerProxy):
+	self.look_at(player_proxy.position)
+	self.movement_node.set_process(false)
+	self.interactable_collision.set_disabled(false)
+	player_proxy.set_process(false)
+	player_proxy.set_physics_process(false)
+	player_proxy.set_process_input(false)
+	
+	var local_scene: LocalScene = get_local_scene()
+	
+	var talk_result = local_scene.talk(self, self.dialog_name, self.dialog_nid)
+	
+	if talk_result is GDScriptFunctionState:
+		talk_result = yield(talk_result, \"completed\")
+	
+	player_proxy.set_physics_process(true)
+	player_proxy.set_process(true)
+	player_proxy.set_process_input(true)
+	self.interactable_collision.set_disabled(false)
+	self.movement_node.set_process(true)
+
+func look_at(point: Vector2):
+	facing = self.position.direction_to(point)
+
+	if abs(facing.x) > abs(facing.y):
+		facing.y = 0
+	else:
+		facing.x = 0
+	facing = facing.normalized()
+	
+	update_facing()
+	
+func get_local_scene():
+	return get_node(\"../../../\")
+"
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8, 8 )
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Area2D
+
+onready var parent = get_parent()
+
+
+func on_player_interaction(player):
+		parent.on_player_interaction(player)
+	
+"
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 8, 8 )
+
+[sub_resource type="AnimationNodeAnimation" id=5]
+animation = "idle_down"
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "idle_up"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "idle_right"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "idle_left"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=9]
+blend_point_0/node = SubResource( 5 )
+blend_point_0/pos = Vector2( 0, 1 )
+blend_point_1/node = SubResource( 6 )
+blend_point_1/pos = Vector2( 0, -1 )
+blend_point_2/node = SubResource( 7 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 8 )
+blend_point_3/pos = Vector2( -1, 0 )
+snap = Vector2( 1, 1 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "walk_left"
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "walk_up"
+
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "walk_down"
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "walk_right"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=14]
+blend_point_0/node = SubResource( 10 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 11 )
+blend_point_1/pos = Vector2( 0, -1 )
+blend_point_2/node = SubResource( 12 )
+blend_point_2/pos = Vector2( 0, 1 )
+blend_point_3/node = SubResource( 13 )
+blend_point_3/pos = Vector2( 1, 0 )
+snap = Vector2( 1, 1 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+
+[sub_resource type="AnimationNodeStateMachine" id=17]
+states/idle/node = SubResource( 9 )
+states/idle/position = Vector2( 384, 110 )
+states/move/node = SubResource( 14 )
+states/move/position = Vector2( 599, 110 )
+transitions = [ "idle", "move", SubResource( 15 ), "move", "idle", SubResource( 16 ) ]
+start_node = "idle"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=18]
+
+[sub_resource type="Animation" id=19]
+resource_name = "idle_down"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=20]
+resource_name = "idle_left"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector2( 3, 0 ) ]
+}
+
+[sub_resource type="Animation" id=21]
+resource_name = "idle_right"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector2( 2, 0 ) ]
+}
+
+[sub_resource type="Animation" id=22]
+resource_name = "idle_up"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector2( 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=23]
+resource_name = "walk_down"
+length = 0.8
+loop = true
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 1 ), Vector2( 1, 1 ), Vector2( 2, 1 ), Vector2( 3, 1 ) ]
+}
+
+[sub_resource type="Animation" id=24]
+resource_name = "walk_left"
+length = 0.8
+loop = true
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 1, 4 ), Vector2( 0, 4 ), Vector2( 2, 4 ), Vector2( 0, 4 ) ]
+}
+
+[sub_resource type="Animation" id=25]
+resource_name = "walk_right"
+length = 0.8
+loop = true
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 1, 3 ), Vector2( 0, 3 ), Vector2( 2, 3 ), Vector2( 0, 3 ) ]
+}
+
+[sub_resource type="Animation" id=26]
+resource_name = "walk_up"
+length = 0.8
+loop = true
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 2 ), Vector2( 1, 2 ), Vector2( 2, 2 ), Vector2( 3, 2 ) ]
+}
+
+[node name="BaseNPC" type="KinematicBody2D" groups=[
+"npc",
+]]
+position = Vector2( 162.58, 87.1959 )
+collision_layer = 2
+collision_mask = 15
+script = SubResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+centered = false
+vframes = 5
+hframes = 4
+frame = 1
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -7 )
+shape = SubResource( 2 )
+
+[node name="InteractableArea" type="Area2D" parent="."]
+monitoring = false
+monitorable = false
+collision_layer = 16
+script = SubResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableArea"]
+position = Vector2( 0, -7 )
+shape = SubResource( 4 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 17 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 18 )
+parameters/idle/blend_position = Vector2( 0.000756979, -0.982759 )
+parameters/move/blend_position = Vector2( 0, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/idle_down = SubResource( 19 )
+anims/idle_left = SubResource( 20 )
+anims/idle_right = SubResource( 21 )
+anims/idle_up = SubResource( 22 )
+anims/walk_down = SubResource( 23 )
+anims/walk_left = SubResource( 24 )
+anims/walk_right = SubResource( 25 )
+anims/walk_up = SubResource( 26 )
