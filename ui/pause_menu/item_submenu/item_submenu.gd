@@ -1,8 +1,6 @@
 extends VSplitContainer
 
-var item_entry_scene = preload("res://ui/pause_menu/item_entry.tscn")
-onready var browse: Button = $ActionsPanel/ActionsHBox/Browse
-onready var autosort: Button = $ActionsPanel/ActionsHBox/Autosort
+var item_entry_scene = preload("res://ui/pause_menu/item_submenu/item_entry.tscn")
 onready var items: Container = $SplitPanel/ItemsPanel/ItemsScroll/Items
 onready var use_and_description = $SplitPanel/ItemUseAndDescription
 onready var use_description_panel: PanelContainer = $SplitPanel/ItemUseAndDescription
@@ -13,29 +11,17 @@ var index_for_swap: int = -1
 var inventory: Inventory = null
 
 func _ready():
-	set_process_input(false)
-
+	self.set_process_unhandled_input(false)
+	self.set_process_input(false)
+	self.focus_mode = Control.FOCUS_ALL
+	
+	
 func initialize(party: Party):
 	self.inventory = party.inventory
 	update_items()
 
 
-func _on_Browse_pressed():
-	browse.disabled = true
-	autosort.disabled = true
-	
-	for item in items.get_children():
-		item.focus_mode = Control.FOCUS_ALL
-		
-	if items.get_child_count() > 0:
-		var first_item = items.get_child(0)
-		first_item.grab_focus()
-		first_item.grab_click_focus()
-		
-	set_process_input(true)
-
-
-func _on_Autosort_pressed():
+func autosort():
 	inventory.sort()
 	update_items()
 
@@ -53,6 +39,7 @@ func _on_swap_mode_toggled(swap_mode):
 	new_focused_item.set_selected_while_unfocused(in_swap_mode)
 	new_focused_item.grab_focus()
 	new_focused_item.grab_click_focus()
+	
 	
 func perform_swap():
 	inventory.swap_items(index_for_swap, focused_index)
@@ -109,19 +96,7 @@ func on_swap_input(event: InputEvent):
 	get_tree().set_input_as_handled()
 
 func on_browse_input(event: InputEvent):
-	if event.is_action_pressed("ui_cancel"):
-		browse.disabled = false
-		autosort.disabled = false
-		
-		browse.grab_focus()
-		browse.grab_click_focus()
-		focused_index = -1
-		
-		for item in items.get_children():
-			item.focus_mode = Control.FOCUS_NONE
-		use_and_description.clear()
-		set_process_input(false)
-	elif event.is_action_pressed("ui_left"):
+	if event.is_action_pressed("ui_left"):
 		use_and_description._on_left()
 	elif event.is_action_pressed("ui_right"):
 		use_and_description._on_right()
@@ -137,7 +112,13 @@ func update_items():
 	remove_all_items()
 	add_all_items()
 	set_all_item_neighbours()
-
+	
+	if len(self.items) > 0:
+		self.focus_mode == Control.FOCUS_NONE
+	else:
+		self.focus_mode == Control.FOCUS_ALL
+	
+	self.reset_focus()
 
 func add_all_items():
 	for i in range(len(self.inventory.order)):
@@ -183,5 +164,28 @@ func set_item_neighbours(i: int, children: Array):
 	item_entry.focus_neighbour_left = item_entry.get_path_to(item_entry)
 	item_entry.focus_neighbour_right = item_entry.get_path_to(item_entry)
 
-func get_first_focusable_control():
-		return browse
+
+
+func receive_focus():
+	self.reset_focus()
+	self.set_process_unhandled_input(true)
+	self.set_process_input(true)
+	
+	return true
+
+
+func relinquish_focus():
+	self.set_process_unhandled_input(false)
+	self.set_process_input(false)
+
+
+func reset_focus():
+	var element_to_focus
+	if items.get_child_count() > 0:
+		element_to_focus = items.get_child(0)
+	else:
+		element_to_focus = self
+		
+	element_to_focus.grab_focus()
+	element_to_focus.grab_click_focus()
+	

@@ -1,14 +1,22 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://main/party.gd" type="Script" id=1]
+[ext_resource path="res://characters/party_member.tscn" type="PackedScene" id=2]
+[ext_resource path="res://characters/arden/growth.tres" type="Resource" id=3]
 
-
-
-
-
-
-
-[node name="Party" type="Node2D" groups=[
+[node name="Party" type="Node" groups=[
 "save",
 ]]
 script = ExtResource( 1 )
+
+[node name="Arden" parent="." instance=ExtResource( 2 )]
+display_name = "Arden"
+anim_path = NodePath("Anim")
+growth = ExtResource( 3 )
+unlocked = true
+
+[node name="Anim" type="Position2D" parent="Arden"]
+
+[editable path="Arden"]
+
+[editable path="Arden/Battler"]

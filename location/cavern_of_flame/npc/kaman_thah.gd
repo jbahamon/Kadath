@@ -41,7 +41,7 @@ func on_player_interaction(player_proxy: PlayerProxy):
 			self.dialog_nid = DialogNodes.AFTER_AMULET_RECEIVED
 		
 
-func get_slot(nid, slots):
+func get_slot(_nid, _slots):
 	
 	if not PlayerVars.get_flag(PlayerVars.Flags.SAVE_TUTORIAL_COMPLETED):
 		return 0

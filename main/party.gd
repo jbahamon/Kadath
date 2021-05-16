@@ -3,7 +3,7 @@
 # has already unlocked them or not in the game.
 # After an encounter, it delegates stats update (experience and health) to each
 # active party member
-extends Node2D
+extends Node
 class_name Party
 
 export var PARTY_SIZE: int = 3
@@ -18,7 +18,7 @@ func load(save_data: SaveData) -> void:
 func save(save_data: SaveData) -> void:
 	inventory.save(save_data)
 	
-func get_active_members():
+func get_active_members() -> Array:
 	# Returns the first unlocked children until the party is filled
 	var active = []
 	var available = get_unlocked_characters()

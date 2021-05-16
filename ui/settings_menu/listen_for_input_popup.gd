@@ -6,6 +6,7 @@ var action: String
 
 onready var label = $PressKeyLabel
 
+
 func _ready():
 	set_process_unhandled_input(false)
 
@@ -25,7 +26,6 @@ func _unhandled_input(event):
 		emit_signal("key_pressed", action, event)
 		get_tree().set_input_as_handled()
 		self.hide()
-		
 		
 
 func update_action(new_action, new_action_label):

@@ -9,8 +9,8 @@ export (int) var MAX_COINS = 9999999
 
 
 func load(save_data: SaveData) -> void:
-	self.amounts = save_data[save_key]['amounts']
-	self.order = save_data[save_key]['order']
+	self.amounts = save_data.data[save_key]['amounts']
+	self.order = save_data.data[save_key]['order']
 
 func save(save_data: SaveData) -> void:
 	save_data.data[save_key] = {

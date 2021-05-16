@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://characters/growth_stats.gd" type="Script" id=1]
+
+[sub_resource type="Curve" id=1]
+
+[resource]
+script = ExtResource( 1 )
+level_lookup = [  ]
+max_health_curve = SubResource( 1 )

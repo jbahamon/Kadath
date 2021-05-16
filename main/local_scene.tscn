@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://ui/PixelInterface/Style/Stone.tres" type="StyleBox" id=1]
-[ext_resource path="res://main/party.gd" type="Script" id=2]
+[ext_resource path="res://main/party.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ui/pause_menu/pause_menu.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/PixelInterface/Theme.tres" type="Theme" id=4]
 [ext_resource path="res://addons/dialog_boxes/dialog_box.gd" type="Script" id=5]
@@ -10,7 +10,7 @@
 [ext_resource path="res://ui/saves_menu/saves_popup.tscn" type="PackedScene" id=8]
 [ext_resource path="res://main/player_proxy.tscn" type="PackedScene" id=9]
 
-[node name="LocalScene" type="Node2D" groups=[
+[node name="LocalScene" type="Node" groups=[
 "save",
 ]]
 script = ExtResource( 7 )
@@ -69,12 +69,8 @@ size_flags_vertical = 3
 [node name="SavesPopup" parent="MenuLayer" instance=ExtResource( 8 )]
 current_mode = 0
 
-[node name="Party" type="Node2D" parent="." groups=[
-"save",
-]]
-script = ExtResource( 2 )
+[node name="Party" parent="." instance=ExtResource( 2 )]
 [connection signal="about_to_show" from="MenuLayer/MenuPopup" to="." method="_on_menu_about_to_show"]
-[connection signal="focus_entered" from="MenuLayer/MenuPopup" to="." method="_on_MenuPopup_focus_entered"]
 [connection signal="popup_hide" from="MenuLayer/MenuPopup" to="." method="_on_menu_popup_hide"]
 [connection signal="about_to_show" from="MenuLayer/SavesPopup" to="." method="_on_menu_about_to_show"]
 [connection signal="popup_hide" from="MenuLayer/SavesPopup" to="." method="_on_menu_popup_hide"]

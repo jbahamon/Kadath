@@ -1,0 +1,29 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://main/save_data.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+game_version = "0.1.0"
+data = {
+"flags": {
+
+},
+"inventory": {
+"amounts": {
+
+},
+"order": [  ]
+},
+"location": "cavern_of_flame",
+"player_position": Vector2( 80.6066, -41.2716 ),
+"strings": {
+"run": "Z",
+"ui_accept": "X",
+"ui_cancel": "Z",
+"ui_down": "Down",
+"ui_left": "Left",
+"ui_menu": "S",
+"ui_right": "Right"
+}
+}
