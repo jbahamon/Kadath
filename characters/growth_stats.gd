@@ -3,9 +3,12 @@ class_name GrowthStats
 
 export var level_lookup: Array = []
 export var max_health_curve: Curve
-export var max_mana_curve: Curve
-export var strength_curve: Curve
+export var max_energy_curve: Curve
+export var attack_curve: Curve
 export var defense_curve: Curve
+export var magic_attack_curve: Curve
+export var magic_defense_curve: Curve
+export var luck_curve: Curve
 export var speed_curve: Curve
 
 
@@ -15,19 +18,22 @@ func create_stats(experience: int) -> CharacterStats:
 	var stats := CharacterStats.new()
 	stats.level = get_level(experience)
 	stats.max_health = _get_max_health(experience)
-	stats.max_mana = _get_max_mana(experience)
-	stats.strength = _get_strength(experience)
+	stats.max_energy = _get_max_energy(experience)
+	stats.attack = _get_attack(experience)
 	stats.defense = _get_defense(experience)
+	stats.magic_attack = _get_magic_attack(experience)
+	stats.magic_defense = _get_magic_defense(experience)
 	stats.speed = _get_speed(experience)
+	stats.luck = _get_luck(experience)
 	stats.reset()  # give stats full hp and mana on level up
 	return stats
 
 
-func get_level(value: int) -> int:
+func get_level(experience: int) -> int:
 	var max_level: int = len(level_lookup)
 	assert(max_level > 0)
 	var level: int = 0
-	while level + 1 < max_level && value > level_lookup[level + 1]:
+	while level + 1 < max_level && experience > level_lookup[level + 1]:
 		level += 1
 	return level
 
@@ -46,25 +52,34 @@ func _get_max_health(experience: int) -> int:
 	return int(max_health_curve.interpolate_baked(level))
 
 
-func _get_max_mana(experience: int) -> int:
-	assert(max_mana_curve != null)
-	var level: float = _get_interpolated_level(experience)
-	return int(max_mana_curve.interpolate_baked(level))
+func _get_max_energy(experience: int) -> int:
+	return _get_stat(max_energy_curve, experience)
 
-
-func _get_strength(experience: int) -> int:
-	assert(strength_curve != null)
-	var level: float = _get_interpolated_level(experience)
-	return int(strength_curve.interpolate_baked(level))
+func _get_attack(experience: int) -> int:
+	return _get_stat(attack_curve, experience)
 
 
 func _get_defense(experience: int) -> int:
-	assert(defense_curve != null)
-	var level: float = _get_interpolated_level(experience)
-	return int(defense_curve.interpolate_baked(level))
+	return _get_stat(defense_curve, experience)
+
+
+func _get_magic_attack(experience: int) -> int:
+	return _get_stat(magic_attack_curve, experience)
+
+
+func _get_magic_defense(experience: int) -> int:
+	return _get_stat(magic_defense_curve, experience)
+
+
+func _get_luck(experience: int) -> int:
+	return _get_stat(luck_curve, experience)
 
 
 func _get_speed(experience: int) -> int:
-	assert(speed_curve != null)
+	return _get_stat(speed_curve, experience)
+
+
+func _get_stat(stat_curve: Curve, experience: int) -> int:
+	assert(stat_curve != null)
 	var level: float = _get_interpolated_level(experience)
-	return int(speed_curve.interpolate_baked(level))
+	return int(stat_curve.interpolate_baked(level))

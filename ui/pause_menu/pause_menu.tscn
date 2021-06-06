@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://ui/PixelInterface/Theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/pause_menu/pause_menu_tabs.gd" type="Script" id=2]
@@ -7,56 +7,76 @@
 [ext_resource path="res://ui/settings_menu/settings.gd" type="Script" id=5]
 [ext_resource path="res://ui/pause_menu/item_submenu/item_use_and_description.gd" type="Script" id=6]
 [ext_resource path="res://ui/pause_menu/pause_menu.gd" type="Script" id=7]
+[ext_resource path="res://ui/pause_menu/party_submenu/party_submenu.gd" type="Script" id=8]
+[ext_resource path="res://ui/pause_menu/party_submenu/party_list.tscn" type="PackedScene" id=9]
+[ext_resource path="res://ui/pause_menu/party_submenu/party_member_stats.tscn" type="PackedScene" id=10]
+[ext_resource path="res://ui/PixelInterface/Style/Paper.tres" type="StyleBox" id=11]
 
 [node name="PauseMenu" type="MarginContainer"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -155.0
-margin_top = -115.0
-margin_right = 155.0
-margin_bottom = 115.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="PauseMenuTabs" type="VBoxContainer" parent="."]
-margin_right = 310.0
-margin_bottom = 230.0
+margin_right = 320.0
+margin_bottom = 240.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 tab_alignment = 1
+content_style = ExtResource( 11 )
 
 [node name="Equip" type="VBoxContainer" parent="PauseMenuTabs"]
 visible = false
-margin_right = 320.0
+margin_right = 310.0
+margin_bottom = 48.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Party" type="VBoxContainer" parent="PauseMenuTabs"]
+[node name="Party" type="HSplitContainer" parent="PauseMenuTabs"]
 visible = false
 margin_right = 320.0
+margin_bottom = 240.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+collapsed = true
+dragger_visibility = 2
+script = ExtResource( 8 )
+
+[node name="PartyList" parent="PauseMenuTabs/Party" instance=ExtResource( 9 )]
+margin_right = 16.0
+margin_bottom = 240.0
+size_flags_horizontal = 4
+size_flags_vertical = 1
+
+[node name="PanelContainer" parent="PauseMenuTabs/Party" instance=ExtResource( 10 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 16.0
+margin_right = 320.0
+margin_bottom = 240.0
+size_flags_horizontal = 1
 
 [node name="Item" type="VSplitContainer" parent="PauseMenuTabs"]
+visible = false
 margin_right = 310.0
-margin_bottom = 230.0
+margin_bottom = 113.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+collapsed = true
 dragger_visibility = 2
 script = ExtResource( 4 )
 
 [node name="SplitPanel" type="HSplitContainer" parent="PauseMenuTabs/Item"]
 margin_right = 310.0
-margin_bottom = 203.0
+margin_bottom = 86.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 split_offset = 320
@@ -64,7 +84,7 @@ dragger_visibility = 2
 
 [node name="ItemsPanel" type="PanelContainer" parent="PauseMenuTabs/Item/SplitPanel"]
 margin_right = 165.0
-margin_bottom = 203.0
+margin_bottom = 86.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -72,7 +92,7 @@ size_flags_vertical = 3
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 157.0
-margin_bottom = 195.0
+margin_bottom = 78.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 follow_focus = true
@@ -80,14 +100,14 @@ scroll_horizontal_enabled = false
 
 [node name="Items" type="VBoxContainer" parent="PauseMenuTabs/Item/SplitPanel/ItemsPanel/ItemsScroll"]
 margin_right = 149.0
-margin_bottom = 187.0
+margin_bottom = 70.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ItemUseAndDescription" type="PanelContainer" parent="PauseMenuTabs/Item/SplitPanel"]
 margin_left = 165.0
 margin_right = 310.0
-margin_bottom = 203.0
+margin_bottom = 86.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 6 )
@@ -96,7 +116,7 @@ script = ExtResource( 6 )
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 137.0
-margin_bottom = 195.0
+margin_bottom = 78.0
 
 [node name="ItemActions" type="HBoxContainer" parent="PauseMenuTabs/Item/SplitPanel/ItemUseAndDescription/VBoxContainer"]
 margin_right = 129.0
@@ -137,7 +157,7 @@ __meta__ = {
 [node name="Description" type="Label" parent="PauseMenuTabs/Item/SplitPanel/ItemUseAndDescription/VBoxContainer"]
 margin_top = 45.0
 margin_right = 129.0
-margin_bottom = 187.0
+margin_bottom = 70.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 valign = 1
@@ -145,20 +165,19 @@ autowrap = true
 max_lines_visible = 4
 
 [node name="InfoPanel" type="PanelContainer" parent="PauseMenuTabs/Item"]
-margin_top = 203.0
+margin_top = 86.0
 margin_right = 310.0
-margin_bottom = 230.0
+margin_bottom = 113.0
 
 [node name="Info" type="Label" parent="PauseMenuTabs/Item/InfoPanel"]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 302.0
 margin_bottom = 19.0
-text = "Press [X] for auto-sorting items."
+text = "Press [X] to auto sort items"
 
 [node name="Settings" type="PanelContainer" parent="PauseMenuTabs"]
 visible = false
-margin_top = 117.0
 margin_right = 310.0
 margin_bottom = 230.0
 size_flags_horizontal = 3
@@ -171,6 +190,8 @@ anchor_bottom = 0.0
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 302.0
-margin_bottom = 105.0
+margin_bottom = 222.0
+[connection signal="party_member_focused" from="PauseMenuTabs/Party/PartyList" to="PauseMenuTabs/Party/PanelContainer" method="on_party_member_focused"]
+[connection signal="party_member_selected" from="PauseMenuTabs/Party/PartyList" to="PauseMenuTabs/Party/PanelContainer" method="on_party_member_selected"]
 [connection signal="swap_mode_toggled" from="PauseMenuTabs/Item/SplitPanel/ItemUseAndDescription" to="PauseMenuTabs/Item" method="_on_swap_mode_toggled"]
 [connection signal="toggled" from="PauseMenuTabs/Item/SplitPanel/ItemUseAndDescription/VBoxContainer/ItemActions/Swap" to="PauseMenuTabs/Item/SplitPanel/ItemUseAndDescription" method="_on_Swap_toggled"]

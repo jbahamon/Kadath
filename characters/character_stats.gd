@@ -7,19 +7,21 @@ class_name CharacterStats
 
 signal health_changed(new_health, old_health)
 signal health_depleted
-signal mana_changed(new_mana, old_mana)
-signal mana_depleted
+signal energy_changed(new_energy, old_energy)
+signal energy_depleted
 
 var modifiers = {}
 
 var health: int
-var mana: int setget set_mana
+var energy: int setget set_energy
 export var max_health: int = 1 setget set_max_health, _get_max_health
-export var max_mana: int = 0 setget set_max_mana, _get_max_mana
+export var max_energy: int = 0 setget set_max_energy, _get_max_energy
 
-export var strength: int = 1 setget , _get_strength
+export var attack: int = 1 setget , _get_attack
 export var defense: int = 1 setget , _get_defense
-
+export var magic_attack: int = 1 setget , _get_magic_attack
+export var magic_defense: int = 1 setget , _get_magic_defense
+export var luck: int = 1 setget , _get_luck
 export var speed: int = 1 setget , _get_speed
 
 
@@ -29,7 +31,7 @@ var level: int
 
 func reset():
 	health = self.max_health
-	mana = self.max_mana
+	energy = self.max_energy
 
 
 func copy() -> CharacterStats:
@@ -38,7 +40,7 @@ func copy() -> CharacterStats:
 	# in the ResourceLoader
 	var copy = duplicate()
 	copy.health = health
-	copy.mana = mana
+	copy.energy = energy
 	return copy
 
 
@@ -57,12 +59,12 @@ func heal(amount: int):
 	emit_signal("health_changed", health, old_health)
 
 
-func set_mana(value: int):
-	var old_mana = mana
-	mana = max(0, value)
-	emit_signal("mana_changed", mana, old_mana)
-	if mana == 0:
-		emit_signal("mana_depleted")
+func set_energy(value: int):
+	var old_energy = energy
+	energy = max(0, value)
+	emit_signal("energy_changed", energy, old_energy)
+	if energy == 0:
+		emit_signal("energy_depleted")
 
 
 func set_max_health(value: int):
@@ -71,10 +73,10 @@ func set_max_health(value: int):
 	max_health = max(1, value)
 
 
-func set_max_mana(value: int):
+func set_max_energy(value: int):
 	if value == null:
 		return
-	max_mana = max(0, value)
+	max_energy = max(0, value)
 
 
 func add_modifier(id: int, modifier):
@@ -93,16 +95,28 @@ func _get_max_health() -> int:
 	return max_health
 
 
-func _get_max_mana() -> int:
-	return max_mana
+func _get_max_energy() -> int:
+	return max_energy
 
 
-func _get_strength() -> int:
-	return strength
+func _get_attack() -> int:
+	return attack
 
 
 func _get_defense() -> int:
 	return defense
+
+
+func _get_magic_attack() -> int:
+	return magic_attack
+
+
+func _get_magic_defense() -> int:
+	return magic_attack
+
+
+func _get_luck() -> int:
+	return luck
 
 
 func _get_speed() -> int:

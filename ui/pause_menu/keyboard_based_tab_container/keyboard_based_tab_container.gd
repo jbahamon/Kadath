@@ -23,6 +23,9 @@ export var clicked_font_color: Color
 export var disabled_font_color: Color
 export var focused_font_color: Color
 
+
+export var content_style: StyleBox
+
 var tabs_container: HBoxContainer
 var content_container: Container
 var tabs_button_group: ButtonGroup

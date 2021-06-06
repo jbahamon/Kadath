@@ -9,26 +9,27 @@ signal level_changed(new_value, old_value)
 
 export var display_name: String
 export var anim_path: NodePath
+export var icon: Texture
 export var growth: Resource
 export var unlocked = false
 export var experience: int setget _set_experience
-var stats: Resource
+var stats: CharacterStats
 
 onready var battler: Battler = $Battler
 onready var SAVE_KEY: String = "party_member_" + name
 
-var equip_weapon: Equipment
-var equip_head: Equipment
-var equip_body: Equipment
-var equip_accessory: Equipment
+var equipped_weapon: Weapon
+var equipped_helmet: Helmet
+var equipped_armor: Armor
+var equipped_accessory: Accessory
 
 
 func _ready():
 	assert(anim_path)
 	assert(growth)
 	# TODO
-	# stats = growth.create_stats(experience)
-	# battler.stats = stats
+	stats = growth.create_stats(experience)
+	battler.stats = stats
 
 
 func update_stats(before_stats: CharacterStats):
@@ -66,13 +67,13 @@ func save(save_game: Resource):
 	save_game.data[SAVE_KEY] = {
 		'display_name': display_name,
 		'unlocked': unlocked,
-		'equip_weapon': equip_weapon,
-		'equip_head': equip_head,
-		'equip_body': equip_body,
-		'equip_accessory': equip_accessory,
+		'equipped_weapon': equipped_weapon,
+		'equipped_helmet': equipped_helmet,
+		'equipped_armor': equipped_armor,
+		'equipped_accessory': equipped_accessory,
 		'experience': experience,
 		'health': stats.health,
-		'mana': stats.mana,
+		'energy': stats.energy,
 	}
 
 
@@ -81,15 +82,14 @@ func load(save_game: Resource):
 	display_name = data['display_name']
 	unlocked = data['unlocked']
 	
-	equip_weapon = data['equip_weapon']
-	equip_head = data['equip_head']
-	equip_body = data['equip_body']
-	equip_accessory = data['equip_accessory']
+	equipped_weapon = data['equipped_weapon']
+	equipped_helmet = data['equipped_helmet']
+	equipped_armor = data['equipped_armor']
+	equipped_accessory = data['equipped_accessory']
 	
 	experience = data['experience']
-	# TODO
-	# stats = growth.create_stats(experience)
+	stats = growth.create_stats(experience)
 	
 	stats.health = data['health']
-	stats.mana = data['mana']
+	stats.energy = data['energy']
 	

@@ -60,6 +60,6 @@ func sort():
 class ItemSorter:
 	static func sort_ascending(a: InventoryItem, b: InventoryItem):
 		if a.category != b.category:
-			return a.category < b.category
+			return a.get_class() < b.get_class()
 		else:
 			return a.name < b.name

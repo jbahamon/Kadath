@@ -19,7 +19,7 @@ func _on_item_focused(item: InventoryItem):
 	
 	use.set_disabled(in_swap_mode or item.usable_outside_of_battle)
 	swap.disabled = false
-	toss.set_disabled(in_swap_mode or item.category == InventoryItem.ItemCategory.QUEST)
+	toss.set_disabled(in_swap_mode or item.tossable)
 	
 	if not in_swap_mode:
 		for button in buttons:

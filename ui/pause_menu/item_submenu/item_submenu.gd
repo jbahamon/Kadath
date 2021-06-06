@@ -113,10 +113,10 @@ func update_items():
 	add_all_items()
 	set_all_item_neighbours()
 	
-	if len(self.items) > 0:
-		self.focus_mode == Control.FOCUS_NONE
+	if self.items.get_child_count() > 0:
+		self.focus_mode = Control.FOCUS_NONE
 	else:
-		self.focus_mode == Control.FOCUS_ALL
+		self.focus_mode = Control.FOCUS_ALL
 	
 	self.reset_focus()
 
@@ -163,7 +163,6 @@ func set_item_neighbours(i: int, children: Array):
 	
 	item_entry.focus_neighbour_left = item_entry.get_path_to(item_entry)
 	item_entry.focus_neighbour_right = item_entry.get_path_to(item_entry)
-
 
 
 func receive_focus():

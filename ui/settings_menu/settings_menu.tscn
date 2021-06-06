@@ -29,7 +29,7 @@ __meta__ = {
 
 [node name="Settings" type="VBoxContainer" parent="CenterContainer"]
 margin_left = 44.0
-margin_top = 76.0
+margin_top = 77.0
 margin_right = 275.0
 margin_bottom = 163.0
 size_flags_horizontal = 3
@@ -43,7 +43,7 @@ size_flags_vertical = 3
 columns = 2
 
 [node name="MusicVolumeLabel" type="Label" parent="CenterContainer/Settings/Sliders"]
-margin_top = 4.0
+margin_top = 5.0
 margin_right = 60.0
 margin_bottom = 15.0
 text = "Music Volume:"
@@ -52,6 +52,7 @@ text = "Music Volume:"
 margin_left = 64.0
 margin_right = 231.0
 margin_bottom = 20.0
+focus_neighbour_top = NodePath(".")
 size_flags_horizontal = 3
 step = 5.0
 tick_count = 3
@@ -61,7 +62,7 @@ __meta__ = {
 }
 
 [node name="SFXVolumeLabel" type="Label" parent="CenterContainer/Settings/Sliders"]
-margin_top = 28.0
+margin_top = 29.0
 margin_right = 60.0
 margin_bottom = 39.0
 text = "SFX Volume:"
@@ -80,7 +81,7 @@ __meta__ = {
 }
 
 [node name="Text Speed" type="Label" parent="CenterContainer/Settings/Sliders"]
-margin_top = 52.0
+margin_top = 53.0
 margin_right = 60.0
 margin_bottom = 63.0
 text = "Text Speed:"
@@ -101,19 +102,19 @@ __meta__ = {
 [node name="InputVBox" type="VBoxContainer" parent="CenterContainer/Settings"]
 margin_top = 72.0
 margin_right = 231.0
-margin_bottom = 87.0
+margin_bottom = 86.0
 size_flags_horizontal = 3
 
 [node name="ConfigureLabel" type="Label" parent="CenterContainer/Settings/InputVBox"]
 margin_right = 231.0
-margin_bottom = 11.0
+margin_bottom = 10.0
 text = "Configure Input (you can use your mouse for this):"
 
 [node name="InputControls" type="GridContainer" parent="CenterContainer/Settings/InputVBox"]
 margin_left = 115.0
-margin_top = 15.0
+margin_top = 14.0
 margin_right = 115.0
-margin_bottom = 15.0
+margin_bottom = 14.0
 size_flags_horizontal = 4
 size_flags_vertical = 3
 theme = ExtResource( 1 )

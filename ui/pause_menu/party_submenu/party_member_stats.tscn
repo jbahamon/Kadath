@@ -1,0 +1,240 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/PixelInterface/Theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/pause_menu/party_submenu/party_member_stats.gd" type="Script" id=2]
+
+[node name="PartyMemberStats" type="PanelContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="VBoxContainer" parent="."]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 312.0
+margin_bottom = 232.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 5
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+margin_top = 30.0
+margin_right = 304.0
+margin_bottom = 150.0
+grow_horizontal = 0
+custom_constants/margin_right = 40
+custom_constants/margin_left = 40
+
+[node name="Equipment" type="GridContainer" parent="Panel/MarginContainer"]
+margin_left = 40.0
+margin_right = 264.0
+margin_bottom = 120.0
+columns = 3
+
+[node name="WeaponIcon" type="TextureRect" parent="Panel/MarginContainer/Equipment"]
+margin_top = 13.0
+margin_bottom = 13.0
+size_flags_horizontal = 5
+size_flags_vertical = 4
+
+[node name="WeaponStats" type="Label" parent="Panel/MarginContainer/Equipment"]
+margin_left = 4.0
+margin_top = 8.0
+margin_right = 14.0
+margin_bottom = 18.0
+size_flags_horizontal = 5
+text = "15"
+align = 2
+valign = 1
+
+[node name="WeaponName" type="Button" parent="Panel/MarginContainer/Equipment"]
+margin_left = 18.0
+margin_top = -1.0
+margin_right = 224.0
+margin_bottom = 26.2206
+size_flags_horizontal = 7
+size_flags_vertical = 4
+text = "Wooden Stick"
+
+[node name="HelmetIcon" type="TextureRect" parent="Panel/MarginContainer/Equipment"]
+margin_top = 44.0
+margin_bottom = 44.0
+size_flags_horizontal = 5
+size_flags_vertical = 4
+
+[node name="HelmetStats" type="Label" parent="Panel/MarginContainer/Equipment"]
+margin_left = 4.0
+margin_top = 39.0
+margin_right = 14.0
+margin_bottom = 49.0
+size_flags_horizontal = 5
+text = "--"
+align = 2
+valign = 1
+
+[node name="HelmetName" type="Button" parent="Panel/MarginContainer/Equipment"]
+margin_left = 18.0
+margin_top = 30.0
+margin_right = 224.0
+margin_bottom = 57.2206
+size_flags_horizontal = 5
+size_flags_vertical = 4
+text = "--"
+
+[node name="ArmorIcon" type="TextureRect" parent="Panel/MarginContainer/Equipment"]
+margin_top = 75.0
+margin_bottom = 75.0
+size_flags_horizontal = 5
+size_flags_vertical = 4
+
+[node name="ArmorStats" type="Label" parent="Panel/MarginContainer/Equipment"]
+margin_left = 4.0
+margin_top = 70.0
+margin_right = 14.0
+margin_bottom = 80.0
+size_flags_horizontal = 5
+text = "15"
+align = 2
+valign = 1
+
+[node name="ArmorName" type="Button" parent="Panel/MarginContainer/Equipment"]
+margin_left = 18.0
+margin_top = 61.0
+margin_right = 224.0
+margin_bottom = 88.2206
+size_flags_horizontal = 5
+size_flags_vertical = 4
+text = "Leather Armor"
+
+[node name="AccessoryIcon" type="TextureRect" parent="Panel/MarginContainer/Equipment"]
+margin_top = 106.0
+margin_bottom = 106.0
+size_flags_horizontal = 5
+size_flags_vertical = 4
+
+[node name="Control" type="Control" parent="Panel/MarginContainer/Equipment"]
+margin_left = 4.0
+margin_top = 93.0
+margin_right = 14.0
+margin_bottom = 120.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AccessoryName" type="Button" parent="Panel/MarginContainer/Equipment"]
+margin_left = 18.0
+margin_top = 92.0
+margin_right = 224.0
+margin_bottom = 119.221
+size_flags_horizontal = 5
+size_flags_vertical = 4
+text = "--"
+
+[node name="Stats" type="GridContainer" parent="Panel"]
+margin_top = 155.0
+margin_right = 304.0
+margin_bottom = 193.0
+size_flags_horizontal = 9
+columns = 4
+
+[node name="AttackLabel" type="Label" parent="Panel/Stats"]
+margin_right = 73.0
+margin_bottom = 10.0
+size_flags_horizontal = 3
+text = "Attack"
+align = 2
+
+[node name="AttackValue" type="Label" parent="Panel/Stats"]
+margin_left = 77.0
+margin_right = 150.0
+margin_bottom = 10.0
+size_flags_horizontal = 3
+text = "10"
+
+[node name="MagicAttackLabel" type="Label" parent="Panel/Stats"]
+margin_left = 154.0
+margin_right = 227.0
+margin_bottom = 10.0
+size_flags_horizontal = 3
+text = "Magic Attack"
+align = 2
+
+[node name="MagicAttackValue" type="Label" parent="Panel/Stats"]
+margin_left = 231.0
+margin_right = 304.0
+margin_bottom = 10.0
+size_flags_horizontal = 3
+text = "10"
+
+[node name="DefenseLabel" type="Label" parent="Panel/Stats"]
+margin_top = 14.0
+margin_right = 73.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "Defense"
+align = 2
+
+[node name="DefenseValue" type="Label" parent="Panel/Stats"]
+margin_left = 77.0
+margin_top = 14.0
+margin_right = 150.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "10"
+
+[node name="MagicDefenseLabel" type="Label" parent="Panel/Stats"]
+margin_left = 154.0
+margin_top = 14.0
+margin_right = 227.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "Magic Defense"
+align = 2
+
+[node name="MagicDefenseValue" type="Label" parent="Panel/Stats"]
+margin_left = 231.0
+margin_top = 14.0
+margin_right = 304.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "10"
+
+[node name="SpeedLabel" type="Label" parent="Panel/Stats"]
+margin_top = 28.0
+margin_right = 73.0
+margin_bottom = 38.0
+size_flags_horizontal = 3
+text = "Speed"
+align = 2
+
+[node name="SpeedValue" type="Label" parent="Panel/Stats"]
+margin_left = 77.0
+margin_top = 28.0
+margin_right = 150.0
+margin_bottom = 38.0
+size_flags_horizontal = 3
+text = "10"
+
+[node name="LuckLabel" type="Label" parent="Panel/Stats"]
+margin_left = 154.0
+margin_top = 28.0
+margin_right = 227.0
+margin_bottom = 38.0
+size_flags_horizontal = 3
+text = "Luck"
+align = 2
+
+[node name="LuckValue" type="Label" parent="Panel/Stats"]
+margin_left = 231.0
+margin_top = 28.0
+margin_right = 304.0
+margin_bottom = 38.0
+size_flags_horizontal = 3
+text = "10"
