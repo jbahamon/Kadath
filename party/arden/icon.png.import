@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/walk2.png-e44344cd30aa3de690173e9968586a7f.stex"
+path="res://.import/icon.png-de6c1f0f9caa86d3b9faa2c5318adda6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characters/test/walk2.png"
-dest_files=[ "res://.import/walk2.png-e44344cd30aa3de690173e9968586a7f.stex" ]
+source_file="res://party/arden/icon.png"
+dest_files=[ "res://.import/icon.png-de6c1f0f9caa86d3b9faa2c5318adda6.stex" ]
 
 [params]
 

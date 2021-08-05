@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://ui/PixelInterface/Style/Stone.tres" type="StyleBox" id=1]
-[ext_resource path="res://main/party.tscn" type="PackedScene" id=2]
+[ext_resource path="res://party/party.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ui/pause_menu/pause_menu.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/PixelInterface/Theme.tres" type="Theme" id=4]
 [ext_resource path="res://addons/dialog_boxes/dialog_box.gd" type="Script" id=5]
@@ -9,6 +9,8 @@
 [ext_resource path="res://main/local_scene.gd" type="Script" id=7]
 [ext_resource path="res://ui/saves_menu/saves_popup.tscn" type="PackedScene" id=8]
 [ext_resource path="res://main/player_proxy.tscn" type="PackedScene" id=9]
+
+
 
 [node name="LocalScene" type="Node" groups=[
 "save",

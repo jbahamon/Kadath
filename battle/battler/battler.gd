@@ -1,7 +1,7 @@
 # Base entity that represents a character or a monster in combat
 # Every battler has an AI node so all characters can work as a monster
 # or as a computer-controlled player ally
-extends Position2D
+extends Node
 
 class_name Battler
 
@@ -9,7 +9,6 @@ signal died(battler)
 
 export var stats: Resource
 onready var drops := $Drops
-onready var skin = $Skin
 onready var actions = $Actions
 # onready var bars = $Bars
 onready var skills = $Skills
@@ -31,7 +30,6 @@ func _ready() -> void:
 
 
 func initialize():
-	skin.initialize()
 	actions.initialize(skills.get_children())
 	stats = stats.copy()
 	stats.connect("health_depleted", self, "_on_health_depleted")
@@ -44,7 +42,6 @@ func is_able_to_play() -> bool:
 
 func set_selected(value):
 	selected = value
-	skin.blink = value
 
 
 func set_selectable(value):
@@ -57,19 +54,20 @@ func take_damage(hit):
 	stats.take_damage(hit)
 	# prevent playing both stagger and death animation if health <= 0
 	if stats.health > 0:
-		skin.play_stagger()
+		self.play_anim('stagger')
 
 
 func _on_health_depleted():
 	selectable = false
-	yield(skin.play_death(), "completed")
+	yield(self.play_anim('death'), "completed")
 	emit_signal("died", self)
 
+func play_anim(anim_name):
+	self.get_parent().play_anim(anim_name)
+		
+func choose_action(battlers: Array):
+	return self.ai.choose_action(battlers)
 
-func appear():
-	var offset_direction = 1.0 if party_member else -1.0
-	skin.appear()
-
-
-func has_point(point: Vector2):
-	return skin.battler_anim.extents.has_point(point)
+		
+func choose_targets(battlers: Array):
+	return self.ai.choose_targets(battlers)

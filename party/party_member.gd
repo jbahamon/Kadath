@@ -29,8 +29,7 @@ func _ready():
 	assert(growth)
 	# TODO
 	stats = growth.create_stats(experience)
-	battler.stats = stats
-
+	# battler.stats = stats
 
 func update_stats(before_stats: CharacterStats):
 	# Update this character's stats to match select changes
@@ -40,13 +39,13 @@ func update_stats(before_stats: CharacterStats):
 	if before_level != after_level:
 		stats = growth.create_stats(experience)
 		emit_signal("level_changed", after_level, before_level)
-	battler.stats = stats
+	# battler.stats = stats
 
 
 func get_battler_copy():
 	# Returns a copy of the battler to add to the CombatArena
 	# at the start of a battle
-	return battler.duplicate()
+	return null # battler.duplicate()
 
 
 func get_pawn_anim():

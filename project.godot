@@ -24,20 +24,35 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://location/base_classes/npc/base_npc.gd"
 }, {
-"base": "Position2D",
+"base": "Node",
+"class": "BattleAction",
+"language": "GDScript",
+"path": "res://battle/actions/battle_action.gd"
+}, {
+"base": "Node",
+"class": "BattleLoop",
+"language": "GDScript",
+"path": "res://battle/battle_loop.gd"
+}, {
+"base": "Node",
 "class": "Battler",
 "language": "GDScript",
-"path": "res://battle/battler.gd"
+"path": "res://battle/battler/battler.gd"
+}, {
+"base": "Node",
+"class": "BattlerAI",
+"language": "GDScript",
+"path": "res://battle/ai/random_ai.gd"
 }, {
 "base": "Position2D",
 "class": "CharacterAnim",
 "language": "GDScript",
-"path": "res://characters/character_anim.gd"
+"path": "res://party/character_anim.gd"
 }, {
 "base": "Resource",
 "class": "CharacterStats",
 "language": "GDScript",
-"path": "res://characters/character_stats.gd"
+"path": "res://party/character_stats.gd"
 }, {
 "base": "InventoryItem",
 "class": "Equipment",
@@ -52,7 +67,7 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "GrowthStats",
 "language": "GDScript",
-"path": "res://characters/growth_stats.gd"
+"path": "res://party/growth_stats.gd"
 }, {
 "base": "Equipment",
 "class": "Helmet",
@@ -92,17 +107,22 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "Party",
 "language": "GDScript",
-"path": "res://main/party.gd"
+"path": "res://party/party.gd"
 }, {
 "base": "Node",
 "class": "PartyMember",
 "language": "GDScript",
-"path": "res://characters/party_member.gd"
+"path": "res://party/party_member.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "PlayerProxy",
 "language": "GDScript",
 "path": "res://main/player_proxy.gd"
+}, {
+"base": "Reference",
+"class": "PriorityQueue",
+"language": "GDScript",
+"path": "res://utils/priority_queue.gd"
 }, {
 "base": "Resource",
 "class": "SaveData",
@@ -123,7 +143,10 @@ _global_script_class_icons={
 "Accessory": "",
 "Armor": "",
 "BaseNPC": "",
+"BattleAction": "",
+"BattleLoop": "",
 "Battler": "",
+"BattlerAI": "",
 "CharacterAnim": "",
 "CharacterStats": "",
 "Equipment": "",
@@ -139,6 +162,7 @@ _global_script_class_icons={
 "Party": "",
 "PartyMember": "",
 "PlayerProxy": "",
+"PriorityQueue": "",
 "SaveData": "",
 "SavesPopup": "",
 "Weapon": ""
@@ -162,8 +186,8 @@ SaveManager="*res://globals/save_manager.gd"
 
 window/size/width=320
 window/size/height=240
-window/size/test_width=640
-window/size/test_height=480
+window/size/test_width=1280
+window/size/test_height=960
 window/dpi/allow_hidpi=true
 window/stretch/mode="2d"
 window/stretch/aspect="keep"

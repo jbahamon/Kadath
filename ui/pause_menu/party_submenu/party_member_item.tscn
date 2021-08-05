@@ -1,8 +1,9 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://characters/arden/icon.png" type="Texture" id=1]
+[ext_resource path="res://party/arden/icon.png" type="Texture" id=1]
 [ext_resource path="res://ui/pause_menu/party_submenu/party_member_item.gd" type="Script" id=2]
 [ext_resource path="res://ui/PixelInterface/Theme.tres" type="Theme" id=3]
+
 
 [node name="PartyCharacterItem" type="CenterContainer"]
 margin_left = 78.0

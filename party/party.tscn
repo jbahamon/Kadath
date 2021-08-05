@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://party/party.gd" type="Script" id=1]
+[ext_resource path="res://party/party_member.tscn" type="PackedScene" id=2]
+[ext_resource path="res://party/arden/growth.tres" type="Resource" id=3]
+[ext_resource path="res://party/arden/icon.png" type="Texture" id=4]
+[ext_resource path="res://party/arden/arden_anim.tscn" type="PackedScene" id=5]
+
+[node name="Party" type="Node" groups=[
+"save",
+]]
+script = ExtResource( 1 )
+
+[node name="Arden" parent="." instance=ExtResource( 2 )]
+display_name = "Arden"
+anim_path = NodePath("Anim")
+icon = ExtResource( 4 )
+growth = ExtResource( 3 )
+unlocked = true
+
+[node name="Anim" parent="Arden" instance=ExtResource( 5 )]
+
+[editable path="Arden"]
+
+[editable path="Arden/Battler"]
