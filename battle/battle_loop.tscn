@@ -2,6 +2,5 @@
 
 [ext_resource path="res://battle/battle_loop.gd" type="Script" id=1]
 
-
-[node name="TurnQueue" type="Node"]
+[node name="BattleLoop" type="Node"]
 script = ExtResource( 1 )

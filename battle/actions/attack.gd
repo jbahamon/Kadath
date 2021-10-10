@@ -1,15 +1,14 @@
 extends BattleAction
 
 
-func execute(targets):
-	assert(initialized)
-	if actor.party_member and not targets:
-		return false
-
-	for target in targets:
-		yield(actor.skin.move_to(target), "completed")
-		var hit = Hit.new(actor.stats.strength)
-		target.take_damage(hit)
-		yield(actor.get_tree().create_timer(1.0), "timeout")
-		yield(return_to_start_position(), "completed")
-	return true
+func execute(actor: Battler, targets: Array):
+	assert(len(targets) == 1)
+	
+	var target = targets[0]
+	var prev_hp = target.stats.health
+	var hit = Hit.new()
+	hit.type = Hit.Element.PHYSICAL
+	hit.base_damage = actor.get_physical_attack() * 5
+	target.take_damage(hit)
+	
+	print("%s attacked %s (HP: %d -> HP: %d)" % [actor.display_name, target.display_name, prev_hp, target.stats.health])

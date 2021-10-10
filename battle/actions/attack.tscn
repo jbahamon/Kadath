@@ -2,5 +2,6 @@
 
 [ext_resource path="res://battle/actions/attack.gd" type="Script" id=1]
 
-[node name="BattleAction" type="Node"]
+[node name="Attack" type="Node"]
 script = ExtResource( 1 )
+should_retarget_on_missing_target = true

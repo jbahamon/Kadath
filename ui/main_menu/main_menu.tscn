@@ -95,6 +95,7 @@ margin_left = 4.0
 margin_top = 4.0
 margin_right = 316.0
 margin_bottom = 236.0
+
 [connection signal="pressed" from="VBoxContainer/Menu Options/Continue Game" to="." method="_on_Continue_Game_pressed"]
 [connection signal="pressed" from="VBoxContainer/Menu Options/New Game" to="." method="_on_New_Game_pressed"]
 [connection signal="pressed" from="VBoxContainer/Menu Options/Settings" to="." method="_on_Settings_pressed"]

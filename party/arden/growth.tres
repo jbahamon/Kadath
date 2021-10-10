@@ -36,7 +36,7 @@ _data = [ Vector2( 0, 1.54545 ), 0.0, 5.54545, 0, 1, Vector2( 1, 7.09091 ), 5.54
 
 [resource]
 script = ExtResource( 1 )
-level_lookup = [ 0 ]
+level_lookup = [ 0, 100 ]
 max_health_curve = SubResource( 7 )
 max_energy_curve = SubResource( 6 )
 attack_curve = SubResource( 1 )

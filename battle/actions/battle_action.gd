@@ -2,25 +2,20 @@ extends Node
 
 class_name BattleAction
 
-var initialized = false
+enum TargetingType { 
+	ONE_ENEMY,
+	ALL_ENEMIES,
+	
+	SELF,
+	ONE_ALLY,
+	ALL_ALLIES
+}
 
-# Since Actions can be instanced by code (ie skills) these
-# actions doesn't have an owner, that's why we get the owner
-# from it's parent (BattlerActions.gd)
-onready var actor: Battler = get_parent().get_owner()
 export (String) var description: String = "Base battle action"
+export (TargetingType) var targeting_type: int
+export var should_retarget_on_missing_target: bool
 
-
-func initialize(battler: Battler) -> void:
-	actor = battler
-	initialized = true
-
-
-func execute(targets: Array):
-	assert(initialized)
+func execute(actor: Battler, targets: Array):
 	print("%s missing overwrite of the execute method" % name)
 	return false
 
-
-func can_use() -> bool:
-	return true

@@ -18,7 +18,7 @@ func _unhandled_input(event) -> void:
 	if event.is_action_pressed("ui_accept"):
 		raycast.force_raycast_update()
 		if raycast.is_colliding() and raycast.get_collider().has_method("on_player_interaction"):
-			anim.play_idle()
+			anim.play_anim("idle")
 			raycast.get_collider().on_player_interaction(self)
 			
 
@@ -59,14 +59,17 @@ func get_movement_speed() -> float:
 
 
 func update_animation() -> void:
-	anim.play_on_movement(velocity)
+	if velocity == Vector2.ZERO:
+		anim.play_anim("idle")
+	else:
+		anim.play_anim("walk")
 		
 		
 func update_orientation() -> void:
 	if velocity == Vector2.ZERO:
 		return
 
-	anim.update_orientation(input_vector)
+	anim.set_orientation(input_vector)
 	
 	raycast.set_cast_to(Vector2(
 			interaction_vector.x * input_vector.x, 

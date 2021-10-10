@@ -29,10 +29,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://battle/actions/battle_action.gd"
 }, {
-"base": "Node",
-"class": "BattleLoop",
+"base": "Control",
+"class": "BattleUI",
 "language": "GDScript",
-"path": "res://battle/battle_loop.gd"
+"path": "res://battle/sample_battle/text_interface.gd"
 }, {
 "base": "Node",
 "class": "Battler",
@@ -42,7 +42,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "BattlerAI",
 "language": "GDScript",
-"path": "res://battle/ai/random_ai.gd"
+"path": "res://battle/ai/battler_ai.gd"
 }, {
 "base": "Position2D",
 "class": "CharacterAnim",
@@ -53,6 +53,11 @@ _global_script_classes=[ {
 "class": "CharacterStats",
 "language": "GDScript",
 "path": "res://party/character_stats.gd"
+}, {
+"base": "StatusEffect",
+"class": "DownedStatus",
+"language": "GDScript",
+"path": "res://battle/status_effects/downed.gd"
 }, {
 "base": "InventoryItem",
 "class": "Equipment",
@@ -73,6 +78,11 @@ _global_script_classes=[ {
 "class": "Helmet",
 "language": "GDScript",
 "path": "res://item/helmet.gd"
+}, {
+"base": "Reference",
+"class": "Hit",
+"language": "GDScript",
+"path": "res://battle/hit.gd"
 }, {
 "base": "Reference",
 "class": "Inventory",
@@ -114,15 +124,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://party/party_member.gd"
 }, {
+"base": "BattlerAI",
+"class": "PlayerInputAI",
+"language": "GDScript",
+"path": "res://battle/ai/player_input.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "PlayerProxy",
 "language": "GDScript",
 "path": "res://main/player_proxy.gd"
 }, {
-"base": "Reference",
-"class": "PriorityQueue",
+"base": "BattlerAI",
+"class": "RandomAI",
 "language": "GDScript",
-"path": "res://utils/priority_queue.gd"
+"path": "res://battle/ai/random_ai.gd"
 }, {
 "base": "Resource",
 "class": "SaveData",
@@ -134,6 +149,31 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ui/saves_menu/saves_popup.gd"
 }, {
+"base": "Reference",
+"class": "StatusEffect",
+"language": "GDScript",
+"path": "res://battle/status_effects/status_effect.gd"
+}, {
+"base": "Reference",
+"class": "StatusEffectManager",
+"language": "GDScript",
+"path": "res://battle/status_effects/status_effect_manager.gd"
+}, {
+"base": "CharacterAnim",
+"class": "TextAnim",
+"language": "GDScript",
+"path": "res://battle/sample_battle/text_anim.gd"
+}, {
+"base": "Reference",
+"class": "Turn",
+"language": "GDScript",
+"path": "res://battle/turn.gd"
+}, {
+"base": "Reference",
+"class": "TurnQueue",
+"language": "GDScript",
+"path": "res://utils/turn_queue.gd"
+}, {
 "base": "Equipment",
 "class": "Weapon",
 "language": "GDScript",
@@ -144,15 +184,17 @@ _global_script_class_icons={
 "Armor": "",
 "BaseNPC": "",
 "BattleAction": "",
-"BattleLoop": "",
+"BattleUI": "",
 "Battler": "",
 "BattlerAI": "",
 "CharacterAnim": "",
 "CharacterStats": "",
+"DownedStatus": "",
 "Equipment": "",
 "FlagSetterNPC": "",
 "GrowthStats": "",
 "Helmet": "",
+"Hit": "",
 "Inventory": "",
 "InventoryItem": "",
 "KeyboardBasedTabsContainer": "",
@@ -161,10 +203,16 @@ _global_script_class_icons={
 "NPCMovement": "",
 "Party": "",
 "PartyMember": "",
+"PlayerInputAI": "",
 "PlayerProxy": "",
-"PriorityQueue": "",
+"RandomAI": "",
 "SaveData": "",
 "SavesPopup": "",
+"StatusEffect": "",
+"StatusEffectManager": "",
+"TextAnim": "",
+"Turn": "",
+"TurnQueue": "",
 "Weapon": ""
 }
 
@@ -181,6 +229,7 @@ PlayerVars="*res://globals/player_vars.gd"
 UserSettings="*res://globals/user_settings.gd"
 SceneSwitcher="*res://globals/scene_switcher.gd"
 SaveManager="*res://globals/save_manager.gd"
+BattleLoop="*res://battle/battle_loop.gd"
 
 [display]
 
@@ -194,7 +243,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "EXP-System-Dialog", "dialog_boxes" )
+enabled=PoolStringArray( "res://addons/EXP-System-Dialog/plugin.cfg", "res://addons/dialog_boxes/plugin.cfg" )
 
 [importer_defaults]
 
@@ -303,8 +352,9 @@ ui_menu={
 
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
-quality/2d/use_pixel_snap=true
+2d/snapping/use_gpu_pixel_snap=true
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
 environment/default_clear_color=Color( 0.0745098, 0.0352941, 0.0901961, 1 )
 environment/default_environment="res://default_env.tres"
+quality/2d/use_pixel_snap=true
