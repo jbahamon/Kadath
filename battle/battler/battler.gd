@@ -8,7 +8,6 @@ class_name Battler
 export var is_party_member = false
 export var display_name: String
 export var anim_path: NodePath
-export var icon: Texture
 export var stats: Resource # Should be Character Stats, tho
 export var turn_order_icon: Texture
 

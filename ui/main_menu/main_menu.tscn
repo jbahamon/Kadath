@@ -1,10 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://ui/main_menu/main_menu.gd" type="Script" id=1]
 [ext_resource path="res://ui/assets/fonts/DungeonFont.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://ui/PixelInterface/Theme.tres" type="Theme" id=3]
+[ext_resource path="res://ui/styles/big_button.tres" type="StyleBox" id=4]
 [ext_resource path="res://ui/saves_menu/saves_popup.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ui/settings_menu/settings_menu.tscn" type="PackedScene" id=6]
+[ext_resource path="res://ui/styles/big_button_focus.tres" type="StyleBox" id=7]
+[ext_resource path="res://ui/styles/big_button_disabled.tres" type="StyleBox" id=8]
+[ext_resource path="res://ui/styles/big_button_pressed.tres" type="StyleBox" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -29,50 +33,83 @@ __meta__ = {
 popup_path = NodePath("../PopupPanel")
 
 [node name="Title" type="Label" parent="."]
-margin_top = 12.0
+margin_top = 16.0
 margin_right = 299.0
-margin_bottom = 81.0
+margin_bottom = 85.0
 custom_fonts/font = SubResource( 1 )
 text = "The Dream-Quest of Unknown Kadath"
 align = 1
 autowrap = true
 
 [node name="VBoxContainer" type="HBoxContainer" parent="."]
-margin_top = 91.0
+margin_top = 95.0
 margin_right = 299.0
-margin_bottom = 211.0
+margin_bottom = 207.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
 [node name="Menu Options" type="VBoxContainer" parent="VBoxContainer"]
-margin_left = 111.0
-margin_right = 187.0
-margin_bottom = 120.0
+margin_left = 112.0
+margin_right = 186.0
+margin_bottom = 112.0
 alignment = 1
 
 [node name="Continue Game" type="Button" parent="VBoxContainer/Menu Options"]
-margin_right = 76.0
-margin_bottom = 27.2206
+margin_right = 74.0
+margin_bottom = 25.0
+mouse_filter = 2
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 9 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 8 )
+custom_styles/normal = ExtResource( 4 )
 text = "Continue Game"
 
 [node name="New Game" type="Button" parent="VBoxContainer/Menu Options"]
-margin_top = 31.0
-margin_right = 76.0
-margin_bottom = 58.2206
+margin_top = 29.0
+margin_right = 74.0
+margin_bottom = 54.0
+mouse_filter = 2
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 9 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 8 )
+custom_styles/normal = ExtResource( 4 )
 text = "New Game"
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="Settings" type="Button" parent="VBoxContainer/Menu Options"]
-margin_top = 62.0
-margin_right = 76.0
-margin_bottom = 89.2206
+margin_top = 58.0
+margin_right = 74.0
+margin_bottom = 83.0
+mouse_filter = 2
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 9 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 8 )
+custom_styles/normal = ExtResource( 4 )
 text = "Settings"
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="Quit" type="Button" parent="VBoxContainer/Menu Options"]
-margin_top = 93.0
-margin_right = 76.0
-margin_bottom = 120.221
+margin_top = 87.0
+margin_right = 74.0
+margin_bottom = 112.0
+mouse_filter = 2
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 9 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 8 )
+custom_styles/normal = ExtResource( 4 )
 text = "Quit"
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="Popups" type="Node" parent="."]
 

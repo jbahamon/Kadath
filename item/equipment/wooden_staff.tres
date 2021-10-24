@@ -10,4 +10,5 @@ max_amount = 99
 usable_outside_of_battle = false
 usable_in_battle = false
 tossable = true
+equippable_by = 1
 attack = 1

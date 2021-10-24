@@ -222,7 +222,7 @@ texture = ExtResource( 1 )
 offset = Vector2( 0, -17 )
 hframes = 10
 vframes = 10
-frame = 65
+frame = 20
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 21 )

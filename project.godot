@@ -94,7 +94,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://item/inventory_item.gd"
 }, {
-"base": "VBoxContainer",
+"base": "HBoxContainer",
 "class": "KeyboardBasedTabsContainer",
 "language": "GDScript",
 "path": "res://ui/pause_menu/keyboard_based_tab_container/keyboard_based_tab_container.gd"
@@ -114,15 +114,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://location/base_classes/npc/movement/npc_movement.gd"
 }, {
-"base": "Node",
+"base": "Node2D",
 "class": "Party",
 "language": "GDScript",
 "path": "res://party/party.gd"
 }, {
-"base": "Node",
+"base": "Node2D",
 "class": "PartyMember",
 "language": "GDScript",
 "path": "res://party/party_member.gd"
+}, {
+"base": "MarginContainer",
+"class": "PartyMemberItem",
+"language": "GDScript",
+"path": "res://ui/pause_menu/party_submenu/party_member_item.gd"
 }, {
 "base": "BattlerAI",
 "class": "PlayerInputAI",
@@ -203,6 +208,7 @@ _global_script_class_icons={
 "NPCMovement": "",
 "Party": "",
 "PartyMember": "",
+"PartyMemberItem": "",
 "PlayerInputAI": "",
 "PlayerProxy": "",
 "RandomAI": "",
@@ -339,6 +345,10 @@ ui_menu={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
  ]
 }
+
+[input_devices]
+
+pointing/emulate_mouse_from_touch=false
 
 [layer_names]
 

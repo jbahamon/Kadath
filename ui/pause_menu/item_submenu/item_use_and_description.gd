@@ -1,8 +1,10 @@
 extends PanelContainer
 
 signal swap_mode_toggled(mode)
-var normal_button_style = load("res://ui/PixelInterface/Style/Button.tres")
-var highlighted_button_style = load("res://ui/PixelInterface/Style/ButtonHover.tres")
+var normal_button_style = load("res://ui/PixelInterface/Style/ButtonFlat.tres")
+var highlighted_button_style = load("res://ui/PixelInterface/Style/ButtonFlatHover.tres")
+var font_color_normal = Color(1, 1, 1, 1)
+var font_color_highlighted = Color(0, 1, 1, 1)
 var highlighted_index: int = -1
 
 var in_swap_mode = false
@@ -17,13 +19,14 @@ func _on_item_focused(item: InventoryItem):
 
 	description.text = item.description
 	
-	use.set_disabled(in_swap_mode or item.usable_outside_of_battle)
-	swap.disabled = false
-	toss.set_disabled(in_swap_mode or item.tossable)
+	use.set_disabled(in_swap_mode or (not item.usable_outside_of_battle))
+	swap.set_disabled(false)
+	toss.set_disabled(in_swap_mode or (not item.tossable))
 	
 	if not in_swap_mode:
 		for button in buttons:
 			button.add_stylebox_override("normal", normal_button_style)
+			button.add_color_override("font_color", font_color_normal)
 		
 		if highlighted_index < 0 or buttons[highlighted_index].disabled:
 			for i in range(len(buttons)):	
@@ -66,9 +69,11 @@ func move(increment: int):
 
 func highlight(i: int):
 	if highlighted_index >= 0:
-		buttons[highlighted_index] .add_stylebox_override("normal", normal_button_style)
+		buttons[highlighted_index].add_stylebox_override("normal", normal_button_style)
+		buttons[highlighted_index].add_color_override("font_color", font_color_normal)
 		
 	buttons[i].add_stylebox_override("normal", highlighted_button_style)
+	buttons[i].add_color_override("font_color", font_color_highlighted)
 	highlighted_index = i
 
 func disable_swap_mode():

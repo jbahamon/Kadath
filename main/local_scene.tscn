@@ -10,8 +10,6 @@
 [ext_resource path="res://ui/saves_menu/saves_popup.tscn" type="PackedScene" id=8]
 [ext_resource path="res://main/player_proxy.tscn" type="PackedScene" id=9]
 
-
-
 [node name="LocalScene" type="Node" groups=[
 "save",
 ]]
@@ -19,15 +17,24 @@ script = ExtResource( 7 )
 
 [node name="World" type="YSort" parent="."]
 
+[node name="Party" parent="World" instance=ExtResource( 2 )]
+
+[node name="Anim" parent="World/Party/Arden" index="1"]
+position = Vector2( 0, 0 )
+
 [node name="PlayerProxy" parent="World" groups=[
 "save",
 ] instance=ExtResource( 9 )]
 position = Vector2( 0, 0 )
+anim_path = NodePath("../Party/Arden/Anim")
 
 [node name="Camera2D" type="Camera2D" parent="World/PlayerProxy"]
 current = true
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="World/PlayerProxy"]
+remote_path = NodePath("../../Party")
 
 [node name="SimpleDialogBox" type="CanvasLayer" parent="."]
 script = ExtResource( 5 )
@@ -42,6 +49,8 @@ panel_stylebox = ExtResource( 1 )
 [node name="MenuLayer" type="CanvasLayer" parent="."]
 
 [node name="MenuPopup" type="PopupPanel" parent="MenuLayer"]
+visible = true
+self_modulate = Color( 0.290196, 0.290196, 0.290196, 0.501961 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -73,8 +82,11 @@ custom_constants/margin_bottom = 0
 [node name="SavesPopup" parent="MenuLayer" instance=ExtResource( 8 )]
 current_mode = 0
 
-[node name="Party" parent="." instance=ExtResource( 2 )]
 [connection signal="about_to_show" from="MenuLayer/MenuPopup" to="." method="_on_menu_about_to_show"]
 [connection signal="popup_hide" from="MenuLayer/MenuPopup" to="." method="_on_menu_popup_hide"]
 [connection signal="about_to_show" from="MenuLayer/SavesPopup" to="." method="_on_menu_about_to_show"]
 [connection signal="popup_hide" from="MenuLayer/SavesPopup" to="." method="_on_menu_popup_hide"]
+
+[editable path="World/Party"]
+[editable path="World/Party/Arden"]
+[editable path="World/Party/Arden/Battler"]

@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends HBoxContainer
 
 class_name KeyboardBasedTabsContainer
 
@@ -16,6 +16,7 @@ export var inactive_content_modulate = Color("#888888")
 export var normal_tab: StyleBox
 export var pressed_tab: StyleBox
 export var disabled_tab: StyleBox
+export var hover_tab: StyleBox
 export var focused_tab: StyleBox
 
 export var normal_font_color: Color
@@ -23,10 +24,14 @@ export var clicked_font_color: Color
 export var disabled_font_color: Color
 export var focused_font_color: Color
 
+export var label_style: StyleBox
+export var label_font: Font
 
 export var content_style: StyleBox
 
-var tabs_container: HBoxContainer
+var overlay: Container
+var content_label: Label
+var tabs_container: VBoxContainer
 var content_container: Container
 var tabs_button_group: ButtonGroup
 
@@ -55,21 +60,46 @@ func pop_children():
 	return children
 
 func build_tabs_container():
-	tabs_container = HBoxContainer.new()
+	tabs_container = VBoxContainer.new()
 	tabs_container.name = "Tabs"
 	tabs_container.alignment = tab_alignment
-	tabs_container.size_flags_horizontal = SIZE_EXPAND_FILL
-	tabs_container.size_flags_vertical = SIZE_SHRINK_CENTER
+	tabs_container.size_flags_horizontal = SIZE_SHRINK_CENTER
+	tabs_container.size_flags_vertical = SIZE_EXPAND_FILL
 	self.add_child(tabs_container)
 
 func build_content_container():
+	var container = MarginContainer.new()
+	container.name = "Container"
+	container.size_flags_horizontal = SIZE_EXPAND_FILL
+	container.size_flags_vertical = SIZE_EXPAND_FILL
+	
+	overlay = CenterContainer.new()
+	overlay.name = "Overlay"
+	overlay.size_flags_horizontal = SIZE_EXPAND_FILL
+	overlay.size_flags_vertical = SIZE_EXPAND_FILL
+	
+	content_label = Label.new()
+	if label_font != null:
+		content_label.add_font_override("font", label_font)
+	
+	if label_style != null:
+		content_label.add_stylebox_override("normal", label_style)
+	content_label.name = "Content Label"
+	content_label.size_flags_horizontal = SIZE_EXPAND_FILL
+	content_label.size_flags_vertical = SIZE_EXPAND_FILL
+	
+	overlay.add_child(content_label)
+	
 	content_container = VBoxContainer.new()
 	content_container.name = "Content"
 	content_container.size_flags_horizontal = SIZE_EXPAND_FILL
 	content_container.size_flags_vertical = SIZE_EXPAND_FILL
 	content_container.modulate = inactive_content_modulate
 	
-	self.add_child(content_container)
+	container.add_child(content_container)
+	container.add_child(overlay)
+	
+	self.add_child(container)
 
 func build_tabs(children: Array):
 	tabs_button_group = ButtonGroup.new()
@@ -81,17 +111,26 @@ func build_tabs(children: Array):
 
 		
 func build_tab_button_for(child: Control):
+	
 	var button = Button.new()
+	button.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
 	if normal_tab != null:
 		button.add_stylebox_override("normal", normal_tab)
 	if pressed_tab != null:
 		button.add_stylebox_override("pressed", pressed_tab)
 	if disabled_tab != null:
 		button.add_stylebox_override("disabled", disabled_tab)
+	if hover_tab != null:
+		button.add_stylebox_override("hover", hover_tab)
 	if focused_tab != null:
 		button.add_stylebox_override("focus", focused_tab)
 
-	button.text = child.name
+	if "icon" in child:
+		button.icon = child.icon
+		button.text = ""
+	else:
+		button.text = child.name
 	button.toggle_mode = true
 	button.group = tabs_button_group
 	
@@ -109,10 +148,10 @@ func assign_tab_neighbours():
 			
 	for i in range(len(buttons)):
 		var button = buttons[i]
-		button.focus_neighbour_top = button.get_path_to(button)
-		button.focus_neighbour_bottom = button.get_path_to(button)
-		button.focus_neighbour_left = button.get_path_to(buttons[posmod((i - 1), len(buttons))])
-		button.focus_neighbour_right = button.get_path_to(buttons[posmod((i + 1), len(buttons))])
+		button.focus_neighbour_left = button.get_path_to(button)
+		button.focus_neighbour_right = button.get_path_to(button)
+		button.focus_neighbour_top = button.get_path_to(buttons[posmod((i - 1), len(buttons))])
+		button.focus_neighbour_bottom = button.get_path_to(buttons[posmod((i + 1), len(buttons))])
 	
 func set_initial_focus():
 	if not tabs_button_group.get_buttons().empty():
@@ -123,9 +162,10 @@ func set_initial_focus():
 
 	
 func _unhandled_input(event):
-	if event.is_action_pressed("ui_accept") or event.is_action_pressed("ui_down"):
+	if event.is_action_pressed("ui_accept"):
 		var pressed_tab_button = tabs_button_group.get_pressed_button()
 		if pressed_tab_button.has_focus() and current_content.has_method("receive_focus"):
+			overlay.visible = false
 			current_content.receive_focus()
 			content_container.modulate = default_modulate
 			get_tree().set_input_as_handled()
@@ -133,6 +173,7 @@ func _unhandled_input(event):
 	elif event.is_action_pressed("ui_cancel"):
 		var pressed_tab_button = tabs_button_group.get_pressed_button()
 		if not pressed_tab_button.has_focus() and current_content.has_method("relinquish_focus"):
+			overlay.visible = "icon" in current_content
 			current_content.relinquish_focus()
 			pressed_tab_button.grab_click_focus()
 			pressed_tab_button.grab_focus()
@@ -147,6 +188,8 @@ func on_content_toggled(toggled: bool, content: Control):
 	content.visible = toggled
 	
 	if toggled:
+		content_label.text = content.name
+		overlay.visible = "icon" in content
 		current_content = content
 		current_content.size_flags_horizontal = SIZE_EXPAND_FILL
 		current_content.size_flags_vertical = SIZE_EXPAND_FILL

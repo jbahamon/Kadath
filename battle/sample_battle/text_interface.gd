@@ -16,6 +16,7 @@ func choose_action(actor: Battler) -> BattleAction:
 	self.clear_buttons()
 	for action in actions:
 		var button = Button.new()
+		button.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		button.text = action.name
 		button.connect("pressed", self, "on_action_selected", [action])
 		buttons.add_child(button)
@@ -34,6 +35,7 @@ func choose_targets(battlers: Array):
 	clear_buttons()
 	for battler in battlers:
 		var button = Button.new()
+		button.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		button.text = battler.name
 		button.connect("pressed", self, "on_battler_selected", [battler])
 		buttons.add_child(button)

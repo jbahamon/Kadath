@@ -5,12 +5,14 @@ class_name PlayerProxy
 const walk_speed: float = 100.0
 const interaction_vector = Vector2(20, 10)
 
+export var anim_path: NodePath
+
 
 var input_vector = Vector2.ZERO
 var velocity = Vector2.ZERO
 var party: Party
 
-onready var anim: CharacterAnim = $CharacterAnim
+onready var anim: CharacterAnim = get_node(anim_path)
 onready var raycast: RayCast2D = $RayCast2D
 
 

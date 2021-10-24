@@ -1,5 +1,7 @@
 extends PanelContainer
 
+export var icon: Texture 
+
 func receive_focus():
 	return $SettingsMenu.receive_focus()
 

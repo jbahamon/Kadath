@@ -52,7 +52,13 @@ func get_sorted_items_amounts() -> Array:
 		ids_and_amounts.push_back([item, amounts[item]])
 		
 	return ids_and_amounts
-	
+
+func get_equipment(cls, equippable_flag: int) -> Array:
+	var ret = []
+	for item in order:
+		if item is cls and (item.equippable_by & equippable_flag):
+			ret.append(item)
+	return ret
 
 func sort():
 	order.sort_custom(ItemSorter, "sort_ascending")

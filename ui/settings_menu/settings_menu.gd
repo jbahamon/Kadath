@@ -39,6 +39,7 @@ func add_label(label_text: String):
 	
 func add_button(action: String):
 	var button = Button.new()
+	button.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var actions = InputMap.get_action_list(action)
 	if actions.empty():
 		button.text = "---"
@@ -61,12 +62,11 @@ func link_buttons():
 	var keys = buttons.keys()
 	for i in range(len(keys)):
 		var button: Button = buttons[keys[i]]
-		if i > 0:
-			if i % 2 != 0:
-				button.focus_neighbour_left = button.get_path_to(buttons[keys[i - 1]])
-			else:
-				button.focus_neighbour_left = button.get_path_to(button)
-			
+		if i % 2 != 0:
+			button.focus_neighbour_left = button.get_path_to(buttons[keys[i - 1]])
+		else:
+			button.focus_neighbour_left = button.get_path_to(button)
+		
 		if i > 1:
 			button.focus_neighbour_top = button.get_path_to(buttons[keys[i - 2]])
 		else:

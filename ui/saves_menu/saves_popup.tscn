@@ -7,6 +7,10 @@
 [ext_resource path="res://ui/PixelInterface/Style/Panel.tres" type="StyleBox" id=5]
 
 [node name="SavesPopup" type="PopupPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = ExtResource( 3 )
 custom_styles/panel = ExtResource( 1 )
 script = ExtResource( 2 )
@@ -14,21 +18,41 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Scroll" type="ScrollContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 135.0
-margin_bottom = 64.0
+margin_right = -8.0
+margin_bottom = -8.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Scroll" type="ScrollContainer" parent="MarginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 294.0
+margin_bottom = 214.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 follow_focus = true
 scroll_horizontal_enabled = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SavesList" type="VBoxContainer" parent="Scroll"]
-margin_right = 127.0
+[node name="SavesList" type="VBoxContainer" parent="MarginContainer/Scroll"]
+margin_right = 284.0
+margin_bottom = 204.0
 size_flags_horizontal = 3
-alignment = 1
+size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -36,16 +60,16 @@ __meta__ = {
 [node name="ConfirmationPopup" type="PopupPanel" parent="."]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 135.0
-margin_bottom = 64.0
+margin_right = 312.0
+margin_bottom = 232.0
 custom_styles/panel = ExtResource( 5 )
 script = ExtResource( 4 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ConfirmationPopup"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 119.0
-margin_bottom = 48.0
+margin_right = 296.0
+margin_bottom = 216.0
 alignment = 1
 
 [node name="Label" type="Label" parent="ConfirmationPopup/VBoxContainer"]
@@ -63,12 +87,15 @@ alignment = 1
 [node name="Yes" type="Button" parent="ConfirmationPopup/VBoxContainer/HBoxContainer"]
 margin_right = 22.0
 margin_bottom = 33.0
+mouse_filter = 2
 text = "Yes"
 
 [node name="No" type="Button" parent="ConfirmationPopup/VBoxContainer/HBoxContainer"]
 margin_right = 22.0
 margin_bottom = 33.0
+mouse_filter = 2
 text = "No"
+
 [connection signal="confirmed" from="ConfirmationPopup" to="." method="_on_ConfirmationPopup_confirmed"]
 [connection signal="pressed" from="ConfirmationPopup/VBoxContainer/HBoxContainer/Yes" to="ConfirmationPopup" method="_on_Yes_pressed"]
 [connection signal="pressed" from="ConfirmationPopup/VBoxContainer/HBoxContainer/No" to="ConfirmationPopup" method="_on_No_pressed"]

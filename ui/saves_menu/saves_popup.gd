@@ -9,7 +9,7 @@ export(Mode) var current_mode: int = Mode.LOAD
 var selected_index: int = -1
 var file_previews = []
 
-onready var v_box: VBoxContainer = $Scroll/SavesList
+onready var v_box: VBoxContainer = $MarginContainer/Scroll/SavesList
 onready var confirmation_popup: Popup = $ConfirmationPopup
 
 func _ready():
@@ -31,6 +31,7 @@ func update_options():
 	var first_focusable = null	
 	for i in range(len(file_previews)):
 		var new_button = Button.new()
+		new_button.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		
 		if file_previews[i] != null:
 			new_button.text = "File %d" % (i + 1)

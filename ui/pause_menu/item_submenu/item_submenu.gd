@@ -5,6 +5,8 @@ onready var items: Container = $SplitPanel/ItemsPanel/ItemsScroll/Items
 onready var use_and_description = $SplitPanel/ItemUseAndDescription
 onready var use_description_panel: PanelContainer = $SplitPanel/ItemUseAndDescription
 
+export var icon: Texture 
+
 var in_swap_mode = false
 var focused_index: int
 var index_for_swap: int = -1
@@ -127,7 +129,7 @@ func add_all_items():
 		
 		items.add_child(new_item_entry)
 		new_item_entry.set_item(item, inventory.amounts[item])
-		new_item_entry.focus_mode = Control.FOCUS_NONE
+		new_item_entry.focus_mode = Control.FOCUS_ALL
 		new_item_entry.connect(
 			"focus_entered",
 			use_and_description,

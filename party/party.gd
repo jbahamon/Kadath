@@ -3,14 +3,15 @@
 # has already unlocked them or not in the game.
 # After an encounter, it delegates stats update (experience and health) to each
 # active party member
-extends Node
+extends Node2D
+
 class_name Party
 
 export var PARTY_SIZE: int = 3
 
 const inventory_save_key = 'Inventory'
 
-var inventory = Inventory.new()
+var inventory: Inventory = Inventory.new()
 
 func load(save_data: SaveData) -> void:
 	inventory.load(save_data)

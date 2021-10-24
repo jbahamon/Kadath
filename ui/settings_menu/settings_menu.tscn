@@ -29,9 +29,9 @@ __meta__ = {
 
 [node name="Settings" type="VBoxContainer" parent="CenterContainer"]
 margin_left = 44.0
-margin_top = 77.0
+margin_top = 75.0
 margin_right = 275.0
-margin_bottom = 163.0
+margin_bottom = 164.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -43,9 +43,9 @@ size_flags_vertical = 3
 columns = 2
 
 [node name="MusicVolumeLabel" type="Label" parent="CenterContainer/Settings/Sliders"]
-margin_top = 5.0
+margin_top = 3.0
 margin_right = 60.0
-margin_bottom = 15.0
+margin_bottom = 16.0
 text = "Music Volume:"
 
 [node name="MusicVolumeSlider" type="HSlider" parent="CenterContainer/Settings/Sliders"]
@@ -53,18 +53,19 @@ margin_left = 64.0
 margin_right = 231.0
 margin_bottom = 20.0
 focus_neighbour_top = NodePath(".")
+mouse_filter = 2
 size_flags_horizontal = 3
 step = 5.0
-tick_count = 3
+tick_count = 2
 ticks_on_borders = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="SFXVolumeLabel" type="Label" parent="CenterContainer/Settings/Sliders"]
-margin_top = 29.0
+margin_top = 27.0
 margin_right = 60.0
-margin_bottom = 39.0
+margin_bottom = 40.0
 text = "SFX Volume:"
 
 [node name="SFXVolumeSlider" type="HSlider" parent="CenterContainer/Settings/Sliders"]
@@ -72,18 +73,19 @@ margin_left = 64.0
 margin_top = 24.0
 margin_right = 231.0
 margin_bottom = 44.0
+mouse_filter = 2
 size_flags_horizontal = 3
 step = 5.0
-tick_count = 3
+tick_count = 2
 ticks_on_borders = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Text Speed" type="Label" parent="CenterContainer/Settings/Sliders"]
-margin_top = 53.0
+margin_top = 51.0
 margin_right = 60.0
-margin_bottom = 63.0
+margin_bottom = 64.0
 text = "Text Speed:"
 
 [node name="TextSpeedSlider" type="HSlider" parent="CenterContainer/Settings/Sliders"]
@@ -91,6 +93,7 @@ margin_left = 64.0
 margin_top = 48.0
 margin_right = 231.0
 margin_bottom = 68.0
+mouse_filter = 2
 size_flags_horizontal = 3
 max_value = 4.0
 tick_count = 5
@@ -102,19 +105,19 @@ __meta__ = {
 [node name="InputVBox" type="VBoxContainer" parent="CenterContainer/Settings"]
 margin_top = 72.0
 margin_right = 231.0
-margin_bottom = 86.0
+margin_bottom = 89.0
 size_flags_horizontal = 3
 
 [node name="ConfigureLabel" type="Label" parent="CenterContainer/Settings/InputVBox"]
 margin_right = 231.0
-margin_bottom = 10.0
+margin_bottom = 13.0
 text = "Configure Input (you can use your mouse for this):"
 
 [node name="InputControls" type="GridContainer" parent="CenterContainer/Settings/InputVBox"]
 margin_left = 115.0
-margin_top = 14.0
+margin_top = 17.0
 margin_right = 115.0
-margin_bottom = 14.0
+margin_bottom = 17.0
 size_flags_horizontal = 4
 size_flags_vertical = 3
 theme = ExtResource( 1 )
@@ -148,7 +151,7 @@ __meta__ = {
 margin_left = 14.0
 margin_top = 14.0
 margin_right = 107.0
-margin_bottom = 26.0
+margin_bottom = 27.0
 size_flags_horizontal = 13
 size_flags_vertical = 12
 text = "Press key for \"Up\"..."
@@ -157,4 +160,5 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="key_pressed" from="Popups/ListenForInputPopup" to="." method="_on_ListenForInputPopup_key_pressed"]

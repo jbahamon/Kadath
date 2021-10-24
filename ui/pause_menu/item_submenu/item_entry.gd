@@ -1,11 +1,24 @@
-extends HBoxContainer
+extends MarginContainer
 
 var item: InventoryItem
-var amount: int
 var _selected_while_unfocused = false
+var amount: int
 
+var modulate_bg = Color("a7591b")
+var modulate_invisible = Color(0, 0, 0, 0)
+
+var modulate_none = Color(1, 1, 1, 1)
+var modulate_swap = Color(1, 1, 0, 1)
+var modulate_focus = Color(0, 1, 1, 1)
+
+onready var bg = $NinePatch
+onready var box = $MarginContainer/HBoxContainer
+onready var icon = $MarginContainer/HBoxContainer/Icon
+onready var item_name_label = $MarginContainer/HBoxContainer/ItemName
+onready var amount_label = $MarginContainer/HBoxContainer/Amount
 
 func _ready():
+	
 	if self.item != null:
 		update_item()
 		
@@ -18,24 +31,25 @@ func set_item(new_item: InventoryItem, amount: int):
 		
 
 func update_item():
-	$Icon.text = ""
-	$ItemName.text = item.name
+	item_name_label.text = item.name
 	
 	if item.max_amount == 1:
-		$Amount.text = ""
+		amount_label.text = ""
 	else:
-		$Amount.text = "x%d" % amount
+		amount_label.text = "x%d" % amount
 
 
 func _on_ItemEntry_focus_entered():
-	$Icon.text = ">"
+	self.bg.self_modulate = modulate_bg
+	self.box.modulate = modulate_focus
 
 
 func _on_ItemEntry_focus_exited():
+	self.bg.self_modulate = modulate_invisible
 	if _selected_while_unfocused:
-		$Icon.text = "*"
+		self.box.modulate = modulate_swap
 	else:
-		$Icon.text = ""
+		self.box.modulate = modulate_none
 	
 func set_selected_while_unfocused(val: bool):
 	_selected_while_unfocused = val

@@ -5,7 +5,7 @@ var StoryReader = load("res://addons/EXP-System-Dialog/Reference_StoryReader/EXP
 var talk_speed = 20.0
 var current_location: LocationMap = null
 
-onready var party = $Party
+onready var party = $World/Party
 onready var player_proxy: PlayerProxy = $World/PlayerProxy
 onready var world = $World
 onready var dialog_box = $SimpleDialogBox
