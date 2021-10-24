@@ -1,6 +1,15 @@
 extends Reference
 class_name Inventory
 
+signal inventory_changed(change_type)
+
+enum Change {
+	ADD,
+	REMOVE,
+	SORT,
+	SWAP
+}
+
 const save_key = 'inventory'
 var amounts = {}
 var order = []
@@ -24,6 +33,8 @@ func add(item: InventoryItem, amount: int = 1) -> void:
 	else:
 		amounts[item] = min(amount, item.max_amount)
 		order.push_back(item)
+	
+	emit_signal("inventory_changed", Change.ADD)
 		
 	
 func remove(item: InventoryItem, amount: int = 1) -> void:
@@ -37,10 +48,13 @@ func remove(item: InventoryItem, amount: int = 1) -> void:
 		amounts.erase(item)
 		order.erase(item)
 
+	emit_signal("inventory_changed", Change.REMOVE)
+	
 func swap_items(i1: int, i2: int) -> void:
 	var temp_item: InventoryItem = order[i1]
 	order[i1] = order[i2]
 	order[i2] = temp_item
+	emit_signal("inventory_changed", Change.SWAP)
 
 func has(item: InventoryItem):
 	return item in amounts
@@ -62,6 +76,7 @@ func get_equipment(cls, equippable_flag: int) -> Array:
 
 func sort():
 	order.sort_custom(ItemSorter, "sort_ascending")
+	emit_signal("inventory_changed", Change.SORT)
 	
 class ItemSorter:
 	static func sort_ascending(a: InventoryItem, b: InventoryItem):

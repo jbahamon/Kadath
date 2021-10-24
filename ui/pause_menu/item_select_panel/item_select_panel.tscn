@@ -30,3 +30,13 @@ margin_right = 304.0
 margin_bottom = 224.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="CancelButton" type="Button" parent="ScrollContainer/VBoxContainer"]
+margin_right = 304.0
+margin_bottom = 17.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+mouse_filter = 2
+text = "Cancel"
+
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/CancelButton" to="." method="on_cancel"]

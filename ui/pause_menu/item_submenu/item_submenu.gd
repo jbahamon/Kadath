@@ -19,14 +19,15 @@ func _ready():
 	
 	
 func initialize(party: Party):
+	if self.inventory != null:
+		self.inventory.disconnect("inventory_changed", self, "on_inventory_changed")
 	self.inventory = party.inventory
+	self.inventory.connect("inventory_changed", self, "on_inventory_changed")
+	
 	update_items()
-
 
 func autosort():
 	inventory.sort()
-	update_items()
-
 
 func _on_swap_mode_toggled(swap_mode):
 	in_swap_mode = swap_mode
@@ -67,17 +68,14 @@ func swap_item_entries(i1, i2):
 	
 	set_all_item_neighbours()
 	
-	
 func _on_index_focused(index):
 	focused_index = index
-	
 	
 func _input(event: InputEvent):
 	if in_swap_mode:
 		on_swap_input(event)
 	else:
 		on_browse_input(event)
-
 
 func on_swap_input(event: InputEvent):
 	if event.is_action_pressed("ui_cancel"):
@@ -108,7 +106,10 @@ func on_browse_input(event: InputEvent):
 		return
 		
 	get_tree().set_input_as_handled()
-	
+
+func on_inventory_changed(change_type):
+	if change_type != Inventory.Change.SWAP:
+		update_items()
 	
 func update_items():
 	remove_all_items()
