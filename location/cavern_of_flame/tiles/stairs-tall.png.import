@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cavern_wall.png-501fa8a54a5dd6842396d97dbf543b51.stex"
+path="res://.import/stairs-tall.png-14f578f8c31dd7306dc4de35bc5124d4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://location/cavern_of_flame/map/cavern_wall.png"
-dest_files=[ "res://.import/cavern_wall.png-501fa8a54a5dd6842396d97dbf543b51.stex" ]
+source_file="res://location/cavern_of_flame/tiles/stairs-tall.png"
+dest_files=[ "res://.import/stairs-tall.png-14f578f8c31dd7306dc4de35bc5124d4.stex" ]
 
 [params]
 

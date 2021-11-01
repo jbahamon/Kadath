@@ -8,6 +8,9 @@ onready var cancel_button = $ScrollContainer/VBoxContainer/CancelButton
 
 var property_to_assign: String
 
+func _ready():
+	self.set_process_unhandled_input(false)
+	
 func initialize(items: Array):
 	for item in items:
 		var button = Button.new()
@@ -50,6 +53,7 @@ func on_cancel():
 	emit_signal("item_selected", null)
 	
 func clear_items():
+	self.set_process_unhandled_input(false)
 	for child in container.get_children():
 		if child != cancel_button:
 			container.remove_child(child)

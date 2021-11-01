@@ -1,10 +1,12 @@
-extends Node
+extends Node2D
 class_name LocalScene
 
 var StoryReader = load("res://addons/EXP-System-Dialog/Reference_StoryReader/EXP_StoryReader.gd")
 var talk_speed = 20.0
-var current_location: LocationMap = null
+var current_location: Location = null
+var current_room: Room = null
 
+onready var camera = $World/PlayerProxy/Camera2D
 onready var party = $World/Party
 onready var player_proxy: PlayerProxy = $World/PlayerProxy
 onready var world = $World
@@ -13,7 +15,9 @@ onready var story_reader = StoryReader.new()
 onready var menu_popup: Popup = $MenuLayer/MenuPopup
 onready var menu = $MenuLayer/MenuPopup/PauseMenu
 onready var save_popup = $MenuLayer/SavesPopup
+onready var cutscene = $LocalCutscene
 
+var block_input = false
 
 func _ready() -> void:
 	player_proxy.set_party(party)
@@ -22,8 +26,10 @@ func _ready() -> void:
 		SaveManager.load(PlayerVars.loaded_slot)
 		PlayerVars.loaded_slot = -1
 	else:
-		self.update_location(PlayerVars.starting_location_name)
-
+		self.update_whereabouts(
+			PlayerVars.starting_location_name, 
+			PlayerVars.starting_room_name
+		)
 
 func talk(source, dialog_name, from_node_id) -> void:
 	if not story_reader.has_record_name(dialog_name):
@@ -57,7 +63,16 @@ func talk(source, dialog_name, from_node_id) -> void:
 func _unhandled_input(event) -> void:
 	if event.is_action_pressed("ui_menu"):
 		menu_popup.popup_centered_ratio(1)
+	
+func start_cutscene():
+	self.set_process_unhandled_input(false)
+	player_proxy.set_process_unhandled_input(false)
+	world.set_process_unhandled_input(false)
 
+func end_cutscene():
+	self.set_process_unhandled_input(true)
+	player_proxy.set_process_unhandled_input(true)
+	world.set_process_unhandled_input(true)
 
 func show_save_menu() -> void:
 	save_popup.popup_centered_ratio(1)
@@ -68,7 +83,6 @@ func _on_menu_popup_hide() -> void:
 	world.set_physics_process(true)
 	world.set_process(true)
 	world.set_process_unhandled_input(true)
-	
 	menu.set_process_unhandled_input(false)
 
 
@@ -77,31 +91,86 @@ func _on_menu_about_to_show() -> void:
 	world.set_physics_process(false)
 	world.set_process(false)
 	world.set_process_unhandled_input(false)
-	
 	menu.initialize(party)
 	menu.set_process_unhandled_input(true)
 
 
 func save(save_data: SaveData) -> void:
-	save_data.data['location'] = self.current_location.save_name
-
+	save_data.data['location'] = self.current_location.location_id
+	save_data.data['room'] = self.current_room.room_id
 
 func load(save_data: SaveData) -> void:
-	update_location(save_data.data['location'])
+	update_whereabouts(
+		save_data.data['location'], 
+		save_data.data['room']
+	)
+	
+func update_whereabouts(
+	location_id: String, 
+	room_id: String, 
+	target_position = Vector2.ZERO, 
+	target_orientation = Vector2.DOWN
+	) -> void:
+	
+	var location_path = "res://location/%s/location.tres" % location_id
+	var old_location = current_location
+	var old_room = current_room
+	
+	if (old_location != null and location_id != old_location.location_id and
+		old_room != null and room_id == old_room.room_id):
+		return
+	
+	self.start_cutscene()
+	
+	if old_location != null:
+		cutscene.play("fade_to_black")
+	
+	if old_location == null or location_id != old_location.location_id:
+		
+		var new_location: Location = load(location_path)
+		new_location.load_rooms()
+	
+		if old_location != null:
+			old_location.free_rooms()
 
+		current_location = new_location
+		story_reader.read(current_location.story)
+			
+	if old_location != null:
+		yield(cutscene, "animation_finished")
+		
+	self.move_to_room(room_id, target_position, target_orientation)
+
+	cutscene.play("fade_from_black")
+	yield(cutscene, "animation_finished")
 	
-func update_location(location_name) -> void:
-	var location_path = ("res://location/%s/map/%s.tscn" % 
-						 [location_name, location_name])
-	var location = load(location_path).instance()
-	world.add_child(location)
-	world.move_child(location, 0)
+	self.end_cutscene()
 	
-	for child in location.get_children():
+func move_to_room(room_id: String, target_position: Vector2, target_orientation: Vector2) -> void:
+	if current_room != null and room_id == current_room.room_id:
+		return
+	
+	if current_room != null:
+		world.remove_child(world.get_child(0))
+		
+	var room = current_location.get_room(room_id)
+		
+	world.add_child(room)
+	world.move_child(room, 0)
+	
+	for child in room.get_children():
 		if child is AnimatedSprite:
 			child.set_animation("default")
 			child.play()
-			
-	current_location = location
-	story_reader.read(current_location.story)
 	
+	var map_limits = room.get_used_rect()
+	var map_cellsize = room.cell_size
+	camera.limit_left = map_limits.position.x * map_cellsize.x + room.position.x
+	camera.limit_right = map_limits.end.x * map_cellsize.x + room.position.x
+	camera.limit_top = map_limits.position.y * map_cellsize.y + room.position.y
+	camera.limit_bottom = map_limits.end.y * map_cellsize.y + room.position.y
+	
+	player_proxy.position = target_position
+	player_proxy.set_orientation(target_orientation)
+	camera.align()
+	current_room = room

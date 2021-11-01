@@ -4,17 +4,6 @@
 [ext_resource path="res://location/cavern_of_flame/npc/kaman_thah.png" type="Texture" id=2]
 [ext_resource path="res://location/base_classes/npc/base_npc.tscn" type="PackedScene" id=3]
 
-
-
-
-
-
-
-
-
-
-
-
 [sub_resource type="AnimationNodeStateMachinePlayback" id=1]
 
 [node name="Kaman-Thah" instance=ExtResource( 3 )]

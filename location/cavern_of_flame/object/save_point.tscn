@@ -5,12 +5,6 @@
 [ext_resource path="res://location/cavern_of_flame/object/save-point3.png" type="Texture" id=3]
 [ext_resource path="res://location/cavern_of_flame/object/save_point.gd" type="Script" id=4]
 
-
-
-
-
-
-
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 1 ), ExtResource( 3 ), ExtResource( 1 ) ],
@@ -23,14 +17,14 @@ animations = [ {
 extents = Vector2( 10.9678, 9.88343 )
 
 [node name="SavePoint" type="StaticBody2D"]
-collision_layer = 24
-collision_mask = 3
+collision_layer = 8
+collision_mask = 7
 script = ExtResource( 4 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 1.52588e-05, -20.2165 )
 frames = SubResource( 1 )
-frame = 2
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -11,6 +11,7 @@ enum Flags {
 
 var loaded_slot = -1
 var starting_location_name = "cavern_of_flame"
+var starting_room_name = "main_room"
 var strings: Dictionary = {}
 var current_flags: Dictionary = {}
 

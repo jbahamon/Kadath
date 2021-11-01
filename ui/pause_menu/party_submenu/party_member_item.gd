@@ -19,8 +19,8 @@ func _ready():
 		self.update_party_member()
 
 
-func initialize(party_member: PartyMember):
-	self.party_member = party_member
+func initialize(init_party_member: PartyMember):
+	self.party_member = init_party_member
 	
 	if self.is_inside_tree():
 		self.update_party_member()

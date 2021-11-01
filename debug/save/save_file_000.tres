@@ -1,27 +1,21 @@
-[gd_resource type="Resource" load_steps=5 format=2]
+[gd_resource type="Resource" load_steps=2 format=2]
 
 [ext_resource path="res://main/save_data.gd" type="Script" id=1]
-[ext_resource path="res://item/equipment/leather_cap.tres" type="Resource" id=2]
-[ext_resource path="res://item/equipment/leather_armor.tres" type="Resource" id=3]
-[ext_resource path="res://item/equipment/wooden_staff.tres" type="Resource" id=4]
 
 [resource]
 script = ExtResource( 1 )
 game_version = "0.1.0"
 data = {
 "flags": {
-0: true
 },
 "inventory": {
 "amounts": {
-ExtResource( 2 ): 1,
-ExtResource( 3 ): 1,
-ExtResource( 4 ): 1
 },
-"order": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ]
+"order": [  ]
 },
 "location": "cavern_of_flame",
-"player_position": Vector2( 71.5335, -41.1968 ),
+"player_position": Vector2( 78.1806, -169.336 ),
+"room": "main_room",
 "strings": {
 "run": "Z",
 "ui_accept": "X",

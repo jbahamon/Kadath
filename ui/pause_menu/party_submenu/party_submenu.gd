@@ -15,6 +15,7 @@ func initialize(party: Party):
 	party_member_stats.on_party_member_focused(party_list.get_first_party_member_item())
 	
 func show_item_panel(items: Array):
+	item_select_panel.set_process_unhandled_input(true)
 	item_select_panel.initialize(items)
 	item_select_panel.rect_min_size = Vector2(party_list.rect_size[0], 0.0)
 	item_select_panel.visible = true
@@ -43,5 +44,5 @@ func on_item_requested(cls, party_member: PartyMember):
 	var items = self.inventory.get_equipment(cls, party_member.id)
 	show_item_panel(items)
 
-func on_item_selected(item: Equipment):
+func on_item_selected(_item: Equipment):
 	hide_item_panel()

@@ -70,18 +70,20 @@ func update_animation() -> void:
 func update_orientation() -> void:
 	if velocity == Vector2.ZERO:
 		return
-
-	anim.set_orientation(input_vector)
+	self.set_orientation(input_vector)
 	
-	raycast.set_cast_to(Vector2(
-			interaction_vector.x * input_vector.x, 
-			interaction_vector.y * input_vector.y
-	))
 
 func save(save_data: SaveData) -> void:
 	save_data.data['player_position'] = self.position
 
+func set_orientation(orientation: Vector2):
+	anim.set_orientation(orientation)
 
+	raycast.set_cast_to(Vector2(
+			interaction_vector.x * orientation.x, 
+			interaction_vector.y * orientation.y
+	))
+	
 func load(save_data: SaveData) -> void:
 	self.position = save_data.data['player_position']
 	
