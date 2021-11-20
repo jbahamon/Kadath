@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/AAP Indie Pixel Font #02 - Irishalini.png-8bdd87e20bf3c19fccfc0370d074f51e.stex"
+path="res://.import/AAP Indie Pixel Font #04 - Eromantique.png-40a959ceb4d2dc2669eba85d43aad4f7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/assets/fonts/AAP Indie Pixel Font #02 - Irishalini.png"
-dest_files=[ "res://.import/AAP Indie Pixel Font #02 - Irishalini.png-8bdd87e20bf3c19fccfc0370d074f51e.stex" ]
+source_file="res://ui/assets/fonts/By Adigun/AAP Indie Pixel Font #04 - Eromantique.png"
+dest_files=[ "res://.import/AAP Indie Pixel Font #04 - Eromantique.png-40a959ceb4d2dc2669eba85d43aad4f7.stex" ]
 
 [params]
 

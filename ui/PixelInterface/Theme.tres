@@ -4,7 +4,7 @@
 [ext_resource path="res://ui/PixelInterface/Style/Panel.tres" type="StyleBox" id=2]
 [ext_resource path="res://ui/PixelInterface/Style/ButtonFlatFocus.tres" type="StyleBox" id=3]
 [ext_resource path="res://ui/PixelInterface/Style/ButtonFlatPress.tres" type="StyleBox" id=4]
-[ext_resource path="res://ui/assets/fonts/Irishalini.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://ui/assets/fonts/By Adigun/Irishalini.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://ui/PixelInterface/Style/Input.tres" type="StyleBox" id=6]
 [ext_resource path="res://ui/PixelInterface/Style/ButtonFlatHover.tres" type="StyleBox" id=7]
 [ext_resource path="res://ui/PixelInterface/Style/ButtonFlatDisable.tres" type="StyleBox" id=8]
