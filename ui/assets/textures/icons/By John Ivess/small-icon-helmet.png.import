@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon-party.png-bb944eb4ad197d215626b30714c38c3f.stex"
+path="res://.import/small-icon-helmet.png-a3da4fc562254d605733367849687ea8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/assets/textures/icons/icon-party.png"
-dest_files=[ "res://.import/icon-party.png-bb944eb4ad197d215626b30714c38c3f.stex" ]
+source_file="res://ui/assets/textures/icons/By John Ivess/small-icon-helmet.png"
+dest_files=[ "res://.import/small-icon-helmet.png-a3da4fc562254d605733367849687ea8.stex" ]
 
 [params]
 

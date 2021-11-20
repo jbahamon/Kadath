@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/small-icon-paw.png-9b13ba7080a4d2636a37390dda63d2af.stex"
+path="res://.import/small-icon-accessory.png-f4307b7a22ca9260e2b4036b62601d89.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/assets/textures/icons/small-icon-paw.png"
-dest_files=[ "res://.import/small-icon-paw.png-9b13ba7080a4d2636a37390dda63d2af.stex" ]
+source_file="res://ui/assets/textures/icons/By John Ivess/small-icon-accessory.png"
+dest_files=[ "res://.import/small-icon-accessory.png-f4307b7a22ca9260e2b4036b62601d89.stex" ]
 
 [params]
 

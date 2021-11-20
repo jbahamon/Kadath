@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/small-icon-thrown.png-2d3f2eef69cff62f4456bf3580115431.stex"
+path="res://.import/icon-settings.png-de6f03f37f03dd3c83166c0715a95136.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/assets/textures/icons/small-icon-thrown.png"
-dest_files=[ "res://.import/small-icon-thrown.png-2d3f2eef69cff62f4456bf3580115431.stex" ]
+source_file="res://ui/assets/textures/icons/By ssugmi/icon-settings.png"
+dest_files=[ "res://.import/icon-settings.png-de6f03f37f03dd3c83166c0715a95136.stex" ]
 
 [params]
 

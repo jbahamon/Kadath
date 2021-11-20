@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/small-icon-sword.png-8e2f2967e9e79d410d340604d2566630.stex"
+path="res://.import/icon-skills.png-20ebc821b564aa02d6fcc72b2e8ea6ea.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/assets/textures/icons/small-icon-sword.png"
-dest_files=[ "res://.import/small-icon-sword.png-8e2f2967e9e79d410d340604d2566630.stex" ]
+source_file="res://ui/assets/textures/icons/By ssugmi/icon-skills.png"
+dest_files=[ "res://.import/icon-skills.png-20ebc821b564aa02d6fcc72b2e8ea6ea.stex" ]
 
 [params]
 

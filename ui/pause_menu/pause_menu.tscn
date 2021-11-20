@@ -15,9 +15,9 @@
 [ext_resource path="res://ui/styles/big_button_focus.tres" type="StyleBox" id=13]
 [ext_resource path="res://ui/styles/big_button_disabled.tres" type="StyleBox" id=14]
 [ext_resource path="res://ui/styles/big_button_pressed.tres" type="StyleBox" id=15]
-[ext_resource path="res://ui/assets/textures/icons/icon-party.png" type="Texture" id=16]
-[ext_resource path="res://ui/assets/textures/icons/icon-items.png" type="Texture" id=17]
-[ext_resource path="res://ui/assets/textures/icons/icon-settings.png" type="Texture" id=18]
+[ext_resource path="res://ui/assets/textures/icons/By ssugmi/icon-party.png" type="Texture" id=16]
+[ext_resource path="res://ui/assets/textures/icons/By ssugmi/icon-items.png" type="Texture" id=17]
+[ext_resource path="res://ui/assets/textures/icons/By ssugmi/icon-settings.png" type="Texture" id=18]
 [ext_resource path="res://ui/pause_menu/item_select_panel/item_select_panel.tscn" type="PackedScene" id=19]
 
 [sub_resource type="DynamicFontData" id=1]

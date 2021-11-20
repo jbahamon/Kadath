@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/small-icon-staff.png-4fc69d9ba734375a95fed64d63c7a014.stex"
+path="res://.import/small-icon-tombstone.png-35417217ca2f2e175a7e6556b057a456.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/assets/textures/icons/small-icon-staff.png"
-dest_files=[ "res://.import/small-icon-staff.png-4fc69d9ba734375a95fed64d63c7a014.stex" ]
+source_file="res://ui/assets/textures/icons/By John Ivess/small-icon-tombstone.png"
+dest_files=[ "res://.import/small-icon-tombstone.png-35417217ca2f2e175a7e6556b057a456.stex" ]
 
 [params]
 

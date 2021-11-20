@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/small-icon-armor.png-8701cc431bfe356af7d4f3167e380b15.stex"
+path="res://.import/icon-items.png-742e54bf69e141b1c8e92eaded2073be.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/assets/textures/icons/small-icon-armor.png"
-dest_files=[ "res://.import/small-icon-armor.png-8701cc431bfe356af7d4f3167e380b15.stex" ]
+source_file="res://ui/assets/textures/icons/By ssugmi/icon-items.png"
+dest_files=[ "res://.import/icon-items.png-742e54bf69e141b1c8e92eaded2073be.stex" ]
 
 [params]
 

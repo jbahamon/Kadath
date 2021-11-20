@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/small-icon-helmet.png-956ce11954b8868ee5982e41e163fc55.stex"
+path="res://.import/small-icon-sword.png-ed51e6427ccff0a242f7f12ffc7305b4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/assets/textures/icons/small-icon-helmet.png"
-dest_files=[ "res://.import/small-icon-helmet.png-956ce11954b8868ee5982e41e163fc55.stex" ]
+source_file="res://ui/assets/textures/icons/By John Ivess/small-icon-sword.png"
+dest_files=[ "res://.import/small-icon-sword.png-ed51e6427ccff0a242f7f12ffc7305b4.stex" ]
 
 [params]
 

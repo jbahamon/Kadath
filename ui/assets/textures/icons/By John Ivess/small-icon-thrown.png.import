@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon-skills.png-d97e26aaadaca2c3991a1841d5237cb0.stex"
+path="res://.import/small-icon-thrown.png-a8cfb1f8f1ba761079ed02cea5cd1379.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/assets/textures/icons/icon-skills.png"
-dest_files=[ "res://.import/icon-skills.png-d97e26aaadaca2c3991a1841d5237cb0.stex" ]
+source_file="res://ui/assets/textures/icons/By John Ivess/small-icon-thrown.png"
+dest_files=[ "res://.import/small-icon-thrown.png-a8cfb1f8f1ba761079ed02cea5cd1379.stex" ]
 
 [params]
 
