@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/priestess.png-c87da81669987e315cc68e06d39666da.stex"
+path="res://.import/kaman_thah-sheet.png-4ae352e1413b9b7f18d00b64633a433a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://location/cavern_of_flame/npc/priestess.png"
-dest_files=[ "res://.import/priestess.png-c87da81669987e315cc68e06d39666da.stex" ]
+source_file="res://location/cavern_of_flame/npc/kaman_thah-sheet.png"
+dest_files=[ "res://.import/kaman_thah-sheet.png-4ae352e1413b9b7f18d00b64633a433a.stex" ]
 
 [params]
 

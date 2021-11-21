@@ -1,7 +1,7 @@
 [gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://location/base_classes/npc/base_npc.gd" type="Script" id=1]
-[ext_resource path="res://location/cavern_of_flame/npc/nasht.png" type="Texture" id=2]
+[ext_resource path="res://location/cavern_of_flame/npc/priest-sheet.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
@@ -157,7 +157,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( 0, 1 ), Vector2( 1, 1 ), Vector2( 2, 1 ), Vector2( 3, 1 ) ]
+"values": [ Vector2( 5, 0 ), Vector2( 6, 0 ), Vector2( 7, 0 ), Vector2( 8, 0 ) ]
 }
 
 [sub_resource type="Animation" id=23]
@@ -175,7 +175,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( 1, 4 ), Vector2( 0, 4 ), Vector2( 2, 4 ), Vector2( 0, 4 ) ]
+"values": [ Vector2( 18, 0 ), Vector2( 16, 0 ), Vector2( 17, 0 ), Vector2( 16, 0 ) ]
 }
 
 [sub_resource type="Animation" id=24]
@@ -193,7 +193,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( 1, 3 ), Vector2( 0, 3 ), Vector2( 2, 3 ), Vector2( 0, 3 ) ]
+"values": [ Vector2( 14, 0 ), Vector2( 13, 0 ), Vector2( 15, 0 ), Vector2( 13, 0 ) ]
 }
 
 [sub_resource type="Animation" id=25]
@@ -208,10 +208,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"times": PoolRealArray( 0, 0.2, 0.4, 0.601388 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( 0, 2 ), Vector2( 1, 2 ), Vector2( 2, 2 ), Vector2( 3, 2 ) ]
+"values": [ Vector2( 9, 0 ), Vector2( 10, 0 ), Vector2( 11, 0 ), Vector2( 12, 0 ) ]
 }
 
 [node name="BaseNPC" type="KinematicBody2D" groups=[
@@ -224,13 +224,15 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
+sprite_sheet = ExtResource( 2 )
+hframes = 19
+vframes = 1
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 centered = false
-hframes = 4
-vframes = 5
-frame = 1
+hframes = 19
+frame = 9
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -7 )

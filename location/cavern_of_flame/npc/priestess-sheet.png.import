@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/priest.png-f5f3c882df7d4af7dbbae681ccc9448a.stex"
+path="res://.import/priestess-sheet.png-747df8f60a740b192aab914d4c82aca2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://location/cavern_of_flame/npc/priest.png"
-dest_files=[ "res://.import/priest.png-f5f3c882df7d4af7dbbae681ccc9448a.stex" ]
+source_file="res://location/cavern_of_flame/npc/priestess-sheet.png"
+dest_files=[ "res://.import/priestess-sheet.png-747df8f60a740b192aab914d4c82aca2.stex" ]
 
 [params]
 

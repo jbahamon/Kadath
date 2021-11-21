@@ -1,14 +1,13 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://location/base_classes/room.gd" type="Script" id=1]
 [ext_resource path="res://location/cavern_of_flame/tiles/cavern_of_flame_tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://location/cavern_of_flame/npc/equipment_npc.gd" type="Script" id=3]
 [ext_resource path="res://location/base_classes/npc/flag_setter_npc.gd" type="Script" id=4]
-[ext_resource path="res://location/cavern_of_flame/npc/priest.png" type="Texture" id=5]
+[ext_resource path="res://location/cavern_of_flame/npc/priestess-sheet.png" type="Texture" id=5]
 [ext_resource path="res://location/cavern_of_flame/object/stairs.tscn" type="PackedScene" id=6]
 [ext_resource path="res://location/cavern_of_flame/object/torch2.png" type="Texture" id=7]
 [ext_resource path="res://location/cavern_of_flame/object/torch3.png" type="Texture" id=8]
-[ext_resource path="res://location/cavern_of_flame/npc/priestess.png" type="Texture" id=9]
 [ext_resource path="res://location/cavern_of_flame/object/torch1.png" type="Texture" id=10]
 [ext_resource path="res://location/base_classes/npc/base_npc.tscn" type="PackedScene" id=12]
 [ext_resource path="res://location/cavern_of_flame/object/save_point.tscn" type="PackedScene" id=13]
@@ -44,47 +43,43 @@ npc_name = "Nasht"
 
 [node name="Priest0" parent="." instance=ExtResource( 12 )]
 position = Vector2( 0, -400 )
-sprite_sheet = ExtResource( 5 )
 dialog_name = "priests"
 movement_type = 1
 
 [node name="Equipment Tut Priest" parent="." instance=ExtResource( 12 )]
 position = Vector2( -80, -336 )
 script = ExtResource( 3 )
-sprite_sheet = ExtResource( 9 )
+sprite_sheet = ExtResource( 5 )
 dialog_name = "equipment_tutorial"
 movement_type = 1
 flag = 3
 
 [node name="Priest4" parent="." instance=ExtResource( 12 )]
 position = Vector2( 16, -192 )
-sprite_sheet = ExtResource( 5 )
 dialog_name = "cavern_of_flame"
 movement_type = 1
 
 [node name="Priest3" parent="." instance=ExtResource( 12 )]
 position = Vector2( -16, -112 )
-sprite_sheet = ExtResource( 9 )
+sprite_sheet = ExtResource( 5 )
 dialog_name = "dreamlands_setting"
 movement_type = 1
 
 [node name="Priest5" parent="." instance=ExtResource( 12 )]
 position = Vector2( 128, -336 )
-sprite_sheet = ExtResource( 5 )
 dialog_name = "dreamlands_conflict"
 movement_type = 1
 
 [node name="Menu Tut Priest" parent="." instance=ExtResource( 12 )]
 position = Vector2( -64, -544 )
 script = ExtResource( 4 )
-sprite_sheet = ExtResource( 9 )
+sprite_sheet = ExtResource( 5 )
 dialog_name = "menu_tutorial"
 movement_type = 1
 
 [node name="Battle Tut Priest" parent="." instance=ExtResource( 12 )]
 position = Vector2( -96, -160 )
 script = ExtResource( 4 )
-sprite_sheet = ExtResource( 5 )
 dialog_name = "battle_tutorial"
 movement_type = 1
 flag = 1
@@ -92,7 +87,7 @@ flag = 1
 [node name="Save Tut Priest" parent="." instance=ExtResource( 12 )]
 position = Vector2( 0, -288 )
 script = ExtResource( 4 )
-sprite_sheet = ExtResource( 9 )
+sprite_sheet = ExtResource( 5 )
 dialog_name = "save_tutorial"
 movement_type = 1
 flag = 2
