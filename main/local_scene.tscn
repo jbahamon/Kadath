@@ -42,9 +42,8 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ) ]
 }
 
-[node name="LocalScene" type="Node2D" groups=[
-"save",
-]]
+[node name="LocalScene" type="Node2D" groups=["save"]]
+modulate = Color( 0, 0, 0, 1 )
 script = ExtResource( 7 )
 
 [node name="World" type="YSort" parent="."]
@@ -57,9 +56,7 @@ position = Vector2( 0, 0 )
 [node name="Arden2" parent="World/Party" index="1"]
 visible = false
 
-[node name="PlayerProxy" parent="World" groups=[
-"save",
-] instance=ExtResource( 9 )]
+[node name="PlayerProxy" parent="World" groups=["save"] instance=ExtResource( 9 )]
 position = Vector2( 0, 0 )
 anim_path = NodePath("../Party/Arden/Anim")
 

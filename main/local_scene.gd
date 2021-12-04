@@ -4,7 +4,7 @@ class_name LocalScene
 var StoryReader = load("res://addons/EXP-System-Dialog/Reference_StoryReader/EXP_StoryReader.gd")
 var talk_speed = 20.0
 var current_location: Location = null
-var current_room: Room = null
+var current_room: LocationRoom = null
 
 onready var camera = $World/PlayerProxy/Camera2D
 onready var party = $World/Party
@@ -76,7 +76,6 @@ func end_cutscene():
 
 func show_save_menu() -> void:
 	save_popup.popup_centered_ratio(1)
-
 
 func _on_menu_popup_hide() -> void:
 	player_proxy.set_process_unhandled_input(true)

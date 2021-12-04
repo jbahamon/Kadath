@@ -13,7 +13,7 @@ func load_rooms() -> void:
 		return
 		
 	for path in room_paths:
-		var room: Room = load(path).instance()
+		var room: LocationRoom = load(path).instance()
 		room_scenes[room.room_id] = room
 		
 func get_room(room_id: String) -> Room:
