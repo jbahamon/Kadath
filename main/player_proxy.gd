@@ -7,7 +7,6 @@ const interaction_vector = Vector2(20, 10)
 
 export var anim_path: NodePath
 
-
 var input_vector = Vector2.ZERO
 var velocity = Vector2.ZERO
 var party: Party

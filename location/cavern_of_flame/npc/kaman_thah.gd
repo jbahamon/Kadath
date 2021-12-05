@@ -14,6 +14,7 @@ func _ready():
 		self.dialog_nid = DialogNodes.IN_QUEST
 	else:
 		self.dialog_nid = DialogNodes.BEFORE_QUEST
+
 	
 func on_player_interaction(player_proxy: PlayerProxy):
 	if PlayerVars.get_flag(PlayerVars.Flags.TUTORIAL_STARTED):

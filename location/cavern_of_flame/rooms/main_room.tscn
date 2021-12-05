@@ -42,7 +42,7 @@ collision_mask = 15
 npc_name = "Nasht"
 
 [node name="Priest0" parent="." instance=ExtResource( 12 )]
-position = Vector2( 0, -400 )
+position = Vector2( 32, -416 )
 dialog_name = "priests"
 movement_type = 1
 
@@ -55,12 +55,12 @@ movement_type = 1
 flag = 3
 
 [node name="Priest4" parent="." instance=ExtResource( 12 )]
-position = Vector2( 16, -192 )
+position = Vector2( 32, -176 )
 dialog_name = "cavern_of_flame"
 movement_type = 1
 
 [node name="Priest3" parent="." instance=ExtResource( 12 )]
-position = Vector2( -16, -112 )
+position = Vector2( -144, -176 )
 sprite_sheet = ExtResource( 5 )
 dialog_name = "dreamlands_setting"
 movement_type = 1
@@ -85,7 +85,7 @@ movement_type = 1
 flag = 1
 
 [node name="Save Tut Priest" parent="." instance=ExtResource( 12 )]
-position = Vector2( 0, -288 )
+position = Vector2( 112, -176 )
 script = ExtResource( 4 )
 sprite_sheet = ExtResource( 5 )
 dialog_name = "save_tutorial"

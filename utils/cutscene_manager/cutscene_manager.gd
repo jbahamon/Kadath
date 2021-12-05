@@ -63,6 +63,9 @@ func run_cutscene_instructions(instructions: Array):
 		
 		if function_return != null:
 			self.get_execution_mode().on_executed_instruction(function_return)
+			
+	while not execution_stack.empty():
+		yield(self.execution_stack.pop_back().finish(), "completed")
 
 func execute_instruction(cutscene_instruction: CutsceneInstruction):
 	match cutscene_instruction.type:
@@ -89,7 +92,11 @@ func execute_instruction(cutscene_instruction: CutsceneInstruction):
 		
 		CutsceneInstruction.Type.OPEN_DIALOG: 
 			yield(
-				local_scene.open_dialog(cutscene_instruction.args["Dialog"]), 
+				local_scene.open_dialog(
+					cutscene_instruction.args["Dialog"],
+					cutscene_instruction.args["Dialog Node"],
+					cutscene_instruction.args.get("Branch Selector", self.local_scene)
+				), 
 				"completed"
 			)
 			

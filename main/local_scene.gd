@@ -31,12 +31,18 @@ func _ready() -> void:
 			PlayerVars.starting_room_name
 		)
 
-func talk(source, dialog_name, from_node_id) -> void:
+func get_room_object(object_name: String):
+	if current_room != null:
+		return current_room.get_node("./" + object_name)
+	else:
+		return null
+
+func open_dialog(dialog_name: String, node_id: int, branch_selector) -> void:
 	if not story_reader.has_record_name(dialog_name):
 		return
 		
 	var did = story_reader.get_did_via_record_name(dialog_name)
-	var nid = from_node_id
+	var nid = node_id
 	var pool = PoolStringArray()
 	
 	while story_reader.has_nid(did, nid):
@@ -56,7 +62,11 @@ func talk(source, dialog_name, from_node_id) -> void:
 			_: 
 				dialog_box.queue_texts(pool)
 				pool = PoolStringArray()
-				var slot = source.get_slot(nid, slots)
+				var slot = branch_selector.get_slot(nid, slots)
+				
+				if slot is GDScriptFunctionState:
+					slot = yield(slot, "completed")
+				
 				nid = story_reader.get_nid_from_slot(did, nid, slot)
 		
 	

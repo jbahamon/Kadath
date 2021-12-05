@@ -21,7 +21,7 @@
 [ext_resource path="res://ui/pause_menu/item_select_panel/item_select_panel.tscn" type="PackedScene" id=19]
 
 [sub_resource type="DynamicFontData" id=1]
-font_path = "res://ui/assets/fonts/Irishalini.ttf"
+font_path = "res://ui/assets/fonts/By Adigun/Irishalini.ttf"
 
 [sub_resource type="DynamicFont" id=2]
 size = 15
@@ -68,8 +68,8 @@ script = ExtResource( 8 )
 icon = ExtResource( 16 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PauseMenuTabs/Party"]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 320.0
+margin_bottom = 224.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
@@ -98,9 +98,9 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="InfoPanel" type="PanelContainer" parent="PauseMenuTabs/Party"]
-margin_top = 86.0
-margin_right = 310.0
-margin_bottom = 113.0
+margin_top = 224.0
+margin_right = 320.0
+margin_bottom = 240.0
 size_flags_horizontal = 3
 
 [node name="Info" type="Label" parent="PauseMenuTabs/Party/InfoPanel"]
@@ -123,14 +123,14 @@ icon = ExtResource( 17 )
 
 [node name="SplitPanel" type="HSplitContainer" parent="PauseMenuTabs/Item"]
 margin_right = 310.0
-margin_bottom = 86.0
+margin_bottom = 97.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 dragger_visibility = 2
 
 [node name="ItemsPanel" type="PanelContainer" parent="PauseMenuTabs/Item/SplitPanel"]
-margin_right = 165.0
-margin_bottom = 86.0
+margin_right = 155.0
+margin_bottom = 97.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -150,9 +150,9 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ItemUseAndDescription" type="PanelContainer" parent="PauseMenuTabs/Item/SplitPanel"]
-margin_left = 165.0
+margin_left = 155.0
 margin_right = 310.0
-margin_bottom = 86.0
+margin_bottom = 97.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 6 )
@@ -211,7 +211,7 @@ autowrap = true
 max_lines_visible = 4
 
 [node name="InfoPanel" type="PanelContainer" parent="PauseMenuTabs/Item"]
-margin_top = 86.0
+margin_top = 97.0
 margin_right = 310.0
 margin_bottom = 113.0
 size_flags_horizontal = 3
