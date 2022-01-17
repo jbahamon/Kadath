@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://ui/PixelInterface/Style/Stone.tres" type="StyleBox" id=1]
 [ext_resource path="res://party/party.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://main/local_scene.gd" type="Script" id=7]
 [ext_resource path="res://ui/saves_menu/saves_popup.tscn" type="PackedScene" id=8]
 [ext_resource path="res://main/player_proxy.tscn" type="PackedScene" id=9]
+[ext_resource path="res://utils/cutscene_manager/cutscene_manager.tscn" type="PackedScene" id=10]
 
 [sub_resource type="Animation" id=1]
 resource_name = "fade_from_black"
@@ -43,7 +44,6 @@ tracks/0/keys = {
 }
 
 [node name="LocalScene" type="Node2D" groups=["save"]]
-modulate = Color( 0, 0, 0, 1 )
 script = ExtResource( 7 )
 
 [node name="World" type="YSort" parent="."]
@@ -72,7 +72,7 @@ remote_path = NodePath("../../Party")
 script = ExtResource( 5 )
 transition_time_ms = 200.0
 text_speed = 30.0
-height_percent = 0.3
+height_percent = 0.5
 margin = 5
 bbcode_enabled = true
 theme = ExtResource( 4 )
@@ -113,9 +113,24 @@ custom_constants/margin_bottom = 0
 [node name="SavesPopup" parent="MenuLayer" instance=ExtResource( 8 )]
 current_mode = 0
 
+[node name="OverlayLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="OverlayLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="LocalCutscene" type="AnimationPlayer" parent="."]
 anims/fade_from_black = SubResource( 1 )
 anims/fade_to_black = SubResource( 2 )
+
+[node name="CutsceneManager" parent="." instance=ExtResource( 10 )]
+overlay_path = NodePath("../OverlayLayer/ColorRect")
+camera_path = NodePath("../World/PlayerProxy/Camera2D")
+local_scene_path = NodePath("..")
 
 [connection signal="about_to_show" from="MenuLayer/MenuPopup" to="." method="_on_menu_about_to_show"]
 [connection signal="popup_hide" from="MenuLayer/MenuPopup" to="." method="_on_menu_popup_hide"]

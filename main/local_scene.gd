@@ -6,6 +6,7 @@ var talk_speed = 20.0
 var current_location: Location = null
 var current_room: LocationRoom = null
 
+
 onready var camera = $World/PlayerProxy/Camera2D
 onready var party = $World/Party
 onready var player_proxy: PlayerProxy = $World/PlayerProxy
@@ -16,6 +17,7 @@ onready var menu_popup: Popup = $MenuLayer/MenuPopup
 onready var menu = $MenuLayer/MenuPopup/PauseMenu
 onready var save_popup = $MenuLayer/SavesPopup
 onready var cutscene = $LocalCutscene
+onready var cutscene_manager = $CutsceneManager
 
 var block_input = false
 
@@ -28,9 +30,13 @@ func _ready() -> void:
 	else:
 		self.update_whereabouts(
 			PlayerVars.starting_location_name, 
-			PlayerVars.starting_room_name
+			PlayerVars.starting_room_name,
+			Vector2.ZERO,
+			Vector2.DOWN,
+			false
 		)
-
+		yield(cutscene_manager.play_cutscene('intro'), "completed")
+	
 func get_room_object(object_name: String):
 	if current_room != null:
 		return current_room.get_node("./" + object_name)
@@ -111,19 +117,25 @@ func save(save_data: SaveData) -> void:
 func load(save_data: SaveData) -> void:
 	update_whereabouts(
 		save_data.data['location'], 
-		save_data.data['room']
+		save_data.data['room'],
+		Vector2.ZERO,
+		Vector2.DOWN,
+		true
 	)
 	
 func update_whereabouts(
 	location_id: String, 
 	room_id: String, 
-	target_position = Vector2.ZERO, 
-	target_orientation = Vector2.DOWN
+	target_position: Vector2, 
+	target_orientation: Vector2,
+	fade: bool
 	) -> void:
 	
 	var location_path = "res://location/%s/location.tres" % location_id
 	var old_location = current_location
 	var old_room = current_room
+	
+	fade = fade and old_location != null
 	
 	if (old_location != null and location_id != old_location.location_id and
 		old_room != null and room_id == old_room.room_id):
@@ -131,7 +143,7 @@ func update_whereabouts(
 	
 	self.start_cutscene()
 	
-	if old_location != null:
+	if fade and old_location != null and old_room != null:
 		cutscene.play("fade_to_black")
 	
 	if old_location == null or location_id != old_location.location_id:
@@ -143,17 +155,22 @@ func update_whereabouts(
 			old_location.free_rooms()
 
 		current_location = new_location
+		
+		assert(current_location.story != null)
+		
 		story_reader.read(current_location.story)
-			
-	if old_location != null:
+
+	if fade and old_location != null and old_room != null:
 		yield(cutscene, "animation_finished")
 		
 	self.move_to_room(room_id, target_position, target_orientation)
 
-	cutscene.play("fade_from_black")
-	yield(cutscene, "animation_finished")
+	if fade:
+		cutscene.play("fade_from_black")
+		yield(cutscene, "animation_finished")
 	
 	self.end_cutscene()
+	current_room.on_enter(self)
 	
 func move_to_room(room_id: String, target_position: Vector2, target_orientation: Vector2) -> void:
 	if current_room != null and room_id == current_room.room_id:

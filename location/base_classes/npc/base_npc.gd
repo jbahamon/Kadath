@@ -23,6 +23,7 @@ export (MovementType) var movement_type: int = MovementType.NONE
 export (NodePath) var custom_movement = null
 
 onready var sprite: Sprite = $Sprite
+onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var animation_tree: AnimationTree = $AnimationTree
 onready var animation_state = animation_tree.get("parameters/playback")
 onready var interactable_collision: CollisionShape2D = $InteractableArea/CollisionShape2D
@@ -90,6 +91,9 @@ func on_player_interaction(player_proxy: PlayerProxy):
 	self.interactable_collision.set_disabled(false)
 	self.movement_node.set_process(true)
 	
+func set_orientation(orientation: Vector2):
+	self.facing = orientation
+	update_facing()
 
 func look_at(point: Vector2):
 	facing = self.position.direction_to(point)
@@ -104,7 +108,7 @@ func look_at(point: Vector2):
 
 
 func walk_to(target: Vector2, speed = WALK_SPEED):
-	self.movement_node.walk_to(target, speed)
+	yield(self.movement_node.walk_to(target, speed), "completed")
 	
 func get_local_scene():
 	return get_node("../../../")

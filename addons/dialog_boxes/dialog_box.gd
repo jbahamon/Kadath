@@ -124,7 +124,6 @@ func change_state(new_state: int):
 		DialogState.HIDDEN:
 			set_process_unhandled_input(false)
 			_dialog_panel_container.visible = false
-			emit_signal("dialog_closed")
 		DialogState.TRANSITION_IN:
 			transition_in()
 		DialogState.ADVANCING:
@@ -155,6 +154,9 @@ func change_state(new_state: int):
 			transition_out()
 			
 	current_state = new_state
+	
+	if new_state == DialogState.HIDDEN:
+		emit_signal("dialog_closed")
 	emit_signal("on_state", new_state)
 
 func transition_in():

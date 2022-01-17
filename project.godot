@@ -54,11 +54,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://party/character_stats.gd"
 }, {
-"base": "Reference",
-"class": "CutsceneInstruction",
-"language": "GDScript",
-"path": "res://utils/cutscene_manager/cutscene_instruction.gd"
-}, {
 "base": "StatusEffect",
 "class": "DownedStatus",
 "language": "GDScript",
@@ -204,7 +199,6 @@ _global_script_class_icons={
 "BattlerAI": "",
 "CharacterAnim": "",
 "CharacterStats": "",
-"CutsceneInstruction": "",
 "DownedStatus": "",
 "Equipment": "",
 "FlagSetterNPC": "",

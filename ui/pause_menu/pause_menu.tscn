@@ -82,7 +82,7 @@ size_flags_vertical = 1
 
 [node name="PartyList" parent="PauseMenuTabs/Party/HBoxContainer" instance=ExtResource( 9 )]
 margin_right = 16.0
-margin_bottom = 240.0
+margin_bottom = 211.0
 size_flags_horizontal = 4
 size_flags_vertical = 1
 
@@ -92,8 +92,9 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 16.0
+margin_top = 0.0
 margin_right = 320.0
-margin_bottom = 240.0
+margin_bottom = 211.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -106,8 +107,8 @@ size_flags_horizontal = 3
 [node name="Info" type="Label" parent="PauseMenuTabs/Party/InfoPanel"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 302.0
-margin_bottom = 19.0
+margin_right = 312.0
+margin_bottom = 21.0
 text = "Press [X] to auto sort items"
 
 [node name="Item" type="VSplitContainer" parent="PauseMenuTabs"]

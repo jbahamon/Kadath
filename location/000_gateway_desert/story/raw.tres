@@ -1,0 +1,272 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://addons/EXP-System-Dialog/Resource_EditorStory/EXP_EditorStory.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+TYPE = "EXP_Story_editor"
+names = {
+"intro_cutscene": 1
+}
+story = {
+1: {
+"available_nid": [  ],
+"groups": [  ],
+"human_readable_description": "Intro cutscene",
+"name": "intro_cutscene",
+"nodes": {
+1: {
+"graph_offset": Vector2( 60, 160 ),
+"links": {
+0: 3
+},
+"rect_size": Vector2( 441, 154.4 ),
+"slot_amount": 1,
+"text": "????
+We should stop soon.
+The sun is already setting.",
+"type": "line"
+},
+2: {
+"graph_offset": Vector2( 60, 320 ),
+"links": {
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "????
+I'll gather some firewood.",
+"type": "line"
+},
+3: {
+"graph_offset": Vector2( 520, 160 ),
+"links": {
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "????
+It's not safe to travel at night.",
+"type": "line"
+},
+4: {
+"graph_offset": Vector2( 60, 480 ),
+"links": {
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "????
+I'll check the surroundings for monsters.
+Better safe than sorry",
+"type": "line"
+},
+5: {
+"graph_offset": Vector2( 60, 640 ),
+"links": {
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "????
+A person, here? Hey, are you okay?",
+"type": "line"
+},
+6: {
+"graph_offset": Vector2( 60, 800 ),
+"links": {
+0: 7
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "????
+You're finally awake!
+Don't know how you got in that cave, but 
+you don't seem to have a single scratch.
+",
+"type": "line"
+},
+7: {
+"graph_offset": Vector2( 520, 800 ),
+"links": {
+0: 8
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "????
+W-where am I? Who are you?
+... I don't remember what happened.",
+"type": "line"
+},
+8: {
+"graph_offset": Vector2( 980, 800 ),
+"links": {
+0: 9
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "????
+We're close to the place we found you.
+We're traveling through this desert..
+Some sightseers and I, Hadi, as their guide.",
+"type": "line"
+},
+9: {
+"graph_offset": Vector2( 60, 980 ),
+"links": {
+0: 10
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "Hadi
+Tell me, what's your name, kid?",
+"type": "line"
+},
+10: {
+"graph_offset": Vector2( 520, 980 ),
+"links": {
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "????
+I'm...",
+"type": "line"
+},
+11: {
+"graph_offset": Vector2( 60, 1160 ),
+"links": {
+0: 12
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "arden_name
+arden_name. 
+I don't really remember much else...
+Where is this desert?",
+"type": "line"
+},
+12: {
+"graph_offset": Vector2( 520, 1160 ),
+"links": {
+0: 13
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "Hadi
+Well, it's not strange to forget things in here...
+You're in a dream, kid.",
+"type": "line"
+},
+13: {
+"graph_offset": Vector2( 980, 1160 ),
+"links": {
+0: 14
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "Hadi
+You'll probably remember everything when you 
+wake up. And probably forget about this, too.",
+"type": "line"
+},
+14: {
+"graph_offset": Vector2( 60, 1320 ),
+"links": {
+0: 15
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "arden_name
+A dream? 
+Am I dreaming you then?
+How do I wake up? 
+",
+"type": "line"
+},
+15: {
+"graph_offset": Vector2( 520, 1320 ),
+"links": {
+0: 16
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "Hadi
+Ha! Lots of questions, kid!
+A good sign, if you ask me.",
+"type": "line"
+},
+16: {
+"graph_offset": Vector2( 980, 1320 ),
+"links": {
+0: 17
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "Hadi
+No, I'm not a character in your head.
+We're close to the Dreamlands,
+so all of us are real, as far as I can tell.
+It's a sort of a shared dream, If you may.",
+"type": "line"
+},
+17: {
+"graph_offset": Vector2( 1440, 1320 ),
+"links": {
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "Hadi
+As for waking up, just focus on the fact
+you're dreaming.
+Closing your eyes and shaking a bit helps.",
+"type": "line"
+},
+18: {
+"graph_offset": Vector2( 60, 1480 ),
+"links": {
+0: 19
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "arden_name
+... Not working, Hadi.",
+"type": "line"
+},
+19: {
+"graph_offset": Vector2( 520, 1480 ),
+"links": {
+0: 20
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "Hadi
+That's weird. Maybe you're physically here.
+But then you wouldn't be forgetting things...",
+"type": "line"
+},
+20: {
+"graph_offset": Vector2( 980, 1480 ),
+"links": {
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "Hadi
+Well, you can stay with us while you figure
+things out.. ",
+"type": "line"
+}
+}
+},
+2: {
+"available_nid": [  ],
+"groups": [  ],
+"human_readable_description": "Woman finds Arden",
+"nodes": {
+}
+},
+3: {
+"available_nid": [  ],
+"groups": [  ],
+"human_readable_description": "Arden wakes up",
+"nodes": {
+}
+}
+}
+available_dids = [  ]
+groups = [  ]

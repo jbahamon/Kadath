@@ -1,0 +1,180 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://addons/EXP-System-Dialog/Resource_BakedStory/EXP_BakedStory.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+TYPE = "EXP_Baked_Story"
+story = {
+1: {
+"nodes": {
+1: {
+"links": {
+0: 3
+},
+"text": "????
+We should stop soon.
+The sun is already setting."
+},
+2: {
+"links": {
+},
+"text": "????
+I'll gather some firewood."
+},
+3: {
+"links": {
+},
+"text": "????
+It's not safe to travel at night."
+},
+4: {
+"links": {
+},
+"text": "????
+I'll check the surroundings for monsters.
+Better safe than sorry"
+},
+5: {
+"links": {
+},
+"text": "????
+A person, here? Hey, are you okay?"
+},
+6: {
+"links": {
+0: 7
+},
+"text": "????
+You're finally awake!
+Don't know how you got in that cave, but 
+you don't seem to have a single scratch.
+"
+},
+7: {
+"links": {
+0: 8
+},
+"text": "????
+W-where am I? Who are you?
+... I don't remember what happened."
+},
+8: {
+"links": {
+0: 9
+},
+"text": "????
+We're close to the place we found you.
+We're traveling through this desert..
+Some sightseers and I, Hadi, as their guide."
+},
+9: {
+"links": {
+0: 10
+},
+"text": "Hadi
+Tell me, what's your name, kid?"
+},
+10: {
+"links": {
+},
+"text": "????
+I'm..."
+},
+11: {
+"links": {
+0: 12
+},
+"text": "arden_name
+arden_name. 
+I don't really remember much else...
+Where is this desert?"
+},
+12: {
+"links": {
+0: 13
+},
+"text": "Hadi
+Well, it's not strange to forget things in here...
+You're in a dream, kid."
+},
+13: {
+"links": {
+0: 14
+},
+"text": "Hadi
+You'll probably remember everything when you 
+wake up. And probably forget about this, too."
+},
+14: {
+"links": {
+0: 15
+},
+"text": "arden_name
+A dream? 
+Am I dreaming you then?
+How do I wake up? 
+"
+},
+15: {
+"links": {
+0: 16
+},
+"text": "Hadi
+Ha! Lots of questions, kid!
+A good sign, if you ask me."
+},
+16: {
+"links": {
+0: 17
+},
+"text": "Hadi
+No, I'm not a character in your head.
+We're close to the Dreamlands,
+so all of us are real, as far as I can tell.
+It's a sort of a shared dream, If you may."
+},
+17: {
+"links": {
+},
+"text": "Hadi
+As for waking up, just focus on the fact
+you're dreaming.
+Closing your eyes and shaking a bit helps."
+},
+18: {
+"links": {
+0: 19
+},
+"text": "arden_name
+... Not working, Hadi."
+},
+19: {
+"links": {
+0: 20
+},
+"text": "Hadi
+That's weird. Maybe you're physically here.
+But then you wouldn't be forgetting things..."
+},
+20: {
+"links": {
+},
+"text": "Hadi
+Well, you can stay with us while you figure
+things out.. "
+}
+}
+},
+2: {
+"nodes": {
+}
+},
+3: {
+"nodes": {
+}
+}
+}
+names = {
+"intro_cutscene": 1
+}

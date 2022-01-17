@@ -1,0 +1,23 @@
+enum Type {
+	SET_ROOM,
+	SET_OVERLAY,
+	FADE_OVERLAY,
+	
+	SET_CAMERA,
+	MOVE_CAMERA,
+	ASSIGN_CAMERA,
+	
+	LOOK,
+	WALK,
+	PLAY_ANIM,
+	
+	START_DIALOG,
+	
+	SIMULTANEOUS,
+	SEQUENTIAL,
+	END,
+	WAIT
+}
+
+func execute(cutscene_manager):
+	pass
