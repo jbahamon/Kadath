@@ -34,7 +34,8 @@ The sun is already setting.",
 "rect_size": Vector2( 324, 137 ),
 "slot_amount": 1,
 "text": "????
-I'll gather some firewood.",
+I'll check the surroundings for monsters.
+Better safe than sorry, right?",
 "type": "line"
 },
 3: {
@@ -54,8 +55,7 @@ It's not safe to travel at night.",
 "rect_size": Vector2( 324, 137 ),
 "slot_amount": 1,
 "text": "????
-I'll check the surroundings for monsters.
-Better safe than sorry",
+I'll gather some firewood.",
 "type": "line"
 },
 5: {

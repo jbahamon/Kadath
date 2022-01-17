@@ -29,7 +29,9 @@ class SimultaneousExecution extends ExecutionMode:
 		function_states.append(state)
 		
 	func finish():
-		yield(self.wait_for_all(), "completed")
+		var wait_result = self.wait_for_all()
+		if wait_result is GDScriptFunctionState and wait_result.is_valid():
+			yield(wait_result, "completed")
 		return null
 		
 	func wait_for_all() -> bool:
@@ -55,7 +57,7 @@ func play_cutscene(cutsceneName: String):
 	self.local_scene.start_cutscene()
 	var execution_result = self.run_cutscene_instructions(instructions);
 	
-	if execution_result is GDScriptFunctionState and execution_result.is_valid(true):
+	if execution_result is GDScriptFunctionState and execution_result.is_valid():
 		yield(execution_result, "completed")
 		
 	self.local_scene.end_cutscene()
@@ -75,9 +77,7 @@ func run_cutscene_instructions(instructions: Array):
 				
 
 	while not execution_stack.empty():
-		var last_value = self.execution_stack.pop_back().finish()
-		if last_value is GDScriptFunctionState and last_value.is_valid(true):
-			yield(last_value, "completed")
+		end_execution()
 	
 func begin_sequential():
 	self.execution_stack.push_back(SequentialExecution.new())
@@ -86,7 +86,9 @@ func begin_simultaneous():
 	self.execution_stack.push_back(SimultaneousExecution.new())
 	
 func end_execution():
-	yield(self.execution_stack.pop_back().finish(), "completed")
+	var last_value = self.execution_stack.pop_back().finish()
+	if last_value is GDScriptFunctionState and last_value.is_valid():
+		yield(last_value, "completed")
 	
 func get_execution_mode() -> ExecutionMode:
 	return self.execution_stack.back()
@@ -95,9 +97,8 @@ func get_entity(entity_name: String):
 	return local_scene.get_room_object(entity_name)
 	
 func on_tween_completed(object, key):
-	if object == self.overlay and key == ":modulate":
-		print("finished")
-		emit_signal("overlay_fade_finished")
+	if object.get('manager_signal') != null:
+		emit_signal(object.get('manager_signal'))
 	elif object == self.camera and key == "position":
 		emit_signal("move_camera_finished")
 		

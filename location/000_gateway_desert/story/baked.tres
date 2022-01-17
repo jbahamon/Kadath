@@ -20,7 +20,8 @@ The sun is already setting."
 "links": {
 },
 "text": "????
-I'll gather some firewood."
+I'll check the surroundings for monsters.
+Better safe than sorry, right?"
 },
 3: {
 "links": {
@@ -32,8 +33,7 @@ It's not safe to travel at night."
 "links": {
 },
 "text": "????
-I'll check the surroundings for monsters.
-Better safe than sorry"
+I'll gather some firewood."
 },
 5: {
 "links": {
