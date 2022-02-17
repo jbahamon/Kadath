@@ -1,15 +1,21 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://ui/PixelInterface/Style/Stone.tres" type="StyleBox" id=1]
+[ext_resource path="res://ui/styles/ui_bg.tres" type="StyleBox" id=1]
 [ext_resource path="res://party/party.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ui/pause_menu/pause_menu.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/PixelInterface/Theme.tres" type="Theme" id=4]
-[ext_resource path="res://addons/dialog_boxes/dialog_box.gd" type="Script" id=5]
+[ext_resource path="res://addons/dialog_boxes/dialog_box_canvas_layer.gd" type="Script" id=5]
 [ext_resource path="res://ui/pause_menu/menu_popup.gd" type="Script" id=6]
 [ext_resource path="res://main/local_scene.gd" type="Script" id=7]
 [ext_resource path="res://ui/saves_menu/saves_popup.tscn" type="PackedScene" id=8]
 [ext_resource path="res://main/player_proxy.tscn" type="PackedScene" id=9]
 [ext_resource path="res://utils/cutscene_manager/cutscene_manager.tscn" type="PackedScene" id=10]
+[ext_resource path="res://ui/styles/ui_bg_small.tres" type="StyleBox" id=11]
+
+[sub_resource type="CanvasItemMaterial" id=4]
+
+[sub_resource type="CanvasItemMaterial" id=3]
+blend_mode = 1
 
 [sub_resource type="Animation" id=1]
 resource_name = "fade_from_black"
@@ -57,26 +63,50 @@ position = Vector2( 0, 0 )
 visible = false
 
 [node name="PlayerProxy" parent="World" groups=["save"] instance=ExtResource( 9 )]
-position = Vector2( 0, 0 )
 anim_path = NodePath("../Party/Arden/Anim")
+
+[node name="RemoteTransform2D" parent="World/PlayerProxy" index="2"]
+remote_path = NodePath("../../Party")
 
 [node name="Camera2D" type="Camera2D" parent="World/PlayerProxy"]
 current = true
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
+drag_margin_left = 0.0
+drag_margin_top = 0.0
+drag_margin_right = 0.0
+drag_margin_bottom = 0.0
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="World/PlayerProxy"]
-remote_path = NodePath("../../Party")
+[node name="OverlayLayer" type="CanvasLayer" parent="."]
+
+[node name="Mix" type="ColorRect" parent="OverlayLayer"]
+material = SubResource( 4 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 1, 1, 1, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Add" type="ColorRect" parent="OverlayLayer"]
+material = SubResource( 3 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="SimpleDialogBox" type="CanvasLayer" parent="."]
 script = ExtResource( 5 )
 transition_time_ms = 200.0
-text_speed = 30.0
 height_percent = 0.35
-margin = 5
-bbcode_enabled = true
+separation = 0
+source_stylebox = ExtResource( 11 )
+dialog_stylebox = ExtResource( 1 )
 theme = ExtResource( 4 )
-panel_stylebox = ExtResource( 1 )
+text_speed = 30.0
+bbcode_enabled = true
 
 [node name="MenuLayer" type="CanvasLayer" parent="."]
 
@@ -113,22 +143,11 @@ custom_constants/margin_bottom = 0
 [node name="SavesPopup" parent="MenuLayer" instance=ExtResource( 8 )]
 current_mode = 0
 
-[node name="OverlayLayer" type="CanvasLayer" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="OverlayLayer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0, 0, 0, 0 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="LocalCutscene" type="AnimationPlayer" parent="."]
 anims/fade_from_black = SubResource( 1 )
 anims/fade_to_black = SubResource( 2 )
 
 [node name="CutsceneManager" parent="." instance=ExtResource( 10 )]
-overlay_path = NodePath("../OverlayLayer/ColorRect")
 camera_path = NodePath("../World/PlayerProxy/Camera2D")
 local_scene_path = NodePath("..")
 
@@ -142,3 +161,4 @@ local_scene_path = NodePath("..")
 [editable path="World/Party/Arden/Battler"]
 [editable path="World/Party/Arden2"]
 [editable path="World/Party/Arden2/Battler"]
+[editable path="World/PlayerProxy"]

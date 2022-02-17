@@ -10,42 +10,41 @@ story = {
 "nodes": {
 1: {
 "links": {
-0: 3
 },
-"text": "????
-We should stop soon.
-The sun is already setting."
+"text": "[????]
+Don't worry, we'll get there in the morning.
+But it's not safe to travel at night around here."
 },
 2: {
 "links": {
 },
-"text": "????
-I'll check the surroundings for monsters.
+"text": "[????]
+I'll check the surroundings, just in case.
 Better safe than sorry, right?"
 },
 3: {
 "links": {
 },
-"text": "????
-It's not safe to travel at night."
+"text": "[????]
+We should stop for the day."
 },
 4: {
 "links": {
 },
-"text": "????
-I'll gather some firewood."
+"text": "[????]
+I guess that's okay. I'll build the fire. I've gotten used to it."
 },
 5: {
 "links": {
 },
-"text": "????
+"text": "[????]
 A person, here? Hey, are you okay?"
 },
 6: {
 "links": {
 0: 7
 },
-"text": "????
+"text": "[????]
 You're finally awake!
 Don't know how you got in that cave, but 
 you don't seem to have a single scratch.
@@ -55,7 +54,7 @@ you don't seem to have a single scratch.
 "links": {
 0: 8
 },
-"text": "????
+"text": "[????]
 W-where am I? Who are you?
 ... I don't remember what happened."
 },
@@ -63,7 +62,7 @@ W-where am I? Who are you?
 "links": {
 0: 9
 },
-"text": "????
+"text": "[????]
 We're close to the place we found you.
 We're traveling through this desert..
 Some sightseers and I, Hadi, as their guide."
@@ -72,21 +71,21 @@ Some sightseers and I, Hadi, as their guide."
 "links": {
 0: 10
 },
-"text": "Hadi
+"text": "[Hadi]
 Tell me, what's your name, kid?"
 },
 10: {
 "links": {
 },
-"text": "????
+"text": "[????]
 I'm..."
 },
 11: {
 "links": {
 0: 12
 },
-"text": "arden_name
-arden_name. 
+"text": "[arden_name]
+arden_name.
 I don't really remember much else...
 Where is this desert?"
 },
@@ -94,7 +93,7 @@ Where is this desert?"
 "links": {
 0: 13
 },
-"text": "Hadi
+"text": "[Hadi]
 Well, it's not strange to forget things in here...
 You're in a dream, kid."
 },
@@ -102,7 +101,7 @@ You're in a dream, kid."
 "links": {
 0: 14
 },
-"text": "Hadi
+"text": "[Hadi]
 You'll probably remember everything when you 
 wake up. And probably forget about this, too."
 },
@@ -110,7 +109,7 @@ wake up. And probably forget about this, too."
 "links": {
 0: 15
 },
-"text": "arden_name
+"text": "[{arden_name}]
 A dream? 
 Am I dreaming you then?
 How do I wake up? 
@@ -120,7 +119,7 @@ How do I wake up?
 "links": {
 0: 16
 },
-"text": "Hadi
+"text": "[Hadi]
 Ha! Lots of questions, kid!
 A good sign, if you ask me."
 },
@@ -128,7 +127,7 @@ A good sign, if you ask me."
 "links": {
 0: 17
 },
-"text": "Hadi
+"text": "[Hadi]
 No, I'm not a character in your head.
 We're close to the Dreamlands,
 so all of us are real, as far as I can tell.
@@ -137,7 +136,7 @@ It's a sort of a shared dream, If you may."
 17: {
 "links": {
 },
-"text": "Hadi
+"text": "[Hadi]
 As for waking up, just focus on the fact
 you're dreaming.
 Closing your eyes and shaking a bit helps."
@@ -146,28 +145,49 @@ Closing your eyes and shaking a bit helps."
 "links": {
 0: 19
 },
-"text": "arden_name
+"text": "[{arden_name}]
 ... Not working, Hadi."
 },
 19: {
 "links": {
 0: 20
 },
-"text": "Hadi
+"text": "[Hadi]
 That's weird. Maybe you're physically here.
 But then you wouldn't be forgetting things..."
 },
 20: {
 "links": {
 },
-"text": "Hadi
+"text": "[Hadi]
 Well, you can stay with us while you figure
 things out.. "
+},
+21: {
+"links": {
+},
+"text": "[????]
+We can still go. We're almost at the temple, right?"
 }
 }
 },
 2: {
 "nodes": {
+1: {
+"links": {
+},
+"text": ""
+},
+2: {
+"links": {
+},
+"text": "To be honest, I'm glad we stopped. My feet are killing me."
+},
+3: {
+"links": {
+},
+"text": "Weren't you going to check the surroundings? I saw a [color=aqua]cave[/color] nearby, to the [color=aqua]north[/color]."
+}
 }
 },
 3: {
@@ -176,5 +196,6 @@ things out.. "
 }
 }
 names = {
-"intro_cutscene": 1
+"camp": 2,
+"cutscenes": 1
 }

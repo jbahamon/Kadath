@@ -10,7 +10,7 @@ enum Change {
 	SWAP
 }
 
-const save_key = 'inventory'
+const save_key = "inventory"
 var amounts = {}
 var order = []
 
@@ -18,13 +18,13 @@ export (int) var MAX_COINS = 9999999
 
 
 func load(save_data: SaveData) -> void:
-	self.amounts = save_data.data[save_key]['amounts']
-	self.order = save_data.data[save_key]['order']
+	self.amounts = save_data.data[save_key]["amounts"]
+	self.order = save_data.data[save_key]["order"]
 
 func save(save_data: SaveData) -> void:
 	save_data.data[save_key] = {
-		'amounts': self.amounts,
-		'order': self.order
+		"amounts": self.amounts,
+		"order": self.order
 	}
 
 func add(item: InventoryItem, amount: int = 1) -> void:

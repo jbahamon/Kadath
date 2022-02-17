@@ -12,16 +12,10 @@ func execute(cutscene_manager):
 	if camera_parent != null:
 		camera_parent.remove_child(camera)
 	
-	var new_parent: Node
-	
-	match self.entity:
-		'WORLD':
-			camera.anchor_mode = camera.ANCHOR_MODE_FIXED_TOP_LEFT
-			new_parent = cutscene_manager.local_scene.world
-		_: 
-			camera.anchor_mode = camera.ANCHOR_MODE_DRAG_CENTER
-			new_parent = cutscene_manager.get_entity(self.entity) 
+	var new_parent = cutscene_manager.get_entity(self.entity) 
 	new_parent.add_child(camera)
+	if self.entity != "WORLD":
+		camera.position = Vector2.ZERO
 
 func str():
 	return "assign_camera %s" % self.entity

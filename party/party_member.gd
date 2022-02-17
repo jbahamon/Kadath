@@ -64,33 +64,33 @@ func get_elemental_armor() -> float:
 
 func save(save_game: Resource):
 	save_game.data[SAVE_KEY] = {
-		'display_name': display_name,
-		'unlocked': unlocked,
-		'equipped_weapon': equipped_weapon,
-		'equipped_helmet': equipped_helmet,
-		'equipped_armor': equipped_armor,
-		'equipped_accessory': equipped_accessory,
-		'experience': experience,
-		'health': battler.stats.health,
-		'energy': battler.stats.energy,
+		"display_name": display_name,
+		"unlocked": unlocked,
+		"equipped_weapon": equipped_weapon,
+		"equipped_helmet": equipped_helmet,
+		"equipped_armor": equipped_armor,
+		"equipped_accessory": equipped_accessory,
+		"experience": experience,
+		"health": battler.stats.health,
+		"energy": battler.stats.energy,
 	}
 
 
 func load(save_game: Resource):
 	var data: Dictionary = save_game.data[SAVE_KEY]
-	display_name = data['display_name']
-	unlocked = data['unlocked']
+	display_name = data["display_name"]
+	unlocked = data["unlocked"]
 	
-	equipped_weapon = data['equipped_weapon']
-	equipped_helmet = data['equipped_helmet']
-	equipped_armor = data['equipped_armor']
-	equipped_accessory = data['equipped_accessory']
+	equipped_weapon = data["equipped_weapon"]
+	equipped_helmet = data["equipped_helmet"]
+	equipped_armor = data["equipped_armor"]
+	equipped_accessory = data["equipped_accessory"]
 	
-	experience = data['experience']
+	experience = data["experience"]
 	battler.stats = growth.create_stats(experience)
 	
-	battler.stats.health = data['health']
-	battler.stats.energy = data['energy']
+	battler.stats.health = data["health"]
+	battler.stats.energy = data["energy"]
 	
 func set_weapon(weapon: Weapon):
 	var party: Party = self.get_parent()
@@ -132,3 +132,6 @@ func set_accessory(accessory: Accessory):
 		party.inventory.remove(accessory)
 	
 	equipped_accessory = accessory
+
+func get_anim():
+	return self.battler.anim

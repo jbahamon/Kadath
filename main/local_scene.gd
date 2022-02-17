@@ -19,6 +19,7 @@ onready var save_popup = $MenuLayer/SavesPopup
 onready var cutscene = $LocalCutscene
 onready var cutscene_manager = $CutsceneManager
 
+var display_name = null
 var block_input = false
 
 func _ready() -> void:
@@ -35,7 +36,7 @@ func _ready() -> void:
 			Vector2.DOWN,
 			false
 		)
-		yield(cutscene_manager.play_cutscene('intro'), "completed")
+		yield(cutscene_manager.play_cutscene("intro"), "completed")
 	
 func get_room_object(object_name: String):
 	if current_room != null:
@@ -43,13 +44,22 @@ func get_room_object(object_name: String):
 	else:
 		return null
 
-func open_dialog(dialog_name: String, node_id: int, branch_selector) -> void:
+func get_overlay(overlay: String):
+	match overlay:
+		"MIX": return $OverlayLayer/Mix
+		"ADD": return $OverlayLayer/Add
+		_: return null
+	
+
+func open_dialog(dialog_name: String, node_id: int, source) -> void:
 	if not story_reader.has_record_name(dialog_name):
 		return
 		
 	var did = story_reader.get_did_via_record_name(dialog_name)
 	var nid = node_id
 	var pool = PoolStringArray()
+	
+	dialog_box.set_default_source(source.display_name)
 	
 	while story_reader.has_nid(did, nid):
 		
@@ -68,7 +78,7 @@ func open_dialog(dialog_name: String, node_id: int, branch_selector) -> void:
 			_: 
 				dialog_box.queue_texts(pool)
 				pool = PoolStringArray()
-				var slot = branch_selector.get_slot(nid, slots)
+				var slot = source.get_slot(nid, slots)
 				
 				if slot is GDScriptFunctionState:
 					slot = yield(slot, "completed")
@@ -111,13 +121,13 @@ func _on_menu_about_to_show() -> void:
 
 
 func save(save_data: SaveData) -> void:
-	save_data.data['location'] = self.current_location.location_id
-	save_data.data['room'] = self.current_room.room_id
+	save_data.data["location"] = self.current_location.location_id
+	save_data.data["room"] = self.current_room.room_id
 
 func load(save_data: SaveData) -> void:
 	update_whereabouts(
-		save_data.data['location'], 
-		save_data.data['room'],
+		save_data.data["location"], 
+		save_data.data["room"],
 		Vector2.ZERO,
 		Vector2.DOWN,
 		true
@@ -173,14 +183,14 @@ func update_whereabouts(
 	current_room.on_enter(self)
 	
 func move_to_room(room_id: String, target_position: Vector2, target_orientation: Vector2) -> void:
-	if current_room != null and room_id == current_room.room_id:
+	var room = current_location.get_room(room_id)
+	
+	if current_room != null and current_room == room:
 		return
 	
 	if current_room != null:
 		world.remove_child(world.get_child(0))
-		
-	var room = current_location.get_room(room_id)
-		
+
 	world.add_child(room)
 	world.move_child(room, 0)
 	

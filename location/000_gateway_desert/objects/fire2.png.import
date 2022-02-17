@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sand_with_plant.png-00994bcbd258a0790bcff2cb53332b14.stex"
+path="res://.import/fire2.png-14fb22d9678bf10f9b6e496ba0ff3228.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://location/000_gateway_desert/tiles/sand_with_plant.png"
-dest_files=[ "res://.import/sand_with_plant.png-00994bcbd258a0790bcff2cb53332b14.stex" ]
+source_file="res://location/000_gateway_desert/objects/fire2.png"
+dest_files=[ "res://.import/fire2.png-14fb22d9678bf10f9b6e496ba0ff3228.stex" ]
 
 [params]
 

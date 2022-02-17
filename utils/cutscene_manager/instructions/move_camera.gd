@@ -1,20 +1,31 @@
 extends "res://utils/cutscene_manager/instructions/cutscene_instruction.gd"
 
+var entity: String
 var position: Vector2
 var time: float
-func _init(position, time):
-	self.position = position
+func _init(target, time):
+	if target is Vector2:
+		self.position = target
+	elif target is String:
+		self.entity = target
+		
 	self.time = time
 
 func execute(cutscene_manager):
-	cutscene_manager.tween.interpolate_property(
+	if self.entity != null:
+		var entity = cutscene_manager.get_entity(self.entity)
+		self.position = entity.global_position
+	
+	cutscene_manager.move_camera_tween.interpolate_property(
 		cutscene_manager.camera, 
-		"position", 
-		cutscene_manager.camera.position, 
-		self.position, 
+		"global_position", 
+		cutscene_manager.camera.global_position, 
+		self.position,
 		self.time
 	)
-	yield(cutscene_manager, "camera_move_finished")
+	cutscene_manager.move_camera_tween.start()
+	
+	yield(cutscene_manager, "move_camera_finished")
 	
 func str():
 	return "move_camera to %s in %f" % [str(self.position), self.time]

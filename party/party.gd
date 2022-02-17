@@ -9,7 +9,7 @@ class_name Party
 
 export var PARTY_SIZE: int = 3
 
-const inventory_save_key = 'Inventory'
+const inventory_save_key = "Inventory"
 
 var inventory: Inventory = Inventory.new()
 
@@ -34,3 +34,6 @@ func get_unlocked_characters() -> Array:
 		if member.unlocked:
 			has_unlocked.append(member)
 	return has_unlocked
+
+func get_anim():
+	return self.get_active_members()[0].get_anim()

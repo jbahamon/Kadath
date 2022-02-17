@@ -33,9 +33,9 @@ func update_party_member():
 	character_name.text = party_member.display_name
 	icon.texture = party_member.icon
 	var battler = party_member.battler
-	level.text = 'Lv. %d' % battler.stats.level
-	hp.text = '%d/%d' % [battler.stats.health, battler.stats.max_health]
-	ep.text = '%d/%d' % [battler.stats.energy, battler.stats.max_energy]
+	level.text = "Lv. %d" % battler.stats.level
+	hp.text = "%d/%d" % [battler.stats.health, battler.stats.max_health]
+	ep.text = "%d/%d" % [battler.stats.energy, battler.stats.max_energy]
 	
 
 func _on_Button_pressed():

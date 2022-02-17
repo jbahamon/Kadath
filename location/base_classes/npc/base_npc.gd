@@ -12,7 +12,7 @@ enum MovementType {
 
 const WALK_SPEED = 100.0
 
-export (String) var npc_name
+export (String) var display_name
 export (Texture) var sprite_sheet
 export (int) var hframes = 5
 export (int) var vframes = 5
@@ -26,6 +26,7 @@ onready var sprite: Sprite = $Sprite
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var animation_tree: AnimationTree = $AnimationTree
 onready var animation_state = animation_tree.get("parameters/playback")
+onready var collision: CollisionShape2D = $CollisionShape
 onready var interactable_collision: CollisionShape2D = $InteractableArea/CollisionShape2D
 
 var velocity: Vector2 = Vector2.ZERO
@@ -66,7 +67,7 @@ func update_facing():
 	animation_tree["parameters/walk/blend_position"] = facing
 
 
-func set_animation(animation_name):
+func play_anim(animation_name):
 	animation_state.travel(animation_name)
 
 
@@ -113,3 +114,25 @@ func walk_to(target: Vector2, speed = WALK_SPEED):
 func get_local_scene():
 	return get_node("../../../")
 	
+func get_anim():
+	return self
+	
+func on_proxy_enter():
+	self.set_physics_process(false)
+	self.movement_node.set_process(false)
+	self.collision.disabled = true
+	self.interactable_collision.disabled = true
+	
+func on_proxy_leave():
+	self.set_physics_process(true)
+	self.movement_node.set_process(true)
+	self.collision.disabled = false
+	self.interactable_collision.disabled = false
+
+func disable_collisions():
+	self.set_physics_process(false)
+	self.collision.disabled = true
+	
+func enable_collisions():
+	self.set_physics_process(true)
+	self.collision.disabled = false

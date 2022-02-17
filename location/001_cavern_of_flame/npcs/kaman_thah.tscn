@@ -11,6 +11,9 @@ script = ExtResource( 1 )
 sprite_sheet = ExtResource( 2 )
 dialog_name = "kaman_thah"
 
+[node name="Sprite" parent="." index="0"]
+frame = 1
+
 [node name="AnimationTree" parent="." index="3"]
 parameters/playback = SubResource( 1 )
 parameters/idle/blend_position = Vector2( -0.0704012, -0.534483 )

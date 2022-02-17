@@ -10,16 +10,15 @@ func _init(dialog_name: String, node_id: int, branch_selector: String):
 	self.branch_selector = branch_selector
 	
 func execute(cutscene_manager):
-	yield(
-		cutscene_manager.local_scene.open_dialog(
+	var ret = cutscene_manager.local_scene.open_dialog(
 			self.dialog_name,
 			self.node_id,
-			self.branch_selector 
+			cutscene_manager.get_entity(self.branch_selector)
 				if self.branch_selector != null 
 				else cutscene_manager.local_scene
-		), 
-		"completed"
-	)
+		)
+	if ret is GDScriptFunctionState:
+		yield(ret, "completed")
 	
 
 func str():

@@ -6,56 +6,56 @@
 script = ExtResource( 1 )
 TYPE = "EXP_Story_editor"
 names = {
-"intro_cutscene": 1
+"camp": 2,
+"cutscenes": 1
 }
 story = {
 1: {
 "available_nid": [  ],
 "groups": [  ],
 "human_readable_description": "Intro cutscene",
-"name": "intro_cutscene",
+"name": "cutscenes",
 "nodes": {
 1: {
 "graph_offset": Vector2( 60, 160 ),
 "links": {
-0: 3
 },
 "rect_size": Vector2( 441, 154.4 ),
 "slot_amount": 1,
-"text": "????
-We should stop soon.
-The sun is already setting.",
+"text": "[????]
+Don't worry, we'll get there in the morning.
+But it's not safe to travel at night around here.",
 "type": "line"
 },
 2: {
-"graph_offset": Vector2( 60, 320 ),
-"links": {
-},
-"rect_size": Vector2( 324, 137 ),
-"slot_amount": 1,
-"text": "????
-I'll check the surroundings for monsters.
-Better safe than sorry, right?",
-"type": "line"
-},
-3: {
-"graph_offset": Vector2( 520, 160 ),
-"links": {
-},
-"rect_size": Vector2( 324, 137 ),
-"slot_amount": 1,
-"text": "????
-It's not safe to travel at night.",
-"type": "line"
-},
-4: {
 "graph_offset": Vector2( 60, 480 ),
 "links": {
 },
 "rect_size": Vector2( 324, 137 ),
 "slot_amount": 1,
-"text": "????
-I'll gather some firewood.",
+"text": "[????]
+I'll check the surroundings, just in case.
+Better safe than sorry, right?",
+"type": "line"
+},
+3: {
+"graph_offset": Vector2( 60, -160 ),
+"links": {
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "[????]
+We should stop for the day.",
+"type": "line"
+},
+4: {
+"graph_offset": Vector2( 60, 320 ),
+"links": {
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "[????]
+I guess that's okay. I'll build the fire. I've gotten used to it.",
 "type": "line"
 },
 5: {
@@ -64,7 +64,7 @@ I'll gather some firewood.",
 },
 "rect_size": Vector2( 324, 137 ),
 "slot_amount": 1,
-"text": "????
+"text": "[????]
 A person, here? Hey, are you okay?",
 "type": "line"
 },
@@ -75,7 +75,7 @@ A person, here? Hey, are you okay?",
 },
 "rect_size": Vector2( 324, 137 ),
 "slot_amount": 1,
-"text": "????
+"text": "[????]
 You're finally awake!
 Don't know how you got in that cave, but 
 you don't seem to have a single scratch.
@@ -89,7 +89,7 @@ you don't seem to have a single scratch.
 },
 "rect_size": Vector2( 324, 137 ),
 "slot_amount": 1,
-"text": "????
+"text": "[????]
 W-where am I? Who are you?
 ... I don't remember what happened.",
 "type": "line"
@@ -101,7 +101,7 @@ W-where am I? Who are you?
 },
 "rect_size": Vector2( 324, 137 ),
 "slot_amount": 1,
-"text": "????
+"text": "[????]
 We're close to the place we found you.
 We're traveling through this desert..
 Some sightseers and I, Hadi, as their guide.",
@@ -114,7 +114,7 @@ Some sightseers and I, Hadi, as their guide.",
 },
 "rect_size": Vector2( 324, 137 ),
 "slot_amount": 1,
-"text": "Hadi
+"text": "[Hadi]
 Tell me, what's your name, kid?",
 "type": "line"
 },
@@ -124,7 +124,7 @@ Tell me, what's your name, kid?",
 },
 "rect_size": Vector2( 324, 137 ),
 "slot_amount": 1,
-"text": "????
+"text": "[????]
 I'm...",
 "type": "line"
 },
@@ -135,8 +135,8 @@ I'm...",
 },
 "rect_size": Vector2( 324, 137 ),
 "slot_amount": 1,
-"text": "arden_name
-arden_name. 
+"text": "[arden_name]
+arden_name.
 I don't really remember much else...
 Where is this desert?",
 "type": "line"
@@ -148,7 +148,7 @@ Where is this desert?",
 },
 "rect_size": Vector2( 324, 137 ),
 "slot_amount": 1,
-"text": "Hadi
+"text": "[Hadi]
 Well, it's not strange to forget things in here...
 You're in a dream, kid.",
 "type": "line"
@@ -160,7 +160,7 @@ You're in a dream, kid.",
 },
 "rect_size": Vector2( 324, 137 ),
 "slot_amount": 1,
-"text": "Hadi
+"text": "[Hadi]
 You'll probably remember everything when you 
 wake up. And probably forget about this, too.",
 "type": "line"
@@ -172,7 +172,7 @@ wake up. And probably forget about this, too.",
 },
 "rect_size": Vector2( 324, 137 ),
 "slot_amount": 1,
-"text": "arden_name
+"text": "[{arden_name}]
 A dream? 
 Am I dreaming you then?
 How do I wake up? 
@@ -186,7 +186,7 @@ How do I wake up?
 },
 "rect_size": Vector2( 324, 137 ),
 "slot_amount": 1,
-"text": "Hadi
+"text": "[Hadi]
 Ha! Lots of questions, kid!
 A good sign, if you ask me.",
 "type": "line"
@@ -198,7 +198,7 @@ A good sign, if you ask me.",
 },
 "rect_size": Vector2( 324, 137 ),
 "slot_amount": 1,
-"text": "Hadi
+"text": "[Hadi]
 No, I'm not a character in your head.
 We're close to the Dreamlands,
 so all of us are real, as far as I can tell.
@@ -211,7 +211,7 @@ It's a sort of a shared dream, If you may.",
 },
 "rect_size": Vector2( 324, 137 ),
 "slot_amount": 1,
-"text": "Hadi
+"text": "[Hadi]
 As for waking up, just focus on the fact
 you're dreaming.
 Closing your eyes and shaking a bit helps.",
@@ -224,7 +224,7 @@ Closing your eyes and shaking a bit helps.",
 },
 "rect_size": Vector2( 324, 137 ),
 "slot_amount": 1,
-"text": "arden_name
+"text": "[{arden_name}]
 ... Not working, Hadi.",
 "type": "line"
 },
@@ -235,7 +235,7 @@ Closing your eyes and shaking a bit helps.",
 },
 "rect_size": Vector2( 324, 137 ),
 "slot_amount": 1,
-"text": "Hadi
+"text": "[Hadi]
 That's weird. Maybe you're physically here.
 But then you wouldn't be forgetting things...",
 "type": "line"
@@ -246,9 +246,19 @@ But then you wouldn't be forgetting things...",
 },
 "rect_size": Vector2( 324, 137 ),
 "slot_amount": 1,
-"text": "Hadi
+"text": "[Hadi]
 Well, you can stay with us while you figure
 things out.. ",
+"type": "line"
+},
+21: {
+"graph_offset": Vector2( 60, 0 ),
+"links": {
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "[????]
+We can still go. We're almost at the temple, right?",
 "type": "line"
 }
 }
@@ -256,8 +266,36 @@ things out.. ",
 2: {
 "available_nid": [  ],
 "groups": [  ],
-"human_readable_description": "Woman finds Arden",
+"human_readable_description": "Dialog at the camp",
+"name": "camp",
 "nodes": {
+1: {
+"graph_offset": Vector2( 40, 40 ),
+"links": {
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "",
+"type": "line"
+},
+2: {
+"graph_offset": Vector2( -440, 240 ),
+"links": {
+},
+"rect_size": Vector2( 441, 159 ),
+"slot_amount": 1,
+"text": "To be honest, I'm glad we stopped. My feet are killing me.",
+"type": "line"
+},
+3: {
+"graph_offset": Vector2( -440, 420 ),
+"links": {
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "Weren't you going to check the surroundings? I saw a [color=aqua]cave[/color] nearby, to the [color=aqua]north[/color].",
+"type": "line"
+}
 }
 },
 3: {

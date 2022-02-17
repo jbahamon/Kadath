@@ -7,4 +7,4 @@
 script = ExtResource( 1 )
 location_id = "gateway_desert"
 story = ExtResource( 2 )
-room_paths = [ "res://location/000_gateway_desert/rooms/desert.tscn" ]
+base_room_path = "res://location/000_gateway_desert/rooms/"

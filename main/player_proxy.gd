@@ -11,9 +11,10 @@ var input_vector = Vector2.ZERO
 var velocity = Vector2.ZERO
 var party: Party
 
-onready var anim: CharacterAnim = get_node(anim_path)
+onready var anim = get_node(anim_path)
 onready var raycast: RayCast2D = $RayCast2D
-
+onready var remote_transform: RemoteTransform2D = $RemoteTransform2D
+onready var collision: CollisionShape2D = $CollisionShape2D
 
 func _unhandled_input(event) -> void:
 	if event.is_action_pressed("ui_accept"):
@@ -73,7 +74,7 @@ func update_orientation() -> void:
 	
 
 func save(save_data: SaveData) -> void:
-	save_data.data['player_position'] = self.position
+	save_data.data["player_position"] = self.position
 
 func set_orientation(orientation: Vector2):
 	anim.set_orientation(orientation)
@@ -84,12 +85,35 @@ func set_orientation(orientation: Vector2):
 	))
 	
 func load(save_data: SaveData) -> void:
-	self.position = save_data.data['player_position']
+	self.position = save_data.data["player_position"]
 	
+func set_target(new_target: Node):
+	self.set_physics_process(false)
+	var old_target = self.remote_transform.get_node(self.remote_transform.remote_path)
 	
+	if old_target.has_method("on_proxy_leave"):
+		old_target.on_proxy_leave()
+	
+	if new_target.has_method("on_proxy_enter"):
+		new_target.on_proxy_enter()
+	
+	self.global_position = new_target.global_position
+	self.remote_transform.remote_path = self.remote_transform.get_path_to(new_target)
+	self.anim = new_target.get_anim()
+	self.anim_path = self.get_path_to(self.anim)
+	self.set_physics_process(true)
+
 func set_party(new_party: Party) -> void:
 	self.party = new_party
 
 
 func get_inventory() -> Inventory:
 	return self.party.inventory
+
+func disable_collisions():
+	self.set_physics_process(false)
+	self.collision.disabled = true
+	
+func enable_collisions():
+	self.set_physics_process(true)
+	self.collision.disabled = false

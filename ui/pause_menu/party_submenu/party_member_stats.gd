@@ -40,13 +40,13 @@ func on_party_member_selected(party_member):
 	
 func update_ui_info():
 	var party_member = party_member_item.party_member
-	set_text(weapon_name, party_member.equipped_weapon, 'name', '--')
-	set_text(weapon_stats, party_member.equipped_weapon, 'attack', '0')
-	set_text(helmet_name, party_member.equipped_helmet, 'name', '--')
-	set_text(helmet_stats, party_member.equipped_helmet, 'defense', '0')
-	set_text(armor_name, party_member.equipped_armor, 'name', '--')
-	set_text(armor_stats, party_member.equipped_armor, 'defense', '0')
-	set_text(accessory_name, party_member.equipped_accessory, 'name', '--')
+	set_text(weapon_name, party_member.equipped_weapon, "name", "--")
+	set_text(weapon_stats, party_member.equipped_weapon, "attack", "0")
+	set_text(helmet_name, party_member.equipped_helmet, "name", "--")
+	set_text(helmet_stats, party_member.equipped_helmet, "defense", "0")
+	set_text(armor_name, party_member.equipped_armor, "name", "--")
+	set_text(armor_stats, party_member.equipped_armor, "defense", "0")
+	set_text(accessory_name, party_member.equipped_accessory, "name", "--")
 	
 	var battler = party_member.battler
 	attack_value.text = str(battler.stats.attack)

@@ -1,8 +1,8 @@
 extends FlagSetterNPC
 
-var leather_cap = preload('res://item/equipment/leather_cap.tres')
-var leather_armor = preload('res://item/equipment/leather_armor.tres')
-var stick = preload('res://item/equipment/wooden_staff.tres')
+var leather_cap = preload("res://item/equipment/leather_cap.tres")
+var leather_armor = preload("res://item/equipment/leather_armor.tres")
+var stick = preload("res://item/equipment/wooden_staff.tres")
 
 const NID_AFTER_GIVING_EQUIPMENT = 6
 

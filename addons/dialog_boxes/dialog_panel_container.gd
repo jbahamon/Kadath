@@ -1,42 +1,40 @@
 tool
-extends PanelContainer
+extends "./text_panel_container.gd"
 
-enum DialogPosition { TOP, BOTTOM }
+signal transition_finished
+signal text_shown
 
-var _positioning: int
-
-var _margin_container: MarginContainer
-var _outline_margin_container: MarginContainer
+var AutoScroller = preload("./autoscroller.gd")
 var _text_label: RichTextLabel
+var _text_tween: Tween
+var _scroller
 
 func _init():
-	_margin_container = MarginContainer.new()
-	_outline_margin_container = MarginContainer.new()
 	_text_label = RichTextLabel.new()
+	_text_label.rect_clip_content = false
+	
+	_text_tween = Tween.new()
+	add_child(_text_tween)
+	_scroller = AutoScroller.new()
+	_scroller.initialize(_text_label)
+	
 	self.rect_clip_content = true
 
 func _ready():
-	self.add_child(_margin_container)
-	_margin_container.size_flags_horizontal = SIZE_EXPAND_FILL
-	_margin_container.size_flags_vertical = SIZE_EXPAND_FILL
-	_margin_container.rect_clip_content = true
+	self.size_flags_vertical = SIZE_EXPAND_FILL
+	_text_tween.connect("tween_all_completed", self, "on_text_shown")
+
+func get_content():
+	return _text_label
 	
-	_margin_container.add_child(_outline_margin_container)
-
-
-	_outline_margin_container.size_flags_horizontal = SIZE_EXPAND_FILL
-	_outline_margin_container.size_flags_vertical = SIZE_EXPAND_FILL
-	_outline_margin_container.rect_clip_content = false
-	update_outline_margin()
-
-	_outline_margin_container.add_child(_text_label)	
-
-func set_dialog_margin(new_margin: float):
-	margin_top = new_margin
-	margin_bottom = new_margin
-	margin_left = new_margin
-	margin_right = new_margin
+func set_text_property(property_name, value):
+	_text_label.set(property_name, value)
+	self.update_outline_margin()
 	
+func add_font_override(name, value):
+	.add_font_override(name, value)
+	_text_label.add_font_override(name, value)
+	self.update_outline_margin()
 
 func get_max_outline():
 	var max_outline = 0
@@ -62,32 +60,53 @@ func get_max_outline():
 		max_outline = max(max_outline, mono.outline_size)
 
 	return max_outline
+
+func wait_for_label_resizing():
+	if _text_label.rect_size == Vector2.ZERO:
+		yield(_text_label, "resized")
+	else:
+		return null
+
+func on_text_shown():
+	emit_signal("text_shown")
+
+func on_transition_finished():
+	emit_signal("transition_finished")
+
+func reset_playback():
+	_text_tween.reset(_scroller)
+	_text_tween.reset(_text_label)
+	_text_tween.playback_speed = 1.0
 	
-func set_padding(new_padding: float):
-	_margin_container.set("custom_constants/margin_top", new_padding)
-	_margin_container.set("custom_constants/margin_bottom", new_padding)
-	_margin_container.set("custom_constants/margin_left", new_padding)
-	_margin_container.set("custom_constants/margin_right", new_padding)
+func start_playback(text: String, speed: float):
+	_text_label.visible_characters = 0
+	_text_label.scroll_to_line(0)
 	
-func set_positioning(new_positioning: int, height_percent: float, margin: int):
-	match new_positioning:
-		DialogPosition.BOTTOM:
-			set_anchors_and_margins_preset(PRESET_BOTTOM_WIDE, PRESET_MODE_MINSIZE, margin)
-			set_anchor_and_margin(MARGIN_TOP, 1.0 - height_percent, margin)
-			grow_vertical = GROW_DIRECTION_BEGIN
-			size_flags_horizontal = SIZE_EXPAND_FILL
-		DialogPosition.TOP:
-			set_anchors_and_margins_preset(PRESET_TOP_WIDE, PRESET_MODE_MINSIZE, margin)
-			set_anchor_and_margin(MARGIN_BOTTOM, height_percent, margin)
-			grow_vertical = GROW_DIRECTION_END
-			size_flags_horizontal = SIZE_EXPAND_FILL
-		_: return
+	if _text_label.bbcode_enabled:
+		_text_label.bbcode_text = text
+	else:
+		_text_label.text = text
 	
-	_positioning = new_positioning
+	var length = _text_label.text.length()
+	var time = length/speed
+
+	_text_tween.interpolate_property(_text_label, "percent_visible",
+		0.0, 1.0, time,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
+	)
+
+	_scroller.reset()
+
+	_text_tween.interpolate_method(
+		_scroller, "update_scroll", 0.0, 1.0, time,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
+	)
+	_text_tween.start()
+
+func set_speed(factor: float):
+	_text_tween.playback_speed = factor
+
+func clear():
+	_text_label.bbcode_text = ""
+	_text_label.text = ""
 	
-func update_outline_margin():
-	var max_outline = get_max_outline()
-	_outline_margin_container.set("custom_constants/margin_top", max_outline)
-	_outline_margin_container.set("custom_constants/margin_bottom", max_outline)
-	_outline_margin_container.set("custom_constants/margin_left", max_outline)
-	_outline_margin_container.set("custom_constants/margin_right", max_outline)

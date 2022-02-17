@@ -5,101 +5,51 @@ var CutsceneParser = preload("res://utils/cutscene_manager/cutscene_parser.gd")
 signal overlay_fade_finished
 signal move_camera_finished
 
-export var overlay_path: NodePath
 export var camera_path: NodePath
 export var local_scene_path: NodePath
 
-onready var tween: Tween = $Tween
+onready var fade_overlay_tween: Tween = $OverlayFadeTween
+onready var move_camera_tween: Tween = $CameraMoveTween
 
 var local_scene: LocalScene
-var overlay: CanvasItem
 var camera: Camera2D
 
-
-class ExecutionMode:
-	func on_executed_instruction(state: GDScriptFunctionState):
-		pass
-	func finish() -> GDScriptFunctionState:
-		return null
-		
-class SimultaneousExecution extends ExecutionMode:
-	var function_states = []
-			
-	func on_executed_instruction(state: GDScriptFunctionState):
-		function_states.append(state)
-		
-	func finish():
-		var wait_result = self.wait_for_all()
-		if wait_result is GDScriptFunctionState and wait_result.is_valid():
-			yield(wait_result, "completed")
-		return null
-		
-	func wait_for_all() -> bool:
-		for state in self.function_states:
-			if state.is_valid():
-				yield(state, "completed")
-		return true
-		
-class SequentialExecution extends ExecutionMode:
-	func on_executed_instruction(state: GDScriptFunctionState):
-		yield(state, "completed")
-
-var execution_stack: Array
-
 func _ready():
-	self.overlay = get_node(self.overlay_path)
 	self.camera = get_node(self.camera_path)
 	self.local_scene = get_node(self.local_scene_path)
 	
 func play_cutscene(cutsceneName: String):
 	var parser = CutsceneParser.new()
-	var instructions = parser.parse_cutscene(cutsceneName)
+	var cutscene_instruction = parser.parse_cutscene(cutsceneName)
 	self.local_scene.start_cutscene()
-	var execution_result = self.run_cutscene_instructions(instructions);
-	
-	if execution_result is GDScriptFunctionState and execution_result.is_valid():
-		yield(execution_result, "completed")
-		
+	cutscene_instruction.run(self)
+	if !cutscene_instruction.finished:
+		yield(cutscene_instruction, "execution_finished")
 	self.local_scene.end_cutscene()
-	
-func run_cutscene_instructions(instructions: Array):
-	self.execution_stack = []
-	self.execution_stack.push_back(SequentialExecution.new())
-	
-	for instruction in instructions:
-		print(instruction.str())
-		var execution_value: GDScriptFunctionState = instruction.execute(self)
-		
-		if execution_value != null:
-			var instruction_processing = self.get_execution_mode().on_executed_instruction(execution_value)
-			if instruction_processing != null:
-				yield(instruction_processing, "completed")
-				
 
-	while not execution_stack.empty():
-		end_execution()
+func get_proxy():
+	return self.local_scene.player_proxy
 	
-func begin_sequential():
-	self.execution_stack.push_back(SequentialExecution.new())
-	
-func begin_simultaneous():
-	self.execution_stack.push_back(SimultaneousExecution.new())
-	
-func end_execution():
-	var last_value = self.execution_stack.pop_back().finish()
-	if last_value is GDScriptFunctionState and last_value.is_valid():
-		yield(last_value, "completed")
-	
-func get_execution_mode() -> ExecutionMode:
-	return self.execution_stack.back()
+func get_party():
+	return self.local_scene.party
 
 func get_entity(entity_name: String):
-	return local_scene.get_room_object(entity_name)
+	match entity_name:
+		"PROXY":
+			return self.get_proxy()
+		"WORLD":
+			return self.local_scene.world
+		"PARTY":
+			return self.get_party()
+		_:
+			return local_scene.get_room_object(entity_name)
+			
+func get_overlay(overlay: String):
+	return local_scene.get_overlay(overlay)
 	
 func on_tween_completed(object, key):
-	if object.get('manager_signal') != null:
-		emit_signal(object.get('manager_signal'))
-	elif object == self.camera and key == "position":
+	if object.has_method("on_tween_completed"):
+		object.on_tween_completed()
+	elif object == self.camera and key == ":global_position":
 		emit_signal("move_camera_finished")
-		
 		

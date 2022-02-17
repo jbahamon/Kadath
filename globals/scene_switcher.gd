@@ -7,7 +7,7 @@ func _ready():
 	current_scene = root.get_child(root.get_child_count() - 1)
 	
 func go_to_scene(path):
-	call_deferred('_deferred_go_to_scene', path)
+	call_deferred("_deferred_go_to_scene", path)
 	
 func _deferred_go_to_scene(path):
 	current_scene.free()

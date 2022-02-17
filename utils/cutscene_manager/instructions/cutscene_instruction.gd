@@ -7,6 +7,14 @@ enum Type {
 	MOVE_CAMERA,
 	ASSIGN_CAMERA,
 	
+	HIDE,
+	SHOW,
+	
+	DISABLE_COLLISIONS,
+	ENABLE_COLLISIONS,
+	
+	ASSIGN_PROXY,
+	
 	LOOK,
 	WALK,
 	PLAY_ANIM,
@@ -19,5 +27,23 @@ enum Type {
 	WAIT
 }
 
+signal execution_finished
+
+var finished: bool
+
 func execute(cutscene_manager):
 	pass
+
+func run(cutscene_manager):
+	self.finished = false
+	print(self.str())
+	var value = self.execute(cutscene_manager)
+	
+	if value != null:
+		yield(value, "completed")
+		
+	self.finished = true
+	emit_signal("execution_finished")
+	
+func str():
+	return "generic instruction"

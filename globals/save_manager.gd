@@ -1,9 +1,9 @@
 extends Node
 # Saves and loads savegame files
 # Each node is responsible for finding itself in the save_game
-# dict so saves don't rely on the nodes' path or their source file
+# dict so saves don"t rely on the nodes" path or their source file
 
-const SaveData = preload('res://main/save_data.gd')
+const SaveData = preload("res://main/save_data.gd")
 
 const MAX_SAVE_FILES = 6
 var SAVE_FOLDER: String = "res://debug/save"
@@ -17,7 +17,7 @@ func save(slot_index: int) -> void:
 	var save_data := SaveData.new()
 	save_data.game_version = ProjectSettings.get_setting("application/config/version")
 	
-	for node in get_tree().get_nodes_in_group('save'):
+	for node in get_tree().get_nodes_in_group("save"):
 		node.save(save_data)
 
 	var directory: Directory = Directory.new()
@@ -28,7 +28,7 @@ func save(slot_index: int) -> void:
 	
 	var error: int = ResourceSaver.save(save_path, save_data)
 	if error != OK:
-		print('There was an issue writing the save %s to %s' % [slot_index, save_path])
+		print("There was an issue writing the save %s to %s" % [slot_index, save_path])
 
 	
 func load(slot_index: int) -> void:
@@ -41,7 +41,7 @@ func load(slot_index: int) -> void:
 		return
 
 	var save_game: Resource = load(save_file_path)
-	for node in get_tree().get_nodes_in_group('save'):
+	for node in get_tree().get_nodes_in_group("save"):
 		node.load(save_game)
 
 	

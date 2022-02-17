@@ -47,7 +47,7 @@ func _ready():
 	
 func initialize(party: Party):
 	for child in content_container.get_children():
-		if child.has_method('initialize'):
+		if child.has_method("initialize"):
 			child.initialize(party)
 		
 
