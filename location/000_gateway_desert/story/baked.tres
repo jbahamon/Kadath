@@ -11,8 +11,9 @@ story = {
 1: {
 "links": {
 },
-"text": "Don't worry, we'll get there in the morning.
-But it's not safe to travel at night around here."
+"text": "Don't worry, Biggs, we'll get there in the morning.
+But it's not safe to travel at night around here.
+Want to help me set up camp, Wedge?"
 },
 2: {
 "links": {
@@ -29,7 +30,8 @@ We should stop for the day."
 4: {
 "links": {
 },
-"text": "I guess that's okay. I'll build the fire. I've gotten used to it."
+"text": "No problem! I'll build the fire, I've gotten pretty good at it.
+What about you, Zal?"
 },
 5: {
 "links": {
@@ -39,7 +41,8 @@ We should stop for the day."
 21: {
 "links": {
 },
-"text": "Come on, Hadi, we can still go! We're almost at the temple, right?"
+"text": "[????]
+Come on, Hadi, we can still go! We're almost at the temple, right?"
 },
 22: {
 "links": {
@@ -73,8 +76,7 @@ We should stop for the day."
 "links": {
 },
 "text": "You're finally awake!
-Don't know how you got in that cave, but you don't seem to have a single scratch.
-And you seem equipped to defend yourself."
+Don't know how you got in that cave, but you don't seem to have a single scratch. "
 },
 2: {
 "links": {

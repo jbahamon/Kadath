@@ -181,25 +181,25 @@ rotation = 1.5708
 shape = SubResource( 5 )
 disabled = true
 
-[node name="Traveler1" parent="." instance=ExtResource( 3 )]
+[node name="Zal" parent="." instance=ExtResource( 3 )]
 position = Vector2( -48, 16 )
-display_name = "Traveler"
+display_name = "Zal"
 sprite_sheet = ExtResource( 13 )
 dialog_name = "camp"
 movement_type = 1
 
-[node name="Traveler2" parent="." instance=ExtResource( 3 )]
+[node name="Biggs" parent="." instance=ExtResource( 3 )]
 position = Vector2( 34.1213, -44.818 )
 script = ExtResource( 6 )
-display_name = "Traveler"
+display_name = "Biggs"
 sprite_sheet = ExtResource( 14 )
 dialog_name = "camp"
 movement_type = 1
 
-[node name="Traveler3" parent="." instance=ExtResource( 3 )]
+[node name="Wedge" parent="." instance=ExtResource( 3 )]
 position = Vector2( -32, -32 )
 script = ExtResource( 4 )
-display_name = "Traveler"
+display_name = "Wedge"
 sprite_sheet = ExtResource( 14 )
 dialog_name = "camp"
 movement_type = 1
@@ -215,6 +215,7 @@ movement_type = 1
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Fire"]
 frames = SubResource( 4 )
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Fire"]
