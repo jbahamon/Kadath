@@ -15,6 +15,7 @@ enum Type {
 	
 	ASSIGN_PROXY,
 	
+	SET_POSITION,
 	LOOK,
 	WALK,
 	PLAY_ANIM,
@@ -24,7 +25,9 @@ enum Type {
 	SIMULTANEOUS,
 	SEQUENTIAL,
 	END,
-	WAIT
+	WAIT,
+	
+	CALL
 }
 
 signal execution_finished

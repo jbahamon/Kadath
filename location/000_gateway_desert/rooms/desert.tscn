@@ -40,16 +40,20 @@ script = ExtResource( 1 )
 
 [node name="Traveler1" parent="." instance=ExtResource( 3 )]
 position = Vector2( -108, 48 )
+display_name = "Traveler"
 sprite_sheet = ExtResource( 6 )
 
 [node name="Traveler2" parent="." instance=ExtResource( 3 )]
 position = Vector2( -80, -48 )
+display_name = "Traveler"
 sprite_sheet = ExtResource( 4 )
 
 [node name="Traveler3" parent="." instance=ExtResource( 3 )]
 position = Vector2( -128, -16 )
+display_name = "Traveler"
 sprite_sheet = ExtResource( 4 )
 
 [node name="Hadi" parent="." instance=ExtResource( 3 )]
 position = Vector2( -32, 16 )
+display_name = "Hadi"
 sprite_sheet = ExtResource( 5 )

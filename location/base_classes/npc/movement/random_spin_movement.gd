@@ -1,6 +1,6 @@
 extends NPCMovement
 
-export var period: float = 2.0
+export var period: float = 3.0
 
 var time = 0
 

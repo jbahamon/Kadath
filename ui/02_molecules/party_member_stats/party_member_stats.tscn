@@ -1,0 +1,295 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://ui/01_atoms/theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/02_molecules/party_member_stats/party_member_stats.gd" type="Script" id=2]
+[ext_resource path="res://ui/01_atoms/assets/icons/By John Ivess/small-icon-accessory.png" type="Texture" id=3]
+[ext_resource path="res://ui/01_atoms/assets/icons/By John Ivess/small-icon-helmet.png" type="Texture" id=4]
+[ext_resource path="res://ui/01_atoms/assets/icons/By John Ivess/small-icon-armor.png" type="Texture" id=5]
+[ext_resource path="res://ui/01_atoms/assets/icons/By John Ivess/small-icon-sword.png" type="Texture" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[node name="PartyMemberStats" type="PanelContainer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -160.0
+margin_top = -120.0
+margin_right = 160.0
+margin_bottom = 120.0
+theme = ExtResource( 1 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="VBoxContainer" parent="."]
+margin_right = 320.0
+margin_bottom = 240.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 5
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+margin_top = 38.0
+margin_right = 320.0
+margin_bottom = 150.0
+grow_horizontal = 0
+custom_constants/margin_right = 20
+custom_constants/margin_left = 20
+
+[node name="Equipment" type="GridContainer" parent="Panel/MarginContainer"]
+margin_left = 20.0
+margin_right = 300.0
+margin_bottom = 112.0
+columns = 3
+
+[node name="WeaponIcon" type="TextureRect" parent="Panel/MarginContainer/Equipment"]
+margin_top = 4.0
+margin_right = 16.0
+margin_bottom = 20.0
+size_flags_horizontal = 5
+size_flags_vertical = 4
+texture = ExtResource( 6 )
+
+[node name="WeaponName" type="Button" parent="Panel/MarginContainer/Equipment"]
+margin_left = 20.0
+margin_right = 266.0
+margin_bottom = 25.0
+grow_vertical = 2
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../AccessoryName")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../HelmetName")
+focus_next = NodePath("../HelmetName")
+focus_previous = NodePath("../AccessoryName")
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+text = "Wooden Stick"
+
+[node name="WeaponStats" type="Label" parent="Panel/MarginContainer/Equipment"]
+margin_left = 270.0
+margin_right = 280.0
+margin_bottom = 25.0
+size_flags_horizontal = 5
+size_flags_vertical = 3
+text = "0"
+valign = 1
+
+[node name="HelmetIcon" type="TextureRect" parent="Panel/MarginContainer/Equipment"]
+margin_top = 33.0
+margin_right = 16.0
+margin_bottom = 49.0
+size_flags_horizontal = 5
+size_flags_vertical = 4
+texture = ExtResource( 4 )
+
+[node name="HelmetName" type="Button" parent="Panel/MarginContainer/Equipment"]
+margin_left = 20.0
+margin_top = 29.0
+margin_right = 266.0
+margin_bottom = 54.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../WeaponName")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../ArmorName")
+focus_next = NodePath("../ArmorName")
+focus_previous = NodePath("../WeaponName")
+mouse_filter = 2
+size_flags_horizontal = 5
+size_flags_vertical = 7
+toggle_mode = true
+text = "--"
+
+[node name="HelmetStats" type="Label" parent="Panel/MarginContainer/Equipment"]
+margin_left = 270.0
+margin_top = 29.0
+margin_right = 280.0
+margin_bottom = 54.0
+size_flags_horizontal = 5
+size_flags_vertical = 3
+text = "0"
+valign = 1
+
+[node name="ArmorIcon" type="TextureRect" parent="Panel/MarginContainer/Equipment"]
+margin_top = 62.0
+margin_right = 16.0
+margin_bottom = 78.0
+size_flags_horizontal = 5
+size_flags_vertical = 4
+texture = ExtResource( 5 )
+
+[node name="ArmorName" type="Button" parent="Panel/MarginContainer/Equipment"]
+margin_left = 20.0
+margin_top = 58.0
+margin_right = 266.0
+margin_bottom = 83.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../HelmetName")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../AccessoryName")
+focus_next = NodePath("../AccessoryName")
+focus_previous = NodePath("../HelmetName")
+mouse_filter = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+toggle_mode = true
+text = "Leather Armor"
+
+[node name="ArmorStats" type="Label" parent="Panel/MarginContainer/Equipment"]
+margin_left = 270.0
+margin_top = 58.0
+margin_right = 280.0
+margin_bottom = 83.0
+size_flags_horizontal = 5
+size_flags_vertical = 3
+text = "15"
+valign = 1
+
+[node name="AccessoryIcon" type="TextureRect" parent="Panel/MarginContainer/Equipment"]
+margin_top = 91.0
+margin_right = 16.0
+margin_bottom = 107.0
+size_flags_horizontal = 5
+size_flags_vertical = 4
+texture = ExtResource( 3 )
+
+[node name="AccessoryName" type="Button" parent="Panel/MarginContainer/Equipment"]
+margin_left = 20.0
+margin_top = 87.0
+margin_right = 266.0
+margin_bottom = 112.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../ArmorName")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../WeaponName")
+focus_next = NodePath("../WeaponName")
+mouse_filter = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+toggle_mode = true
+text = "--"
+
+[node name="Control" type="Control" parent="Panel/MarginContainer/Equipment"]
+margin_left = 270.0
+margin_top = 87.0
+margin_right = 280.0
+margin_bottom = 112.0
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Stats" type="GridContainer" parent="Panel"]
+margin_top = 155.0
+margin_right = 320.0
+margin_bottom = 202.0
+size_flags_horizontal = 9
+columns = 4
+
+[node name="AttackLabel" type="Label" parent="Panel/Stats"]
+margin_right = 77.0
+margin_bottom = 13.0
+size_flags_horizontal = 3
+text = "Attack"
+align = 2
+
+[node name="AttackValue" type="Label" parent="Panel/Stats"]
+margin_left = 81.0
+margin_right = 158.0
+margin_bottom = 13.0
+size_flags_horizontal = 3
+text = "10"
+
+[node name="MagicAttackLabel" type="Label" parent="Panel/Stats"]
+margin_left = 162.0
+margin_right = 239.0
+margin_bottom = 13.0
+size_flags_horizontal = 3
+text = "Magic Attack"
+align = 2
+
+[node name="MagicAttackValue" type="Label" parent="Panel/Stats"]
+margin_left = 243.0
+margin_right = 320.0
+margin_bottom = 13.0
+size_flags_horizontal = 3
+text = "10"
+
+[node name="DefenseLabel" type="Label" parent="Panel/Stats"]
+margin_top = 17.0
+margin_right = 77.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+text = "Defense"
+align = 2
+
+[node name="DefenseValue" type="Label" parent="Panel/Stats"]
+margin_left = 81.0
+margin_top = 17.0
+margin_right = 158.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+text = "10"
+
+[node name="MagicDefenseLabel" type="Label" parent="Panel/Stats"]
+margin_left = 162.0
+margin_top = 17.0
+margin_right = 239.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+text = "Magic Defense"
+align = 2
+
+[node name="MagicDefenseValue" type="Label" parent="Panel/Stats"]
+margin_left = 243.0
+margin_top = 17.0
+margin_right = 320.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+text = "10"
+
+[node name="SpeedLabel" type="Label" parent="Panel/Stats"]
+margin_top = 34.0
+margin_right = 77.0
+margin_bottom = 47.0
+size_flags_horizontal = 3
+text = "Speed"
+align = 2
+
+[node name="SpeedValue" type="Label" parent="Panel/Stats"]
+margin_left = 81.0
+margin_top = 34.0
+margin_right = 158.0
+margin_bottom = 47.0
+size_flags_horizontal = 3
+text = "10"
+
+[node name="LuckLabel" type="Label" parent="Panel/Stats"]
+margin_left = 162.0
+margin_top = 34.0
+margin_right = 239.0
+margin_bottom = 47.0
+size_flags_horizontal = 3
+text = "Luck"
+align = 2
+
+[node name="LuckValue" type="Label" parent="Panel/Stats"]
+margin_left = 243.0
+margin_top = 34.0
+margin_right = 320.0
+margin_bottom = 47.0
+size_flags_horizontal = 3
+text = "10"
+
+[connection signal="pressed" from="Panel/MarginContainer/Equipment/WeaponName" to="." method="on_weapon_clicked"]
+[connection signal="pressed" from="Panel/MarginContainer/Equipment/HelmetName" to="." method="on_helmet_clicked"]
+[connection signal="pressed" from="Panel/MarginContainer/Equipment/ArmorName" to="." method="on_armor_clicked"]
+[connection signal="pressed" from="Panel/MarginContainer/Equipment/AccessoryName" to="." method="on_accessory_clicked"]

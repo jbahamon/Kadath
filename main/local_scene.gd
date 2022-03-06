@@ -19,6 +19,8 @@ onready var save_popup = $MenuLayer/SavesPopup
 onready var cutscene = $LocalCutscene
 onready var cutscene_manager = $CutsceneManager
 
+onready var popup_layer = $PopupLayer
+
 var display_name = null
 var block_input = false
 
@@ -89,6 +91,13 @@ func open_dialog(dialog_name: String, node_id: int, source) -> void:
 func _unhandled_input(event) -> void:
 	if event.is_action_pressed("ui_menu"):
 		menu_popup.popup_centered_ratio(1)
+
+func show_popup(popup: Popup):
+	self.popup_layer.add_child(popup)
+	popup.popup()
+
+func play_cutscene(cutscene_name: String):
+	yield(self.cutscene_manager.play_cutscene(cutscene_name), "completed")
 	
 func start_cutscene():
 	self.set_process_unhandled_input(false)
@@ -135,7 +144,7 @@ func load(save_data: SaveData) -> void:
 	
 func update_whereabouts(
 	location_id: String, 
-	room_id: String, 
+	room_id: String,
 	target_position: Vector2, 
 	target_orientation: Vector2,
 	fade: bool
@@ -165,14 +174,12 @@ func update_whereabouts(
 			old_location.free_rooms()
 
 		current_location = new_location
-		
 		assert(current_location.story != null)
-		
 		story_reader.read(current_location.story)
 
 	if fade and old_location != null and old_room != null:
 		yield(cutscene, "animation_finished")
-		
+	
 	self.move_to_room(room_id, target_position, target_orientation)
 
 	if fade:
@@ -180,19 +187,26 @@ func update_whereabouts(
 		yield(cutscene, "animation_finished")
 	
 	self.end_cutscene()
-	current_room.on_enter(self)
 	
-func move_to_room(room_id: String, target_position: Vector2, target_orientation: Vector2) -> void:
+	
+func move_to_room(
+	room_id: String,
+	target_position: Vector2, 
+	target_orientation: Vector2
+) -> void:
 	var room = current_location.get_room(room_id)
+	var proxy_target = player_proxy.get_target()
+	var proxy_name = proxy_target.name if proxy_target != null else null
 	
 	if current_room != null and current_room == room:
 		return
 	
 	if current_room != null:
 		world.remove_child(world.get_child(0))
-
+	
 	world.add_child(room)
 	world.move_child(room, 0)
+	current_room = room
 	
 	for child in room.get_children():
 		if child is AnimatedSprite:
@@ -206,7 +220,18 @@ func move_to_room(room_id: String, target_position: Vector2, target_orientation:
 	camera.limit_top = map_limits.position.y * map_cellsize.y + room.position.y
 	camera.limit_bottom = map_limits.end.y * map_cellsize.y + room.position.y
 	
+	var new_proxy_target = null
+	
+	if proxy_name != null:
+		if proxy_name == "Party":
+			new_proxy_target = party
+		else:
+			new_proxy_target = self.get_room_object(proxy_name)
+		
+		self.player_proxy.set_target(new_proxy_target)
+	
 	player_proxy.position = target_position
 	player_proxy.set_orientation(target_orientation)
 	camera.align()
-	current_room = room
+	
+	current_room.on_enter()

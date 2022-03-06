@@ -94,10 +94,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://item/inventory_item.gd"
 }, {
-"base": "HBoxContainer",
+"base": "VBoxContainer",
 "class": "KeyboardBasedTabsContainer",
 "language": "GDScript",
-"path": "res://ui/pause_menu/keyboard_based_tab_container/keyboard_based_tab_container.gd"
+"path": "res://ui/02_molecules/keyboard_based_tab_container/keyboard_based_tab_container.gd"
 }, {
 "base": "Node2D",
 "class": "LocalScene",
@@ -130,9 +130,9 @@ _global_script_classes=[ {
 "path": "res://party/party_member.gd"
 }, {
 "base": "MarginContainer",
-"class": "PartyMemberItem",
+"class": "PartyMemberSummary",
 "language": "GDScript",
-"path": "res://ui/pause_menu/party_submenu/party_member_item.gd"
+"path": "res://ui/02_molecules/party_member_summary/party_member_summary.gd"
 }, {
 "base": "BattlerAI",
 "class": "PlayerInputAI",
@@ -157,7 +157,7 @@ _global_script_classes=[ {
 "base": "PopupPanel",
 "class": "SavesPopup",
 "language": "GDScript",
-"path": "res://ui/saves_menu/saves_popup.gd"
+"path": "res://ui/04_templates/saves_menu/saves_popup.gd"
 }, {
 "base": "Reference",
 "class": "StatusEffect",
@@ -214,7 +214,7 @@ _global_script_class_icons={
 "NPCMovement": "",
 "Party": "",
 "PartyMember": "",
-"PartyMemberItem": "",
+"PartyMemberSummary": "",
 "PlayerInputAI": "",
 "PlayerProxy": "",
 "RandomAI": "",
@@ -231,7 +231,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Kadath"
-run/main_scene="res://ui/main_menu/main_menu.tscn"
+run/main_scene="res://ui/04_templates/main_menu/main_menu.tscn"
 config/icon="res://icon.png"
 config/version="0.1.0"
 

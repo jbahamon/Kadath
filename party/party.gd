@@ -12,6 +12,7 @@ export var PARTY_SIZE: int = 3
 const inventory_save_key = "Inventory"
 
 var inventory: Inventory = Inventory.new()
+var display_name setget , get_display_name
 
 func load(save_data: SaveData) -> void:
 	inventory.load(save_data)
@@ -37,3 +38,8 @@ func get_unlocked_characters() -> Array:
 
 func get_anim():
 	return self.get_active_members()[0].get_anim()
+	
+func get_display_name() -> String:
+	return get_children()[0].display_name
+	
+	

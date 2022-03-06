@@ -220,7 +220,7 @@ anims/walk_up = SubResource( 8 )
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 offset = Vector2( 0, -17 )
-hframes = 28
+hframes = 29
 frame = 2
 
 [node name="AnimationTree" type="AnimationTree" parent="."]

@@ -54,6 +54,12 @@ func _ready():
 
 	update_facing()
 
+func stop_movement():
+	self.movement_node.set_process(false)
+
+func resume_movement():
+	self.movement_node.set_process(true)
+	
 func _physics_process(delta):
 	self.move_and_collide(velocity * delta)
 

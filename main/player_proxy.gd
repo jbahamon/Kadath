@@ -10,6 +10,8 @@ export var anim_path: NodePath
 var input_vector = Vector2.ZERO
 var velocity = Vector2.ZERO
 var party: Party
+var automated = false
+var display_name setget , get_display_name
 
 onready var anim = get_node(anim_path)
 onready var raycast: RayCast2D = $RayCast2D
@@ -25,13 +27,14 @@ func _unhandled_input(event) -> void:
 			
 
 func _physics_process(_delta) -> void:
-	var input_vector_changed = update_input_vector()
-	
-	if input_vector_changed:
-		update_velocity()
-		update_orientation()
-		update_animation()
+	if not automated:
+		var input_vector_changed = update_input_vector()
 		
+		if input_vector_changed:
+			update_velocity()
+			update_orientation()
+			update_animation()
+			
 	move()
 
 func move() -> void:
@@ -80,21 +83,25 @@ func set_orientation(orientation: Vector2):
 	anim.set_orientation(orientation)
 
 	raycast.set_cast_to(Vector2(
-			interaction_vector.x * orientation.x, 
-			interaction_vector.y * orientation.y
+		interaction_vector.x * orientation.x, 
+		interaction_vector.y * orientation.y
 	))
 	
 func load(save_data: SaveData) -> void:
 	self.position = save_data.data["player_position"]
 	
 func set_target(new_target: Node):
-	self.set_physics_process(false)
-	var old_target = self.remote_transform.get_node(self.remote_transform.remote_path)
+	var old_target = self.remote_transform.get_node_or_null(self.remote_transform.remote_path)
 	
-	if old_target.has_method("on_proxy_leave"):
+	if old_target == new_target:
+		return 
+	
+	self.set_physics_process(false)
+	
+	if old_target and old_target.has_method("on_proxy_leave"):
 		old_target.on_proxy_leave()
 	
-	if new_target.has_method("on_proxy_enter"):
+	if new_target and new_target.has_method("on_proxy_enter"):
 		new_target.on_proxy_enter()
 	
 	self.global_position = new_target.global_position
@@ -102,10 +109,12 @@ func set_target(new_target: Node):
 	self.anim = new_target.get_anim()
 	self.anim_path = self.get_path_to(self.anim)
 	self.set_physics_process(true)
+	
+func get_target():
+	return self.remote_transform.get_node(self.remote_transform.remote_path)
 
 func set_party(new_party: Party) -> void:
 	self.party = new_party
-
 
 func get_inventory() -> Inventory:
 	return self.party.inventory
@@ -117,3 +126,29 @@ func disable_collisions():
 func enable_collisions():
 	self.set_physics_process(true)
 	self.collision.disabled = false
+
+func walk_to(target: Vector2, speed):
+	assert(speed > 0)
+	var was_processing_physics = self.is_physics_processing()
+	var time = (global_position - target).length()/speed
+	
+	self.automated = true
+	self.set_physics_process(true)
+	
+	self.set_orientation(global_position.direction_to(target))
+	self.velocity = (target - global_position).normalized() * speed
+	self.anim.play_anim("walk")
+	
+	yield(get_tree().create_timer(time), "timeout")
+	
+	self.velocity = Vector2.ZERO
+	self.anim.play_anim("idle")
+	
+	self.set_physics_process(was_processing_physics)
+	self.automated = false
+	
+func get_display_name() -> String:
+	var target = self.remote_transform.get_node_or_null(self.remote_transform.remote_path)
+	assert(target != null)
+	return target.display_name
+	

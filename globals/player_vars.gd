@@ -23,6 +23,9 @@ func on_action_updated(action: String, event: InputEvent) -> void:
 			event.get_scancode_with_modifiers()
 		)
 
+func set_string(string_name: String, value: String) -> void:
+	strings[string_name] = value
+
 func set_flag(flag_name: String, value: bool) -> void:
 	current_flags[flag_name] = value
 

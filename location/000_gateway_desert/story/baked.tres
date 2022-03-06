@@ -11,15 +11,13 @@ story = {
 1: {
 "links": {
 },
-"text": "[????]
-Don't worry, we'll get there in the morning.
+"text": "Don't worry, we'll get there in the morning.
 But it's not safe to travel at night around here."
 },
 2: {
 "links": {
 },
-"text": "[????]
-I'll check the surroundings, just in case.
+"text": "I'll check the surroundings, just in case.
 Better safe than sorry, right?"
 },
 3: {
@@ -31,143 +29,22 @@ We should stop for the day."
 4: {
 "links": {
 },
-"text": "[????]
-I guess that's okay. I'll build the fire. I've gotten used to it."
+"text": "I guess that's okay. I'll build the fire. I've gotten used to it."
 },
 5: {
 "links": {
 },
-"text": "[????]
-A person, here? Hey, are you okay?"
-},
-6: {
-"links": {
-0: 7
-},
-"text": "[????]
-You're finally awake!
-Don't know how you got in that cave, but 
-you don't seem to have a single scratch.
-"
-},
-7: {
-"links": {
-0: 8
-},
-"text": "[????]
-W-where am I? Who are you?
-... I don't remember what happened."
-},
-8: {
-"links": {
-0: 9
-},
-"text": "[????]
-We're close to the place we found you.
-We're traveling through this desert..
-Some sightseers and I, Hadi, as their guide."
-},
-9: {
-"links": {
-0: 10
-},
-"text": "[Hadi]
-Tell me, what's your name, kid?"
-},
-10: {
-"links": {
-},
-"text": "[????]
-I'm..."
-},
-11: {
-"links": {
-0: 12
-},
-"text": "[arden_name]
-arden_name.
-I don't really remember much else...
-Where is this desert?"
-},
-12: {
-"links": {
-0: 13
-},
-"text": "[Hadi]
-Well, it's not strange to forget things in here...
-You're in a dream, kid."
-},
-13: {
-"links": {
-0: 14
-},
-"text": "[Hadi]
-You'll probably remember everything when you 
-wake up. And probably forget about this, too."
-},
-14: {
-"links": {
-0: 15
-},
-"text": "[{arden_name}]
-A dream? 
-Am I dreaming you then?
-How do I wake up? 
-"
-},
-15: {
-"links": {
-0: 16
-},
-"text": "[Hadi]
-Ha! Lots of questions, kid!
-A good sign, if you ask me."
-},
-16: {
-"links": {
-0: 17
-},
-"text": "[Hadi]
-No, I'm not a character in your head.
-We're close to the Dreamlands,
-so all of us are real, as far as I can tell.
-It's a sort of a shared dream, If you may."
-},
-17: {
-"links": {
-},
-"text": "[Hadi]
-As for waking up, just focus on the fact
-you're dreaming.
-Closing your eyes and shaking a bit helps."
-},
-18: {
-"links": {
-0: 19
-},
-"text": "[{arden_name}]
-... Not working, Hadi."
-},
-19: {
-"links": {
-0: 20
-},
-"text": "[Hadi]
-That's weird. Maybe you're physically here.
-But then you wouldn't be forgetting things..."
-},
-20: {
-"links": {
-},
-"text": "[Hadi]
-Well, you can stay with us while you figure
-things out.. "
+"text": "A person, here? Hey, are you okay?"
 },
 21: {
 "links": {
 },
-"text": "[????]
-We can still go. We're almost at the temple, right?"
+"text": "Come on, Hadi, we can still go! We're almost at the temple, right?"
+},
+22: {
+"links": {
+},
+"text": "!!"
 }
 }
 },
@@ -176,7 +53,7 @@ We can still go. We're almost at the temple, right?"
 1: {
 "links": {
 },
-"text": ""
+"text": "Do you want to explore a bit? That's fine; just be back before it gets dark."
 },
 2: {
 "links": {
@@ -192,10 +69,135 @@ We can still go. We're almost at the temple, right?"
 },
 3: {
 "nodes": {
+1: {
+"links": {
+},
+"text": "You're finally awake!
+Don't know how you got in that cave, but you don't seem to have a single scratch.
+And you seem equipped to defend yourself."
+},
+2: {
+"links": {
+},
+"text": "[????]
+W-where am I? Who are you?
+... I don't remember what happened."
+},
+3: {
+"links": {
+0: 4
+},
+"text": "We're close to the place we found you.
+We're traveling through this desert: some sightseers and I, Hadi, as their guide."
+},
+4: {
+"links": {
+},
+"text": "Tell me, what's your name, kid?"
+},
+5: {
+"links": {
+},
+"text": "[????]
+I'm..."
+},
+6: {
+"links": {
+},
+"text": "[{arden_name}]
+... {arden_name}.
+I don't really remember much else...
+Where is this desert?"
+},
+7: {
+"links": {
+0: 8
+},
+"text": "Well, it's not strange to forget things in here...
+You're in a dream!"
+},
+8: {
+"links": {
+},
+"text": "You'll probably remember everything when you 
+wake up. And probably forget about this, too."
+},
+9: {
+"links": {
+},
+"text": "[{arden_name}]
+A dream? 
+Am I dreaming you then?
+How do I wake up? "
+},
+10: {
+"links": {
+0: 11
+},
+"text": "Ha! Lots of questions!
+A good sign, if you ask me."
+},
+11: {
+"links": {
+0: 12
+},
+"text": "No, I'm not a character in your head.
+We're close to the Dreamlands, so all of us are real, as far as I can tell.
+It's a sort of a shared dream, If you may."
+},
+12: {
+"links": {
+},
+"text": "As for waking up, just focus on the fact
+you're dreaming.
+Closing your eyes and shaking a bit helps."
+},
+13: {
+"links": {
+},
+"text": "[{arden_name}]
+... Not working, Hadi."
+},
+14: {
+"links": {
+0: 15
+},
+"text": "That's weird. Maybe you're physically here.
+But then you wouldn't be forgetting things..."
+},
+15: {
+"links": {
+0: 16
+},
+"text": "Well, you can stay with us while you figure things out. Let's set up a tent for you and get some rest."
+},
+16: {
+"links": {
+},
+"text": "We'll arrive tomorrow to the Temple of Flame. The priests there might be able to help you."
+},
+17: {
+"links": {
+0: 19
+},
+"text": "{arden_name}!
+Wake up!"
+},
+18: {
+"links": {
+},
+"text": "You got a weapon, right? Help us take these out!"
+},
+19: {
+"links": {
+},
+"text": "We're being attacked!"
+}
 }
 }
 }
 names = {
+"arden_intro": 3,
 "camp": 2,
 "cutscenes": 1
 }

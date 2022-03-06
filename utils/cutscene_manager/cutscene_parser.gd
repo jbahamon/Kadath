@@ -37,6 +37,9 @@ func _init():
 	patterns["MOVE"] = RegEx.new()
 	patterns["MOVE"].compile("TO (?<Position>.+) IN (?<Time>.+)$")
 	
+	patterns["SET_POSITION"] = RegEx.new()
+	patterns["SET_POSITION"].compile("^(?<Character>.+) TO (?<Position>.+)$")
+	
 	patterns["WALK"] = RegEx.new()
 	patterns["WALK"].compile("^(?<Character>.+) TO (?<Position>.+) AT (?<Speed>.+)$")
 		
@@ -47,7 +50,7 @@ func _init():
 	patterns["PLAY_ANIM"].compile("^(?<Character>.+) (?<Anim>.+)$")
 	
 	patterns["CALL"] = RegEx.new()
-	patterns["CALL"].compile("^(?<Entity>.+) (?<FunctionName>.+) (?<Args>.+)$")
+	patterns["CALL"].compile("^(?<Entity>.+) (?<FunctionName>.+)( (?<Args>.*)$|$)")
 	
 	patterns["START_DIALOG"] = RegEx.new()
 	patterns["START_DIALOG"].compile("^(?<DialogId>.+) ID (?<NodeId>.+) SOURCE (?<Source>.+)$")
@@ -130,6 +133,13 @@ func parse_instruction(instruction_name: String, args: String):
 				"set_orientation",
 				[self.parse_direction(look_match.get_string("Direction"))]
 			)
+		CutsceneInstruction.Type.SET_POSITION:
+			var set_position_match: RegExMatch = self.patterns["SET_POSITION"].search(args)
+			instruction = Call.new(
+				set_position_match.get_string("Character").strip_edges(),
+				"set_position",
+				[self.parse_position(set_position_match.get_string("Position"))]
+			)
 		CutsceneInstruction.Type.DISABLE_COLLISIONS:
 			instruction = DisableCollisions.new(args.strip_edges())
 		CutsceneInstruction.Type.ENABLE_COLLISIONS:
@@ -185,6 +195,15 @@ func parse_instruction(instruction_name: String, args: String):
 			instruction = self.stack.pop_back()
 		CutsceneInstruction.Type.WAIT:
 			instruction = Wait.new(float(args.strip_edges()))
+			
+		CutsceneInstruction.Type.CALL:
+			var call_match: RegExMatch = self.patterns["CALL"].search(args)
+			
+			instruction = Call.new(
+				call_match.get_string("Entity").strip_edges(),
+				call_match.get_string("FunctionName").strip_edges(),
+				call_match.get_string("Args").strip_edges().split(" ", false)
+			)
 		_:
 			instruction = null
 			

@@ -248,8 +248,7 @@ func dequeue_text():
 	
 	
 	if split.size() > 1 and split[0].begins_with("[") and split[0].ends_with("]"):
-		split[0].erase(split[0].length() - 1, 1)
-		split[0].erase(0, 1)
+		split[0] = split[0].substr(1, split[0].length() - 2)
 		source = split[0].format(PlayerVars.strings)
 		text = split[1]
 		
