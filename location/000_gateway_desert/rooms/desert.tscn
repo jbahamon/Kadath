@@ -1,11 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://location/base_classes/room.gd" type="Script" id=1]
 [ext_resource path="res://location/000_gateway_desert/tiles/sand.png" type="Texture" id=2]
-[ext_resource path="res://location/base_classes/npc/base_npc.tscn" type="PackedScene" id=3]
 [ext_resource path="res://location/000_gateway_desert/npcs/traveler.png" type="Texture" id=4]
 [ext_resource path="res://location/000_gateway_desert/npcs/hadi.png" type="Texture" id=5]
 [ext_resource path="res://location/000_gateway_desert/npcs/traveler2.png" type="Texture" id=6]
+[ext_resource path="res://location/base_classes/npc/simple_npc.tscn" type="PackedScene" id=7]
 
 [sub_resource type="TileSet" id=3]
 0/name = "sand.png 0"
@@ -30,6 +30,14 @@
 0/shapes = [  ]
 0/z_index = 0
 
+[sub_resource type="AnimationNodeStateMachinePlayback" id=4]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=5]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=6]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=7]
+
 [node name="Desert" type="TileMap"]
 tile_set = SubResource( 3 )
 cell_size = Vector2( 24, 28 )
@@ -38,22 +46,47 @@ format = 1
 tile_data = PoolIntArray( -327689, 0, 0, -327688, 0, 0, -327687, 0, 0, -327686, 0, 0, -327685, 0, 0, -327684, 0, 0, -327683, 0, 1, -327682, 0, 0, -327681, 0, 1, -393216, 0, 0, -393215, 0, 0, -393214, 0, 0, -393213, 0, 0, -393212, 0, 0, -393211, 0, 0, -393210, 0, 1, -393209, 0, 0, -393208, 0, 0, -262153, 0, 0, -262152, 0, 0, -262151, 0, 0, -262150, 0, 0, -262149, 0, 0, -262148, 0, 0, -262147, 0, 0, -262146, 0, 0, -262145, 0, 0, -327680, 0, 0, -327679, 0, 0, -327678, 0, 0, -327677, 0, 0, -327676, 0, 0, -327675, 0, 0, -327674, 0, 0, -327673, 0, 0, -327672, 0, 0, -196617, 0, 0, -196616, 0, 0, -196615, 0, 1, -196614, 0, 0, -196613, 0, 0, -196612, 0, 0, -196611, 0, 0, -196610, 0, 0, -196609, 0, 0, -262144, 0, 0, -262143, 0, 0, -262142, 0, 0, -262141, 0, 0, -262140, 0, 0, -262139, 0, 0, -262138, 0, 0, -262137, 0, 0, -262136, 0, 0, -131081, 0, 0, -131080, 0, 0, -131079, 0, 0, -131078, 0, 0, -131077, 0, 0, -131076, 0, 0, -131075, 0, 0, -131074, 0, 0, -131073, 0, 0, -196608, 0, 0, -196607, 0, 0, -196606, 0, 0, -196605, 0, 1, -196604, 0, 0, -196603, 0, 0, -196602, 0, 0, -196601, 0, 0, -196600, 0, 0, -65545, 0, 0, -65544, 0, 0, -65543, 0, 0, -65542, 0, 0, -65541, 0, 0, -65540, 0, 0, -65539, 0, 0, -65538, 0, 0, -65537, 0, 0, -131072, 0, 0, -131071, 0, 0, -131070, 0, 0, -131069, 0, 0, -131068, 0, 0, -131067, 0, 0, -131066, 0, 0, -131065, 0, 0, -131064, 0, 0, -9, 0, 0, -8, 0, 0, -7, 0, 0, -6, 0, 0, -5, 0, 0, -4, 0, 0, -3, 0, 0, -2, 0, 0, -1, 0, 0, -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0, -65532, 0, 1, -65531, 0, 0, -65530, 0, 0, -65529, 0, 0, -65528, 0, 0, 65527, 0, 0, 65528, 0, 0, 65529, 0, 0, 65530, 0, 0, 65531, 0, 1, 65532, 0, 0, 65533, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 131063, 0, 0, 131064, 0, 0, 131065, 0, 1, 131066, 0, 1, 131067, 0, 0, 131068, 0, 0, 131069, 0, 0, 131070, 0, 0, 131071, 0, 0, 65536, 0, 0, 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65540, 0, 0, 65541, 0, 0, 65542, 0, 0, 65543, 0, 0, 65544, 0, 0, 196599, 0, 0, 196600, 0, 0, 196601, 0, 0, 196602, 0, 0, 196603, 0, 0, 196604, 0, 0, 196605, 0, 0, 196606, 0, 0, 196607, 0, 0, 131072, 0, 0, 131073, 0, 1, 131074, 0, 0, 131075, 0, 0, 131076, 0, 1, 131077, 0, 0, 131078, 0, 1, 131079, 0, 0, 131080, 0, 0, 262135, 0, 0, 262136, 0, 0, 262137, 0, 0, 262138, 0, 0, 262139, 0, 0, 262140, 0, 1, 262141, 0, 0, 262142, 0, 0, 262143, 0, 0, 196608, 0, 0, 196609, 0, 1, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 327671, 0, 0, 327672, 0, 0, 327673, 0, 0, 327674, 0, 0, 327675, 0, 0, 327676, 0, 0, 327677, 0, 0, 327678, 0, 0, 327679, 0, 0, 262144, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 393207, 0, 0, 393208, 0, 0, 393209, 0, 0, 393210, 0, 0, 393211, 0, 0, 393212, 0, 0, 393213, 0, 0, 393214, 0, 0, 393215, 0, 0, 327680, 0, 0, 327681, 0, 0, 327682, 0, 0, 327683, 0, 1, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 0, 1 )
 script = ExtResource( 1 )
 
-[node name="Traveler1" parent="." instance=ExtResource( 3 )]
+[node name="Zal" parent="." instance=ExtResource( 7 )]
 position = Vector2( -108, 48 )
-display_name = "Traveler"
-sprite_sheet = ExtResource( 6 )
+display_name = "Zal"
 
-[node name="Traveler2" parent="." instance=ExtResource( 3 )]
-position = Vector2( -80, -48 )
-display_name = "Traveler"
-sprite_sheet = ExtResource( 4 )
+[node name="Sprite" parent="Zal" index="0"]
+texture = ExtResource( 6 )
 
-[node name="Traveler3" parent="." instance=ExtResource( 3 )]
+[node name="AnimationTree" parent="Zal" index="3"]
+parameters/playback = SubResource( 4 )
+
+[node name="Biggs" parent="." instance=ExtResource( 7 )]
+position = Vector2( -64, -48 )
+display_name = "Biggs"
+
+[node name="Sprite" parent="Biggs" index="0"]
+texture = ExtResource( 4 )
+
+[node name="AnimationTree" parent="Biggs" index="3"]
+parameters/playback = SubResource( 5 )
+
+[node name="Wedge" parent="." instance=ExtResource( 7 )]
 position = Vector2( -128, -16 )
-display_name = "Traveler"
-sprite_sheet = ExtResource( 4 )
+display_name = "Wedge"
 
-[node name="Hadi" parent="." instance=ExtResource( 3 )]
+[node name="Sprite" parent="Wedge" index="0"]
+texture = ExtResource( 4 )
+
+[node name="AnimationTree" parent="Wedge" index="3"]
+parameters/playback = SubResource( 6 )
+
+[node name="Hadi" parent="." instance=ExtResource( 7 )]
 position = Vector2( -32, 16 )
 display_name = "Hadi"
-sprite_sheet = ExtResource( 5 )
+
+[node name="Sprite" parent="Hadi" index="0"]
+texture = ExtResource( 5 )
+
+[node name="AnimationTree" parent="Hadi" index="3"]
+parameters/playback = SubResource( 7 )
+
+[editable path="Zal"]
+[editable path="Biggs"]
+[editable path="Wedge"]
+[editable path="Hadi"]

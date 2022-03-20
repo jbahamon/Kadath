@@ -16,7 +16,7 @@ onready var actions = $Actions
 onready var skills = $Skills
 onready var ai = $AI
 
-var anim: CharacterAnim
+var anim: Node
 var status_effects = StatusEffectManager.new()
 
 func _ready():
@@ -25,7 +25,6 @@ func _ready():
 	
 func initialize(ui):
 	ai.interface = ui
-	stats.reset()
 
 func take_damage(hit: Hit):
 	var damage = ceil(hit.base_damage * self.get_damage_modifier(hit) + rand_range(1, hit.base_damage*0.2))

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://ui/01_atoms/panel/panel.tres" type="StyleBox" id=1]
 [ext_resource path="res://party/party.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://main/player_proxy.tscn" type="PackedScene" id=9]
 [ext_resource path="res://utils/cutscene_manager/cutscene_manager.tscn" type="PackedScene" id=10]
 [ext_resource path="res://ui/01_atoms/tab/normal.tres" type="StyleBox" id=11]
+[ext_resource path="res://battle/battle.tscn" type="PackedScene" id=12]
 
 [sub_resource type="CanvasItemMaterial" id=4]
 
@@ -50,6 +51,7 @@ tracks/0/keys = {
 }
 
 [node name="LocalScene" type="Node2D" groups=["save"]]
+modulate = Color( 0.8, 0.8, 0.8, 1 )
 script = ExtResource( 7 )
 
 [node name="World" type="YSort" parent="."]
@@ -144,6 +146,8 @@ custom_constants/margin_bottom = 0
 current_mode = 0
 
 [node name="PopupLayer" type="CanvasLayer" parent="."]
+
+[node name="Battle" parent="." instance=ExtResource( 12 )]
 
 [node name="LocalCutscene" type="AnimationPlayer" parent="."]
 anims/fade_from_black = SubResource( 1 )

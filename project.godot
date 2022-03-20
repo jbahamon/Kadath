@@ -32,7 +32,7 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "BattleUI",
 "language": "GDScript",
-"path": "res://battle/sample_battle/text_interface.gd"
+"path": "res://ui/04_templates/battle_ui/battle_ui.gd"
 }, {
 "base": "Node",
 "class": "Battler",

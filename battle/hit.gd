@@ -1,11 +1,15 @@
 class_name Hit
 
 enum Element {
-	PHYSICAL,
-	GRAVITY,
-	TIME,
+	NONE,
+	
+	INSTINCT,
+	SOUL,
+	MIND,
+	
 	SPACE,
-	DREAM,
+	TIME,
+	MATTER,
 }
 var base_damage: float
 var type: int

@@ -63,7 +63,7 @@ func _init():
 
 func parse_cutscene(cutscene_name: String): 
 	var cutscene_file = File.new()
-	cutscene_file.open("res://cutscenes/%s.txt" % cutscene_name, File.READ)
+	cutscene_file.open("res://%s.txt" % cutscene_name, File.READ)
 	
 	self.stack = [
 		Sequential.new()

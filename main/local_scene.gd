@@ -38,7 +38,6 @@ func _ready() -> void:
 			Vector2.DOWN,
 			false
 		)
-		yield(cutscene_manager.play_cutscene("intro"), "completed")
 	
 func get_room_object(object_name: String):
 	if current_room != null:
@@ -235,3 +234,14 @@ func move_to_room(
 	camera.align()
 	
 	current_room.on_enter()
+
+func start_battle(battlers):
+	$Battle.initialize(party, battlers)
+
+func get_party_battlers() -> Array:
+	var battlers = []
+	
+	for child in party.get_children():
+		battlers.append(child.battler)
+		
+	return battlers

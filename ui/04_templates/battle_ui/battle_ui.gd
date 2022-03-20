@@ -1,13 +1,14 @@
 extends Control
 
+class_name BattleUI
 
-var buttons
-
+onready var buttons = $VBoxContainer/Buttons
+onready var party_list = $VBoxContainer/PartyScroll/PartyList
 signal action
 signal targets
 
-func initialize():
-	buttons = $Buttons
+func initialize(party: Party):
+	party_list.initialize(party)
 
 func choose_action(actor: Battler) -> BattleAction:
 	var actions = actor.get_actions()
@@ -19,6 +20,8 @@ func choose_action(actor: Battler) -> BattleAction:
 		button.text = action.name
 		button.connect("pressed", self, "on_action_selected", [action])
 		buttons.add_child(button)
+		
+	self.set_button_neighbors()
 	
 	return yield(self, "action")
 
@@ -44,3 +47,6 @@ func choose_targets(battlers: Array):
 	
 func on_battler_selected(battler: Battler):
 	emit_signal("targets", [battler])
+
+func set_button_neighbors():
+	pass

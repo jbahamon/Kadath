@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://location/base_classes/npc/base_npc.gd" type="Script" id=1]
 [ext_resource path="res://location/001_cavern_of_flame/npcs/priest-sheet.png" type="Texture" id=2]
@@ -86,138 +86,6 @@ start_node = "idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=17]
 
-[sub_resource type="Animation" id=18]
-resource_name = "idle_down"
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ Vector2( 0, 0 ) ]
-}
-
-[sub_resource type="Animation" id=19]
-resource_name = "idle_left"
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ Vector2( 3, 0 ) ]
-}
-
-[sub_resource type="Animation" id=20]
-resource_name = "idle_right"
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ Vector2( 2, 0 ) ]
-}
-
-[sub_resource type="Animation" id=21]
-resource_name = "idle_up"
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ Vector2( 1, 0 ) ]
-}
-
-[sub_resource type="Animation" id=22]
-resource_name = "walk_down"
-length = 0.8
-loop = true
-step = 0.2
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Vector2( 5, 0 ), Vector2( 6, 0 ), Vector2( 7, 0 ), Vector2( 8, 0 ) ]
-}
-
-[sub_resource type="Animation" id=23]
-resource_name = "walk_left"
-length = 0.8
-loop = true
-step = 0.2
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Vector2( 18, 0 ), Vector2( 16, 0 ), Vector2( 17, 0 ), Vector2( 16, 0 ) ]
-}
-
-[sub_resource type="Animation" id=24]
-resource_name = "walk_right"
-length = 0.8
-loop = true
-step = 0.2
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Vector2( 14, 0 ), Vector2( 13, 0 ), Vector2( 15, 0 ), Vector2( 13, 0 ) ]
-}
-
-[sub_resource type="Animation" id=25]
-resource_name = "walk_up"
-length = 0.8
-loop = true
-step = 0.2
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.601388 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Vector2( 9, 0 ), Vector2( 10, 0 ), Vector2( 11, 0 ), Vector2( 12, 0 ) ]
-}
-
 [node name="BaseNPC" type="KinematicBody2D" groups=["npc"]]
 position = Vector2( 162.58, 87.1959 )
 collision_layer = 2
@@ -226,16 +94,13 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
-sprite_sheet = ExtResource( 2 )
-hframes = 19
-vframes = 1
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 centered = false
 hframes = 19
 
-[node name="CollisionShape" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -7 )
 shape = SubResource( 1 )
 
@@ -252,18 +117,6 @@ shape = SubResource( 3 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 16 )
-anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/playback = SubResource( 17 )
 parameters/idle/blend_position = Vector2( -0.00438213, 1.46034 )
 parameters/walk/blend_position = Vector2( 0, 0 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/idle_down = SubResource( 18 )
-anims/idle_left = SubResource( 19 )
-anims/idle_right = SubResource( 20 )
-anims/idle_up = SubResource( 21 )
-anims/walk_down = SubResource( 22 )
-anims/walk_left = SubResource( 23 )
-anims/walk_right = SubResource( 24 )
-anims/walk_up = SubResource( 25 )

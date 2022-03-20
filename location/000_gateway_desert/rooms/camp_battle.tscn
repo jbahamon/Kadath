@@ -1,7 +1,8 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=29 format=2]
 
-[ext_resource path="res://location/000_gateway_desert/rooms/camp.gd" type="Script" id=1]
+[ext_resource path="res://location/000_gateway_desert/rooms/camp_battle.gd" type="Script" id=1]
 [ext_resource path="res://location/000_gateway_desert/tiles/sand.png" type="Texture" id=2]
+[ext_resource path="res://battle/enemies/shadow_critter.tscn" type="PackedScene" id=3]
 [ext_resource path="res://location/000_gateway_desert/npcs/traveler_3.gd" type="Script" id=4]
 [ext_resource path="res://location/000_gateway_desert/npcs/hadi.png" type="Texture" id=5]
 [ext_resource path="res://location/000_gateway_desert/npcs/traveler_2.gd" type="Script" id=6]
@@ -12,6 +13,7 @@
 [ext_resource path="res://location/000_gateway_desert/objects/fire3.png" type="Texture" id=11]
 [ext_resource path="res://location/000_gateway_desert/tiles/sand-night.png" type="Texture" id=12]
 [ext_resource path="res://location/000_gateway_desert/npcs/traveler2.png" type="Texture" id=13]
+[ext_resource path="res://location/base_classes/npc/base_npc.gd" type="Script" id=14]
 [ext_resource path="res://location/000_gateway_desert/objects/cave.png" type="Texture" id=15]
 [ext_resource path="res://location/000_gateway_desert/objects/cave_door.gd" type="Script" id=16]
 [ext_resource path="res://location/base_classes/npc/simple_npc.tscn" type="PackedScene" id=17]
@@ -80,10 +82,10 @@ radius = 12.0
 height = 16.0
 
 [sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 34.5, 311.5 )
+extents = Vector2( 34.5, 369.25 )
 
 [sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 262.875, 20.375 )
+extents = Vector2( 470, 20.375 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=10]
 
@@ -169,7 +171,6 @@ rotation = 1.5708
 shape = SubResource( 5 )
 
 [node name="Tent5" type="StaticBody2D" parent="."]
-visible = false
 position = Vector2( -8, 111 )
 collision_layer = 8
 collision_mask = 7
@@ -186,13 +187,12 @@ flip_h = true
 position = Vector2( 1.95101, -12.2299 )
 rotation = 1.5708
 shape = SubResource( 5 )
-disabled = true
 
 [node name="Fire" type="StaticBody2D" parent="."]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Fire"]
 frames = SubResource( 4 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Fire"]
@@ -226,23 +226,23 @@ shape = SubResource( 7 )
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( -219.5, -114.5 )
+position = Vector2( -414, -65 )
 shape = SubResource( 8 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 245, -105 )
+position = Vector2( 493, -56.25 )
 shape = SubResource( 8 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 8, -436 )
+position = Vector2( 44, -436 )
 shape = SubResource( 9 )
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 8, 214 )
+position = Vector2( 23, 299 )
 shape = SubResource( 9 )
 
 [node name="Zal" parent="." instance=ExtResource( 17 )]
-position = Vector2( -48, 16 )
+position = Vector2( -94, 9 )
 display_name = "Zal"
 dialog_name = "camp"
 movement_type = 1
@@ -254,7 +254,7 @@ texture = ExtResource( 13 )
 parameters/playback = SubResource( 10 )
 
 [node name="Biggs" parent="." instance=ExtResource( 17 )]
-position = Vector2( 34, -44 )
+position = Vector2( 23, -95 )
 script = ExtResource( 6 )
 display_name = "Biggs"
 
@@ -262,7 +262,7 @@ display_name = "Biggs"
 parameters/playback = SubResource( 11 )
 
 [node name="Wedge" parent="." instance=ExtResource( 17 )]
-position = Vector2( -32, -32 )
+position = Vector2( -32, -95 )
 script = ExtResource( 4 )
 display_name = "Wedge"
 dialog_name = "camp"
@@ -271,7 +271,7 @@ dialog_name = "camp"
 parameters/playback = SubResource( 12 )
 
 [node name="Hadi" parent="." instance=ExtResource( 17 )]
-position = Vector2( 48, 16 )
+position = Vector2( 84, -70 )
 display_name = "Hadi"
 dialog_name = "camp"
 movement_type = 1
@@ -281,6 +281,13 @@ texture = ExtResource( 5 )
 
 [node name="AnimationTree" parent="Hadi" index="3"]
 parameters/playback = SubResource( 13 )
+
+[node name="ShadowCritter" parent="." groups=["npc"] instance=ExtResource( 3 )]
+position = Vector2( 141, 111 )
+collision_layer = 2
+collision_mask = 0
+script = ExtResource( 14 )
+facing = Vector2( -1, 0 )
 
 [connection signal="body_entered" from="Cave/Door" to="Cave/Door" method="_on_Area2D_body_entered"]
 

@@ -5,7 +5,7 @@ var RandomSpinMovement = preload("./movement/random_spin_movement.tscn")
 class_name BaseNPC
 
 enum MovementType { 
-	NONE = 0,	
+	NONE = 0,
 	RANDOM_SPIN = 1,
 	CUSTOM = 2, 
 }
@@ -13,24 +13,21 @@ enum MovementType {
 const WALK_SPEED = 100.0
 
 export (String) var display_name
-export (Texture) var sprite_sheet
-export (int) var hframes = 5
-export (int) var vframes = 5
-export (Vector2) var sprite_offset = Vector2(12, 33)
 export var dialog_name: String = "test_message"
 export var dialog_nid: int = 1
 export (MovementType) var movement_type: int = MovementType.NONE
 export (NodePath) var custom_movement = null
+export var facing = Vector2.DOWN
 
 onready var sprite: Sprite = $Sprite
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var animation_tree: AnimationTree = $AnimationTree
 onready var animation_state = animation_tree.get("parameters/playback")
-onready var collision: CollisionShape2D = $CollisionShape
+onready var collision: CollisionShape2D = $CollisionShape2D
 onready var interactable_collision: CollisionShape2D = $InteractableArea/CollisionShape2D
 
 var velocity: Vector2 = Vector2.ZERO
-var facing = Vector2.DOWN
+
 var movement_node 
 
 func _ready():
@@ -46,11 +43,6 @@ func _ready():
 			movement_node = get_node(custom_movement)
 		_:
 			self.add_child(movement_node)
-	
-	sprite.texture = sprite_sheet
-	sprite.hframes = hframes
-	sprite.vframes = vframes
-	sprite.offset = -sprite_offset
 
 	update_facing()
 
