@@ -2,14 +2,14 @@
 
 [ext_resource path="res://ui/01_atoms/tab/hover.tres" type="StyleBox" id=1]
 [ext_resource path="res://ui/01_atoms/separator/hseparator.tres" type="StyleBox" id=2]
-[ext_resource path="res://ui/01_atoms/button/disabled.tres" type="StyleBox" id=3]
-[ext_resource path="res://ui/01_atoms/button/hover.tres" type="StyleBox" id=4]
+[ext_resource path="res://ui/01_atoms/highlight/normal.tres" type="StyleBox" id=3]
+[ext_resource path="res://ui/01_atoms/highlight/disabled.tres" type="StyleBox" id=4]
 [ext_resource path="res://ui/01_atoms/assets/fonts/By Adigun/Irishalini.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://ui/01_atoms/separator/vseparator.tres" type="StyleBox" id=6]
-[ext_resource path="res://ui/01_atoms/button/pressed.tres" type="StyleBox" id=7]
-[ext_resource path="res://ui/01_atoms/button/normal.tres" type="StyleBox" id=8]
+[ext_resource path="res://ui/01_atoms/highlight/focus.tres" type="StyleBox" id=7]
+[ext_resource path="res://ui/01_atoms/highlight/pressed.tres" type="StyleBox" id=8]
 [ext_resource path="res://ui/01_atoms/input/input.tres" type="StyleBox" id=9]
-[ext_resource path="res://ui/01_atoms/button/focus.tres" type="StyleBox" id=10]
+[ext_resource path="res://ui/01_atoms/highlight/hover.tres" type="StyleBox" id=10]
 [ext_resource path="res://ui/01_atoms/input/input-focus.tres" type="StyleBox" id=11]
 [ext_resource path="res://ui/01_atoms/tab/focused.tres" type="StyleBox" id=29]
 [ext_resource path="res://ui/01_atoms/panel/panel.tres" type="StyleBox" id=30]
@@ -32,11 +32,11 @@ Button/colors/font_color_hover = Color( 0, 1, 1, 1 )
 Button/colors/font_color_pressed = Color( 0, 1, 1, 1 )
 Button/constants/hseparation = 2
 Button/fonts/font = null
-Button/styles/disabled = ExtResource( 3 )
-Button/styles/focus = ExtResource( 10 )
-Button/styles/hover = ExtResource( 4 )
-Button/styles/normal = ExtResource( 8 )
-Button/styles/pressed = ExtResource( 7 )
+Button/styles/disabled = ExtResource( 4 )
+Button/styles/focus = ExtResource( 7 )
+Button/styles/hover = ExtResource( 10 )
+Button/styles/normal = ExtResource( 3 )
+Button/styles/pressed = ExtResource( 8 )
 HSeparator/styles/separator = ExtResource( 2 )
 LineEdit/colors/clear_button_color = Color( 0.623529, 0.690196, 1, 1 )
 LineEdit/colors/clear_button_color_pressed = Color( 0.623529, 0.690196, 1, 1 )

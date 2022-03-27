@@ -1,18 +1,19 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://ui/01_atoms/theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/03_organisms/select_panel/select_list.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ui/03_organisms/party_submenu/party_submenu.gd" type="Script" id=4]
 [ext_resource path="res://ui/01_atoms/assets/icons/By ssugmi/icon-party.png" type="Texture" id=6]
 [ext_resource path="res://ui/03_organisms/item_select_panel/item_select_panel.tscn" type="PackedScene" id=7]
 [ext_resource path="res://ui/02_molecules/party_member_stats/party_member_stats.tscn" type="PackedScene" id=8]
-[ext_resource path="res://ui/02_molecules/party_list/party_list.tscn" type="PackedScene" id=9]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
 [sub_resource type="StyleBoxEmpty" id=2]
 
 [node name="PartySubmenu" type="PanelContainer"]
-margin_right = 320.0
+margin_left = -1.0
+margin_right = 319.0
 margin_bottom = 240.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -44,10 +45,12 @@ anchor_bottom = 0.0
 margin_right = 136.0
 margin_bottom = 189.0
 
-[node name="PartyList" parent="VSplitContainer/HBoxContainer" instance=ExtResource( 9 )]
-margin_right = 0.0
+[node name="PartyList" parent="VSplitContainer/HBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_bottom = 189.0
 size_flags_horizontal = 4
+size_flags_vertical = 3
 
 [node name="VSeparator" type="VSeparator" parent="VSplitContainer/HBoxContainer"]
 margin_right = 9.0
@@ -86,4 +89,6 @@ text = "Press [X] to auto sort items"
 
 [connection signal="item_selected" from="VSplitContainer/HBoxContainer/ItemSelectPanel" to="." method="on_item_selected"]
 [connection signal="item_selected" from="VSplitContainer/HBoxContainer/ItemSelectPanel" to="VSplitContainer/HBoxContainer/PartyMemberStats" method="on_item_selected"]
+[connection signal="element_focused" from="VSplitContainer/HBoxContainer/PartyList" to="VSplitContainer/HBoxContainer/PartyMemberStats" method="on_party_member_focused"]
+[connection signal="element_selected" from="VSplitContainer/HBoxContainer/PartyList" to="VSplitContainer/HBoxContainer/PartyMemberStats" method="on_party_member_selected"]
 [connection signal="item_requested" from="VSplitContainer/HBoxContainer/PartyMemberStats" to="." method="on_item_requested"]

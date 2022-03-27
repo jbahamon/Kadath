@@ -1,6 +1,6 @@
 [gd_resource type="StyleBoxLine" format=2]
 
 [resource]
-color = Color( 0.745098, 0.466667, 0.168627, 1 )
+color = Color( 0.811765, 0.65098, 0.482353, 1 )
 grow_begin = -3.0
 grow_end = -3.0

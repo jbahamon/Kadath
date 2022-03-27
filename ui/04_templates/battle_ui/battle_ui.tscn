@@ -1,42 +1,62 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://ui/04_templates/battle_ui/battle_ui.gd" type="Script" id=1]
 [ext_resource path="res://ui/02_molecules/party_list/party_list.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ui/01_atoms/theme.tres" type="Theme" id=3]
+[ext_resource path="res://ui/01_atoms/panel-small/pressed.tres" type="StyleBox" id=4]
+[ext_resource path="res://ui/01_atoms/panel-small/disabled.tres" type="StyleBox" id=5]
+[ext_resource path="res://ui/01_atoms/panel-small/hover.tres" type="StyleBox" id=6]
+[ext_resource path="res://ui/01_atoms/panel-small/focus.tres" type="StyleBox" id=7]
+[ext_resource path="res://ui/01_atoms/panel-small/normal.tres" type="StyleBox" id=8]
 
-[node name="BattleUI" type="Control"]
+[node name="BattleUI" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 3 )
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PartyScroll" type="ScrollContainer" parent="VBoxContainer"]
-margin_right = 320.0
-margin_bottom = 236.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 475.0
+margin_bottom = 265.0
 size_flags_vertical = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="PartyList" parent="VBoxContainer/PartyScroll" instance=ExtResource( 2 )]
-margin_right = 320.0
-margin_bottom = 236.0
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 470.0
+margin_bottom = 256.0
+size_flags_vertical = 3
+
+[node name="PartyList" parent="VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
+margin_right = 0.0
+margin_bottom = 256.0
+size_flags_horizontal = 1
+theme = ExtResource( 3 )
 clickable = false
+toggle = false
+normal_item = ExtResource( 8 )
+pressed_item = ExtResource( 4 )
+disabled_item = ExtResource( 5 )
+hover_item = ExtResource( 6 )
+focused_item = ExtResource( 7 )
+
+[node name="Options" type="PanelContainer" parent="VBoxContainer/HBoxContainer"]
+margin_left = 4.0
+margin_right = 16.0
+margin_bottom = 256.0
+custom_styles/panel = ExtResource( 8 )
 
 [node name="Buttons" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 240.0
-margin_right = 320.0
-margin_bottom = 240.0
+margin_top = 260.0
+margin_right = 470.0
+margin_bottom = 260.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false

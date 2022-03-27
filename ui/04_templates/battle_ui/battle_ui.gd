@@ -1,14 +1,14 @@
-extends Control
+extends MarginContainer
 
 class_name BattleUI
 
 onready var buttons = $VBoxContainer/Buttons
-onready var party_list = $VBoxContainer/PartyScroll/PartyList
+onready var party_list = $VBoxContainer/HBoxContainer/PartyList
 signal action
 signal targets
 
-func initialize(party: Party):
-	party_list.initialize(party)
+func initialize(party_members: Array):
+	party_list.initialize(party_members)
 
 func choose_action(actor: Battler) -> BattleAction:
 	var actions = actor.get_actions()

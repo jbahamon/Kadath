@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://location/000_gateway_desert/rooms/camp_battle.gd" type="Script" id=1]
 [ext_resource path="res://location/000_gateway_desert/tiles/sand.png" type="Texture" id=2]
@@ -13,7 +13,6 @@
 [ext_resource path="res://location/000_gateway_desert/objects/fire3.png" type="Texture" id=11]
 [ext_resource path="res://location/000_gateway_desert/tiles/sand-night.png" type="Texture" id=12]
 [ext_resource path="res://location/000_gateway_desert/npcs/traveler2.png" type="Texture" id=13]
-[ext_resource path="res://location/base_classes/npc/base_npc.gd" type="Script" id=14]
 [ext_resource path="res://location/000_gateway_desert/objects/cave.png" type="Texture" id=15]
 [ext_resource path="res://location/000_gateway_desert/objects/cave_door.gd" type="Script" id=16]
 [ext_resource path="res://location/base_classes/npc/simple_npc.tscn" type="PackedScene" id=17]
@@ -192,7 +191,6 @@ shape = SubResource( 5 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Fire"]
 frames = SubResource( 4 )
-frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Fire"]
@@ -256,7 +254,6 @@ parameters/playback = SubResource( 10 )
 [node name="Biggs" parent="." instance=ExtResource( 17 )]
 position = Vector2( 23, -95 )
 script = ExtResource( 6 )
-display_name = "Biggs"
 
 [node name="AnimationTree" parent="Biggs" index="3"]
 parameters/playback = SubResource( 11 )
@@ -264,8 +261,6 @@ parameters/playback = SubResource( 11 )
 [node name="Wedge" parent="." instance=ExtResource( 17 )]
 position = Vector2( -32, -95 )
 script = ExtResource( 4 )
-display_name = "Wedge"
-dialog_name = "camp"
 
 [node name="AnimationTree" parent="Wedge" index="3"]
 parameters/playback = SubResource( 12 )
@@ -282,11 +277,8 @@ texture = ExtResource( 5 )
 [node name="AnimationTree" parent="Hadi" index="3"]
 parameters/playback = SubResource( 13 )
 
-[node name="ShadowCritter" parent="." groups=["npc"] instance=ExtResource( 3 )]
+[node name="ShadowCritter" parent="." instance=ExtResource( 3 )]
 position = Vector2( 141, 111 )
-collision_layer = 2
-collision_mask = 0
-script = ExtResource( 14 )
 facing = Vector2( -1, 0 )
 
 [connection signal="body_entered" from="Cave/Door" to="Cave/Door" method="_on_Area2D_body_entered"]

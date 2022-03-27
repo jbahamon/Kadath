@@ -73,20 +73,16 @@ func on_player_interaction(player_proxy: PlayerProxy):
 	self.look_at(player_proxy.position)
 	self.movement_node.set_process(false)
 	self.interactable_collision.set_disabled(false)
-	player_proxy.set_process(false)
-	player_proxy.set_physics_process(false)
-	player_proxy.set_process_input(false)
 	
 	var local_scene: LocalScene = get_local_scene()
-	
+	local_scene.disable_inputs()
+
 	var talk_result = local_scene.open_dialog(self.dialog_name, self.dialog_nid, self)
 	
 	if talk_result is GDScriptFunctionState:
 		talk_result = yield(talk_result, "completed")
 	
-	player_proxy.set_physics_process(true)
-	player_proxy.set_process(true)
-	player_proxy.set_process_input(true)
+	local_scene.enable_inputs()
 	self.interactable_collision.set_disabled(false)
 	self.movement_node.set_process(true)
 	

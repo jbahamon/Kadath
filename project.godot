@@ -29,7 +29,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://battle/actions/battle_action.gd"
 }, {
-"base": "Control",
+"base": "MarginContainer",
 "class": "BattleUI",
 "language": "GDScript",
 "path": "res://ui/04_templates/battle_ui/battle_ui.gd"
@@ -245,10 +245,10 @@ BattleLoop="*res://battle/battle_loop.gd"
 
 [display]
 
-window/size/width=320
-window/size/height=240
-window/size/test_width=640
-window/size/test_height=480
+window/size/width=480
+window/size/height=270
+window/size/test_width=1280
+window/size/test_height=720
 window/dpi/allow_hidpi=true
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
@@ -370,6 +370,7 @@ quality/intended_usage/framebuffer_allocation.mobile=0
 2d/snapping/use_gpu_pixel_snap=true
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
+2d/options/ninepatch_mode=0
 environment/default_clear_color=Color( 0.729412, 0.192157, 0.945098, 1 )
 environment/default_environment="res://default_env.tres"
 quality/2d/use_pixel_snap=true

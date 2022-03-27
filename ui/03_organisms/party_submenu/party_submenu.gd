@@ -10,9 +10,8 @@ var inventory: Inventory
 
 func initialize(party: Party):
 	self.inventory = party.inventory
-	party_list.initialize(party)
+	party_list.initialize(party.get_active_members())
 	item_select_panel.set_process_unhandled_input(false)
-	party_member_stats.on_party_member_focused(party_list.get_first_party_member_item())
 	
 func show_item_panel(items: Array):
 	item_select_panel.set_process_unhandled_input(true)

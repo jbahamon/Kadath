@@ -1,8 +1,8 @@
 extends PanelContainer
 
 signal swap_mode_toggled(mode)
-var normal_button_style = load("res://ui/01_atoms/button/normal.tres")
-var highlighted_button_style = load("res://ui/01_atoms/button/focus.tres")
+var normal_button_style = load("res://ui/01_atoms/highlight/normal.tres")
+var highlighted_button_style = load("res://ui/01_atoms/highlight/focus.tres")
 var font_color_normal = Color(1, 1, 1, 1)
 var font_color_highlighted = Color(0, 1, 1, 1)
 var highlighted_index: int = -1

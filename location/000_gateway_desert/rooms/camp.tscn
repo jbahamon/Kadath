@@ -192,7 +192,6 @@ disabled = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Fire"]
 frames = SubResource( 4 )
-frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Fire"]
@@ -256,7 +255,6 @@ parameters/playback = SubResource( 10 )
 [node name="Biggs" parent="." instance=ExtResource( 17 )]
 position = Vector2( 34, -44 )
 script = ExtResource( 6 )
-display_name = "Biggs"
 
 [node name="AnimationTree" parent="Biggs" index="3"]
 parameters/playback = SubResource( 11 )
@@ -264,8 +262,6 @@ parameters/playback = SubResource( 11 )
 [node name="Wedge" parent="." instance=ExtResource( 17 )]
 position = Vector2( -32, -32 )
 script = ExtResource( 4 )
-display_name = "Wedge"
-dialog_name = "camp"
 
 [node name="AnimationTree" parent="Wedge" index="3"]
 parameters/playback = SubResource( 12 )

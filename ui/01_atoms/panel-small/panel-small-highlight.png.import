@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/button-highlight.png-cbf4fc4b4f336d8038fca0a1efad68c7.stex"
+path="res://.import/panel-small-highlight.png-1198ec53776ab90b400a5f68e1c3e9c5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/01_atoms/button/button-highlight.png"
-dest_files=[ "res://.import/button-highlight.png-cbf4fc4b4f336d8038fca0a1efad68c7.stex" ]
+source_file="res://ui/01_atoms/panel-small/panel-small-highlight.png"
+dest_files=[ "res://.import/panel-small-highlight.png-1198ec53776ab90b400a5f68e1c3e9c5.stex" ]
 
 [params]
 

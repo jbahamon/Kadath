@@ -3,7 +3,10 @@
 # and the character's stats to save the game
 extends Node2D
 
+var PartyMemberSummary = preload("res://ui/02_molecules/party_member_summary/party_member_summary.tscn")
+
 class_name PartyMember
+
 
 enum Id {
 	ARDEN = 1 << 0
@@ -135,3 +138,8 @@ func set_accessory(accessory: Accessory):
 
 func get_anim():
 	return self.battler.anim
+
+func instance_ui_control():
+	var control = PartyMemberSummary.instance()
+	control.party_member = self
+	return control

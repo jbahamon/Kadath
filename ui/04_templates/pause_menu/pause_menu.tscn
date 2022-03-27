@@ -24,8 +24,8 @@ __meta__ = {
 [node name="PauseMenuTabs" parent="." instance=ExtResource( 8 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 320.0
-margin_bottom = 240.0
+margin_right = 480.0
+margin_bottom = 270.0
 script = ExtResource( 2 )
 tab_alignment = 1
 normal_tab = ExtResource( 20 )
@@ -35,18 +35,21 @@ hover_tab = ExtResource( 12 )
 focused_tab = ExtResource( 13 )
 
 [node name="Party" parent="PauseMenuTabs" instance=ExtResource( 4 )]
-visible = false
-margin_bottom = 215.0
+margin_left = 0.0
+margin_right = 480.0
+margin_bottom = 270.0
 
 [node name="Items" parent="PauseMenuTabs" instance=ExtResource( 6 )]
 visible = false
-margin_top = 219.0
-margin_right = 320.0
-margin_bottom = 312.0
+margin_top = 215.0
+margin_right = 480.0
+margin_bottom = 308.0
 
 [node name="Settings" type="PanelContainer" parent="PauseMenuTabs"]
-margin_right = 320.0
-margin_bottom = 240.0
+visible = false
+margin_top = 308.0
+margin_right = 480.0
+margin_bottom = 334.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 5 )
@@ -57,5 +60,5 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 13.0
 margin_top = 13.0
-margin_right = 307.0
-margin_bottom = 227.0
+margin_right = 467.0
+margin_bottom = 13.0

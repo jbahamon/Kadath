@@ -103,6 +103,7 @@ __meta__ = {
 script = ExtResource( 5 )
 transition_time_ms = 200.0
 height_percent = 0.4
+margin = 2
 separation = 0
 source_stylebox = ExtResource( 11 )
 dialog_stylebox = ExtResource( 1 )

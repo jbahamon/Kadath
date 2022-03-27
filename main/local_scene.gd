@@ -98,14 +98,18 @@ func show_popup(popup: Popup):
 func play_cutscene(cutscene_name: String):
 	yield(self.cutscene_manager.play_cutscene(cutscene_name), "completed")
 	
-func start_cutscene():
+func disable_inputs():
 	self.set_process_unhandled_input(false)
-	player_proxy.set_process_unhandled_input(false)
+	player_proxy.set_process(false)
+	player_proxy.set_physics_process(false)
+	player_proxy.set_process_input(false)
 	world.set_process_unhandled_input(false)
 
-func end_cutscene():
+func enable_inputs():
 	self.set_process_unhandled_input(true)
-	player_proxy.set_process_unhandled_input(true)
+	player_proxy.set_process(true)
+	player_proxy.set_physics_process(true)
+	player_proxy.set_process_input(true)
 	world.set_process_unhandled_input(true)
 
 func show_save_menu() -> void:
@@ -159,7 +163,7 @@ func update_whereabouts(
 		old_room != null and room_id == old_room.room_id):
 		return
 	
-	self.start_cutscene()
+	self.disable_inputs()
 	
 	if fade and old_location != null and old_room != null:
 		cutscene.play("fade_to_black")
@@ -179,26 +183,29 @@ func update_whereabouts(
 	if fade and old_location != null and old_room != null:
 		yield(cutscene, "animation_finished")
 	
-	self.move_to_room(room_id, target_position, target_orientation)
+	var room_moved = self.move_to_room(room_id, target_position, target_orientation)
 
 	if fade:
 		cutscene.play("fade_from_black")
 		yield(cutscene, "animation_finished")
 	
-	self.end_cutscene()
+	self.enable_inputs()
+	
+	if room_moved:
+		current_room.on_enter()
 	
 	
 func move_to_room(
 	room_id: String,
 	target_position: Vector2, 
 	target_orientation: Vector2
-) -> void:
+) -> bool:
 	var room = current_location.get_room(room_id)
 	var proxy_target = player_proxy.get_target()
 	var proxy_name = proxy_target.name if proxy_target != null else null
 	
 	if current_room != null and current_room == room:
-		return
+		return false
 	
 	if current_room != null:
 		world.remove_child(world.get_child(0))
@@ -233,10 +240,31 @@ func move_to_room(
 	player_proxy.set_orientation(target_orientation)
 	camera.align()
 	
-	current_room.on_enter()
+	return true
 
 func start_battle(battlers):
-	$Battle.initialize(party, battlers)
+	self.disable_inputs()
+	# 
+	# make dict with battler names as they're unique
+	var battler_names = {}
+	for battler in battlers:
+		battler_names[battler.name] = true
+	
+	var elements_to_hide = []
+	
+	for child in world.get_children():
+		if (child.is_in_group("npc") and 
+			child.visible and
+			not battler_names.get(child.name, false)):
+			elements_to_hide.append(child)
+			child.visible = false
+
+	$Battle.start(party.get_active_members(), battlers)
+	
+	
+func end_battle():
+	for element in self.elements_hidden_for_battle:
+		element.visible = true
 
 func get_party_battlers() -> Array:
 	var battlers = []

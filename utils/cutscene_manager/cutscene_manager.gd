@@ -23,11 +23,11 @@ func get_local_scene():
 func play_cutscene(cutsceneName: String):
 	var parser = CutsceneParser.new()
 	var cutscene_instruction = parser.parse_cutscene(cutsceneName)
-	self.get_local_scene().start_cutscene()
+	self.get_local_scene().disable_inputs()
 	cutscene_instruction.run(self)
 	if !cutscene_instruction.finished:
 		yield(cutscene_instruction, "execution_finished")
-	self.get_local_scene().end_cutscene()
+	self.get_local_scene().enable_inputs()
 
 func get_proxy():
 	return self.get_local_scene().player_proxy

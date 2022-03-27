@@ -1,7 +1,7 @@
 extends PanelContainer
 
 signal item_requested(cls, party_member)
-
+signal focus_released
 onready var weapon_name: Button = $Panel/MarginContainer/Equipment/WeaponName
 onready var weapon_stats: Label = $Panel/MarginContainer/Equipment/WeaponStats
 onready var helmet_name: Button = $Panel/MarginContainer/Equipment/HelmetName
@@ -17,21 +17,20 @@ onready var magic_defense_value: Label = $Panel/Stats/MagicDefenseValue
 onready var speed_value: Label = $Panel/Stats/SpeedValue
 onready var luck_value: Label = $Panel/Stats/LuckValue
 
-var party_member_item: PartyMemberSummary
+var party_member
 
 var selected_property: String = ""
 var selected_button: Button = null
 
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_cancel") and self.is_focus_on_buttons():
-		party_member_item.button.pressed = false
-		party_member_item.button.grab_focus()
-		party_member_item.button.grab_click_focus()
+		emit_signal("focus_released")
 		get_tree().set_input_as_handled()
 		
-func on_party_member_focused(new_party_member_item: PartyMemberSummary):
-	self.party_member_item = new_party_member_item
-	update_ui_info()
+func on_party_member_focused(party_member):
+	if party_member != null:
+		self.party_member = party_member
+		update_ui_info()
 
 func on_party_member_selected(party_member):
 	on_party_member_focused(party_member)
@@ -39,7 +38,6 @@ func on_party_member_selected(party_member):
 	weapon_name.grab_click_focus()
 	
 func update_ui_info():
-	var party_member = party_member_item.party_member
 	set_text(weapon_name, party_member.equipped_weapon, "name", "--")
 	set_text(weapon_stats, party_member.equipped_weapon, "attack", "0")
 	set_text(helmet_name, party_member.equipped_helmet, "name", "--")
@@ -70,7 +68,7 @@ func on_weapon_clicked():
 	emit_signal(
 		"item_requested", 
 		Weapon, 
-		party_member_item.party_member
+		party_member
 	)
 	selected_property = "equipped_weapon"
 	selected_button = weapon_name
@@ -79,7 +77,7 @@ func on_helmet_clicked():
 	emit_signal(
 		"item_requested", 
 		Helmet, 
-		party_member_item.party_member
+		party_member
 	)
 	selected_property = "equipped_helmet"
 	selected_button = helmet_name
@@ -88,7 +86,7 @@ func on_armor_clicked():
 	emit_signal(
 		"item_requested", 
 		Armor, 
-		party_member_item.party_member
+		party_member
 	)
 	selected_property = "equipped_armor"
 	selected_button = armor_name
@@ -97,14 +95,14 @@ func on_accessory_clicked():
 	emit_signal(
 		"item_requested", 
 		Accessory, 
-		party_member_item.party_member
+		party_member
 	)
 	selected_property = "equipped_accessory"
 	selected_button = accessory_name
 
 func on_item_selected(item: Equipment):
 	if item != null:
-		party_member_item.party_member.set(selected_property, item)
+		party_member.set(selected_property, item)
 		update_ui_info()
 		
 	selected_button.pressed = false

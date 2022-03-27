@@ -34,14 +34,17 @@ func _init():
 	patterns["FADE"] = RegEx.new()
 	patterns["FADE"].compile("(?<Overlay>.+) TO (?<Color>.+) IN (?<Time>.+)$")
 	
-	patterns["MOVE"] = RegEx.new()
-	patterns["MOVE"].compile("TO (?<Position>.+) IN (?<Time>.+)$")
+	patterns["MOVE_TO"] = RegEx.new()
+	patterns["MOVE_TO"].compile("TO (?<Position>.+) IN (?<Time>.+)$")
+	
+	patterns["MOVE_BY"] = RegEx.new()
+	patterns["MOVE_BY"].compile("(?<Position>.+) IN (?<Time>.+)$")
 	
 	patterns["SET_POSITION"] = RegEx.new()
 	patterns["SET_POSITION"].compile("^(?<Character>.+) TO (?<Position>.+)$")
 	
 	patterns["WALK"] = RegEx.new()
-	patterns["WALK"].compile("^(?<Character>.+) TO (?<Position>.+) AT (?<Speed>.+)$")
+	patterns["WALK"].compile("^(?<Character>.+) (?<Position>.+) AT (?<Speed>.+)$")
 		
 	patterns["LOOK"] = RegEx.new()
 	patterns["LOOK"].compile("^(?<Character>.+) (?<Direction>.+)$")
@@ -113,17 +116,31 @@ func parse_instruction(instruction_name: String, args: String):
 				self.parse_position(args)
 			)
 		CutsceneInstruction.Type.MOVE_CAMERA:
-			var move_match: RegExMatch = self.patterns["MOVE"].search(args)
-			var position_string = move_match.get_string("Position")
-			var position = self.parse_position(position_string)
-			
-			if position == null:
-				position = position_string
+			var mode: String
+			var position
+			var move_match: RegExMatch = self.patterns["MOVE_TO"].search(args)
+			if move_match != null:
+				var position_string = move_match.get_string("Position")
+				position = self.parse_position(position_string)
 				
+				if position == null:
+					mode = "target_entity"
+					position = position_string
+				else:
+					mode = "target_position"
+			
+			else:
+				mode = "displacement"
+				move_match = self.patterns["MOVE_BY"].search(args)
+				var position_string = move_match.get_string("Position")
+				position = self.parse_position(position_string)
+			
 			instruction = MoveCamera.new(
 				position,
+				mode,
 				float(move_match.get_string("Time").strip_edges())
 			)
+				
 		CutsceneInstruction.Type.ASSIGN_CAMERA:
 			instruction = AssignCamera.new(args.strip_edges())
 		CutsceneInstruction.Type.LOOK:
