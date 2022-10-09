@@ -13,22 +13,20 @@ script = ExtResource( 1 )
 display_name = "Arden"
 growth = ExtResource( 3 )
 unlocked = true
+experience = 200
 icon = ExtResource( 4 )
 
 [node name="Battler" parent="Arden" index="0"]
-is_party_member = true
 anim_path = NodePath("../Anim")
 
 [node name="Anim" parent="Arden" instance=ExtResource( 5 )]
 
 [node name="Arden2" parent="." instance=ExtResource( 2 )]
-display_name = "Arden"
+display_name = "Arden2"
 growth = ExtResource( 3 )
-unlocked = true
 icon = ExtResource( 4 )
 
 [node name="Battler" parent="Arden2" index="0"]
-is_party_member = true
 anim_path = NodePath("../Anim")
 
 [node name="Anim" parent="Arden2" instance=ExtResource( 5 )]

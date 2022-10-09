@@ -12,7 +12,7 @@ export var PARTY_SIZE: int = 3
 const inventory_save_key = "Inventory"
 
 var inventory: Inventory = Inventory.new()
-var display_name setget , get_display_name
+var display_name = "party" # setget , get_display_name
 
 func load(save_data: SaveData) -> void:
 	inventory.load(save_data)
@@ -35,11 +35,18 @@ func get_unlocked_characters() -> Array:
 		if member.unlocked:
 			has_unlocked.append(member)
 	return has_unlocked
-
-func get_anim():
-	return self.get_active_members()[0].get_anim()
 	
 func get_display_name() -> String:
-	return get_children()[0].display_name
+	return self.get_leader().display_name
 	
+func play_anim(anim_name: String):
+	self.get_leader().play_anim(anim_name)
 	
+func set_orientation(orientation: Vector2):
+	self.get_leader().set_orientation(orientation)
+	
+func get_leader():
+	for member in get_children():
+		if member.unlocked:
+			return member
+	return null

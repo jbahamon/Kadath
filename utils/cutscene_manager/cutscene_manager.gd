@@ -20,14 +20,27 @@ func _ready():
 func get_local_scene():
 	return get_node(self.local_scene_path)
 	
-func play_cutscene(cutsceneName: String):
+func play_cutscene_from_file(cutscene_name: String):
 	var parser = CutsceneParser.new()
-	var cutscene_instruction = parser.parse_cutscene(cutsceneName)
-	self.get_local_scene().disable_inputs()
+	var cutscene_instruction = parser.parse_cutscene_from_file(cutscene_name)
+	yield(self.play_cutscene(cutscene_instruction), "completed")
+	
+func play_cutscene_from_array(instructions: Array):
+	var parser = CutsceneParser.new()
+	var cutscene_instruction = parser.parse_cutscene_from_array(instructions)
+	yield(self.play_cutscene(cutscene_instruction), "completed")
+	
+func play_cutscene(cutscene_instruction):
+	var were_inputs_disabled = not self.get_local_scene().is_processing_unhandled_input()
+	
+	if not were_inputs_disabled:
+		self.get_local_scene().disable_inputs()
 	cutscene_instruction.run(self)
 	if !cutscene_instruction.finished:
 		yield(cutscene_instruction, "execution_finished")
-	self.get_local_scene().enable_inputs()
+		
+	if not were_inputs_disabled:
+		self.get_local_scene().enable_inputs()
 
 func get_proxy():
 	return self.get_local_scene().player_proxy

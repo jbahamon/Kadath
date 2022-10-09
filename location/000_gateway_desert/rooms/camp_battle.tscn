@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://location/000_gateway_desert/rooms/camp_battle.gd" type="Script" id=1]
 [ext_resource path="res://location/000_gateway_desert/tiles/sand.png" type="Texture" id=2]
@@ -13,9 +13,12 @@
 [ext_resource path="res://location/000_gateway_desert/objects/fire3.png" type="Texture" id=11]
 [ext_resource path="res://location/000_gateway_desert/tiles/sand-night.png" type="Texture" id=12]
 [ext_resource path="res://location/000_gateway_desert/npcs/traveler2.png" type="Texture" id=13]
+[ext_resource path="res://location/base_classes/objects/battle_spot.tscn" type="PackedScene" id=14]
 [ext_resource path="res://location/000_gateway_desert/objects/cave.png" type="Texture" id=15]
 [ext_resource path="res://location/000_gateway_desert/objects/cave_door.gd" type="Script" id=16]
 [ext_resource path="res://location/base_classes/npc/simple_npc.tscn" type="PackedScene" id=17]
+[ext_resource path="res://location/base_classes/objects/enemy_spot.gd" type="Script" id=18]
+[ext_resource path="res://location/base_classes/npc/base_npc.gd" type="Script" id=19]
 
 [sub_resource type="TileSet" id=3]
 0/name = "sand.png 0"
@@ -191,6 +194,7 @@ shape = SubResource( 5 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Fire"]
 frames = SubResource( 4 )
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Fire"]
@@ -277,9 +281,28 @@ texture = ExtResource( 5 )
 [node name="AnimationTree" parent="Hadi" index="3"]
 parameters/playback = SubResource( 13 )
 
-[node name="ShadowCritter" parent="." instance=ExtResource( 3 )]
+[node name="ShadowCritter" parent="." groups=["npc"] instance=ExtResource( 3 )]
 position = Vector2( 141, 111 )
+collision_layer = 2
+collision_mask = 0
+script = ExtResource( 19 )
 facing = Vector2( -1, 0 )
+
+[node name="BattleSpot" parent="." instance=ExtResource( 14 )]
+
+[node name="Position2D" type="Position2D" parent="BattleSpot/PartySpots" index="0"]
+position = Vector2( 18, 168 )
+
+[node name="Position2D2" type="Position2D" parent="BattleSpot/PartySpots" index="1"]
+position = Vector2( -32, 207 )
+
+[node name="Position2D3" type="Position2D" parent="BattleSpot/PartySpots" index="2"]
+position = Vector2( -44, 147 )
+
+[node name="EnemySpot" type="Position2D" parent="BattleSpot/EnemySpots" index="0"]
+position = Vector2( 127, 159 )
+script = ExtResource( 18 )
+enemy = "Shadow Critter"
 
 [connection signal="body_entered" from="Cave/Door" to="Cave/Door" method="_on_Area2D_body_entered"]
 
@@ -287,3 +310,4 @@ facing = Vector2( -1, 0 )
 [editable path="Biggs"]
 [editable path="Wedge"]
 [editable path="Hadi"]
+[editable path="BattleSpot"]

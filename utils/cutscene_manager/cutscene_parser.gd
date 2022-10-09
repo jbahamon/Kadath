@@ -12,7 +12,8 @@ var AssignCamera = preload("res://utils/cutscene_manager/instructions/assign_cam
 var DisableCollisions = preload("res://utils/cutscene_manager/instructions/disable_collisions.gd")
 var EnableCollisions = preload("res://utils/cutscene_manager/instructions/enable_collisions.gd")
 
-var Walk = preload("res://utils/cutscene_manager/instructions/walk.gd")
+var Move = preload("res://utils/cutscene_manager/instructions/move.gd")
+var LookAt = preload("res://utils/cutscene_manager/instructions/look_at.gd")
 var Call = preload("res://utils/cutscene_manager/instructions/call.gd")
 var StartDialog = preload("res://utils/cutscene_manager/instructions/start_dialog.gd")
 
@@ -25,8 +26,6 @@ var Wait = preload("res://utils/cutscene_manager/instructions/wait.gd")
 
 var patterns = {}
 
-var stack = []
-
 func _init():
 	patterns["SET_OVERLAY"] = RegEx.new()
 	patterns["SET_OVERLAY"].compile("(?<Overlay>.+) TO (?<Color>.+)$")
@@ -34,20 +33,23 @@ func _init():
 	patterns["FADE"] = RegEx.new()
 	patterns["FADE"].compile("(?<Overlay>.+) TO (?<Color>.+) IN (?<Time>.+)$")
 	
-	patterns["MOVE_TO"] = RegEx.new()
-	patterns["MOVE_TO"].compile("TO (?<Position>.+) IN (?<Time>.+)$")
+	patterns["MOVE_CAMERA_TO"] = RegEx.new()
+	patterns["MOVE_CAMERA_TO"].compile("TO (?<Position>.+) IN (?<Time>.+)$")
 	
-	patterns["MOVE_BY"] = RegEx.new()
-	patterns["MOVE_BY"].compile("(?<Position>.+) IN (?<Time>.+)$")
+	patterns["MOVE_CAMERA_BY"] = RegEx.new()
+	patterns["MOVE_CAMERA_BY"].compile("(?<Position>.+) IN (?<Time>.+)$")
 	
 	patterns["SET_POSITION"] = RegEx.new()
 	patterns["SET_POSITION"].compile("^(?<Character>.+) TO (?<Position>.+)$")
 	
 	patterns["WALK"] = RegEx.new()
-	patterns["WALK"].compile("^(?<Character>.+) (?<Position>.+) AT (?<Speed>.+)$")
+	patterns["WALK"].compile("^(?<Character>.+) TO (?<Position>.+) AT (?<Speed>.+)$")
 		
 	patterns["LOOK"] = RegEx.new()
 	patterns["LOOK"].compile("^(?<Character>.+) (?<Direction>.+)$")
+	
+	patterns["LOOK_AT"] = RegEx.new()
+	patterns["LOOK_AT"].compile("^(?<Character>.+) AT (?<Target>.+)$")
 	
 	patterns["PLAY_ANIM"] = RegEx.new()
 	patterns["PLAY_ANIM"].compile("^(?<Character>.+) (?<Anim>.+)$")
@@ -64,33 +66,47 @@ func _init():
 	patterns["POSITION"] = RegEx.new()
 	patterns["POSITION"].compile("\\([ ]*(?<X>[^ ,)]+)[ ]*,[ ]*(?<Y>[^ ,)]+)[ ]*\\)")
 
-func parse_cutscene(cutscene_name: String): 
+
+func parse_cutscene_from_file(cutscene_name: String): 
 	var cutscene_file = File.new()
-	cutscene_file.open("res://%s.txt" % cutscene_name, File.READ)
-	
-	self.stack = [
-		Sequential.new()
-	]
-	
-	stack[0].add_instruction(Wait.new(0))
+	cutscene_file.open("res://cutscenes/%s.txt" % cutscene_name, File.READ)
+	var stack = self.get_initial_stack()
 	
 	while not cutscene_file.eof_reached():
 		var line = cutscene_file.get_line()
-		if line.strip_edges().begins_with("#"):
-			continue
-			
-		var tokens = line.strip_edges().split(" ", false, 1)
-
-		if not tokens.empty():
-			var instruction_name = tokens[0]
-			var args = tokens[1].strip_edges() if tokens.size() > 1 else ""
-
-			self.parse_instruction(instruction_name, args)
+		self.parse_line(stack, line)
 	
-	assert(len(self.stack) == 1, "Missing END instruction")
-	return self.stack[0]
+	assert(len(stack) == 1, "Missing END instruction")
+	return stack[0]
+	
+func parse_cutscene_from_array(instructions: Array): 
+	var stack = self.get_initial_stack()
+	for line in instructions:
+		self.parse_line(stack, line)
+	
+	assert(len(stack) == 1, "Missing END instruction")
+	return stack[0]
 
-func parse_instruction(instruction_name: String, args: String):
+func get_initial_stack() -> Array:
+	var stack = [
+		Sequential.new()
+	]
+	stack[0].add_instruction(Wait.new(0))
+	return stack
+	
+func parse_line(stack: Array, line: String):
+	if line.strip_edges().begins_with("#"):
+		return
+			
+	var tokens = line.strip_edges().split(" ", false, 1)
+
+	if not tokens.empty():
+		var instruction_name = tokens[0]
+		var args = tokens[1].strip_edges() if tokens.size() > 1 else ""
+
+		self.parse_instruction(stack, instruction_name, args)
+			
+func parse_instruction(stack: Array, instruction_name: String, args: String):
 	var instruction_type = CutsceneInstruction.Type.get(instruction_name)
 	
 	var instruction
@@ -118,7 +134,7 @@ func parse_instruction(instruction_name: String, args: String):
 		CutsceneInstruction.Type.MOVE_CAMERA:
 			var mode: String
 			var position
-			var move_match: RegExMatch = self.patterns["MOVE_TO"].search(args)
+			var move_match: RegExMatch = self.patterns["MOVE_CAMERA_TO"].search(args)
 			if move_match != null:
 				var position_string = move_match.get_string("Position")
 				position = self.parse_position(position_string)
@@ -131,7 +147,7 @@ func parse_instruction(instruction_name: String, args: String):
 			
 			else:
 				mode = "displacement"
-				move_match = self.patterns["MOVE_BY"].search(args)
+				move_match = self.patterns["MOVE_CAMERA_BY"].search(args)
 				var position_string = move_match.get_string("Position")
 				position = self.parse_position(position_string)
 			
@@ -150,6 +166,18 @@ func parse_instruction(instruction_name: String, args: String):
 				"set_orientation",
 				[self.parse_direction(look_match.get_string("Direction"))]
 			)
+		CutsceneInstruction.Type.LOOK_AT:
+			var look_at_match: RegExMatch = self.patterns["LOOK_AT"].search(args)
+			
+			var target = self.parse_position(look_at_match.get_string("Target").strip_edges())
+			
+			if target == null:
+				look_at_match.get_string("Target").strip_edges()
+			
+			instruction = LookAt.new(
+				look_at_match.get_string("Character").strip_edges(),
+				target
+			)
 		CutsceneInstruction.Type.SET_POSITION:
 			var set_position_match: RegExMatch = self.patterns["SET_POSITION"].search(args)
 			instruction = Call.new(
@@ -157,13 +185,27 @@ func parse_instruction(instruction_name: String, args: String):
 				"set_position",
 				[self.parse_position(set_position_match.get_string("Position"))]
 			)
+			
 		CutsceneInstruction.Type.DISABLE_COLLISIONS:
 			instruction = DisableCollisions.new(args.strip_edges())
+			
 		CutsceneInstruction.Type.ENABLE_COLLISIONS:
 			instruction = EnableCollisions.new(args.strip_edges())
+			
 		CutsceneInstruction.Type.WALK:
 			var walk_match: RegExMatch = self.patterns["WALK"].search(args)
-			instruction = Walk.new(
+			var entity = walk_match.get_string("Character").strip_edges()
+			var target = self.parse_position(walk_match.get_string("Position"))
+			var speed = float(walk_match.get_string("Speed").strip_edges())
+			instruction = Sequential.new()
+			instruction.add_instruction(LookAt.new(entity, target))
+			instruction.add_instruction(Call.new(entity, "play_anim", ["walk"]))
+			instruction.add_instruction(Move.new(entity, target, speed))
+			instruction.add_instruction(Call.new(entity, "play_anim", ["idle"]))
+			
+		CutsceneInstruction.Type.MOVE:
+			var walk_match: RegExMatch = self.patterns["MOVE"].search(args)
+			instruction = Move.new(
 				walk_match.get_string("Character").strip_edges(),
 				self.parse_position(walk_match.get_string("Position")),
 				float(walk_match.get_string("Speed").strip_edges())
@@ -175,8 +217,8 @@ func parse_instruction(instruction_name: String, args: String):
 				"play_anim",
 				[anim_match.get_string("Anim").strip_edges()]
 			)
-		CutsceneInstruction.Type.PLAY_ANIM:
-			var call_match: RegExMatch = self.patterns["PLAY_ANIM"].search(args)
+		CutsceneInstruction.Type.CALL:
+			var call_match: RegExMatch = self.patterns["CALL"].search(args)
 			instruction = Call.new(
 				call_match.get_string("Entity").strip_edges(),
 				call_match.get_string("FunctionName").strip_edges(),
@@ -204,28 +246,21 @@ func parse_instruction(instruction_name: String, args: String):
 		CutsceneInstruction.Type.ASSIGN_PROXY:
 			instruction = AssignProxy.new(args.strip_edges())
 		CutsceneInstruction.Type.SIMULTANEOUS:
-			self.stack.push_back(Simultaneous.new())
+			stack.push_back(Simultaneous.new())
 		CutsceneInstruction.Type.SEQUENTIAL:
-			self.stack.push_back(Sequential.new())
+			stack.push_back(Sequential.new())
 		CutsceneInstruction.Type.END:
-			assert(len(self.stack) > 0, "Too many END instructions")
-			instruction = self.stack.pop_back()
+			assert(len(stack) > 0, "Too many END instructions")
+			instruction = stack.pop_back()
 		CutsceneInstruction.Type.WAIT:
 			instruction = Wait.new(float(args.strip_edges()))
 			
-		CutsceneInstruction.Type.CALL:
-			var call_match: RegExMatch = self.patterns["CALL"].search(args)
-			
-			instruction = Call.new(
-				call_match.get_string("Entity").strip_edges(),
-				call_match.get_string("FunctionName").strip_edges(),
-				call_match.get_string("Args").strip_edges().split(" ", false)
-			)
 		_:
+			assert(false)
 			instruction = null
 			
 	if instruction != null:
-		self.stack.back().add_instruction(instruction)
+		stack.back().add_instruction(instruction)
 
 func parse_color(color_string: String) -> Color:
 	var color_match: RegExMatch = self.patterns["COLOR"].search(color_string)

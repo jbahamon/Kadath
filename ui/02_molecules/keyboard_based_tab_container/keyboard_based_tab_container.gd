@@ -169,17 +169,17 @@ func set_initial_focus():
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_accept"):
 		var pressed_tab_button = tabs_button_group.get_pressed_button()
-		if pressed_tab_button.has_focus() and current_content.has_method("receive_focus"):
+		if pressed_tab_button.has_focus() and current_content.has_method("grab_focus"):
 			overlay.visible = false
-			current_content.receive_focus()
+			current_content.grab_focus()
 			content_container.modulate = default_modulate
 			get_tree().set_input_as_handled()
 
 	elif event.is_action_pressed("ui_cancel"):
 		var pressed_tab_button = tabs_button_group.get_pressed_button()
-		if not pressed_tab_button.has_focus() and current_content.has_method("relinquish_focus"):
+		if not pressed_tab_button.has_focus() and current_content.has_method("release_focus"):
 			overlay.visible = "icon" in current_content
-			current_content.relinquish_focus()
+			current_content.release_focus()
 			pressed_tab_button.grab_click_focus()
 			pressed_tab_button.grab_focus()
 			content_container.modulate = inactive_content_modulate

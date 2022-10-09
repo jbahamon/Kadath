@@ -168,7 +168,7 @@ func set_item_neighbours(i: int, children: Array):
 	item_entry.focus_neighbour_right = item_entry.get_path_to(item_entry)
 
 
-func receive_focus():
+func grab_focus():
 	self.reset_focus()
 	self.set_process_unhandled_input(true)
 	self.set_process_input(true)
@@ -176,7 +176,7 @@ func receive_focus():
 	return true
 
 
-func relinquish_focus():
+func release_focus():
 	self.set_process_unhandled_input(false)
 	self.set_process_input(false)
 
@@ -186,7 +186,7 @@ func reset_focus():
 	if items.get_child_count() > 0:
 		element_to_focus = items.get_child(0)
 	else:
-		element_to_focus = self
+		return
 		
 	element_to_focus.grab_focus()
 	element_to_focus.grab_click_focus()

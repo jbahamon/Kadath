@@ -5,13 +5,11 @@ extends Node
 
 class_name Battler
 
-export var is_party_member = false
-export var display_name: String
 export var anim_path: NodePath
 export var stats: Resource # Should be Character Stats, tho
 export var turn_order_icon: Texture
+export var rewards: Resource
 
-onready var drops := $Drops
 onready var actions = $Actions
 onready var skills = $Skills
 onready var ai = $AI
@@ -49,10 +47,10 @@ func get_damage_modifier(hit: Hit):
 	
 func get_physical_attack() -> float:
 	var attack
-	if self.is_party_member:
-		var party_member: PartyMember = self.get_parent()
+	var parent = self.get_parent()
+	if parent is PartyMember:
 		attack = (self.stats.attack * 0.7 + 
-				  party_member.get_physical_attack_bonus() * 0.3) 
+				  parent.get_physical_attack_bonus() * 0.3) 
 	else:
 		attack = self.stats.attack 
 		
@@ -60,9 +58,9 @@ func get_physical_attack() -> float:
 
 func get_physical_defense() -> float:
 	var defense
-	if self.is_party_member:
-		var party_member: PartyMember = get_parent()
-		defense = self.stats.defense + party_member.get_physical_armor()
+	var parent = self.get_parent()
+	if parent is PartyMember:
+		defense = self.stats.defense + parent.get_physical_armor()
 	else:
 		defense = self.stats.defense
 		
@@ -82,12 +80,32 @@ func is_alive() -> bool:
 
 func on_turn_end():
 	if stats.health <= 0:
-		self.die()
+		var result = self.die()
+		if result is GDScriptFunctionState:
+			yield(result, "completed")
 		
 func die():
-	BattleLoop.remove_battler(self)
+	if self.rewards != null:
+		BattleLoop.add_rewards(self.rewards)
+		
+	var parent = self.get_parent()
+	BattleLoop.remove_actor(parent)
 	
-	if self.is_party_member:
+	if parent is PartyMember:
 		self.status_effects.add(self, DownedStatus.new())
 	else:
-		self.queue_free()
+		var result = parent.die()
+		if result is GDScriptFunctionState:
+			yield(result, "completed")
+
+func play_anim(anim_name: String):
+	self.get_parent().play_anim(anim_name)
+	
+func set_orientation(orientation: Vector2):
+	self.get_parent().set_orientation(orientation)
+	
+func move_to(target_position: Vector2, speed: float):
+	yield(self.get_parent().move_to(target_position), "completed")
+
+func is_party_member():
+	return get_parent() is PartyMember

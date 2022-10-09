@@ -7,7 +7,14 @@ func _init(room_name: String):
 	
 func execute(cutscene_manager):
 	var local_scene: LocalScene = cutscene_manager.local_scene
-	local_scene.move_to_room(self.room_name, Vector2(0,0), Vector2.DOWN)
-
+	var current_location_id = local_scene.current_location.location_id
+	local_scene.update_whereabouts(
+		current_location_id, 
+		self.room_name,
+		Vector2(0,0), 
+		Vector2.DOWN,
+		false
+	) 
+	
 func str():
 	return "set_room to %s" % self.room_name

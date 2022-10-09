@@ -4,4 +4,6 @@
 
 [node name="Attack" type="Node"]
 script = ExtResource( 1 )
+action_name = "Attack"
+description = "Attack an enemy with your weapon"
 should_retarget_on_missing_target = true

@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=17 format=2]
+[gd_resource type="Theme" load_steps=16 format=2]
 
 [ext_resource path="res://ui/01_atoms/tab/hover.tres" type="StyleBox" id=1]
 [ext_resource path="res://ui/01_atoms/separator/hseparator.tres" type="StyleBox" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://ui/01_atoms/highlight/disabled.tres" type="StyleBox" id=4]
 [ext_resource path="res://ui/01_atoms/assets/fonts/By Adigun/Irishalini.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://ui/01_atoms/separator/vseparator.tres" type="StyleBox" id=6]
-[ext_resource path="res://ui/01_atoms/highlight/focus.tres" type="StyleBox" id=7]
 [ext_resource path="res://ui/01_atoms/highlight/pressed.tres" type="StyleBox" id=8]
 [ext_resource path="res://ui/01_atoms/input/input.tres" type="StyleBox" id=9]
 [ext_resource path="res://ui/01_atoms/highlight/hover.tres" type="StyleBox" id=10]
@@ -33,7 +32,7 @@ Button/colors/font_color_pressed = Color( 0, 1, 1, 1 )
 Button/constants/hseparation = 2
 Button/fonts/font = null
 Button/styles/disabled = ExtResource( 4 )
-Button/styles/focus = ExtResource( 7 )
+Button/styles/focus = null
 Button/styles/hover = ExtResource( 10 )
 Button/styles/normal = ExtResource( 3 )
 Button/styles/pressed = ExtResource( 8 )

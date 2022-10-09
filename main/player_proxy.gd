@@ -5,24 +5,26 @@ class_name PlayerProxy
 const walk_speed: float = 100.0
 const interaction_vector = Vector2(20, 10)
 
-export var anim_path: NodePath
 
 var input_vector = Vector2.ZERO
 var velocity = Vector2.ZERO
 var party: Party
 var automated = false
-var display_name setget , get_display_name
+var display_name = "proxy"#  setget , get_display_name
+var target: Node2D
 
-onready var anim = get_node(anim_path)
 onready var raycast: RayCast2D = $RayCast2D
 onready var remote_transform: RemoteTransform2D = $RemoteTransform2D
 onready var collision: CollisionShape2D = $CollisionShape2D
+
+func _ready():
+	self.set_target(self.remote_transform.get_node_or_null(self.remote_transform.remote_path))
 
 func _unhandled_input(event) -> void:
 	if event.is_action_pressed("ui_accept"):
 		raycast.force_raycast_update()
 		if raycast.is_colliding() and raycast.get_collider().has_method("on_player_interaction"):
-			anim.play_anim("idle")
+			self.target.play_anim("idle")
 			raycast.get_collider().on_player_interaction(self)
 			
 
@@ -40,13 +42,11 @@ func _physics_process(_delta) -> void:
 func move() -> void:
 	velocity = move_and_slide(velocity)
 
-
 func update_velocity() -> void:
 	if input_vector != Vector2.ZERO:
 		velocity = input_vector.normalized() * get_movement_speed()
 	else:
 		velocity = Vector2.ZERO
-
 
 func update_input_vector():
 	var old_input_vector = input_vector
@@ -57,17 +57,15 @@ func update_input_vector():
 	) if self.is_processing_unhandled_input() else Vector2.ZERO
 		
 	return old_input_vector == input_vector
-	
-	
+
 func get_movement_speed() -> float:
 	return walk_speed
 
-
 func update_animation() -> void:
 	if velocity == Vector2.ZERO:
-		anim.play_anim("idle")
+		self.target.play_anim("idle")
 	else:
-		anim.play_anim("walk")
+		self.target.play_anim("walk")
 		
 		
 func update_orientation() -> void:
@@ -79,39 +77,28 @@ func update_orientation() -> void:
 func save(save_data: SaveData) -> void:
 	save_data.data["player_position"] = self.position
 
-func set_orientation(orientation: Vector2):
-	anim.set_orientation(orientation)
-
-	raycast.set_cast_to(Vector2(
-		interaction_vector.x * orientation.x, 
-		interaction_vector.y * orientation.y
-	))
 	
 func load(save_data: SaveData) -> void:
 	self.position = save_data.data["player_position"]
 	
 func set_target(new_target: Node):
-	var old_target = self.remote_transform.get_node_or_null(self.remote_transform.remote_path)
-	
-	if old_target == new_target:
+	if self.target == new_target:
 		return 
 	
 	self.set_physics_process(false)
 	
-	if old_target and old_target.has_method("on_proxy_leave"):
-		old_target.on_proxy_leave()
+	if self.target and self.target.has_method("on_proxy_leave"):
+		self.target.on_proxy_leave()
 	
-	if new_target and new_target.has_method("on_proxy_enter"):
-		new_target.on_proxy_enter()
+	self.target = new_target
 	
-	self.global_position = new_target.global_position
-	self.remote_transform.remote_path = self.remote_transform.get_path_to(new_target)
-	self.anim = new_target.get_anim()
-	self.anim_path = self.get_path_to(self.anim)
+	if self.target and self.target.has_method("on_proxy_enter"):
+		self.target.on_proxy_enter()
+	
+	self.global_position = self.target.global_position
+	self.target = self.target
+	self.remote_transform.remote_path = self.remote_transform.get_path_to(self.target)
 	self.set_physics_process(true)
-	
-func get_target():
-	return self.remote_transform.get_node(self.remote_transform.remote_path)
 
 func set_party(new_party: Party) -> void:
 	self.party = new_party
@@ -119,36 +106,38 @@ func set_party(new_party: Party) -> void:
 func get_inventory() -> Inventory:
 	return self.party.inventory
 
+func get_display_name() -> String:
+	assert(self.target != null)
+	return self.target.display_name
+
+# Animatable interface
+
 func disable_collisions():
-	self.set_physics_process(false)
 	self.collision.disabled = true
 	
 func enable_collisions():
-	self.set_physics_process(true)
 	self.collision.disabled = false
 
-func walk_to(target: Vector2, speed):
+func move_to(target_position: Vector2, speed):
 	assert(speed > 0)
 	var was_processing_physics = self.is_physics_processing()
-	var time = (global_position - target).length()/speed
+	var time = (global_position - target_position).length()/speed
 	
 	self.automated = true
 	self.set_physics_process(true)
-	
-	self.set_orientation(global_position.direction_to(target))
-	self.velocity = (target - global_position).normalized() * speed
-	self.anim.play_anim("walk")
-	
+	self.velocity = (target_position - global_position).normalized() * speed
 	yield(get_tree().create_timer(time), "timeout")
-	
 	self.velocity = Vector2.ZERO
-	self.anim.play_anim("idle")
-	
 	self.set_physics_process(was_processing_physics)
 	self.automated = false
+
+func play_anim(anim_name: String):
+	self.target.play_anim(anim_name)
 	
-func get_display_name() -> String:
-	var target = self.remote_transform.get_node_or_null(self.remote_transform.remote_path)
-	assert(target != null)
-	return target.display_name
-	
+func set_orientation(orientation: Vector2):
+	self.target.set_orientation(orientation)
+
+	raycast.set_cast_to(Vector2(
+		interaction_vector.x * orientation.x, 
+		interaction_vector.y * orientation.y
+	))

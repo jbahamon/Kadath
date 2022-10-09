@@ -1,12 +1,9 @@
 class_name Turn
 
-var actor: Battler
+var actor
 var action: BattleAction
-var targets: Array 
+var action_args: Dictionary 
 
 func play():
 	assert(action != null && actor != null)
-	
-	action.execute(actor, targets)
-	
-	
+	action.execute(actor, action_args)

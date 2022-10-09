@@ -25,7 +25,7 @@ func _ready():
 		var label_text = labels[action]
 		add_input_option(action, label_text)
 		link_buttons()
-	self.receive_focus()
+	self.grab_focus()
 
 func add_input_option(action: String, label_text: String):
 	add_label(label_text)
@@ -106,7 +106,7 @@ func _on_ListenForInputPopup_key_pressed(action: String, event: InputEventKey):
 	buttons[action].grab_click_focus()
 	buttons[action].text = "<%s>" % OS.get_scancode_string(event.scancode)
 
-func receive_focus():
+func grab_focus():
 	var first_element = $CenterContainer/Settings/Sliders/MusicVolumeSlider
 
 	first_element.grab_focus()
@@ -114,5 +114,5 @@ func receive_focus():
 	
 	return true
 
-func relinquish_focus():
+func release_focus():
 	return

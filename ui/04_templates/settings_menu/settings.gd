@@ -2,9 +2,9 @@ extends PanelContainer
 
 export var icon: Texture 
 
-func receive_focus():
-	return $SettingsMenu.receive_focus()
+func grab_focus():
+	return $SettingsMenu.grab_focus()
 
 
-func relinquish_focus():
-	return $SettingsMenu.relinquish_focus()
+func release_focus():
+	return $SettingsMenu.release_focus()

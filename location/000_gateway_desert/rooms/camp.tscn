@@ -1,7 +1,8 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://location/000_gateway_desert/rooms/camp.gd" type="Script" id=1]
 [ext_resource path="res://location/000_gateway_desert/tiles/sand.png" type="Texture" id=2]
+[ext_resource path="res://location/000_gateway_desert/npcs/traveler.png" type="Texture" id=3]
 [ext_resource path="res://location/000_gateway_desert/npcs/traveler_3.gd" type="Script" id=4]
 [ext_resource path="res://location/000_gateway_desert/npcs/hadi.png" type="Texture" id=5]
 [ext_resource path="res://location/000_gateway_desert/npcs/traveler_2.gd" type="Script" id=6]
@@ -192,6 +193,7 @@ disabled = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Fire"]
 frames = SubResource( 4 )
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Fire"]
@@ -256,12 +258,18 @@ parameters/playback = SubResource( 10 )
 position = Vector2( 34, -44 )
 script = ExtResource( 6 )
 
+[node name="Sprite" parent="Biggs" index="0"]
+texture = ExtResource( 3 )
+
 [node name="AnimationTree" parent="Biggs" index="3"]
 parameters/playback = SubResource( 11 )
 
 [node name="Wedge" parent="." instance=ExtResource( 17 )]
 position = Vector2( -32, -32 )
 script = ExtResource( 4 )
+
+[node name="Sprite" parent="Wedge" index="0"]
+texture = ExtResource( 3 )
 
 [node name="AnimationTree" parent="Wedge" index="3"]
 parameters/playback = SubResource( 12 )

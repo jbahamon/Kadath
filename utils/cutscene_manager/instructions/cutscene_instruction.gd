@@ -17,6 +17,9 @@ enum Type {
 	
 	SET_POSITION,
 	LOOK,
+	LOOK_AT,
+	
+	MOVE,
 	WALK,
 	PLAY_ANIM,
 	
@@ -47,6 +50,6 @@ func run(cutscene_manager):
 		
 	self.finished = true
 	emit_signal("execution_finished")
-	
+
 func str():
 	return "generic instruction"

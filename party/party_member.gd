@@ -1,12 +1,11 @@
 # Represents a playable character to add in the player's party
 # Holds the data and nodes for the character's battler, anim,
 # and the character's stats to save the game
-extends Node2D
+extends KinematicBody2D
 
 var PartyMemberSummary = preload("res://ui/02_molecules/party_member_summary/party_member_summary.tscn")
 
 class_name PartyMember
-
 
 enum Id {
 	ARDEN = 1 << 0
@@ -17,7 +16,10 @@ enum Id {
 	KURANES = 1 << 5,
 }
 
+onready var SAVE_KEY: String = "party_member_" + name
+onready var anim = $Anim
 onready var battler = $Battler
+onready var collision = $CollisionShape2D
 
 export (Id) var id: int = Id.ARDEN
 export var display_name: String
@@ -26,18 +28,26 @@ export var unlocked = false
 export var experience: int setget _set_experience
 export var icon: Texture
 
-onready var SAVE_KEY: String = "party_member_" + name
-
 var equipped_weapon: Weapon setget set_weapon
 var equipped_helmet: Helmet setget set_helmet
 var equipped_armor: Armor setget set_armor
 var equipped_accessory: Accessory setget set_accessory
 
+var velocity: Vector2 = Vector2.ZERO
+
 func _ready():
 	assert(growth)
-	battler.is_party_member = true
+	self.set_physics_process(false)
 	battler.stats = growth.create_stats(experience)
 
+func _physics_process(delta):
+	self.move_and_collide(velocity * delta)
+
+func get_level() -> int:
+	if battler == null:
+		return -1
+	
+	return battler.stats.level
 
 func update_stats():
 	if battler == null:
@@ -136,10 +146,52 @@ func set_accessory(accessory: Accessory):
 	
 	equipped_accessory = accessory
 
-func get_anim():
-	return self.battler.anim
-
 func instance_ui_control():
 	var control = PartyMemberSummary.instance()
 	control.party_member = self
 	return control
+
+# Methods for battles	
+	
+func get_allies(actors: Array):
+	var allies = []
+	var script = get_script()
+	for actor in actors:
+		if actor is script:
+			allies.append(actor)
+	return allies
+	
+func get_enemies(actors: Array):
+	var enemies = []
+	var script = get_script()
+	for actor in actors:
+		if not actor is script:
+			enemies.append(actor)
+	return enemies
+	
+func take_hit(hit: Hit):
+	self.battler.take_damage(hit)
+
+# Animatable interface
+
+func play_anim(anim_name: String):
+	self.anim.play_anim(anim_name)
+	
+func set_orientation(orientation: Vector2):
+	self.anim.set_orientation(orientation)
+	
+func move_to(target: Vector2, speed: float):
+	assert(speed > 0)
+	var was_processing_physics = self.is_physics_processing()
+	var time = (self.global_position - target).length()/speed
+	self.velocity = (target - self.global_position).normalized() * speed
+	self.set_physics_process(true)
+	yield(get_tree().create_timer(time), "timeout")
+	self.velocity = Vector2.ZERO
+	self.set_physics_process(was_processing_physics)
+
+func disable_collisions():
+	self.collision.disabled = true
+
+func enable_collisions():	
+	self.collision.disabled = false

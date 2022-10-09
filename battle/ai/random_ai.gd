@@ -1,28 +1,38 @@
-extends BattlerAI
+extends "./non_player_ai.gd"
 
 class_name RandomAI
 
 
-func choose_action(actor: Battler) -> BattleAction:
-	# Select an action to perform in combat
-	# Can be based on state of the actor
-	return actor.get_actions()[0]
+func choose_action(actor, actors: Array):
+	return actor.battler.get_actions()[0]
 
-
-func choose_targets(actor: Battler, action: BattleAction, battlers: Array) -> Array:
+func choose_action_args(action_signature: Array, actor, actors) -> Dictionary:
+	var args = {}
+	
+	for action_arg in action_signature:
+		var arg_name = action_arg["name"]
+		
+		match action_arg["type"]:
+			BattleAction.ActionArgument.TARGET:
+				args[arg_name] = self.choose_targets(action_arg["targeting_type"], actor, actors)
+	
+	return args
+	
+func choose_targets(targeting_type, actor, actors):
 	# Chooses a target to perform an action on
-	match action.targeting_type:
-		BattleAction.TargetingType.ALL_ALLIES:
-			return self.get_allies(actor, battlers)
-		BattleAction.TargetingType.ONE_ALLY:
-			var allies = self.get_allies(actor, battlers)
+	match targeting_type:
+		BattleAction.TargetType.ALL_ALLIES:
+			return actor.get_allies(actors)
+		BattleAction.TargetType.ONE_ALLY:
+			var allies = actor.get_allies(actors)
 			return [allies[randi() % allies.size()]]
-		BattleAction.TargetingType.ALL_ENEMIES:
-			return self.get_enemies(actor, battlers)
-		BattleAction.TargetingType.ONE_ENEMY:
-			var enemies = self.get_enemies(actor, battlers)
+		BattleAction.TargetType.ALL_ENEMIES:
+			return actor.get_enemies(actors)
+		BattleAction.TargetType.ONE_ENEMY:
+			var enemies = actor.get_enemies(actors)
 			return [enemies[randi() % enemies.size()]]
-		BattleAction.TargetingType.SELF:
+		BattleAction.TargetType.SELF:
 			return [actor]
 		_:
 			return []
+

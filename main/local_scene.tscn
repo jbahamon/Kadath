@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://ui/01_atoms/panel/panel.tres" type="StyleBox" id=1]
 [ext_resource path="res://party/party.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://utils/cutscene_manager/cutscene_manager.tscn" type="PackedScene" id=10]
 [ext_resource path="res://ui/01_atoms/tab/normal.tres" type="StyleBox" id=11]
 [ext_resource path="res://battle/battle.tscn" type="PackedScene" id=12]
+[ext_resource path="res://battle/actions/attack.tscn" type="PackedScene" id=13]
 
 [sub_resource type="CanvasItemMaterial" id=4]
 
@@ -58,14 +59,17 @@ script = ExtResource( 7 )
 
 [node name="Party" parent="World" instance=ExtResource( 2 )]
 
-[node name="Anim" parent="World/Party/Arden" index="1"]
+[node name="Attack" parent="World/Party/Arden/Battler/Actions" index="0" instance=ExtResource( 13 )]
+
+[node name="Anim" parent="World/Party/Arden" index="2"]
 position = Vector2( 0, 0 )
 
 [node name="Arden2" parent="World/Party" index="1"]
 visible = false
 
+[node name="Attack" parent="World/Party/Arden2/Battler/Actions" index="0" instance=ExtResource( 13 )]
+
 [node name="PlayerProxy" parent="World" groups=["save"] instance=ExtResource( 9 )]
-anim_path = NodePath("../Party/Arden/Anim")
 
 [node name="RemoteTransform2D" parent="World/PlayerProxy" index="2"]
 remote_path = NodePath("../../Party")
@@ -155,6 +159,7 @@ anims/fade_from_black = SubResource( 1 )
 anims/fade_to_black = SubResource( 2 )
 
 [node name="CutsceneManager" parent="." instance=ExtResource( 10 )]
+visible = false
 camera_path = NodePath("../World/PlayerProxy/Camera2D")
 local_scene_path = NodePath("..")
 
@@ -162,6 +167,7 @@ local_scene_path = NodePath("..")
 [connection signal="popup_hide" from="MenuLayer/MenuPopup" to="." method="_on_menu_popup_hide"]
 [connection signal="about_to_show" from="MenuLayer/SavesPopup" to="." method="_on_menu_about_to_show"]
 [connection signal="popup_hide" from="MenuLayer/SavesPopup" to="." method="_on_menu_popup_hide"]
+[connection signal="battle_ended" from="Battle" to="." method="end_battle"]
 
 [editable path="World/Party"]
 [editable path="World/Party/Arden"]

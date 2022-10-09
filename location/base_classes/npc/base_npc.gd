@@ -20,6 +20,7 @@ export (NodePath) var custom_movement = null
 export var facing = Vector2.DOWN
 
 onready var sprite: Sprite = $Sprite
+onready var battler: Battler = $Battler
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var animation_tree: AnimationTree = $AnimationTree
 onready var animation_state = animation_tree.get("parameters/playback")
@@ -45,33 +46,35 @@ func _ready():
 			self.add_child(movement_node)
 
 	update_facing()
-
-func stop_movement():
-	self.movement_node.set_process(false)
-
-func resume_movement():
-	self.movement_node.set_process(true)
 	
 func _physics_process(delta):
 	self.move_and_collide(velocity * delta)
 
-func rotate_facing(angle):
-	facing = facing.rotated(angle)
-	update_facing()
-	
-	
 func update_facing():
 	animation_tree["parameters/idle/blend_position"] = facing
 	animation_tree["parameters/walk/blend_position"] = facing
 
-
-func play_anim(animation_name):
-	animation_state.travel(animation_name)
+func get_local_scene():
+	return get_node("../../../")
+	
+func on_proxy_enter():
+	self.set_physics_process(false)
+	self.stop_auto_movement()
+	self.collision.disabled = true
+	self.interactable_collision.disabled = true
+	
+func on_proxy_leave():
+	self.set_physics_process(true)
+	self.start_auto_movement()
+	self.collision.disabled = false
+	self.interactable_collision.disabled = false
 
 
 func on_player_interaction(player_proxy: PlayerProxy):
-	self.look_at(player_proxy.position)
-	self.movement_node.set_process(false)
+	self.set_orientation(
+		self.position.direction_to(player_proxy.position).normalized()
+	)
+	self.stop_auto_movement()
 	self.interactable_collision.set_disabled(false)
 	
 	var local_scene: LocalScene = get_local_scene()
@@ -84,49 +87,60 @@ func on_player_interaction(player_proxy: PlayerProxy):
 	
 	local_scene.enable_inputs()
 	self.interactable_collision.set_disabled(false)
-	self.movement_node.set_process(true)
+	self.start_auto_movement()
 	
+	
+func die():
+	self.queue_free()
+
+func stop_auto_movement():
+	self.movement_node.set_process(false)
+	
+func start_auto_movement():
+	self.movement_node.set_process(true)
+
+# Battle methods
+	
+func get_allies(actors: Array):
+	var allies = []
+	for actor in actors:
+		if not actor is PartyMember:
+			allies.append(actor)
+	return allies
+	
+func get_enemies(actors: Array):
+	var enemies = []
+	for actor in actors:
+		if actor is PartyMember:
+			enemies.append(actor)
+	return enemies
+
+func take_hit(hit: Hit):
+	self.battler.take_damage(hit)
+
+# Animatable interface
+
+func play_anim(anim_name: String):
+	animation_state.travel(anim_name)
+
 func set_orientation(orientation: Vector2):
 	self.facing = orientation
 	update_facing()
 
-func look_at(point: Vector2):
-	facing = self.position.direction_to(point)
-
-	if abs(facing.x) > abs(facing.y):
-		facing.y = 0
-	else:
-		facing.x = 0
-	facing = facing.normalized()
-	
-	update_facing()
-
-
-func walk_to(target: Vector2, speed = WALK_SPEED):
-	yield(self.movement_node.walk_to(target, speed), "completed")
-	
-func get_local_scene():
-	return get_node("../../../")
-	
-func get_anim():
-	return self
-	
-func on_proxy_enter():
-	self.set_physics_process(false)
+func move_to(target: Vector2, speed = WALK_SPEED):
+	assert(speed > 0)
+	var was_processing_physics = self.is_physics_processing()
+	var time = (self.global_position - target).length()/speed
 	self.movement_node.set_process(false)
-	self.collision.disabled = true
-	self.interactable_collision.disabled = true
-	
-func on_proxy_leave():
 	self.set_physics_process(true)
+	self.velocity = (target - self.global_position).normalized() * speed
+	yield(get_tree().create_timer(time), "timeout")
+	self.velocity = Vector2.ZERO
 	self.movement_node.set_process(true)
-	self.collision.disabled = false
-	self.interactable_collision.disabled = false
-
+	self.set_physics_process(was_processing_physics)
+	
 func disable_collisions():
-	self.set_physics_process(false)
 	self.collision.disabled = true
 	
 func enable_collisions():
-	self.set_physics_process(true)
 	self.collision.disabled = false

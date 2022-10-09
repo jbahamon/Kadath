@@ -8,6 +8,8 @@ onready var level = $MarginContainer/Info/Level
 onready var hp = $MarginContainer/Info/HP
 onready var ep = $MarginContainer/Info/EP
 
+var disabled = false
+
 var party_member
 
 func _ready():

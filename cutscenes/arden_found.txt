@@ -9,7 +9,7 @@ START_DIALOG cutscenes ID 5 SOURCE Zal
 SET_OVERLAY MIX TO (0,0,0,0)
 
 SIMULTANEOUS
-	MOVE_CAMERA TO (0, -800) IN 2
+	MOVE_CAMERA TO (0, -80) IN 2
 	FADE_OVERLAY MIX TO (0,0,0,1) IN 2
 END
 
@@ -20,10 +20,10 @@ ASSIGN_PROXY PARTY
 ASSIGN_CAMERA PROXY
 ENABLE_COLLISIONS PROXY
 
-CALL Hadi stop_movement
-CALL Zal stop_movement
-CALL Biggs stop_movement
-CALL Wedge stop_movement
+CALL Hadi stop_auto_movement
+CALL Zal stop_auto_movement
+CALL Biggs stop_auto_movement
+CALL Wedge stop_auto_movement
 
 SHOW PARTY
 

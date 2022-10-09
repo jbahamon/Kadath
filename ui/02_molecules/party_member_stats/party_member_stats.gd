@@ -1,7 +1,8 @@
 extends PanelContainer
 
 signal item_requested(cls, party_member)
-signal focus_released
+signal focus_released(party_member)
+
 onready var weapon_name: Button = $Panel/MarginContainer/Equipment/WeaponName
 onready var weapon_stats: Label = $Panel/MarginContainer/Equipment/WeaponStats
 onready var helmet_name: Button = $Panel/MarginContainer/Equipment/HelmetName
@@ -23,7 +24,8 @@ var selected_property: String = ""
 var selected_button: Button = null
 
 func _unhandled_input(event):
-	if event.is_action_pressed("ui_cancel") and self.is_focus_on_buttons():
+	if event.is_action_pressed("ui_cancel") and self.has_focus():
+		self.set_process_unhandled_input(false)
 		emit_signal("focus_released")
 		get_tree().set_input_as_handled()
 		
@@ -33,9 +35,11 @@ func on_party_member_focused(party_member):
 		update_ui_info()
 
 func on_party_member_selected(party_member):
-	on_party_member_focused(party_member)
-	weapon_name.grab_focus()
-	weapon_name.grab_click_focus()
+	if party_member != null:
+		on_party_member_focused(party_member)
+		self.set_process_unhandled_input(true)
+		weapon_name.grab_focus()
+		weapon_name.grab_click_focus()
 	
 func update_ui_info():
 	set_text(weapon_name, party_member.equipped_weapon, "name", "--")
@@ -54,7 +58,7 @@ func update_ui_info():
 	speed_value.text = str(battler.stats.speed)
 	luck_value.text = str(battler.stats.luck)
 
-func is_focus_on_buttons() -> bool:
+func has_focus() -> bool:
 	return (weapon_name.has_focus() or helmet_name.has_focus() or 
 	armor_name.has_focus() or accessory_name.has_focus())
 	
@@ -99,6 +103,7 @@ func on_accessory_clicked():
 	)
 	selected_property = "equipped_accessory"
 	selected_button = accessory_name
+	
 
 func on_item_selected(item: Equipment):
 	if item != null:
@@ -109,3 +114,7 @@ func on_item_selected(item: Equipment):
 	selected_button.grab_click_focus()
 	selected_button.grab_focus()
 
+func on_item_cancel():
+	selected_button.pressed = false
+	selected_button.grab_click_focus()
+	selected_button.grab_focus()

@@ -1,14 +1,21 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://battle/battler/battler.gd" type="Script" id=1]
 [ext_resource path="res://battle/ai/battler_ai.gd" type="Script" id=2]
+[ext_resource path="res://battle/battle_rewards.gd" type="Script" id=3]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 3 )
+item_amounts = {
+}
+experience = 100
+money = 123
 
 [node name="Battler" type="Node"]
 script = ExtResource( 1 )
+rewards = SubResource( 1 )
 
 [node name="Skills" type="Node" parent="."]
-
-[node name="Drops" type="Node" parent="."]
 
 [node name="AI" type="Node" parent="."]
 script = ExtResource( 2 )

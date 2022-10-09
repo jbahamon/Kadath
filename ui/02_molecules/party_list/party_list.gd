@@ -26,7 +26,7 @@ func initialize(party_members: Array):
 	
 	for party_member in party_members:
 		var item = PartyMemberSummary.instance()
-		item.initialize(party_member)
+		item.party_member = party_member
 		vbox_container.add_child(item)
 		item.connect("party_member_focused", self, "on_party_member_focused")
 		item.connect("party_member_selected", self, "on_party_member_selected")

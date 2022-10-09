@@ -6,7 +6,6 @@ var talk_speed = 20.0
 var current_location: Location = null
 var current_room: LocationRoom = null
 
-
 onready var camera = $World/PlayerProxy/Camera2D
 onready var party = $World/Party
 onready var player_proxy: PlayerProxy = $World/PlayerProxy
@@ -24,6 +23,8 @@ onready var popup_layer = $PopupLayer
 var display_name = null
 var block_input = false
 
+var elements_hidden_for_battle = []
+
 func _ready() -> void:
 	player_proxy.set_party(party)
 	
@@ -40,17 +41,22 @@ func _ready() -> void:
 		)
 	
 func get_room_object(object_name: String):
-	if current_room != null:
-		return current_room.get_node("./" + object_name)
-	else:
+	if current_room == null:
 		return null
+		
+	var object = current_room.get_node("./" + object_name)
+	
+	if object != null:
+		return object
+		
+	object = party.get_node("./" + object_name)
+	return object
 
 func get_overlay(overlay: String):
 	match overlay:
 		"MIX": return $OverlayLayer/Mix
 		"ADD": return $OverlayLayer/Add
 		_: return null
-	
 
 func open_dialog(dialog_name: String, node_id: int, source) -> void:
 	if not story_reader.has_record_name(dialog_name):
@@ -96,7 +102,10 @@ func show_popup(popup: Popup):
 	popup.popup()
 
 func play_cutscene(cutscene_name: String):
-	yield(self.cutscene_manager.play_cutscene(cutscene_name), "completed")
+	yield(self.cutscene_manager.play_cutscene_from_file(cutscene_name), "completed")
+	
+func play_custom_cutscene(cutscene_instructions: Array):
+	yield(self.cutscene_manager.play_cutscene_from_array(cutscene_instructions), "completed")
 	
 func disable_inputs():
 	self.set_process_unhandled_input(false)
@@ -122,7 +131,6 @@ func _on_menu_popup_hide() -> void:
 	world.set_process_unhandled_input(true)
 	menu.set_process_unhandled_input(false)
 
-
 func _on_menu_about_to_show() -> void:
 	player_proxy.set_process_unhandled_input(false)
 	world.set_physics_process(false)
@@ -130,7 +138,6 @@ func _on_menu_about_to_show() -> void:
 	world.set_process_unhandled_input(false)
 	menu.initialize(party)
 	menu.set_process_unhandled_input(true)
-
 
 func save(save_data: SaveData) -> void:
 	save_data.data["location"] = self.current_location.location_id
@@ -163,7 +170,10 @@ func update_whereabouts(
 		old_room != null and room_id == old_room.room_id):
 		return
 	
-	self.disable_inputs()
+	var were_inputs_disabled = not self.is_processing_unhandled_input()
+	
+	if not were_inputs_disabled:
+		self.disable_inputs()
 	
 	if fade and old_location != null and old_room != null:
 		cutscene.play("fade_to_black")
@@ -189,11 +199,11 @@ func update_whereabouts(
 		cutscene.play("fade_from_black")
 		yield(cutscene, "animation_finished")
 	
-	self.enable_inputs()
+	if not were_inputs_disabled:
+		self.enable_inputs()
 	
 	if room_moved:
 		current_room.on_enter()
-	
 	
 func move_to_room(
 	room_id: String,
@@ -201,7 +211,7 @@ func move_to_room(
 	target_orientation: Vector2
 ) -> bool:
 	var room = current_location.get_room(room_id)
-	var proxy_target = player_proxy.get_target()
+	var proxy_target = player_proxy.target
 	var proxy_name = proxy_target.name if proxy_target != null else null
 	
 	if current_room != null and current_room == room:
@@ -242,34 +252,51 @@ func move_to_room(
 	
 	return true
 
-func start_battle(battlers):
-	self.disable_inputs()
-	# 
-	# make dict with battler names as they're unique
-	var battler_names = {}
-	for battler in battlers:
-		battler_names[battler.name] = true
+func start_battle(non_party_actors: Array, enemy_position: Vector2):
+	assert(enemy_position != null)
 	
-	var elements_to_hide = []
+	self.disable_inputs()
+	
+	var camera_parent = self.camera.get_parent()
+	if camera_parent != null:
+		camera_parent.remove_child(camera)
+	
+	self.world.add_child(camera)
+	
+	var positioning_vars = {
+		"current_position": self.camera.position
+	}
+	
+	var actor_names = {}
+	for actor in non_party_actors:
+		actor_names[actor.name] = true
+	
+	self.elements_hidden_for_battle = []
 	
 	for child in world.get_children():
 		if (child.is_in_group("npc") and 
 			child.visible and
-			not battler_names.get(child.name, false)):
-			elements_to_hide.append(child)
+			not actor_names.get(child.name, false)):
+			self.elements_hidden_for_battle.append(child)
 			child.visible = false
 
-	$Battle.start(party.get_active_members(), battlers)
+	var proc = self.player_proxy.is_physics_processing()
+	$Battle.start(current_room, party, non_party_actors, positioning_vars)
 	
+func end_battle(player_won: bool):
 	
-func end_battle():
+	# Return camera to player proxy
+	var camera_parent = self.camera.get_parent()
+	if camera_parent != null:
+		camera_parent.remove_child(camera)
+	
+	self.player_proxy.add_child(camera)
+	
+	# move to game over scene if player lost
 	for element in self.elements_hidden_for_battle:
 		element.visible = true
+	self.elements_hidden_for_battle = []
+	self.enable_inputs()
 
-func get_party_battlers() -> Array:
-	var battlers = []
-	
-	for child in party.get_children():
-		battlers.append(child.battler)
-		
-	return battlers
+
+

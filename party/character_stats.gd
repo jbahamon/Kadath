@@ -51,5 +51,5 @@ func set_max_energy(value: int):
 	max_energy = max(0, value)
 
 func _is_alive() -> bool:
-	return health >= 0
+	return health > 0
 
