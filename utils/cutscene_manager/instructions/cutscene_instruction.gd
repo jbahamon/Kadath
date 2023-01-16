@@ -6,6 +6,7 @@ enum Type {
 	SET_CAMERA,
 	MOVE_CAMERA,
 	ASSIGN_CAMERA,
+	SHAKE,
 	
 	HIDE,
 	SHOW,

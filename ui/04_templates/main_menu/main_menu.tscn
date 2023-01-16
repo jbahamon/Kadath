@@ -39,25 +39,25 @@ __meta__ = {
 popup_path = NodePath("../PopupPanel")
 
 [node name="Title" type="Label" parent="Main Menu"]
-margin_top = 31.0
-margin_right = 459.0
-margin_bottom = 100.0
+margin_top = 58.0
+margin_right = 491.0
+margin_bottom = 91.0
 custom_fonts/font = SubResource( 1 )
 text = "The Dream-Quest of Unknown Kadath"
 align = 1
 autowrap = true
 
 [node name="VBoxContainer" type="HBoxContainer" parent="Main Menu"]
-margin_top = 110.0
-margin_right = 459.0
-margin_bottom = 222.0
+margin_top = 101.0
+margin_right = 491.0
+margin_bottom = 213.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
 [node name="Menu Options" type="VBoxContainer" parent="Main Menu/VBoxContainer"]
-margin_left = 191.0
-margin_right = 267.0
+margin_left = 207.0
+margin_right = 283.0
 margin_bottom = 112.0
 alignment = 1
 
@@ -116,8 +116,8 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 13.0
 margin_top = 13.0
-margin_right = 467.0
-margin_bottom = 257.0
+margin_right = 499.0
+margin_bottom = 275.0
 
 [connection signal="pressed" from="Main Menu/VBoxContainer/Menu Options/Continue Game" to="Main Menu" method="_on_Continue_Game_pressed"]
 [connection signal="pressed" from="Main Menu/VBoxContainer/Menu Options/New Game" to="Main Menu" method="_on_New_Game_pressed"]

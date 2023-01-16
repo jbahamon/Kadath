@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://ui/01_atoms/panel/panel.tres" type="StyleBox" id=1]
 [ext_resource path="res://party/party.tscn" type="PackedScene" id=2]
@@ -13,6 +13,8 @@
 [ext_resource path="res://ui/01_atoms/tab/normal.tres" type="StyleBox" id=11]
 [ext_resource path="res://battle/battle.tscn" type="PackedScene" id=12]
 [ext_resource path="res://battle/actions/attack.tscn" type="PackedScene" id=13]
+[ext_resource path="res://main/camera.gd" type="Script" id=14]
+[ext_resource path="res://main/screen_shake.tscn" type="PackedScene" id=15]
 
 [sub_resource type="CanvasItemMaterial" id=4]
 
@@ -53,7 +55,18 @@ tracks/0/keys = {
 
 [node name="LocalScene" type="Node2D" groups=["save"]]
 modulate = Color( 0.8, 0.8, 0.8, 1 )
+position = Vector2( 0, 1 )
 script = ExtResource( 7 )
+
+[node name="BGLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="CameraBG" type="ColorRect" parent="BGLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="World" type="YSort" parent="."]
 
@@ -82,6 +95,9 @@ drag_margin_left = 0.0
 drag_margin_top = 0.0
 drag_margin_right = 0.0
 drag_margin_bottom = 0.0
+script = ExtResource( 14 )
+
+[node name="ScreenShake" parent="World/PlayerProxy/Camera2D" instance=ExtResource( 15 )]
 
 [node name="OverlayLayer" type="CanvasLayer" parent="."]
 

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://location/lib/scripts/location/location.gd" type="Script" id=1]
+[ext_resource path="res://location/002_cavern_of_flame/story/baked.tres" type="Resource" id=2]
+
+[resource]
+script = ExtResource( 1 )
+location_id = "cavern_of_flame"
+story = ExtResource( 2 )
+room_paths = [ "res://location/000_gateway_desert/rooms/desert.tscn" ]

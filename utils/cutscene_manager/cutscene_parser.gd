@@ -33,11 +33,14 @@ func _init():
 	patterns["FADE"] = RegEx.new()
 	patterns["FADE"].compile("(?<Overlay>.+) TO (?<Color>.+) IN (?<Time>.+)$")
 	
+	patterns["MOVE"] = RegEx.new()
+	patterns["MOVE"].compile("^(?<Character>.+) TO (?<Position>.+) AT (?<Speed>.+)$")
+	
 	patterns["MOVE_CAMERA_TO"] = RegEx.new()
 	patterns["MOVE_CAMERA_TO"].compile("TO (?<Position>.+) IN (?<Time>.+)$")
 	
 	patterns["MOVE_CAMERA_BY"] = RegEx.new()
-	patterns["MOVE_CAMERA_BY"].compile("(?<Position>.+) IN (?<Time>.+)$")
+	patterns["MOVE_CAMERA_BY"].compile("(?<Displacement>.+) IN (?<Time>.+)$")
 	
 	patterns["SET_POSITION"] = RegEx.new()
 	patterns["SET_POSITION"].compile("^(?<Character>.+) TO (?<Position>.+)$")
@@ -63,8 +66,11 @@ func _init():
 	patterns["COLOR"] = RegEx.new()
 	patterns["COLOR"].compile("\\([ ]*(?<R>[^ ,)]+)[ ]*,[ ]*(?<G>[^ ,)]+)[ ]*,[ ]*(?<B>[^ ,)]+)[ ]*,[ ]*(?<A>[^ ,)]+)[ ]*\\)")
 	
-	patterns["POSITION"] = RegEx.new()
-	patterns["POSITION"].compile("\\([ ]*(?<X>[^ ,)]+)[ ]*,[ ]*(?<Y>[^ ,)]+)[ ]*\\)")
+	patterns["VECTOR2"] = RegEx.new()
+	patterns["VECTOR2"].compile("\\([ ]*(?<X>[^ ,)]+)[ ]*,[ ]*(?<Y>[^ ,)]+)[ ]*\\)")
+
+	patterns["SHAKE"] = RegEx.new()
+	patterns["SHAKE"].compile("^FOR (?<Duration>.+) FREQ (?<Frequency>.+) STR (?<Amplitude>.+) PRIORITY (?<Priority>.+)$")
 
 
 func parse_cutscene_from_file(cutscene_name: String): 
@@ -102,7 +108,7 @@ func parse_line(stack: Array, line: String):
 
 	if not tokens.empty():
 		var instruction_name = tokens[0]
-		var args = tokens[1].strip_edges() if tokens.size() > 1 else ""
+		var args = tokens[1] if tokens.size() > 1 else ""
 
 		self.parse_instruction(stack, instruction_name, args)
 			
@@ -113,90 +119,102 @@ func parse_instruction(stack: Array, instruction_name: String, args: String):
 	
 	match(instruction_type):
 		CutsceneInstruction.Type.SET_ROOM:
-			instruction = SetRoom.new(args.strip_edges())
+			instruction = SetRoom.new(self.parse_string(args))
+
 		CutsceneInstruction.Type.SET_OVERLAY:
 			var set_match: RegExMatch = self.patterns["SET_OVERLAY"].search(args)
 			instruction = SetOverlay.new(
-				set_match.get_string("Overlay").strip_edges(),
+				self.parse_string(set_match.get_string("Overlay")),
 				self.parse_color(set_match.get_string("Color"))
 			)
 		CutsceneInstruction.Type.FADE_OVERLAY:
 			var fade_match: RegExMatch = self.patterns["FADE"].search(args)
 			instruction = FadeOverlay.new(
-				fade_match.get_string("Overlay").strip_edges(),
+				self.parse_string(fade_match.get_string("Overlay")),
 				self.parse_color(fade_match.get_string("Color")),
-				float(fade_match.get_string("Time").strip_edges())
+				self.parse_float(fade_match.get_string("Time"))
 			)
 		CutsceneInstruction.Type.SET_CAMERA:
 			instruction = SetCamera.new(
-				self.parse_position(args)
+				self.parse_vector2(args)
 			)
 		CutsceneInstruction.Type.MOVE_CAMERA:
 			var mode: String
-			var position
 			var move_match: RegExMatch = self.patterns["MOVE_CAMERA_TO"].search(args)
+			var movement = move_match.get_string("Position")
+			
 			if move_match != null:
-				var position_string = move_match.get_string("Position")
-				position = self.parse_position(position_string)
-				
-				if position == null:
+				if movement == null:
 					mode = "target_entity"
-					position = position_string
 				else:
 					mode = "target_position"
-			
+					movement = self.parse_vector2(movement)
 			else:
 				mode = "displacement"
 				move_match = self.patterns["MOVE_CAMERA_BY"].search(args)
-				var position_string = move_match.get_string("Position")
-				position = self.parse_position(position_string)
+				movement = self.parse_vector2(move_match.get_string("Displacement"))
 			
 			instruction = MoveCamera.new(
-				position,
+				movement,
 				mode,
-				float(move_match.get_string("Time").strip_edges())
+				self.parse_float(move_match.get_string("Time"))
 			)
 				
 		CutsceneInstruction.Type.ASSIGN_CAMERA:
-			instruction = AssignCamera.new(args.strip_edges())
+			instruction = AssignCamera.new(self.parse_string(args))
+			
 		CutsceneInstruction.Type.LOOK:
 			var look_match: RegExMatch = self.patterns["LOOK"].search(args)
 			instruction = Call.new(
-				look_match.get_string("Character").strip_edges(),
+				self.parse_string(look_match.get_string("Character")),
 				"set_orientation",
 				[self.parse_direction(look_match.get_string("Direction"))]
 			)
 		CutsceneInstruction.Type.LOOK_AT:
 			var look_at_match: RegExMatch = self.patterns["LOOK_AT"].search(args)
 			
-			var target = self.parse_position(look_at_match.get_string("Target").strip_edges())
+			var target = self.parse_vector2(look_at_match.get_string("Target"))
 			
 			if target == null:
-				look_at_match.get_string("Target").strip_edges()
+				target = self.parse_string(look_at_match.get_string("Target"))
 			
 			instruction = LookAt.new(
-				look_at_match.get_string("Character").strip_edges(),
+				self.parse_string(look_at_match.get_string("Character")),
 				target
 			)
+		CutsceneInstruction.Type.SHAKE:
+			var shake_match: RegExMatch = self.patterns["SHAKE"].search(args)
+			instruction = Call.new(
+				"CAMERA",
+				"shake",
+				[
+					self.parse_float(shake_match.get_string("Duration")),
+					self.parse_float(shake_match.get_string("Frequency")),
+					self.parse_vector2(shake_match.get_string("Amplitude")),
+					self.parse_int(shake_match.get_string("Priority")),
+				]
+			)
+				
+			
 		CutsceneInstruction.Type.SET_POSITION:
 			var set_position_match: RegExMatch = self.patterns["SET_POSITION"].search(args)
 			instruction = Call.new(
-				set_position_match.get_string("Character").strip_edges(),
+				self.parse_string(set_position_match.get_string("Character")),
 				"set_position",
-				[self.parse_position(set_position_match.get_string("Position"))]
+				[self.parse_vector2(set_position_match.get_string("Position"))]
 			)
 			
 		CutsceneInstruction.Type.DISABLE_COLLISIONS:
-			instruction = DisableCollisions.new(args.strip_edges())
+			instruction = DisableCollisions.new(self.parse_string(args))
 			
 		CutsceneInstruction.Type.ENABLE_COLLISIONS:
-			instruction = EnableCollisions.new(args.strip_edges())
+			instruction = EnableCollisions.new(self.parse_string(args))
 			
 		CutsceneInstruction.Type.WALK:
 			var walk_match: RegExMatch = self.patterns["WALK"].search(args)
-			var entity = walk_match.get_string("Character").strip_edges()
-			var target = self.parse_position(walk_match.get_string("Position"))
-			var speed = float(walk_match.get_string("Speed").strip_edges())
+			var entity = self.parse_string(walk_match.get_string("Character"))
+			var target = self.parse_vector2(walk_match.get_string("Position"))
+			var speed = self.parse_float(walk_match.get_string("Speed"))
 			instruction = Sequential.new()
 			instruction.add_instruction(LookAt.new(entity, target))
 			instruction.add_instruction(Call.new(entity, "play_anim", ["walk"]))
@@ -206,45 +224,45 @@ func parse_instruction(stack: Array, instruction_name: String, args: String):
 		CutsceneInstruction.Type.MOVE:
 			var walk_match: RegExMatch = self.patterns["MOVE"].search(args)
 			instruction = Move.new(
-				walk_match.get_string("Character").strip_edges(),
-				self.parse_position(walk_match.get_string("Position")),
-				float(walk_match.get_string("Speed").strip_edges())
+				self.parse_string(walk_match.get_string("Character")),
+				self.parse_vector2(walk_match.get_string("Position")),
+				self.parse_float(walk_match.get_string("Speed"))
 			)
 		CutsceneInstruction.Type.PLAY_ANIM:
 			var anim_match: RegExMatch = self.patterns["PLAY_ANIM"].search(args)
 			instruction = Call.new(
-				anim_match.get_string("Character").strip_edges(),
+				self.parse_string(anim_match.get_string("Character")),
 				"play_anim",
-				[anim_match.get_string("Anim").strip_edges()]
+				[self.parse_string(anim_match.get_string("Anim"))]
 			)
 		CutsceneInstruction.Type.CALL:
 			var call_match: RegExMatch = self.patterns["CALL"].search(args)
 			instruction = Call.new(
-				call_match.get_string("Entity").strip_edges(),
-				call_match.get_string("FunctionName").strip_edges(),
+				self.parse_string(call_match.get_string("Entity")),
+				self.parse_string(call_match.get_string("FunctionName")),
 				call_match.get_string("Args").strip_edges().split(" ", false)
 			)
 		CutsceneInstruction.Type.START_DIALOG:
 			var dialog_match: RegExMatch = self.patterns["START_DIALOG"].search(args)
 			instruction = StartDialog.new(
-				dialog_match.get_string("DialogId").strip_edges(),
-				float(dialog_match.get_string("NodeId").strip_edges()),
-				dialog_match.get_string("Source").strip_edges()
+				self.parse_string(dialog_match.get_string("DialogId")),
+				self.parse_int(dialog_match.get_string("NodeId")),
+				self.parse_string(dialog_match.get_string("Source"))
 			)
 		CutsceneInstruction.Type.HIDE:
 			instruction = Call.new(
-				args.strip_edges(),
+				self.parse_string(args),
 				"set_visible",
 				[false]
 			)
 		CutsceneInstruction.Type.SHOW:
 			instruction = Call.new(
-				args.strip_edges(),
+				self.parse_string(args),
 				"set_visible",
 				[true]
 			)
 		CutsceneInstruction.Type.ASSIGN_PROXY:
-			instruction = AssignProxy.new(args.strip_edges())
+			instruction = AssignProxy.new(self.parse_string(args))
 		CutsceneInstruction.Type.SIMULTANEOUS:
 			stack.push_back(Simultaneous.new())
 		CutsceneInstruction.Type.SEQUENTIAL:
@@ -253,7 +271,7 @@ func parse_instruction(stack: Array, instruction_name: String, args: String):
 			assert(len(stack) > 0, "Too many END instructions")
 			instruction = stack.pop_back()
 		CutsceneInstruction.Type.WAIT:
-			instruction = Wait.new(float(args.strip_edges()))
+			instruction = Wait.new(self.parse_float(args))
 			
 		_:
 			assert(false)
@@ -261,6 +279,15 @@ func parse_instruction(stack: Array, instruction_name: String, args: String):
 			
 	if instruction != null:
 		stack.back().add_instruction(instruction)
+
+func parse_string(raw_string: String) -> String:
+	return raw_string.strip_edges()
+
+func parse_int(raw_string: String) -> int:
+	return int(raw_string.strip_edges())
+	
+func parse_float(raw_string: String) -> float:
+	return float(raw_string.strip_edges())
 
 func parse_color(color_string: String) -> Color:
 	var color_match: RegExMatch = self.patterns["COLOR"].search(color_string)
@@ -275,8 +302,8 @@ func parse_color(color_string: String) -> Color:
 		a if a <= 1 else a/256.0
 	)
 
-func parse_position(position_string: String):
-	var position_match: RegExMatch = self.patterns["POSITION"].search(position_string)
+func parse_vector2(position_string: String):
+	var position_match: RegExMatch = self.patterns["VECTOR2"].search(position_string)
 	
 	if position_match != null:
 		return Vector2(

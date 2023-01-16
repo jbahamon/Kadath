@@ -15,7 +15,7 @@ func execute(cutscene_manager):
 			self.node_id,
 			cutscene_manager.get_entity(self.branch_selector)
 				if self.branch_selector != null 
-				else cutscene_manager.local_scene
+				else null
 		)
 	if ret is GDScriptFunctionState:
 		yield(ret, "completed")

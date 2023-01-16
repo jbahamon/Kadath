@@ -35,7 +35,9 @@ func play_cutscene(cutscene_instruction):
 	
 	if not were_inputs_disabled:
 		self.get_local_scene().disable_inputs()
+		
 	cutscene_instruction.run(self)
+	
 	if !cutscene_instruction.finished:
 		yield(cutscene_instruction, "execution_finished")
 		
@@ -50,6 +52,8 @@ func get_party():
 
 func get_entity(entity_name: String):
 	match entity_name:
+		"CAMERA":
+			return self.get_local_scene().camera
 		"PROXY":
 			return self.get_proxy()
 		"ROOM":

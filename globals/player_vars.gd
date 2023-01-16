@@ -1,8 +1,8 @@
 extends Node
 
 var loaded_slot = -1
-var starting_location_name = "000_gateway_desert"
-var starting_room_name = "camp_battle"
+var starting_location_name = "000_prologue_kadath"
+var starting_room_name = "right"
 var strings: Dictionary = {}
 var current_flags: Dictionary = {}
 

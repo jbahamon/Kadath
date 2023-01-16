@@ -22,7 +22,7 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "BaseNPC",
 "language": "GDScript",
-"path": "res://location/base_classes/npc/base_npc.gd"
+"path": "res://location/lib/scripts/npc/base_npc.gd"
 }, {
 "base": "Node",
 "class": "BattleAction",
@@ -72,7 +72,7 @@ _global_script_classes=[ {
 "base": "Position2D",
 "class": "EnemySpot",
 "language": "GDScript",
-"path": "res://location/base_classes/objects/enemy_spot.gd"
+"path": "res://location/lib/scripts/objects/enemy_spot.gd"
 }, {
 "base": "InventoryItem",
 "class": "Equipment",
@@ -82,7 +82,7 @@ _global_script_classes=[ {
 "base": "BaseNPC",
 "class": "FlagSetterNPC",
 "language": "GDScript",
-"path": "res://location/base_classes/npc/flag_setter_npc.gd"
+"path": "res://location/lib/scripts/npc/flag_setter_npc.gd"
 }, {
 "base": "Resource",
 "class": "GrowthStats",
@@ -98,6 +98,11 @@ _global_script_classes=[ {
 "class": "Hit",
 "language": "GDScript",
 "path": "res://battle/hit.gd"
+}, {
+"base": "StaticBody2D",
+"class": "InteractableObject",
+"language": "GDScript",
+"path": "res://location/lib/scripts/objects/interactable_object.gd"
 }, {
 "base": "Reference",
 "class": "Inventory",
@@ -122,17 +127,17 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "Location",
 "language": "GDScript",
-"path": "res://location/base_classes/location.gd"
+"path": "res://location/lib/scripts/location/location.gd"
 }, {
 "base": "TileMap",
 "class": "LocationRoom",
 "language": "GDScript",
-"path": "res://location/base_classes/room.gd"
+"path": "res://location/lib/scripts/location/location_room.gd"
 }, {
 "base": "Node",
 "class": "NPCMovement",
 "language": "GDScript",
-"path": "res://location/base_classes/npc/movement/npc_movement.gd"
+"path": "res://location/lib/scripts/npc/movement/npc_movement.gd"
 }, {
 "base": "Node2D",
 "class": "Party",
@@ -213,6 +218,7 @@ _global_script_class_icons={
 "GrowthStats": "",
 "Helmet": "",
 "Hit": "",
+"InteractableObject": "",
 "Inventory": "",
 "InventoryItem": "",
 "KeyboardBasedTabsContainer": "",
@@ -251,8 +257,8 @@ BattleLoop="*res://battle/battle_loop.gd"
 
 [display]
 
-window/size/width=480
-window/size/height=270
+window/size/width=512
+window/size/height=288
 window/size/test_width=1280
 window/size/test_height=720
 window/dpi/allow_hidpi=true

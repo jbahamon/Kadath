@@ -2,8 +2,8 @@ extends "res://utils/cutscene_manager/instructions/cutscene_instruction.gd"
 
 var time: float
 
-func _init(time: float):
-	self.time = time
+func _init(init_time: float):
+	self.time = init_time
 	
 func execute(cutscene_manager):
 	var local_scene: LocalScene = cutscene_manager.local_scene

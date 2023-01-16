@@ -44,12 +44,12 @@ func get_room_object(object_name: String):
 	if current_room == null:
 		return null
 		
-	var object = current_room.get_node("./" + object_name)
+	var object = current_room.get_node_or_null("./" + object_name)
 	
 	if object != null:
 		return object
 		
-	object = party.get_node("./" + object_name)
+	object = party.get_node_or_null("./" + object_name)
 	return object
 
 func get_overlay(overlay: String):
@@ -66,7 +66,10 @@ func open_dialog(dialog_name: String, node_id: int, source) -> void:
 	var nid = node_id
 	var pool = PoolStringArray()
 	
-	dialog_box.set_default_source(source.display_name)
+	if source != null:
+		dialog_box.set_default_source(source.display_name)
+	else:
+		dialog_box.set_default_source("None")
 	
 	while story_reader.has_nid(did, nid):
 		
@@ -111,14 +114,15 @@ func disable_inputs():
 	self.set_process_unhandled_input(false)
 	player_proxy.set_process(false)
 	player_proxy.set_physics_process(false)
-	player_proxy.set_process_input(false)
+	player_proxy.set_process_unhandled_input(false)
+	
 	world.set_process_unhandled_input(false)
 
 func enable_inputs():
 	self.set_process_unhandled_input(true)
 	player_proxy.set_process(true)
 	player_proxy.set_physics_process(true)
-	player_proxy.set_process_input(true)
+	player_proxy.set_process_unhandled_input(true)
 	world.set_process_unhandled_input(true)
 
 func show_save_menu() -> void:
@@ -229,12 +233,10 @@ func move_to_room(
 			child.set_animation("default")
 			child.play()
 	
-	var map_limits = room.get_used_rect()
-	var map_cellsize = room.cell_size
-	camera.limit_left = map_limits.position.x * map_cellsize.x + room.position.x
-	camera.limit_right = map_limits.end.x * map_cellsize.x + room.position.x
-	camera.limit_top = map_limits.position.y * map_cellsize.y + room.position.y
-	camera.limit_bottom = map_limits.end.y * map_cellsize.y + room.position.y
+	var clear_bg = $BGLayer/CameraBG
+	clear_bg.color = room.clear_color
+	
+	self.update_camera_bounds()
 	
 	var new_proxy_target = null
 	
@@ -252,6 +254,33 @@ func move_to_room(
 	
 	return true
 
+func update_camera_bounds():
+	
+	var room_limits = current_room.get_used_rect()
+	var room_cell_size = current_room.cell_size
+	
+	var screen_width = ProjectSettings.get_setting("display/window/size/width")
+	var room_width = (room_limits.end.x - room_limits.position.x) * room_cell_size.x
+	
+	if room_width < screen_width:
+		var mid_point = current_room.position.x + (room_limits.position.x + room_limits.end.x) * room_cell_size.x / 2
+		camera.limit_left = mid_point - screen_width/2
+		camera.limit_right = mid_point + screen_width/2
+	else:
+		camera.limit_left = room_limits.position.x * room_cell_size.x + current_room.position.x
+		camera.limit_right = room_limits.end.x * room_cell_size.x + current_room.position.x
+	
+	var screen_height = ProjectSettings.get_setting("display/window/size/height")
+	var room_height = (room_limits.end.y - room_limits.position.y) * room_cell_size.y
+	
+	if room_height < screen_height:
+		var mid_point = current_room.position.y + (room_limits.position.y + room_limits.end.y) * room_cell_size.y / 2
+		camera.limit_top = mid_point - screen_height/2
+		camera.limit_bottom = mid_point + screen_height/2
+	else:
+		camera.limit_top = room_limits.position.y * room_cell_size.y + current_room.position.y
+		camera.limit_bottom = room_limits.end.y * room_cell_size.y + current_room.position.y
+	
 func start_battle(non_party_actors: Array, enemy_position: Vector2):
 	assert(enemy_position != null)
 	

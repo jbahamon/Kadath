@@ -3,7 +3,7 @@ extends KinematicBody2D
 class_name PlayerProxy
 
 const walk_speed: float = 100.0
-const interaction_vector = Vector2(20, 10)
+const interaction_vector = Vector2(16, 16)
 
 
 var input_vector = Vector2.ZERO
@@ -23,6 +23,7 @@ func _ready():
 func _unhandled_input(event) -> void:
 	if event.is_action_pressed("ui_accept"):
 		raycast.force_raycast_update()
+		print(raycast.is_colliding())
 		if raycast.is_colliding() and raycast.get_collider().has_method("on_player_interaction"):
 			self.target.play_anim("idle")
 			raycast.get_collider().on_player_interaction(self)

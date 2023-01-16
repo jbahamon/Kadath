@@ -352,7 +352,7 @@ blend_point_3/pos = Vector2( -1.1, 0 )
 min_space = Vector2( -1.1, -1.1 )
 max_space = Vector2( 1.1, 1.1 )
 snap = Vector2( 1, 1 )
-blend_mode = 1
+blend_mode = 2
 
 [sub_resource type="AnimationNodeAnimation" id=9]
 animation = "walk_left"
@@ -378,7 +378,7 @@ blend_point_3/pos = Vector2( 1.1, 0 )
 min_space = Vector2( -1.1, -1.1 )
 max_space = Vector2( 1.1, 1.1 )
 snap = Vector2( 1, 1 )
-blend_mode = 1
+blend_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=14]
 
@@ -407,6 +407,7 @@ states/walk/node = SubResource( 13 )
 states/walk/position = Vector2( 666, 373 )
 transitions = [ "idle", "walk", SubResource( 14 ), "walk", "idle", SubResource( 15 ), "attack", "idle", SubResource( 50 ), "idle", "attack", SubResource( 51 ), "hit", "idle", SubResource( 52 ), "idle", "hit", SubResource( 53 ) ]
 start_node = "idle"
+graph_offset = Vector2( 0, 289.28 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=54]
 
@@ -426,7 +427,7 @@ script = ExtResource( 4 )
 texture = ExtResource( 3 )
 offset = Vector2( -15, -28 )
 hframes = 28
-frame = 5
+frame = 4
 
 [node name="CollisionShape2D" parent="InteractableArea" index="0"]
 position = Vector2( 0, -9 )
