@@ -1,4 +1,4 @@
-extends Area2D
+ extends Area2D
 
 export var room_id: String = "main_room"
 export var target_position: Vector2

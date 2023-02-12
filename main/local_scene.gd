@@ -35,7 +35,7 @@ func _ready() -> void:
 		self.update_whereabouts(
 			PlayerVars.starting_location_name, 
 			PlayerVars.starting_room_name,
-			Vector2.ZERO,
+			Vector2(0, -64), #Vector2.ZERO,
 			Vector2.DOWN,
 			false
 		)
