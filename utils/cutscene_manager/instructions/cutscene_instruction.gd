@@ -25,6 +25,7 @@ enum Type {
 	PLAY_ANIM,
 	
 	START_DIALOG,
+	NARRATE,
 	
 	SIMULTANEOUS,
 	SEQUENTIAL,
@@ -34,23 +35,12 @@ enum Type {
 	CALL
 }
 
-signal execution_finished
-
-var finished: bool
-
-func execute(cutscene_manager):
+func execute(tree: SceneTree):
 	pass
 
-func run(cutscene_manager):
-	self.finished = false
-	print(self.str())
-	var value = self.execute(cutscene_manager)
-	
-	if value != null:
-		yield(value, "completed")
-		
-	self.finished = true
-	emit_signal("execution_finished")
+func run(tree: SceneTree):
+	print(self)
+	await self.execute(tree)
 
-func str():
+func _to_string():
 	return "generic instruction"

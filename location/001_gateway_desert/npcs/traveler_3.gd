@@ -13,4 +13,4 @@ func on_player_interaction(player_proxy: PlayerProxy):
 	else:
 		self.dialog_nid = DialogNodes.TO_TRAVELER
 	
-	.on_player_interaction(player_proxy)
+	super.on_player_interaction(player_proxy)

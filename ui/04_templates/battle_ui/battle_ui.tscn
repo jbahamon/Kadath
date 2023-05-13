@@ -1,109 +1,72 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=9 format=3 uid="uid://ex17k532alby"]
 
-[ext_resource path="res://ui/04_templates/battle_ui/battle_ui.gd" type="Script" id=1]
-[ext_resource path="res://ui/01_atoms/theme.tres" type="Theme" id=3]
-[ext_resource path="res://ui/01_atoms/panel-small/pressed.tres" type="StyleBox" id=4]
-[ext_resource path="res://ui/01_atoms/panel-small/disabled.tres" type="StyleBox" id=5]
-[ext_resource path="res://ui/01_atoms/panel-small/hover.tres" type="StyleBox" id=6]
-[ext_resource path="res://ui/01_atoms/panel-small/focus.tres" type="StyleBox" id=7]
-[ext_resource path="res://ui/01_atoms/panel-small/normal.tres" type="StyleBox" id=8]
-[ext_resource path="res://ui/03_organisms/select_list/select_list.tscn" type="PackedScene" id=9]
+[ext_resource type="Script" path="res://ui/04_templates/battle_ui/battle_ui.gd" id="1"]
+[ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="3"]
+[ext_resource type="StyleBox" path="res://ui/01_atoms/panel-small/pressed.tres" id="4"]
+[ext_resource type="StyleBox" path="res://ui/01_atoms/panel-small/disabled.tres" id="5"]
+[ext_resource type="StyleBox" path="res://ui/01_atoms/panel-small/hover.tres" id="6"]
+[ext_resource type="StyleBox" path="res://ui/01_atoms/panel-small/focus.tres" id="7"]
+[ext_resource type="StyleBox" uid="uid://5onf5ivdwqki" path="res://ui/01_atoms/panel-small/normal.tres" id="8"]
+[ext_resource type="PackedScene" uid="uid://brhpxl8pukdr" path="res://ui/03_organisms/select_list/select_list.tscn" id="9"]
 
 [node name="BattleUI" type="MarginContainer"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 3 )
-custom_constants/margin_right = 5
-custom_constants/margin_top = 5
-custom_constants/margin_left = 5
-custom_constants/margin_bottom = 5
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+theme = ExtResource("3")
+script = ExtResource("1")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 5.0
-margin_top = 5.0
-margin_right = 475.0
-margin_bottom = 265.0
+layout_mode = 2
 size_flags_vertical = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_right = 470.0
-margin_bottom = 260.0
+layout_mode = 2
 size_flags_vertical = 3
-custom_constants/separation = -1
 
-[node name="PartyList" parent="VBoxContainer/HBoxContainer" instance=ExtResource( 9 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 43.0
-margin_bottom = 260.0
+[node name="PartyList" parent="VBoxContainer/HBoxContainer" instance=ExtResource("9")]
+layout_mode = 2
 handle_cancel = false
-normal_button = ExtResource( 8 )
-pressed_button = ExtResource( 4 )
-disabled_button = ExtResource( 5 )
-hover_button = ExtResource( 6 )
-focused_button = ExtResource( 7 )
+normal_button = ExtResource("8")
+pressed_button = ExtResource("4")
+disabled_button = ExtResource("5")
+hover_button = ExtResource("6")
+focused_button = ExtResource("7")
 
 [node name="Options" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 visible = false
-margin_left = 42.0
-margin_right = 154.0
-margin_bottom = 231.0
-custom_constants/separation = -1
+layout_mode = 2
 
 [node name="OptionsTitle" type="PanelContainer" parent="VBoxContainer/HBoxContainer/Options"]
-margin_right = 112.0
-margin_bottom = 25.0
-custom_styles/panel = ExtResource( 8 )
+layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/Options/OptionsTitle"]
-margin_left = 6.0
-margin_top = 6.0
-margin_right = 106.0
-margin_bottom = 19.0
+layout_mode = 2
 text = "Select your character"
 
 [node name="OptionsList" type="PanelContainer" parent="VBoxContainer/HBoxContainer/Options"]
-margin_top = 24.0
-margin_right = 112.0
-margin_bottom = 186.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
-custom_styles/panel = ExtResource( 8 )
 
-[node name="SelectList" parent="VBoxContainer/HBoxContainer/Options/OptionsList" instance=ExtResource( 9 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 6.0
-margin_top = 6.0
-margin_right = 106.0
-margin_bottom = 156.0
-size_flags_horizontal = 3
+[node name="SelectList" parent="VBoxContainer/HBoxContainer/Options/OptionsList" instance=ExtResource("9")]
+layout_mode = 2
 size_flags_vertical = 2
 include_cancel_button = true
 toggle = false
 flat = true
-normal_button = ExtResource( 8 )
-pressed_button = ExtResource( 4 )
-disabled_button = ExtResource( 5 )
-hover_button = ExtResource( 6 )
-focused_button = ExtResource( 7 )
+normal_button = ExtResource("8")
+pressed_button = ExtResource("4")
+disabled_button = ExtResource("5")
+hover_button = ExtResource("6")
+focused_button = ExtResource("7")
 
 [node name="InfoPanel" type="PanelContainer" parent="VBoxContainer"]
 visible = false
-margin_top = 235.0
-margin_right = 470.0
-margin_bottom = 260.0
-custom_styles/panel = ExtResource( 8 )
+layout_mode = 2
 
 [node name="InfoLabel" type="Label" parent="VBoxContainer/InfoPanel"]
-margin_left = 6.0
-margin_top = 6.0
-margin_right = 464.0
-margin_bottom = 19.0
+layout_mode = 2
 
 [connection signal="cancel" from="VBoxContainer/HBoxContainer/Options/OptionsList/SelectList" to="." method="on_cancel"]
 [connection signal="element_focused" from="VBoxContainer/HBoxContainer/Options/OptionsList/SelectList" to="." method="on_option_focused"]

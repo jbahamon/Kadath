@@ -5,14 +5,14 @@ extends Node
 
 class_name Battler
 
-export var anim_path: NodePath
-export var stats: Resource # Should be Character Stats, tho
-export var turn_order_icon: Texture
-export var rewards: Resource
+@export var anim_path: NodePath
+@export var stats: Resource # Should be Character Stats, tho
+@export var turn_order_icon: Texture2D
+@export var rewards: Resource
 
-onready var actions = $Actions
-onready var skills = $Skills
-onready var ai = $AI
+@onready var actions = $Actions
+@onready var skills = $Skills
+@onready var ai = $AI
 
 var anim: Node
 var status_effects = StatusEffectManager.new()
@@ -25,14 +25,14 @@ func initialize(ui):
 	ai.interface = ui
 
 func take_damage(hit: Hit):
-	var damage = ceil(hit.base_damage * self.get_damage_modifier(hit) + rand_range(1, hit.base_damage*0.2))
+	var damage = ceil(hit.base_damage * self.get_damage_modifier(hit) + randf_range(1, hit.base_damage*0.2))
 	stats.take_damage(damage)
 	
 	if stats.health <= 0:
-		BattleLoop.subscribe_to_event(
+		BattleService.subscribe_to_event(
 			self, 
-			BattleLoop.Event.TURN_END, 
-			BattleLoop.Subscription.FIRE_ONCE
+			BattleService.Event.TURN_END, 
+			BattleService.Subscription.FIRE_ONCE
 		)
 
 func get_damage_modifier(hit: Hit):
@@ -50,7 +50,7 @@ func get_physical_attack() -> float:
 	var parent = self.get_parent()
 	if parent is PartyMember:
 		attack = (self.stats.attack * 0.7 + 
-				  parent.get_physical_attack_bonus() * 0.3) 
+			parent.get_physical_attack_bonus() * 0.3) 
 	else:
 		attack = self.stats.attack 
 		
@@ -69,7 +69,7 @@ func get_physical_defense() -> float:
 func get_elemental_defense() -> float:
 	return 1.0
 
-func get_speed() -> float:
+func get_velocity() -> float:
 	return self.stats.speed * self.status_effects.get_speed_modifier()
 
 func get_actions() -> Array:
@@ -80,24 +80,20 @@ func is_alive() -> bool:
 
 func on_turn_end():
 	if stats.health <= 0:
-		var result = self.die()
-		if result is GDScriptFunctionState:
-			yield(result, "completed")
+		await self.die()
 		
 func die():
 	if self.rewards != null:
-		BattleLoop.add_rewards(self.rewards)
+		BattleService.add_rewards(self.rewards)
 		
 	var parent = self.get_parent()
-	BattleLoop.remove_actor(parent)
+	BattleService.remove_actor(parent)
 	
 	if parent is PartyMember:
 		self.status_effects.add(self, DownedStatus.new())
 	else:
-		var result = parent.die()
-		if result is GDScriptFunctionState:
-			yield(result, "completed")
-
+		await parent.die()
+		
 func play_anim(anim_name: String):
 	self.get_parent().play_anim(anim_name)
 	
@@ -105,7 +101,7 @@ func set_orientation(orientation: Vector2):
 	self.get_parent().set_orientation(orientation)
 	
 func move_to(target_position: Vector2, speed: float):
-	yield(self.get_parent().move_to(target_position), "completed")
+	await self.get_parent().move_to(target_position, speed)
 
 func is_party_member():
 	return get_parent() is PartyMember

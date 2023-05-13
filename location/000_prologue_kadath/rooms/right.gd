@@ -1,11 +1,11 @@
 extends LocationRoom
 
-onready var entrance = $Entrance
+@onready var entrance = $Entrance
 
 const SWITCH_FLAG_NAME = "000_right_room_switch"
 
 func _ready():
-	update_entrance(PlayerVars.get_flag(SWITCH_FLAG_NAME))
+	update_entrance(VarsService.get_flag(SWITCH_FLAG_NAME))
 
 func update_entrance(new_value):
 	if new_value:
@@ -20,8 +20,8 @@ func _on_switch_toggled():
 		"SHAKE FOR 2 FREQ 200 STR (20, 0) PRIORITY 1",
 		"START_DIALOG interactions ID 1 SOURCE NONE"
 	]
-	yield(get_local_scene().play_custom_cutscene(instructions), "completed")
-	var new_val = not PlayerVars.get_flag(SWITCH_FLAG_NAME)
-	PlayerVars.set_flag(SWITCH_FLAG_NAME, new_val)
+	await CutsceneService.play_custom_cutscene(instructions)
+	var new_val = not VarsService.get_flag(SWITCH_FLAG_NAME)
+	VarsService.set_flag(SWITCH_FLAG_NAME, new_val)
 	
 	update_entrance(new_val)

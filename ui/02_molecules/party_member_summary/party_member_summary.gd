@@ -2,11 +2,11 @@ extends MarginContainer
 
 class_name PartyMemberSummary
 
-onready var button: Button = $Button
-onready var character_name = $MarginContainer/Info/Name
-onready var level = $MarginContainer/Info/Level
-onready var hp = $MarginContainer/Info/HP
-onready var ep = $MarginContainer/Info/EP
+@onready var button: Button = $Button
+@onready var character_name = $MarginContainer/Info/Name
+@onready var level = $MarginContainer/Info/Level
+@onready var hp = $MarginContainer/Info/HP
+@onready var ep = $MarginContainer/Info/EP
 
 var disabled = false
 

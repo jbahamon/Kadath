@@ -1,4 +1,4 @@
-tool
+@tool
 extends "./text_panel_container.gd"
 
 var _text_label: Label
@@ -19,8 +19,9 @@ func set_text_property(property_name, value):
 	self.update_outline_margin()
 
 func get_outline_size():
-	var font = _text_label.get_font("font")
-	if font.has_outline() and "outline_size" in font:
-		return font.outline_size
+	
+	var settings = _text_label.label_settings
+	if settings != null:
+		return settings.outline_size
 	else:
 		return 0

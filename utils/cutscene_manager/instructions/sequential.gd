@@ -5,14 +5,12 @@ var instructions: Array
 func _init():
 	self.instructions = []
 	
-func execute(cutscene_manager):
+func execute(tree: SceneTree):
 	for instruction in instructions:
-		instruction.run(cutscene_manager)
-		if !instruction.finished:
-			yield(instruction, "execution_finished")
-
+		await instruction.run(tree)
+		
 func add_instruction(instruction):
 	self.instructions.append(instruction)
 
-func str():
+func _to_string():
 	return "start_sequential"

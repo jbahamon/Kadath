@@ -2,15 +2,15 @@ extends Resource
 
 class_name BattleRewards
 
-export var item_amounts: Dictionary
-export var experience: int
-export var money: int
+@export var item_amounts: Dictionary
+@export var experience: int
+@export var money: int
 
 
-var items setget , get_items
+var items : get = get_items
 
 func get_items():
-	var items = {}
+	var returned_items = {}
 	
 	for item in item_amounts:
 		var amount = floor(item_amounts[item])
@@ -19,9 +19,9 @@ func get_items():
 		if additional_probability > 0 and randf() < additional_probability:
 			amount += 1
 		
-		items[item] = amount
+		returned_items[item] = amount
 		
-	return items
+	return returned_items
 	
 func add_from(rewards: BattleRewards):
 	for item in rewards.item_amounts:

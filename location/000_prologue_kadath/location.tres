@@ -1,10 +1,10 @@
-[gd_resource type="Resource" load_steps=3 format=2]
+[gd_resource type="Resource" script_class="Location" load_steps=3 format=3 uid="uid://diydigghs5ihy"]
 
-[ext_resource path="res://location/lib/scripts/location/location.gd" type="Script" id=1]
-[ext_resource path="res://location/000_prologue_kadath/story/baked.tres" type="Resource" id=2]
+[ext_resource type="Script" path="res://location/lib/scripts/location/location.gd" id="1"]
+[ext_resource type="Resource" uid="uid://bxidhava46oov" path="res://location/000_prologue_kadath/story.dialogue" id="2_fbwdy"]
 
 [resource]
-script = ExtResource( 1 )
+script = ExtResource("1")
 location_id = "prologue_kadath"
-story = ExtResource( 2 )
+story = ExtResource("2_fbwdy")
 base_room_path = "res://location/000_prologue_kadath/rooms/"

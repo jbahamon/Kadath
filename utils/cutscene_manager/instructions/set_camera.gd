@@ -1,12 +1,12 @@
 extends "res://utils/cutscene_manager/instructions/cutscene_instruction.gd"
 
 var position: Vector2
-func _init(position: Vector2):
-	self.position = position
-	
 
-func execute(cutscene_manager):
-	cutscene_manager.camera.position = self.position
+func _init(init_position: Vector2):
+	self.position = init_position
+
+func execute(tree: SceneTree):
+	CameraService.set_camera_position(self.position)
 	
-func str():
+func _to_string():
 	return "set_camera to %s" % str(self.position)

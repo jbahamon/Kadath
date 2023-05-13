@@ -2,4 +2,4 @@ extends Equipment
 
 class_name Weapon
 
-export var attack: int
+@export var attack: int

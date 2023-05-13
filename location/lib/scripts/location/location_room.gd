@@ -2,11 +2,15 @@ extends TileMap
 
 class_name LocationRoom
 
-export (Color) var clear_color = Color.black
+@export var clear_color = Color.BLACK
 
 
 func on_enter():
-	pass
-
-func get_local_scene():
-	return self.get_node('../../')
+	await CutsceneService.play_custom_cutscene([
+		"SET_OVERLAY MIX TO (0,0,0,1.0)",
+		"SET_CAMERA (0,0)",
+		"SET_OVERLAY MIX TO (0, 0, 0, 1)",
+		"SET_OVERLAY ADD TO (0, 0, 0, 1)",
+		"NARRATE narration_1 FOR 0.5",
+		"FADE_OVERLAY MIX TO (0,0,0,0) IN 0.5"
+	])

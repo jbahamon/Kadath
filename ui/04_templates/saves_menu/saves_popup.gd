@@ -2,26 +2,26 @@ extends PopupPanel
 
 class_name SavesPopup
 
-enum Mode {SAVE, LOAD}
+enum SaveAccessMode {SAVE, LOAD}
 
-export(Mode) var current_mode: int = Mode.LOAD
+@export var current_mode: SaveAccessMode = SaveAccessMode.LOAD
 
 var selected_index: int = -1
 var file_previews = []
 
-onready var v_box: VBoxContainer = $MarginContainer/Scroll/SavesList
-onready var confirmation_popup: Popup = $ConfirmationPopup
+@onready var v_box: VBoxContainer = $MarginContainer/Scroll/SavesList
+@onready var confirmation_popup: Popup = $ConfirmationPopup
 
 func _ready():
 	self.update_options()
 
-func _gui_input(event):
+func _unhandled_input(event):
 	if event.is_action_pressed("ui_cancel"):
 		hide()
 
 
 func update_options():
-	var new_file_previews = SaveManager.get_file_previews()
+	var new_file_previews = SavesService.get_file_previews()
 	for child in v_box.get_children():
 		v_box.remove_child(child)
 		child.queue_free()
@@ -37,11 +37,11 @@ func update_options():
 			new_button.text = "File %d" % (i + 1)
 		else:
 			new_button.text = "No data"
-			new_button.disabled = current_mode == Mode.LOAD
-			new_button.focus_mode = Control.FOCUS_NONE if current_mode == Mode.LOAD else Control.FOCUS_ALL
+			new_button.disabled = current_mode == SaveAccessMode.LOAD
+			new_button.focus_mode = Control.FOCUS_NONE if current_mode == SaveAccessMode.LOAD else Control.FOCUS_ALL
 		
-		if current_mode == Mode.SAVE or file_previews[i] != null:
-			new_button.connect("pressed", self, "_on_button_pressed", [i])
+		if current_mode == SaveAccessMode.SAVE or file_previews[i] != null:
+			new_button.connect("pressed",Callable(self,"_on_button_pressed").bind(i))
 			
 		if first_focusable == null and not new_button.disabled:
 			first_focusable = new_button
@@ -55,13 +55,13 @@ func update_options():
 
 func _on_button_pressed(index):
 	selected_index = index
-	if current_mode == Mode.SAVE:
+	if current_mode == SaveAccessMode.SAVE:
 		if file_previews[index] != null:
-			confirmation_popup.popup_centered_minsize()
+			confirmation_popup.popup_centered_clamped()
 		else:
 			save_to_file(index)
 	else:
-		PlayerVars.loaded_slot = index
+		VarsService.loaded_slot = index
 		SceneSwitcher.go_to_scene("res://main/local_scene.tscn")
 	
 func has_file_with_data():
@@ -76,6 +76,6 @@ func _on_ConfirmationPopup_confirmed():
 
 
 func save_to_file(slot_index):
-	SaveManager.save(slot_index)
+	SavesService.save(slot_index)
 	update_options()
 	

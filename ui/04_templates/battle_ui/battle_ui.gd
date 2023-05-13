@@ -1,16 +1,17 @@
 extends MarginContainer
 
+class_name BattleUI
+
 var BattleAction = preload("res://battle/actions/battle_action.gd")
 var MultiTargetOption = load("res://ui/04_templates/battle_ui/multi_target_option.gd")
 
-class_name BattleUI
 
-onready var party_list = $VBoxContainer/HBoxContainer/PartyList
-onready var options = $VBoxContainer/HBoxContainer/Options
-onready var options_title: Label = $VBoxContainer/HBoxContainer/Options/OptionsTitle/Label
-onready var options_list = $VBoxContainer/HBoxContainer/Options/OptionsList/SelectList
-onready var info_panel = $VBoxContainer/InfoPanel
-onready var info_label = $VBoxContainer/InfoPanel/InfoLabel
+@onready var party_list = $VBoxContainer/HBoxContainer/PartyList
+@onready var options = $VBoxContainer/HBoxContainer/Options
+@onready var options_title: Label = $VBoxContainer/HBoxContainer/Options/OptionsTitle/Label
+@onready var options_list = $VBoxContainer/HBoxContainer/Options/OptionsList/SelectList
+@onready var info_panel = $VBoxContainer/InfoPanel
+@onready var info_label = $VBoxContainer/InfoPanel/InfoLabel
 
 signal option_selected(option)
 signal prompt_closed
@@ -30,7 +31,7 @@ func _init():
 func prompt(text: String):
 	self.waiting_for_prompt = true
 	self.set_info_text(text)
-	yield(self, "prompt_closed")
+	await self.prompt_closed
 	self.waiting_for_prompt = false
 
 func _unhandled_input(event):
@@ -64,7 +65,7 @@ func request_argument(actor, actors: Array, argument_definition: Dictionary):
 		BattleAction.ActionArgument.TARGET:
 			self.request_targets(actor, actors, argument_definition["targeting_type"])
 		BattleAction.ActionArgument.ITEM:
-			assert(false, "not yet implemented!")
+			assert(false) #,"not yet implemented!")
 			
 func request_targets(actor, actors: Array, targeting_type: int):
 	self.options_stack = []
@@ -120,11 +121,11 @@ func on_action_type_selected(action_type: BattleActionType):
 	options_stack.push_back(new_options)
 	self.set_options(new_options)
 
-func set_options(options):
+func set_options(new_options):
 	self.options.visible = true
-	options_title.text = options["title"]
-	options_list.include_cancel_button = options["include_cancel_button"]
-	options_list.initialize(options["options"])
+	options_title.text = new_options["title"]
+	options_list.include_cancel_button = new_options["include_cancel_button"]
+	options_list.initialize(new_options["options"])
 	options_list.grab_focus()
 	
 func on_cancel():

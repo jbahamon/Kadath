@@ -2,7 +2,7 @@
 
 [ext_resource path="res://ui/03_organisms/item_submenu/item_submenu.gd" type="Script" id=1]
 [ext_resource path="res://ui/03_organisms/item_submenu/item_use_and_description.gd" type="Script" id=2]
-[ext_resource path="res://ui/01_atoms/assets/icons/By ssugmi/icon-items.png" type="Texture" id=3]
+[ext_resource path="res://ui/01_atoms/assets/icons/By ssugmi/icon-items.png" type="Texture2D" id=3]
 [ext_resource path="res://ui/01_atoms/theme.tres" type="Theme" id=4]
 
 [sub_resource type="StyleBoxEmpty" id=1]
@@ -12,8 +12,8 @@
 [sub_resource type="StyleBoxEmpty" id=3]
 
 [node name="Item" type="PanelContainer"]
-margin_right = 310.0
-margin_bottom = 113.0
+offset_right = 310.0
+offset_bottom = 113.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 4 )
@@ -24,65 +24,65 @@ __meta__ = {
 icon = ExtResource( 3 )
 
 [node name="VBox" type="VBoxContainer" parent="."]
-margin_left = 13.0
-margin_top = 13.0
-margin_right = 297.0
-margin_bottom = 100.0
+offset_left = 13.0
+offset_top = 13.0
+offset_right = 297.0
+offset_bottom = 100.0
 
 [node name="HBox" type="HBoxContainer" parent="VBox"]
-margin_right = 284.0
-margin_bottom = 62.0
+offset_right = 284.0
+offset_bottom = 62.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ItemsPanel" type="PanelContainer" parent="VBox/HBox"]
-margin_right = 136.0
-margin_bottom = 62.0
+offset_right = 136.0
+offset_bottom = 62.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 1 )
 
 [node name="ItemsScroll" type="ScrollContainer" parent="VBox/HBox/ItemsPanel"]
-margin_right = 136.0
-margin_bottom = 62.0
+offset_right = 136.0
+offset_bottom = 62.0
 size_flags_horizontal = 3
 follow_focus = true
 scroll_horizontal_enabled = false
 
 [node name="Items" type="VBoxContainer" parent="VBox/HBox/ItemsPanel/ItemsScroll"]
-margin_right = 136.0
-margin_bottom = 62.0
+offset_right = 136.0
+offset_bottom = 62.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VSeparator" type="VSeparator" parent="VBox/HBox"]
-margin_left = 140.0
-margin_right = 144.0
-margin_bottom = 62.0
+offset_left = 140.0
+offset_right = 144.0
+offset_bottom = 62.0
 
 [node name="ItemUseAndDescription" type="PanelContainer" parent="VBox/HBox"]
-margin_left = 148.0
-margin_right = 284.0
-margin_bottom = 62.0
+offset_left = 148.0
+offset_right = 284.0
+offset_bottom = 62.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
 script = ExtResource( 2 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBox/HBox/ItemUseAndDescription"]
-margin_right = 136.0
-margin_bottom = 62.0
+offset_right = 136.0
+offset_bottom = 62.0
 
 [node name="ItemActions" type="HBoxContainer" parent="VBox/HBox/ItemUseAndDescription/VBoxContainer"]
-margin_right = 136.0
-margin_bottom = 25.0
+offset_right = 136.0
+offset_bottom = 25.0
 grow_horizontal = 2
 size_flags_horizontal = 3
 alignment = 1
 
 [node name="Use" type="Button" parent="VBox/HBox/ItemUseAndDescription/VBoxContainer/ItemActions"]
-margin_right = 42.0
-margin_bottom = 25.0
+offset_right = 42.0
+offset_bottom = 25.0
 focus_mode = 1
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -90,9 +90,9 @@ disabled = true
 text = "Use"
 
 [node name="Swap" type="Button" parent="VBox/HBox/ItemUseAndDescription/VBoxContainer/ItemActions"]
-margin_left = 46.0
-margin_right = 89.0
-margin_bottom = 25.0
+offset_left = 46.0
+offset_right = 89.0
+offset_bottom = 25.0
 focus_mode = 1
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -101,9 +101,9 @@ toggle_mode = true
 text = "Swap"
 
 [node name="Toss" type="Button" parent="VBox/HBox/ItemUseAndDescription/VBoxContainer/ItemActions"]
-margin_left = 93.0
-margin_right = 136.0
-margin_bottom = 25.0
+offset_left = 93.0
+offset_right = 136.0
+offset_bottom = 25.0
 focus_mode = 1
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -111,9 +111,9 @@ disabled = true
 text = "Toss"
 
 [node name="Description" type="Label" parent="VBox/HBox/ItemUseAndDescription/VBoxContainer"]
-margin_top = 29.0
-margin_right = 136.0
-margin_bottom = 62.0
+offset_top = 29.0
+offset_right = 136.0
+offset_bottom = 62.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 valign = 1
@@ -121,20 +121,20 @@ autowrap = true
 max_lines_visible = 4
 
 [node name="HSeparator" type="HSeparator" parent="VBox"]
-margin_top = 66.0
-margin_right = 284.0
-margin_bottom = 70.0
+offset_top = 66.0
+offset_right = 284.0
+offset_bottom = 70.0
 
 [node name="InfoPanel" type="PanelContainer" parent="VBox"]
-margin_top = 74.0
-margin_right = 284.0
-margin_bottom = 87.0
+offset_top = 74.0
+offset_right = 284.0
+offset_bottom = 87.0
 size_flags_horizontal = 3
 custom_styles/panel = SubResource( 3 )
 
 [node name="Info" type="Label" parent="VBox/InfoPanel"]
-margin_right = 284.0
-margin_bottom = 13.0
+offset_right = 284.0
+offset_bottom = 13.0
 text = "Press [X] to auto sort items"
 
 [connection signal="swap_mode_toggled" from="VBox/HBox/ItemUseAndDescription" to="." method="_on_swap_mode_toggled"]

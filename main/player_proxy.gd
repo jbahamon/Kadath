@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 class_name PlayerProxy
 
@@ -7,15 +7,13 @@ const interaction_vector = Vector2(16, 16)
 
 
 var input_vector = Vector2.ZERO
-var velocity = Vector2.ZERO
-var party: Party
 var automated = false
-var display_name = "proxy"#  setget , get_display_name
+var display_name = "proxy"#  : get = get_display_name
 var target: Node2D
 
-onready var raycast: RayCast2D = $RayCast2D
-onready var remote_transform: RemoteTransform2D = $RemoteTransform2D
-onready var collision: CollisionShape2D = $CollisionShape2D
+@onready var raycast: RayCast2D = $RayCast2D
+@onready var remote_transform: RemoteTransform2D = $RemoteTransform2D
+@onready var collision: CollisionShape2D = $CollisionShape2D
 
 func _ready():
 	self.set_target(self.remote_transform.get_node_or_null(self.remote_transform.remote_path))
@@ -41,7 +39,9 @@ func _physics_process(_delta) -> void:
 	move()
 
 func move() -> void:
-	velocity = move_and_slide(velocity)
+	set_velocity(velocity)
+	move_and_slide()
+	velocity = velocity
 
 func update_velocity() -> void:
 	if input_vector != Vector2.ZERO:
@@ -79,7 +79,7 @@ func save(save_data: SaveData) -> void:
 	save_data.data["player_position"] = self.position
 
 	
-func load(save_data: SaveData) -> void:
+func load_game_data(save_data: SaveData) -> void:
 	self.position = save_data.data["player_position"]
 	
 func set_target(new_target: Node):
@@ -101,12 +101,6 @@ func set_target(new_target: Node):
 	self.remote_transform.remote_path = self.remote_transform.get_path_to(self.target)
 	self.set_physics_process(true)
 
-func set_party(new_party: Party) -> void:
-	self.party = new_party
-
-func get_inventory() -> Inventory:
-	return self.party.inventory
-
 func get_display_name() -> String:
 	assert(self.target != null)
 	return self.target.display_name
@@ -127,7 +121,7 @@ func move_to(target_position: Vector2, speed):
 	self.automated = true
 	self.set_physics_process(true)
 	self.velocity = (target_position - global_position).normalized() * speed
-	yield(get_tree().create_timer(time), "timeout")
+	await get_tree().create_timer(time).timeout
 	self.velocity = Vector2.ZERO
 	self.set_physics_process(was_processing_physics)
 	self.automated = false
@@ -138,7 +132,7 @@ func play_anim(anim_name: String):
 func set_orientation(orientation: Vector2):
 	self.target.set_orientation(orientation)
 
-	raycast.set_cast_to(Vector2(
+	raycast.set_target_position(Vector2(
 		interaction_vector.x * orientation.x, 
 		interaction_vector.y * orientation.y
 	))

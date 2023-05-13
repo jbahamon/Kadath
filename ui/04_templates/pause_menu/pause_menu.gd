@@ -1,6 +1,6 @@
 extends MarginContainer
 
-onready var tabs = $PauseMenuTabs
+@onready var tabs = $PauseMenuTabs
 
 enum MenuTabs {
 	PARTY,

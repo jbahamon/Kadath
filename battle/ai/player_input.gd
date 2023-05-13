@@ -8,23 +8,22 @@ var action_signature: Array
 var current_action_argument: int
 var action_arguments: Dictionary
 
-func get_turn(actors: Array) -> Turn:
-	self.actors = actors
+func get_turn(current_actors: Array) -> Turn:
+	self.actors = current_actors
 	var actor = self.get_parent().get_parent()
 	self.action = null
 	
-	self.interface.connect("option_selected", self, "on_option_selected")
-	self.interface.connect("cancel", self, "on_cancel")
+	self.interface.connect("option_selected",Callable(self,"on_option_selected"))
+	self.interface.connect("cancel",Callable(self,"on_cancel"))
 	self.request_action()
-	yield(self, "turn_chosen")
-	self.interface.disconnect("option_selected", self, "on_option_selected")
-	self.interface.disconnect("cancel", self, "on_cancel")
+	await self.turn_chosen
+	self.interface.disconnect("option_selected",Callable(self,"on_option_selected"))
+	self.interface.disconnect("cancel",Callable(self,"on_cancel"))
 	
 	var turn = Turn.new()
 	turn.actor = actor
 	turn.action = self.action
 	turn.action_args = self.action_arguments
-	
 	
 	return turn
 
@@ -68,6 +67,6 @@ func request_action():
 	var actions = battler.get_actions()
 	self.interface.request_action(actions)
 
-func request_argument(actor, actors, argument):
-	self.interface.request_argument(actor, actors, argument)
+func request_argument(actor, current_actors, argument):
+	self.interface.request_argument(actor, current_actors, argument)
 	

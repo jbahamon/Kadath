@@ -7,15 +7,15 @@ extends Node2D
 
 class_name Party
 
-export var PARTY_SIZE: int = 3
+@export var PARTY_SIZE: int = 3
 
 const inventory_save_key = "Inventory"
 
 var inventory: Inventory = Inventory.new()
-var display_name = "party" # setget , get_display_name
+var display_name = "party" # : get = get_display_name
 
-func load(save_data: SaveData) -> void:
-	inventory.load(save_data)
+func load_game_data(save_data: SaveData) -> void:
+	inventory.load_game_data(save_data)
 	
 func save(save_data: SaveData) -> void:
 	inventory.save(save_data)

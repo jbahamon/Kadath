@@ -2,18 +2,17 @@ extends Resource
 
 class_name Location
 
-export var location_id: String 
-export var story: Resource
-export var base_room_path: String
+@export var location_id: String 
+@export var story: DialogueResource
+@export var base_room_path: String
 
 var room_scenes: Dictionary = {}
 
 func load_rooms() -> void:
 	if room_scenes.size() > 0:
 		return
-	var dir = Directory.new()
-	dir.open(base_room_path)
-	dir.list_dir_begin()
+	var dir = DirAccess.open(base_room_path)
+	dir.list_dir_begin()  # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547# TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 	
 	while true:
 		var file = dir.get_next()
@@ -24,10 +23,11 @@ func load_rooms() -> void:
 				"path": base_room_path,
 				"file": file
 			})
-			var room: LocationRoom = load(room_path).instance()
+			var room: LocationRoom = load(room_path).instantiate()
 			room_scenes[file.replace(".tscn", "")] = room
-		
-func get_room(room_id: String) -> Room:
+	dir.list_dir_end()
+	
+func get_room(room_id: String) -> LocationRoom:
 	return room_scenes.get(room_id)
 	
 func free_rooms() -> void:

@@ -15,19 +15,19 @@ facing = Vector2( 0, 0 )
 speed = 50
 mode = 1
 
-[node name="Position2D" type="Position2D" parent="ShadowCritter/PathMovement"]
+[node name="Marker2D" type="Marker2D" parent="ShadowCritter/PathMovement"]
 position = Vector2( 63, 60 )
 
-[node name="Position2D2" type="Position2D" parent="ShadowCritter/PathMovement"]
+[node name="Position2D2" type="Marker2D" parent="ShadowCritter/PathMovement"]
 position = Vector2( 165, 60 )
 
-[node name="Position2D3" type="Position2D" parent="ShadowCritter/PathMovement"]
+[node name="Position2D3" type="Marker2D" parent="ShadowCritter/PathMovement"]
 position = Vector2( 165, 121 )
 
-[node name="Position2D4" type="Position2D" parent="ShadowCritter/PathMovement"]
+[node name="Position2D4" type="Marker2D" parent="ShadowCritter/PathMovement"]
 position = Vector2( 63, 121 )
 
-[node name="Position2D5" type="Position2D" parent="ShadowCritter/PathMovement"]
+[node name="Position2D5" type="Marker2D" parent="ShadowCritter/PathMovement"]
 position = Vector2( 63, 60 )
 
 [editable path="ShadowCritter/PathMovement"]

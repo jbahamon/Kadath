@@ -11,11 +11,11 @@ var modulate_none = Color(1, 1, 1, 1)
 var modulate_swap = Color(1, 1, 0, 1)
 var modulate_focus = Color(0, 1, 1, 1)
 
-onready var bg = $NinePatch
-onready var box = $MarginContainer/HBoxContainer
-onready var icon = $MarginContainer/HBoxContainer/Icon
-onready var item_name_label = $MarginContainer/HBoxContainer/ItemName
-onready var amount_label = $MarginContainer/HBoxContainer/Amount
+@onready var bg = $NinePatch
+@onready var box = $MarginContainer/HBoxContainer
+@onready var icon = $MarginContainer/HBoxContainer/Icon
+@onready var item_name_label = $MarginContainer/HBoxContainer/ItemName
+@onready var amount_label = $MarginContainer/HBoxContainer/Amount
 
 func _ready():
 	
@@ -23,9 +23,9 @@ func _ready():
 		update_item()
 		
 		
-func set_item(new_item: InventoryItem, amount: int):
+func set_item(new_item: InventoryItem, new_amount: int):
 	self.item = new_item
-	self.amount = amount
+	self.amount = new_amount
 	if self.is_inside_tree():
 		self.update_item()
 		

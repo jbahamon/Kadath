@@ -1,194 +1,221 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=3 uid="uid://c2luykmp4iss7"]
 
-[ext_resource path="res://ui/01_atoms/panel/panel.tres" type="StyleBox" id=1]
-[ext_resource path="res://party/party.tscn" type="PackedScene" id=2]
-[ext_resource path="res://ui/04_templates/pause_menu/pause_menu.tscn" type="PackedScene" id=3]
-[ext_resource path="res://ui/01_atoms/theme.tres" type="Theme" id=4]
-[ext_resource path="res://addons/dialog_boxes/dialog_box_canvas_layer.gd" type="Script" id=5]
-[ext_resource path="res://ui/04_templates/pause_menu/menu_popup.gd" type="Script" id=6]
-[ext_resource path="res://main/local_scene.gd" type="Script" id=7]
-[ext_resource path="res://ui/04_templates/saves_menu/saves_popup.tscn" type="PackedScene" id=8]
-[ext_resource path="res://main/player_proxy.tscn" type="PackedScene" id=9]
-[ext_resource path="res://utils/cutscene_manager/cutscene_manager.tscn" type="PackedScene" id=10]
-[ext_resource path="res://ui/01_atoms/tab/normal.tres" type="StyleBox" id=11]
-[ext_resource path="res://battle/battle.tscn" type="PackedScene" id=12]
-[ext_resource path="res://battle/actions/attack.tscn" type="PackedScene" id=13]
-[ext_resource path="res://main/camera.gd" type="Script" id=14]
-[ext_resource path="res://main/screen_shake.tscn" type="PackedScene" id=15]
+[ext_resource type="StyleBox" uid="uid://brc46g1cj5k2v" path="res://ui/01_atoms/panel/panel.tres" id="1"]
+[ext_resource type="PackedScene" uid="uid://b1ap7o3phiuv3" path="res://party/party.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://c3okprgd6vbwj" path="res://ui/04_templates/pause_menu/pause_menu.tscn" id="3"]
+[ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="4"]
+[ext_resource type="Script" path="res://addons/dialog_boxes/dialog_box_canvas_layer.gd" id="5"]
+[ext_resource type="Script" path="res://ui/04_templates/pause_menu/menu_popup.gd" id="6"]
+[ext_resource type="Script" path="res://main/local_scene.gd" id="7"]
+[ext_resource type="PackedScene" uid="uid://kjfr6yr534rp" path="res://ui/04_templates/saves_menu/saves_popup.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://main/player_proxy.tscn" id="9"]
+[ext_resource type="StyleBox" path="res://ui/01_atoms/tab/normal.tres" id="11"]
+[ext_resource type="PackedScene" uid="uid://ex17k532alby" path="res://ui/04_templates/battle_ui/battle_ui.tscn" id="11_42lm3"]
+[ext_resource type="PackedScene" path="res://battle/actions/attack.tscn" id="13"]
+[ext_resource type="Script" path="res://main/camera.gd" id="14"]
+[ext_resource type="PackedScene" uid="uid://bibiysotd3rmq" path="res://main/screen_shake.tscn" id="15"]
+[ext_resource type="Script" path="res://main/narration_layer.gd" id="16_6ypov"]
 
-[sub_resource type="CanvasItemMaterial" id=4]
+[sub_resource type="CanvasItemMaterial" id="4"]
 
-[sub_resource type="CanvasItemMaterial" id=3]
+[sub_resource type="CanvasItemMaterial" id="3"]
 blend_mode = 1
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id="1"]
 resource_name = "fade_from_black"
 length = 0.5
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id="2"]
 length = 0.5
 step = 0.5
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ) ]
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
 }
 
-[node name="LocalScene" type="Node2D" groups=["save"]]
-modulate = Color( 0.8, 0.8, 0.8, 1 )
-position = Vector2( 0, 1 )
-script = ExtResource( 7 )
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e58ng"]
+_data = {
+"fade_from_black": SubResource("1"),
+"fade_to_black": SubResource("2")
+}
 
-[node name="BGLayer" type="CanvasLayer" parent="."]
+[node name="LocalScene" type="Node2D"]
+texture_filter = 1
+script = ExtResource("7")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1280.0
+offset_bottom = 760.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+size = Vector2i(640, 360)
+render_target_update_mode = 4
+
+[node name="BGLayer" type="CanvasLayer" parent="SubViewportContainer/SubViewport"]
 layer = -1
 
-[node name="CameraBG" type="ColorRect" parent="BGLayer"]
+[node name="CameraBG" type="ColorRect" parent="SubViewportContainer/SubViewport/BGLayer"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="World" type="YSort" parent="."]
+[node name="World" type="Node2D" parent="SubViewportContainer/SubViewport"]
+y_sort_enabled = true
 
-[node name="Party" parent="World" instance=ExtResource( 2 )]
+[node name="Party" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("2")]
 
-[node name="Attack" parent="World/Party/Arden/Battler/Actions" index="0" instance=ExtResource( 13 )]
+[node name="Attack" parent="SubViewportContainer/SubViewport/World/Party/Arden/Battler/Actions" index="0" instance=ExtResource("13")]
 
-[node name="Anim" parent="World/Party/Arden" index="2"]
-position = Vector2( 0, 0 )
+[node name="Anim" parent="SubViewportContainer/SubViewport/World/Party/Arden" index="2"]
+position = Vector2(0, 0)
 
-[node name="Arden2" parent="World/Party" index="1"]
+[node name="Arden2" parent="SubViewportContainer/SubViewport/World/Party" index="1"]
 visible = false
 
-[node name="Attack" parent="World/Party/Arden2/Battler/Actions" index="0" instance=ExtResource( 13 )]
+[node name="Attack" parent="SubViewportContainer/SubViewport/World/Party/Arden2/Battler/Actions" index="0" instance=ExtResource("13")]
 
-[node name="PlayerProxy" parent="World" groups=["save"] instance=ExtResource( 9 )]
+[node name="PlayerProxy" parent="SubViewportContainer/SubViewport/World" groups=["save"] instance=ExtResource("9")]
 
-[node name="RemoteTransform2D" parent="World/PlayerProxy" index="2"]
+[node name="RemoteTransform2D" parent="SubViewportContainer/SubViewport/World/PlayerProxy" index="2"]
 remote_path = NodePath("../../Party")
 
-[node name="Camera2D" type="Camera2D" parent="World/PlayerProxy"]
-current = true
-zoom = Vector2( 0.5, 0.5 )
-drag_margin_h_enabled = true
-drag_margin_v_enabled = true
-drag_margin_left = 0.0
-drag_margin_top = 0.0
-drag_margin_right = 0.0
-drag_margin_bottom = 0.0
-script = ExtResource( 14 )
+[node name="Camera2D" type="Camera2D" parent="SubViewportContainer/SubViewport/World/PlayerProxy"]
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.0
+drag_top_margin = 0.0
+drag_right_margin = 0.0
+drag_bottom_margin = 0.0
+script = ExtResource("14")
 
-[node name="ScreenShake" parent="World/PlayerProxy/Camera2D" instance=ExtResource( 15 )]
+[node name="ScreenShake" parent="SubViewportContainer/SubViewport/World/PlayerProxy/Camera2D" instance=ExtResource("15")]
 
-[node name="OverlayLayer" type="CanvasLayer" parent="."]
+[node name="OverlayLayer" type="CanvasLayer" parent="SubViewportContainer/SubViewport"]
 
-[node name="Mix" type="ColorRect" parent="OverlayLayer"]
-material = SubResource( 4 )
+[node name="Mix" type="ColorRect" parent="SubViewportContainer/SubViewport/OverlayLayer"]
+material = SubResource("4")
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 1, 1, 1, 0 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+color = Color(1, 1, 1, 0)
 
-[node name="Add" type="ColorRect" parent="OverlayLayer"]
-material = SubResource( 3 )
+[node name="Add" type="ColorRect" parent="SubViewportContainer/SubViewport/OverlayLayer"]
+material = SubResource("3")
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 0 )
-__meta__ = {
-"_edit_use_anchors_": false
+color = Color(0, 0, 0, 0)
+
+[node name="LocalCutscene" type="AnimationPlayer" parent="SubViewportContainer/SubViewport"]
+root_node = NodePath("../../..")
+libraries = {
+"": SubResource("AnimationLibrary_e58ng")
 }
 
 [node name="SimpleDialogBox" type="CanvasLayer" parent="."]
-script = ExtResource( 5 )
+script = ExtResource("5")
 transition_time_ms = 200.0
 height_percent = 0.4
 margin = 2
 separation = 0
-source_stylebox = ExtResource( 11 )
-dialog_stylebox = ExtResource( 1 )
-theme = ExtResource( 4 )
+source_stylebox = ExtResource("11")
+dialog_stylebox = ExtResource("1")
+theme = ExtResource("4")
 text_speed = 30.0
 bbcode_enabled = true
+
+[node name="BattleUILayer" type="CanvasLayer" parent="."]
+
+[node name="BattleUI" parent="BattleUILayer" instance=ExtResource("11_42lm3")]
 
 [node name="MenuLayer" type="CanvasLayer" parent="."]
 
 [node name="MenuPopup" type="PopupPanel" parent="MenuLayer"]
-self_modulate = Color( 0.290196, 0.290196, 0.290196, 0.501961 )
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -160.0
-margin_top = -120.0
-margin_right = 160.0
-margin_bottom = 120.0
+transparent_bg = true
+size = Vector2i(347, 324)
+transparent = true
+script = ExtResource("6")
+
+[node name="PauseMenu" parent="MenuLayer/MenuPopup" instance=ExtResource("3")]
+offset_right = 29.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-popup_exclusive = true
-script = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="PauseMenu" parent="MenuLayer/MenuPopup" instance=ExtResource( 3 )]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = -4.0
-margin_bottom = -4.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/margin_right = 0
-custom_constants/margin_top = 0
-custom_constants/margin_left = 0
-custom_constants/margin_bottom = 0
-
-[node name="SavesPopup" parent="MenuLayer" instance=ExtResource( 8 )]
+[node name="SavesPopup" parent="MenuLayer" instance=ExtResource("8")]
+visible = false
 current_mode = 0
+
+[node name="NarrationLayer" type="CanvasLayer" parent="."]
+script = ExtResource("16_6ypov")
+
+[node name="VBox" type="VBoxContainer" parent="NarrationLayer"]
+top_level = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Margin" type="MarginContainer" parent="NarrationLayer/VBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="NarrationText" type="RichTextLabel" parent="NarrationLayer/VBox/Margin"]
+layout_mode = 2
+theme = ExtResource("4")
+theme_type_variation = &"HeaderLarge"
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "Once there was a little boy"
+fit_content = true
+scroll_active = false
 
 [node name="PopupLayer" type="CanvasLayer" parent="."]
 
-[node name="Battle" parent="." instance=ExtResource( 12 )]
-
-[node name="LocalCutscene" type="AnimationPlayer" parent="."]
-anims/fade_from_black = SubResource( 1 )
-anims/fade_to_black = SubResource( 2 )
-
-[node name="CutsceneManager" parent="." instance=ExtResource( 10 )]
-visible = false
-camera_path = NodePath("../World/PlayerProxy/Camera2D")
-local_scene_path = NodePath("..")
-
-[connection signal="about_to_show" from="MenuLayer/MenuPopup" to="." method="_on_menu_about_to_show"]
+[connection signal="about_to_popup" from="MenuLayer/MenuPopup" to="." method="_on_menu_about_to_show"]
 [connection signal="popup_hide" from="MenuLayer/MenuPopup" to="." method="_on_menu_popup_hide"]
-[connection signal="about_to_show" from="MenuLayer/SavesPopup" to="." method="_on_menu_about_to_show"]
+[connection signal="about_to_popup" from="MenuLayer/SavesPopup" to="." method="_on_menu_about_to_show"]
 [connection signal="popup_hide" from="MenuLayer/SavesPopup" to="." method="_on_menu_popup_hide"]
-[connection signal="battle_ended" from="Battle" to="." method="end_battle"]
 
-[editable path="World/Party"]
-[editable path="World/Party/Arden"]
-[editable path="World/Party/Arden/Battler"]
-[editable path="World/Party/Arden2"]
-[editable path="World/Party/Arden2/Battler"]
-[editable path="World/PlayerProxy"]
+[editable path="SubViewportContainer/SubViewport/World/Party"]
+[editable path="SubViewportContainer/SubViewport/World/Party/Arden"]
+[editable path="SubViewportContainer/SubViewport/World/Party/Arden/Battler"]
+[editable path="SubViewportContainer/SubViewport/World/Party/Arden2"]
+[editable path="SubViewportContainer/SubViewport/World/Party/Arden2/Battler"]
+[editable path="SubViewportContainer/SubViewport/World/PlayerProxy"]

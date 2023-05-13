@@ -1,51 +1,44 @@
 extends "res://utils/cutscene_manager/instructions/cutscene_instruction.gd"
 
-signal finished
 
 var overlay: String
 var color: Color
 var time: float
 var overlay_object
-var _cutscene_manager
 
-func _init(overlay: String, color: Color, time: float):
-	self.overlay = overlay
-	self.color = color
-	self.time = time
+func _init(init_overlay: String, init_color: Color, init_time: float):
+	self.overlay = init_overlay
+	self.color = init_color
+	self.time = init_time
 	self.overlay_object = null
 
-func execute(cutscene_manager):
-	self._cutscene_manager = cutscene_manager
-	self.overlay_object = cutscene_manager.get_overlay(overlay)
+func execute(tree: SceneTree):
+	self.overlay_object = LayersService.get_layer(overlay)
 	
 	var original_color = self.overlay_object.color
-	self._cutscene_manager.fade_overlay_tween.interpolate_method(
-		self,
-		"interpolate",
+	var tween = tree.create_tween()
+	
+	tween.tween_method(
+		self.sample,
 		original_color,
 		self.color,
 		self.time
 	)
-	self._cutscene_manager.fade_overlay_tween.start()
+	await tween.finished
 	
-	yield(self, "finished")
-	
-func interpolate(value: Color):
+func sample(value: Color):
 	if self.overlay_object == null:
 		return
 
 	var actual_color = Color(
-		stepify(value.r, 0.05), 
-		stepify(value.g, 0.05),
-		stepify(value.b, 0.05), 
-		stepify(value.a, 0.05)
+		snapped(value.r, 0.05), 
+		snapped(value.g, 0.05),
+		snapped(value.b, 0.05), 
+		snapped(value.a, 0.05)
 	)
 	self.overlay_object.color = actual_color
 
-func on_tween_completed():
-	emit_signal("finished")
-
-func str():
+func _to_string():
 	return "fade_overlay %s to %s in %f" % [
 		self.overlay, str(self.color), self.time
 	]

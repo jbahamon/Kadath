@@ -8,16 +8,19 @@ const EASE = Tween.EASE_IN_OUT
 var amplitude: Vector2 = Vector2.ZERO
 var priority = 0
 
-onready var duration_timer = $Duration
-onready var frequency_timer = $Frequency
-onready var shake_tween = $Tween
+@onready var duration_timer = $Duration
+@onready var frequency_timer = $Frequency
+@onready var shake_tween = get_tree().create_tween()
 
-onready var camera = get_parent()
+@onready var camera = get_parent()
 
-func start(duration: float, frequency: float, amplitude: Vector2, priority: int):
-	if priority >= self.priority:
-		self.priority = priority
-		self.amplitude = amplitude
+func _ready():
+	self.shake_tween.stop()
+	
+func start(duration: float, frequency: float, new_amplitude: Vector2, new_priority: int):
+	if new_priority >= self.priority:
+		self.priority = new_priority
+		self.amplitude = new_amplitude
 
 		duration_timer.wait_time = duration
 		frequency_timer.wait_time = 1 / float(frequency)
@@ -26,21 +29,22 @@ func start(duration: float, frequency: float, amplitude: Vector2, priority: int)
 
 		_new_shake()
 		
-		yield(duration_timer, "timeout")
+		await duration_timer.timeout
 	else:
 		emit_signal("shake_finished")
 
 func _new_shake():
 	var rand = Vector2()
-	rand.x = rand_range(-amplitude.x, amplitude.x)
-	rand.y = rand_range(-amplitude.y, amplitude.y)
-
-	shake_tween.interpolate_property(camera, "offset", camera.offset, rand, $Frequency.wait_time, TRANS, EASE)
-	shake_tween.start()
+	rand.x = randf_range(-amplitude.x, amplitude.x)
+	rand.y = randf_range(-amplitude.y, amplitude.y)
+	shake_tween.kill()
+	shake_tween.tween_property(camera, "offset", rand, $Frequency.wait_time).set_trans(TRANS).set_ease(EASE)
+	shake_tween.play()
 
 func _reset():
-	shake_tween.interpolate_property(camera, "offset", camera.offset, Vector2(), $Frequency.wait_time, TRANS, EASE)
-	shake_tween.start()
+	shake_tween.kill()
+	shake_tween.tween_property(camera, "offset", Vector2(), $Frequency.wait_time).set_trans(TRANS).set_ease(EASE)
+	shake_tween.play()
 
 	priority = 0
 

@@ -1,11 +1,11 @@
 extends PanelContainer
 
 var item_entry_scene = preload("res://ui/02_molecules/item_entry/item_entry.tscn")
-onready var items: Container = $VBox/HBox/ItemsPanel/ItemsScroll/Items
-onready var use_and_description = $VBox/HBox/ItemUseAndDescription
-onready var use_description_panel: PanelContainer = $VBox/HBox/ItemUseAndDescription
+@onready var items: Container = $VBox/HBox/ItemsPanel/ItemsScroll/Items
+@onready var use_and_description = $VBox/HBox/ItemUseAndDescription
+@onready var use_description_panel: PanelContainer = $VBox/HBox/ItemUseAndDescription
 
-export var icon: Texture 
+@export var icon: Texture2D 
 
 var in_swap_mode = false
 var focused_index: int
@@ -20,9 +20,9 @@ func _ready():
 	
 func initialize(party: Party):
 	if self.inventory != null:
-		self.inventory.disconnect("inventory_changed", self, "on_inventory_changed")
+		self.inventory.disconnect("inventory_changed",Callable(self,"on_inventory_changed"))
 	self.inventory = party.inventory
-	self.inventory.connect("inventory_changed", self, "on_inventory_changed")
+	self.inventory.connect("inventory_changed",Callable(self,"on_inventory_changed"))
 	
 	update_items()
 
@@ -60,11 +60,11 @@ func swap_item_entries(i1, i2):
 	items.move_child(items.get_child(first), second)
 	items.move_child(items.get_child(second - 1), first)
 	
-	first_child.disconnect("focus_entered", self, "_on_index_focused")
-	second_child.disconnect("focus_entered", self, "_on_index_focused")
+	first_child.disconnect("focus_entered",Callable(self,"_on_index_focused"))
+	second_child.disconnect("focus_entered",Callable(self,"_on_index_focused"))
 
-	first_child.connect("focus_entered", self, "_on_index_focused", [second])
-	second_child.connect("focus_entered", self, "_on_index_focused", [first])
+	first_child.connect("focus_entered",Callable(self,"_on_index_focused").bind(second))
+	second_child.connect("focus_entered",Callable(self,"_on_index_focused").bind(first))
 	
 	set_all_item_neighbours()
 	
@@ -93,7 +93,7 @@ func on_swap_input(event: InputEvent):
 	else:
 		return
 		
-	get_tree().set_input_as_handled()
+	get_viewport().set_input_as_handled()
 
 func on_browse_input(event: InputEvent):
 	if event.is_action_pressed("ui_left"):
@@ -105,7 +105,7 @@ func on_browse_input(event: InputEvent):
 	else:
 		return
 		
-	get_tree().set_input_as_handled()
+	get_viewport().set_input_as_handled()
 
 func on_inventory_changed(change_type):
 	if change_type != Inventory.Change.SWAP:
@@ -126,23 +126,19 @@ func update_items():
 func add_all_items():
 	for i in range(len(self.inventory.order)):
 		var item = self.inventory.order[i]
-		var new_item_entry = item_entry_scene.instance()
+		var new_item_entry = item_entry_scene.instantiate()
 		
 		items.add_child(new_item_entry)
 		new_item_entry.set_item(item, inventory.amounts[item])
 		new_item_entry.focus_mode = Control.FOCUS_ALL
 		new_item_entry.connect(
 			"focus_entered",
-			use_and_description,
-			"_on_item_focused",
-			[item]
+			use_and_description._on_item_focused.bind(item)
 		)
 		
 		new_item_entry.connect(
 			"focus_entered",
-			self,
-			"_on_index_focused",
-			[i]
+			self._on_index_focused.bind(i)
 		)
 
 
@@ -161,14 +157,14 @@ func set_all_item_neighbours():
 func set_item_neighbours(i: int, children: Array):
 	var item_entry: Control = children[i]
 	
-	item_entry.focus_neighbour_top = item_entry.get_path_to(children[posmod((i - 1), len(children))])
-	item_entry.focus_neighbour_bottom = item_entry.get_path_to(children[posmod((i + 1),  len(children))])
+	item_entry.focus_neighbor_top = item_entry.get_path_to(children[posmod((i - 1), len(children))])
+	item_entry.focus_neighbor_bottom = item_entry.get_path_to(children[posmod((i + 1),  len(children))])
 	
-	item_entry.focus_neighbour_left = item_entry.get_path_to(item_entry)
-	item_entry.focus_neighbour_right = item_entry.get_path_to(item_entry)
+	item_entry.focus_neighbor_left = item_entry.get_path_to(item_entry)
+	item_entry.focus_neighbor_right = item_entry.get_path_to(item_entry)
 
 
-func grab_focus():
+func on_grab_focus():
 	self.reset_focus()
 	self.set_process_unhandled_input(true)
 	self.set_process_input(true)
@@ -176,7 +172,7 @@ func grab_focus():
 	return true
 
 
-func release_focus():
+func on_release_focus():
 	self.set_process_unhandled_input(false)
 	self.set_process_input(false)
 

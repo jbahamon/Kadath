@@ -1,17 +1,17 @@
 extends "res://utils/cutscene_manager/instructions/cutscene_instruction.gd"
 
-var character: String
+var entity_name: String
 var position: Vector2
 var speed: float
 
-func _init(character: String, position: Vector2, speed: float):
-	self.character = character
-	self.position = position
-	self.speed = speed
+func _init(init_entity_name: String, init_position: Vector2, init_speed: float):
+	self.entity_name = init_entity_name
+	self.position = init_position
+	self.speed = init_speed
 	
-func execute(cutscene_manager):
-	var entity = cutscene_manager.get_entity(character)
-	yield(entity.move_to(position, speed), "completed")
+func execute(tree: SceneTree):
+	var entity = EntitiesService.get_entity(self.entity_name)
+	await entity.move_to(position, speed)
 
-func str():
-	return "move %s to %s at %f" % [self.character, str(self.position), self.speed]
+func _to_string():
+	return "move %s to %s at %f" % [self.entity_name, str(self.position), self.speed]

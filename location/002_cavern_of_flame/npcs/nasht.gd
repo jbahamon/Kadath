@@ -27,7 +27,7 @@ func on_player_interaction(player_proxy: PlayerProxy):
 		
 		self.dialog_nid = DialogNodes.QUEST_DONE
 	
-	.on_player_interaction(player_proxy)
+	super.on_player_interaction(player_proxy)
 	
 	match self.dialog_nid:
 		DialogNodes.BEFORE_QUEST:
@@ -35,7 +35,7 @@ func on_player_interaction(player_proxy: PlayerProxy):
 			self.dialog_nid = DialogNodes.IN_QUEST
 		DialogNodes.QUEST_DONE:
 			PlayerVars.set_flag(PlayerVars.Flags.TUTORIAL_FINISHED, true)
-			var inventory = player_proxy.get_inventory()
+			var inventory = EntitiesService.get_party().get_inventory()
 			if not inventory.has("amulet"):
 				inventory.add("amulet")
 			self.dialog_nid = DialogNodes.AFTER_AMULET_RECEIVED

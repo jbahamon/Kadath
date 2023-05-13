@@ -4,7 +4,7 @@ var _effects: Array
 
 var speed_modifier = 1
 
-func add(battler, new_effect: StatusEffect):
+func add(_battler, new_effect: StatusEffect):
 	for effect in _effects:
 		if effect.get_class() == new_effect.get_class():
 			effect.refresh(new_effect)

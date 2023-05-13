@@ -6,15 +6,15 @@ enum PathMode {
 	BOUNCE
 }
 
-export var speed = 100
-export (PathMode) var mode: int = PathMode.LINEAR
+@export var speed = 100
+@export var mode: PathMode = PathMode.LINEAR
 
-export var starting_target_idx: int = 0
+@export var starting_target_idx: int = 0
 
 var initialized = false
 var base_position: Vector2
 var current_target_idx: int
-var points: PoolVector2Array
+var points: PackedVector2Array
 
 var direction = 1
 var tolerance =  1
@@ -38,7 +38,7 @@ func update_movement():
 	self.parent.set_orientation(current_direction)
 	
 func _physics_process(delta):
-	._physics_process(delta)
+	super._physics_process(delta)
 	
 	if not self.initialized:
 		self.parent.play_anim("walk")

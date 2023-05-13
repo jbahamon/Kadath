@@ -1,0 +1,15 @@
+PanelContainer
+MarginContainer
+VBoxContainer
+Sprite2D
+RichTextLabel
+Label
+CenterContainer
+Control
+CanvasLayer
+CollisionShape2D
+Area2D
+SubViewportContainer
+SubViewport
+Window
+Button

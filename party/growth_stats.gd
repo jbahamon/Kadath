@@ -1,15 +1,15 @@
 extends Resource
 class_name GrowthStats
 
-export var level_lookup: Array = []
-export var max_health_curve: Curve
-export var max_energy_curve: Curve
-export var attack_curve: Curve
-export var defense_curve: Curve
-export var magic_attack_curve: Curve
-export var magic_defense_curve: Curve
-export var luck_curve: Curve
-export var speed_curve: Curve
+@export var level_lookup: Array = []
+@export var max_health_curve: Curve
+@export var max_energy_curve: Curve
+@export var attack_curve: Curve
+@export var defense_curve: Curve
+@export var magic_attack_curve: Curve
+@export var magic_defense_curve: Curve
+@export var luck_curve: Curve
+@export var speed_curve: Curve
 
 
 func create_stats(experience: int) -> CharacterStats:
@@ -49,7 +49,7 @@ func _get_interpolated_level(value: int = 0) -> float:
 func _get_max_health(experience: int) -> int:
 	assert(max_health_curve != null)
 	var level: float = _get_interpolated_level(experience)
-	return int(max_health_curve.interpolate_baked(level))
+	return int(max_health_curve.sample_baked(level))
 
 
 func _get_max_energy(experience: int) -> int:
@@ -82,4 +82,4 @@ func _get_speed(experience: int) -> int:
 func _get_stat(stat_curve: Curve, experience: int) -> int:
 	assert(stat_curve != null)
 	var level: float = _get_interpolated_level(experience)
-	return int(stat_curve.interpolate_baked(level))
+	return int(stat_curve.sample_baked(level))

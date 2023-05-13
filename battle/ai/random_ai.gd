@@ -3,7 +3,7 @@ extends "./non_player_ai.gd"
 class_name RandomAI
 
 
-func choose_action(actor, actors: Array):
+func choose_action(actor, _actors: Array):
 	return actor.battler.get_actions()[0]
 
 func choose_action_args(action_signature: Array, actor, actors) -> Dictionary:

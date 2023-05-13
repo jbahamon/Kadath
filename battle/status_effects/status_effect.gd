@@ -4,5 +4,5 @@ var speed_modifier: float = 1.0
 var physical_defense_modifier: float = 1.0
 var physical_attack_modifier: float = 1.0
 
-func refresh(effect: StatusEffect):
+func refresh(_effect: StatusEffect):
 	pass

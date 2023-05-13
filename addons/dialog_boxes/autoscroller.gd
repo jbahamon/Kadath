@@ -1,5 +1,5 @@
 var label: RichTextLabel
-var line_lengths: PoolIntArray
+var line_lengths: PackedInt32Array
 var line_height: int
 var next_line_to_show: int
 var lines_per_screen: int
@@ -10,7 +10,7 @@ var scroll: ScrollBar
 
 func initialize(rich_text_label: RichTextLabel):
 	self.label = rich_text_label
-	self.scroll = self.label.get_v_scroll()
+	self.scroll = self.label.get_v_scroll_bar()
 
 func update_scroll(percent: float):
 	if not scroll_required:
@@ -29,14 +29,14 @@ func update_scroll(percent: float):
 func reset():
 	var text = label.text
 	var font = label.get_font("normal")
-	var width = label.rect_size.x
-	var height = label.rect_size.y
+	var width = label.size.x
+	var height = label.size.y
 	
 	line_height = font.get_string_size(text).y
 	lines_per_screen = floor(height/line_height)
 	next_line_to_show = lines_per_screen
 	
-	var new_line_lengths = PoolIntArray()
+	var new_line_lengths = PackedInt32Array()
 	
 	for raw_line in text.split("\n", false):
 		var words = raw_line.split(" ", false)

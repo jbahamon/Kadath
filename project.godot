@@ -6,269 +6,51 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
-
-_global_script_classes=[ {
-"base": "Equipment",
-"class": "Accessory",
-"language": "GDScript",
-"path": "res://item/accessory.gd"
-}, {
-"base": "Equipment",
-"class": "Armor",
-"language": "GDScript",
-"path": "res://item/armor.gd"
-}, {
-"base": "KinematicBody2D",
-"class": "BaseNPC",
-"language": "GDScript",
-"path": "res://location/lib/scripts/npc/base_npc.gd"
-}, {
-"base": "Node",
-"class": "BattleAction",
-"language": "GDScript",
-"path": "res://battle/actions/battle_action.gd"
-}, {
-"base": "Node",
-"class": "BattleActionType",
-"language": "GDScript",
-"path": "res://battle/action_types/battle_action_type.gd"
-}, {
-"base": "Resource",
-"class": "BattleRewards",
-"language": "GDScript",
-"path": "res://battle/battle_rewards.gd"
-}, {
-"base": "MarginContainer",
-"class": "BattleUI",
-"language": "GDScript",
-"path": "res://ui/04_templates/battle_ui/battle_ui.gd"
-}, {
-"base": "Node",
-"class": "Battler",
-"language": "GDScript",
-"path": "res://battle/battler/battler.gd"
-}, {
-"base": "Node",
-"class": "BattlerAI",
-"language": "GDScript",
-"path": "res://battle/ai/battler_ai.gd"
-}, {
-"base": "Position2D",
-"class": "CharacterAnim",
-"language": "GDScript",
-"path": "res://party/character_anim.gd"
-}, {
-"base": "Resource",
-"class": "CharacterStats",
-"language": "GDScript",
-"path": "res://party/character_stats.gd"
-}, {
-"base": "StatusEffect",
-"class": "DownedStatus",
-"language": "GDScript",
-"path": "res://battle/status_effects/downed.gd"
-}, {
-"base": "Position2D",
-"class": "EnemySpot",
-"language": "GDScript",
-"path": "res://location/lib/scripts/objects/enemy_spot.gd"
-}, {
-"base": "InventoryItem",
-"class": "Equipment",
-"language": "GDScript",
-"path": "res://item/equipment.gd"
-}, {
-"base": "BaseNPC",
-"class": "FlagSetterNPC",
-"language": "GDScript",
-"path": "res://location/lib/scripts/npc/flag_setter_npc.gd"
-}, {
-"base": "Resource",
-"class": "GrowthStats",
-"language": "GDScript",
-"path": "res://party/growth_stats.gd"
-}, {
-"base": "Equipment",
-"class": "Helmet",
-"language": "GDScript",
-"path": "res://item/helmet.gd"
-}, {
-"base": "Reference",
-"class": "Hit",
-"language": "GDScript",
-"path": "res://battle/hit.gd"
-}, {
-"base": "StaticBody2D",
-"class": "InteractableObject",
-"language": "GDScript",
-"path": "res://location/lib/scripts/objects/interactable_object.gd"
-}, {
-"base": "Reference",
-"class": "Inventory",
-"language": "GDScript",
-"path": "res://main/inventory.gd"
-}, {
-"base": "Resource",
-"class": "InventoryItem",
-"language": "GDScript",
-"path": "res://item/inventory_item.gd"
-}, {
-"base": "VBoxContainer",
-"class": "KeyboardBasedTabsContainer",
-"language": "GDScript",
-"path": "res://ui/02_molecules/keyboard_based_tab_container/keyboard_based_tab_container.gd"
-}, {
-"base": "Node2D",
-"class": "LocalScene",
-"language": "GDScript",
-"path": "res://main/local_scene.gd"
-}, {
-"base": "Resource",
-"class": "Location",
-"language": "GDScript",
-"path": "res://location/lib/scripts/location/location.gd"
-}, {
-"base": "TileMap",
-"class": "LocationRoom",
-"language": "GDScript",
-"path": "res://location/lib/scripts/location/location_room.gd"
-}, {
-"base": "Node",
-"class": "NPCMovement",
-"language": "GDScript",
-"path": "res://location/lib/scripts/npc/movement/npc_movement.gd"
-}, {
-"base": "Node2D",
-"class": "Party",
-"language": "GDScript",
-"path": "res://party/party.gd"
-}, {
-"base": "KinematicBody2D",
-"class": "PartyMember",
-"language": "GDScript",
-"path": "res://party/party_member.gd"
-}, {
-"base": "MarginContainer",
-"class": "PartyMemberSummary",
-"language": "GDScript",
-"path": "res://ui/02_molecules/party_member_summary/party_member_summary.gd"
-}, {
-"base": "KinematicBody2D",
-"class": "PlayerProxy",
-"language": "GDScript",
-"path": "res://main/player_proxy.gd"
-}, {
-"base": "",
-"class": "RandomAI",
-"language": "GDScript",
-"path": "res://battle/ai/random_ai.gd"
-}, {
-"base": "Resource",
-"class": "SaveData",
-"language": "GDScript",
-"path": "res://main/save_data.gd"
-}, {
-"base": "PopupPanel",
-"class": "SavesPopup",
-"language": "GDScript",
-"path": "res://ui/04_templates/saves_menu/saves_popup.gd"
-}, {
-"base": "Reference",
-"class": "StatusEffect",
-"language": "GDScript",
-"path": "res://battle/status_effects/status_effect.gd"
-}, {
-"base": "Reference",
-"class": "StatusEffectManager",
-"language": "GDScript",
-"path": "res://battle/status_effects/status_effect_manager.gd"
-}, {
-"base": "Reference",
-"class": "Turn",
-"language": "GDScript",
-"path": "res://battle/turn.gd"
-}, {
-"base": "Reference",
-"class": "TurnQueue",
-"language": "GDScript",
-"path": "res://utils/turn_queue.gd"
-}, {
-"base": "Equipment",
-"class": "Weapon",
-"language": "GDScript",
-"path": "res://item/weapon.gd"
-} ]
-_global_script_class_icons={
-"Accessory": "",
-"Armor": "",
-"BaseNPC": "",
-"BattleAction": "",
-"BattleActionType": "",
-"BattleRewards": "",
-"BattleUI": "",
-"Battler": "",
-"BattlerAI": "",
-"CharacterAnim": "",
-"CharacterStats": "",
-"DownedStatus": "",
-"EnemySpot": "",
-"Equipment": "",
-"FlagSetterNPC": "",
-"GrowthStats": "",
-"Helmet": "",
-"Hit": "",
-"InteractableObject": "",
-"Inventory": "",
-"InventoryItem": "",
-"KeyboardBasedTabsContainer": "",
-"LocalScene": "",
-"Location": "",
-"LocationRoom": "",
-"NPCMovement": "",
-"Party": "",
-"PartyMember": "",
-"PartyMemberSummary": "",
-"PlayerProxy": "",
-"RandomAI": "",
-"SaveData": "",
-"SavesPopup": "",
-"StatusEffect": "",
-"StatusEffectManager": "",
-"Turn": "",
-"TurnQueue": "",
-"Weapon": ""
-}
+config_version=5
 
 [application]
 
 config/name="Kadath"
 run/main_scene="res://ui/04_templates/main_menu/main_menu.tscn"
+config/features=PackedStringArray("4.0")
 config/icon="res://icon.png"
 config/version="0.1.0"
 
 [autoload]
 
-PlayerVars="*res://globals/player_vars.gd"
-UserSettings="*res://globals/user_settings.gd"
+VarsService="*res://globals/vars_service.gd"
+SettingsService="*res://globals/settings_service.gd"
+BattleService="*res://globals/battle_service.gd"
+CameraService="*res://globals/camera_service.gd"
+CutsceneService="*res://globals/cutscene_service.gd"
+EntitiesService="*res://globals/entities_service.gd"
+EnvironmentService="*res://globals/environment_service.gd"
+InputService="*res://globals/input_service.gd"
+SavesService="*res://globals/saves_service.gd"
 SceneSwitcher="*res://globals/scene_switcher.gd"
-SaveManager="*res://globals/save_manager.gd"
-BattleLoop="*res://battle/battle_loop.gd"
+DialogService="*res://globals/dialog_service.gd"
+DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+LayersService="*res://globals/layers_service.gd"
+UIService="*res://globals/ui_service.gd"
+
+[dialogue_manager]
+
+general/wrap_lines=true
 
 [display]
 
-window/size/width=1280
-window/size/height=720
-window/size/resizable=false
-window/size/test_width=1280
-window/size/test_height=720
-window/dpi/allow_hidpi=true
-window/stretch/mode="2d"
-window/stretch/aspect="keep"
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="viewport"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/EXP-System-Dialog/plugin.cfg", "res://addons/dialog_boxes/plugin.cfg" )
+enabled=PackedStringArray("res://addons/dialog_boxes/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg")
+
+[gui]
+
+theme/custom="res://ui/01_atoms/theme.tres"
+theme/default_font_antialiasing=0
 
 [importer_defaults]
 
@@ -297,77 +79,70 @@ texture={
 
 ui_accept={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":88,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":90,"physical_keycode":0,"key_label":0,"unicode":122,"echo":false,"script":null)
+]
 }
 ui_select={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":67,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": []
 }
 ui_cancel={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":90,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
-}
-ui_focus_next={
-"deadzone": 0.5,
-"events": [  ]
-}
-ui_focus_prev={
-"deadzone": 0.5,
-"events": [  ]
-}
-ui_left={
-"deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
-}
-ui_right={
-"deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":88,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
 }
 ui_up={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194320,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":11,"pressure":0.0,"pressed":false,"script":null)
+]
 }
 ui_down={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194322,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
 }
 ui_page_up={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 ui_page_down={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 ui_home={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 ui_end={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
-run={
+ui_text_caret_down={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":90,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": []
+}
+ui_text_clear_carets_and_selection={
+"deadzone": 0.5,
+"events": []
 }
 ui_menu={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":83,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
+run={
+"deadzone": 0.5,
+"events": []
 }
 
 [input_devices]
 
 pointing/emulate_mouse_from_touch=false
+
+[internationalization]
+
+locale/translations_pot_files=PackedStringArray("res://location/000_prologue_kadath/story.dialogue")
 
 [layer_names]
 
@@ -378,12 +153,12 @@ pointing/emulate_mouse_from_touch=false
 
 [rendering]
 
+anti_aliasing/screen_space_roughness_limiter/enabled=false
+environment/defaults/default_clear_color=Color(0.729412, 0.192157, 0.945098, 1)
+environment/defaults/default_environment="res://default_env.tres"
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
 2d/snapping/use_gpu_pixel_snap=true
 vram_compression/import_etc=true
-vram_compression/import_etc2=false
 2d/options/ninepatch_mode=0
-environment/default_clear_color=Color( 0.729412, 0.192157, 0.945098, 1 )
-environment/default_environment="res://default_env.tres"
 quality/2d/use_pixel_snap=true

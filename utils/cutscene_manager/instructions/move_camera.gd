@@ -5,31 +5,32 @@ var mode: String
 var position: Vector2
 var time: float
 
-func _init(movement_param, mode, time):
-	self.movement_param = movement_param
-	self.mode = mode	
-	self.time = time
+func _init(init_movement_param, init_mode, init_time):
+	self.movement_param = init_movement_param
+	self.mode = init_mode	
+	self.time = init_time
 
-func execute(cutscene_manager):
+func execute(tree: SceneTree):
 	match self.mode:
 		"target_entity":
-			var entity = cutscene_manager.get_entity(self.movement_param)
+			var entity = EntitiesService.get_entity(self.movement_param)
 			self.position = entity.global_position	
 		"target_position":
 			self.position = movement_param
 		"displacement":
-			self.position = cutscene_manager.camera.global_position + self.movement
+			self.position = CameraService.get_camera_global_position() + self.movement
 		
-	cutscene_manager.move_camera_tween.interpolate_property(
-		cutscene_manager.camera, 
+	var tween = tree.create_tween()
+	
+	tween.interpolate_property(
+		CameraService.get_camera(), 
 		"global_position", 
-		cutscene_manager.camera.global_position, 
+		CameraService.get_camera_global_position(),
 		self.position,
 		self.time
 	)
-	cutscene_manager.move_camera_tween.start()
 	
-	yield(cutscene_manager, "move_camera_finished")
+	await tween.finished
 	
-func str():
+func _to_string():
 	return "move_camera to %s in %f" % [str(self.position), self.time]

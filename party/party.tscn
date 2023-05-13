@@ -1,35 +1,35 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://b1ap7o3phiuv3"]
 
-[ext_resource path="res://party/party.gd" type="Script" id=1]
-[ext_resource path="res://party/party_member.tscn" type="PackedScene" id=2]
-[ext_resource path="res://party/arden/growth.tres" type="Resource" id=3]
-[ext_resource path="res://party/arden/icon.png" type="Texture" id=4]
-[ext_resource path="res://party/arden/arden_anim.tscn" type="PackedScene" id=5]
+[ext_resource type="Script" path="res://party/party.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://bomxx7doloqmu" path="res://party/party_member.tscn" id="2"]
+[ext_resource type="Resource" uid="uid://dbl1jea1yllcp" path="res://party/arden/growth.tres" id="3"]
+[ext_resource type="Texture2D" uid="uid://c7iv4j4yioinv" path="res://party/arden/icon.png" id="4"]
+[ext_resource type="PackedScene" uid="uid://d3ao8055xmv7" path="res://party/arden/arden_anim.tscn" id="5"]
 
 [node name="Party" type="Node2D" groups=["save"]]
-script = ExtResource( 1 )
+script = ExtResource("1")
 
-[node name="Arden" parent="." instance=ExtResource( 2 )]
+[node name="Arden" parent="." instance=ExtResource("2")]
 display_name = "Arden"
-growth = ExtResource( 3 )
+growth = ExtResource("3")
 unlocked = true
 experience = 200
-icon = ExtResource( 4 )
+icon = ExtResource("4")
 
 [node name="Battler" parent="Arden" index="0"]
 anim_path = NodePath("../Anim")
 
-[node name="Anim" parent="Arden" instance=ExtResource( 5 )]
+[node name="Anim" parent="Arden" instance=ExtResource("5")]
 
-[node name="Arden2" parent="." instance=ExtResource( 2 )]
+[node name="Arden2" parent="." instance=ExtResource("2")]
 display_name = "Arden2"
-growth = ExtResource( 3 )
-icon = ExtResource( 4 )
+growth = ExtResource("3")
+icon = ExtResource("4")
 
 [node name="Battler" parent="Arden2" index="0"]
 anim_path = NodePath("../Anim")
 
-[node name="Anim" parent="Arden2" instance=ExtResource( 5 )]
+[node name="Anim" parent="Arden2" instance=ExtResource("5")]
 
 [editable path="Arden"]
 [editable path="Arden/Battler"]

@@ -1,0 +1,14 @@
+res://default_env.tres
+res://ui/04_templates/battle_ui/battle_ui.tscn
+res://ui/01_atoms/theme.tres
+res://ui/01_atoms/panel-small/normal.tres
+res://ui/04_templates/main_menu/main_menu.tscn
+res://ui/04_templates/pause_menu/pause_menu.tscn
+res://ui/02_molecules/keyboard_based_tab_container/keyboard_based_tab_container.tscn
+res://main/local_scene.gd
+res://globals/cutscene_service.gd
+res://globals/dialog_service.gd
+res://globals/environment_service.gd
+res://main/local_scene.tscn
+res://party/arden/growth.tres
+res://utils/cutscene_manager/instructions/fade_overlay.gd

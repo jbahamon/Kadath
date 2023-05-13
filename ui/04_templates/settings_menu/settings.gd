@@ -1,10 +1,10 @@
 extends PanelContainer
 
-export var icon: Texture 
+@export var icon: Texture2D 
 
-func grab_focus():
-	return $SettingsMenu.grab_focus()
+func on_grab_focus():
+	return $SettingsMenu.on_grab_focus()
 
 
-func release_focus():
-	return $SettingsMenu.release_focus()
+func on_release_focus():
+	return $SettingsMenu.on_release_focus()

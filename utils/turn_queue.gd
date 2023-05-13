@@ -11,7 +11,7 @@ class TurnQueueElement:
 		remaining_charge = CHARGE_TO_ACT
 
 	func get_time_to_act() -> int:
-		return int(ceil(self.remaining_charge/self.actor.battler.get_speed()))
+		return int(ceil(self.remaining_charge/self.actor.battler.get_velocity()))
 
 	static func sort(a: TurnQueueElement, b: TurnQueueElement) -> bool:
 		var time_diff = a.get_time_to_act() - b.get_time_to_act()
@@ -41,7 +41,7 @@ func erase(actor):
 		else:
 			idx += 1
 	
-	self._elements.remove(idx)
+	self._elements.remove_at(idx)
 	
 func get_preview(preview_size: int) -> Array:
 	var ret = []
@@ -58,7 +58,7 @@ func get_preview(preview_size: int) -> Array:
 		var time = next_element.get_time_to_act()
 		
 		for element in self._elements:
-			element.remaining_charge = clamp(element.remaining_charge - time * element.actor.battler.get_speed(), 0, 100)
+			element.remaining_charge = clamp(element.remaining_charge - time * element.actor.battler.get_velocity(), 0, 100)
 		next_element.remaining_charge = CHARGE_TO_ACT
 	
 	for element in self._elements:
@@ -79,7 +79,7 @@ func get_current_actors() -> Array:
 		var time = next_element.get_time_to_act()
 		
 		for element in self._elements:
-			element.remaining_charge = clamp(element.remaining_charge - time * element.actor.battler.get_speed(), 0, 100)
+			element.remaining_charge = clamp(element.remaining_charge - time * element.actor.battler.get_velocity(), 0, 100)
 		next_element.remaining_charge = CHARGE_TO_ACT
 		
 		next_element = self.get_next_element()

@@ -5,9 +5,8 @@ var time: float
 func _init(init_time: float):
 	self.time = init_time
 	
-func execute(cutscene_manager):
-	var local_scene: LocalScene = cutscene_manager.local_scene
-	yield(local_scene.get_tree().create_timer(time), "timeout")
+func execute(tree: SceneTree):
+	await tree.create_timer(time).timeout
 
-func str():
+func _to_string():
 	return "wait %f" % self.time

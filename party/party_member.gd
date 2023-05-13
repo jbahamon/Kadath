@@ -1,14 +1,14 @@
 # Represents a playable character to add in the player's party
 # Holds the data and nodes for the character's battler, anim,
 # and the character's stats to save the game
-extends KinematicBody2D
+extends CharacterBody2D
+class_name PartyMember
 
 var PartyMemberSummary = preload("res://ui/02_molecules/party_member_summary/party_member_summary.tscn")
 
-class_name PartyMember
 
 enum Id {
-	ARDEN = 1 << 0
+	ARDEN = 1 << 0,
 	ZOOG = 1 << 1,
 	KIT = 1 << 2,
 	LENG = 1 << 3,
@@ -16,24 +16,22 @@ enum Id {
 	KURANES = 1 << 5,
 }
 
-onready var SAVE_KEY: String = "party_member_" + name
-onready var anim = $Anim
-onready var battler = $Battler
-onready var collision = $CollisionShape2D
+@onready var SAVE_KEY: String = "party_member_" + name
+@onready var anim = $Anim
+@onready var battler = $Battler
+@onready var collision = $CollisionShape2D
 
-export (Id) var id: int = Id.ARDEN
-export var display_name: String
-export var growth: Resource
-export var unlocked = false
-export var experience: int setget _set_experience
-export var icon: Texture
+@export_flags ("ARDEN", "ZOOG", "KIT", "LENG", "UPTON", "KURANES") var id: int = Id.ARDEN
+@export var display_name: String
+@export var growth: Resource
+@export var unlocked = false
+@export var experience: int : set = _set_experience
+@export var icon: Texture2D
 
-var equipped_weapon: Weapon setget set_weapon
-var equipped_helmet: Helmet setget set_helmet
-var equipped_armor: Armor setget set_armor
-var equipped_accessory: Accessory setget set_accessory
-
-var velocity: Vector2 = Vector2.ZERO
+var equipped_weapon: Weapon : set = set_weapon
+var equipped_helmet: Helmet : set = set_helmet
+var equipped_armor: Armor : set = set_armor
+var equipped_accessory: Accessory : set = set_accessory
 
 func _ready():
 	assert(growth)
@@ -89,7 +87,7 @@ func save(save_game: Resource):
 	}
 
 
-func load(save_game: Resource):
+func load_game_data(save_game: Resource):
 	var data: Dictionary = save_game.data[SAVE_KEY]
 	display_name = data["display_name"]
 	unlocked = data["unlocked"]
@@ -147,7 +145,7 @@ func set_accessory(accessory: Accessory):
 	equipped_accessory = accessory
 
 func instance_ui_control():
-	var control = PartyMemberSummary.instance()
+	var control = PartyMemberSummary.instantiate()
 	control.party_member = self
 	return control
 
@@ -157,7 +155,7 @@ func get_allies(actors: Array):
 	var allies = []
 	var script = get_script()
 	for actor in actors:
-		if actor is script:
+		if script.instance_has(actor):
 			allies.append(actor)
 	return allies
 	
@@ -165,7 +163,7 @@ func get_enemies(actors: Array):
 	var enemies = []
 	var script = get_script()
 	for actor in actors:
-		if not actor is script:
+		if script.instance_has(actor):
 			enemies.append(actor)
 	return enemies
 	
@@ -186,7 +184,7 @@ func move_to(target: Vector2, speed: float):
 	var time = (self.global_position - target).length()/speed
 	self.velocity = (target - self.global_position).normalized() * speed
 	self.set_physics_process(true)
-	yield(get_tree().create_timer(time), "timeout")
+	await get_tree().create_timer(time).timeout
 	self.velocity = Vector2.ZERO
 	self.set_physics_process(was_processing_physics)
 

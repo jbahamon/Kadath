@@ -2,4 +2,4 @@ extends InventoryItem
 
 class_name Equipment
 
-export (int, FLAGS, "Arden", "Zoog", "Kit", "Leng", "Upton", "Kuranes") var equippable_by
+@export_flags("Arden", "Zoog", "Kit", "Leng", "Upton", "Kuranes") var equippable_by

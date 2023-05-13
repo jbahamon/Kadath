@@ -3,20 +3,20 @@ extends PanelContainer
 signal item_requested(cls, party_member)
 signal focus_released(party_member)
 
-onready var weapon_name: Button = $Panel/MarginContainer/Equipment/WeaponName
-onready var weapon_stats: Label = $Panel/MarginContainer/Equipment/WeaponStats
-onready var helmet_name: Button = $Panel/MarginContainer/Equipment/HelmetName
-onready var helmet_stats: Label = $Panel/MarginContainer/Equipment/HelmetStats
-onready var armor_name: Button = $Panel/MarginContainer/Equipment/ArmorName
-onready var armor_stats: Label = $Panel/MarginContainer/Equipment/ArmorStats
-onready var accessory_name: Button = $Panel/MarginContainer/Equipment/AccessoryName
+@onready var weapon_name: Button = $Panel/MarginContainer/Equipment/WeaponName
+@onready var weapon_stats: Label = $Panel/MarginContainer/Equipment/WeaponStats
+@onready var helmet_name: Button = $Panel/MarginContainer/Equipment/HelmetName
+@onready var helmet_stats: Label = $Panel/MarginContainer/Equipment/HelmetStats
+@onready var armor_name: Button = $Panel/MarginContainer/Equipment/ArmorName
+@onready var armor_stats: Label = $Panel/MarginContainer/Equipment/ArmorStats
+@onready var accessory_name: Button = $Panel/MarginContainer/Equipment/AccessoryName
 
-onready var attack_value: Label = $Panel/Stats/AttackValue
-onready var defense_value: Label = $Panel/Stats/DefenseValue
-onready var magic_attack_value: Label = $Panel/Stats/MagicAttackValue
-onready var magic_defense_value: Label = $Panel/Stats/MagicDefenseValue
-onready var speed_value: Label = $Panel/Stats/SpeedValue
-onready var luck_value: Label = $Panel/Stats/LuckValue
+@onready var attack_value: Label = $Panel/Stats/AttackValue
+@onready var defense_value: Label = $Panel/Stats/DefenseValue
+@onready var magic_attack_value: Label = $Panel/Stats/MagicAttackValue
+@onready var magic_defense_value: Label = $Panel/Stats/MagicDefenseValue
+@onready var speed_value: Label = $Panel/Stats/SpeedValue
+@onready var luck_value: Label = $Panel/Stats/LuckValue
 
 var party_member
 
@@ -24,19 +24,19 @@ var selected_property: String = ""
 var selected_button: Button = null
 
 func _unhandled_input(event):
-	if event.is_action_pressed("ui_cancel") and self.has_focus():
+	if event.is_action_pressed("ui_cancel") and self.element_has_focus():
 		self.set_process_unhandled_input(false)
 		emit_signal("focus_released")
-		get_tree().set_input_as_handled()
+		get_viewport().set_input_as_handled()
 		
-func on_party_member_focused(party_member):
-	if party_member != null:
-		self.party_member = party_member
+func on_party_member_focused(focused_party_member):
+	if focused_party_member != null:
+		self.party_member = focused_party_member
 		update_ui_info()
 
-func on_party_member_selected(party_member):
-	if party_member != null:
-		on_party_member_focused(party_member)
+func on_party_member_selected(selected_party_member):
+	if selected_party_member != null:
+		on_party_member_focused(selected_party_member)
 		self.set_process_unhandled_input(true)
 		weapon_name.grab_focus()
 		weapon_name.grab_click_focus()
@@ -58,7 +58,7 @@ func update_ui_info():
 	speed_value.text = str(battler.stats.speed)
 	luck_value.text = str(battler.stats.luck)
 
-func has_focus() -> bool:
+func element_has_focus() -> bool:
 	return (weapon_name.has_focus() or helmet_name.has_focus() or 
 	armor_name.has_focus() or accessory_name.has_focus())
 	
@@ -110,11 +110,11 @@ func on_item_selected(item: Equipment):
 		party_member.set(selected_property, item)
 		update_ui_info()
 		
-	selected_button.pressed = false
+	selected_button.button_pressed = false
 	selected_button.grab_click_focus()
 	selected_button.grab_focus()
 
 func on_item_cancel():
-	selected_button.pressed = false
+	selected_button.button_pressed = false
 	selected_button.grab_click_focus()
 	selected_button.grab_focus()

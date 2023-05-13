@@ -2,4 +2,4 @@ extends Equipment
 
 class_name Helmet
 
-export var defense: int
+@export var defense: int

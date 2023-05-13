@@ -1,4 +1,4 @@
-tool
+@tool
 extends "./text_panel_container.gd"
 
 signal transition_finished
@@ -6,24 +6,23 @@ signal text_shown
 
 var AutoScroller = preload("./autoscroller.gd")
 var _text_label: RichTextLabel
-var _text_tween: Tween
+
 var _scroller
+
+@onready var _text_tween = get_tree().create_tween()
 
 func _init():
 	_text_label = RichTextLabel.new()
-	_text_label.rect_clip_content = false
-	
-	_text_tween = Tween.new()
-	add_child(_text_tween)
+	_text_label.clip_contents = false
 	_scroller = AutoScroller.new()
 	_scroller.initialize(_text_label)
 	
-	self.rect_clip_content = true
+	self.clip_contents = true
 
 func _ready():
+	self._text_tween.stop()
 	self.size_flags_vertical = SIZE_EXPAND_FILL
-	_text_tween.connect("tween_all_completed", self, "on_text_shown")
-
+	
 func get_content():
 	return _text_label
 	
@@ -31,9 +30,9 @@ func set_text_property(property_name, value):
 	_text_label.set(property_name, value)
 	self.update_outline_margin()
 	
-func add_font_override(name, value):
-	.add_font_override(name, value)
-	_text_label.add_font_override(name, value)
+func add_theme_font_override(name, value):
+	super.add_theme_font_override(name, value)
+	_text_label.add_theme_font_override(name, value)
 	self.update_outline_margin()
 
 func get_max_outline():
@@ -62,8 +61,8 @@ func get_max_outline():
 	return max_outline
 
 func wait_for_label_resizing():
-	if _text_label.rect_size == Vector2.ZERO:
-		yield(_text_label, "resized")
+	if _text_label.size == Vector2.ZERO:
+		await _text_label.resized
 	else:
 		return null
 
@@ -74,16 +73,14 @@ func on_transition_finished():
 	emit_signal("transition_finished")
 
 func reset_playback():
-	_text_tween.reset(_scroller)
-	_text_tween.reset(_text_label)
-	_text_tween.playback_speed = 1.0
+	_text_tween.stop()
 	
 func start_playback(text: String, speed: float):
 	_text_label.visible_characters = 0
 	_text_label.scroll_to_line(0)
 	
 	if _text_label.bbcode_enabled:
-		_text_label.bbcode_text = text
+		_text_label.text = text
 	else:
 		_text_label.text = text
 	
@@ -101,12 +98,14 @@ func start_playback(text: String, speed: float):
 		_scroller, "update_scroll", 0.0, 1.0, time,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
 	)
+	
 	_text_tween.start()
 
-func set_speed(factor: float):
+func set_velocity(factor: float):
 	_text_tween.playback_speed = factor
+	pass
 
 func clear():
-	_text_label.bbcode_text = ""
+	_text_label.text = ""
 	_text_label.text = ""
 	

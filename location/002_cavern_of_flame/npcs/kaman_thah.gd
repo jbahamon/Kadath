@@ -28,7 +28,7 @@ func on_player_interaction(player_proxy: PlayerProxy):
 		
 		self.dialog_nid = DialogNodes.QUEST_DONE
 	
-	.on_player_interaction(player_proxy)
+	super.on_player_interaction(player_proxy)
 	
 	match self.dialog_nid:
 		DialogNodes.BEFORE_QUEST:

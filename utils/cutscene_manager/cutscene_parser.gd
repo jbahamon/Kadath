@@ -16,6 +16,7 @@ var Move = preload("res://utils/cutscene_manager/instructions/move.gd")
 var LookAt = preload("res://utils/cutscene_manager/instructions/look_at.gd")
 var Call = preload("res://utils/cutscene_manager/instructions/call.gd")
 var StartDialog = preload("res://utils/cutscene_manager/instructions/start_dialog.gd")
+var Narrate = preload("res://utils/cutscene_manager/instructions/narrate.gd")
 
 var AssignProxy = preload("res://utils/cutscene_manager/instructions/assign_proxy.gd")
 
@@ -61,7 +62,10 @@ func _init():
 	patterns["CALL"].compile("^(?<Entity>.+) (?<FunctionName>.+)( (?<Args>.*)$|$)")
 	
 	patterns["START_DIALOG"] = RegEx.new()
-	patterns["START_DIALOG"].compile("^(?<DialogId>.+) ID (?<NodeId>.+) SOURCE (?<Source>.+)$")
+	patterns["START_DIALOG"].compile("^(?<DialogId>.+) SOURCE (?<Source>.+)$")
+	
+	patterns["NARRATE"] = RegEx.new()
+	patterns["NARRATE"].compile("^(?<DialogId>.+) FOR (?<Duration>.+)$")
 	
 	patterns["COLOR"] = RegEx.new()
 	patterns["COLOR"].compile("\\([ ]*(?<R>[^ ,)]+)[ ]*,[ ]*(?<G>[^ ,)]+)[ ]*,[ ]*(?<B>[^ ,)]+)[ ]*,[ ]*(?<A>[^ ,)]+)[ ]*\\)")
@@ -74,8 +78,7 @@ func _init():
 
 
 func parse_cutscene_from_file(cutscene_name: String): 
-	var cutscene_file = File.new()
-	cutscene_file.open("res://cutscenes/%s.txt" % cutscene_name, File.READ)
+	var cutscene_file = FileAccess.open("res://cutscenes/%s.txt" % cutscene_name, FileAccess.READ)
 	var stack = self.get_initial_stack()
 	
 	while not cutscene_file.eof_reached():
@@ -106,7 +109,7 @@ func parse_line(stack: Array, line: String):
 			
 	var tokens = line.strip_edges().split(" ", false, 1)
 
-	if not tokens.empty():
+	if not tokens.is_empty():
 		var instruction_name = tokens[0]
 		var args = tokens[1] if tokens.size() > 1 else ""
 
@@ -186,7 +189,7 @@ func parse_instruction(stack: Array, instruction_name: String, args: String):
 			var shake_match: RegExMatch = self.patterns["SHAKE"].search(args)
 			instruction = Call.new(
 				"CAMERA",
-				"shake",
+				"do_shake",
 				[
 					self.parse_float(shake_match.get_string("Duration")),
 					self.parse_float(shake_match.get_string("Frequency")),
@@ -246,8 +249,13 @@ func parse_instruction(stack: Array, instruction_name: String, args: String):
 			var dialog_match: RegExMatch = self.patterns["START_DIALOG"].search(args)
 			instruction = StartDialog.new(
 				self.parse_string(dialog_match.get_string("DialogId")),
-				self.parse_int(dialog_match.get_string("NodeId")),
 				self.parse_string(dialog_match.get_string("Source"))
+			)
+		CutsceneInstruction.Type.NARRATE:
+			var narrate_match: RegExMatch = self.patterns["NARRATE"].search(args)
+			instruction = Narrate.new(
+				self.parse_string(narrate_match.get_string("DialogId")),
+				self.parse_float(narrate_match.get_string("Duration"))
 			)
 		CutsceneInstruction.Type.HIDE:
 			instruction = Call.new(

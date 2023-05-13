@@ -1,4 +1,4 @@
-extends Reference
+extends RefCounted
 class_name Inventory
 
 signal inventory_changed(change_type)
@@ -14,10 +14,10 @@ const save_key = "inventory"
 var amounts = {}
 var order = []
 
-export (int) var MAX_COINS = 9999999
+@export var MAX_COINS = 9999999
 
 
-func load(save_data: SaveData) -> void:
+func load_game_data(save_data: SaveData) -> void:
 	self.amounts = save_data.data[save_key]["amounts"]
 	self.order = save_data.data[save_key]["order"]
 
@@ -70,12 +70,12 @@ func get_sorted_items_amounts() -> Array:
 func get_equipment(cls, equippable_flag: int) -> Array:
 	var ret = []
 	for item in order:
-		if item is cls and (item.equippable_by & equippable_flag):
+		if cls.instance_has(item) and (item.equippable_by & equippable_flag):
 			ret.append(item)
 	return ret
 
 func sort():
-	order.sort_custom(ItemSorter, "sort_ascending")
+	order.sort_custom(Callable(ItemSorter,"sort_ascending"))
 	emit_signal("inventory_changed", Change.SORT)
 	
 class ItemSorter:

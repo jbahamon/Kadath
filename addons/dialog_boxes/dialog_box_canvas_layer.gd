@@ -1,4 +1,4 @@
-tool
+@tool
 extends CanvasLayer
 var SourcePanelContainer = preload("./source_panel_container.gd")
 var DialogPanelContainer = preload("./dialog_panel_container.gd")
@@ -12,55 +12,55 @@ enum TransitionMode { NONE, UNROLL, FADE }
 
 const ANIMATION_DISPLAY_TEXT = "display_text"
 
-
 # Behavior
-export var block_input: bool = true
-export(TransitionMode) var transition = TransitionMode.NONE
-export var transition_time_ms: float = 20.0
+@export var block_input: bool = true
+@export var transition: TransitionMode = TransitionMode.NONE
+@export var transition_time_ms: float = 20.0
 
 # Sizing
-export var height_percent: float = 0.2 
-export var margin: int = 0 setget set_margin
-export var padding: int = 0 setget set_padding
-export var separation: int = 1 setget set_separation
+@export var height_percent: float = 0.2 
+@export var margin: int = 0 : set = set_margin
+@export var padding: int = 0 : set = set_padding
+@export var separation: int = 1 : set = set_separation
 
 # Positioning
-export(DialogPosition) var positioning = DialogPosition.BOTTOM setget set_positioning
+@export var positioning: DialogPosition = DialogPosition.BOTTOM : set = set_positioning
 
 # Box styling
-export var advance_indicator_texture: Texture
-export var show_scroll: bool = false setget set_show_scroll
-export var source_stylebox: StyleBox setget set_source_stylebox
-export var dialog_stylebox: StyleBox setget set_dialog_stylebox
-export var theme: Theme setget set_theme
+@export var advance_indicator_texture: Texture2D
+@export var show_scroll: bool = false : set = set_show_scroll
+@export var source_stylebox: StyleBox : set = set_source_stylebox
+@export var dialog_stylebox: StyleBox : set = set_dialog_stylebox
+@export var theme: Theme : set = set_theme
 
 # Text speed
-export var text_speed: float = 9.0
-export var speedup_factor: float = 2.0
+@export var text_speed: float = 9.0
+@export var speedup_factor: float = 2.0
 
 # Text styling
 
-export var normal_font: Font setget set_normal_font
-export var mono_font: Font setget set_mono_font
-export var bold_font: Font setget set_bold_font
-export var italics_font: Font setget set_italics_font
-export var bold_italics_font: Font setget set_bold_font
-export var meta_underlined: bool = true setget set_meta_underlined
-export var tab_size: int = 4 setget set_tab_size
-export var custom_effects: Array = [] setget set_custom_effects
-export var bbcode_enabled: bool = false setget set_bbcode_enabled
+@export var normal_font: Font : set = set_normal_font
+@export var mono_font: Font : set = set_mono_font
+@export var bold_font: Font : set = set_bold_font
+@export var italics_font: Font : set = set_italics_font
+@export var bold_italics_font: Font : set = set_bold_font
+@export var meta_underlined: bool = true : set = set_meta_underlined
+@export var tab_size: int = 4 : set = set_tab_size
+@export var custom_effects: Array = [] : set = set_custom_effects
+@export var bbcode_enabled: bool = false : set = set_bbcode_enabled
 
+@onready var _transition_tween: Tween = get_tree().create_tween()
 
 # UI Components
 var _vbox: VBoxContainer
 
 var _source_container: Container
 var _dialog_container: Container
-var _transition_tween: Tween
+
 var _scroller
 var _advance_indicator: TextureRect
 var current_state = DialogState.HIDDEN
-var text_queue: PoolStringArray = PoolStringArray()
+var text_queue: PackedStringArray = PackedStringArray()
 var default_source: String = '????'
 
 func _init():
@@ -71,27 +71,23 @@ func _init():
 	_source_container = SourcePanelContainer.new()
 	_source_container.name = "source_panel"
 	_source_container.theme = theme
-	_source_container.add_stylebox_override("panel", source_stylebox)
 	
 	_vbox.add_child(_source_container)
 	
 	_dialog_container = DialogPanelContainer.new()
 	_dialog_container.name ="dialog_panel"
 	_dialog_container.theme = theme
-	_dialog_container.add_stylebox_override("panel", dialog_stylebox)
 	
 	_vbox.add_child(_dialog_container)
 
 	_advance_indicator = TextureRect.new()
 	_advance_indicator.visible = false
 	
-	_transition_tween = Tween.new()
-	
 	self.add_child(_vbox)
 	self.add_child(_advance_indicator)
-	self.add_child(_transition_tween)
 	
 func _ready():
+	self._transition_tween.stop()
 	
 	set_process_unhandled_input(false)
 		
@@ -102,26 +98,26 @@ func _ready():
 	self.init_panels()
 	
 	_dialog_container.update_outline_margin()
-	_transition_tween.connect("tween_all_completed", self, "on_transition_finished")
-	_dialog_container.connect("text_shown", self, "on_text_shown")
+	_transition_tween.connect("loop_finished", Callable(self,"on_transition_finished"))
+	_dialog_container.connect("text_shown", Callable(self,"on_text_shown"))
 	
 
 func _unhandled_input(event):
 	match current_state:
 		DialogState.ADVANCING:
 			if event.is_action_pressed("ui_accept"):
-				_dialog_container.set_speed(speedup_factor)
+				_dialog_container.set_velocity(speedup_factor)
 			elif event.is_action_released("ui_accept"):
-				_dialog_container.set_speed(1.0)
+				_dialog_container.set_velocity(1.0)
 		DialogState.WAITING_FOR_INPUT:
 			if event.is_action_pressed("ui_accept"):
-				if text_queue.empty():
+				if text_queue.is_empty():
 					change_state(DialogState.TRANSITION_OUT)
 				else:
 					change_state(DialogState.ADVANCING)
 				
 	if block_input:
-		get_tree().set_input_as_handled()
+		get_viewport().set_input_as_handled()
 
 func set_default_source(source: String):
 	self.default_source = source
@@ -154,14 +150,12 @@ func change_state(new_state: int):
 			
 			set_process_unhandled_input(true)
 			
-			if text_queue.empty():
+			if text_queue.is_empty():
 				# We let the state last for at least a single frame.
 				change_state(DialogState.TRANSITION_OUT)
 			else:
 				# We have to wait until the label is inflated.
-				var ret = _dialog_container.wait_for_label_resizing()
-				if ret is GDScriptFunctionState:
-					yield(ret, "completed")
+				await _dialog_container.wait_for_label_resizing()
 				dequeue_text()
 		DialogState.WAITING_FOR_INPUT:
 			if _advance_indicator.texture != null:
@@ -185,7 +179,7 @@ func transition_in():
 	# change to DialogPanelContainer.transition_in()
 	match transition:
 		TransitionMode.NONE:
-			yield(get_tree(), "idle_frame")
+			await get_tree().process_frame 
 			change_state(DialogState.ADVANCING)
 		TransitionMode.FADE:
 			
@@ -196,22 +190,22 @@ func transition_in():
 			)
 			_transition_tween.start()
 		TransitionMode.UNROLL:
-			_dialog_container.rect_pivot_offset = _dialog_container.rect_size/2.0
+			_dialog_container.pivot_offset = _dialog_container.size/2.0
 			_transition_tween.interpolate_property(
-				_dialog_container, "rect_scale",
+				_dialog_container, "scale",
 				Vector2(1, 0), Vector2(1, 1), transition_time_ms/1000.0,
 				Tween.TRANS_LINEAR, Tween.EASE_IN
 			)
 			_transition_tween.start()
 	
-	yield(get_tree(), "idle_frame")
+	await get_tree().process_frame
 	_vbox.visible = true
 	
 func transition_out():
 	_dialog_container.clear()
 	match transition:
 		TransitionMode.NONE:
-			yield(get_tree(), "idle_frame")
+			await get_tree().idle_frame
 			change_state(DialogState.HIDDEN)
 		TransitionMode.FADE:
 			_transition_tween.interpolate_property(
@@ -220,27 +214,27 @@ func transition_out():
 				Tween.TRANS_LINEAR, Tween.EASE_IN
 			)
 		TransitionMode.UNROLL:
-			_dialog_container.rect_pivot_offset = _dialog_container.rect_size/2.0
+			_dialog_container.pivot_offset = _dialog_container.size/2.0
 			_transition_tween.interpolate_property(
-				_dialog_container, "rect_scale",
+				_dialog_container, "scale",
 				Vector2(1, 1), Vector2(1, 0), transition_time_ms/1000.0,
 				Tween.TRANS_LINEAR, Tween.EASE_IN
 			)
 			_transition_tween.start()
 
 	
-func queue_texts(texts: PoolStringArray):
+func queue_texts(texts: PackedStringArray):
 	text_queue.append_array(texts)
 	match current_state:
 		DialogState.HIDDEN:
 			change_state(DialogState.TRANSITION_IN)
 			
 func dequeue_text():
-	if text_queue.empty():
+	if text_queue.is_empty():
 		return
 	
 	var new_text: String = text_queue[0]
-	text_queue.remove(0)
+	text_queue.remove_at(0)
 	
 	var source = self.default_source
 	var text = new_text
@@ -249,7 +243,7 @@ func dequeue_text():
 	
 	if split.size() > 1 and split[0].begins_with("[") and split[0].ends_with("]"):
 		split[0] = split[0].substr(1, split[0].length() - 2)
-		source = split[0].format(PlayerVars.strings)
+		source = split[0].format(VarsService.strings)
 		text = split[1]
 		
 	if source == "None":
@@ -264,10 +258,10 @@ func dequeue_text():
 
 func set_margin(new_margin: int):
 	margin = new_margin
-	_vbox.margin_top = new_margin
-	_vbox.margin_bottom = new_margin
-	_vbox.margin_left = new_margin
-	_vbox.margin_right = new_margin
+	_vbox.offset_top = new_margin
+	_vbox.offset_bottom = new_margin
+	_vbox.offset_left = new_margin
+	_vbox.offset_right = new_margin
 
 func set_padding(new_value: int):
 	padding = new_value
@@ -276,19 +270,19 @@ func set_padding(new_value: int):
 
 func set_separation(new_value: int):
 	separation = new_value
-	_vbox.add_constant_override("separation", new_value)
+	_vbox.add_theme_constant_override("separation", new_value)
 
 
 func update_vbox_positioning(new_positioning, height_percent, margin):
 	match new_positioning:
 		DialogPosition.BOTTOM:
-			_vbox.set_anchors_and_margins_preset(Control.PRESET_BOTTOM_WIDE, Control.PRESET_MODE_MINSIZE, margin)
-			_vbox.set_anchor_and_margin(MARGIN_TOP, 1.0 - height_percent, margin)
+			_vbox.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE, Control.PRESET_MODE_MINSIZE, margin)
+			_vbox.set_anchor_and_offset(SIDE_TOP, 1.0 - height_percent, margin)
 			_vbox.grow_vertical = Control.GROW_DIRECTION_BEGIN
 			_vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		DialogPosition.TOP:
-			_vbox.set_anchors_and_margins_preset(Control.PRESET_TOP_WIDE, Control.PRESET_MODE_MINSIZE, margin)
-			_vbox.set_anchor_and_margin(MARGIN_BOTTOM, height_percent, margin)
+			_vbox.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE, Control.PRESET_MODE_MINSIZE, margin)
+			_vbox.set_anchor_and_offset(SIDE_BOTTOM, height_percent, margin)
 			_vbox.grow_vertical = Control.GROW_DIRECTION_END
 			_vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		_: return
@@ -297,13 +291,13 @@ func update_advance_indicator_positioning():
 	if _advance_indicator.texture == null:
 		return
 		
-	_advance_indicator.rect_position = _dialog_container.rect_position + _dialog_container.rect_size + \
-			Vector2(_dialog_container.margin_right - _advance_indicator.texture.get_width(),
-					_dialog_container.margin_bottom - _advance_indicator.texture.get_height())
+	_advance_indicator.position = _dialog_container.position + _dialog_container.size + \
+			Vector2(_dialog_container.offset_right - _advance_indicator.texture.get_width(),
+					_dialog_container.offset_bottom - _advance_indicator.texture.get_height())
 
 func init_panels():
 	_vbox.theme = theme
-	_vbox.add_constant_override("separation", self.separation)
+	_vbox.add_theme_constant_override("separation", self.separation)
 	
 	_dialog_container.set_text_property("bbcode_enabled", bbcode_enabled)
 	_dialog_container.set_text_property("meta_underlined", meta_underlined)
@@ -348,41 +342,40 @@ func set_positioning(new_positioning: int):
 
 func set_normal_font(new_value: Font):
 	normal_font = new_value
-	_source_container.add_font_override("normal", new_value)
-	_dialog_container.add_font_override("normal", new_value)
+	_source_container.add_theme_font_override("normal", new_value)
+	_dialog_container.add_theme_font_override("normal", new_value)
 
 func set_bold_font(new_value: Font):
 	bold_font = new_value
-	_source_container.add_font_override("bold", new_value)
-	_dialog_container.add_font_override("bold", new_value)
+	_source_container.add_theme_font_override("bold", new_value)
+	_dialog_container.add_theme_font_override("bold", new_value)
 
 func set_italics_font(new_value: Font):
 	italics_font = new_value
-	_source_container.add_font_override("italics", new_value)
-	_dialog_container.add_font_override("italics", new_value)
+	_source_container.add_theme_font_override("italics", new_value)
+	_dialog_container.add_theme_font_override("italics", new_value)
 
 func set_bold_italics_font(new_value: Font):
 	bold_italics_font = new_value
-	_source_container.add_font_override("bold_italics", new_value)
-	_dialog_container.add_font_override("bold_italics", new_value)
+	_source_container.add_theme_font_override("bold_italics", new_value)
+	_dialog_container.add_theme_font_override("bold_italics", new_value)
 	
 func set_mono_font(new_value: Font):
 	mono_font = new_value
-	_source_container.add_font_override("mono", new_value)
-	_dialog_container.add_font_override("mono", new_value)
+	_source_container.add_theme_font_override("mono", new_value)
+	_dialog_container.add_theme_font_override("mono", new_value)
 	
 func set_source_stylebox(new_value: StyleBox):
 	source_stylebox = new_value
-	_source_container.add_stylebox_override("panel", new_value)
+	_source_container.add_theme_stylebox_override("panel", new_value)
 
 func set_dialog_stylebox(new_value: StyleBox):
 	dialog_stylebox = new_value
-	_dialog_container.add_stylebox_override("panel", new_value)
+	_dialog_container.add_theme_stylebox_override("panel", new_value)
 
 	
 func set_theme(new_value: Theme):
 	theme = new_value
 	_source_container.theme = new_value
-	
 	_dialog_container.theme = new_value
 	_dialog_container.update_outline_margin()

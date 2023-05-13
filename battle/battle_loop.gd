@@ -5,15 +5,6 @@ var BattleEndState = preload("res://battle/battle_end_state.gd")
 # This class is responsible for running the battle's steps.
 # It should handle choosing turn order, pre and post action events (such as 
 # status damage, etc) and win/lose conditions
-enum Event {
-	TURN_START,
-	TURN_END,
-	BATTLE_END
-}
-enum Subscription {
-	FIRE_ONCE,
-	FIRE_ALWAYS
-}
 
 var actors: Array
 var preview_size: int = 6
@@ -36,7 +27,7 @@ func initialize(init_actors: Array, init_ui: BattleUI):
 		turn_queue.add(actor)
 	
 	self.event_subscribers = [] 
-	for event_type in Event:
+	for event_type in BattleService.Event:
 		self.event_subscribers.append({})
 	
 
@@ -54,19 +45,13 @@ func do_battle() -> bool:
 		turns = []
 		
 		for actor in current_actors:
-			var turn = actor.battler.ai.get_turn(actors)
-			if turn is GDScriptFunctionState:
-				turn = yield(turn, "completed")
-			
+			var turn = await actor.battler.ai.get_turn(actors)
 			turns.append(turn)
 	
 		for turn in turns:
 			print("%s used %s!" % [turn.actor.name, turn.action.name])
-			var r = turn.play()
-			if r is GDScriptFunctionState:
-				r = yield(r, "completed")
-				
-			self.notify_subscribers(Event.TURN_END, "on_turn_end")
+			await turn.play()
+			self.notify_subscribers(BattleService.Event.TURN_END, "on_turn_end")
 			
 			if is_battle_won():
 				battle_end_state.player_won = true
@@ -80,7 +65,7 @@ func do_battle() -> bool:
 			
 		self.preview = self.turn_queue.get_preview(self.preview_size)
 	
-	return null
+	return false
 	
 func is_battle_won() -> bool:
 	for actor in actors:
@@ -106,7 +91,7 @@ func remove_actor(actor):
 	while true:
 		var idx = self.preview.find(actor)
 		if idx >= 0:
-			self.preview.remove(idx)
+			self.preview.remove_at(idx)
 		else:
 			break
 	
@@ -127,11 +112,9 @@ func notify_subscribers(event: int, method: String):
 	var to_be_removed = []
 	for subscriber in self.event_subscribers[event]:
 		var subscription_type = self.event_subscribers[event][subscriber]
-		var result = subscriber.call(method)
-		if result is GDScriptFunctionState:
-			yield(result, "completed")
-			
-		if subscription_type == Subscription.FIRE_ONCE:
+		await subscriber.call(method)
+		
+		if subscription_type == BattleService.Subscription.FIRE_ONCE:
 			to_be_removed.append(subscriber)
 	for subscriber in to_be_removed:
 		event_subscribers[event].erase(subscriber)

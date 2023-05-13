@@ -1,15 +1,15 @@
 extends PopupPanel
 signal closed(text)
 
-onready var line_edit: LineEdit = $VBoxContainer/LineEdit
-onready var button: Button = $VBoxContainer/Button
+@onready var line_edit: LineEdit = $VBoxContainer/LineEdit
+@onready var button: Button = $VBoxContainer/Button
 
 var default_text
 
 func _ready():
 	if default_text != null:
 		line_edit.text = default_text
-		line_edit.caret_position = line_edit.text.length()
+		line_edit.caret_column = line_edit.text.length()
 	update_confirm_button()
 		
 func _on_LineEdit_text_changed(new_text: String):

@@ -8,12 +8,12 @@ var font_color_highlighted = Color(0, 1, 1, 1)
 var highlighted_index: int = -1
 
 var in_swap_mode = false
-onready var use: Button = $VBoxContainer/ItemActions/Use
-onready var swap: Button = $VBoxContainer/ItemActions/Swap
-onready var toss: Button = $VBoxContainer/ItemActions/Toss
-onready var buttons = [use, swap, toss]
+@onready var use: Button = $VBoxContainer/ItemActions/Use
+@onready var swap: Button = $VBoxContainer/ItemActions/Swap
+@onready var toss: Button = $VBoxContainer/ItemActions/Toss
+@onready var buttons = [use, swap, toss]
 
-onready var description: Label = $VBoxContainer/Description
+@onready var description: Label = $VBoxContainer/Description
 
 func _on_item_focused(item: InventoryItem):
 
@@ -25,8 +25,8 @@ func _on_item_focused(item: InventoryItem):
 	
 	if not in_swap_mode:
 		for button in buttons:
-			button.add_stylebox_override("normal", normal_button_style)
-			button.add_color_override("font_color", font_color_normal)
+			button.add_theme_stylebox_override("normal", normal_button_style)
+			button.add_theme_color_override("font_color", font_color_normal)
 		
 		if highlighted_index < 0 or buttons[highlighted_index].disabled:
 			for i in range(len(buttons)):	
@@ -69,23 +69,23 @@ func move(increment: int):
 
 func highlight(i: int):
 	if highlighted_index >= 0:
-		buttons[highlighted_index].add_stylebox_override("normal", normal_button_style)
-		buttons[highlighted_index].add_color_override("font_color", font_color_normal)
+		buttons[highlighted_index].add_theme_stylebox_override("normal", normal_button_style)
+		buttons[highlighted_index].add_theme_color_override("font_color", font_color_normal)
 		
-	buttons[i].add_stylebox_override("normal", highlighted_button_style)
-	buttons[i].add_color_override("font_color", font_color_highlighted)
+	buttons[i].add_theme_stylebox_override("normal", highlighted_button_style)
+	buttons[i].add_theme_color_override("font_color", font_color_highlighted)
 	highlighted_index = i
 
 func disable_swap_mode():
 	# In order to do this manually, we have to disconnect, toggle and reconnect.
-	swap.disconnect("toggled", self, "_on_Swap_toggled")
-	swap.pressed = false
-	swap.connect("toggled", self, "_on_Swap_toggled")
+	swap.disconnect("toggled",Callable(self,"_on_Swap_toggled"))
+	swap.button_pressed = false
+	swap.connect("toggled",Callable(self,"_on_Swap_toggled"))
 
 func click_action():
 	var button: Button = buttons[highlighted_index]
 	if button.toggle_mode:
-		button.pressed = not button.pressed
+		button.button_pressed = not button.button_pressed
 	else:
 		button.emit_signal("pressed")
 	
