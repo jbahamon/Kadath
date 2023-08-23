@@ -1,23 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://bomxx7doloqmu"]
+[gd_scene load_steps=4 format=3 uid="uid://bomxx7doloqmu"]
 
 [ext_resource type="Script" path="res://party/party_member.gd" id="1"]
-[ext_resource type="PackedScene" path="res://battle/battler/battler.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://dtaxhpmmjspek" path="res://battle/battler/battler.tscn" id="2"]
 [ext_resource type="Script" path="res://battle/ai/player_input.gd" id="3"]
 
-[sub_resource type="CapsuleShape2D" id="1"]
-radius = 14.5
-
-[node name="PartyMember" type="CharacterBody2D"]
+[node name="PartyMember" type="Node2D"]
 script = ExtResource("1")
+id = 5
 
 [node name="Battler" parent="." instance=ExtResource("2")]
 
 [node name="AI" parent="Battler" index="1"]
 script = ExtResource("3")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -23.75)
-shape = SubResource("1")
-disabled = true
 
 [editable path="Battler"]

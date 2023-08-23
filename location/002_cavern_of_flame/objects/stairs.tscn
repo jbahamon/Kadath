@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource path="res://location/002_cavern_of_flame/tiles/stairs-tall.png" type="Texture2D" id=1]
-[ext_resource path="res://location/lib/scripts/objects/warp.gd" type="Script" id=2]
+[ext_resource type="Texture2D" uid="uid://bkqjpp4tbvju6" path="res://location/002_cavern_of_flame/tiles/stairs-tall.png" id="1"]
+[ext_resource type="Script" path="res://location/lib/script/objects/warp.gd" id="2"]
 
 [sub_resource type="RectangleShape2D" id=1]
 size = Vector2( 16, 32 )

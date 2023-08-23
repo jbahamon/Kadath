@@ -28,13 +28,10 @@ alignment = 1
 [node name="ItemList" parent="VSplitContainer/HBoxContainer" instance=ExtResource("2")]
 visible = false
 layout_mode = 2
-include_cancel_button = true
-toggle = false
 
 [node name="PartyList" parent="VSplitContainer/HBoxContainer" instance=ExtResource("2")]
 layout_mode = 2
 size_flags_horizontal = 8
-handle_cancel = false
 
 [node name="VSeparator" type="VSeparator" parent="VSplitContainer/HBoxContainer"]
 layout_mode = 2

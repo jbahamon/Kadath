@@ -78,7 +78,7 @@ func _init():
 
 
 func parse_cutscene_from_file(cutscene_name: String): 
-	var cutscene_file = FileAccess.open("res://cutscenes/%s.txt" % cutscene_name, FileAccess.READ)
+	var cutscene_file = FileAccess.open(cutscene_name, FileAccess.READ)
 	var stack = self.get_initial_stack()
 	
 	while not cutscene_file.eof_reached():

@@ -8,7 +8,7 @@ enum DialogNodes {
 }
 
 func on_player_interaction(player_proxy: PlayerProxy):
-	if PlayerVars.get_flag(flag):
+	if VarsService.get_flag(flag):
 		self.dialog_nid = DialogNodes.TO_ARDEN
 	else:
 		self.dialog_nid = DialogNodes.TO_TRAVELER

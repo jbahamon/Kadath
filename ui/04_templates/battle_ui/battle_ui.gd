@@ -2,16 +2,16 @@ extends MarginContainer
 
 class_name BattleUI
 
-var BattleAction = preload("res://battle/actions/battle_action.gd")
+var BattleAction = preload("res://battle/action/battle_action.gd")
 var MultiTargetOption = load("res://ui/04_templates/battle_ui/multi_target_option.gd")
 
 
-@onready var party_list = $VBoxContainer/HBoxContainer/PartyList
+@onready var party_status = $VBoxContainer/HBoxContainer/PartyStatus
 @onready var options = $VBoxContainer/HBoxContainer/Options
 @onready var options_title: Label = $VBoxContainer/HBoxContainer/Options/OptionsTitle/Label
-@onready var options_list = $VBoxContainer/HBoxContainer/Options/OptionsList/SelectList
-@onready var info_panel = $VBoxContainer/InfoPanel
-@onready var info_label = $VBoxContainer/InfoPanel/InfoLabel
+@onready var options_list = $VBoxContainer/HBoxContainer/Options/OptionsList
+@onready var info_panel = $VBoxContainer/HBoxContainer/Options/InfoPanel
+@onready var info_label = $VBoxContainer/HBoxContainer/Options/InfoPanel/InfoLabel
 
 signal option_selected(option)
 signal prompt_closed
@@ -44,8 +44,8 @@ func _unhandled_input(event):
 		
 
 func initialize(party_members: Array):
-	party_list.initialize(party_members)
-	# TODO set top margin 
+	party_status.initialize(party_members)
+	
 	self.hide_options()
 	self.set_info_text(null)
 	
@@ -115,7 +115,6 @@ func on_action_type_selected(action_type: BattleActionType):
 	var new_options = {
 		"options": action_type.get_actions(),
 		"title": action_type.prompt,
-		"include_cancel_button": true
 	}
 	
 	options_stack.push_back(new_options)
@@ -124,7 +123,6 @@ func on_action_type_selected(action_type: BattleActionType):
 func set_options(new_options):
 	self.options.visible = true
 	options_title.text = new_options["title"]
-	options_list.include_cancel_button = new_options["include_cancel_button"]
 	options_list.initialize(new_options["options"])
 	options_list.grab_focus()
 	

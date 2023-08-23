@@ -35,6 +35,7 @@ func do_battle() -> bool:
 	var current_actors: Array
 	var turns: Array
 	battle_end_state = BattleEndState.new()
+	self.preview = self.turn_queue.get_preview(self.preview_size)
 	while true:
 		print(get_preview_text())
 		

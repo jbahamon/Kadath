@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource path="res://location/lib/scripts/location/location_room.gd" type="Script" id=1]
-[ext_resource path="res://location/002_cavern_of_flame/tiles/cavern_of_flame_tileset.tres" type="TileSet" id=2]
-[ext_resource path="res://location/002_cavern_of_flame/objects/stairs.tscn" type="PackedScene" id=3]
+[ext_resource type="Script" path="res://location/lib/script/location/location_room.gd" id="1"]
+[ext_resource type="TileSet" path="res://location/002_cavern_of_flame/tiles/cavern_of_flame_tileset.tres" id="2"]
+[ext_resource type="PackedScene" path="res://location/002_cavern_of_flame/objects/stairs.tscn" id="3"]
 
 [node name="Small Room" type="TileMap"]
 position = Vector2( 128, 128 )

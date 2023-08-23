@@ -35,7 +35,7 @@ enum Type {
 	CALL
 }
 
-func execute(tree: SceneTree):
+func execute(_tree: SceneTree):
 	pass
 
 func run(tree: SceneTree):

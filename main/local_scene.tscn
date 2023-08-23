@@ -1,17 +1,14 @@
-[gd_scene load_steps=21 format=3 uid="uid://c2luykmp4iss7"]
+[gd_scene load_steps=18 format=3 uid="uid://c2luykmp4iss7"]
 
-[ext_resource type="StyleBox" uid="uid://brc46g1cj5k2v" path="res://ui/01_atoms/panel/panel.tres" id="1"]
 [ext_resource type="PackedScene" uid="uid://b1ap7o3phiuv3" path="res://party/party.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://c3okprgd6vbwj" path="res://ui/04_templates/pause_menu/pause_menu.tscn" id="3"]
 [ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="4"]
-[ext_resource type="Script" path="res://addons/dialog_boxes/dialog_box_canvas_layer.gd" id="5"]
 [ext_resource type="Script" path="res://ui/04_templates/pause_menu/menu_popup.gd" id="6"]
 [ext_resource type="Script" path="res://main/local_scene.gd" id="7"]
 [ext_resource type="PackedScene" uid="uid://kjfr6yr534rp" path="res://ui/04_templates/saves_menu/saves_popup.tscn" id="8"]
-[ext_resource type="PackedScene" path="res://main/player_proxy.tscn" id="9"]
-[ext_resource type="StyleBox" path="res://ui/01_atoms/tab/normal.tres" id="11"]
+[ext_resource type="PackedScene" uid="uid://bo1y3b4btisvv" path="res://ui/04_templates/dialog/dialog.tscn" id="8_pwmoh"]
+[ext_resource type="PackedScene" uid="uid://bg7hnqo1b5c6m" path="res://main/player_proxy.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://ex17k532alby" path="res://ui/04_templates/battle_ui/battle_ui.tscn" id="11_42lm3"]
-[ext_resource type="PackedScene" path="res://battle/actions/attack.tscn" id="13"]
 [ext_resource type="Script" path="res://main/camera.gd" id="14"]
 [ext_resource type="PackedScene" uid="uid://bibiysotd3rmq" path="res://main/screen_shake.tscn" id="15"]
 [ext_resource type="Script" path="res://main/narration_layer.gd" id="16_6ypov"]
@@ -71,14 +68,15 @@ offset_right = 1280.0
 offset_bottom = 760.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(2, 2)
+scale = Vector2(4, 4)
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
-size = Vector2i(640, 360)
+size = Vector2i(320, 180)
+size_2d_override = Vector2i(320, 180)
 render_target_update_mode = 4
 
 [node name="BGLayer" type="CanvasLayer" parent="SubViewportContainer/SubViewport"]
@@ -94,24 +92,16 @@ y_sort_enabled = true
 
 [node name="Party" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("2")]
 
-[node name="Attack" parent="SubViewportContainer/SubViewport/World/Party/Arden/Battler/Actions" index="0" instance=ExtResource("13")]
-
-[node name="Anim" parent="SubViewportContainer/SubViewport/World/Party/Arden" index="2"]
-position = Vector2(0, 0)
-
-[node name="Arden2" parent="SubViewportContainer/SubViewport/World/Party" index="1"]
-visible = false
-
-[node name="Attack" parent="SubViewportContainer/SubViewport/World/Party/Arden2/Battler/Actions" index="0" instance=ExtResource("13")]
-
 [node name="PlayerProxy" parent="SubViewportContainer/SubViewport/World" groups=["save"] instance=ExtResource("9")]
+floor_stop_on_slope = false
+
+[node name="RayCast2D" parent="SubViewportContainer/SubViewport/World/PlayerProxy" index="1"]
+hit_from_inside = true
 
 [node name="RemoteTransform2D" parent="SubViewportContainer/SubViewport/World/PlayerProxy" index="2"]
 remote_path = NodePath("../../Party")
 
 [node name="Camera2D" type="Camera2D" parent="SubViewportContainer/SubViewport/World/PlayerProxy"]
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
 drag_left_margin = 0.0
 drag_top_margin = 0.0
 drag_right_margin = 0.0
@@ -142,21 +132,16 @@ libraries = {
 "": SubResource("AnimationLibrary_e58ng")
 }
 
-[node name="SimpleDialogBox" type="CanvasLayer" parent="."]
-script = ExtResource("5")
-transition_time_ms = 200.0
-height_percent = 0.4
-margin = 2
-separation = 0
-source_stylebox = ExtResource("11")
-dialog_stylebox = ExtResource("1")
-theme = ExtResource("4")
-text_speed = 30.0
-bbcode_enabled = true
-
 [node name="BattleUILayer" type="CanvasLayer" parent="."]
 
 [node name="BattleUI" parent="BattleUILayer" instance=ExtResource("11_42lm3")]
+visible = false
+
+[node name="DialogLayer" type="CanvasLayer" parent="."]
+
+[node name="Dialog" parent="DialogLayer" instance=ExtResource("8_pwmoh")]
+characters_per_second = 25.0
+skip_speed_factor = 5.0
 
 [node name="MenuLayer" type="CanvasLayer" parent="."]
 
@@ -167,7 +152,8 @@ transparent = true
 script = ExtResource("6")
 
 [node name="PauseMenu" parent="MenuLayer/MenuPopup" instance=ExtResource("3")]
-offset_right = 29.0
+offset_right = 10.0
+offset_bottom = 22.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -176,6 +162,7 @@ visible = false
 current_mode = 0
 
 [node name="NarrationLayer" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("16_6ypov")
 
 [node name="VBox" type="VBoxContainer" parent="NarrationLayer"]
@@ -216,6 +203,6 @@ scroll_active = false
 [editable path="SubViewportContainer/SubViewport/World/Party"]
 [editable path="SubViewportContainer/SubViewport/World/Party/Arden"]
 [editable path="SubViewportContainer/SubViewport/World/Party/Arden/Battler"]
-[editable path="SubViewportContainer/SubViewport/World/Party/Arden2"]
-[editable path="SubViewportContainer/SubViewport/World/Party/Arden2/Battler"]
+[editable path="SubViewportContainer/SubViewport/World/Party/Peters"]
+[editable path="SubViewportContainer/SubViewport/World/Party/Peters/Battler"]
 [editable path="SubViewportContainer/SubViewport/World/PlayerProxy"]

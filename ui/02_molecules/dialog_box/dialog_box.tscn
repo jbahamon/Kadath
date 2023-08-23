@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8h7mj2g47i5t"]
+
+[ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="1_t15n4"]
+[ext_resource type="Script" path="res://ui/02_molecules/dialog_box/dialog_box.gd" id="3_gm8sd"]
+[ext_resource type="Texture2D" uid="uid://daewnnjw7jcqa" path="res://ui/01_atoms/assets/textures/By HenrySoftware/Sprite/ArrowEast.png" id="5_57thx"]
+
+[node name="DialogBox" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 130)
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -13.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_t15n4")
+script = ExtResource("3_gm8sd")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer"]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "This is some dialog.
+The dialog box should support at least 4 lines of dialog
+This is the third
+This is the fourth"
+scroll_active = false
+scroll_following = true
+shortcut_keys_enabled = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+texture_filter = 2
+layout_mode = 2
+texture = ExtResource("5_57thx")
+stretch_mode = 3

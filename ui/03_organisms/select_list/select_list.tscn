@@ -1,8 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://brhpxl8pukdr"]
+[gd_scene load_steps=2 format=3 uid="uid://brhpxl8pukdr"]
 
 [ext_resource type="Script" path="res://ui/03_organisms/select_list/select_list.gd" id="1"]
-[ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="2"]
-[ext_resource type="Script" path="res://ui/01_atoms/simple_list_element/simple_list_element.gd" id="3"]
 
 [node name="SelectList" type="PanelContainer"]
 anchors_preset = 15
@@ -27,15 +25,4 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="CancelButton" type="Button" parent="ScrollContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-focus_neighbor_left = NodePath(".")
-focus_neighbor_right = NodePath(".")
-theme = ExtResource("2")
-text = "Cancel"
-script = ExtResource("3")
-
 [connection signal="visibility_changed" from="." to="." method="_on_SelectPanel_visibility_changed"]
-[connection signal="pressed" from="ScrollContainer/VBoxContainer/CancelButton" to="." method="on_cancel"]

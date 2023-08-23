@@ -7,9 +7,9 @@ var stick = preload("res://item/equipment/wooden_staff.tres")
 const NID_AFTER_GIVING_EQUIPMENT = 6
 
 func on_player_interaction(player_proxy: PlayerProxy):
-	var was_flag_on = PlayerVars.get_flag(self.flag)
+	var was_flag_on = VarsService.get_flag(self.flag)
 	super.on_player_interaction(player_proxy)
-	if not was_flag_on and PlayerVars.get_flag(self.flag) and\
+	if not was_flag_on and VarsService.get_flag(self.flag) and\
 	 	self.dialog_nid != NID_AFTER_GIVING_EQUIPMENT:
 		
 		var inventory: Inventory = EntitiesService.get_party().get_inventory()

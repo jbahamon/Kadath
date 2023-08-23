@@ -7,7 +7,7 @@ func _init(init_overlay: String, init_color: Color):
 	self.overlay = init_overlay
 	self.color = init_color
 
-func execute(tree: SceneTree):
+func execute(_tree: SceneTree):
 	LayersService.get_layer(self.overlay).color = self.color
 
 func _to_string():

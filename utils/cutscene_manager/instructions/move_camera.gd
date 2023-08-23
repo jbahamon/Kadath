@@ -22,10 +22,9 @@ func execute(tree: SceneTree):
 		
 	var tween = tree.create_tween()
 	
-	tween.interpolate_property(
+	tween.tween_property(
 		CameraService.get_camera(), 
 		"global_position", 
-		CameraService.get_camera_global_position(),
 		self.position,
 		self.time
 	)

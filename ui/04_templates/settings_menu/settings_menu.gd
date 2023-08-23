@@ -9,7 +9,7 @@ const labels = {
 	"ui_left": "Left",
 	"ui_menu": "Open Menu",
 	"ui_right": "Right",
-	"run": "Run"
+	"action_run": "Walk/run (hold)"
 }
 
 var buttons: Dictionary

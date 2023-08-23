@@ -9,7 +9,7 @@ func _init(init_entity_name: String, init_position: Vector2, init_speed: float):
 	self.position = init_position
 	self.speed = init_speed
 	
-func execute(tree: SceneTree):
+func execute(_tree: SceneTree):
 	var entity = EntitiesService.get_entity(self.entity_name)
 	await entity.move_to(position, speed)
 

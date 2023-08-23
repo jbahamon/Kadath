@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" uid="uid://cdhfej7dcp7bi" path="res://npc/enemy/shadow_critter/shadow_critter.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://location/lib/script/npc/movement/path_movement.tscn" id="2"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="ShadowCritter" parent="." instance=ExtResource( 1 )]
+position = Vector2( 63, 5 )
+movement_type = 2
+custom_movement = NodePath("PathMovement")
+facing = Vector2( 0, 0 )
+
+[node name="PathMovement" parent="ShadowCritter" instance=ExtResource( 2 )]
+speed = 50
+mode = 1
+
+[node name="Marker2D" type="Marker2D" parent="ShadowCritter/PathMovement"]
+position = Vector2( 63, 60 )
+
+[node name="Position2D2" type="Marker2D" parent="ShadowCritter/PathMovement"]
+position = Vector2( 165, 60 )
+
+[node name="Position2D3" type="Marker2D" parent="ShadowCritter/PathMovement"]
+position = Vector2( 165, 121 )
+
+[node name="Position2D4" type="Marker2D" parent="ShadowCritter/PathMovement"]
+position = Vector2( 63, 121 )
+
+[node name="Position2D5" type="Marker2D" parent="ShadowCritter/PathMovement"]
+position = Vector2( 63, 60 )
+
+[editable path="ShadowCritter/PathMovement"]

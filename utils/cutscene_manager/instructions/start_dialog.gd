@@ -7,7 +7,7 @@ func _init(init_dialog_id: String, init_branch_selector: String):
 	self.dialog_id = init_dialog_id
 	self.branch_selector = init_branch_selector
 	
-func execute(tree: SceneTree):
+func execute(_tree: SceneTree):
 	await DialogService.open_dialog(
 		self.dialog_id,
 		EntitiesService.get_entity(self.branch_selector)

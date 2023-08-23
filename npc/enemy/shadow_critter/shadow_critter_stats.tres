@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://party/character_stats.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+max_health = 20
+max_energy = 0
+attack = 5
+defense = 5
+magic_attack = 5
+magic_defense = 5
+luck = 5
+speed = 1

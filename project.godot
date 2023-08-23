@@ -12,26 +12,26 @@ config_version=5
 
 config/name="Kadath"
 run/main_scene="res://ui/04_templates/main_menu/main_menu.tscn"
-config/features=PackedStringArray("4.0")
+config/features=PackedStringArray("4.1")
 config/icon="res://icon.png"
 config/version="0.1.0"
 
 [autoload]
 
-VarsService="*res://globals/vars_service.gd"
-SettingsService="*res://globals/settings_service.gd"
-BattleService="*res://globals/battle_service.gd"
-CameraService="*res://globals/camera_service.gd"
-CutsceneService="*res://globals/cutscene_service.gd"
-EntitiesService="*res://globals/entities_service.gd"
-EnvironmentService="*res://globals/environment_service.gd"
-InputService="*res://globals/input_service.gd"
-SavesService="*res://globals/saves_service.gd"
-SceneSwitcher="*res://globals/scene_switcher.gd"
-DialogService="*res://globals/dialog_service.gd"
+VarsService="*res://global/vars_service.gd"
+SettingsService="*res://global/settings_service.gd"
+BattleService="*res://global/battle_service.gd"
+CameraService="*res://global/camera_service.gd"
+CutsceneService="*res://global/cutscene_service.gd"
+EntitiesService="*res://global/entities_service.gd"
+EnvironmentService="*res://global/environment_service.gd"
+InputService="*res://global/input_service.gd"
+SavesService="*res://global/saves_service.gd"
+SceneSwitcher="*res://global/scene_switcher.gd"
+DialogService="*res://global/dialog_service.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
-LayersService="*res://globals/layers_service.gd"
-UIService="*res://globals/ui_service.gd"
+LayersService="*res://global/layers_service.gd"
+UIService="*res://global/ui_service.gd"
 
 [dialogue_manager]
 
@@ -45,7 +45,7 @@ window/stretch/mode="viewport"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialog_boxes/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
 
 [gui]
 
@@ -131,9 +131,10 @@ ui_menu={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":83,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
-run={
+action_run={
 "deadzone": 0.5,
-"events": []
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":88,"key_label":0,"unicode":120,"echo":false,"script":null)
+]
 }
 
 [input_devices]
@@ -150,6 +151,7 @@ locale/translations_pot_files=PackedStringArray("res://location/000_prologue_kad
 2d_physics/layer_2="NPCs and Enemies"
 2d_physics/layer_3="Walls"
 2d_physics/layer_4="Interactables"
+2d_physics/layer_5="Battle Triggers"
 
 [rendering]
 

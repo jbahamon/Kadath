@@ -2,14 +2,16 @@ extends CharacterBody2D
 
 class_name PlayerProxy
 
+signal proxy_resumed
+
 const walk_speed: float = 100.0
 const interaction_vector = Vector2(16, 16)
 
 
 var input_vector = Vector2.ZERO
 var automated = false
-var display_name = "proxy"#  : get = get_display_name
 var target: Node2D
+var current_orientation = Vector2.ZERO
 
 @onready var raycast: RayCast2D = $RayCast2D
 @onready var remote_transform: RemoteTransform2D = $RemoteTransform2D
@@ -21,11 +23,9 @@ func _ready():
 func _unhandled_input(event) -> void:
 	if event.is_action_pressed("ui_accept"):
 		raycast.force_raycast_update()
-		print(raycast.is_colliding())
 		if raycast.is_colliding() and raycast.get_collider().has_method("on_player_interaction"):
 			self.target.play_anim("idle")
 			raycast.get_collider().on_player_interaction(self)
-			
 
 func _physics_process(_delta) -> void:
 	if not automated:
@@ -82,6 +82,7 @@ func save(save_data: SaveData) -> void:
 func load_game_data(save_data: SaveData) -> void:
 	self.position = save_data.data["player_position"]
 	
+	
 func set_target(new_target: Node):
 	if self.target == new_target:
 		return 
@@ -105,13 +106,32 @@ func get_display_name() -> String:
 	assert(self.target != null)
 	return self.target.display_name
 
-# Animatable interface
 
-func disable_collisions():
-	self.collision.disabled = true
+func pause():
+
+	var was_processing_physics = self.is_physics_processing()
+	self.set_physics_process(false)
 	
-func enable_collisions():
-	self.collision.disabled = false
+	var was_processing_unhandled_input = self.is_processing_unhandled_input()
+	self.set_process_unhandled_input(false)
+	
+	var was_processing_collisions = self.is_processing_collisions()
+	self.set_process_collisions(false)
+	
+	await self.proxy_resumed
+	
+	self.set_process_collisions(was_processing_collisions)
+	self.set_physics_process(was_processing_physics)
+	self.set_physics_process(was_processing_unhandled_input)
+
+func resume():
+	self.emit_signal("proxy_resumed")
+	
+func set_process_collisions(value: bool):
+	self.collision.set_deferred("disabled", not value)
+	
+func is_processing_collisions():
+	return not self.collision.disabled
 
 func move_to(target_position: Vector2, speed):
 	assert(speed > 0)
@@ -122,6 +142,7 @@ func move_to(target_position: Vector2, speed):
 	self.set_physics_process(true)
 	self.velocity = (target_position - global_position).normalized() * speed
 	await get_tree().create_timer(time).timeout
+	self.position = target_position
 	self.velocity = Vector2.ZERO
 	self.set_physics_process(was_processing_physics)
 	self.automated = false
@@ -130,6 +151,9 @@ func play_anim(anim_name: String):
 	self.target.play_anim(anim_name)
 	
 func set_orientation(orientation: Vector2):
+	if current_orientation == orientation:
+		return
+	current_orientation = orientation
 	self.target.set_orientation(orientation)
 
 	raycast.set_target_position(Vector2(

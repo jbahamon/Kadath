@@ -7,7 +7,7 @@ func _init(init_entity_name: String, init_target):
 	self.entity_name = init_entity_name
 	self.target = init_target
 	
-func execute(tree: SceneTree):
+func execute(_tree: SceneTree):
 	var target_position
 	if self.target is Vector2:
 		target_position = self.target

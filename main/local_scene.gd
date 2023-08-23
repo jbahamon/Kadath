@@ -3,8 +3,11 @@ class_name LocalScene
 
 func _ready() -> void:
 	BattleService.initialize($BattleUILayer/BattleUI)
-	CameraService.initialize($SubViewportContainer/SubViewport/World/PlayerProxy/Camera2D)
-	DialogService.initialize($SimpleDialogBox, $NarrationLayer)
+	CameraService.initialize(
+		$SubViewportContainer/SubViewport/World/PlayerProxy/Camera2D,
+		$SubViewportContainer/SubViewport
+	)
+	DialogService.initialize($DialogLayer/Dialog, $NarrationLayer)
 	EntitiesService.initialize(
 		$SubViewportContainer/SubViewport/World/PlayerProxy, 
 		$SubViewportContainer/SubViewport/World/Party
@@ -25,7 +28,7 @@ func _ready() -> void:
 		EnvironmentService.update_whereabouts(
 			VarsService.starting_location_name, 
 			VarsService.starting_room_name,
-			Vector2(0, -64), #Vector2.ZERO,
-			Vector2.DOWN,
+			Vector2(0, 240), #Vector2.ZERO,
+			Vector2.UP,
 			false
 		)

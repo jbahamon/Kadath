@@ -9,7 +9,7 @@ func _init(init_entity_name: String, init_function_name: String, init_args: Arra
 	self.function_name = init_function_name
 	self.args = init_args
 	
-func execute(tree: SceneTree):
+func execute(_tree: SceneTree):
 	var entity: Node = EntitiesService.get_entity(self.entity_name)
 	await entity.callv(self.function_name, self.args)
 	

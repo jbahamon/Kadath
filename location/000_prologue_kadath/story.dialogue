@@ -1,8 +1,33 @@
 ~ narration_1
-
 "Three times Randolph Carter dreamed of the marvellous city, and three times was he snatched away while still he paused on the high terrace above it."
 "He resolved to find the gods on unknown Kadath in the cold waste, wherever that might be, and to win from them the sight and remembrance and shelter of the marvellous sunset city."
+=> END
+
+~ entrance_ghoul
+Pickman: At last, we have arrived. Let us finish this.
+=> END
+
+~ starting_instructions
+Move around with [{ui_up}]/[{ui_left}]/[{ui_down}]/[{ui_right}]. You can interact with individuals and objects with [{ui_accept}], and cancel with [{ui_cancel}].
+=> END
 
 ~ barrier
+This is not the time to retreat. The journey to this place has been long and hard, and it is time to claim what is yours.
+=> END
 
-This is not the time to retreat. We are here for a reason.
+~ guard_ghoul
+Ghoul: We'll guard the entrance... Y-You go ahead and join mister Pickman...
+Ghoul: B-by the way, if you want to change the controls, you can open the menu with [{ui_menu}] and head to the Settings section.
+=> END
+
+~ guard_ghoul_2
+Ghoul: So this is K-Kadath...? I-I think I'll stay here and guard the rear...
+Ghoul: O-oh, remember you can change between walking and running by holding [{action_run}].
+=> END
+
+~ pickman_recruit
+Pickman: We should proceed at once. I allowed the others to stay at the entrance, as they seem too scared to be of use. 
+Pickman: Even though we might encounter some resistance, the two of us should be enough.
+Pickman joined your party!
+=> END
+

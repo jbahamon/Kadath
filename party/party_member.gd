@@ -1,7 +1,7 @@
 # Represents a playable character to add in the player's party
 # Holds the data and nodes for the character's battler, anim,
 # and the character's stats to save the game
-extends CharacterBody2D
+extends Node2D
 class_name PartyMember
 
 var PartyMemberSummary = preload("res://ui/02_molecules/party_member_summary/party_member_summary.tscn")
@@ -9,17 +9,16 @@ var PartyMemberSummary = preload("res://ui/02_molecules/party_member_summary/par
 
 enum Id {
 	ARDEN = 1 << 0,
-	ZOOG = 1 << 1,
-	KIT = 1 << 2,
+	VOLKI = 1 << 1,
+	GRUSKA = 1 << 2,
 	LENG = 1 << 3,
-	UPTON = 1 << 4,
+	PETERS = 1 << 4,
 	KURANES = 1 << 5,
 }
 
 @onready var SAVE_KEY: String = "party_member_" + name
 @onready var anim = $Anim
 @onready var battler = $Battler
-@onready var collision = $CollisionShape2D
 
 @export_flags ("ARDEN", "ZOOG", "KIT", "LENG", "UPTON", "KURANES") var id: int = Id.ARDEN
 @export var display_name: String
@@ -33,13 +32,14 @@ var equipped_helmet: Helmet : set = set_helmet
 var equipped_armor: Armor : set = set_armor
 var equipped_accessory: Accessory : set = set_accessory
 
+var velocity: Vector2 = Vector2.ZERO
 func _ready():
 	assert(growth)
 	self.set_physics_process(false)
 	battler.stats = growth.create_stats(experience)
 
 func _physics_process(delta):
-	self.move_and_collide(velocity * delta)
+	self.position += velocity * delta
 
 func get_level() -> int:
 	if battler == null:
@@ -86,7 +86,6 @@ func save(save_game: Resource):
 		"energy": battler.stats.energy,
 	}
 
-
 func load_game_data(save_game: Resource):
 	var data: Dictionary = save_game.data[SAVE_KEY]
 	display_name = data["display_name"]
@@ -113,7 +112,6 @@ func set_weapon(weapon: Weapon):
 	
 	equipped_weapon = weapon
 	
-
 func set_helmet(helmet: Helmet):
 	var party: Party = self.get_parent()
 	assert(party != null || equipped_helmet == null)
@@ -187,9 +185,3 @@ func move_to(target: Vector2, speed: float):
 	await get_tree().create_timer(time).timeout
 	self.velocity = Vector2.ZERO
 	self.set_physics_process(was_processing_physics)
-
-func disable_collisions():
-	self.collision.disabled = true
-
-func enable_collisions():	
-	self.collision.disabled = false

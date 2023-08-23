@@ -1,8 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource path="res://location/002_cavern_of_flame/npcs/kaman_thah.gd" type="Script" id=1]
-[ext_resource path="res://location/002_cavern_of_flame/npcs/kaman_thah-sheet.png" type="Texture2D" id=2]
-[ext_resource path="res://location/lib/scripts/npc/base_npc.tscn" type="PackedScene" id=3]
+[ext_resource type="Script" path="res://location/002_cavern_of_flame/npcs/kaman_thah.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://ckd45e42v0wst" path="res://location/002_cavern_of_flame/npcs/kaman_thah-sheet.png" id="2"]
+[ext_resource type="PackedScene" uid="uid://c17hneqpuil0l" path="res://location/lib/script/npc/base_npc.tscn" id="3"]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=1]
 

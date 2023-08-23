@@ -1,11 +1,11 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=12 format=3]
 
-[ext_resource path="res://location/001_gateway_desert/rooms/desert.gd" type="Script" id=1]
-[ext_resource path="res://location/001_gateway_desert/tiles/sand.png" type="Texture2D" id=2]
-[ext_resource path="res://location/001_gateway_desert/npcs/traveler.png" type="Texture2D" id=4]
-[ext_resource path="res://location/001_gateway_desert/npcs/hadi.png" type="Texture2D" id=5]
-[ext_resource path="res://location/001_gateway_desert/npcs/traveler2.png" type="Texture2D" id=6]
-[ext_resource path="res://location/lib/scripts/npc/simple_npc.tscn" type="PackedScene" id=7]
+[ext_resource type="Script" path="res://location/001_gateway_desert/rooms/desert.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://dh14lpu4pkfej" path="res://location/001_gateway_desert/tiles/sand.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://nndk08qhwd66" path="res://location/001_gateway_desert/npcs/traveler.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://b2nby64nuk08e" path="res://location/001_gateway_desert/npcs/hadi.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://br7sm2d4ybby4" path="res://location/001_gateway_desert/npcs/traveler2.png" id="6"]
+[ext_resource type="PackedScene" uid="uid://c72m6bvkalkqd" path="res://location/lib/script/npc/simple_npc.tscn" id="7"]
 
 [sub_resource type="TileSet" id=3]
 0/name = "sand.png 0"

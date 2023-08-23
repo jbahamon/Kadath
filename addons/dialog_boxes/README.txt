@@ -1,1 +1,0 @@
-Drew inspiration/some code from https://github.com/jacopofar/blocking-dialog-box/. Go check it out!

@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnihqcw4rnk07"]
+
+[ext_resource type="Script" path="res://ui/04_templates/battle_ui/party_status.gd" id="1_p1qhq"]
+[ext_resource type="PackedScene" uid="uid://crjmxm0ml1eek" path="res://ui/02_molecules/party_member_summary/party_member_summary.tscn" id="2_epvoo"]
+
+[node name="PartyStatus" type="HBoxContainer"]
+offset_right = 580.0
+offset_bottom = 101.0
+theme_override_constants/separation = 20
+alignment = 2
+script = ExtResource("1_p1qhq")
+
+[node name="PartyMemberItem" parent="." instance=ExtResource("2_epvoo")]
+layout_mode = 2
+
+[node name="PartyMemberItem2" parent="." instance=ExtResource("2_epvoo")]
+layout_mode = 2
+
+[node name="PartyMemberItem3" parent="." instance=ExtResource("2_epvoo")]
+layout_mode = 2

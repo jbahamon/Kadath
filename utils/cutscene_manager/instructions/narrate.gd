@@ -7,7 +7,7 @@ func _init(init_dialog_id: String, init_duration: float):
 	self.dialog_id = init_dialog_id
 	self.duration = init_duration
 	
-func execute(tree: SceneTree):
+func execute(_tree: SceneTree):
 	await DialogService.narrate(
 		self.dialog_id,
 		self.duration
