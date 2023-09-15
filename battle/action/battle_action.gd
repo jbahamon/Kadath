@@ -16,13 +16,22 @@ enum TargetType {
 	ALL_ALLIES,
 }
 
-@export var action_name: String
+@export var display_name: String
 @export var description: String = "Base battle action"
 @export var should_retarget_on_missing_target: bool
 @export var disabled: bool
 
-func get_signature():
-	assert(false, "%s missing overwrite of the get_signature method" % name)
+func reset():
+	assert(false, "%s missing overwrite of the reset method" % name)
 
-func execute(_actor: Battler, _args: Dictionary):
+func get_next_parameter_signature():
+	assert(false, "%s missing overwrite of the get_next_parameter_signature method" % name)
+	
+func push_parameter(_parameter_name, _value):
+	assert(false, "%s missing overwrite of the push_parameter method" % name)
+	
+func pop_parameter():
+	assert(false, "%s missing overwrite of the pop_parameter method" % name)
+	
+func execute(_actor: Battler):
 	assert(false,"%s missing overwrite of the execute method" % name)

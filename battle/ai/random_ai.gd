@@ -4,7 +4,7 @@ class_name RandomAI
 
 
 func choose_action(actor, _actors: Array):
-	return actor.battler.get_actions()[0]
+	return actor.battler.get_action_options()[0]
 
 func choose_action_args(action_signature: Array, actor, actors) -> Dictionary:
 	var args = {}

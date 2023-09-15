@@ -37,8 +37,6 @@ func update_whereabouts(
 		old_room != null and room_id == old_room.room_id):
 		return
 	
-	var proxy: PlayerProxy = EntitiesService.get_proxy()
-	proxy.pause()
 	var was_input_enabled = InputService.is_input_enabled()
 	
 	InputService.set_input_enabled(false)
@@ -67,8 +65,6 @@ func update_whereabouts(
 		# await cutscene.animation_finished
 	
 	InputService.set_input_enabled(was_input_enabled)
-	
-	proxy.resume()
 	
 	if room_moved:
 		current_room.on_enter()

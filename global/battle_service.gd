@@ -1,5 +1,6 @@
 extends Node
 const BattleLoop = preload("res://battle/battle_loop.gd")
+const Attack = preload("res://battle/action/attack.gd")
 
 enum Event {
 	TURN_START,
@@ -18,17 +19,25 @@ enum Subscription {
 var loop
 var ui: BattleUI
 
-var in_battle = false
+var current_battle_parameters = null
+var common_action_options = {}
 
 func _init():
 	self.loop = BattleLoop.new()
+	self.init_common_action_options()
 
 func initialize(init_ui: BattleUI):
 	self.ui = init_ui
 
-func start_mook_battle():
+func init_common_action_options():
+	var attack = Attack.new()
+	attack.display_name = "Attack"
+	attack.description = "Attack with the equipped weapon"
+	self.common_action_options["attack"] = attack
 	
-	if self.in_battle: 
+func start_mook_battle(escapable: bool):
+	
+	if self.current_battle_parameters != null: 
 		return
 		
 	var rect: Rect2i = CameraService.get_visible_rect()
@@ -39,13 +48,15 @@ func start_mook_battle():
 		if rect.has_point(Vector2i(mook.position)):
 			mooks.append(mook)
 	
-	self.start_battle(mooks)
+	self.start_battle(mooks, escapable)
 
-func start_battle(non_party_actors: Array):
-	if self.in_battle:
+func start_battle(non_party_actors: Array, escapable: bool):
+	if self.current_battle_parameters != null:
 		return
 	
-	self.in_battle = true
+	self.current_battle_parameters = {
+		"escapable": escapable
+	}
 	
 	var camera_position = CameraService.get_camera().get_screen_center_position()
 	var battle_spot = self.get_nearest_battle_spot(camera_position)
@@ -110,6 +121,7 @@ func start_battle(non_party_actors: Array):
 		npc.visible = true
 	
 	proxy.resume()
+	self.current_battle_parameters = null
 
 func set_up_battle_positions(battle_spot, party_actors: Array, non_party_actors: Array):
 	var party_spots = battle_spot.get_party_spots()
@@ -127,7 +139,7 @@ func set_up_battle_positions(battle_spot, party_actors: Array, non_party_actors:
 	var cutscene_lines = []
 	cutscene_lines.append("SIMULTANEOUS")
 	cutscene_lines.append(
-		"MOVE_CAMERA TO (%d, %d) IN 1.0" % [
+		"MOVE_CAMERA TO (%d, %d) IN 0.5" % [
 			int(round(battle_spot.global_position.x)), 
 			int(round(battle_spot.global_position.y))
 		]
@@ -137,7 +149,7 @@ func set_up_battle_positions(battle_spot, party_actors: Array, non_party_actors:
 		var party_actor = party_actors[i]
 		var spot = party_spots[i]
 		cutscene_lines.append(
-			"WALK %s TO (%d, %d) AT 30" % [
+			"WALK %s TO (%d, %d) AT 50" % [
 				party_actor.name, 
 				int(round(spot.global_position.x)), 
 				int(round(spot.global_position.y))
@@ -147,7 +159,7 @@ func set_up_battle_positions(battle_spot, party_actors: Array, non_party_actors:
 	for non_party_actor in non_party_actors: 
 		var spot = spots_by_name[non_party_actor.display_name].pop_back()
 		cutscene_lines.append(
-			"WALK %s TO (%d, %d) AT 30" % [
+			"WALK %s TO (%d, %d) AT 50" % [
 				non_party_actor.name, 
 				int(round(spot.global_position.x)), 
 				int(round(spot.global_position.y))

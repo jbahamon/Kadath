@@ -6,4 +6,4 @@ var action_args: Dictionary
 
 func play():
 	assert(action != null && actor != null)
-	action.execute(actor, action_args)
+	action.execute(actor)

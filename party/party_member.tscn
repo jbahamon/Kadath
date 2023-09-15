@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bomxx7doloqmu"]
+[gd_scene load_steps=5 format=3 uid="uid://bomxx7doloqmu"]
 
 [ext_resource type="Script" path="res://party/party_member.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://dtaxhpmmjspek" path="res://battle/battler/battler.tscn" id="2"]
 [ext_resource type="Script" path="res://battle/ai/player_input.gd" id="3"]
+[ext_resource type="Script" path="res://battle/action/skill.gd" id="4_8ihmo"]
 
 [node name="PartyMember" type="Node2D"]
 script = ExtResource("1")
@@ -12,5 +13,8 @@ id = 5
 
 [node name="AI" parent="Battler" index="1"]
 script = ExtResource("3")
+
+[node name="Skill" type="Node" parent="Battler/Actions" index="0"]
+script = ExtResource("4_8ihmo")
 
 [editable path="Battler"]

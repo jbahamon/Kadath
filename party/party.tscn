@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://b1ap7o3phiuv3"]
+[gd_scene load_steps=4 format=3 uid="uid://d2fira8jrokg5"]
 
 [ext_resource type="Script" path="res://party/party.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://jekjd0u7io0t" path="res://party/arden/arden.tscn" id="2_rtt04"]

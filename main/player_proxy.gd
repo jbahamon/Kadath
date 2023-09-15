@@ -122,7 +122,7 @@ func pause():
 	
 	self.set_process_collisions(was_processing_collisions)
 	self.set_physics_process(was_processing_physics)
-	self.set_physics_process(was_processing_unhandled_input)
+	self.set_process_unhandled_input(was_processing_unhandled_input)
 
 func resume():
 	self.emit_signal("proxy_resumed")

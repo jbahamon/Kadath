@@ -2,71 +2,57 @@ extends BattlerAI
 
 signal turn_chosen
 
-var actors: Array
-var action: BattleAction
-var action_signature: Array
-var current_action_argument: int
-var action_arguments: Dictionary
-
 func get_turn(current_actors: Array) -> Turn:
-	self.actors = current_actors
-	var actor = self.get_parent().get_parent()
-	self.action = null
+	var battler = self.get_parent()
+	var actor = battler.get_parent()
+	var action = null
+	var state = "waiting_for_action"
+	self.interface.reset_options_stack()
+	var options = battler.get_action_options()
 	
-	self.interface.connect("option_selected",Callable(self,"on_option_selected"))
-	self.interface.connect("cancel",Callable(self,"on_cancel"))
-	self.request_action()
-	await self.turn_chosen
-	self.interface.disconnect("option_selected",Callable(self,"on_option_selected"))
-	self.interface.disconnect("cancel",Callable(self,"on_cancel"))
+	self.interface.set_options({
+		"title": "What will %s do?" % battler.get_parent().display_name,
+		"options": options
+	})
 	
+	while true:
+		match state:
+			"waiting_for_action":
+				action = await self.interface.option_selected
+				if action != null:
+					state = "waiting_for_parameters"
+			"waiting_for_parameters":
+				var ready = await self.wait_for_parameters(action, actor, current_actors)
+				if not ready:
+					state = "waiting_for_action"
+				else:
+					break
+
 	var turn = Turn.new()
 	turn.actor = actor
-	turn.action = self.action
-	turn.action_args = self.action_arguments
-	
+	turn.action = action
+
 	return turn
 
-func on_option_selected(option):
-	if option is BattleAction and self.action == null:
-		self.action = option
-		self.action_signature = self.action.get_signature()
-		self.action_arguments = {}
-		self.current_action_argument = 0
-	else:
-		var argument_name = self.action_signature[self.current_action_argument]["name"]
-		var argument_value = option.get_value() if option.has_method("get_value") else option
-		self.action_arguments[argument_name] = argument_value
-		self.current_action_argument += 1
+
+func wait_for_parameters(action: BattleAction, action_actor, actors: Array):
+	var i = 0
+	var current_parameter_signature = action.get_next_parameter_signature()
 	
-	if self.current_action_argument < self.action_signature.size():
-		self.request_argument(
-			self.get_parent().get_parent(), 
-			self.actors, 
-			self.action_signature[self.current_action_argument]
+	while current_parameter_signature != null:
+		var new_parameter = await self.interface.request_action_parameter(
+			action_actor, 
+			actors, 
+			current_parameter_signature
 		)
-	else:
-		self.emit_signal("turn_chosen")
-
-func on_cancel():
-	if current_action_argument <= 0:
-		self.action = null
-		self.request_action()
-	else:
-		self.current_action_argument -= 1
-		var argument_name = self.action_signature[self.current_action_argument]["name"]
-		self.action_arguments.erase(argument_name)
-		self.request_argument(
-			self.get_parent(), 
-			self.actors, 
-			self.action_signature[self.current_action_argument]
-		)
-
-func request_action():
-	var battler = self.get_parent()
-	var actions = battler.get_actions()
-	self.interface.request_action(actions)
-
-func request_argument(actor, current_actors, argument):
-	self.interface.request_argument(actor, current_actors, argument)
 	
+		if new_parameter == null:
+			var was_popped = action.pop_parameter()
+			if not was_popped:
+				return false
+		else:
+			action.push_parameter(current_parameter_signature["name"], new_parameter)
+			
+		current_parameter_signature = action.get_next_parameter_signature()
+	
+	return true

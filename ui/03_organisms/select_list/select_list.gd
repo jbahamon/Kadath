@@ -43,7 +43,7 @@ func get_ui_control(element):
 		return element.instance_ui_control()
 	else:
 		var control = SimpleListElement.instantiate()
-		control.text = element.display_name if "display_name" in element else element.name
+		control.text = element.display_name
 		return control
 	
 func on_element_focused(element):

@@ -9,7 +9,9 @@ enum Element {
 	
 	ELDER,
 	OUTER,
-	GREAT_OLD
+	GREAT_OLD,
+	
+	NONE
 }
 var base_damage: float
 var type: int

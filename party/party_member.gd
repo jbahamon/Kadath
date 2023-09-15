@@ -161,7 +161,7 @@ func get_enemies(actors: Array):
 	var enemies = []
 	var script = get_script()
 	for actor in actors:
-		if script.instance_has(actor):
+		if not script.instance_has(actor):
 			enemies.append(actor)
 	return enemies
 	

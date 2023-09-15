@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://jekjd0u7io0t"]
+[gd_scene load_steps=6 format=3 uid="uid://jekjd0u7io0t"]
 
 [ext_resource type="PackedScene" uid="uid://bomxx7doloqmu" path="res://party/party_member.tscn" id="1_1alx3"]
 [ext_resource type="Resource" uid="uid://dbl1jea1yllcp" path="res://party/arden/growth.tres" id="2_qn0cw"]
 [ext_resource type="Texture2D" uid="uid://c7iv4j4yioinv" path="res://party/arden/icon.png" id="3_141jc"]
 [ext_resource type="PackedScene" uid="uid://d3ao8055xmv7" path="res://party/arden/anim.tscn" id="4_nebb4"]
+[ext_resource type="Script" path="res://party/arden/skill/charge.gd" id="4_rmqgj"]
 
 [node name="Arden" instance=ExtResource("1_1alx3")]
 id = 1
@@ -14,6 +15,14 @@ icon = ExtResource("3_141jc")
 
 [node name="Battler" parent="." index="0"]
 anim_path = NodePath("../Anim")
+
+[node name="Skill" parent="Battler/Actions" index="0"]
+display_name = "Skill"
+
+[node name="Node" type="Node" parent="Battler/Actions/Skill" index="0"]
+script = ExtResource("4_rmqgj")
+display_name = "Charge"
+description = "Charge an enemy with your weapon"
 
 [node name="Anim" parent="." index="1" instance=ExtResource("4_nebb4")]
 

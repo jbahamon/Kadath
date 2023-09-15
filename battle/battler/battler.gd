@@ -17,6 +17,13 @@ class_name Battler
 var anim: Node
 var status_effects = StatusEffectManager.new()
 
+var display_name: String:
+	get:
+		return self.get_parent().display_name
+	set(value):
+		pass
+	
+
 func _ready():
 	assert(anim_path)
 	anim = get_node(anim_path)
@@ -72,8 +79,24 @@ func get_elemental_defense() -> float:
 func get_velocity() -> float:
 	return self.stats.speed * self.status_effects.get_speed_modifier()
 
-func get_actions() -> Array:
-	return actions.get_children()
+func get_action_options() -> Array:
+	var parent = self.get_parent()
+	var options
+	if parent is PartyMember:
+		
+		options = actions.get_children()
+		
+		options.push_front(BattleService.common_action_options["attack"])
+		#options.push_back(BattleService.common_action_options["item"])
+		
+		if BattleService.current_battle_parameters.get("escapable", false):
+			pass #options.append(BattleService.common_action_options["run"])
+		
+	else:
+		options = actions.get_children()
+		options.append(BattleService.common_action_options["attack"])
+		
+	return options
 
 func is_alive() -> bool:
 	return self.stats.is_alive
