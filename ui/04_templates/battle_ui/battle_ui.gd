@@ -23,9 +23,9 @@ var all_allies_option = MultiTargetOption.new()
 var all_enemies_option = MultiTargetOption.new()
 
 func _init():
-	self.all_allies_option.name = "All allies"
+	self.all_allies_option.display_name = "All allies"
 	self.all_allies_option.targets = []
-	self.all_enemies_option.name = "All enemies"
+	self.all_enemies_option.display_name = "All enemies"
 	self.all_enemies_option.targets = []
 
 func initialize(party_members: Array):

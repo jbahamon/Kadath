@@ -39,7 +39,6 @@ func execute(_tree: SceneTree):
 	pass
 
 func run(tree: SceneTree):
-	print(self)
 	await self.execute(tree)
 
 func _to_string():

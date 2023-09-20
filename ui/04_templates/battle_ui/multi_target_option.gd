@@ -1,5 +1,2 @@
-var name: String
+var display_name: String
 var targets: Array
-
-func get_value():
-	return self.targets

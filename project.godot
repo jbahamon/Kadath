@@ -20,7 +20,7 @@ config/version="0.1.0"
 
 VarsService="*res://global/vars_service.gd"
 SettingsService="*res://global/settings_service.gd"
-BattleService="*res://global/battle_service.gd"
+BattleService="*res://battle_service.gd"
 CameraService="*res://global/camera_service.gd"
 CutsceneService="*res://global/cutscene_service.gd"
 EntitiesService="*res://global/entities_service.gd"

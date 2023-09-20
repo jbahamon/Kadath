@@ -31,40 +31,34 @@ func initialize(init_actors: Array, init_ui: BattleUI):
 		self.event_subscribers.append({})
 	
 
-func do_battle() -> bool:
-	var current_actors: Array
-	var turns: Array
+func do_battle():
+	
 	battle_end_state = BattleEndState.new()
-	self.preview = self.turn_queue.get_preview(self.preview_size)
+	
 	while true:
+		self.preview = self.turn_queue.get_preview(self.preview_size)
 		print(get_preview_text())
 		
-		# get the chunk of characters on the same team 
-		# do their turns together
-		current_actors = self.turn_queue.get_current_actors()
-		
-		turns = []
-		
-		for actor in current_actors:
-			var turn = await actor.battler.ai.get_turn(actors)
-			turns.append(turn)
-	
-		for turn in turns:
-			print("%s used %s!" % [turn.actor.name, turn.action.name])
-			await turn.play()
-			self.notify_subscribers(BattleService.Event.TURN_END, "on_turn_end")
-			
-			if is_battle_won():
-				battle_end_state.player_won = true
-				return battle_end_state
+		var current_actor = self.turn_queue.get_current_actor()
+		var turn = await current_actor.battler.ai.get_turn(self.actors)
 
-			if is_battle_lost():
-				battle_end_state.player_won = false
-				return battle_end_state
+		print("%s used %s!" % [turn.actor.name, turn.action.name])
+		await turn.play()
+		self.notify_subscribers(BattleService.Event.TURN_END, "on_turn_end")
+		
+		if is_battle_won():
+			var party_actors = []
+			for actor in actors:
+				if actor is PartyMember:
+					party_actors.append(actor)
+			battle_end_state.set_active_party_actors(party_actors)
+			battle_end_state.player_won = true
+			return battle_end_state
 
-			preview = preview.slice(current_actors.size(), preview.size() - 1)
-			
-		self.preview = self.turn_queue.get_preview(self.preview_size)
+		if is_battle_lost():
+			battle_end_state.player_won = false
+			return battle_end_state
+
 	
 	return false
 	

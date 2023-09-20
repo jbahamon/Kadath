@@ -3,6 +3,7 @@ extends BattlerAI
 signal turn_chosen
 
 func get_turn(current_actors: Array) -> Turn:
+	# self.interface.show_timeline()
 	var battler = self.get_parent()
 	var actor = battler.get_parent()
 	var action = null
@@ -31,6 +32,9 @@ func get_turn(current_actors: Array) -> Turn:
 	var turn = Turn.new()
 	turn.actor = actor
 	turn.action = action
+	
+	self.interface.hide_options()
+	# self.interface.hide_timeline()
 
 	return turn
 

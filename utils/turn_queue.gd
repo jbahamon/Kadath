@@ -66,25 +66,22 @@ func get_preview(preview_size: int) -> Array:
 		
 	return ret
 
-func get_current_actors() -> Array:
+func get_current_actor():
 	assert(self._has_two_teams())
 	
 	var ret = []
 	
 	var next_element = self.get_next_element()
 	var is_player_turn = next_element.actor is PartyMember
+	var time = next_element.get_time_to_act()
 	
-	while (next_element.actor is PartyMember) == is_player_turn:
-		ret.append(next_element.actor)
-		var time = next_element.get_time_to_act()
-		
-		for element in self._elements:
-			element.remaining_charge = clamp(element.remaining_charge - time * element.actor.battler.get_velocity(), 0, 100)
-		next_element.remaining_charge = CHARGE_TO_ACT
-		
-		next_element = self.get_next_element()
+	for element in self._elements:
+		element.remaining_charge = clamp(element.remaining_charge - time * element.actor.battler.get_velocity(), 0, 100)
+	next_element.remaining_charge = CHARGE_TO_ACT
 	
-	return ret
+	next_element = self.get_next_element()
+	
+	return next_element.actor
 
 func _has_two_teams() -> bool:
 	var has_party_member = false

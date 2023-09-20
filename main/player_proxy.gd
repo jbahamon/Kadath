@@ -2,16 +2,20 @@ extends CharacterBody2D
 
 class_name PlayerProxy
 
-signal proxy_resumed
+enum ProxyMode {
+	GAMEPLAY,
+	CUTSCENE,
+	NOT_THERE
+}
 
 const walk_speed: float = 100.0
 const interaction_vector = Vector2(16, 16)
-
 
 var input_vector = Vector2.ZERO
 var automated = false
 var target: Node2D
 var current_orientation = Vector2.ZERO
+var current_mode = ProxyMode.GAMEPLAY
 
 @onready var raycast: RayCast2D = $RayCast2D
 @onready var remote_transform: RemoteTransform2D = $RemoteTransform2D
@@ -28,20 +32,16 @@ func _unhandled_input(event) -> void:
 			raycast.get_collider().on_player_interaction(self)
 
 func _physics_process(_delta) -> void:
-	if not automated:
+	if self.current_mode == ProxyMode.GAMEPLAY:
 		var input_vector_changed = update_input_vector()
 		
 		if input_vector_changed:
 			update_velocity()
 			update_orientation()
 			update_animation()
-			
-	move()
-
-func move() -> void:
+	
 	set_velocity(velocity)
 	move_and_slide()
-	velocity = velocity
 
 func update_velocity() -> void:
 	if input_vector != Vector2.ZERO:
@@ -68,25 +68,22 @@ func update_animation() -> void:
 	else:
 		self.target.play_anim("walk")
 		
-		
 func update_orientation() -> void:
 	if velocity == Vector2.ZERO:
 		return
 	self.set_orientation(input_vector)
-	
 
 func save(save_data: SaveData) -> void:
 	save_data.data["player_position"] = self.position
 
-	
 func load_game_data(save_data: SaveData) -> void:
 	self.position = save_data.data["player_position"]
-	
-	
+
 func set_target(new_target: Node):
 	if self.target == new_target:
 		return 
 	
+	var was_processing_physics = self.is_physics_processing()
 	self.set_physics_process(false)
 	
 	if self.target and self.target.has_method("on_proxy_leave"):
@@ -98,54 +95,26 @@ func set_target(new_target: Node):
 		self.target.on_proxy_enter()
 	
 	self.global_position = self.target.global_position
-	self.target = self.target
 	self.remote_transform.remote_path = self.remote_transform.get_path_to(self.target)
-	self.set_physics_process(true)
+	self.set_physics_process(was_processing_physics)
 
 func get_display_name() -> String:
 	assert(self.target != null)
 	return self.target.display_name
-
-
-func pause():
-
-	var was_processing_physics = self.is_physics_processing()
-	self.set_physics_process(false)
 	
-	var was_processing_unhandled_input = self.is_processing_unhandled_input()
-	self.set_process_unhandled_input(false)
-	
-	var was_processing_collisions = self.is_processing_collisions()
-	self.set_process_collisions(false)
-	
-	await self.proxy_resumed
-	
-	self.set_process_collisions(was_processing_collisions)
-	self.set_physics_process(was_processing_physics)
-	self.set_process_unhandled_input(was_processing_unhandled_input)
-
-func resume():
-	self.emit_signal("proxy_resumed")
-	
-func set_process_collisions(value: bool):
+func _set_process_collisions(value: bool):
 	self.collision.set_deferred("disabled", not value)
-	
-func is_processing_collisions():
-	return not self.collision.disabled
 
 func move_to(target_position: Vector2, speed):
 	assert(speed > 0)
-	var was_processing_physics = self.is_physics_processing()
+	var previous_mode = self.current_mode
+	self.set_mode(ProxyMode.CUTSCENE)
 	var time = (global_position - target_position).length()/speed
-	
-	self.automated = true
-	self.set_physics_process(true)
 	self.velocity = (target_position - global_position).normalized() * speed
 	await get_tree().create_timer(time).timeout
 	self.position = target_position
 	self.velocity = Vector2.ZERO
-	self.set_physics_process(was_processing_physics)
-	self.automated = false
+	self.set_mode(previous_mode)
 
 func play_anim(anim_name: String):
 	self.target.play_anim(anim_name)
@@ -160,3 +129,23 @@ func set_orientation(orientation: Vector2):
 		interaction_vector.x * orientation.x, 
 		interaction_vector.y * orientation.y
 	))
+
+func set_mode(mode: ProxyMode):
+	self.current_mode = mode
+	match(self.current_mode):
+		ProxyMode.GAMEPLAY:
+			self.set_physics_process(true)
+			self.set_process_unhandled_input(true)
+			self._set_process_collisions(true)
+		ProxyMode.CUTSCENE:
+			self.velocity = Vector2.ZERO
+			self.set_physics_process(true)
+			self.set_process_unhandled_input(false)
+			self._set_process_collisions(true)
+		ProxyMode.NOT_THERE:
+			self.set_physics_process(false)
+			self.set_process_unhandled_input(false)
+			self._set_process_collisions(false)
+			
+			
+		

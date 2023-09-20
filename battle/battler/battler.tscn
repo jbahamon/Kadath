@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dtaxhpmmjspek"]
+[gd_scene load_steps=6 format=3 uid="uid://dtaxhpmmjspek"]
 
 [ext_resource type="Script" path="res://battle/battler/battler.gd" id="1"]
 [ext_resource type="Script" path="res://battle/ai/battler_ai.gd" id="2"]
+[ext_resource type="Resource" uid="uid://cdcbv6worc83n" path="res://battle/battler/placeholder_stats.tres" id="2_04g3y"]
 [ext_resource type="Script" path="res://battle/battle_rewards.gd" id="3"]
 
 [sub_resource type="Resource" id="1"]
@@ -12,6 +13,7 @@ money = 123
 
 [node name="Battler" type="Node"]
 script = ExtResource("1")
+stats = ExtResource("2_04g3y")
 rewards = SubResource("1")
 
 [node name="Skills" type="Node" parent="."]

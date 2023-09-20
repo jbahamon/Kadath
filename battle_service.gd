@@ -1,6 +1,8 @@
 extends Node
 const BattleLoop = preload("res://battle/battle_loop.gd")
 const Attack = preload("res://battle/action/attack.gd")
+const Win = preload("res://battle/action/win.gd")
+const Lose = preload("res://battle/action/lose.gd")
 
 enum Event {
 	TURN_START,
@@ -35,6 +37,16 @@ func init_common_action_options():
 	attack.description = "Attack with the equipped weapon"
 	self.common_action_options["attack"] = attack
 	
+	var win = Win.new()
+	win.display_name = "Win"
+	win.description = "Win the battle"
+	self.common_action_options["win"] = win
+	
+	var lose = Lose.new()
+	lose.display_name = "Lose"
+	lose.description = "Lose the battle"
+	self.common_action_options["lose"] = lose
+	
 func start_mook_battle(escapable: bool):
 	
 	if self.current_battle_parameters != null: 
@@ -50,7 +62,7 @@ func start_mook_battle(escapable: bool):
 	
 	self.start_battle(mooks, escapable)
 
-func start_battle(non_party_actors: Array, escapable: bool):
+func start_battle(enemies: Array, escapable: bool):
 	if self.current_battle_parameters != null:
 		return
 	
@@ -58,46 +70,18 @@ func start_battle(non_party_actors: Array, escapable: bool):
 		"escapable": escapable
 	}
 	
-	var camera_position = CameraService.get_camera().get_screen_center_position()
-	var battle_spot = self.get_nearest_battle_spot(camera_position)
-
-	if battle_spot.get_enemy_spots().size() < non_party_actors.size():
-		non_party_actors.sort_custom(
-			func(a: Node2D, b: Node2D): 
-				return (
-					a.position.distance_squared_to(camera_position) < 
-					b.position.distance_squared_to(camera_position)
-				)
-		)
-		non_party_actors = non_party_actors.slice(0, battle_spot.get_enemy_spots().size())
+	var battle_spot = self.get_nearest_battle_spot()
+	var non_party_actors = self.filter_non_party_actors(enemies, battle_spot)
 	
-	var world = EnvironmentService.get_world()
-	var hidden_npcs = []
-
-	for npc in world.get_tree().get_nodes_in_group("npc"):
-		if npc not in non_party_actors and npc.visible:
-			hidden_npcs.append(npc)
-			npc.pause()
-			npc.visible = false
-			
-	var proxy = EntitiesService.get_proxy()
-	proxy.pause()
+	self.pause_non_participants(non_party_actors)
 	
-	var party = EntitiesService.get_party()
-	var party_actors = EntitiesService.get_active_party_members()
-	var room = EnvironmentService.get_room()
-	
-	for party_actor in party_actors:
-		party.remove_child(party_actor)
-		room.add_child(party_actor)
-		party_actor.set_position(party_actor.position + party.position)
-
+	var party_actors = self.prepare_party_actors()	
 	var actors = party_actors + non_party_actors
 
 	self.loop.initialize(actors, self.ui)
 	self.ui.initialize(party_actors)
 
-	# cutscene
+	# starting cutscene
 	await self.set_up_battle_positions(battle_spot, party_actors, non_party_actors)
 	
 	# just to ensure we're not keeping references to enemies that might be freed during battle
@@ -108,20 +92,74 @@ func start_battle(non_party_actors: Array, escapable: bool):
 	var battle_end_state = await self.loop.do_battle()
 	
 	if battle_end_state.player_won: 
-		await self.deal_rewards(party, battle_end_state.rewards)
+		await self.deal_rewards(battle_end_state.rewards)
+			
+		self.ui.hide()
+		
+		await self.tear_down_battle_positions(battle_end_state)
+		self.restore_party_actors(party_actors)
+		self.resume_non_participants()
 	else:
+		self.ui.hide()
 		print("game over :(")
 		
-	self.ui.hide()
-	
-	# TODO: return party to position, return party members to party
-	# move to game over scene if player lost
-	for npc in self.hidden_npcs:
-		npc.resume()
-		npc.visible = true
-	
-	proxy.resume()
 	self.current_battle_parameters = null
+
+func get_nearest_battle_spot():
+	var camera_position = CameraService.get_camera().get_screen_center_position()
+	var battle_spots = get_tree().get_nodes_in_group("battle_spot")
+	var min_distance = INF
+	var nearest_spot = null
+	
+	for battle_spot in battle_spots:
+		var distance = (camera_position - battle_spot.position).length()
+		if distance < min_distance:
+			min_distance = distance
+			nearest_spot = battle_spot
+			
+	return nearest_spot
+
+func filter_non_party_actors(non_party_actors: Array, battle_spot):
+	if battle_spot.get_enemy_spots().size() < non_party_actors.size():
+		var camera_position = CameraService.get_camera().get_screen_center_position()
+
+		non_party_actors.sort_custom(
+			func(a: Node2D, b: Node2D): 
+				return (
+					a.position.distance_squared_to(camera_position) < 
+					b.position.distance_squared_to(camera_position)
+				)
+		)
+		return non_party_actors.slice(0, battle_spot.get_enemy_spots().size())
+	else:
+		return non_party_actors
+
+func prepare_party_actors():
+	var party_actors = EntitiesService.get_active_party_members()
+	var room = EnvironmentService.get_room()
+	
+	var party = EntitiesService.get_party()
+	for party_actor in party_actors:
+		party.remove_child(party_actor)
+		room.add_child(party_actor)
+		party_actor.set_position(party_actor.position + party.position)
+	return party_actors
+
+func restore_party_actors(party_actors):
+	var room = EnvironmentService.get_room()
+	var party = EntitiesService.get_party()
+	var last_added_child = null
+	for party_actor in party_actors:
+		room.remove_child(party_actor)
+		if last_added_child == null:
+			party.add_child(party_actor)
+			party.move_child(party_actor, 0)
+		else:
+			last_added_child.add_sibling(party_actor)
+		
+		party_actor.set_position(party_actor.position - party.position)
+		last_added_child = party_actor
+
 
 func set_up_battle_positions(battle_spot, party_actors: Array, non_party_actors: Array):
 	var party_spots = battle_spot.get_party_spots()
@@ -169,21 +207,52 @@ func set_up_battle_positions(battle_spot, party_actors: Array, non_party_actors:
 	cutscene_lines.append("END")
 
 	await CutsceneService.play_custom_cutscene(cutscene_lines)
-	
-func get_nearest_battle_spot(current_position: Vector2):
-	var battle_spots = get_tree().get_nodes_in_group("battle_spot")
-	var min_distance = INF
-	var nearest_spot = null
-	
-	for battle_spot in battle_spots:
-		var distance = (current_position - battle_spot.position).length()
-		if distance < min_distance:
-			min_distance = distance
-			nearest_spot = battle_spot
-			
-	return nearest_spot
 
-func deal_rewards(party: Party, rewards: BattleRewards):
+func tear_down_battle_positions(battle_end_state):
+	var proxy = EntitiesService.get_proxy()
+	var cutscene_lines = []
+	cutscene_lines.append("SIMULTANEOUS")
+	cutscene_lines.append(
+		"MOVE_CAMERA TO (%d, %d) IN 0.5" % [
+			int(round(proxy.global_position.x)), 
+			int(round(proxy.global_position.y))
+		]
+	)
+	
+	for party_actor in battle_end_state.party_actors:
+		cutscene_lines.append(
+			"WALK %s TO (%d, %d) AT 50" % [
+				party_actor.name, 
+				int(round(proxy.global_position.x)), 
+				int(round(proxy.global_position.y))
+			]
+		)
+	cutscene_lines.append("END")
+	await CutsceneService.play_custom_cutscene(cutscene_lines)
+		
+
+func pause_non_participants(non_party_actors: Array):
+	var world = EnvironmentService.get_world()
+	var hidden_npcs = []
+
+	for npc in world.get_tree().get_nodes_in_group("npc"):
+		if npc not in non_party_actors and npc.visible:
+			hidden_npcs.append(npc)
+			npc.pause()
+			npc.visible = false
+	
+	self.current_battle_parameters["hidden_npcs"] = hidden_npcs
+	EntitiesService.get_proxy().set_mode(PlayerProxy.ProxyMode.NOT_THERE)
+
+func resume_non_participants():
+	for npc in self.current_battle_parameters["hidden_npcs"]:
+		npc.resume()
+		npc.visible = true
+	
+	EntitiesService.get_proxy().set_mode(PlayerProxy.ProxyMode.GAMEPLAY)
+	
+func deal_rewards(rewards: BattleRewards):
+	var party = EntitiesService.get_party()
 	var experience = rewards.experience
 	if experience > 0:
 		await deal_experience(party, experience)

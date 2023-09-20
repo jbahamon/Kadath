@@ -1,0 +1,55 @@
+[gd_resource type="Resource" script_class="GrowthStats" load_steps=10 format=3 uid="uid://b4nbxe88mk82q"]
+
+[ext_resource type="Script" path="res://party/growth_stats.gd" id="1_xqohj"]
+
+[sub_resource type="Curve" id="1"]
+max_value = 99.0
+_data = [Vector2(0, 20), 0.0, 181.548, 0, 1, Vector2(0.435146, 99), 181.548, 0.0, 1, 0, Vector2(0.998605, 99), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="2"]
+max_value = 99.0
+_data = [Vector2(0, 20), 0.0, 132.653, 0, 1, Vector2(0.595537, 99), 132.653, 0.0, 1, 0, Vector2(1, 99), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="3"]
+max_value = 99.0
+_data = [Vector2(0, 20), 0.0, 28.6, 0, 1, Vector2(1, 48.6), 28.6, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="4"]
+max_value = 99.0
+_data = [Vector2(0, 20), 0.0, 122.604, 0, 1, Vector2(0.644351, 99), 122.604, 0.0, 1, 0, Vector2(1, 99), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="5"]
+max_value = 99.0
+_data = [Vector2(0, 20), 0.0, 104.894, 0, 1, Vector2(0.753138, 99), 104.894, 0.0, 1, 0, Vector2(1, 99), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="6"]
+max_value = 99.0
+_data = [Vector2(0, 50), 0.0, 80.0919, 0, 1, Vector2(0.611797, 99), 80.0919, 0.0, 1, 1, Vector2(1, 99), 0.0, 0.0, 1, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="7"]
+max_value = 999.0
+_data = [Vector2(0, 100), 0.0, 1785.75, 0, 1, Vector2(0.503429, 999), 1785.75, 0.0, 1, 0, Vector2(1, 999), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="8"]
+max_value = 10.0
+_data = [Vector2(0, 10), 0.0, 0.0, 0, 1, Vector2(1, 10), 0.0, 0.0, 1, 0]
+point_count = 2
+
+[resource]
+script = ExtResource("1_xqohj")
+level_lookup = [0, 100]
+max_health_curve = SubResource("7")
+max_energy_curve = SubResource("6")
+attack_curve = SubResource("1")
+defense_curve = SubResource("2")
+magic_attack_curve = SubResource("4")
+magic_defense_curve = SubResource("5")
+luck_curve = SubResource("3")
+speed_curve = SubResource("8")

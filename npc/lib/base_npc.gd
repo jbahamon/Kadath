@@ -74,11 +74,13 @@ func on_player_interaction(player_proxy: PlayerProxy):
 	self.interactable_collision.set_disabled(true)
 	
 	var was_input_enabled = InputService.is_input_enabled()
+	player_proxy.set_mode(PlayerProxy.ProxyMode.CUTSCENE)
 	InputService.set_input_enabled(false)
 	
 	await DialogService.open_dialog(self.dialog_name, self)	
 	
 	InputService.set_input_enabled(was_input_enabled)
+	player_proxy.set_mode(PlayerProxy.ProxyMode.GAMEPLAY)
 	self.interactable_collision.set_disabled(false)
 	self.start_auto_movement()
 	
@@ -90,24 +92,6 @@ func stop_auto_movement():
 	
 func start_auto_movement():
 	self.movement_node.start()
-	
-	
-
-# Battle methods
-	
-func get_allies(actors: Array):
-	var allies = []
-	for actor in actors:
-		if not actor is PartyMember:
-			allies.append(actor)
-	return allies
-	
-func get_enemies(actors: Array):
-	var enemies = []
-	for actor in actors:
-		if actor is PartyMember:
-			enemies.append(actor)
-	return enemies
 
 
 func move_to(target: Vector2, speed = WALK_SPEED):

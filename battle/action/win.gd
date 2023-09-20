@@ -10,18 +10,18 @@ func get_next_parameter_signature():
 		return {
 			"name": "targets",
 			"type": BattleAction.ActionArgument.TARGET,
-			"targeting_type": BattleAction.TargetType.ALL_ALLIES
+			"targeting_type": BattleAction.TargetType.ALL_ENEMIES
 		}
 	else:
 		return null
 	
 func push_parameter(parameter_name, value):
-	assert(parameter_name == "targets", "unknown parameter %s passed to attack action" % parameter_name)
-	self.targets = value
+	assert(parameter_name == "targets", "unknown parameter %s passed to win action" % parameter_name)
+	self.targets = value.targets
 	
 func pop_parameter() -> bool:
-	var had_targets = self.target != null
-	self.target = null
+	var had_targets = self.targets != null
+	self.targets = null
 	return had_targets
 	
 func execute(actor):
