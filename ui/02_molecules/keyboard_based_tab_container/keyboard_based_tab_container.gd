@@ -18,13 +18,9 @@ const default_modulate = Color("#FFFFFF")
 @export var disabled_font_color: Color
 @export var focused_font_color: Color
 
-@export var label_style: StyleBox
-@export var label_font: Font
-
 @export var content_style: StyleBox
 
 var overlay: Container
-var content_label: Label
 var tabs_container: HBoxContainer
 var content_container: Container
 var tabs_button_group: ButtonGroup
@@ -37,7 +33,7 @@ func _ready():
 	build_content_container()
 	build_tabs(children)
 	assign_tab_neighbours()
-	set_initial_focus()
+	
 	
 func initialize(party: Party):
 	for child in content_container.get_children():
@@ -71,18 +67,6 @@ func build_content_container():
 	overlay.name = "Overlay"
 	overlay.size_flags_horizontal = SIZE_EXPAND_FILL
 	overlay.size_flags_vertical = SIZE_EXPAND_FILL
-	
-	content_label = Label.new()
-	if label_font != null:
-		content_label.add_theme_font_override("font", label_font)
-	
-	if label_style != null:
-		content_label.add_theme_stylebox_override("normal", label_style)
-	content_label.name = "Content Label"
-	content_label.size_flags_horizontal = SIZE_EXPAND_FILL
-	content_label.size_flags_vertical = SIZE_EXPAND_FILL
-	
-	overlay.add_child(content_label)
 	
 	content_container = VBoxContainer.new()
 	content_container.name = "Content"
@@ -122,9 +106,9 @@ func build_tab_button_for(child: Control):
 
 	if "icon" in child:
 		button.icon = child.icon
-		button.text = ""
-	else:
-		button.text = child.name
+		
+	
+	button.text = child.name
 	button.toggle_mode = true
 	button.button_group = tabs_button_group
 	
@@ -147,10 +131,12 @@ func assign_tab_neighbours():
 		button.focus_neighbor_left = button.get_path_to(buttons[posmod((i - 1), len(buttons))])
 		button.focus_neighbor_right = button.get_path_to(buttons[posmod((i + 1), len(buttons))])
 	
-func set_initial_focus():
+func reset():
 	var buttons = tabs_button_group.get_buttons()
 	if buttons.is_empty():
 		return
+		
+	overlay.visible = false
 	
 	for button in buttons:
 		if not button.disabled:
@@ -169,16 +155,14 @@ func _unhandled_input(event):
 			content_container.modulate = default_modulate
 			get_viewport().set_input_as_handled()
 
-	elif event.is_action_pressed("ui_cancel"):
-		var pressed_tab_button = tabs_button_group.get_pressed_button()
-		if not pressed_tab_button.has_focus() and current_content.has_method("on_release_focus"):
-			overlay.visible = "icon" in current_content
-			current_content.on_release_focus()
-			pressed_tab_button.grab_click_focus()
-			pressed_tab_button.grab_focus()
-			content_container.modulate = inactive_content_modulate
-			get_viewport().set_input_as_handled()
-	
+func focus_current_tab():
+	var pressed_tab_button = tabs_button_group.get_pressed_button()
+	overlay.visible = "icon" in current_content
+	if current_content.has_method("on_release_focus"):
+		current_content.on_release_focus()
+	pressed_tab_button.grab_click_focus()
+	pressed_tab_button.grab_focus()
+	content_container.modulate = inactive_content_modulate
 
 func on_button_focused(button: Button):
 	button.button_pressed = true
@@ -187,7 +171,6 @@ func on_content_toggled(toggled: bool, content: Control):
 	content.visible = toggled
 	
 	if toggled:
-		content_label.text = content.name
 		overlay.visible = "icon" in content
 		current_content = content
 		current_content.size_flags_horizontal = SIZE_EXPAND_FILL

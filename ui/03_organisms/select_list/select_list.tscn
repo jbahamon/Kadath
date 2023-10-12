@@ -25,4 +25,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[connection signal="cancel" from="." to="." method="_on_cancel"]
+[connection signal="element_selected" from="." to="." method="_on_element_selected"]
 [connection signal="visibility_changed" from="." to="." method="_on_SelectPanel_visibility_changed"]

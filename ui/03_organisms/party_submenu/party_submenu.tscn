@@ -1,10 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://bxtqflr2vn3o4"]
+[gd_scene load_steps=10 format=3 uid="uid://bxtqflr2vn3o4"]
 
 [ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="1"]
 [ext_resource type="PackedScene" uid="uid://brhpxl8pukdr" path="res://ui/03_organisms/select_list/select_list.tscn" id="2"]
 [ext_resource type="Script" path="res://ui/03_organisms/party_submenu/party_submenu.gd" id="4"]
 [ext_resource type="Texture2D" uid="uid://chqcjur8n17ah" path="res://ui/01_atoms/assets/icons/By ssugmi/icon-party.png" id="6"]
-[ext_resource type="PackedScene" path="res://ui/02_molecules/party_member_stats/party_member_stats.tscn" id="8"]
+[ext_resource type="PackedScene" uid="uid://caki3n35ds5sk" path="res://ui/02_molecules/party_member_stats/party_member_stats.tscn" id="8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pkv6n"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k1cdo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_icqbp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v1mrn"]
 
 [node name="PartySubmenu" type="PanelContainer"]
 offset_left = -1.0
@@ -16,43 +24,59 @@ theme = ExtResource("1")
 script = ExtResource("4")
 icon = ExtResource("6")
 
-[node name="VSplitContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VSplitContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
-[node name="ItemList" parent="VSplitContainer/HBoxContainer" instance=ExtResource("2")]
-visible = false
+[node name="PartyList" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_stretch_ratio = 0.5
+theme_override_styles/panel = SubResource("StyleBoxEmpty_pkv6n")
+toggle = true
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="PartyList" parent="VSplitContainer/HBoxContainer" instance=ExtResource("2")]
-layout_mode = 2
-size_flags_horizontal = 8
-
-[node name="VSeparator" type="VSeparator" parent="VSplitContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="PartyMemberStats" parent="VSplitContainer/HBoxContainer" instance=ExtResource("8")]
+[node name="PartyMemberStats" parent="VBoxContainer/HBoxContainer" instance=ExtResource("8")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_k1cdo")
 
-[node name="HSeparator" type="HSeparator" parent="VSplitContainer"]
+[node name="VSeparator2" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="InfoPanel" type="PanelContainer" parent="VSplitContainer"]
+[node name="ItemList" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_icqbp")
+args_for_null_element = {
+"display_name": "None"
+}
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="InfoPanel" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_v1mrn")
 
-[node name="Info" type="Label" parent="VSplitContainer/InfoPanel"]
+[node name="Info" type="Label" parent="VBoxContainer/InfoPanel"]
 layout_mode = 2
 text = "Press [X] to auto sort items"
 
-[connection signal="element_focused" from="VSplitContainer/HBoxContainer/PartyList" to="VSplitContainer/HBoxContainer/PartyMemberStats" method="on_party_member_focused"]
-[connection signal="element_selected" from="VSplitContainer/HBoxContainer/PartyList" to="VSplitContainer/HBoxContainer/PartyMemberStats" method="on_party_member_selected"]
-[connection signal="focus_released" from="VSplitContainer/HBoxContainer/PartyMemberStats" to="VSplitContainer/HBoxContainer/PartyList" method="grab_focus"]
-[connection signal="item_requested" from="VSplitContainer/HBoxContainer/PartyMemberStats" to="." method="on_item_requested"]
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="cancel" from="VBoxContainer/HBoxContainer/PartyList" to="." method="_on_party_list_cancel"]
+[connection signal="element_focused" from="VBoxContainer/HBoxContainer/PartyList" to="VBoxContainer/HBoxContainer/PartyMemberStats" method="on_party_member_focused"]
+[connection signal="element_selected" from="VBoxContainer/HBoxContainer/PartyList" to="VBoxContainer/HBoxContainer/PartyMemberStats" method="on_party_member_selected"]
+[connection signal="focus_entered" from="VBoxContainer/HBoxContainer/PartyList" to="." method="on_grab_focus"]
+[connection signal="focus_released" from="VBoxContainer/HBoxContainer/PartyMemberStats" to="VBoxContainer/HBoxContainer/PartyList" method="on_grab_focus"]
+[connection signal="item_requested" from="VBoxContainer/HBoxContainer/PartyMemberStats" to="." method="on_item_requested"]
+[connection signal="element_selected" from="VBoxContainer/HBoxContainer/ItemList" to="VBoxContainer/HBoxContainer/PartyMemberStats" method="on_item_selected"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://co4ecuc835bk6"]
 
 [ext_resource type="PackedScene" uid="uid://c17hneqpuil0l" path="res://npc/lib/base_npc.tscn" id="1"]
-[ext_resource type="PackedScene" path="res://battle/battler/battler.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://dtaxhpmmjspek" path="res://battle/battler/battler.tscn" id="2"]
 [ext_resource type="Script" path="res://npc/enemy/enemy.gd" id="2_yhkqm"]
 
 [node name="Enemy" groups=["enemy"] instance=ExtResource("1")]

@@ -279,10 +279,12 @@ func deal_experience(party: Party, experience: int):
 		if previous_level != party_member.get_level():
 			await self.ui.prompt("%s leveled up" % party_member.display_name)
 
-func deal_items(party: Party, loot_bag: Array):
+func deal_items(party: Party, loot_bag: Dictionary):
 	for loot in loot_bag:
-		await self.ui.prompt("Received %s!" % loot.item.name)
-		party.inventory.add(loot.item, loot.amount)
+		var item: InventoryItem = ItemService.id_to_item(loot)
+		var amount = loot_bag[loot]
+		await self.ui.prompt("Received %s!" % item.name)
+		party.inventory.add(loot, amount)
 
 func deal_money(_party: Party, money: int):
 	await self.ui.prompt("Received %d G!" % money)

@@ -1,0 +1,100 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1j0bc2dxk7lu"]
+
+[ext_resource type="Script" path="res://ui/03_organisms/item_submenu_legacy/item_submenu.gd" id="1"]
+[ext_resource type="Script" path="res://ui/03_organisms/item_submenu_legacy/item_use_and_description.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://dy4u72rn5jlrr" path="res://ui/01_atoms/assets/icons/By ssugmi/icon-items.png" id="3"]
+[ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="4"]
+
+[node name="Inventory" type="PanelContainer"]
+offset_right = 310.0
+offset_bottom = 113.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("4")
+script = ExtResource("1")
+icon = ExtResource("3")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HBox" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ItemsPanel" type="PanelContainer" parent="VBox/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ItemsScroll" type="ScrollContainer" parent="VBox/HBox/ItemsPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+follow_focus = true
+
+[node name="Items" type="VBoxContainer" parent="VBox/HBox/ItemsPanel/ItemsScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VSeparator" type="VSeparator" parent="VBox/HBox"]
+layout_mode = 2
+
+[node name="ItemUseAndDescription" type="PanelContainer" parent="VBox/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBox/HBox/ItemUseAndDescription"]
+layout_mode = 2
+
+[node name="ItemActions" type="HBoxContainer" parent="VBox/HBox/ItemUseAndDescription/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Use" type="Button" parent="VBox/HBox/ItemUseAndDescription/VBoxContainer/ItemActions"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 1
+mouse_filter = 2
+disabled = true
+text = "Use"
+
+[node name="Swap" type="Button" parent="VBox/HBox/ItemUseAndDescription/VBoxContainer/ItemActions"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 1
+mouse_filter = 2
+disabled = true
+toggle_mode = true
+text = "Swap"
+
+[node name="Toss" type="Button" parent="VBox/HBox/ItemUseAndDescription/VBoxContainer/ItemActions"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 1
+mouse_filter = 2
+disabled = true
+text = "Toss"
+
+[node name="Description" type="Label" parent="VBox/HBox/ItemUseAndDescription/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_lines_visible = 4
+
+[node name="HSeparator" type="HSeparator" parent="VBox"]
+layout_mode = 2
+
+[node name="InfoPanel" type="PanelContainer" parent="VBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Info" type="Label" parent="VBox/InfoPanel"]
+layout_mode = 2
+text = "Press [X] to auto sort items"
+
+[connection signal="swap_mode_toggled" from="VBox/HBox/ItemUseAndDescription" to="." method="_on_swap_mode_toggled"]
+[connection signal="toggled" from="VBox/HBox/ItemUseAndDescription/VBoxContainer/ItemActions/Swap" to="VBox/HBox/ItemUseAndDescription" method="_on_Swap_toggled"]

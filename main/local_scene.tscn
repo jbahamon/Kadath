@@ -58,6 +58,7 @@ _data = {
 
 [node name="LocalScene" type="Node2D"]
 texture_filter = 1
+position = Vector2(0, 1)
 script = ExtResource("7")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
@@ -144,6 +145,7 @@ characters_per_second = 25.0
 skip_speed_factor = 5.0
 
 [node name="MenuLayer" type="CanvasLayer" parent="."]
+process_mode = 3
 
 [node name="MenuPopup" type="PopupPanel" parent="MenuLayer"]
 transparent_bg = true
@@ -152,7 +154,6 @@ transparent = true
 script = ExtResource("6")
 
 [node name="PauseMenu" parent="MenuLayer/MenuPopup" instance=ExtResource("3")]
-offset_right = 10.0
 offset_bottom = 22.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -194,9 +195,8 @@ fit_content = true
 scroll_active = false
 
 [node name="PopupLayer" type="CanvasLayer" parent="."]
+process_mode = 2
 
-[connection signal="about_to_popup" from="MenuLayer/MenuPopup" to="." method="_on_menu_about_to_show"]
-[connection signal="popup_hide" from="MenuLayer/MenuPopup" to="." method="_on_menu_popup_hide"]
 [connection signal="about_to_popup" from="MenuLayer/SavesPopup" to="." method="_on_menu_about_to_show"]
 [connection signal="popup_hide" from="MenuLayer/SavesPopup" to="." method="_on_menu_popup_hide"]
 

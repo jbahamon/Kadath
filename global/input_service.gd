@@ -17,21 +17,9 @@ func set_input_enabled(value: bool):
 	self.input_enabled = value
 
 func enter_menu_mode(menu) -> void:
-	var proxy = EntitiesService.get_proxy()
-	var world = EnvironmentService.get_world()
+	get_tree().paused = true
 	
-	proxy.set_mode(PlayerProxy.ProxyMode.CUTSCENE)
-	world.set_physics_process(false)
-	world.set_process(false)
-	world.set_process_unhandled_input(false)
-	menu.set_process_unhandled_input(true)
 
 func exit_menu_mode(menu) -> void:
-	var proxy = EntitiesService.get_proxy()
-	var world = EnvironmentService.get_world()
+	get_tree().paused = false
 	
-	proxy.set_mode(PlayerProxy.ProxyMode.GAMEPLAY)
-	world.set_physics_process(true)
-	world.set_process(true)
-	world.set_process_unhandled_input(true)
-	menu.set_process_unhandled_input(false)

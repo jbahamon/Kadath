@@ -32,6 +32,7 @@ DialogService="*res://global/dialog_service.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 LayersService="*res://global/layers_service.gd"
 UIService="*res://global/ui_service.gd"
+ItemService="*res://global/item_service.gd"
 
 [dialogue_manager]
 

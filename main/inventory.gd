@@ -5,6 +5,7 @@ signal inventory_changed(change_type)
 
 enum Change {
 	ADD,
+	SET,
 	REMOVE,
 	SORT,
 	SWAP
@@ -27,17 +28,25 @@ func save(save_data: SaveData) -> void:
 		"order": self.order
 	}
 
-func add(item: InventoryItem, amount: int = 1) -> void:
-	if item in amounts:
-		amounts[item] = min(amounts[item] + amount, item.max_amount)
+func add(item_id: String, amount: int = 1) -> void:
+	var max_amount = ItemService.id_to_item(item_id).max_amount
+	if item_id in amounts:
+		amounts[item_id] = min(amounts[item_id] + amount, max_amount)
 	else:
-		amounts[item] = min(amount, item.max_amount)
-		order.push_back(item)
+		amounts[item_id] = min(amount, max_amount)
+		order.push_back(item_id)
 	
 	emit_signal("inventory_changed", Change.ADD)
-		
+
+func set_item(item_id: String, amount: int) -> void:
+	var max_amount = ItemService.id_to_item(item_id).max_amount
+	if item_id not in amounts:
+		order.push_back(item_id)
+	amounts[item_id] = min(amount, max_amount)
 	
-func remove(item: InventoryItem, amount: int = 1) -> void:
+	emit_signal("inventory_changed", Change.SET)		
+	
+func remove(item: String, amount: int = 1) -> void:
 	assert(item in amounts)
 	assert(amount <= amounts[item])
 	assert(item in order)
@@ -56,31 +65,36 @@ func swap_items(i1: int, i2: int) -> void:
 	order[i2] = temp_item
 	emit_signal("inventory_changed", Change.SWAP)
 
-func has(item: InventoryItem):
-	return item in amounts
+func has(item_id: String):
+	return item_id in amounts
 
-func get_sorted_items_amounts() -> Array:
+func get_sorted_items_amounts(category) -> Array:
 	var ids_and_amounts = []
 	
 	for item in order:
-		ids_and_amounts.push_back([item, amounts[item]])
+		if category == null or ItemService.id_to_item(item).category == category:
+			ids_and_amounts.push_back([item, amounts[item]])
 		
 	return ids_and_amounts
 
 func get_equipment(cls, equippable_flag: int) -> Array:
 	var ret = []
-	for item in order:
+	for item_id in order:
+		var item = ItemService.id_to_item(item_id)
 		if cls.instance_has(item) and (item.equippable_by & equippable_flag):
 			ret.append(item)
 	return ret
 
 func sort():
-	order.sort_custom(Callable(ItemSorter,"sort_ascending"))
-	emit_signal("inventory_changed", Change.SORT)
+	var items = []
 	
-class ItemSorter:
-	static func sort_ascending(a: InventoryItem, b: InventoryItem):
-		if a.category != b.category:
-			return a.get_class() < b.get_class()
-		else:
-			return a.name < b.name
+	for item_id in order:
+		items.append(ItemService.get_item(item_id))
+		
+	items.sort_custom(Callable(ItemService.ItemSorter,"sort_ascending"))
+	
+	self.order = []
+	for item in items:
+		self.order.append(item.id)
+		
+	emit_signal("inventory_changed", Change.SORT)

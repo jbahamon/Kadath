@@ -1,9 +1,14 @@
 extends PanelContainer
 
-@onready var item_list = $VSplitContainer/HBoxContainer/ItemList
-@onready var party_list = $VSplitContainer/HBoxContainer/PartyList
-@onready var party_member_stats = $VSplitContainer/HBoxContainer/PartyMemberStats
+var PartyMemberListItem = preload("res://ui/02_molecules/party_member_list_item/party_member_list_item.tscn")
 
+signal exit_submenu
+
+@onready var item_list = $VBoxContainer/HBoxContainer/ItemList
+@onready var party_list = $VBoxContainer/HBoxContainer/PartyList
+@onready var party_member_stats = $VBoxContainer/HBoxContainer/PartyMemberStats
+@onready var party_details_separator = $VBoxContainer/HBoxContainer/VSeparator
+@onready var details_items_separator = $VBoxContainer/HBoxContainer/VSeparator2
 @export var icon: Texture2D
 
 var inventory: Inventory
@@ -11,58 +16,49 @@ var inventory: Inventory
 func initialize(party: Party):
 	self.inventory = party.inventory
 	var party_members = party.get_active_members()
-	party_list.initialize(party_members)
+	party_list.initialize(party_members, PartyMemberListItem)
+	
 	if party_members.size() > 0:
 		party_member_stats.on_party_member_focused(party_members[0])
+
+func set_party_list_mode():
+	# item_list.disconnect("element_focused",party_member_stats.on_item_focused)
+	party_details_separator.visible = true
+	details_items_separator.visible = false
+	party_list.visible = true
+	item_list.visible = false
+	
+func set_item_mode():
+	# item_list.connect("element_focused",party_member_stats.on_item_focused)
+	party_member_stats.set_process_unhandled_input(false)
+	party_details_separator.visible = false
+	details_items_separator.visible = true
+	party_list.visible = false
+	item_list.visible = true
+	item_list.on_grab_focus()
 	
 func on_grab_focus():
-	var first_element = party_list.get_first_clickable_item()
-
-	if first_element != null:
-		first_element.grab_focus()
-		first_element.grab_click_focus()
-		return true
-	else:
-		return false
-
-func on_release_focus():
-	return
+	return party_list.on_grab_focus()
 
 func on_item_requested(item_class, party_member: PartyMember):
 	var items = self.inventory.get_equipment(item_class, party_member.id)
-	self.item_list.custom_minimum_size = Vector2(party_list.size[0], 0.0)
+	items.append(null)
 	self.item_list.initialize(items)
+	
 	self.party_member_stats.set_process_unhandled_input(false)
+	await self.set_item_mode()
 	
-	self.item_list.visible = true
-	self.party_list.visible = false
+	var item = await item_list.done
 	
-	item_list.connect("element_focused", party_member_stats.on_item_focused)
-	item_list.connect("element_selected", self.on_item_selected, CONNECT_ONE_SHOT)
-	item_list.connect("element_selected", party_member_stats.on_item_selected, CONNECT_ONE_SHOT)
+	await self.set_party_list_mode()
 	
-	item_list.connect("cancel", self.on_item_cancel, CONNECT_ONE_SHOT)
-	item_list.connect("cancel", party_member_stats.on_item_cancel, CONNECT_ONE_SHOT)
-		
-	item_list.grab_focus()
-
-func on_item_selected(_item: InventoryItem):
-	self.item_list.visible = false
-	self.party_list.visible = true
 	self.party_member_stats.set_process_unhandled_input(true)
 	
-	item_list.disconnect("element_focused",Callable(party_member_stats,"on_item_focused"))
-	
-	item_list.disconnect("cancel", self.on_item_cancel)
-	item_list.disconnect("cancel", party_member_stats.on_item_cancel)
+	self.party_member_stats.on_grab_focus()
 
-	
-func on_item_cancel():
-	self.item_list.visible = false
-	self.party_list.visible = true
-	self.party_member_stats.set_process_unhandled_input(true)
-	item_list.disconnect("element_focused",party_member_stats.on_item_focused)
-	item_list.disconnect("element_selected", self.on_item_selected)
-	item_list.disconnect("element_selected", party_member_stats.on_item_selected)
-	
+func _on_visibility_changed():
+	if self.visible:
+		self.set_party_list_mode()
 
+func _on_party_list_cancel():
+	emit_signal("exit_submenu")

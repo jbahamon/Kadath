@@ -1,15 +1,14 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=3 uid="uid://caki3n35ds5sk"]
 
-[ext_resource path="res://ui/01_atoms/theme.tres" type="Theme" id=1]
-[ext_resource path="res://ui/02_molecules/party_member_stats/party_member_stats.gd" type="Script" id=2]
-[ext_resource path="res://ui/01_atoms/assets/icons/By John Ivess/small-icon-accessory.png" type="Texture2D" id=3]
-[ext_resource path="res://ui/01_atoms/assets/icons/By John Ivess/small-icon-helmet.png" type="Texture2D" id=4]
-[ext_resource path="res://ui/01_atoms/assets/icons/By John Ivess/small-icon-armor.png" type="Texture2D" id=5]
-[ext_resource path="res://ui/01_atoms/assets/icons/By John Ivess/small-icon-sword.png" type="Texture2D" id=6]
-
-[sub_resource type="StyleBoxEmpty" id=1]
+[ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="1"]
+[ext_resource type="Script" path="res://ui/02_molecules/party_member_stats/party_member_stats.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://j8a0ncohd3ms" path="res://ui/01_atoms/assets/icons/By John Ivess/small-icon-accessory.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://x36nklmtfcye" path="res://ui/01_atoms/assets/icons/By John Ivess/small-icon-helmet.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://c1rsm0d2w3045" path="res://ui/01_atoms/assets/icons/By John Ivess/small-icon-armor.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://c0df7sioi4vge" path="res://ui/01_atoms/assets/icons/By John Ivess/small-icon-sword.png" id="6"]
 
 [node name="PartyMemberStats" type="PanelContainer"]
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -18,50 +17,32 @@ offset_left = -160.0
 offset_top = -120.0
 offset_right = 160.0
 offset_bottom = 120.0
-theme = ExtResource( 1 )
-custom_styles/panel = SubResource( 1 )
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+theme = ExtResource("1")
+script = ExtResource("2")
 
 [node name="Panel" type="VBoxContainer" parent="."]
-offset_right = 320.0
-offset_bottom = 240.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/separation = 5
 alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel"]
-offset_top = 38.0
-offset_right = 320.0
-offset_bottom = 150.0
-grow_horizontal = 0
-custom_constants/offset_right = 20
-custom_constants/offset_left = 20
+layout_mode = 2
 
 [node name="Equipment" type="GridContainer" parent="Panel/MarginContainer"]
-offset_left = 20.0
-offset_right = 300.0
-offset_bottom = 112.0
+layout_mode = 2
 columns = 3
 
 [node name="WeaponIcon" type="TextureRect" parent="Panel/MarginContainer/Equipment"]
-offset_top = 4.0
-offset_right = 16.0
-offset_bottom = 20.0
+layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 4
-texture = ExtResource( 6 )
+texture = ExtResource("6")
 
 [node name="WeaponName" type="Button" parent="Panel/MarginContainer/Equipment"]
-offset_left = 20.0
-offset_right = 266.0
-offset_bottom = 25.0
-grow_vertical = 2
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 focus_neighbor_left = NodePath(".")
 focus_neighbor_top = NodePath("../AccessoryName")
 focus_neighbor_right = NodePath(".")
@@ -69,33 +50,25 @@ focus_neighbor_bottom = NodePath("../HelmetName")
 focus_next = NodePath("../HelmetName")
 focus_previous = NodePath("../AccessoryName")
 mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 toggle_mode = true
 text = "Wooden Stick"
 
 [node name="WeaponStats" type="Label" parent="Panel/MarginContainer/Equipment"]
-offset_left = 270.0
-offset_right = 280.0
-offset_bottom = 25.0
+layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 text = "0"
-valign = 1
 
 [node name="HelmetIcon" type="TextureRect" parent="Panel/MarginContainer/Equipment"]
-offset_top = 33.0
-offset_right = 16.0
-offset_bottom = 49.0
+layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 4
-texture = ExtResource( 4 )
+texture = ExtResource("4")
 
 [node name="HelmetName" type="Button" parent="Panel/MarginContainer/Equipment"]
-offset_left = 20.0
-offset_top = 29.0
-offset_right = 266.0
-offset_bottom = 54.0
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 7
 focus_neighbor_left = NodePath(".")
 focus_neighbor_top = NodePath("../WeaponName")
 focus_neighbor_right = NodePath(".")
@@ -103,34 +76,25 @@ focus_neighbor_bottom = NodePath("../ArmorName")
 focus_next = NodePath("../ArmorName")
 focus_previous = NodePath("../WeaponName")
 mouse_filter = 2
-size_flags_horizontal = 5
-size_flags_vertical = 7
 toggle_mode = true
 text = "--"
 
 [node name="HelmetStats" type="Label" parent="Panel/MarginContainer/Equipment"]
-offset_left = 270.0
-offset_top = 29.0
-offset_right = 280.0
-offset_bottom = 54.0
+layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 text = "0"
-valign = 1
 
 [node name="ArmorIcon" type="TextureRect" parent="Panel/MarginContainer/Equipment"]
-offset_top = 62.0
-offset_right = 16.0
-offset_bottom = 78.0
+layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 4
-texture = ExtResource( 5 )
+texture = ExtResource("5")
 
 [node name="ArmorName" type="Button" parent="Panel/MarginContainer/Equipment"]
-offset_left = 20.0
-offset_top = 58.0
-offset_right = 266.0
-offset_bottom = 83.0
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
 focus_neighbor_left = NodePath(".")
 focus_neighbor_top = NodePath("../HelmetName")
 focus_neighbor_right = NodePath(".")
@@ -138,154 +102,100 @@ focus_neighbor_bottom = NodePath("../AccessoryName")
 focus_next = NodePath("../AccessoryName")
 focus_previous = NodePath("../HelmetName")
 mouse_filter = 2
-size_flags_horizontal = 5
-size_flags_vertical = 3
 toggle_mode = true
 text = "Leather Armor"
 
 [node name="ArmorStats" type="Label" parent="Panel/MarginContainer/Equipment"]
-offset_left = 270.0
-offset_top = 58.0
-offset_right = 280.0
-offset_bottom = 83.0
+layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 text = "15"
-valign = 1
 
 [node name="AccessoryIcon" type="TextureRect" parent="Panel/MarginContainer/Equipment"]
-offset_top = 91.0
-offset_right = 16.0
-offset_bottom = 107.0
+layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 4
-texture = ExtResource( 3 )
+texture = ExtResource("3")
 
 [node name="AccessoryName" type="Button" parent="Panel/MarginContainer/Equipment"]
-offset_left = 20.0
-offset_top = 87.0
-offset_right = 266.0
-offset_bottom = 112.0
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
 focus_neighbor_left = NodePath(".")
 focus_neighbor_top = NodePath("../ArmorName")
 focus_neighbor_right = NodePath(".")
 focus_neighbor_bottom = NodePath("../WeaponName")
 focus_next = NodePath("../WeaponName")
 mouse_filter = 2
-size_flags_horizontal = 5
-size_flags_vertical = 3
 toggle_mode = true
 text = "--"
 
 [node name="Control" type="Control" parent="Panel/MarginContainer/Equipment"]
-offset_left = 270.0
-offset_top = 87.0
-offset_right = 280.0
-offset_bottom = 112.0
+layout_mode = 2
 size_flags_vertical = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Stats" type="GridContainer" parent="Panel"]
-offset_top = 155.0
-offset_right = 320.0
-offset_bottom = 202.0
+layout_mode = 2
 size_flags_horizontal = 9
 columns = 4
 
 [node name="AttackLabel" type="Label" parent="Panel/Stats"]
-offset_right = 77.0
-offset_bottom = 13.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Attack"
-align = 2
 
 [node name="AttackValue" type="Label" parent="Panel/Stats"]
-offset_left = 81.0
-offset_right = 158.0
-offset_bottom = 13.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "10"
 
 [node name="MagicAttackLabel" type="Label" parent="Panel/Stats"]
-offset_left = 162.0
-offset_right = 239.0
-offset_bottom = 13.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Magic Attack"
-align = 2
 
 [node name="MagicAttackValue" type="Label" parent="Panel/Stats"]
-offset_left = 243.0
-offset_right = 320.0
-offset_bottom = 13.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "10"
 
 [node name="DefenseLabel" type="Label" parent="Panel/Stats"]
-offset_top = 17.0
-offset_right = 77.0
-offset_bottom = 30.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Defense"
-align = 2
 
 [node name="DefenseValue" type="Label" parent="Panel/Stats"]
-offset_left = 81.0
-offset_top = 17.0
-offset_right = 158.0
-offset_bottom = 30.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "10"
 
 [node name="MagicDefenseLabel" type="Label" parent="Panel/Stats"]
-offset_left = 162.0
-offset_top = 17.0
-offset_right = 239.0
-offset_bottom = 30.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Magic Defense"
-align = 2
 
 [node name="MagicDefenseValue" type="Label" parent="Panel/Stats"]
-offset_left = 243.0
-offset_top = 17.0
-offset_right = 320.0
-offset_bottom = 30.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "10"
 
 [node name="SpeedLabel" type="Label" parent="Panel/Stats"]
-offset_top = 34.0
-offset_right = 77.0
-offset_bottom = 47.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Speed"
-align = 2
 
 [node name="SpeedValue" type="Label" parent="Panel/Stats"]
-offset_left = 81.0
-offset_top = 34.0
-offset_right = 158.0
-offset_bottom = 47.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "10"
 
 [node name="LuckLabel" type="Label" parent="Panel/Stats"]
-offset_left = 162.0
-offset_top = 34.0
-offset_right = 239.0
-offset_bottom = 47.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Luck"
-align = 2
 
 [node name="LuckValue" type="Label" parent="Panel/Stats"]
-offset_left = 243.0
-offset_top = 34.0
-offset_right = 320.0
-offset_bottom = 47.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "10"
 

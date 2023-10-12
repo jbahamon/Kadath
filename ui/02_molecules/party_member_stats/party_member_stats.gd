@@ -1,7 +1,7 @@
 extends PanelContainer
 
 signal item_requested(cls, party_member)
-signal focus_released(party_member)
+signal focus_released
 
 @onready var weapon_name: Button = $Panel/MarginContainer/Equipment/WeaponName
 @onready var weapon_stats: Label = $Panel/MarginContainer/Equipment/WeaponStats
@@ -104,17 +104,18 @@ func on_accessory_clicked():
 	selected_property = "equipped_accessory"
 	selected_button = accessory_name
 	
-
 func on_item_selected(item: Equipment):
-	if item != null:
+	if item != null and selected_property != null and party_member != null:
+		#FIXME move inventory logic here
 		party_member.set(selected_property, item)
 		update_ui_info()
 		
-	selected_button.button_pressed = false
-	selected_button.grab_click_focus()
-	selected_button.grab_focus()
-
-func on_item_cancel():
-	selected_button.button_pressed = false
-	selected_button.grab_click_focus()
-	selected_button.grab_focus()
+func on_grab_focus():
+	if selected_button != null:
+		selected_button.button_pressed = false
+		selected_button.grab_click_focus()
+		selected_button.grab_focus()
+		selected_button = null
+	else:
+		weapon_name.grab_click_focus()
+		weapon_name.grab_focus()

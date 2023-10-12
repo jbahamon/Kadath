@@ -66,7 +66,7 @@ func get_physical_attack_bonus() -> float:
 	
 func get_physical_armor() -> float:
 	return float(
-		(equipped_armor.defense if equipped_armor != null else 0) +
+		(equipped_helmet.defense if equipped_helmet != null else 0) +
 		(equipped_armor.defense if equipped_armor != null else 0)
 	)
 	
@@ -77,10 +77,10 @@ func save(save_game: Resource):
 	save_game.data[SAVE_KEY] = {
 		"display_name": display_name,
 		"unlocked": unlocked,
-		"equipped_weapon": equipped_weapon,
-		"equipped_helmet": equipped_helmet,
-		"equipped_armor": equipped_armor,
-		"equipped_accessory": equipped_accessory,
+		"equipped_weapon": equipped_weapon.id if equipped_weapon != null else null,
+		"equipped_helmet": equipped_helmet.id if equipped_helmet != null else null,
+		"equipped_armor": equipped_armor.id if equipped_armor != null else null,
+		"equipped_accessory": equipped_accessory.id if equipped_accessory != null else null,
 		"experience": experience,
 		"health": battler.stats.health,
 		"energy": battler.stats.energy,
@@ -91,10 +91,10 @@ func load_game_data(save_game: Resource):
 	display_name = data["display_name"]
 	unlocked = data["unlocked"]
 	
-	equipped_weapon = data["equipped_weapon"]
-	equipped_helmet = data["equipped_helmet"]
-	equipped_armor = data["equipped_armor"]
-	equipped_accessory = data["equipped_accessory"]
+	equipped_weapon = ItemService.id_to_item(data["equipped_weapon"]) if data["equipped_weapon"] != null else null
+	equipped_helmet = ItemService.id_to_item(data["equipped_helmet"]) if data["equipped_helmet"] != null else null 
+	equipped_armor = ItemService.id_to_item(data["equipped_armor"]) if data["equipped_armor"] != null else null
+	equipped_accessory = ItemService.id_to_item(data["equipped_accessory"]) if data["equipped_accessory"] != null else null
 	
 	experience = data["experience"]
 	battler.stats = growth.create_stats(experience)
@@ -104,21 +104,23 @@ func load_game_data(save_game: Resource):
 	
 func set_weapon(weapon: Weapon):
 	var party: Party = self.get_parent()
-	assert(party != null || equipped_weapon == null)
+	assert(party != null)
 	if party != null:
 		if equipped_weapon != null:
-			party.inventory.add(equipped_weapon)
-		party.inventory.remove(weapon)
+			party.inventory.add(equipped_weapon.id)
+		if weapon != null:
+			party.inventory.remove(weapon.id)
 	
 	equipped_weapon = weapon
 	
 func set_helmet(helmet: Helmet):
 	var party: Party = self.get_parent()
-	assert(party != null || equipped_helmet == null)
+	assert(party != null)
 	if party != null:
-		if equipped_helmet != null:
-			party.inventory.add(equipped_helmet)
-		party.inventory.remove(helmet)
+		if self.equipped_helmet != null:
+			party.inventory.add(equipped_helmet.id)
+		if helmet != null:
+			party.inventory.remove(helmet.id)
 	
 	equipped_helmet = helmet
 	
@@ -127,8 +129,9 @@ func set_armor(armor: Armor):
 	assert(party != null || equipped_armor == null)
 	if party != null:
 		if equipped_armor != null:
-			party.inventory.add(equipped_armor)
-		party.inventory.remove(armor)
+			party.inventory.add(equipped_armor.id)
+		if armor != null:
+			party.inventory.remove(armor.id)
 	
 	equipped_armor = armor
 	
@@ -137,8 +140,9 @@ func set_accessory(accessory: Accessory):
 	assert(party != null || equipped_accessory == null)
 	if party != null:
 		if equipped_accessory != null:
-			party.inventory.add(equipped_accessory)
-		party.inventory.remove(accessory)
+			party.inventory.add(equipped_accessory.id)
+		if accessory != null:
+			party.inventory.remove(accessory.id)
 	
 	equipped_accessory = accessory
 

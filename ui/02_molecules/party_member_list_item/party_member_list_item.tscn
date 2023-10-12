@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxf15c38rn3jo"]
+
+[ext_resource type="Script" path="res://ui/02_molecules/party_member_list_item/party_member_list_item.gd" id="1_ladha"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2r1a5"]
+
+[node name="PartyMemberListItem" type="MarginContainer"]
+custom_minimum_size = Vector2(180, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ladha")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+focus_neighbor_left = NodePath(".")
+mouse_filter = 2
+toggle_mode = true
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_2r1a5")
+
+[node name="Info" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Name" type="Label" parent="PanelContainer/Info"]
+layout_mode = 2
+text = "Arden"
+vertical_alignment = 1
+
+[node name="HP" type="Label" parent="PanelContainer/Info"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "10/10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EP" type="Label" parent="PanelContainer/Info"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "5/5"
+horizontal_alignment = 1
+vertical_alignment = 1

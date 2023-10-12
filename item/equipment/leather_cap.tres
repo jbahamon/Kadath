@@ -1,13 +1,13 @@
-[gd_resource type="Resource" load_steps=2 format=2]
+[gd_resource type="Resource" script_class="Helmet" load_steps=2 format=3 uid="uid://c44fjr38h411c"]
 
-[ext_resource path="res://item/helmet.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://item/helmet.gd" id="1"]
 
 [resource]
-script = ExtResource( 1 )
+script = ExtResource("1")
+defense = 10
+equippable_by = 1
+id = "leather_cap"
 name = "Leather Cap"
 description = "It's almost falling apart. But hey, it's free."
 max_amount = 99
-usable_outside_of_battle = false
-usable_in_battle = false
-tossable = true
-defense = 10
+category = 1

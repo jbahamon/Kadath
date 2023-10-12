@@ -1,6 +1,7 @@
 extends MarginContainer
 
-var item: InventoryItem
+var disabled = false
+var item_id: String
 var _selected_while_unfocused = false
 var amount: int
 
@@ -12,32 +13,38 @@ var modulate_swap = Color(1, 1, 0, 1)
 var modulate_focus = Color(0, 1, 1, 1)
 
 @onready var bg = $NinePatch
-@onready var box = $MarginContainer/HBoxContainer
-@onready var icon = $MarginContainer/HBoxContainer/Icon
-@onready var item_name_label = $MarginContainer/HBoxContainer/ItemName
-@onready var amount_label = $MarginContainer/HBoxContainer/Amount
+@onready var box = $Button/HBoxContainer
+@onready var icon = $Button/HBoxContainer/Icon
+@onready var item_name_label = $Button/HBoxContainer/ItemName
+@onready var amount_label = $Button/HBoxContainer/Amount
 
 func _ready():
 	
-	if self.item != null:
+	if self.item_id != null:
 		update_item()
 		
-		
-func set_item(new_item: InventoryItem, new_amount: int):
-	self.item = new_item
-	self.amount = new_amount
+func assign_element(element):
+	self.item_id = element[0]
+	self.amount = element[1]
 	if self.is_inside_tree():
 		self.update_item()
-		
+
+func assign_null(args: Dictionary):
+	self.item_id = ""
+	self.amount = 0
+	if self.is_inside_tree():
+		self.update_item()
 
 func update_item():
-	item_name_label.text = item.name
-	
+	var item = ItemService.id_to_item(self.item_id)
+	self.item_name_label.text = item.name
 	if item.max_amount == 1:
-		amount_label.text = ""
+		self.amount_label.text = ""
 	else:
-		amount_label.text = "x%d" % amount
+		self.amount_label.text = "x%d" % amount
 
+func get_button():
+	return $Button
 
 func _on_ItemEntry_focus_entered():
 	self.bg.self_modulate = modulate_bg

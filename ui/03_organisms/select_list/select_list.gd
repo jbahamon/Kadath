@@ -1,25 +1,43 @@
 extends PanelContainer
 
-var SimpleListElement = preload("res://ui/01_atoms/simple_list_element/simple_list_element.tscn")
+var SimpleListElement = preload("res://ui/01_atoms/simple_list_element/simple_list_element.gd")
 
-signal cancel
 signal element_focused(element)
 signal element_selected(element)
+signal cancel
+signal done
 
 @onready var container = $ScrollContainer/VBoxContainer 
+@export var toggle: bool = false
+@export var args_for_null_element: Dictionary = {}
+
+var button_group: ButtonGroup = null
 
 func _ready():
 	self.set_process_unhandled_input(false)
 	
-func initialize(elements: Array):
+func initialize(elements: Array, class_or_scene=SimpleListElement):
 	self.clear_elements()
 	
 	var buttons = []
 	for element in elements:
-		var control = self.get_ui_control(element)
+		
+		var control
+		
+		if "instantiate" in class_or_scene:
+			control = class_or_scene.instantiate()
+		else:
+			control = class_or_scene.new()
+		
+		if element != null:
+			control.assign_element(element)
+		else:
+			control.assign_null(self.args_for_null_element)
+			
 		container.add_child(control)
 	
 		var button = control.get_button()
+		
 		button.connect("pressed",Callable(self,"on_element_selected").bind(element))
 		button.connect("focus_entered",Callable(self,"on_element_focused").bind(element))
 
@@ -33,18 +51,12 @@ func initialize(elements: Array):
 		button.focus_neighbor_top = button.get_path_to(buttons[posmod((i - 1), len(buttons))])
 		button.focus_neighbor_bottom = button.get_path_to(buttons[posmod((i + 1), len(buttons))])
 
-func get_first_clickable_item():
-	if container.get_child_count() == 0:
-		return null
-	return container.get_child(0).get_button()
-	
-func get_ui_control(element):
-	if element.has_method("instance_ui_control"):
-		return element.instance_ui_control()
-	else:
-		var control = SimpleListElement.instantiate()
-		control.text = element.display_name
-		return control
+
+	if self.toggle:
+		button_group = ButtonGroup.new()
+		for button in buttons:
+			button.set_button_group(button_group)
+			button.toggle_mode = true
 	
 func on_element_focused(element):
 	emit_signal("element_focused", element)
@@ -53,13 +65,24 @@ func on_element_selected(element):
 	emit_signal("element_selected", element)
 
 func on_grab_focus():
+	if toggle:
+		for control in container.get_children():
+			var button = control.get_button()
+			if not button.disabled and button.button_pressed:
+				button.button_pressed = false
+				button.grab_focus()
+				button.grab_click_focus()
+				return true
+	
 	for control in container.get_children():
 		var button = control.get_button()
-		if not button.disabled and (button.pressed or not self.toggle):
+		if not button.disabled:
 			button.button_pressed = false
 			button.grab_focus()
 			button.grab_click_focus()
-			return
+			return true
+	
+	return false
 
 func element_has_focus() -> bool:
 	for control in container.get_children():
@@ -73,8 +96,12 @@ func clear_elements():
 		var button = control.get_button()
 		button.disconnect("pressed",Callable(self,"on_element_selected"))
 		button.disconnect("focus_entered",Callable(self,"on_element_focused"))
+		button.button_group = null
 		container.remove_child(control)
 		control.queue_free()
+	
+	self.button_group = null
+		
 
 func _on_SelectPanel_visibility_changed():
 	self.set_process_unhandled_input(self.visible)
@@ -83,3 +110,9 @@ func _unhandled_input(event):
 	if event.is_action_pressed("ui_cancel") and self.element_has_focus():
 		emit_signal("cancel")
 		get_viewport().set_input_as_handled()
+
+func _on_cancel():
+	emit_signal("done")
+
+func _on_element_selected(_element):
+	emit_signal("done")
