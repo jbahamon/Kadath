@@ -2,6 +2,8 @@ extends VBoxContainer
 
 class_name KeyboardBasedTabsContainer
 
+signal cancel
+
 const default_modulate = Color("#FFFFFF")
 
 @export var tab_alignment: AlignmentMode = ALIGNMENT_BEGIN
@@ -144,7 +146,6 @@ func reset():
 			button.grab_click_focus()
 			button.grab_focus()
 			return
-
 	
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_accept"):
@@ -154,6 +155,11 @@ func _unhandled_input(event):
 			current_content.on_grab_focus()
 			content_container.modulate = default_modulate
 			get_viewport().set_input_as_handled()
+	elif (event.is_action_pressed("ui_cancel") and 
+			tabs_button_group.get_pressed_button() != null and  
+			tabs_button_group.get_pressed_button().has_focus()):
+		emit_signal("cancel")
+		get_viewport().set_input_as_handled()
 
 func focus_current_tab():
 	var pressed_tab_button = tabs_button_group.get_pressed_button()

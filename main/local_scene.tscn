@@ -197,6 +197,7 @@ scroll_active = false
 [node name="PopupLayer" type="CanvasLayer" parent="."]
 process_mode = 2
 
+[connection signal="cancel" from="MenuLayer/MenuPopup/PauseMenu/PauseMenuTabs" to="MenuLayer/MenuPopup" method="_on_pause_menu_tabs_cancel"]
 [connection signal="about_to_popup" from="MenuLayer/SavesPopup" to="." method="_on_menu_about_to_show"]
 [connection signal="popup_hide" from="MenuLayer/SavesPopup" to="." method="_on_menu_popup_hide"]
 
@@ -206,3 +207,5 @@ process_mode = 2
 [editable path="SubViewportContainer/SubViewport/World/Party/Peters"]
 [editable path="SubViewportContainer/SubViewport/World/Party/Peters/Battler"]
 [editable path="SubViewportContainer/SubViewport/World/PlayerProxy"]
+[editable path="MenuLayer/MenuPopup/PauseMenu"]
+[editable path="MenuLayer/MenuPopup/PauseMenu/PauseMenuTabs/Party"]

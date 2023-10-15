@@ -3,20 +3,20 @@ extends PanelContainer
 signal item_requested(cls, party_member)
 signal focus_released
 
-@onready var weapon_name: Button = $Panel/MarginContainer/Equipment/WeaponName
-@onready var weapon_stats: Label = $Panel/MarginContainer/Equipment/WeaponStats
-@onready var helmet_name: Button = $Panel/MarginContainer/Equipment/HelmetName
-@onready var helmet_stats: Label = $Panel/MarginContainer/Equipment/HelmetStats
-@onready var armor_name: Button = $Panel/MarginContainer/Equipment/ArmorName
-@onready var armor_stats: Label = $Panel/MarginContainer/Equipment/ArmorStats
-@onready var accessory_name: Button = $Panel/MarginContainer/Equipment/AccessoryName
+@onready var weapon_name: Button = $HBoxContainer/Panel/MarginContainer/Equipment/WeaponName
+@onready var weapon_stats: Label = $HBoxContainer/Panel/MarginContainer/Equipment/WeaponStats
+@onready var helmet_name: Button = $HBoxContainer/Panel/MarginContainer/Equipment/HelmetName
+@onready var helmet_stats: Label = $HBoxContainer/Panel/MarginContainer/Equipment/HelmetStats
+@onready var armor_name: Button = $HBoxContainer/Panel/MarginContainer/Equipment/ArmorName
+@onready var armor_stats: Label = $HBoxContainer/Panel/MarginContainer/Equipment/ArmorStats
+@onready var accessory_name: Button = $HBoxContainer/Panel/MarginContainer/Equipment/AccessoryName
 
-@onready var attack_value: Label = $Panel/Stats/AttackValue
-@onready var defense_value: Label = $Panel/Stats/DefenseValue
-@onready var magic_attack_value: Label = $Panel/Stats/MagicAttackValue
-@onready var magic_defense_value: Label = $Panel/Stats/MagicDefenseValue
-@onready var speed_value: Label = $Panel/Stats/SpeedValue
-@onready var luck_value: Label = $Panel/Stats/LuckValue
+@onready var attack_value: Label = $HBoxContainer/Panel/Stats/AttackValue
+@onready var defense_value: Label = $HBoxContainer/Panel/Stats/DefenseValue
+@onready var magic_attack_value: Label = $HBoxContainer/Panel/Stats/MagicAttackValue
+@onready var magic_defense_value: Label = $HBoxContainer/Panel/Stats/MagicDefenseValue
+@onready var speed_value: Label = $HBoxContainer/Panel/Stats/SpeedValue
+@onready var luck_value: Label = $HBoxContainer/Panel/Stats/LuckValue
 
 var party_member
 

@@ -1,9 +1,10 @@
-Button
 VBoxContainer
-Label
+MarginContainer
 Control
-GridContainer
 HBoxContainer
+Button
+Label
+GridContainer
 TextureButton
 HSeparator
 VSeparator

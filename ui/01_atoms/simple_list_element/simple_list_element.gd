@@ -1,7 +1,7 @@
 extends Button
 
 func _init():
-	self.alignment
+	self.action_mode = BaseButton.ACTION_MODE_BUTTON_PRESS
 	
 func get_button():
 	return self

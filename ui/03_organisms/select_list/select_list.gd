@@ -36,7 +36,7 @@ func initialize(elements: Array, class_or_scene=SimpleListElement):
 			
 		container.add_child(control)
 	
-		var button = control.get_button()
+		var button: Button = control.get_button()
 		
 		button.connect("pressed",Callable(self,"on_element_selected").bind(element))
 		button.connect("focus_entered",Callable(self,"on_element_focused").bind(element))

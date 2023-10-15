@@ -10,3 +10,4 @@ func set_tab_disabled(tab: int, value: bool):
 
 func _on_visibility_changed():
 	tabs.reset()
+

@@ -20,26 +20,34 @@ offset_bottom = 120.0
 theme = ExtResource("1")
 script = ExtResource("2")
 
-[node name="Panel" type="VBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Filler1" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
 alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Panel"]
 layout_mode = 2
 
-[node name="Equipment" type="GridContainer" parent="Panel/MarginContainer"]
+[node name="Equipment" type="GridContainer" parent="HBoxContainer/Panel/MarginContainer"]
 layout_mode = 2
 columns = 3
 
-[node name="WeaponIcon" type="TextureRect" parent="Panel/MarginContainer/Equipment"]
+[node name="WeaponIcon" type="TextureRect" parent="HBoxContainer/Panel/MarginContainer/Equipment"]
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 4
 texture = ExtResource("6")
 
-[node name="WeaponName" type="Button" parent="Panel/MarginContainer/Equipment"]
+[node name="WeaponName" type="Button" parent="HBoxContainer/Panel/MarginContainer/Equipment"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -51,21 +59,22 @@ focus_next = NodePath("../HelmetName")
 focus_previous = NodePath("../AccessoryName")
 mouse_filter = 2
 toggle_mode = true
+action_mode = 0
 text = "Wooden Stick"
 
-[node name="WeaponStats" type="Label" parent="Panel/MarginContainer/Equipment"]
+[node name="WeaponStats" type="Label" parent="HBoxContainer/Panel/MarginContainer/Equipment"]
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 text = "0"
 
-[node name="HelmetIcon" type="TextureRect" parent="Panel/MarginContainer/Equipment"]
+[node name="HelmetIcon" type="TextureRect" parent="HBoxContainer/Panel/MarginContainer/Equipment"]
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 4
 texture = ExtResource("4")
 
-[node name="HelmetName" type="Button" parent="Panel/MarginContainer/Equipment"]
+[node name="HelmetName" type="Button" parent="HBoxContainer/Panel/MarginContainer/Equipment"]
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 7
@@ -77,21 +86,22 @@ focus_next = NodePath("../ArmorName")
 focus_previous = NodePath("../WeaponName")
 mouse_filter = 2
 toggle_mode = true
+action_mode = 0
 text = "--"
 
-[node name="HelmetStats" type="Label" parent="Panel/MarginContainer/Equipment"]
+[node name="HelmetStats" type="Label" parent="HBoxContainer/Panel/MarginContainer/Equipment"]
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 text = "0"
 
-[node name="ArmorIcon" type="TextureRect" parent="Panel/MarginContainer/Equipment"]
+[node name="ArmorIcon" type="TextureRect" parent="HBoxContainer/Panel/MarginContainer/Equipment"]
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 4
 texture = ExtResource("5")
 
-[node name="ArmorName" type="Button" parent="Panel/MarginContainer/Equipment"]
+[node name="ArmorName" type="Button" parent="HBoxContainer/Panel/MarginContainer/Equipment"]
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
@@ -103,21 +113,22 @@ focus_next = NodePath("../AccessoryName")
 focus_previous = NodePath("../HelmetName")
 mouse_filter = 2
 toggle_mode = true
+action_mode = 0
 text = "Leather Armor"
 
-[node name="ArmorStats" type="Label" parent="Panel/MarginContainer/Equipment"]
+[node name="ArmorStats" type="Label" parent="HBoxContainer/Panel/MarginContainer/Equipment"]
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 text = "15"
 
-[node name="AccessoryIcon" type="TextureRect" parent="Panel/MarginContainer/Equipment"]
+[node name="AccessoryIcon" type="TextureRect" parent="HBoxContainer/Panel/MarginContainer/Equipment"]
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 4
 texture = ExtResource("3")
 
-[node name="AccessoryName" type="Button" parent="Panel/MarginContainer/Equipment"]
+[node name="AccessoryName" type="Button" parent="HBoxContainer/Panel/MarginContainer/Equipment"]
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
@@ -128,78 +139,83 @@ focus_neighbor_bottom = NodePath("../WeaponName")
 focus_next = NodePath("../WeaponName")
 mouse_filter = 2
 toggle_mode = true
+action_mode = 0
 text = "--"
 
-[node name="Control" type="Control" parent="Panel/MarginContainer/Equipment"]
+[node name="Control" type="Control" parent="HBoxContainer/Panel/MarginContainer/Equipment"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Stats" type="GridContainer" parent="Panel"]
+[node name="Stats" type="GridContainer" parent="HBoxContainer/Panel"]
 layout_mode = 2
-size_flags_horizontal = 9
+size_flags_vertical = 8
 columns = 4
 
-[node name="AttackLabel" type="Label" parent="Panel/Stats"]
+[node name="AttackLabel" type="Label" parent="HBoxContainer/Panel/Stats"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Attack"
 
-[node name="AttackValue" type="Label" parent="Panel/Stats"]
+[node name="AttackValue" type="Label" parent="HBoxContainer/Panel/Stats"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "10"
 
-[node name="MagicAttackLabel" type="Label" parent="Panel/Stats"]
+[node name="MagicAttackLabel" type="Label" parent="HBoxContainer/Panel/Stats"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Magic Attack"
 
-[node name="MagicAttackValue" type="Label" parent="Panel/Stats"]
+[node name="MagicAttackValue" type="Label" parent="HBoxContainer/Panel/Stats"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "10"
 
-[node name="DefenseLabel" type="Label" parent="Panel/Stats"]
+[node name="DefenseLabel" type="Label" parent="HBoxContainer/Panel/Stats"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Defense"
 
-[node name="DefenseValue" type="Label" parent="Panel/Stats"]
+[node name="DefenseValue" type="Label" parent="HBoxContainer/Panel/Stats"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "10"
 
-[node name="MagicDefenseLabel" type="Label" parent="Panel/Stats"]
+[node name="MagicDefenseLabel" type="Label" parent="HBoxContainer/Panel/Stats"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Magic Defense"
 
-[node name="MagicDefenseValue" type="Label" parent="Panel/Stats"]
+[node name="MagicDefenseValue" type="Label" parent="HBoxContainer/Panel/Stats"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "10"
 
-[node name="SpeedLabel" type="Label" parent="Panel/Stats"]
+[node name="SpeedLabel" type="Label" parent="HBoxContainer/Panel/Stats"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Speed"
 
-[node name="SpeedValue" type="Label" parent="Panel/Stats"]
+[node name="SpeedValue" type="Label" parent="HBoxContainer/Panel/Stats"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "10"
 
-[node name="LuckLabel" type="Label" parent="Panel/Stats"]
+[node name="LuckLabel" type="Label" parent="HBoxContainer/Panel/Stats"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Luck"
 
-[node name="LuckValue" type="Label" parent="Panel/Stats"]
+[node name="LuckValue" type="Label" parent="HBoxContainer/Panel/Stats"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "10"
 
-[connection signal="pressed" from="Panel/MarginContainer/Equipment/WeaponName" to="." method="on_weapon_clicked"]
-[connection signal="pressed" from="Panel/MarginContainer/Equipment/HelmetName" to="." method="on_helmet_clicked"]
-[connection signal="pressed" from="Panel/MarginContainer/Equipment/ArmorName" to="." method="on_armor_clicked"]
-[connection signal="pressed" from="Panel/MarginContainer/Equipment/AccessoryName" to="." method="on_accessory_clicked"]
+[node name="Filler2" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="pressed" from="HBoxContainer/Panel/MarginContainer/Equipment/WeaponName" to="." method="on_weapon_clicked"]
+[connection signal="pressed" from="HBoxContainer/Panel/MarginContainer/Equipment/HelmetName" to="." method="on_helmet_clicked"]
+[connection signal="pressed" from="HBoxContainer/Panel/MarginContainer/Equipment/ArmorName" to="." method="on_armor_clicked"]
+[connection signal="pressed" from="HBoxContainer/Panel/MarginContainer/Equipment/AccessoryName" to="." method="on_accessory_clicked"]

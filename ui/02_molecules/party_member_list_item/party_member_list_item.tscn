@@ -18,6 +18,7 @@ layout_mode = 2
 focus_neighbor_left = NodePath(".")
 mouse_filter = 2
 toggle_mode = true
+action_mode = 0
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2

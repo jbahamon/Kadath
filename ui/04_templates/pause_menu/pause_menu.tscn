@@ -42,5 +42,6 @@ layout_mode = 2
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="exit_submenu" from="PauseMenuTabs/Party" to="PauseMenuTabs" method="focus_current_tab"]
+[connection signal="exit_submenu" from="PauseMenuTabs/Items" to="PauseMenuTabs" method="focus_current_tab"]
 
 [editable path="PauseMenuTabs/Party"]

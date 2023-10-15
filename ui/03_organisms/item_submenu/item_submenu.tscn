@@ -18,25 +18,10 @@ icon = ExtResource("3")
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="GridContainer" type="GridContainer" parent="HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-columns = 2
-
-[node name="Placeholder" type="Control" parent="HBoxContainer/GridContainer"]
+[node name="Categories" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 
-[node name="CategoryName" type="Label" parent="HBoxContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "All Items"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Categories" type="VBoxContainer" parent="HBoxContainer/GridContainer"]
-layout_mode = 2
-
-[node name="Consumables" type="Button" parent="HBoxContainer/GridContainer/Categories"]
+[node name="Consumables" type="Button" parent="HBoxContainer/Categories"]
 layout_mode = 2
 focus_neighbor_left = NodePath(".")
 focus_neighbor_top = NodePath("../KeyItems")
@@ -45,48 +30,57 @@ focus_neighbor_bottom = NodePath("../Equipment")
 focus_next = NodePath("../Equipment")
 focus_previous = NodePath("../KeyItems")
 toggle_mode = true
+action_mode = 0
+text = "Consumables"
 icon = ExtResource("3")
 
-[node name="Equipment" type="Button" parent="HBoxContainer/GridContainer/Categories"]
+[node name="Equipment" type="Button" parent="HBoxContainer/Categories"]
 layout_mode = 2
 toggle_mode = true
+action_mode = 0
+text = "Equipment"
 icon = ExtResource("3_hpny6")
 
-[node name="KeyItems" type="Button" parent="HBoxContainer/GridContainer/Categories"]
+[node name="KeyItems" type="Button" parent="HBoxContainer/Categories"]
 layout_mode = 2
 toggle_mode = true
+action_mode = 0
+text = "Key Items"
 icon = ExtResource("4_6mbeh")
 
-[node name="ItemsAndActions" type="VBoxContainer" parent="HBoxContainer/GridContainer"]
+[node name="ItemsAndActions" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Items" parent="HBoxContainer/GridContainer/ItemsAndActions" instance=ExtResource("5_fp8y3")]
+[node name="Items" parent="HBoxContainer/ItemsAndActions" instance=ExtResource("5_fp8y3")]
 layout_mode = 2
-size_flags_stretch_ratio = 2.0
+size_flags_stretch_ratio = 3.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_k3sg8")
+toggle = true
 
-[node name="HSeparator" type="HSeparator" parent="HBoxContainer/GridContainer/ItemsAndActions"]
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/ItemsAndActions"]
 layout_mode = 2
 
-[node name="Description" type="Label" parent="HBoxContainer/GridContainer/ItemsAndActions"]
-visible = false
+[node name="Description" type="Label" parent="HBoxContainer/ItemsAndActions"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Actions" type="HBoxContainer" parent="HBoxContainer/GridContainer/ItemsAndActions"]
+[node name="Actions" type="HBoxContainer" parent="HBoxContainer/ItemsAndActions"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 9
 
-[node name="Use" type="Button" parent="HBoxContainer/GridContainer/ItemsAndActions/Actions"]
+[node name="Use" type="Button" parent="HBoxContainer/ItemsAndActions/Actions"]
 layout_mode = 2
 text = "Use"
 
-[node name="Move" type="Button" parent="HBoxContainer/GridContainer/ItemsAndActions/Actions"]
+[node name="Move" type="Button" parent="HBoxContainer/ItemsAndActions/Actions"]
 layout_mode = 2
 text = "Move"
 
-[node name="Toss" type="Button" parent="HBoxContainer/GridContainer/ItemsAndActions/Actions"]
+[node name="Toss" type="Button" parent="HBoxContainer/ItemsAndActions/Actions"]
 layout_mode = 2
 text = "Toss"
 
@@ -98,9 +92,11 @@ layout_mode = 2
 size_flags_horizontal = 8
 theme_override_styles/panel = SubResource("StyleBoxEmpty_w1ay6")
 
-[connection signal="focus_entered" from="HBoxContainer/GridContainer/Categories/Consumables" to="." method="_on_consumables_focus_entered"]
-[connection signal="pressed" from="HBoxContainer/GridContainer/Categories/Consumables" to="." method="_on_consumables_pressed"]
-[connection signal="focus_entered" from="HBoxContainer/GridContainer/Categories/Equipment" to="." method="_on_equipment_focus_entered"]
-[connection signal="pressed" from="HBoxContainer/GridContainer/Categories/Equipment" to="." method="_on_equipment_pressed"]
-[connection signal="focus_entered" from="HBoxContainer/GridContainer/Categories/KeyItems" to="." method="_on_key_items_focus_entered"]
-[connection signal="pressed" from="HBoxContainer/GridContainer/Categories/KeyItems" to="." method="_on_key_items_pressed"]
+[connection signal="focus_entered" from="HBoxContainer/Categories/Consumables" to="." method="_on_consumables_focus_entered"]
+[connection signal="pressed" from="HBoxContainer/Categories/Consumables" to="." method="_on_category_pressed"]
+[connection signal="focus_entered" from="HBoxContainer/Categories/Equipment" to="." method="_on_equipment_focus_entered"]
+[connection signal="pressed" from="HBoxContainer/Categories/Equipment" to="." method="_on_equipment_pressed"]
+[connection signal="focus_entered" from="HBoxContainer/Categories/KeyItems" to="." method="_on_key_items_focus_entered"]
+[connection signal="pressed" from="HBoxContainer/Categories/KeyItems" to="." method="_on_key_items_pressed"]
+[connection signal="cancel" from="HBoxContainer/ItemsAndActions/Items" to="." method="_on_items_cancel"]
+[connection signal="element_focused" from="HBoxContainer/ItemsAndActions/Items" to="." method="_on_items_element_focused"]
