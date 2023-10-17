@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bfd8bve0jvodl"]
+[gd_scene load_steps=15 format=3 uid="uid://bfd8bve0jvodl"]
 
 [ext_resource type="TileSet" uid="uid://cb1f6r4xpgnc0" path="res://location/lib/resource/tile/cave.tres" id="1_3jqx8"]
 [ext_resource type="Script" path="res://location/lib/script/location/location_room.gd" id="2_gmluo"]
@@ -8,7 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://co4ecuc835bk6" path="res://npc/enemy/enemy.tscn" id="4_ulanc"]
 [ext_resource type="PackedScene" uid="uid://cgc5b4s47chs0" path="res://npc/enemy/sentry/anim.tscn" id="5_k5sle"]
 [ext_resource type="PackedScene" uid="uid://ds2ji50aao08o" path="res://npc/lib/movement/path_movement.tscn" id="6_cu0b4"]
-[ext_resource type="Resource" path="res://npc/enemy/sentry/stats.tres" id="9_pcsmg"]
+[ext_resource type="Script" path="res://battle/ai/random_ai.gd" id="8_u0gt1"]
+[ext_resource type="Resource" uid="uid://rlyl1hog6ic0" path="res://npc/enemy/sentry/stats.tres" id="9_pcsmg"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jf1na"]
 
@@ -73,6 +74,9 @@ custom_movement = NodePath("PathMovement")
 [node name="Battler" parent="Sentry 1" index="0"]
 stats = ExtResource("9_pcsmg")
 
+[node name="AI" parent="Sentry 1/Battler" index="1"]
+script = ExtResource("8_u0gt1")
+
 [node name="CollisionShape2D" parent="Sentry 1" index="1"]
 position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_73tx0")
@@ -112,6 +116,9 @@ metadata/_edit_group_ = true
 
 [node name="Battler" parent="Sentry 2" index="0"]
 stats = ExtResource("9_pcsmg")
+
+[node name="AI" parent="Sentry 2/Battler" index="1"]
+script = ExtResource("8_u0gt1")
 
 [node name="CollisionShape2D" parent="Sentry 2" index="1"]
 position = Vector2(0, -10)

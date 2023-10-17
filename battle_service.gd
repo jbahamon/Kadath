@@ -72,10 +72,9 @@ func start_battle(enemies: Array, escapable: bool):
 	
 	var battle_spot = self.get_nearest_battle_spot()
 	var non_party_actors = self.filter_non_party_actors(enemies, battle_spot)
-	
 	self.pause_non_participants(non_party_actors)
 	
-	var party_actors = self.prepare_party_actors()	
+	var party_actors = self.prepare_party_actors()
 	var actors = party_actors + non_party_actors
 
 	self.loop.initialize(actors, self.ui)
@@ -83,6 +82,7 @@ func start_battle(enemies: Array, escapable: bool):
 
 	# starting cutscene
 	await self.set_up_battle_positions(battle_spot, party_actors, non_party_actors)
+	self.rename_non_party_actors(non_party_actors)
 	
 	# just to ensure we're not keeping references to enemies that might be freed during battle
 	non_party_actors = []
@@ -104,6 +104,7 @@ func start_battle(enemies: Array, escapable: bool):
 		print("game over :(")
 		
 	self.current_battle_parameters = null
+
 
 func get_nearest_battle_spot():
 	var camera_position = CameraService.get_camera().get_screen_center_position()
@@ -133,7 +134,29 @@ func filter_non_party_actors(non_party_actors: Array, battle_spot):
 		return non_party_actors.slice(0, battle_spot.get_enemy_spots().size())
 	else:
 		return non_party_actors
-
+func rename_non_party_actors(non_party_actors: Array):
+	var actors_dict ={}
+	
+	for actor in non_party_actors:
+		if not actors_dict.has(actor.display_name):
+			actors_dict[actor.display_name] = [actor]
+		else:
+			actors_dict[actor.display_name].append(actor)
+	
+	# We assume here that there's not gonna be over 16 identical enemies on a
+	# battle, which seems reasonable
+	var suffix: String = "ABCDEFGHIJKLMNOP"
+	for name in actors_dict:
+		var actors = actors_dict[name]
+		if actors.size() > 1:
+			actors.sort_custom(
+				func(a: Node2D, b: Node2D):
+					return a.position.x < b.position.x
+			)
+			
+			for i in range(actors.size()):
+				actors[i].display_name = "%s %s" % [actors[i].display_name, suffix[i % suffix.length()]]
+	
 func prepare_party_actors():
 	var party_actors = EntitiesService.get_active_party_members()
 	var room = EnvironmentService.get_room()

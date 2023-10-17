@@ -10,8 +10,14 @@ var MultiTargetOption = load("res://ui/04_templates/battle_ui/multi_target_optio
 @onready var options = $VBoxContainer/HBoxContainer/Options
 @onready var options_title: Label = $VBoxContainer/HBoxContainer/Options/OptionsTitle/Label
 @onready var options_list = $VBoxContainer/HBoxContainer/Options/OptionsList
-@onready var info_panel = $VBoxContainer/HBoxContainer/Options/InfoPanel
-@onready var info_label = $VBoxContainer/HBoxContainer/Options/InfoPanel/InfoLabel
+@onready var options_info = $VBoxContainer/HBoxContainer/Options/OptionsInfo
+@onready var options_info_label = $VBoxContainer/HBoxContainer/Options/OptionsInfo/InfoLabel
+
+@onready var timeline_container = $VBoxContainer/Timeline
+@onready var timeline = $VBoxContainer/Timeline/PlaceholderTimeline
+
+@onready var info_panel = $VBoxContainer/InfoPanel
+@onready var info_label = $VBoxContainer/InfoPanel/InfoLabel
 
 signal option_selected(option)
 signal prompt_closed
@@ -87,13 +93,19 @@ func on_cancel():
 func hide_options():
 	self.options.visible = false
 	options_list.release_focus()
+
+func hide_timeline():
+	self.timeline_container.visible = false
 	
 func on_option_focused(option):
-	if "description" in option:
-		self.set_info_text(option.description)
-	else:
-		self.set_info_text(null)
 	# TODO: point at entities if targeting
+	if "description" in option:
+		self.options_info.visible = true
+		self.options_info_label.text = option.description
+	else:
+		self.options_info.visible = false
+		self.options_info_label.text = ''
+	
 
 func set_info_text(text):
 	if text != null and text.length() > 0:
@@ -133,5 +145,11 @@ func request_targets(actor, actors: Array, targeting_type: int):
 	
 	return self.option_selected
 	
-	
-
+func update_preview(preview: Array):
+	var r = "Turn Preview: "
+	for b in range(preview.size()):
+		r += preview[b].display_name 
+		if b < (preview.size() - 1):
+			r += " | "
+	self.timeline.text = r
+	self.timeline_container.visible = true

@@ -36,8 +36,8 @@ func do_battle():
 	battle_end_state = BattleEndState.new()
 	
 	while true:
-		self.preview = self.turn_queue.get_preview(self.preview_size)
-		print(get_preview_text())
+		
+		self.update_preview()
 		
 		var current_actor = self.turn_queue.get_current_actor()
 		var turn = await current_actor.battler.ai.get_turn(self.actors)
@@ -47,6 +47,7 @@ func do_battle():
 		self.notify_subscribers(BattleService.Event.TURN_END, "on_turn_end")
 		
 		if is_battle_won():
+			self.ui.hide_timeline()
 			var party_actors = []
 			for actor in actors:
 				if actor is PartyMember:
@@ -82,23 +83,10 @@ func remove_actor(actor):
 		self.actors.erase(actor)
 		
 	self.turn_queue.erase(actor)
-	
-	while true:
-		var idx = self.preview.find(actor)
-		if idx >= 0:
-			self.preview.remove_at(idx)
-		else:
-			break
+	self.update_preview()
 	
 func add_rewards(rewards: BattleRewards):
 	self.battle_end_state.add_rewards(rewards)
-	
-func get_preview_text():
-	var r = "Turn Preview: "
-	for b in preview:
-		r += b.display_name + " "
-	
-	return r
 
 func subscribe_to_event(subscriber, event, subscription_type):
 	self.event_subscribers[event][subscriber] = subscription_type
@@ -113,3 +101,9 @@ func notify_subscribers(event: int, method: String):
 			to_be_removed.append(subscriber)
 	for subscriber in to_be_removed:
 		event_subscribers[event].erase(subscriber)
+		
+func update_preview():
+	self.preview = self.turn_queue.get_preview(self.preview_size)
+	self.ui.update_preview(self.preview)
+	
+

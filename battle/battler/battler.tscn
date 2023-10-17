@@ -9,7 +9,7 @@
 script = ExtResource("3")
 item_amounts = {}
 experience = 100
-money = 123
+money = 100
 
 [node name="Battler" type="Node"]
 script = ExtResource("1")

@@ -15,6 +15,13 @@ script = ExtResource("1")
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
+[node name="InfoPanel" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="InfoLabel" type="Label" parent="VBoxContainer/InfoPanel"]
+layout_mode = 2
+text = "This is a timeline "
+
 [node name="Timeline" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2
 
@@ -46,10 +53,10 @@ text = "Select your character"
 layout_mode = 2
 size_flags_vertical = 2
 
-[node name="InfoPanel" type="PanelContainer" parent="VBoxContainer/HBoxContainer/Options"]
+[node name="OptionsInfo" type="PanelContainer" parent="VBoxContainer/HBoxContainer/Options"]
 layout_mode = 2
 
-[node name="InfoLabel" type="Label" parent="VBoxContainer/HBoxContainer/Options/InfoPanel"]
+[node name="InfoLabel" type="Label" parent="VBoxContainer/HBoxContainer/Options/OptionsInfo"]
 layout_mode = 2
 text = "This is some info about the current command"
 
