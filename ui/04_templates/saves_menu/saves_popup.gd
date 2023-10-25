@@ -41,7 +41,7 @@ func update_options():
 			new_button.focus_mode = Control.FOCUS_NONE if current_mode == SaveAccessMode.LOAD else Control.FOCUS_ALL
 		
 		if current_mode == SaveAccessMode.SAVE or file_previews[i] != null:
-			new_button.connect("pressed",Callable(self,"_on_button_pressed").bind(i))
+			new_button.pressed.connect(self._on_button_pressed.bind(i))
 			
 		if first_focusable == null and not new_button.disabled:
 			first_focusable = new_button

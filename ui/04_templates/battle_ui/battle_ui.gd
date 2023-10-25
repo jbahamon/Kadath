@@ -153,3 +153,6 @@ func update_preview(preview: Array):
 			r += " | "
 	self.timeline.text = r
 	self.timeline_container.visible = true
+
+func update_player_state():
+	party_status.update()

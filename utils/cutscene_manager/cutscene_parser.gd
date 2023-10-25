@@ -5,7 +5,6 @@ var SetRoom = preload("res://utils/cutscene_manager/instructions/set_room.gd")
 var SetOverlay = preload("res://utils/cutscene_manager/instructions/set_overlay.gd")
 var FadeOverlay = preload("res://utils/cutscene_manager/instructions/fade_overlay.gd")
 
-var SetCamera = preload("res://utils/cutscene_manager/instructions/set_camera.gd")
 var MoveCamera = preload("res://utils/cutscene_manager/instructions/move_camera.gd")
 var AssignCamera = preload("res://utils/cutscene_manager/instructions/assign_camera.gd")
 
@@ -35,13 +34,13 @@ func _init():
 	patterns["FADE"].compile("(?<Overlay>.+) TO (?<Color>.+) IN (?<Time>.+)$")
 	
 	patterns["MOVE"] = RegEx.new()
-	patterns["MOVE"].compile("^(?<Character>.+) TO (?<Position>.+) AT (?<Speed>.+)$")
+	patterns["MOVE"].compile("^(?<Character>.+) TO (?<Position>[^a-zA-Z]+)( AT (?<Speed>.+))?$")
 	
 	patterns["MOVE_CAMERA_TO"] = RegEx.new()
-	patterns["MOVE_CAMERA_TO"].compile("TO (?<Position>.+) IN (?<Time>.+)$")
+	patterns["MOVE_CAMERA_TO"].compile("TO (?<Position>[^a-zA-Z]+)( IN (?<Time>.+))?$")
 	
 	patterns["MOVE_CAMERA_BY"] = RegEx.new()
-	patterns["MOVE_CAMERA_BY"].compile("(?<Displacement>.+) IN (?<Time>.+)$")
+	patterns["MOVE_CAMERA_BY"].compile("(?<Displacement>[^a-zA-Z]+)( IN (?<Time>.+))?$")
 	
 	patterns["SET_POSITION"] = RegEx.new()
 	patterns["SET_POSITION"].compile("^(?<Character>.+) TO (?<Position>.+)$")
@@ -137,10 +136,7 @@ func parse_instruction(stack: Array, instruction_name: String, args: String):
 				self.parse_color(fade_match.get_string("Color")),
 				self.parse_float(fade_match.get_string("Time"))
 			)
-		CutsceneInstruction.Type.SET_CAMERA:
-			instruction = SetCamera.new(
-				self.parse_vector2(args)
-			)
+		
 		CutsceneInstruction.Type.MOVE_CAMERA:
 			var mode: String
 			var move_match: RegExMatch = self.patterns["MOVE_CAMERA_TO"].search(args)
@@ -157,11 +153,10 @@ func parse_instruction(stack: Array, instruction_name: String, args: String):
 				move_match = self.patterns["MOVE_CAMERA_BY"].search(args)
 				movement = self.parse_vector2(move_match.get_string("Displacement"))
 			
-			instruction = MoveCamera.new(
-				movement,
-				mode,
-				self.parse_float(move_match.get_string("Time"))
-			)
+			var time_match = move_match.get_string("Time")
+			var time = self.parse_float(time_match) if time_match != null else 0
+			
+			instruction = MoveCamera.new(movement, mode, time)
 				
 		CutsceneInstruction.Type.ASSIGN_CAMERA:
 			instruction = AssignCamera.new(self.parse_string(args))
@@ -226,10 +221,11 @@ func parse_instruction(stack: Array, instruction_name: String, args: String):
 			
 		CutsceneInstruction.Type.MOVE:
 			var walk_match: RegExMatch = self.patterns["MOVE"].search(args)
+			var speed_match = walk_match.get_string("Speed")
 			instruction = Move.new(
 				self.parse_string(walk_match.get_string("Character")),
 				self.parse_vector2(walk_match.get_string("Position")),
-				self.parse_float(walk_match.get_string("Speed"))
+				self.parse_float(speed_match) if speed_match != null else INF
 			)
 		CutsceneInstruction.Type.PLAY_ANIM:
 			var anim_match: RegExMatch = self.patterns["PLAY_ANIM"].search(args)

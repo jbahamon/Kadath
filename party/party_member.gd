@@ -33,6 +33,30 @@ var equipped_armor: Armor : set = set_armor
 var equipped_accessory: Accessory : set = set_accessory
 
 var velocity: Vector2 = Vector2.ZERO
+
+
+var level: int:
+	get:
+		if battler == null:
+			return -1
+		
+		return battler.stats.level
+	
+var physical_attack_bonus: float:
+	get:
+		return float(equipped_weapon.attack if equipped_weapon != null else 0)
+	
+var physical_armor: float:
+	get:
+		return float(
+			(equipped_helmet.defense if equipped_helmet != null else 0) +
+			(equipped_armor.defense if equipped_armor != null else 0)
+		)
+	
+var elemental_armor: float:
+	get:
+		return 0.0
+	
 func _ready():
 	assert(growth)
 	self.set_physics_process(false)
@@ -40,12 +64,6 @@ func _ready():
 
 func _physics_process(delta):
 	self.position += velocity * delta
-
-func get_level() -> int:
-	if battler == null:
-		return -1
-	
-	return battler.stats.level
 
 func update_stats():
 	if battler == null:
@@ -60,18 +78,6 @@ func update_stats():
 func _set_experience(value: int):
 	experience = max(0, value)
 	update_stats()
-
-func get_physical_attack_bonus() -> float:
-	return float(equipped_weapon.attack if equipped_weapon != null else 0)
-	
-func get_physical_armor() -> float:
-	return float(
-		(equipped_helmet.defense if equipped_helmet != null else 0) +
-		(equipped_armor.defense if equipped_armor != null else 0)
-	)
-	
-func get_elemental_armor() -> float:
-	return 0.0
 
 func save(save_game: Resource):
 	save_game.data[SAVE_KEY] = {

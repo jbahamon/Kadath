@@ -13,23 +13,18 @@ signal exit_submenu
 
 var inventory: Inventory
 
-func initialize(party: Party):
-	self.inventory = party.inventory
-	var party_members = party.get_active_members()
-	party_list.initialize(party_members, PartyMemberListItem)
-	
-	if party_members.size() > 0:
-		party_member_stats.on_party_member_focused(party_members[0])
+func initialize():
+	self.update_party_data()
 
 func set_party_list_mode():
-	# item_list.disconnect("element_focused",party_member_stats.on_item_focused)
+	# item_list.element_focused.disconnect(party_member_stats.on_item_focused)
 	party_details_separator.visible = true
 	details_items_separator.visible = false
 	party_list.visible = true
 	item_list.visible = false
 	
 func set_item_mode():
-	# item_list.connect("element_focused",party_member_stats.on_item_focused)
+	# item_list.element_focused.connect(party_member_stats.on_item_focused)
 	party_member_stats.set_process_unhandled_input(false)
 	party_details_separator.visible = false
 	details_items_separator.visible = true
@@ -56,6 +51,14 @@ func on_item_requested(item_class, party_member: PartyMember):
 	
 	self.party_member_stats.on_grab_focus()
 
+func update_party_data():
+	var party = EntitiesService.get_party()
+	self.inventory = party.inventory
+	var party_members = party.get_active_members()
+	party_list.initialize(party_members, PartyMemberListItem)
+	if party_members.size() > 0:
+		party_member_stats.on_party_member_focused(party_members[0])
+		
 func _on_visibility_changed():
 	if self.visible:
 		self.set_party_list_mode()

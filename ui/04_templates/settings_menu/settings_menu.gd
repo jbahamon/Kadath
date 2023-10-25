@@ -49,10 +49,7 @@ func add_button(action: String):
 		var keycode = InputMap.action_get_events(action)[0].keycode
 		button.text = "<%s>" % OS.get_keycode_string(keycode)
 	
-	button.connect(
-		"pressed", 
-		self._button_pressed.bind(action)
-	)
+	button.pressed.connect(self._button_pressed.bind(action))
 	grid.add_child(button)
 	
 	buttons[action] = button

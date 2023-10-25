@@ -78,9 +78,9 @@ func highlight(i: int):
 
 func disable_swap_mode():
 	# In order to do this manually, we have to disconnect, toggle and reconnect.
-	swap.disconnect("toggled",Callable(self,"_on_Swap_toggled"))
+	swap.toggled.disconnect(self._on_Swap_toggled)
 	swap.button_pressed = false
-	swap.connect("toggled",Callable(self,"_on_Swap_toggled"))
+	swap.toggled.connect(self._on_Swap_toggled)
 
 func click_action():
 	var button: Button = buttons[highlighted_index]

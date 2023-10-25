@@ -4,35 +4,48 @@ class_name RandomAI
 
 
 func choose_action(actor, _actors: Array):
-	return actor.battler.get_action_options()[0]
+	var options = actor.battler.get_action_options()
+	while true:
+		var action = options[0]
+		if action is CompositeBattleOption:
+			options = action.get_options()
+		else:
+			return action
+			
 
-func choose_action_args(action_signature: Array, actor, actors) -> Dictionary:
-	var args = {}
+func fill_action_parameters(action: BattleAction, actor, actors: Array):
+	var current_parameter_signature = action.get_next_parameter_signature()
 	
-	for action_arg in action_signature:
-		var arg_name = action_arg["name"]
-		
-		match action_arg["type"]:
-			BattleAction.ActionArgument.TARGET:
-				args[arg_name] = self.choose_targets(action_arg["targeting_type"], actor, actors)
+	while current_parameter_signature != null:
+		var new_parameter = self.get_action_parameter(
+			actor, 
+			actors, 
+			current_parameter_signature
+		)
 	
-	return args
+		action.push_parameter(current_parameter_signature["name"], new_parameter)
+			
+		current_parameter_signature = action.get_next_parameter_signature()
 	
-func choose_targets(targeting_type, actor, actors):
-	# Chooses a target to perform an action on
-	match targeting_type:
-		BattleAction.TargetType.ALL_ALLIES:
-			return actor.get_allies(actors)
+	
+func get_action_parameter(actor, actors: Array, argument_signature: Dictionary):
+	match argument_signature["type"]:
+		BattleAction.ActionArgument.TARGET:
+			return self.choose_targets(actor, actors, argument_signature["targeting_type"])
+		BattleAction.ActionArgument.ITEM:
+			assert(false) #,"not yet implemented!")
+
+func choose_targets(actor, actors: Array, targeting_type: int):
+	var target_options: Array
+	match targeting_type: 
+		BattleAction.TargetType.ONE_ENEMY:
+			return actor.get_enemies(actors)[0]
 		BattleAction.TargetType.ONE_ALLY:
-			var allies = actor.get_allies(actors)
-			return [allies[randi() % allies.size()]]
+			return actor.get_allies(actors)[0]
 		BattleAction.TargetType.ALL_ENEMIES:
 			return actor.get_enemies(actors)
-		BattleAction.TargetType.ONE_ENEMY:
-			var enemies = actor.get_enemies(actors)
-			return [enemies[randi() % enemies.size()]]
+		BattleAction.TargetType.ALL_ALLIES:
+			return actor.get_allies(actors)
 		BattleAction.TargetType.SELF:
-			return [actor]
-		_:
-			return []
+			return actor
 

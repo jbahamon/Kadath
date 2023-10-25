@@ -17,8 +17,8 @@ func initialize(items: Array):
 		button.text = item.name
 		
 		button.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		button.connect("pressed",Callable(self,"on_item_selected").bind(item))
-		button.connect("focus_entered",Callable(self,"on_item_focused").bind(item))
+		button.pressed.connect(self.on_item_selected.bind(item))
+		button.focus_entered.connect(self.on_item_focused.bind(item))
 		container.add_child(button)
 		
 		button.focus_neighbor_left = button.get_path_to(button)

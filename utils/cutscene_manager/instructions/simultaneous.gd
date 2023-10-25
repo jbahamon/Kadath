@@ -16,12 +16,14 @@ func execute(tree: SceneTree):
 	
 	for idx in range(len(instructions)):
 		self._call_instruction(tree, instructions[idx])
-		
-	await self.completed
+	
+	if not self._completed:
+		await self.completed
+	
 		
 		
 func _call_instruction(tree: SceneTree, instruction) -> void:
-	await instruction.execute(tree)
+	await instruction.run(tree)
 	self._pending.erase(instruction)
 	
 	if self._pending.is_empty() and not self._completed:

@@ -33,5 +33,5 @@ func push_parameter(_parameter_name, _value):
 func pop_parameter():
 	assert(false, "%s missing overwrite of the pop_parameter method" % name)
 	
-func execute(_actor: Battler):
+func execute(_actor):
 	assert(false,"%s missing overwrite of the execute method" % name)

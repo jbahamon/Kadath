@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bfd8bve0jvodl"]
+[gd_scene load_steps=17 format=3 uid="uid://bfd8bve0jvodl"]
 
 [ext_resource type="TileSet" uid="uid://cb1f6r4xpgnc0" path="res://location/lib/resource/tile/cave.tres" id="1_3jqx8"]
 [ext_resource type="Script" path="res://location/lib/script/location/location_room.gd" id="2_gmluo"]
@@ -8,15 +8,39 @@
 [ext_resource type="PackedScene" uid="uid://co4ecuc835bk6" path="res://npc/enemy/enemy.tscn" id="4_ulanc"]
 [ext_resource type="PackedScene" uid="uid://cgc5b4s47chs0" path="res://npc/enemy/sentry/anim.tscn" id="5_k5sle"]
 [ext_resource type="PackedScene" uid="uid://ds2ji50aao08o" path="res://npc/lib/movement/path_movement.tscn" id="6_cu0b4"]
+[ext_resource type="Script" path="res://party/character_stats.gd" id="7_2s0i6"]
 [ext_resource type="Script" path="res://battle/ai/random_ai.gd" id="8_u0gt1"]
-[ext_resource type="Resource" uid="uid://rlyl1hog6ic0" path="res://npc/enemy/sentry/stats.tres" id="9_pcsmg"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jf1na"]
+
+[sub_resource type="Resource" id="Resource_4x3lc"]
+resource_local_to_scene = true
+script = ExtResource("7_2s0i6")
+max_health = 20
+max_energy = 0
+attack = 5
+defense = 5
+magic_attack = 5
+magic_defense = 5
+luck = 5
+speed = 10
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_73tx0"]
 size = Vector2(10, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x5vo8"]
+
+[sub_resource type="Resource" id="Resource_d546j"]
+resource_local_to_scene = true
+script = ExtResource("7_2s0i6")
+max_health = 20
+max_energy = 0
+attack = 5
+defense = 5
+magic_attack = 5
+magic_defense = 5
+luck = 5
+speed = 10
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2li33"]
 
@@ -65,96 +89,96 @@ target_orientation = Vector2(0, -1)
 position = Vector2(24, 8)
 shape = SubResource("WorldBoundaryShape2D_jf1na")
 
-[node name="Sentry 1" parent="." instance=ExtResource("4_ulanc")]
+[node name="Sentry1" parent="." instance=ExtResource("4_ulanc")]
 position = Vector2(-46, 218)
 display_name = "Sentry"
 movement_type = 2
 custom_movement = NodePath("PathMovement")
 
-[node name="Battler" parent="Sentry 1" index="0"]
-stats = ExtResource("9_pcsmg")
+[node name="Battler" parent="Sentry1" index="0"]
+stats = SubResource("Resource_4x3lc")
 
-[node name="AI" parent="Sentry 1/Battler" index="1"]
+[node name="AI" parent="Sentry1/Battler" index="1"]
 script = ExtResource("8_u0gt1")
 
-[node name="CollisionShape2D" parent="Sentry 1" index="1"]
+[node name="CollisionShape2D" parent="Sentry1" index="1"]
 position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_73tx0")
 
-[node name="InteractableArea" parent="Sentry 1" index="2"]
+[node name="InteractableArea" parent="Sentry1" index="2"]
 collision_mask = 1
 
-[node name="CollisionShape2D" parent="Sentry 1/InteractableArea" index="0"]
+[node name="CollisionShape2D" parent="Sentry1/InteractableArea" index="0"]
 position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_x5vo8")
 
-[node name="Anim" parent="Sentry 1" instance=ExtResource("5_k5sle")]
+[node name="Anim" parent="Sentry1" instance=ExtResource("5_k5sle")]
 
-[node name="PathMovement" parent="Sentry 1" instance=ExtResource("6_cu0b4")]
+[node name="PathMovement" parent="Sentry1" instance=ExtResource("6_cu0b4")]
 speed = 80
 mode = 1
 starting_target_idx = 1
 
-[node name="Marker2D" type="Marker2D" parent="Sentry 1/PathMovement"]
+[node name="Marker2D" type="Marker2D" parent="Sentry1/PathMovement"]
 position = Vector2(-46, 218)
 
-[node name="Marker2D2" type="Marker2D" parent="Sentry 1/PathMovement"]
+[node name="Marker2D2" type="Marker2D" parent="Sentry1/PathMovement"]
 position = Vector2(46, 218)
 
-[node name="Marker2D3" type="Marker2D" parent="Sentry 1/PathMovement"]
+[node name="Marker2D3" type="Marker2D" parent="Sentry1/PathMovement"]
 position = Vector2(46, 178)
 
-[node name="Marker2D4" type="Marker2D" parent="Sentry 1/PathMovement"]
+[node name="Marker2D4" type="Marker2D" parent="Sentry1/PathMovement"]
 position = Vector2(-46, 178)
 
-[node name="Sentry 2" parent="." instance=ExtResource("4_ulanc")]
+[node name="Sentry2" parent="." instance=ExtResource("4_ulanc")]
 position = Vector2(46, 178)
 display_name = "Sentry"
 movement_type = 2
 custom_movement = NodePath("PathMovement")
 metadata/_edit_group_ = true
 
-[node name="Battler" parent="Sentry 2" index="0"]
-stats = ExtResource("9_pcsmg")
+[node name="Battler" parent="Sentry2" index="0"]
+stats = SubResource("Resource_d546j")
 
-[node name="AI" parent="Sentry 2/Battler" index="1"]
+[node name="AI" parent="Sentry2/Battler" index="1"]
 script = ExtResource("8_u0gt1")
 
-[node name="CollisionShape2D" parent="Sentry 2" index="1"]
+[node name="CollisionShape2D" parent="Sentry2" index="1"]
 position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_73tx0")
 
-[node name="InteractableArea" parent="Sentry 2" index="2"]
+[node name="InteractableArea" parent="Sentry2" index="2"]
 collision_mask = 1
 
-[node name="CollisionShape2D" parent="Sentry 2/InteractableArea" index="0"]
+[node name="CollisionShape2D" parent="Sentry2/InteractableArea" index="0"]
 position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_2li33")
 
-[node name="Anim" parent="Sentry 2" instance=ExtResource("5_k5sle")]
+[node name="Anim" parent="Sentry2" instance=ExtResource("5_k5sle")]
 
-[node name="PathMovement" parent="Sentry 2" instance=ExtResource("6_cu0b4")]
+[node name="PathMovement" parent="Sentry2" instance=ExtResource("6_cu0b4")]
 speed = 80
 mode = 1
 starting_target_idx = 3
 
-[node name="Marker2D" type="Marker2D" parent="Sentry 2/PathMovement"]
+[node name="Marker2D" type="Marker2D" parent="Sentry2/PathMovement"]
 position = Vector2(-46, 218)
 
-[node name="Marker2D2" type="Marker2D" parent="Sentry 2/PathMovement"]
+[node name="Marker2D2" type="Marker2D" parent="Sentry2/PathMovement"]
 position = Vector2(46, 218)
 
-[node name="Marker2D3" type="Marker2D" parent="Sentry 2/PathMovement"]
+[node name="Marker2D3" type="Marker2D" parent="Sentry2/PathMovement"]
 position = Vector2(46, 178)
 
-[node name="Marker2D4" type="Marker2D" parent="Sentry 2/PathMovement"]
+[node name="Marker2D4" type="Marker2D" parent="Sentry2/PathMovement"]
 position = Vector2(-46, 178)
 
 [editable path="BattleSpot"]
 [editable path="Warp"]
-[editable path="Sentry 1"]
-[editable path="Sentry 1/Battler"]
-[editable path="Sentry 1/PathMovement"]
-[editable path="Sentry 2"]
-[editable path="Sentry 2/Battler"]
-[editable path="Sentry 2/PathMovement"]
+[editable path="Sentry1"]
+[editable path="Sentry1/Battler"]
+[editable path="Sentry1/PathMovement"]
+[editable path="Sentry2"]
+[editable path="Sentry2/Battler"]
+[editable path="Sentry2/PathMovement"]

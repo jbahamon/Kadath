@@ -13,7 +13,7 @@ func initialize(party_members: Array):
 		i += 1
 		party_member_item.update()
 
-func update(party_member):
+func update():
 	for control in self.get_children():
 		control.update()
 

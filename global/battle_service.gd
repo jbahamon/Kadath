@@ -1,18 +1,11 @@
 extends Node
 const BattleLoop = preload("res://battle/battle_loop.gd")
 const Attack = preload("res://battle/action/attack.gd")
+const Defend = preload("res://battle/action/defend.gd")
 const Win = preload("res://battle/action/win.gd")
 const Lose = preload("res://battle/action/lose.gd")
-
-enum Event {
-	TURN_START,
-	TURN_END,
-	BATTLE_END
-}
-enum Subscription {
-	FIRE_ONCE,
-	FIRE_ALWAYS
-}
+const Escape = preload("res://battle/action/escape.gd")
+const BattleEndState = preload("res://battle/battle_end_state.gd")
 
 # The Battle Service should handle initialization: this is, connecting characters
 # to the loop, and handling restoring everything to its normal state once the 
@@ -37,6 +30,11 @@ func init_common_action_options():
 	attack.description = "Attack with the equipped weapon"
 	self.common_action_options["attack"] = attack
 	
+	var defend = Defend.new()
+	defend.display_name = "Defend"
+	defend.description = "Raise your defenses until your next move"
+	self.common_action_options["defend"] = defend
+	
 	var win = Win.new()
 	win.display_name = "Win"
 	win.description = "Win the battle"
@@ -46,6 +44,11 @@ func init_common_action_options():
 	lose.display_name = "Lose"
 	lose.description = "Lose the battle"
 	self.common_action_options["lose"] = lose
+	
+	var escape = Escape.new()
+	escape.display_name = "Escape"
+	escape.description = "Try to run away"
+	self.common_action_options["escape"] = escape
 	
 func start_mook_battle(escapable: bool):
 	
@@ -91,18 +94,23 @@ func start_battle(enemies: Array, escapable: bool):
 	self.ui.show()
 	var battle_end_state = await self.loop.do_battle()
 	
-	if battle_end_state.player_won: 
-		await self.deal_rewards(battle_end_state.rewards)
+	match battle_end_state.result:
+		BattleEndState.Result.ESCAPE:
+			self.ui.hide()
+			await self.fade_and_delete_mooks(battle_end_state)
+			await self.tear_down_battle_positions(battle_end_state)
+			self.restore_party_actors(battle_end_state.party_actors)
+			self.resume_non_participants()
+		BattleEndState.Result.WIN: 
+			await self.deal_rewards(battle_end_state.rewards)
+			self.ui.hide()
+			await self.tear_down_battle_positions(battle_end_state)
+			self.restore_party_actors(battle_end_state.party_actors)
+			self.resume_non_participants()
+		BattleEndState.Result.LOSE: 
+			self.ui.hide()
+			print("game over :(")
 			
-		self.ui.hide()
-		
-		await self.tear_down_battle_positions(battle_end_state)
-		self.restore_party_actors(party_actors)
-		self.resume_non_participants()
-	else:
-		self.ui.hide()
-		print("game over :(")
-		
 	self.current_battle_parameters = null
 
 
@@ -198,6 +206,7 @@ func set_up_battle_positions(battle_spot, party_actors: Array, non_party_actors:
 	# move camera to it in X time
 	
 	var cutscene_lines = []
+	
 	cutscene_lines.append("SIMULTANEOUS")
 	cutscene_lines.append(
 		"MOVE_CAMERA TO (%d, %d) IN 0.5" % [
@@ -231,6 +240,23 @@ func set_up_battle_positions(battle_spot, party_actors: Array, non_party_actors:
 
 	await CutsceneService.play_custom_cutscene(cutscene_lines)
 
+func fade_and_delete_mooks(battle_end_state):
+	
+	var proxy = EntitiesService.get_proxy()
+	var cutscene_lines = [
+		"FADE_OVERLAY MIX TO (0,0,0,1) IN 1",
+		"SIMULTANEOUS",
+	]
+	
+	for enemy_actor in battle_end_state.enemy_actors:
+		cutscene_lines.append(
+			"CALL %s die" % enemy_actor.name
+		)
+	cutscene_lines.append_array(["END", "FADE_OVERLAY MIX TO (0,0,0,0) IN 1"])
+	
+	await CutsceneService.play_custom_cutscene(cutscene_lines)
+	
+
 func tear_down_battle_positions(battle_end_state):
 	var proxy = EntitiesService.get_proxy()
 	var cutscene_lines = []
@@ -252,6 +278,7 @@ func tear_down_battle_positions(battle_end_state):
 		)
 	cutscene_lines.append("END")
 	await CutsceneService.play_custom_cutscene(cutscene_lines)
+	
 		
 
 func pause_non_participants(non_party_actors: Array):
@@ -274,6 +301,12 @@ func resume_non_participants():
 	
 	EntitiesService.get_proxy().set_mode(PlayerProxy.ProxyMode.GAMEPLAY)
 	
+func mark_battle_as_escaped():
+	if self.current_battle_parameters == null:
+		return
+	else:
+		self.loop.mark_battle_as_escaped()
+	
 func deal_rewards(rewards: BattleRewards):
 	var party = EntitiesService.get_party()
 	var experience = rewards.experience
@@ -290,7 +323,7 @@ func deal_rewards(rewards: BattleRewards):
 func deal_experience(party: Party, experience: int):
 	await self.ui.prompt("Gained %d experience points!" % experience)
 	for party_member in party.get_active_members():
-		if !party_member.battler.is_alive():
+		if !party_member.battler.is_alive:
 			continue
 			
 		var previous_level = party_member.get_level()
@@ -313,10 +346,7 @@ func deal_money(_party: Party, money: int):
 	await self.ui.prompt("Received %d G!" % money)
 	# WIP
 	# party.inventory.money
-	
-func subscribe_to_event(subscriber, event, subscription_type):
-	self.loop.subscribe_to_event(subscriber, event, subscription_type)
-	
+
 func add_rewards(rewards):
 	self.loop.add_rewards(rewards)
 

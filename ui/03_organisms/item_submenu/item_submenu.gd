@@ -27,7 +27,8 @@ func _ready():
 	equipment_button.button_group = categories_button_group
 	key_items_button.button_group = categories_button_group
 	
-func initialize(party: Party):
+func initialize():
+	var party = EntitiesService.get_party()
 	self.inventory = party.inventory
 	inventory.set_item("salts", 1)
 	var party_members = party.get_unlocked_characters()

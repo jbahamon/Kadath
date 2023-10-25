@@ -19,7 +19,9 @@ func play_cutscene(cutscene_instruction):
 	var was_input_enabled = InputService.is_input_enabled()
 	var proxy = EntitiesService.get_proxy()
 	var prev_proxy_mode = proxy.current_mode
-	proxy.set_mode(PlayerProxy.ProxyMode.CUTSCENE)
+	
+	if prev_proxy_mode == PlayerProxy.ProxyMode.GAMEPLAY:
+		proxy.set_mode(PlayerProxy.ProxyMode.CUTSCENE)
 	InputService.set_input_enabled(false)
 	await cutscene_instruction.execute(get_tree())
 	InputService.set_input_enabled(was_input_enabled)

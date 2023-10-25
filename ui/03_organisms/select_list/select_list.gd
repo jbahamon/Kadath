@@ -38,8 +38,8 @@ func initialize(elements: Array, class_or_scene=SimpleListElement):
 	
 		var button: Button = control.get_button()
 		
-		button.connect("pressed",Callable(self,"on_element_selected").bind(element))
-		button.connect("focus_entered",Callable(self,"on_element_focused").bind(element))
+		button.pressed.connect(self.on_element_selected.bind(element))
+		button.focus_entered.connect(self.on_element_focused.bind(element))
 
 		button.disabled = control.disabled
 		buttons.append(button)
@@ -94,8 +94,8 @@ func element_has_focus() -> bool:
 func clear_elements():
 	for control in container.get_children():
 		var button = control.get_button()
-		button.disconnect("pressed",Callable(self,"on_element_selected"))
-		button.disconnect("focus_entered",Callable(self,"on_element_focused"))
+		button.pressed.disconnect(self.on_element_selected)
+		button.focus_entered.disconnect(self.on_element_focused)
 		button.button_group = null
 		container.remove_child(control)
 		control.queue_free()

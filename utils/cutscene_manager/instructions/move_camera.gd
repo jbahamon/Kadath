@@ -19,17 +19,20 @@ func execute(tree: SceneTree):
 			self.position = movement_param
 		"displacement":
 			self.position = CameraService.get_camera_global_position() + self.movement
+	
+	if self.time > 0:
+		var tween = tree.create_tween()
 		
-	var tween = tree.create_tween()
+		tween.tween_property(
+			CameraService.get_camera(), 
+			"global_position", 
+			self.position,
+			self.time
+		)
 	
-	tween.tween_property(
-		CameraService.get_camera(), 
-		"global_position", 
-		self.position,
-		self.time
-	)
-	
-	await tween.finished
+		await tween.finished
+	else:
+		CameraService.set_camera_position(self.position)
 	
 func _to_string():
 	return "move_camera to %s in %f" % [str(self.position), self.time]

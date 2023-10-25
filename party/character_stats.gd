@@ -17,7 +17,10 @@ var energy: int : set = set_energy
 @export var luck: int = 1
 @export var speed: int = 1
 
-var is_alive: bool : get = _is_alive
+var is_alive: bool : 
+	get:
+		return health > 0
+
 var level: int
 
 func _init():
@@ -46,7 +49,4 @@ func set_max_energy(value: int):
 	if value == null:
 		return
 	max_energy = max(0, value)
-
-func _is_alive() -> bool:
-	return health > 0
 

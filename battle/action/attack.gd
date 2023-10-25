@@ -25,11 +25,12 @@ func pop_parameter() -> bool:
 	return was_target_present
 	
 func execute(actor):
+	var prev_hp = target.battler.stats.health
 	var hit = Hit.new()
 	hit.type = Hit.Element.PHYSICAL
-	hit.base_damage = actor.battler.get_physical_attack() * 5
+	hit.base_damage = actor.battler.physical_attack * 5
 	self.target.take_hit(hit)
 	
-	var prev_hp = target.battler.stats.health
+	
 	print("%s attacked %s (HP: %d -> HP: %d)" % [actor.display_name, self.target.display_name, prev_hp, self.target.battler.stats.health])
 	self.reset()

@@ -12,6 +12,6 @@ func push_parameter(_parameter_name, _value):
 func pop_parameter():
 	return null
 	
-func execute(actor: Battler):
+func execute(actor):
 	print("%s did nothing" % actor.display_name)
 	

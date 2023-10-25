@@ -6,11 +6,12 @@ func get_turn(actors: Array) -> Turn:
 	var actor = get_parent().get_parent()
 	
 	var action = self.choose_action(actor, actors)
+	self.fill_action_parameters(action, actor, actors)
 	
 	var turn = Turn.new()
 	turn.actor = actor
 	turn.action = action
-	turn.action_args = self.choose_action_args(action.get_signature(), actor, actors)
+	
 	return turn
 		
 func choose_action(_actor, _actors: Array) -> BattleAction:
@@ -19,6 +20,6 @@ func choose_action(_actor, _actors: Array) -> BattleAction:
 	assert(false,"%s missing override of the choose_action method" % name)
 	return null
 
-func choose_action_args(_action_signature: Array, _actor, _actors: Array) -> Dictionary:
-	assert(false,"%s missing override of the choose_action method" % name)
+func fill_action_parameters(_action: BattleAction, _actor, _actors: Array):
+	assert(false,"%s missing override of the fill_action_parameters method" % name)
 	return {}

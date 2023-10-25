@@ -20,9 +20,9 @@ func _ready():
 	
 func initialize(party: Party):
 	if self.inventory != null:
-		self.inventory.disconnect("inventory_changed",Callable(self,"on_inventory_changed"))
+		self.inventory.inventory_changed.disconnect(self.on_inventory_changed)
 	self.inventory = party.inventory
-	self.inventory.connect("inventory_changed",Callable(self,"on_inventory_changed"))
+	self.inventory.inventory_changed.connect(self.on_inventory_changed)
 	
 	update_items()
 

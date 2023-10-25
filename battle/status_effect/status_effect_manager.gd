@@ -1,31 +1,83 @@
 class_name StatusEffectManager
 
+var physical_attack_modifier:
+	get:
+		var modifier = 1.0
+		for effect in self._effects:
+			modifier *= effect.physical_attack_modifier
+		return modifier
+	
+var physical_defense_modifier:
+	get:
+		var modifier = 1.0
+		for effect in self._effects:
+			modifier *= effect.physical_defense_modifier
+		return modifier
+		
+var speed_modifier:
+	get:
+		var modifier = 1.0
+		for effect in self._effects:
+			modifier *= effect.speed_modifier
+		return modifier
+
 var _effects: Array
+var owner: Battler
 
-var speed_modifier = 1
+func _init(init_owner):
+	self._effects = []
+	self.owner = init_owner
+	
+func _destroy():
+	self.owner = null
 
-func add(_battler, new_effect: StatusEffect):
-	for effect in _effects:
-		if effect.get_class() == new_effect.get_class():
+func clear():
+	self._effects = []
+	
+func add(new_effect: StatusEffect):
+	for effect in self._effects:
+		if effect.id == new_effect.id:
 			effect.refresh(new_effect)
 			return
 	
 	_effects.append(new_effect)
 
-func get_physical_attack_modifier():
-	var modifier = 1.0
-	for effect in _effects:
-		modifier *= effect.physical_attack_modifier
-	return modifier
+func on_turn_start(turn: Turn):
+	var to_remove = []
 	
-func get_physical_defense_modifier():
-	var modifier = 1.0
-	for effect in _effects:
-		modifier *= effect.physical_defense_modifier
-	return modifier
+	for effect in self._effects:
+		if effect.trigger & StatusEffect.Trigger.TURN_START:
+			effect.on_turn_start(turn, owner)
+			
+			if effect.marked_for_removal:
+				to_remove.append(effect)
+			
+	for effect in to_remove:
+		self._effects.erase(effect)
 	
-func get_speed_modifier():
-	var modifier = 1.0
-	for effect in _effects:
-		modifier *= effect.speed_modifier
-	return modifier
+func on_turn_end(turn: Turn):
+	var to_remove = []
+	
+	for effect in self._effects:
+		if effect.trigger & StatusEffect.Trigger.TURN_END:
+			effect.on_turn_end(turn, owner)
+			
+			if effect.marked_for_removal:
+				to_remove.append(effect)
+			
+	for effect in to_remove:
+		self._effects.erase(effect)
+	
+func on_actor_dead(actor):
+	var to_remove = []
+	
+	for effect in self._effects:
+		if effect.trigger & StatusEffect.Trigger.ACTOR_DEAD:
+			effect.on_actor_dead(actor, owner)
+			
+			if effect.marked_for_removal:
+				to_remove.append(effect)
+			
+	for effect in to_remove:
+		self._effects.erase(effect)
+

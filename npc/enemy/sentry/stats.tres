@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://party/character_stats.gd" id="1"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1")
 max_health = 20
 max_energy = 0
@@ -11,4 +12,4 @@ defense = 5
 magic_attack = 5
 magic_defense = 5
 luck = 5
-speed = 3
+speed = 10

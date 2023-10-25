@@ -37,10 +37,10 @@ func _ready():
 	assign_tab_neighbours()
 	
 	
-func initialize(party: Party):
+func initialize():
 	for child in content_container.get_children():
 		if child.has_method("initialize"):
-			child.initialize(party)
+			child.initialize()
 		
 
 func pop_children():
@@ -114,8 +114,8 @@ func build_tab_button_for(child: Control):
 	button.toggle_mode = true
 	button.button_group = tabs_button_group
 	
-	button.connect("focus_entered",Callable(self,"on_button_focused").bind(button))
-	button.connect("toggled",Callable(self,"on_content_toggled").bind(child))
+	button.focus_entered.connect(self.on_button_focused.bind(button))
+	button.toggled.connect(self.on_content_toggled.bind(child))
 	
 	return button
 

@@ -6,8 +6,8 @@ signal name_chosen
 func choose_arden_name():
 	var popup = TextInputPrompt.instantiate()
 	popup.set_default('Arden')
-	popup.connect("closed",Callable(self,"on_name_chosen"))
-	self.get_local_scene().show_popup(popup)
+	popup.closed.connect(self.on_name_chosen)
+	UIService.show_popup(popup)
 	await self.name_chosen
 
 func on_name_chosen(name: String) -> void:

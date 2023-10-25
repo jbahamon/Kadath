@@ -137,6 +137,7 @@ func set_mode(mode: ProxyMode):
 			self.set_physics_process(true)
 			self.set_process_unhandled_input(true)
 			self._set_process_collisions(true)
+			self.target.set_orientation(current_orientation)
 		ProxyMode.CUTSCENE:
 			self.velocity = Vector2.ZERO
 			self.set_physics_process(true)

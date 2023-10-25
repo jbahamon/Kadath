@@ -11,7 +11,10 @@ func _init(init_entity_name: String, init_position: Vector2, init_speed: float):
 	
 func execute(_tree: SceneTree):
 	var entity = EntitiesService.get_entity(self.entity_name)
-	await entity.move_to(position, speed)
+	if speed != INF:
+		await entity.move_to(position, speed)
+	else:
+		entity.position = position
 
 func _to_string():
 	return "move %s to %s at %f" % [self.entity_name, str(self.position), self.speed]
