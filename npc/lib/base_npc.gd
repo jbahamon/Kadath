@@ -30,8 +30,10 @@ func _ready():
 	match movement_type:
 		MovementType.NONE:
 			movement_node = NPCMovement.instantiate()
+			movement_node.parent = self
 		MovementType.RANDOM_SPIN:
 			movement_node = RandomSpinMovement.instantiate()
+			movement_node.parent = self
 			movement_node.period += randf()
 		MovementType.CUSTOM:
 			movement_node = get_node(custom_movement)

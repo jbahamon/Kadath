@@ -7,3 +7,8 @@ res://location/000_prologue_kadath/room/hub.tscn
 res://utils/cutscene_manager/instructions/simultaneous.gd
 res://global/battle_service.gd
 res://battle/battle_loop.gd
+res://npc/lib/movement/npc_movement.gd
+res://npc/lib/base_npc.gd
+res://global/environment_service.gd
+res://location/000_prologue_kadath/room/entrance.tscn
+res://location/000_prologue_kadath/object/pushing_barrier.gd

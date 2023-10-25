@@ -5,6 +5,8 @@ extends Area2D
 func _on_body_entered(body):
 	if not body is PlayerProxy:
 		return
+		
+	print(self.get_overlapping_bodies())
 	self.call_deferred("push_back", body.position, body.get_movement_speed())
 	
 func push_back(original_position: Vector2, speed: float):

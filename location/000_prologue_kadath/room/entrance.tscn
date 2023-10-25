@@ -10,9 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://lhiyk00h3t4a" path="res://party/peters/anim.tscn" id="8_6mdkm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ke7di"]
-size = Vector2(64, 20)
+size = Vector2(64, 32)
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_kwfoa"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pgvhv"]
+size = Vector2(64, 79)
 
 [node name="Room" type="TileMap"]
 y_sort_enabled = true
@@ -38,10 +39,11 @@ position = Vector2(0, -284)
 collision_layer = 0
 script = ExtResource("3_57rsp")
 room_id = "hub"
-target_position = Vector2(0, -40)
+target_position = Vector2(0, 340)
 target_orientation = Vector2(0, -1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NorthGate"]
+position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_ke7di")
 
 [node name="SouthGate" type="Area2D" parent="."]
@@ -52,7 +54,8 @@ limit = 64.0
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SouthGate"]
-shape = SubResource("WorldBoundaryShape2D_kwfoa")
+position = Vector2(0, 29.5)
+shape = SubResource("RectangleShape2D_pgvhv")
 
 [node name="LeftGhoul" parent="." instance=ExtResource("5_axy2s")]
 position = Vector2(-48, -200)

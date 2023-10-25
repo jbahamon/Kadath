@@ -11,7 +11,8 @@
 [ext_resource type="Script" path="res://party/character_stats.gd" id="7_2s0i6"]
 [ext_resource type="Script" path="res://battle/ai/random_ai.gd" id="8_u0gt1"]
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jf1na"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_isc2h"]
+size = Vector2(66, 34)
 
 [sub_resource type="Resource" id="Resource_4x3lc"]
 resource_local_to_scene = true
@@ -86,8 +87,8 @@ target_position = Vector2(0, -136)
 target_orientation = Vector2(0, -1)
 
 [node name="CollisionShape2D" parent="Warp" index="0"]
-position = Vector2(24, 8)
-shape = SubResource("WorldBoundaryShape2D_jf1na")
+position = Vector2(24, 1)
+shape = SubResource("RectangleShape2D_isc2h")
 
 [node name="Sentry1" parent="." instance=ExtResource("4_ulanc")]
 position = Vector2(-46, 218)

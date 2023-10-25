@@ -75,9 +75,12 @@ func move_to_room(
 	target_orientation: Vector2
 ) -> bool:
 	var room = current_location.get_room(room_id)
-	var proxy = EntitiesService.get_proxy()
+	var proxy: PlayerProxy = EntitiesService.get_proxy()
 	var proxy_target = proxy.target
 	var proxy_name = proxy_target.name if proxy_target != null else null
+	var prev_proxy_mode = proxy.current_mode
+	
+	proxy.set_mode(PlayerProxy.ProxyMode.NOT_THERE)
 	
 	if current_room != null and current_room == room:
 		return false
@@ -98,7 +101,7 @@ func move_to_room(
 	clear_bg.color = room.clear_color
 	
 	var new_proxy_target = null
-	
+
 	if proxy_name != null:
 		if proxy_name == "Party":
 			new_proxy_target = EntitiesService.get_party()
@@ -115,6 +118,8 @@ func move_to_room(
 		current_room.get_used_rect(),
 		current_room.tile_set.tile_size
 	)
+
+	proxy.set_mode(prev_proxy_mode)
 	
 	return true
 
