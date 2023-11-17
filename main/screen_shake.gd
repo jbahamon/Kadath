@@ -38,12 +38,12 @@ func _new_shake():
 	rand.x = randf_range(-amplitude.x, amplitude.x)
 	rand.y = randf_range(-amplitude.y, amplitude.y)
 	shake_tween.kill()
-	shake_tween.tween_property(camera, "offset", rand, $Frequency.wait_time).set_trans(TRANS).set_ease(EASE)
+	shake_tween.tween_property(camera, "offset", rand, $Frequency.wait_time)
 	shake_tween.play()
 
 func _reset():
 	shake_tween.kill()
-	shake_tween.tween_property(camera, "offset", Vector2(), $Frequency.wait_time).set_trans(TRANS).set_ease(EASE)
+	shake_tween.tween_property(camera, "offset", Vector2(), $Frequency.wait_time)
 	shake_tween.play()
 
 	priority = 0

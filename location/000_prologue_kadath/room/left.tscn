@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c5c6u1qkfvsbc"]
-
-[ext_resource type="Script" path="res://location/lib/script/location/location_room.gd" id="1_p3v41"]
-
-[node name="Room" type="TileMap"]
-y_sort_enabled = true
-format = 2
-script = ExtResource("1_p3v41")

@@ -1,0 +1,88 @@
+[gd_scene load_steps=5 format=3 uid="uid://dujv42su4t2r2"]
+
+[ext_resource type="Script" path="res://ui/04_templates/other/demo_end.gd" id="1_5fmkn"]
+[ext_resource type="FontFile" uid="uid://hqhqwk215tl2" path="res://ui/01_atoms/assets/fonts/By Wuchta/Fancy Ink.ttf" id="1_8xirb"]
+[ext_resource type="FontFile" uid="uid://7rvrjv6h33bx" path="res://ui/01_atoms/assets/fonts/By Valiegraphie/Uncial_WIP.ttf" id="1_c5wy5"]
+[ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="1_lqdow"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_5fmkn")
+
+[node name="BG" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="BG"]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Title" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_lqdow")
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_right = 128
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Title"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Title" type="RichTextLabel" parent="Title/VBoxContainer"]
+texture_filter = 1
+clip_contents = false
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.376471, 0.192157, 0.411765, 1)
+theme_override_fonts/normal_font = ExtResource("1_8xirb")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = " [wave rate=20.0 level=5 connected=1]Dream Quest:[/wave]"
+fit_content = true
+scroll_active = false
+
+[node name="Subtitle" type="RichTextLabel" parent="Title/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.188235, 0.611765, 0.560784, 1)
+theme_override_fonts/normal_font = ExtResource("1_c5wy5")
+theme_override_font_sizes/normal_font_size = 128
+bbcode_enabled = true
+text = "To Unknown Kadath"
+fit_content = true
+
+[node name="Prompt" type="MarginContainer" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_lqdow")
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 64
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Prompt"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 2
+
+[node name="Label" type="Label" parent="Prompt/VBoxContainer"]
+layout_mode = 2
+text = "Thanks for playing!
+Press any key to return to the main menu."
+horizontal_alignment = 2

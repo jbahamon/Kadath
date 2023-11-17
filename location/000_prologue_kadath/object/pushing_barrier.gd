@@ -6,7 +6,6 @@ func _on_body_entered(body):
 	if not body is PlayerProxy:
 		return
 		
-	print(self.get_overlapping_bodies())
 	self.call_deferred("push_back", body.position, body.get_movement_speed())
 	
 func push_back(original_position: Vector2, speed: float):
@@ -14,7 +13,7 @@ func push_back(original_position: Vector2, speed: float):
 	await CutsceneService.play_custom_cutscene([
 		"LOOK PROXY DOWN",
 		"PLAY_ANIM PROXY idle",
-		"START_DIALOG barrier SOURCE NONE",
+		"START_DIALOG pushing_barrier SOURCE NONE",
 		"LOOK PROXY UP",
 		"WALK PROXY TO ({x},{y}) AT {speed}".format({
 			"x": target_position.x,

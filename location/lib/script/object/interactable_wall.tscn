@@ -1,16 +1,16 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://oqd23qr312pb"]
 
 [ext_resource type="Script" path="res://location/lib/script/object/interactable_wall.gd" id="1"]
 
-[sub_resource type="RectangleShape2D" id=1]
-size = Vector2( 24, 16 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(24, 16)
 
 [node name="InteractableWall" type="Area2D"]
-position = Vector2( 0, -143 )
+position = Vector2(0, -143)
 collision_layer = 8
 collision_mask = 0
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -1 )
-shape = SubResource( 1 )
+position = Vector2(0, -1)
+shape = SubResource("1")

@@ -1,9 +1,22 @@
 extends InteractableObject
 
 @export var dialog_name: String = "test_message"
-@export var dialog_nid: int = 1
+@export var interactable_collision_path: NodePath
 
-func on_player_interaction(_proxy: PlayerProxy):
-	super.on_player_interaction(_proxy)
-	DialogService.open_dialog(self.dialog_name, self)
+@onready var interactable_collision = get_node(self.interactable_collision_path) 
+
+func on_player_interaction(player_proxy: PlayerProxy):
+	super.on_player_interaction(player_proxy)
+	self.interactable_collision.set_disabled(true)
+	
+	var was_input_enabled = InputService.is_input_enabled()
+	player_proxy.set_mode(PlayerProxy.ProxyMode.CUTSCENE)
+	InputService.set_input_enabled(false)
+	
+	await DialogService.open_dialog(self.dialog_name, self)	
+	
+	InputService.set_input_enabled(was_input_enabled)
+	player_proxy.set_mode(PlayerProxy.ProxyMode.GAMEPLAY)
+	self.interactable_collision.set_disabled(false)
+	
 	

@@ -2,7 +2,7 @@ extends Node
 
 var loaded_slot = -1
 var starting_location_name = "000_prologue_kadath"
-var starting_room_name = "hub"
+var starting_room_name = "02_hub"
 var strings: Dictionary = {}
 var current_flags: Dictionary = {}
 

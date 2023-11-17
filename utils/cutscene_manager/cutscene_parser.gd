@@ -61,7 +61,7 @@ func _init():
 	patterns["CALL"].compile("^(?<Entity>.+) (?<FunctionName>.+)( (?<Args>.*)$|$)")
 	
 	patterns["START_DIALOG"] = RegEx.new()
-	patterns["START_DIALOG"].compile("^(?<DialogId>.+) SOURCE (?<Source>.+)$")
+	patterns["START_DIALOG"].compile("^(?<DialogId>[^ ]+ *)( SOURCE (?<Source>.+))?$")
 	
 	patterns["NARRATE"] = RegEx.new()
 	patterns["NARRATE"].compile("^(?<DialogId>.+) FOR (?<Duration>.+)$")

@@ -1,57 +1,59 @@
 [gd_resource type="Resource" script_class="DialogueResource" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_resource.gd" id="1_ocu1j"]
+[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_resource.gd" id="1_7qqyk"]
 
 [resource]
-script = ExtResource("1_ocu1j")
+script = ExtResource("1_7qqyk")
 titles = {
-"barrier": "15",
-"entrance_ghoul": "7",
-"guard_ghoul": "19",
-"guard_ghoul_2": "24",
-"narration_1": "2",
-"pickman_recruit": "29",
-"starting_instructions": "11"
+"after_boss": "42",
+"barrier": "93",
+"carter_call": "54",
+"entrance_carter": "19",
+"entrance_carter2": "28",
+"entrance_ghoul1": "10",
+"entrance_ghoul2": "15",
+"entrance_pickman": "23",
+"gods_callout": "46",
+"guard_ghoul": "78",
+"guard_ghoul_2": "83",
+"narration_1": "5",
+"nyarlathotep_1": "58",
+"nyarlathotep_2": "65",
+"peters_warning": "50",
+"pickman_recruit": "36",
+"pickman_waiting": "88",
+"pushing_barrier": "74",
+"starting_instructions": "32"
 }
-character_names = PackedStringArray("Pickman", "Ghoul")
-first_title = "2"
+character_names = PackedStringArray("Ghoul", "Carter", "Pickman", "????")
+first_title = "5"
 lines = {
-"1": {
-"next_id": "2",
-"text": "narration_1",
-"type": "title"
-},
 "10": {
-"next_id": "11",
-"text": "starting_instructions",
-"type": "title"
-},
-"11": {
-"character": "",
+"character": "Ghoul",
 "character_replacements": Array[Dictionary]([]),
-"next_id": "12",
-"text": "Move around with [{ui_up}]/[{ui_left}]/[{ui_down}]/[{ui_right}]. You can interact with individuals and objects with [{ui_accept}], and cancel with [{ui_cancel}].",
+"next_id": "11",
+"text": "Oof! Not the way I had imagined our entrance...",
 "text_replacements": Array[Dictionary]([]),
-"translation_key": "Move around with [{ui_up}]/[{ui_left}]/[{ui_down}]/[{ui_right}]. You can interact with individuals and objects with [{ui_accept}], and cancel with [{ui_cancel}].",
+"translation_key": "Oof! Not the way I had imagined our entrance...",
 "type": "dialogue"
 },
-"12": {
+"11": {
 "is_snippet": false,
 "next_id": "end",
 "type": "goto"
 },
 "14": {
 "next_id": "15",
-"text": "barrier",
+"text": "entrance_ghoul2",
 "type": "title"
 },
 "15": {
-"character": "",
+"character": "Ghoul",
 "character_replacements": Array[Dictionary]([]),
 "next_id": "16",
-"text": "This is not the time to retreat. The journey to this place has been long and hard, and it is time to claim what is yours.",
+"text": "Ugh... what happened? Where are the others?",
 "text_replacements": Array[Dictionary]([]),
-"translation_key": "This is not the time to retreat. The journey to this place has been long and hard, and it is time to claim what is yours.",
+"translation_key": "Ugh... what happened? Where are the others?",
 "type": "dialogue"
 },
 "16": {
@@ -61,138 +63,398 @@ lines = {
 },
 "18": {
 "next_id": "19",
-"text": "guard_ghoul",
+"text": "entrance_carter",
 "type": "title"
 },
 "19": {
-"character": "Ghoul",
+"character": "Carter",
 "character_replacements": Array[Dictionary]([]),
 "next_id": "20",
-"text": "We'll guard the entrance... Y-You go ahead and join mister Pickman...",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "We'll guard the entrance... Y-You go ahead and join mister Pickman...",
-"type": "dialogue"
-},
-"2": {
-"character": "",
-"character_replacements": Array[Dictionary]([]),
-"next_id": "3",
-"text": "\"Three times Randolph Carter dreamed of the marvellous city, and three times was he snatched away while still he paused on the high terrace above it.\"",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "\"Three times Randolph Carter dreamed of the marvellous city, and three times was he snatched away while still he paused on the high terrace above it.\"",
-"type": "dialogue"
-},
-"20": {
-"character": "Ghoul",
-"character_replacements": Array[Dictionary]([]),
-"next_id": "21",
-"text": "B-by the way, if you want to change the controls, you can open the menu with [{ui_menu}] and head to the Settings section.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "B-by the way, if you want to change the controls, you can open the menu with [{ui_menu}] and head to the Settings section.",
-"type": "dialogue"
-},
-"21": {
-"is_snippet": false,
-"next_id": "end",
-"type": "goto"
-},
-"23": {
-"next_id": "24",
-"text": "guard_ghoul_2",
-"type": "title"
-},
-"24": {
-"character": "Ghoul",
-"character_replacements": Array[Dictionary]([]),
-"next_id": "25",
-"text": "So this is K-Kadath...? I-I think I'll stay here and guard the rear...",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "So this is K-Kadath...? I-I think I'll stay here and guard the rear...",
-"type": "dialogue"
-},
-"25": {
-"character": "Ghoul",
-"character_replacements": Array[Dictionary]([]),
-"next_id": "26",
-"text": "O-oh, remember you can change between walking and running by holding [{action_run}].",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "O-oh, remember you can change between walking and running by holding [{action_run}].",
-"type": "dialogue"
-},
-"26": {
-"is_snippet": false,
-"next_id": "end",
-"type": "goto"
-},
-"28": {
-"next_id": "29",
-"text": "pickman_recruit",
-"type": "title"
-},
-"29": {
-"character": "Pickman",
-"character_replacements": Array[Dictionary]([]),
-"next_id": "30",
-"text": "We should proceed at once. I allowed the others to stay at the entrance, as they seem too scared to be of use.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "We should proceed at once. I allowed the others to stay at the entrance, as they seem too scared to be of use.",
-"type": "dialogue"
-},
-"3": {
-"character": "",
-"character_replacements": Array[Dictionary]([]),
-"next_id": "4",
-"text": "\"He resolved to find the gods on unknown Kadath in the cold waste, wherever that might be, and to win from them the sight and remembrance and shelter of the marvellous sunset city.\"",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "\"He resolved to find the gods on unknown Kadath in the cold waste, wherever that might be, and to win from them the sight and remembrance and shelter of the marvellous sunset city.\"",
-"type": "dialogue"
-},
-"30": {
-"character": "Pickman",
-"character_replacements": Array[Dictionary]([]),
-"next_id": "31",
-"text": "Even though we might encounter some resistance, the two of us should be enough.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "Even though we might encounter some resistance, the two of us should be enough.",
-"type": "dialogue"
-},
-"31": {
-"character": "",
-"character_replacements": Array[Dictionary]([]),
-"next_id": "32",
-"text": "Pickman joined your party!",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "Pickman joined your party!",
-"type": "dialogue"
-},
-"32": {
-"is_snippet": false,
-"next_id": "end",
-"type": "goto"
-},
-"4": {
-"is_snippet": false,
-"next_id": "end",
-"type": "goto"
-},
-"6": {
-"next_id": "7",
-"text": "entrance_ghoul",
-"type": "title"
-},
-"7": {
-"character": "Pickman",
-"character_replacements": Array[Dictionary]([]),
-"next_id": "8",
 "text": "At last, we have arrived. Let us finish this.",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "At last, we have arrived. Let us finish this.",
 "type": "dialogue"
 },
-"8": {
+"20": {
 "is_snippet": false,
 "next_id": "end",
 "type": "goto"
+},
+"22": {
+"next_id": "23",
+"text": "entrance_pickman",
+"type": "title"
+},
+"23": {
+"character": "Pickman",
+"character_replacements": Array[Dictionary]([]),
+"next_id": "24",
+"text": "Still want to do this? We just lost the majority of our allies.",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Still want to do this? We just lost the majority of our allies.",
+"type": "dialogue"
+},
+"24": {
+"is_snippet": false,
+"next_id": "end",
+"type": "goto"
+},
+"27": {
+"next_id": "28",
+"text": "entrance_carter2",
+"type": "title"
+},
+"28": {
+"character": "Carter",
+"character_replacements": Array[Dictionary]([]),
+"next_id": "29",
+"text": "I must.",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "I must.",
+"type": "dialogue"
+},
+"29": {
+"is_snippet": false,
+"next_id": "end",
+"type": "goto"
+},
+"31": {
+"next_id": "32",
+"text": "starting_instructions",
+"type": "title"
+},
+"32": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
+"next_id": "33",
+"text": "Move around with [{ui_up}]/[{ui_left}]/[{ui_down}]/[{ui_right}]. You can interact with individuals and objects with [{ui_accept}], and cancel with [{ui_cancel}].",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Move around with [{ui_up}]/[{ui_left}]/[{ui_down}]/[{ui_right}]. You can interact with individuals and objects with [{ui_accept}], and cancel with [{ui_cancel}].",
+"type": "dialogue"
+},
+"33": {
+"is_snippet": false,
+"next_id": "end",
+"type": "goto"
+},
+"35": {
+"next_id": "36",
+"text": "pickman_recruit",
+"type": "title"
+},
+"36": {
+"character": "Pickman",
+"character_replacements": Array[Dictionary]([]),
+"next_id": "37",
+"text": "So you will not retreat.",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "So you will not retreat.",
+"type": "dialogue"
+},
+"37": {
+"character": "Pickman",
+"character_replacements": Array[Dictionary]([]),
+"next_id": "38",
+"text": "Very well, I shall see this through too.",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Very well, I shall see this through too.",
+"type": "dialogue"
+},
+"38": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
+"next_id": "39",
+"text": "Pickman joined your party!",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Pickman joined your party!",
+"type": "dialogue"
+},
+"39": {
+"is_snippet": false,
+"next_id": "end",
+"type": "goto"
+},
+"4": {
+"next_id": "5",
+"text": "narration_1",
+"type": "title"
+},
+"41": {
+"next_id": "42",
+"text": "after_boss",
+"type": "title"
+},
+"42": {
+"character": "Carter",
+"character_replacements": Array[Dictionary]([]),
+"next_id": "43",
+"text": "Let's go.",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Let's go.",
+"type": "dialogue"
+},
+"43": {
+"is_snippet": false,
+"next_id": "end",
+"type": "goto"
+},
+"45": {
+"next_id": "46",
+"text": "gods_callout",
+"type": "title"
+},
+"46": {
+"character": "Carter",
+"character_replacements": Array[Dictionary]([]),
+"next_id": "47",
+"text": "Gods of Earth! Cease your hiding and grant me passage to the Sunset City.",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Gods of Earth! Cease your hiding and grant me passage to the Sunset City.",
+"type": "dialogue"
+},
+"47": {
+"is_snippet": false,
+"next_id": "end",
+"type": "goto"
+},
+"49": {
+"next_id": "50",
+"text": "peters_warning",
+"type": "title"
+},
+"5": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
+"next_id": "6",
+"text": "\"Three times Randolph Carter dreamed of the marvellous city, and three times was he snatched away while still he paused on the high terrace above it.\"",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "\"Three times Randolph Carter dreamed of the marvellous city, and three times was he snatched away while still he paused on the high terrace above it.\"",
+"type": "dialogue"
+},
+"50": {
+"character": "Pickman",
+"character_replacements": Array[Dictionary]([]),
+"next_id": "51",
+"text": "Wait. Something's wrong. The Other Gods, their messeng-",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Wait. Something's wrong. The Other Gods, their messeng-",
+"type": "dialogue"
+},
+"51": {
+"is_snippet": false,
+"next_id": "end",
+"type": "goto"
+},
+"53": {
+"next_id": "54",
+"text": "carter_call",
+"type": "title"
+},
+"54": {
+"character": "Carter",
+"character_replacements": Array[Dictionary]([]),
+"next_id": "55",
+"text": "Pickman!",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Pickman!",
+"type": "dialogue"
+},
+"55": {
+"is_snippet": false,
+"next_id": "end",
+"type": "goto"
+},
+"57": {
+"next_id": "58",
+"text": "nyarlathotep_1",
+"type": "title"
+},
+"58": {
+"character": "????",
+"character_replacements": Array[Dictionary]([]),
+"next_id": "59",
+"text": "Randolph Carter.",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Randolph Carter.",
+"type": "dialogue"
+},
+"59": {
+"character": "????",
+"character_replacements": Array[Dictionary]([]),
+"next_id": "60",
+"text": "You have come to see the Great Ones, whom it is unlawful for men to see.",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "You have come to see the Great Ones, whom it is unlawful for men to see.",
+"type": "dialogue"
+},
+"6": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
+"next_id": "7",
+"text": "\"He resolved to find the gods on unknown Kadath in the cold waste, wherever that might be, and to win from them the sight and remembrance and shelter of the marvellous sunset city.\"",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "\"He resolved to find the gods on unknown Kadath in the cold waste, wherever that might be, and to win from them the sight and remembrance and shelter of the marvellous sunset city.\"",
+"type": "dialogue"
+},
+"60": {
+"character": "????",
+"character_replacements": Array[Dictionary]([]),
+"next_id": "61",
+"text": "Watchers have spoken of this thing, and the Other Gods have grunted as they rolled and tumbled mindlessly to the sound of thin flutes in the black ultimate void, where broods the daemon-sultan whose name no lips dare speak aloud.",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Watchers have spoken of this thing, and the Other Gods have grunted as they rolled and tumbled mindlessly to the sound of thin flutes in the black ultimate void, where broods the daemon-sultan whose name no lips dare speak aloud.",
+"type": "dialogue"
+},
+"61": {
+"character": "????",
+"character_replacements": Array[Dictionary]([]),
+"next_id": "62",
+"text": "Because of YOU, Earth has no longer any gods that are gods.",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Because of YOU, Earth has no longer any gods that are gods.",
+"type": "dialogue"
+},
+"62": {
+"is_snippet": false,
+"next_id": "end",
+"type": "goto"
+},
+"64": {
+"next_id": "65",
+"text": "nyarlathotep_2",
+"type": "title"
+},
+"65": {
+"character": "????",
+"character_replacements": Array[Dictionary]([]),
+"next_id": "66",
+"text": "[shake rate=20.0 level=5 connected=1]And only the Other Gods from outer space hold sway on unremembered Kadath.[/shake]",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "[shake rate=20.0 level=5 connected=1]And only the Other Gods from outer space hold sway on unremembered Kadath.[/shake]",
+"type": "dialogue"
+},
+"66": {
+"is_snippet": false,
+"next_id": "end",
+"type": "goto"
+},
+"7": {
+"is_snippet": false,
+"next_id": "end",
+"type": "goto"
+},
+"73": {
+"next_id": "74",
+"text": "pushing_barrier",
+"type": "title"
+},
+"74": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
+"next_id": "75",
+"text": "This is not the time to retreat. The journey to this place has been long and hard, and it's time to face the gods.",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "This is not the time to retreat. The journey to this place has been long and hard, and it's time to face the gods.",
+"type": "dialogue"
+},
+"75": {
+"is_snippet": false,
+"next_id": "end",
+"type": "goto"
+},
+"77": {
+"next_id": "78",
+"text": "guard_ghoul",
+"type": "title"
+},
+"78": {
+"character": "Ghoul",
+"character_replacements": Array[Dictionary]([]),
+"next_id": "79",
+"text": "We'll guard the entrance... Y-You go ahead...",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "We'll guard the entrance... Y-You go ahead...",
+"type": "dialogue"
+},
+"79": {
+"character": "Ghoul",
+"character_replacements": Array[Dictionary]([]),
+"next_id": "80",
+"text": "B-by the way, if you want to change the controls, you can open the menu with [{ui_menu}] and head to the Settings section.",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "B-by the way, if you want to change the controls, you can open the menu with [{ui_menu}] and head to the Settings section.",
+"type": "dialogue"
+},
+"80": {
+"is_snippet": false,
+"next_id": "end",
+"type": "goto"
+},
+"82": {
+"next_id": "83",
+"text": "guard_ghoul_2",
+"type": "title"
+},
+"83": {
+"character": "Ghoul",
+"character_replacements": Array[Dictionary]([]),
+"next_id": "84",
+"text": "So this is K-Kadath...? I-I think I'll stay here and guard the rear...",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "So this is K-Kadath...? I-I think I'll stay here and guard the rear...",
+"type": "dialogue"
+},
+"84": {
+"character": "Ghoul",
+"character_replacements": Array[Dictionary]([]),
+"next_id": "85",
+"text": "O-oh, remember you can change between walking and running by holding [{action_run}].",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "O-oh, remember you can change between walking and running by holding [{action_run}].",
+"type": "dialogue"
+},
+"85": {
+"is_snippet": false,
+"next_id": "end",
+"type": "goto"
+},
+"87": {
+"next_id": "88",
+"text": "pickman_waiting",
+"type": "title"
+},
+"88": {
+"character": "Pickman",
+"character_replacements": Array[Dictionary]([]),
+"next_id": "89",
+"text": "Go ahead, then. We're still recovering from the landing.",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Go ahead, then. We're still recovering from the landing.",
+"type": "dialogue"
+},
+"89": {
+"is_snippet": false,
+"next_id": "end!",
+"type": "goto"
+},
+"9": {
+"next_id": "10",
+"text": "entrance_ghoul1",
+"type": "title"
+},
+"91": {
+"next_id": "93",
+"text": "barrier",
+"type": "title"
+},
+"93": {
+"character": "Carter",
+"character_replacements": Array[Dictionary]([]),
+"next_id": "",
+"text": "There must be a way to remove these. We should check the neighboring rooms.",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "There must be a way to remove these. We should check the neighboring rooms.",
+"type": "dialogue"
 }
 }
 metadata/dialogue_manager_version = "2.15.3"

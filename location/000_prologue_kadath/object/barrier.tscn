@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dafsbbwqgmrh6"]
+
+[ext_resource type="Script" path="res://location/lib/script/object/describable_object.gd" id="1_toiu3"]
+
+[node name="Barrier" type="StaticBody2D"]
+collision_layer = 14
+script = ExtResource("1_toiu3")
+dialog_name = "barrier"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -218,6 +218,8 @@ func set_up_battle_positions(battle_spot, party_actors: Array, non_party_actors:
 	for i in range(party_actors.size()): 
 		var party_actor = party_actors[i]
 		var spot = party_spots[i]
+		if i > 0:
+			cutscene_lines.append("SHOW %s" % party_actor.name)
 		cutscene_lines.append(
 			"WALK %s TO (%d, %d) AT 50" % [
 				party_actor.name, 

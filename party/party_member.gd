@@ -195,3 +195,6 @@ func move_to(target: Vector2, speed: float):
 	await get_tree().create_timer(time).timeout
 	self.velocity = Vector2.ZERO
 	self.set_physics_process(was_processing_physics)
+
+func unlock():
+	self.unlocked = true

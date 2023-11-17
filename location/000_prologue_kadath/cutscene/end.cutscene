@@ -1,0 +1,59 @@
+# Onyx doors open
+# CALL Door open
+PLAY_ANIM PROXY idle
+START_DIALOG after_boss
+# Party walks up , fade to black, change room
+
+SET_OVERLAY MIX TO (0,0,0,0.0)
+FADE_OVERLAY MIX TO (0,0,0,1.0) IN 1
+
+# Party walks up to the center of the room, but nobody's to be seen
+
+# verify this
+SET_ROOM 06_throne_room
+SET_POSITION PROXY TO (0, 112)
+
+SIMULTANEOUS 
+	FADE_OVERLAY MIX TO (0,0,0,0.0) IN 1
+	WALK PROXY TO (0, 48) AT 25
+	WALK Peters TO (32, 80) AT 25
+END
+
+START_DIALOG gods_callout
+
+SIMULTANEOUS
+#	CALL CAMERA do_shake
+	FADE_OVERLAY MIX TO (0,0,0, 0.3) IN 1
+END
+
+LOOK Peters LEFT
+START_DIALOG peters_warning
+
+SIMULTANEOUS
+	LOOK PROXY RIGHT
+	MOVE Peters TO (64, 80) AT 30
+	CALL ROOM fade_companion
+	START_DIALOG carter_call
+END
+
+CALL Peters queue_free
+
+SIMULTANEOUS
+	CALL ROOM darken_room
+	START_DIALOG nyarlathotep_1
+	SEQUENTIAL
+		WAIT 1
+		LOOK PROXY UP
+	END
+END
+
+SIMULTANEOUS
+	CALL ROOM show_spooks
+	START_DIALOG nyarlathotep_2
+END
+
+SET_OVERLAY MIX TO (0,0,0, 1.0)
+
+WAIT 1
+
+CALL ROOM show_title_card

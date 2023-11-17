@@ -14,6 +14,8 @@ const inventory_save_key = "Inventory"
 var inventory: Inventory = Inventory.new()
 var display_name = "party" # : get = get_display_name
 
+ 
+
 func load_game_data(save_data: SaveData) -> void:
 	inventory.load_game_data(save_data)
 	
@@ -50,3 +52,9 @@ func get_leader():
 		if member.unlocked:
 			return member
 	return null
+
+func unlock(id: PartyMember.Id):
+	for member in get_children():
+		if member.id == id:
+			member.unlock()
+			return

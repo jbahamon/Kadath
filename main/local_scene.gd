@@ -26,9 +26,9 @@ func _ready() -> void:
 		VarsService.loaded_slot = -1
 	else:
 		EnvironmentService.update_whereabouts(
-			VarsService.starting_location_name, 
-			VarsService.starting_room_name,
-			Vector2(0, 240), #Vector2.ZERO,
+			"000_prologue_kadath", 
+			"02_hub",
+			Vector2(0, 86), #Vector2.ZERO,
 			Vector2.UP,
 			false
 		)

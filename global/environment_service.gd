@@ -74,7 +74,7 @@ func move_to_room(
 	target_position: Vector2, 
 	target_orientation: Vector2
 ) -> bool:
-	var room = current_location.get_room(room_id)
+	var room = current_location.instantiate_room(room_id)
 	var proxy: PlayerProxy = EntitiesService.get_proxy()
 	var proxy_target = proxy.target
 	var proxy_name = proxy_target.name if proxy_target != null else null
@@ -87,6 +87,7 @@ func move_to_room(
 	
 	if current_room != null:
 		world.remove_child(world.get_child(0))
+		current_room.queue_free()
 	
 	world.add_child(room)
 	world.move_child(room, 0)
