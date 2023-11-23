@@ -54,7 +54,7 @@ func on_item_requested(item_class, party_member: PartyMember):
 func update_party_data():
 	var party = EntitiesService.get_party()
 	self.inventory = party.inventory
-	var party_members = party.get_active_members()
+	var party_members = party.active_members
 	party_list.initialize(party_members, PartyMemberListItem)
 	if party_members.size() > 0:
 		party_member_stats.on_party_member_focused(party_members[0])

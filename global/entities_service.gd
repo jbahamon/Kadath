@@ -1,11 +1,19 @@
 extends Node
 
+var PartyScene = preload("res://party/party.tscn")
+
 var party: Party
 var proxy: PlayerProxy
 
-func initialize(init_proxy: PlayerProxy, init_party: Party):
+func _init():
+	self.party = PartyScene.instantiate()
+	self.party.unlock(PartyMember.Id.PETERS)
+	self.add_child(party)
+	self.add_to_group("save")
+	
+func initialize(init_proxy: PlayerProxy):
 	self.proxy = init_proxy
-	self.party = init_party
+	self.proxy.set_target(self.party)
 	
 func get_entity(entity_name: String):
 	match entity_name:
@@ -37,10 +45,19 @@ func get_room_entity(entity_name: String):
 	return object
 
 func get_active_party_members():
-	return self.party.get_active_members()
+	return self.party.active_members
 
 func get_party():
 	return self.party
 
 func get_proxy():
 	return self.proxy
+
+func on_exit_room():
+	self.party.remove_from_room()
+	
+func on_enter_room():
+	# move active party members into world
+	self.party.add_to_room()
+	
+	

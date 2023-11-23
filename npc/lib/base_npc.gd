@@ -53,13 +53,13 @@ func play_anim(anim_name: String):
 func set_orientation(orientation: Vector2):
 	self.anim.set_orientation(orientation)
 	
-func on_proxy_enter():
+func on_proxy_enter(_proxy):
 	self.set_physics_process(false)
 	self.stop_auto_movement()
 	self.collision.disabled = true
 	self.interactable_collision.disabled = true
 	
-func on_proxy_leave():
+func on_proxy_leave(_proxy):
 	self.set_physics_process(true)
 	self.start_auto_movement()
 	self.collision.disabled = false

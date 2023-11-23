@@ -67,6 +67,7 @@ func update_whereabouts(
 	InputService.set_input_enabled(was_input_enabled)
 	
 	if room_moved:
+		EntitiesService.on_enter_room()
 		current_room.on_enter()
 	
 func move_to_room(
@@ -86,6 +87,7 @@ func move_to_room(
 		return false
 	
 	if current_room != null:
+		EntitiesService.on_exit_room()
 		world.remove_child(world.get_child(0))
 		current_room.queue_free()
 	
@@ -102,17 +104,16 @@ func move_to_room(
 	clear_bg.color = room.clear_color
 	
 	var new_proxy_target = null
-
-	if proxy_name != null:
-		if proxy_name == "Party":
-			new_proxy_target = EntitiesService.get_party()
-		else:
-			new_proxy_target = EntitiesService.get_entity(proxy_name)
-		
-		proxy.set_target(new_proxy_target)
 	
 	proxy.position = target_position
 	proxy.set_orientation(target_orientation)
+	
+	if proxy_name != null and proxy.current_target_type == PlayerProxy.TargetType.OTHER:
+		new_proxy_target = EntitiesService.get_entity(proxy_name)
+		proxy.set_target(new_proxy_target)
+	elif proxy.current_target_type == PlayerProxy.TargetType.PARTY:
+		var party = EntitiesService.get_party()
+		party.on_proxy_enter(proxy)
 	
 	CameraService.update_camera_bounds(
 		current_room.position,

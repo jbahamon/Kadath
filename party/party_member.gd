@@ -178,6 +178,9 @@ func get_enemies(actors: Array):
 func take_hit(hit: Hit):
 	self.battler.take_damage(hit)
 
+func get_current_anim():
+	return self.anim.get_current_anim()
+	
 # Animatable interface
 
 func play_anim(anim_name: String):

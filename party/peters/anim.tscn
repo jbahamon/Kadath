@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://lhiyk00h3t4a"]
+[gd_scene load_steps=26 format=3 uid="uid://lhiyk00h3t4a"]
 
 [ext_resource type="Script" path="res://npc/lib/anim/character_anim.gd" id="1_6b3ka"]
 [ext_resource type="Texture2D" uid="uid://0hld2rfbk3u0" path="res://party/peters/spritesheet.png" id="2_0gpcq"]
@@ -201,16 +201,18 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="20"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hbppg"]
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="21"]
 states/idle/node = SubResource("13")
 states/idle/position = Vector2(437, 149)
 states/walk/node = SubResource("18")
 states/walk/position = Vector2(573, 149)
-transitions = ["idle", "walk", SubResource("19"), "walk", "idle", SubResource("20")]
+transitions = ["idle", "walk", SubResource("19"), "walk", "idle", SubResource("20"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_hbppg")]
 
 [node name="Anim" type="Marker2D"]
 script = ExtResource("1_6b3ka")
-animation_names = PackedStringArray("idle", "walk")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

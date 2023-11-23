@@ -4,13 +4,17 @@
 [ext_resource type="PackedScene" uid="uid://jekjd0u7io0t" path="res://party/arden/arden.tscn" id="2_rtt04"]
 [ext_resource type="PackedScene" uid="uid://dehii02b2xc8o" path="res://party/peters/peters.tscn" id="3_sov78"]
 
-[node name="Party" type="Node2D" groups=["save"]]
+[node name="Party" type="Node" groups=["save"]]
 script = ExtResource("1")
 
 [node name="Arden" parent="." instance=ExtResource("2_rtt04")]
+y_sort_enabled = true
 experience = 100
 
 [node name="Peters" parent="." instance=ExtResource("3_sov78")]
 visible = false
 id = 16
 display_name = "Pickman"
+
+[editable path="Arden"]
+[editable path="Arden/Battler"]

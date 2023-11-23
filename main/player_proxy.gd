@@ -7,6 +7,10 @@ enum ProxyMode {
 	CUTSCENE,
 	NOT_THERE
 }
+enum TargetType {
+	PARTY,
+	OTHER
+}
 
 const walk_speed: float = 100.0
 const interaction_vector = Vector2(16, 16)
@@ -16,13 +20,11 @@ var automated = false
 var target: Node2D
 var current_orientation = Vector2.ZERO
 var current_mode = ProxyMode.GAMEPLAY
+var current_target_type = TargetType.PARTY
 
 @onready var raycast: RayCast2D = $RayCast2D
-@onready var remote_transform: RemoteTransform2D = $RemoteTransform2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
-
-func _ready():
-	self.set_target(self.remote_transform.get_node_or_null(self.remote_transform.remote_path))
+@onready var remote_transform: RemoteTransform2D = $RemoteTransform2D
 
 func _unhandled_input(event) -> void:
 	if event.is_action_pressed("ui_accept"):
@@ -63,6 +65,8 @@ func get_movement_speed() -> float:
 	return walk_speed
 
 func update_animation() -> void:
+	if not self.target:
+		return
 	if velocity == Vector2.ZERO:
 		self.target.play_anim("idle")
 	else:
@@ -79,23 +83,31 @@ func save(save_data: SaveData) -> void:
 func load_game_data(save_data: SaveData) -> void:
 	self.position = save_data.data["player_position"]
 
-func set_target(new_target: Node):
-	if self.target == new_target:
+func set_target(new_target: Node, force: bool = false):
+	if self.target == new_target and not force:
 		return 
 	
 	var was_processing_physics = self.is_physics_processing()
 	self.set_physics_process(false)
 	
 	if self.target and self.target.has_method("on_proxy_leave"):
-		self.target.on_proxy_leave()
+		self.target.on_proxy_leave(self)
 	
-	self.target = new_target
+	self.current_target_type = TargetType.PARTY if new_target is Party else TargetType.OTHER
+	
+	match(self.current_target_type):
+		TargetType.PARTY:
+			self.target = new_target.get_leader()
+			new_target.on_proxy_enter(self)
+		TargetType.OTHER:
+			self.target = new_target
 	
 	if self.target and self.target.has_method("on_proxy_enter"):
-		self.target.on_proxy_enter()
-	
-	self.global_position = self.target.global_position
-	self.remote_transform.remote_path = self.remote_transform.get_path_to(self.target)
+		self.target.on_proxy_enter(self)
+
+	if self.target:
+		self.global_position = self.target.global_position
+		self.remote_transform.remote_path = self.remote_transform.get_path_to(self.target)
 	self.set_physics_process(was_processing_physics)
 
 func get_display_name() -> String:
@@ -123,7 +135,8 @@ func set_orientation(orientation: Vector2):
 	if current_orientation == orientation:
 		return
 	current_orientation = orientation
-	self.target.set_orientation(orientation)
+	if self.target:
+		self.target.set_orientation(orientation)
 
 	raycast.set_target_position(Vector2(
 		interaction_vector.x * orientation.x, 
@@ -137,7 +150,8 @@ func set_mode(mode: ProxyMode):
 			self.set_physics_process(true)
 			self.set_process_unhandled_input(true)
 			self._set_process_collisions(true)
-			self.target.set_orientation(current_orientation)
+			if self.target:
+				self.target.set_orientation(current_orientation)
 		ProxyMode.CUTSCENE:
 			self.velocity = Vector2.ZERO
 			self.set_physics_process(true)

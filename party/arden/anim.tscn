@@ -213,7 +213,6 @@ transitions = ["idle", "walk", SubResource("19"), "walk", "idle", SubResource("2
 
 [node name="ArdenAnim" type="Marker2D"]
 script = ExtResource("1_d8s3w")
-animation_names = PackedStringArray("idle", "walk")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

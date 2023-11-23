@@ -77,7 +77,7 @@ func start_battle(enemies: Array, escapable: bool):
 	var non_party_actors = self.filter_non_party_actors(enemies, battle_spot)
 	self.pause_non_participants(non_party_actors)
 	
-	var party_actors = self.prepare_party_actors()
+	var party_actors = EntitiesService.get_active_party_members()
 	var actors = party_actors + non_party_actors
 
 	self.loop.initialize(actors, self.ui)
@@ -99,13 +99,11 @@ func start_battle(enemies: Array, escapable: bool):
 			self.ui.hide()
 			await self.fade_and_delete_mooks(battle_end_state)
 			await self.tear_down_battle_positions(battle_end_state)
-			self.restore_party_actors(battle_end_state.party_actors)
 			self.resume_non_participants()
 		BattleEndState.Result.WIN: 
 			await self.deal_rewards(battle_end_state.rewards)
 			self.ui.hide()
 			await self.tear_down_battle_positions(battle_end_state)
-			self.restore_party_actors(battle_end_state.party_actors)
 			self.resume_non_participants()
 		BattleEndState.Result.LOSE: 
 			self.ui.hide()
@@ -165,34 +163,11 @@ func rename_non_party_actors(non_party_actors: Array):
 			for i in range(actors.size()):
 				actors[i].display_name = "%s %s" % [actors[i].display_name, suffix[i % suffix.length()]]
 	
-func prepare_party_actors():
-	var party_actors = EntitiesService.get_active_party_members()
-	var room = EnvironmentService.get_room()
-	
-	var party = EntitiesService.get_party()
-	for party_actor in party_actors:
-		party.remove_child(party_actor)
-		room.add_child(party_actor)
-		party_actor.set_position(party_actor.position + party.position)
-	return party_actors
-
-func restore_party_actors(party_actors):
-	var room = EnvironmentService.get_room()
-	var party = EntitiesService.get_party()
-	var last_added_child = null
-	for party_actor in party_actors:
-		room.remove_child(party_actor)
-		if last_added_child == null:
-			party.add_child(party_actor)
-			party.move_child(party_actor, 0)
-		else:
-			last_added_child.add_sibling(party_actor)
-		
-		party_actor.set_position(party_actor.position - party.position)
-		last_added_child = party_actor
-
 
 func set_up_battle_positions(battle_spot, party_actors: Array, non_party_actors: Array):
+	var party: Party = EntitiesService.get_party()
+	party.set_physics_process(false)
+	
 	var party_spots = battle_spot.get_party_spots()
 	var enemy_spots = battle_spot.get_enemy_spots()
 	
@@ -260,6 +235,9 @@ func fade_and_delete_mooks(battle_end_state):
 	
 
 func tear_down_battle_positions(battle_end_state):
+	var party: Party = EntitiesService.get_party()
+	party.set_physics_process(false)
+	
 	var proxy = EntitiesService.get_proxy()
 	var cutscene_lines = []
 	cutscene_lines.append("SIMULTANEOUS")
@@ -324,7 +302,7 @@ func deal_rewards(rewards: BattleRewards):
 
 func deal_experience(party: Party, experience: int):
 	await self.ui.prompt("Gained %d experience points!" % experience)
-	for party_member in party.get_active_members():
+	for party_member in party.active_members:
 		if !party_member.battler.is_alive:
 			continue
 			

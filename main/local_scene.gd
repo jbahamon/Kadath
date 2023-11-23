@@ -7,10 +7,9 @@ func _ready() -> void:
 		$SubViewportContainer/SubViewport/World/PlayerProxy/Camera2D,
 		$SubViewportContainer/SubViewport
 	)
-	DialogService.initialize                                                                                                  ($DialogLayer/Dialog, $NarrationLayer)
+	DialogService.initialize($DialogLayer/Dialog, $NarrationLayer)
 	EntitiesService.initialize(
-		$SubViewportContainer/SubViewport/World/PlayerProxy, 
-		$SubViewportContainer/SubViewport/World/Party
+		$SubViewportContainer/SubViewport/World/PlayerProxy
 	)
 	EnvironmentService.initialize($SubViewportContainer/SubViewport/World)
 	InputService.initialize(self)

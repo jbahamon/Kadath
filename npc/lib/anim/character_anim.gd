@@ -1,6 +1,7 @@
 extends Marker2D
 
-@export var animation_names: PackedStringArray
+@export var animation_names: Array  = ["idle", "walk"]
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var animation_state = animation_tree.get("parameters/playback")
 
@@ -17,3 +18,6 @@ func play_anim(anim_name: String) -> void:
 func set_orientation(orientation: Vector2) -> void:
 	for blend_position_name in self.blend_position_names:
 		self.animation_tree[blend_position_name] = orientation
+
+func get_current_anim():
+	return self.animation_state.get_current_node()

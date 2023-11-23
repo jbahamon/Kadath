@@ -1,6 +1,5 @@
-[gd_scene load_steps=18 format=3 uid="uid://c2luykmp4iss7"]
+[gd_scene load_steps=17 format=3 uid="uid://c2luykmp4iss7"]
 
-[ext_resource type="PackedScene" uid="uid://d2fira8jrokg5" path="res://party/party.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://c3okprgd6vbwj" path="res://ui/04_templates/pause_menu/pause_menu.tscn" id="3"]
 [ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="4"]
 [ext_resource type="Script" path="res://ui/04_templates/pause_menu/menu_popup.gd" id="6"]
@@ -91,16 +90,11 @@ anchor_bottom = 1.0
 [node name="World" type="Node2D" parent="SubViewportContainer/SubViewport"]
 y_sort_enabled = true
 
-[node name="Party" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("2")]
-
 [node name="PlayerProxy" parent="SubViewportContainer/SubViewport/World" groups=["save"] instance=ExtResource("9")]
 floor_stop_on_slope = false
 
 [node name="RayCast2D" parent="SubViewportContainer/SubViewport/World/PlayerProxy" index="1"]
 hit_from_inside = true
-
-[node name="RemoteTransform2D" parent="SubViewportContainer/SubViewport/World/PlayerProxy" index="2"]
-remote_path = NodePath("../../Party")
 
 [node name="Camera2D" type="Camera2D" parent="SubViewportContainer/SubViewport/World/PlayerProxy"]
 drag_left_margin = 0.0
@@ -202,11 +196,6 @@ process_mode = 2
 [connection signal="about_to_popup" from="MenuLayer/SavesPopup" to="." method="_on_menu_about_to_show"]
 [connection signal="popup_hide" from="MenuLayer/SavesPopup" to="." method="_on_menu_popup_hide"]
 
-[editable path="SubViewportContainer/SubViewport/World/Party"]
-[editable path="SubViewportContainer/SubViewport/World/Party/Arden"]
-[editable path="SubViewportContainer/SubViewport/World/Party/Arden/Battler"]
-[editable path="SubViewportContainer/SubViewport/World/Party/Peters"]
-[editable path="SubViewportContainer/SubViewport/World/Party/Peters/Battler"]
 [editable path="SubViewportContainer/SubViewport/World/PlayerProxy"]
 [editable path="MenuLayer/MenuPopup/PauseMenu"]
 [editable path="MenuLayer/MenuPopup/PauseMenu/PauseMenuTabs/Party"]
