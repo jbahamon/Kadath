@@ -1,7 +1,7 @@
 # Base entity that represents a character or a monster in combat
 # Every battler has an AI node so all characters can work as a monster
 # or as a computer-controlled player ally
-extends Node
+extends Node2D
 
 class_name Battler
 signal died
@@ -9,11 +9,13 @@ signal died
 @export var anim_path: NodePath
 @export var stats: CharacterStats
 @export var turn_order_icon: Texture2D
-@export var rewards: Resource
+@export var rewards: BattleRewards
+@export var toast_offset: Vector2 = Vector2(0,-32)
 
 @onready var actions = $Actions
 @onready var skills = $Skills
-@onready var ai = $AI
+@onready var ai: BattlerAI = $AI
+@onready var toast: Node2D = $Toast
 
 var anim: Node
 var status_effects = StatusEffectManager.new(self)
@@ -21,7 +23,6 @@ var status_effects = StatusEffectManager.new(self)
 var is_alive: bool:
 	get:
 		return self.stats.is_alive
-
 
 var physical_attack: float:
 	get:
@@ -58,23 +59,26 @@ var speed: float:
 var display_name: String:
 	get:
 		return self.get_parent().display_name
-	set(value):
+	set(_value):
 		pass
 
 func _ready():
-	assert(anim_path)
-	anim = get_node(anim_path)
+	assert(self.anim_path)
+	self.anim = get_node(self.anim_path)
+	self.toast.position = self.toast_offset
 	
 func free():
 	self.status_effects._destroy()
 	super.free()
 	
-func initialize(ui):
-	ai.interface = ui
+func initialize(ui: BattleUI):
+	self.ai.interface = ui
 
 func take_damage(hit: Hit):
 	var damage = ceil(hit.base_damage * self.get_damage_modifier(hit) + randf_range(1, hit.base_damage*0.2))
-	stats.take_damage(damage)
+	
+	await self.toast.show_toast(str(damage))
+	self.stats.take_damage(damage)
 	
 	if self.stats.health <= 0:
 		emit_signal("died", self.get_parent())
@@ -119,8 +123,8 @@ func play_anim(anim_name: String):
 func set_orientation(orientation: Vector2):
 	self.get_parent().set_orientation(orientation)
 	
-func move_to(target_position: Vector2, speed: float):
-	await self.get_parent().move_to(target_position, speed)
+func move_to(target_position: Vector2, move_speed: float):
+	await self.get_parent().move_to(target_position, move_speed)
 
 func is_party_member():
 	return get_parent() is PartyMember

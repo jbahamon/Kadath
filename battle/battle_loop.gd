@@ -34,6 +34,7 @@ func do_battle():
 	while true:
 		
 		self.update_preview()
+		
 		var current_actor = self.turn_queue.get_current_actor()
 		var turn = await current_actor.battler.ai.get_turn(self.actors)
 

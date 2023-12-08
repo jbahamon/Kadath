@@ -1,7 +1,75 @@
-[gd_scene load_steps=26 format=3 uid="uid://lhiyk00h3t4a"]
+[gd_scene load_steps=37 format=3 uid="uid://cv5wwoeq1pjb7"]
 
-[ext_resource type="Script" path="res://npc/lib/anim/character_anim.gd" id="1_6b3ka"]
-[ext_resource type="Texture2D" uid="uid://0hld2rfbk3u0" path="res://party/peters/spritesheet.png" id="2_0gpcq"]
+[ext_resource type="Script" path="res://npc/lib/anim/character_anim.gd" id="1_wndig"]
+[ext_resource type="Texture2D" uid="uid://dlvuo81uss6l2" path="res://party/peters/spritesheet - alt.png" id="2_ug0e5"]
+
+[sub_resource type="Animation" id="Animation_aq4sd"]
+resource_name = "battle_idle_down"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [56, 57, 58, 57]
+}
+
+[sub_resource type="Animation" id="Animation_g4hwa"]
+resource_name = "battle_idle_left"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [53, 54, 55, 54]
+}
+
+[sub_resource type="Animation" id="Animation_j4nk8"]
+resource_name = "battle_idle_right"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [50, 51, 52, 51]
+}
+
+[sub_resource type="Animation" id="Animation_51hy3"]
+resource_name = "battle_idle_up"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [59, 60, 61, 60]
+}
 
 [sub_resource type="Animation" id="1"]
 resource_name = "idle_down"
@@ -137,6 +205,10 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gdtcw"]
 _data = {
+"battle_idle_down": SubResource("Animation_aq4sd"),
+"battle_idle_left": SubResource("Animation_g4hwa"),
+"battle_idle_right": SubResource("Animation_j4nk8"),
+"battle_idle_up": SubResource("Animation_51hy3"),
 "idle_down": SubResource("1"),
 "idle_left": SubResource("2"),
 "idle_right": SubResource("3"),
@@ -146,6 +218,31 @@ _data = {
 "walk_right": SubResource("7"),
 "walk_up": SubResource("8")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ogdas"]
+animation = &"battle_idle_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_00rvu"]
+animation = &"battle_idle_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_muqoc"]
+animation = &"battle_idle_down"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a5sb4"]
+animation = &"battle_idle_up"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_yc4yp"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_ogdas")
+blend_point_0/pos = Vector2(-1.1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_00rvu")
+blend_point_1/pos = Vector2(1.1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_muqoc")
+blend_point_2/pos = Vector2(0, 1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_a5sb4")
+blend_point_3/pos = Vector2(0, -1)
+min_space = Vector2(-1.1, -1)
+max_space = Vector2(1.1, 1)
+blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="9"]
 animation = &"idle_down"
@@ -204,15 +301,22 @@ blend_mode = 1
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hbppg"]
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4hlgj"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hkeja"]
+
 [sub_resource type="AnimationNodeStateMachine" id="21"]
+states/battle_idle/node = SubResource("AnimationNodeBlendSpace2D_yc4yp")
+states/battle_idle/position = Vector2(424, 224)
 states/idle/node = SubResource("13")
 states/idle/position = Vector2(437, 149)
 states/walk/node = SubResource("18")
 states/walk/position = Vector2(573, 149)
-transitions = ["idle", "walk", SubResource("19"), "walk", "idle", SubResource("20"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_hbppg")]
+transitions = ["idle", "walk", SubResource("19"), "walk", "idle", SubResource("20"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_hbppg"), "idle", "battle_idle", SubResource("AnimationNodeStateMachineTransition_4hlgj"), "battle_idle", "idle", SubResource("AnimationNodeStateMachineTransition_hkeja")]
 
 [node name="Anim" type="Marker2D"]
-script = ExtResource("1_6b3ka")
+script = ExtResource("1_wndig")
+animation_names = ["idle", "walk", "battle_idle"]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -221,7 +325,7 @@ libraries = {
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("2_0gpcq")
+texture = ExtResource("2_ug0e5")
 centered = false
 offset = Vector2(-23, -47)
 hframes = 85
@@ -231,5 +335,6 @@ frame = 2
 tree_root = SubResource("21")
 anim_player = NodePath("../AnimationPlayer")
 active = true
+parameters/battle_idle/blend_position = Vector2(0, 0)
 parameters/idle/blend_position = Vector2(-0.0484331, 0.275)
 parameters/walk/blend_position = Vector2(-0.141914, 0.32459)

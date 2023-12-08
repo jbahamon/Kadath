@@ -5,4 +5,4 @@ var action: BattleAction
 
 func play():
 	assert(action != null && actor != null)
-	action.execute(actor)
+	await action.execute(actor)

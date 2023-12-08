@@ -4,7 +4,7 @@ extends MarginContainer
 @onready var character_name = $PanelContainer/Info/Name
 @onready var hp = $PanelContainer/Info/HP
 @onready var ep = $PanelContainer/Info/EP
-
+@onready var toast = $Control/Toast
 var disabled = false
 var party_member
 
@@ -33,4 +33,6 @@ func assign_null(args: Dictionary):
 	
 func get_button():
 	return button
-	
+
+func show_toast(text, color=Color.WHITE):
+	self.toast.show_toast(text, color)

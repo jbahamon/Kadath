@@ -18,3 +18,4 @@ display_name = "Pickman"
 
 [editable path="Arden"]
 [editable path="Arden/Battler"]
+[editable path="Arden/Battler/Toast"]

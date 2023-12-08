@@ -7,13 +7,11 @@ var proxy: PlayerProxy
 
 func _init():
 	self.party = PartyScene.instantiate()
-	self.party.unlock(PartyMember.Id.PETERS)
 	self.add_child(party)
 	self.add_to_group("save")
-	
+
 func initialize(init_proxy: PlayerProxy):
 	self.proxy = init_proxy
-	self.proxy.set_target(self.party)
 	
 func get_entity(entity_name: String):
 	match entity_name:
@@ -57,7 +55,6 @@ func on_exit_room():
 	self.party.remove_from_room()
 	
 func on_enter_room():
-	# move active party members into world
 	self.party.add_to_room()
 	
 	

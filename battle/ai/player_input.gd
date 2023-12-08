@@ -23,8 +23,8 @@ func get_turn(current_actors: Array) -> Turn:
 				if action != null:
 					state = "waiting_for_parameters"
 			"waiting_for_parameters":
-				var ready = await self.wait_for_parameters(action, actor, current_actors)
-				if not ready:
+				var parameters_ready = await self.wait_for_parameters(action, actor, current_actors)
+				if not parameters_ready:
 					state = "waiting_for_action"
 				else:
 					break
@@ -40,7 +40,6 @@ func get_turn(current_actors: Array) -> Turn:
 
 
 func wait_for_parameters(action: BattleAction, action_actor, actors: Array):
-	var i = 0
 	var current_parameter_signature = action.get_next_parameter_signature()
 	
 	while current_parameter_signature != null:

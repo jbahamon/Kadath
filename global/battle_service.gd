@@ -91,7 +91,7 @@ func start_battle(enemies: Array, escapable: bool):
 	non_party_actors = []
 	actors = []
 	
-	self.ui.show()
+	self.ui.start()
 	var battle_end_state = await self.loop.do_battle()
 	
 	match battle_end_state.result:
@@ -190,18 +190,7 @@ func set_up_battle_positions(battle_spot, party_actors: Array, non_party_actors:
 		]
 	)
 	
-	for i in range(party_actors.size()): 
-		var party_actor = party_actors[i]
-		var spot = party_spots[i]
-		if i > 0:
-			cutscene_lines.append("SHOW %s" % party_actor.name)
-		cutscene_lines.append(
-			"WALK %s TO (%d, %d) AT 50" % [
-				party_actor.name, 
-				int(round(spot.global_position.x)), 
-				int(round(spot.global_position.y))
-			]
-		)
+	var target_spots = []
 	
 	for non_party_actor in non_party_actors: 
 		var spot = spots_by_name[non_party_actor.display_name].pop_back()
@@ -212,11 +201,44 @@ func set_up_battle_positions(battle_spot, party_actors: Array, non_party_actors:
 				int(round(spot.global_position.y))
 			]
 		)
+		target_spots.append(spot.global_position)
+		
+	for i in range(party_actors.size()): 
+		var party_actor = party_actors[i]
+		var spot = party_spots[i]
+		var closest_enemy = self.get_closest_to(target_spots, spot.global_position)
+		cutscene_lines.append_array(
+			[
+				"SEQUENTIAL",
+				"WALK %s TO (%d, %d) AT 50" % [
+					party_actor.name, 
+					int(round(spot.global_position.x)), 
+					int(round(spot.global_position.y))
+				],
+				"LOOK_AT %s AT (%d, %d)" % [
+					party_actor.name, 
+					int(round(closest_enemy.x)), 
+					int(round(closest_enemy.y))
+				],
+				"PLAY_ANIM %s battle_idle" % party_actor.name,
+				"END"
+			]
+		)
 	
 	cutscene_lines.append("END")
-
+	
 	await CutsceneService.play_custom_cutscene(cutscene_lines)
-
+	
+func get_closest_to(choices, current_position: Vector2):
+	var current_choice = null
+	var current_distance = INF
+	for choice in choices:
+		var distance = current_position.distance_to(choice)
+		if distance < current_distance:
+			current_choice = choice
+			current_distance = distance
+	return current_choice
+	
 func fade_and_delete_mooks(battle_end_state):
 	
 	var proxy = EntitiesService.get_proxy()
@@ -236,7 +258,6 @@ func fade_and_delete_mooks(battle_end_state):
 
 func tear_down_battle_positions(battle_end_state):
 	var party: Party = EntitiesService.get_party()
-	party.set_physics_process(false)
 	
 	var proxy = EntitiesService.get_proxy()
 	var cutscene_lines = []
@@ -258,8 +279,8 @@ func tear_down_battle_positions(battle_end_state):
 		)
 	cutscene_lines.append("END")
 	await CutsceneService.play_custom_cutscene(cutscene_lines)
-	
-		
+	party.set_physics_process(true)
+	party.on_proxy_enter(proxy)
 
 func pause_non_participants(non_party_actors: Array):
 	var world = EnvironmentService.get_world()
@@ -306,13 +327,13 @@ func deal_experience(party: Party, experience: int):
 		if !party_member.battler.is_alive:
 			continue
 			
-		var previous_level = party_member.get_level()
+		var previous_level = party_member.level	
 		# TODO: include support party members
 	
 		party_member.experience += experience
 		party_member.update_stats()
 		
-		if previous_level != party_member.get_level():
+		if previous_level != party_member.level:
 			await self.ui.prompt("%s leveled up" % party_member.display_name)
 
 func deal_items(party: Party, loot_bag: Dictionary):

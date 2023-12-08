@@ -9,7 +9,7 @@ func _on_interactable_area_body_entered(body):
 # Battle methods
 
 func take_hit(hit: Hit):
-	self.battler.take_damage(hit)
+	await self.battler.take_damage(hit)
 	
 func get_allies(actors: Array):
 	var allies = []

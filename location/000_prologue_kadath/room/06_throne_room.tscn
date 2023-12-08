@@ -3,7 +3,7 @@
 [ext_resource type="TileSet" uid="uid://cb1f6r4xpgnc0" path="res://location/lib/resource/tile/cave.tres" id="1_rj3nl"]
 [ext_resource type="Script" path="res://location/000_prologue_kadath/room/06_throne_room.gd" id="2_xd66w"]
 [ext_resource type="PackedScene" uid="uid://qscnhsk7b4m7" path="res://npc/lib/simple_ghoul_npc.tscn" id="3_qvvke"]
-[ext_resource type="PackedScene" uid="uid://lhiyk00h3t4a" path="res://party/peters/anim.tscn" id="4_n6eel"]
+[ext_resource type="PackedScene" uid="uid://cv5wwoeq1pjb7" path="res://party/peters/anim.tscn" id="4_n6eel"]
 [ext_resource type="Texture2D" uid="uid://c5oigs2jtc778" path="res://location/000_prologue_kadath/object/horrorterror.png" id="5_yj61u"]
 
 [node name="Room" type="TileMap"]

@@ -23,8 +23,8 @@ var movement_cache_index: int
 var movement_pointers: Array
 
 func _ready():
-	self.update_active_members()
-	self.set_process(false)
+	self.update_active_members(self.get_unlocked_characters(), false)
+	self.set_physics_process(false)
 	self.movement_cache = []
 	self.movement_cache.resize(
 		max(MOVEMENT_STANDING_OFFSET, MOVEMENT_STANDING_OFFSET) * PARTY_SIZE
@@ -33,11 +33,15 @@ func _ready():
 	self.movement_pointers.resize(PARTY_SIZE)
 	
 func on_proxy_enter(proxy: PlayerProxy):
+	self.set_physics_process(true)
 	self.movement_pointers.fill(0)
 	
 	for party_member in self.active_members:
 		party_member.position = proxy.position
 		party_member.set_orientation(proxy.current_orientation)
+	
+func on_proxy_exit(proxy: PlayerProxy):
+	self.set_physics_process(false)
 	
 func _physics_process(delta):
 	var proxy: PlayerProxy = EntitiesService.get_proxy()
@@ -51,7 +55,6 @@ func _physics_process(delta):
 		
 		self.movement_pointers[0] = (self.movement_pointers[0] + 1) % self.movement_cache.size()
 		
-	
 	if active_members.size() > 1:
 		var offset = MOVEMENT_MOVING_OFFSET if proxy.velocity != Vector2.ZERO else MOVEMENT_STANDING_OFFSET
 		var leader_idx = self.movement_pointers[0]
@@ -67,26 +70,41 @@ func _physics_process(delta):
 
 func load_game_data(save_data: SaveData) -> void:
 	inventory.load_game_data(save_data)
-	self.update_active_members()
+	# self.update_active_members()
 	
 func save(save_data: SaveData) -> void:
 	inventory.save(save_data)
 	
-func update_active_members():
-	# Updates active members with the first unlocked children until the party is filled
-	var active = []
-	var available = get_unlocked_characters()
+func update_active_members(new_ordered_members: Array, update_proxy=true):
+	var old_active_members = self.active_members
+	var current_parent = self.active_members[0].get_parent() if self.active_members.size() > 0 else null
+	
+	var new_active_members = []
 	var i = 0;
-	for party_member in available:
+	var last_added_child = null
+	for party_member in new_ordered_members:
+		var parent = party_member.get_parent()
+		if parent != null:
+			parent.remove_child(party_member)
+		
 		if i < PARTY_SIZE:
+			new_active_members.append(party_member)
 			party_member.visible = true
-			active.append(party_member)
+			if current_parent != null:
+				current_parent.add_child(party_member)
 		else:
 			party_member.visible = false
-	
-	self.active_members = active
+			if last_added_child == null:
+				self.add_child(party_member)
+				self.move_child(party_member, 0)
+			else:
+				last_added_child.add_sibling(party_member)
+
+			last_added_child = party_member
+			
+	self.active_members = new_active_members
 	# since this is called during game initialization, some globals might not be there
-	if EntitiesService != null:
+	if update_proxy:
 		var proxy: PlayerProxy = EntitiesService.get_proxy()
 		if proxy != null and proxy.current_target_type == PlayerProxy.TargetType.PARTY:
 			proxy.set_target(self, true)
@@ -94,6 +112,11 @@ func update_active_members():
 func get_unlocked_characters() -> Array:
 	# Returns all the characters that can be active in the party
 	var has_unlocked = []
+	
+	for member in active_members:
+		if member.unlocked and member.get_parent() != self:
+			has_unlocked.append(member)
+			
 	for member in get_children():
 		if member.unlocked:
 			has_unlocked.append(member)
@@ -112,7 +135,7 @@ func unlock(id: PartyMember.Id):
 	for member in get_children():
 		if member.id == id:
 			member.unlock()
-			self.update_active_members()
+			self.update_active_members(self.get_unlocked_characters())
 			return
 
 func get_leader():
@@ -121,23 +144,13 @@ func get_leader():
 func add_to_room():
 	var room = EnvironmentService.get_room()
 	var last_added_child = null
-	for i in range(active_members.size() - 1, -1, -1):
-		var party_member = active_members[i]
-		self.remove_child(party_member)
+	for party_member in self.active_members:
 		room.add_child(party_member)
 	
 func remove_from_room():
-	var room = EnvironmentService.get_room()
-	
-	var last_added_child = null
 	for party_member in active_members:
-		room.remove_child(party_member)
-		if last_added_child == null:
-			self.add_child(party_member)
-			self.move_child(party_member, 0)
-		else:
-			last_added_child.add_sibling(party_member)
-
-		last_added_child = party_member
+		var parent = party_member.get_parent()
+		if parent != null:
+			parent.remove_child(party_member)
 
 	

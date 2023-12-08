@@ -64,7 +64,7 @@ func _ready():
 
 func _physics_process(delta):
 	self.position += velocity * delta
-
+	
 func update_stats():
 	if battler == null:
 		return
@@ -176,7 +176,7 @@ func get_enemies(actors: Array):
 	return enemies
 	
 func take_hit(hit: Hit):
-	self.battler.take_damage(hit)
+	await self.battler.take_damage(hit)
 
 func get_current_anim():
 	return self.anim.get_current_anim()

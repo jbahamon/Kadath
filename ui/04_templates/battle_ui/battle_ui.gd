@@ -38,6 +38,10 @@ func initialize(party_members: Array):
 	party_status.initialize(party_members)
 	self.reset_options_stack()
 	self.set_info_text(null)
+	
+func start():
+	self.options.hide()
+	self.show()
 		
 func prompt(text: String):
 	self.waiting_for_prompt = true

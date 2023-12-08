@@ -29,7 +29,8 @@ func execute(actor):
 	var hit = Hit.new()
 	hit.type = Hit.Element.PHYSICAL
 	hit.base_damage = actor.battler.physical_attack * 5
-	self.target.take_hit(hit)
+	await self.target.take_hit(hit)
+	print("Hello")
 	
 	
 	print("%s attacked %s (HP: %d -> HP: %d)" % [actor.display_name, self.target.display_name, prev_hp, self.target.battler.stats.health])

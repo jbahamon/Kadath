@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://qscnhsk7b4m7" path="res://npc/lib/simple_ghoul_npc.tscn" id="5_t4523"]
 [ext_resource type="PackedScene" uid="uid://3huenc8ltgbh" path="res://npc/lib/anim/simple_npc_anim.tscn" id="6_c8udh"]
 [ext_resource type="Texture2D" uid="uid://dq5du17wnwgxf" path="res://npc/ghoul_npc.png" id="7_iyhsx"]
-[ext_resource type="PackedScene" uid="uid://lhiyk00h3t4a" path="res://party/peters/anim.tscn" id="8_xselo"]
+[ext_resource type="PackedScene" uid="uid://cv5wwoeq1pjb7" path="res://party/peters/anim.tscn" id="8_xselo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ke7di"]
 size = Vector2(64, 32)
@@ -64,6 +64,7 @@ dialog_name = "guard_ghoul"
 metadata/_edit_group_ = true
 
 [node name="Anim" parent="LeftGhoul" instance=ExtResource("6_c8udh")]
+animation_names = ["idle", "walk"]
 
 [node name="Sprite2D" parent="LeftGhoul/Anim" index="0"]
 texture = ExtResource("7_iyhsx")
@@ -81,6 +82,7 @@ dialog_name = "guard_ghoul_2"
 metadata/_edit_group_ = true
 
 [node name="Anim" parent="RightGhoul" instance=ExtResource("6_c8udh")]
+animation_names = ["idle", "walk"]
 
 [node name="Sprite2D" parent="RightGhoul/Anim" index="0"]
 texture = ExtResource("7_iyhsx")
