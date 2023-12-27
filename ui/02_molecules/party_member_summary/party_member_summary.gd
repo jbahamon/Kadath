@@ -5,7 +5,6 @@ extends MarginContainer
 @onready var hp = $PanelContainer/Info/HP
 @onready var ep = $PanelContainer/Info/EP
 
-var disabled = false
 var party_member
 
 func _ready():

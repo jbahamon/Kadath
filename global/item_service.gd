@@ -7,19 +7,13 @@ enum ItemCategory {
 }
 
 
-var item_definitions: Dictionary # id (string) -> InventoryItem
+var item_definitions: Dictionary
 
 func _init():
-	# TODO: 
-	var salts = InventoryItem.new()
-	salts.id = "salts"
-	salts.name = "Essential Salts"
-	salts.description = "Revives a fallen ally."
-	salts.category = ItemCategory.CONSUMABLE
-	salts.max_amount = 99
-	self.item_definitions = {
-		"salts": salts
-	}
+	self.item_definitions = {}
+	for file_name in self.get_all_files("res://item/resource/", "tres"):
+		var item_resource: InventoryItem = load(file_name)
+		self.item_definitions[item_resource.id] = item_resource
 	
 func id_to_item(id: String) -> InventoryItem:
 	return self.item_definitions.get(id)
@@ -39,7 +33,31 @@ func category_name(category: ItemCategory) -> String:
 			return "All Items"
 			
 	return "Other"
-	
+
+func get_all_files(path: String, file_ext := "", files := []):
+	var dir = DirAccess.open(path)
+
+	if dir:
+		dir.list_dir_begin()
+
+		var file_name = dir.get_next()
+
+		while file_name != "":
+			if dir.current_is_dir():
+				files = get_all_files(dir.get_current_dir().path_join(file_name), file_ext, files)
+			else:
+				if file_ext and file_name.get_extension() != file_ext:
+					file_name = dir.get_next()
+					continue
+
+				files.append(dir.get_current_dir().path_join(file_name))
+
+			file_name = dir.get_next()
+	else:
+		print("An error occurred when trying to access %s." % path)
+
+	return files
+
 class ItemSorter:
 	static func sort_ascending(a: InventoryItem, b: InventoryItem):
 		if a.category != b.category:

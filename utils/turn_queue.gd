@@ -21,7 +21,7 @@ class TurnQueueElement:
 		else:
 			return time_diff < 0
 
-var _elements: Array = []
+var _elements: Array[TurnQueueElement] = []
 
 func reset() -> void:
 	self._elements = []
@@ -69,10 +69,7 @@ func get_preview(preview_size: int) -> Array:
 func get_current_actor():
 	assert(self._has_two_teams())
 	
-	var ret = []
-	
 	var next_element = self.get_next_element()
-	var is_player_turn = next_element.actor is PartyMember
 	var time = next_element.get_time_to_act()
 	
 	for element in self._elements:

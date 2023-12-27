@@ -18,7 +18,7 @@ enum Id {
 
 @onready var SAVE_KEY: String = "party_member_" + name
 @onready var anim = $Anim
-@onready var battler = $Battler
+@onready var battler: Battler = $Battler
 
 @export_flags ("ARDEN", "ZOOG", "KIT", "LENG", "UPTON", "KURANES") var id: int = Id.ARDEN
 @export var display_name: String
@@ -34,6 +34,13 @@ var equipped_accessory: Accessory : set = set_accessory
 
 var velocity: Vector2 = Vector2.ZERO
 
+var health:
+	get:
+		return self.battler.stats.health
+
+var energy:
+	get:
+		return self.battler.stats.energy
 
 var level: int:
 	get:
@@ -176,7 +183,16 @@ func get_enemies(actors: Array):
 	return enemies
 	
 func take_hit(hit: Hit):
-	await self.battler.take_damage(hit)
+	await self.battler.take_hit(hit)
+
+func heal(amount: int):
+	self.battler.heal(amount)
+	
+func recover_energy(amount: int):
+	self.battler.recover_energy(amount)
+	
+func show_toast(text: String, color: Color=Color.WHITE):
+	await self.battler.show_toast(text, color)	
 
 func get_current_anim():
 	return self.anim.get_current_anim()

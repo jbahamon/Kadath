@@ -1,15 +1,31 @@
 extends BaseNPC
 
-@onready var battler = $Battler
+@onready var battler: Battler = $Battler
 
-func _on_interactable_area_body_entered(body):
+var health:
+	get:
+		return self.battler.stats.health
+		
+var energy:
+	get:
+		return self.battler.stats.energy
+		
+func _on_interactable_area_body_entered(_body):
 	BattleService.start_mook_battle(true)
 
-
+func show_toast(text: String, color: Color=Color.WHITE):
+	await self.battler.show_toast(text, color)
+	
 # Battle methods
 
+func heal(amount: int):
+	self.battler.heal(amount)
+	
+func recover_energy(amount: int):
+	self.battler.recover_energy(amount)
+	
 func take_hit(hit: Hit):
-	await self.battler.take_damage(hit)
+	await self.battler.take_hit(hit)
 	
 func get_allies(actors: Array):
 	var allies = []

@@ -73,10 +73,10 @@ func close_dialog():
 	self.current_state = State.CLOSED
 	emit_signal("closed")
 
-func set_dialog_alignment(alignment: BoxContainer.AlignmentMode):
-	if self.alignment == alignment:
+func set_dialog_alignment(new_alignment: BoxContainer.AlignmentMode):
+	if self.alignment == new_alignment:
 		return
-	self.alignment = alignment
+	self.alignment = new_alignment
 	
 	if self.alignment == ALIGNMENT_BEGIN:
 		self.move_child(source, 1)

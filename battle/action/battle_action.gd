@@ -14,6 +14,7 @@ enum TargetType {
 	SELF,
 	ONE_ALLY,
 	ALL_ALLIES,
+	NONE,
 }
 
 @export var display_name: String

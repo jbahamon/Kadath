@@ -37,6 +37,9 @@ func take_damage(damage: float):
 func heal(amount: int):
 	health = clamp(health + amount, 0, max_health)
 
+func recover_energy(amount: int):
+	energy = clamp(energy + amount, 0, max_energy)
+
 func set_energy(value: int):
 	energy = clamp(value, 0, max_energy)
 

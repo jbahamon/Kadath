@@ -55,7 +55,6 @@ var speed: float:
 	get:
 		return self.stats.speed * self.status_effects.speed_modifier
 
-
 var display_name: String:
 	get:
 		return self.get_parent().display_name
@@ -71,17 +70,29 @@ func free():
 	self.status_effects._destroy()
 	super.free()
 	
+func show_toast(text: String, color: Color=Color.WHITE):
+	await self.toast.show_toast(text, color)
+	
 func initialize(ui: BattleUI):
 	self.ai.interface = ui
 
-func take_damage(hit: Hit):
+func take_hit(hit: Hit, in_battle: bool = true):
 	var damage = ceil(hit.base_damage * self.get_damage_modifier(hit) + randf_range(1, hit.base_damage*0.2))
 	
-	await self.toast.show_toast(str(damage))
+	if in_battle:
+		await self.toast.show_toast(str(damage))
+		
 	self.stats.take_damage(damage)
 	
-	if self.stats.health <= 0:
+	if in_battle and self.stats.health <= 0:
 		emit_signal("died", self.get_parent())
+	return damage
+	
+func heal(amount: int):
+	self.stats.heal(amount)
+	
+func recover_energy(amount: int):
+	self.stats.recover_energy(amount)
 	
 func get_damage_modifier(hit: Hit):
 	var defense: float

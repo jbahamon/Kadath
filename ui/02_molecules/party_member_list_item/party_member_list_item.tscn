@@ -55,3 +55,4 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="Toast" parent="Control" instance=ExtResource("2_rb0sh")]
+rise_length = 48

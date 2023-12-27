@@ -1,3 +1,4 @@
+HealingItem
 StyleBoxEmpty
 StyleBoxTexture
 StyleBoxLine

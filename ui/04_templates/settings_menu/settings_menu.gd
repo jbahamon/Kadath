@@ -109,8 +109,6 @@ func on_grab_focus():
 
 	first_element.grab_focus()
 	first_element.grab_click_focus()
-	
-	return true
 
 func on_release_focus():
 	return

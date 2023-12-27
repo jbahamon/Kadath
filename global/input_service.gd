@@ -16,10 +16,8 @@ func set_input_enabled(value: bool):
 	world.set_process_unhandled_input(value)
 	self.input_enabled = value
 
-func enter_menu_mode(menu) -> void:
+func enter_menu_mode(_menu) -> void:
 	get_tree().paused = true
 	
-
-func exit_menu_mode(menu) -> void:
+func exit_menu_mode(_menu) -> void:
 	get_tree().paused = false
-	

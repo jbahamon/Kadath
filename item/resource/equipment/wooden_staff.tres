@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=2 format=3 uid="uid://bte7weyi5ali6"]
+
+[ext_resource type="Script" path="res://item/script/equipment/weapon.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+attack = 1
+equippable_by = 1
+id = "wooden_staff"
+name = "Wooden Staff"
+description = "You can give someone a good beating with this. It might break afterwards, though."
+max_amount = 99
+category = 1

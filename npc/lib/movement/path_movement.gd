@@ -44,10 +44,10 @@ func update_movement():
 		if self.mode == PathMode.LINEAR:
 			return
 	
-	var start = self.parent.position
-	var end = self.points[self.current_target_idx]
+	var start_position = self.parent.position
+	var end_position = self.points[self.current_target_idx]
 	
-	var current_direction = (end - start).normalized()
+	var current_direction = (end_position - start_position).normalized()
 	self.parent.velocity = current_direction * self.speed
 	self.parent.set_orientation(current_direction)
 	

@@ -33,7 +33,7 @@ func set_item_mode():
 	item_list.on_grab_focus()
 	
 func on_grab_focus():
-	return party_list.on_grab_focus()
+	party_list.on_grab_focus()
 
 func on_item_requested(item_class, party_member: PartyMember):
 	var items = self.inventory.get_equipment(item_class, party_member.id)
@@ -55,7 +55,7 @@ func update_party_data():
 	var party = EntitiesService.get_party()
 	self.inventory = party.inventory
 	var party_members = party.active_members
-	party_list.initialize(party_members, PartyMemberListItem)
+	party_list.initialize(party_members, {"class_or_scene": PartyMemberListItem})
 	if party_members.size() > 0:
 		party_member_stats.on_party_member_focused(party_members[0])
 		
@@ -65,3 +65,4 @@ func _on_visibility_changed():
 
 func _on_party_list_cancel():
 	emit_signal("exit_submenu")
+

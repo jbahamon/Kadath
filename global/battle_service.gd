@@ -152,8 +152,8 @@ func rename_non_party_actors(non_party_actors: Array):
 	# We assume here that there's not gonna be over 16 identical enemies on a
 	# battle, which seems reasonable
 	var suffix: String = "ABCDEFGHIJKLMNOP"
-	for name in actors_dict:
-		var actors = actors_dict[name]
+	for actor_name in actors_dict:
+		var actors = actors_dict[actor_name]
 		if actors.size() > 1:
 			actors.sort_custom(
 				func(a: Node2D, b: Node2D):
@@ -240,8 +240,6 @@ func get_closest_to(choices, current_position: Vector2):
 	return current_choice
 	
 func fade_and_delete_mooks(battle_end_state):
-	
-	var proxy = EntitiesService.get_proxy()
 	var cutscene_lines = [
 		"FADE_OVERLAY MIX TO (0,0,0,1) IN 1",
 		"SIMULTANEOUS",

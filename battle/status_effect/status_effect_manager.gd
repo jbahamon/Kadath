@@ -1,5 +1,9 @@
 class_name StatusEffectManager
 
+var size:
+	get:
+		return self._effects.size()
+		
 var physical_attack_modifier:
 	get:
 		var modifier = 1.0
@@ -41,8 +45,19 @@ func add(new_effect: StatusEffect):
 			return
 	
 	_effects.append(new_effect)
+	
+func remove(effect_id: StatusEffect):
+	var to_remove = []
+	for effect in self._effects:
+		if effect.id == effect_id:
+			to_remove.append(effect)
+	
+	for effect in to_remove:
+		self._effects.erase(effect)
+	
+	return to_remove.size() > 0
 
-func on_turn_start(turn: Turn):
+func on_turn_start(turn: Turn) -> bool:
 	var to_remove = []
 	
 	for effect in self._effects:
@@ -54,6 +69,8 @@ func on_turn_start(turn: Turn):
 			
 	for effect in to_remove:
 		self._effects.erase(effect)
+		
+	return to_remove.size() > 0
 	
 func on_turn_end(turn: Turn):
 	var to_remove = []

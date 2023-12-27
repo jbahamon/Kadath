@@ -5,14 +5,16 @@ extends MarginContainer
 @onready var hp = $PanelContainer/Info/HP
 @onready var ep = $PanelContainer/Info/EP
 @onready var toast = $Control/Toast
-var disabled = false
-var party_member
+var party_member: PartyMember
 
+var health:
+	get:
+		return self.party_member.health
+		
 func _ready():
 	self.update()
 	
 func update():
-	
 	if self.party_member != null:
 		self.visible = true
 		character_name.text = party_member.display_name
@@ -33,6 +35,14 @@ func assign_null(args: Dictionary):
 	
 func get_button():
 	return button
-
-func show_toast(text, color=Color.WHITE):
-	self.toast.show_toast(text, color)
+	
+func heal(amount: int):
+	self.party_member.heal(amount)
+	self.update()
+	
+func recover_energy(amount: int):
+	self.party_member.recover_energy(amount)
+	self.update()
+	
+func show_toast(text: String, color: Color = Color.WHITE):
+	await self.toast.show_toast(text, color)

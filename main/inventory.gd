@@ -68,7 +68,7 @@ func swap_items(i1: int, i2: int) -> void:
 func has(item_id: String):
 	return item_id in amounts
 
-func get_sorted_items_amounts(category) -> Array:
+func get_sorted_items_amounts(category = null) -> Array:
 	var ids_and_amounts = []
 	
 	for item in order:

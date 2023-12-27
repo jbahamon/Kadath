@@ -28,6 +28,7 @@ script = ExtResource("2")
 z_index = 10
 
 [node name="Label" parent="Toast" index="0"]
+visible = false
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 16
 

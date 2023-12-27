@@ -20,6 +20,10 @@ func _ready() -> void:
 	})
 	UIService.initialize($PopupLayer, $MenuLayer/MenuPopup, $MenuLayer/SavesPopup)
 	
+	var hit = Hit.new()
+	hit.base_damage = 35
+	hit.type = Hit.Element.NONE
+	EntitiesService.get_party().get_leader().battler.take_hit(hit, false)
 	if VarsService.loaded_slot >= 0:
 		SavesService.load_game_data(VarsService.loaded_slot)
 		VarsService.loaded_slot = -1

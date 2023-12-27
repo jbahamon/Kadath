@@ -3,9 +3,9 @@ extends Node
 var camera: Camera2D
 var sub_viewport: SubViewport
 
-func initialize(init_camera: Camera2D, sub_viewport: SubViewport):
+func initialize(init_camera: Camera2D, init_sub_viewport: SubViewport):
 	self.camera = init_camera
-	self.sub_viewport = sub_viewport
+	self.sub_viewport = init_sub_viewport
 
 func update_camera_bounds(origin: Vector2, tilemap_limits: Rect2i, tile_size: Vector2i):
 	

@@ -11,17 +11,22 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w1ay6"]
 
 [node name="Inventory" type="PanelContainer"]
+size_flags_horizontal = 3
 script = ExtResource("1")
 icon = ExtResource("3")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/separation = 0
 
-[node name="Categories" type="VBoxContainer" parent="HBoxContainer"]
+[node name="Categories" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="Consumables" type="Button" parent="HBoxContainer/Categories"]
+[node name="Consumables" type="Button" parent="VBoxContainer/HBoxContainer/Categories"]
 layout_mode = 2
 focus_neighbor_left = NodePath(".")
 focus_neighbor_top = NodePath("../KeyItems")
@@ -29,74 +34,69 @@ focus_neighbor_right = NodePath(".")
 focus_neighbor_bottom = NodePath("../Equipment")
 focus_next = NodePath("../Equipment")
 focus_previous = NodePath("../KeyItems")
+mouse_filter = 2
 toggle_mode = true
 action_mode = 0
 text = "Consumables"
 icon = ExtResource("3")
 
-[node name="Equipment" type="Button" parent="HBoxContainer/Categories"]
+[node name="Equipment" type="Button" parent="VBoxContainer/HBoxContainer/Categories"]
 layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../Consumables")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../KeyItems")
+focus_next = NodePath("../KeyItems")
+focus_previous = NodePath("../Consumables")
+mouse_filter = 2
 toggle_mode = true
 action_mode = 0
 text = "Equipment"
 icon = ExtResource("3_hpny6")
 
-[node name="KeyItems" type="Button" parent="HBoxContainer/Categories"]
+[node name="KeyItems" type="Button" parent="VBoxContainer/HBoxContainer/Categories"]
 layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../Equipment")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../Consumables")
+focus_next = NodePath("../Consumables")
+mouse_filter = 2
 toggle_mode = true
 action_mode = 0
 text = "Key Items"
 icon = ExtResource("4_6mbeh")
 
-[node name="ItemsAndActions" type="VBoxContainer" parent="HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Items" parent="HBoxContainer/ItemsAndActions" instance=ExtResource("5_fp8y3")]
+[node name="Items" parent="VBoxContainer/HBoxContainer" instance=ExtResource("5_fp8y3")]
 layout_mode = 2
 size_flags_stretch_ratio = 3.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_k3sg8")
+bind_ui_elements = true
 toggle = true
 
-[node name="HSeparator" type="HSeparator" parent="HBoxContainer/ItemsAndActions"]
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="Description" type="Label" parent="HBoxContainer/ItemsAndActions"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Actions" type="HBoxContainer" parent="HBoxContainer/ItemsAndActions"]
-visible = false
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 9
-
-[node name="Use" type="Button" parent="HBoxContainer/ItemsAndActions/Actions"]
-layout_mode = 2
-text = "Use"
-
-[node name="Move" type="Button" parent="HBoxContainer/ItemsAndActions/Actions"]
-layout_mode = 2
-text = "Move"
-
-[node name="Toss" type="Button" parent="HBoxContainer/ItemsAndActions/Actions"]
-layout_mode = 2
-text = "Toss"
-
-[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
-layout_mode = 2
-
-[node name="PartyList" parent="HBoxContainer" instance=ExtResource("5_fp8y3")]
+[node name="PartyList" parent="VBoxContainer/HBoxContainer" instance=ExtResource("5_fp8y3")]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_styles/panel = SubResource("StyleBoxEmpty_w1ay6")
+bind_ui_elements = true
+toggle = true
 
-[connection signal="focus_entered" from="HBoxContainer/Categories/Consumables" to="." method="_on_consumables_focus_entered"]
-[connection signal="pressed" from="HBoxContainer/Categories/Consumables" to="." method="_on_category_pressed"]
-[connection signal="focus_entered" from="HBoxContainer/Categories/Equipment" to="." method="_on_equipment_focus_entered"]
-[connection signal="pressed" from="HBoxContainer/Categories/Equipment" to="." method="_on_equipment_pressed"]
-[connection signal="focus_entered" from="HBoxContainer/Categories/KeyItems" to="." method="_on_key_items_focus_entered"]
-[connection signal="pressed" from="HBoxContainer/Categories/KeyItems" to="." method="_on_key_items_pressed"]
-[connection signal="cancel" from="HBoxContainer/ItemsAndActions/Items" to="." method="_on_items_cancel"]
-[connection signal="element_focused" from="HBoxContainer/ItemsAndActions/Items" to="." method="_on_items_element_focused"]
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="HelpText" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+
+[connection signal="focus_entered" from="VBoxContainer/HBoxContainer/Categories/Consumables" to="." method="_on_consumables_focus_entered"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Categories/Consumables" to="." method="_on_category_pressed"]
+[connection signal="focus_entered" from="VBoxContainer/HBoxContainer/Categories/Equipment" to="." method="_on_equipment_focus_entered"]
+[connection signal="focus_entered" from="VBoxContainer/HBoxContainer/Categories/KeyItems" to="." method="_on_key_items_focus_entered"]
+[connection signal="cancel" from="VBoxContainer/HBoxContainer/Items" to="." method="_on_items_cancel"]
+[connection signal="element_focused" from="VBoxContainer/HBoxContainer/Items" to="." method="_on_items_element_focused"]
+[connection signal="element_selected" from="VBoxContainer/HBoxContainer/Items" to="." method="_on_items_element_selected"]
+[connection signal="cancel" from="VBoxContainer/HBoxContainer/PartyList" to="." method="_on_party_list_cancel"]
+[connection signal="element_selected" from="VBoxContainer/HBoxContainer/PartyList" to="." method="_on_party_list_element_selected"]

@@ -36,7 +36,6 @@ func get_action_parameter(actor, actors: Array, argument_signature: Dictionary):
 			assert(false) #,"not yet implemented!")
 
 func choose_targets(actor, actors: Array, targeting_type: int):
-	var target_options: Array
 	match targeting_type: 
 		BattleAction.TargetType.ONE_ENEMY:
 			return actor.get_enemies(actors)[0]

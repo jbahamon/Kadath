@@ -12,6 +12,6 @@ func push_parameter(_parameter_name, _value):
 func pop_parameter():
 	return null
 	
-func execute(actor):
+func execute(_actor):
 	BattleService.mark_battle_as_escaped()
 	

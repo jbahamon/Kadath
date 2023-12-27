@@ -13,8 +13,6 @@ func initialize(init_popup_layer: CanvasLayer, init_menu_popup: Popup, init_save
 	
 	self.popup_layer = init_popup_layer
 	self.menu_popup = init_menu_popup
-	var menu: Node = self.menu_popup.get_child(0)
-	
 	self.save_popup = init_save_popup
 	
 func _unhandled_input(event) -> void:

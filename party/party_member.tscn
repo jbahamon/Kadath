@@ -18,3 +18,4 @@ script = ExtResource("3")
 script = ExtResource("4_8ihmo")
 
 [editable path="Battler"]
+[editable path="Battler/Toast"]

@@ -8,6 +8,7 @@ signal cancel
 signal done
 
 @onready var container = $ScrollContainer/VBoxContainer 
+@export var bind_ui_elements = false
 @export var toggle: bool = false
 @export var args_for_null_element: Dictionary = {}
 
@@ -16,12 +17,14 @@ var button_group: ButtonGroup = null
 func _ready():
 	self.set_process_unhandled_input(false)
 	
-func initialize(elements: Array, class_or_scene=SimpleListElement):
+func initialize(elements: Array, other_params: Dictionary = {}):
 	self.clear_elements()
+	
+	var class_or_scene = other_params.get("class_or_scene", SimpleListElement)
+	var disable_func = other_params.get("disable_func", null)
 	
 	var buttons = []
 	for element in elements:
-		
 		var control
 		
 		if "instantiate" in class_or_scene:
@@ -33,15 +36,18 @@ func initialize(elements: Array, class_or_scene=SimpleListElement):
 			control.assign_element(element)
 		else:
 			control.assign_null(self.args_for_null_element)
+		
+		if disable_func != null:
+			control.set_as_disabled(disable_func.call(element))
 			
 		container.add_child(control)
 	
 		var button: Button = control.get_button()
 		
-		button.pressed.connect(self.on_element_selected.bind(element))
-		button.focus_entered.connect(self.on_element_focused.bind(element))
+		var bound_object = control if bind_ui_elements else element
+		button.pressed.connect(self.on_element_selected.bind(bound_object))
+		button.focus_entered.connect(self.on_element_focused.bind(bound_object))
 
-		button.disabled = control.disabled
 		buttons.append(button)
 	
 	for i in range(len(buttons)):
@@ -66,24 +72,20 @@ func on_element_selected(element):
 
 func on_grab_focus():
 	if toggle:
-		for control in container.get_children():
-			var button = control.get_button()
-			if not button.disabled and button.button_pressed:
-				button.button_pressed = false
-				button.grab_focus()
-				button.grab_click_focus()
-				return true
-	
-	for control in container.get_children():
-		var button = control.get_button()
-		if not button.disabled:
+		var button = self.button_group.get_pressed_button()
+		if button != null:
 			button.button_pressed = false
 			button.grab_focus()
 			button.grab_click_focus()
-			return true
-	
-	return false
+			return
 
+	for control in container.get_children():
+		var button = control.get_button()
+		button.button_pressed = false
+		button.grab_focus()
+		button.grab_click_focus()
+		return
+	
 func element_has_focus() -> bool:
 	for control in container.get_children():
 		var button: Button = control.get_button()
@@ -116,3 +118,11 @@ func _on_cancel():
 
 func _on_element_selected(_element):
 	emit_signal("done")
+	
+func size():
+	return container.get_child_count()
+	
+func deselect():
+	for control in container.get_children():
+		var button: Button = control.get_button()
+		button.set_pressed_no_signal(false)

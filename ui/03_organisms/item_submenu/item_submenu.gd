@@ -7,87 +7,138 @@ var PartyMemberListItem = preload("res://ui/02_molecules/party_member_list_item/
 
 @export var icon: Texture2D 
 
-@onready var categories: Container = $HBoxContainer/Categories
-@onready var first_category: Button = $HBoxContainer/Categories.get_children()[0]
+@onready var categories: Container = $VBoxContainer/HBoxContainer/Categories
+@onready var first_category: Button = $VBoxContainer/HBoxContainer/Categories.get_children()[0]
 
-@onready var consumables_button: Button = $HBoxContainer/Categories/Consumables
-@onready var equipment_button: Button = $HBoxContainer/Categories/Equipment
-@onready var key_items_button: Button = $HBoxContainer/Categories/KeyItems
+@onready var consumables_button: Button = $VBoxContainer/HBoxContainer/Categories/Consumables
+@onready var equipment_button: Button = $VBoxContainer/HBoxContainer/Categories/Equipment
+@onready var key_items_button: Button = $VBoxContainer/HBoxContainer/Categories/KeyItems
 
-@onready var items = $HBoxContainer/ItemsAndActions/Items
-@onready var description: Label = $HBoxContainer/ItemsAndActions/Description
-@onready var actions: HBoxContainer = $HBoxContainer/ItemsAndActions/Actions
+@onready var items = $VBoxContainer/HBoxContainer/Items
+@onready var help_text: Label = $VBoxContainer/HelpText
+@onready var party_list = $VBoxContainer/HBoxContainer/PartyList
 
 var inventory: Inventory
-
+var current_category = null
 var categories_button_group = ButtonGroup.new()
+var selected_item
 
 func _ready():
-	consumables_button.button_group = categories_button_group
-	equipment_button.button_group = categories_button_group
-	key_items_button.button_group = categories_button_group
+	self.consumables_button.button_group = self.categories_button_group
+	self.equipment_button.button_group = self.categories_button_group
+	self.key_items_button.button_group = self.categories_button_group
 	
 func initialize():
 	var party = EntitiesService.get_party()
-	self.inventory = party.inventory
-	inventory.set_item("salts", 1)
 	var party_members = party.get_unlocked_characters()
-	$HBoxContainer/PartyList.initialize(party_members, PartyMemberListItem)
-	reset_controls()
+	self.party_list.initialize(party_members, {"class_or_scene": PartyMemberListItem})
 	
-func reset_controls():
-	items.initialize([], ItemEntry)
-	description.text = ''
-	description.visible = true
-	actions.visible = false
+	self.inventory = party.inventory
+	self.inventory.set_item("potion", 3)
+	
+	self.reset_controls()
+	
+func reset_controls(reset_categories = true):
 	var pressed = categories_button_group.get_pressed_button()
-	if pressed != null:
+	if reset_categories and pressed != null:
 		pressed.button_pressed = false
+		self.current_category = null
+	
+	self.update_shown_items()
+	self.help_text.text = " "
+	
 	
 func on_grab_focus():
-	first_category.button_pressed = true
-	first_category.grab_click_focus()
-	first_category.grab_focus()
+	self.first_category.button_pressed = true
+	self.first_category.grab_click_focus()
+	self.first_category.grab_focus()
 
+func update_shown_items():
+	self.items.initialize(
+		inventory.get_sorted_items_amounts(self.current_category), 
+		{
+			"class_or_scene": ItemEntry, 
+			"disable_func": (
+				func (item_and_amount):
+					var disabled = not ItemService.id_to_item(item_and_amount[0]).usable_in_menu
+					return disabled
+					)
+		}
+	)
+	
 func _on_consumables_focus_entered():
+	self.help_text.text = "Consumable items, including recovery items"
 	self.consumables_button.button_pressed = true
 	self._on_category_focused(ItemService.ItemCategory.CONSUMABLE)
 	
 func _on_equipment_focus_entered():
+	self.help_text.text = "Weapons, armor and accessories"
 	self.equipment_button.button_pressed = true
 	self._on_category_focused(ItemService.ItemCategory.EQUIPMENT)
 	
 func _on_key_items_focus_entered():
+	self.help_text.text = "Important items that might be of use during your journeys"
 	self.key_items_button.button_pressed = true
 	self._on_category_focused(ItemService.ItemCategory.KEY)
 
 func _on_category_focused(category: ItemService.ItemCategory):
-	items.initialize(inventory.get_sorted_items_amounts(category), ItemEntry)
+	self.current_category = category
+	self.update_shown_items()
 
 func _on_category_pressed():
-	if items.get_children().size() > 0:
-		items.on_grab_focus()
+	if self.items.size() > 0:
+		self.items.on_grab_focus()
 
 func _unhandled_input(event):
-	if event.is_action_pressed("ui_cancel") and self.is_focus_on_categories():
-		emit_signal("exit_submenu")
-		get_viewport().set_input_as_handled()
+	if event.is_action_pressed("ui_cancel"):
+		if self.is_focus_on_categories():
+			self.emit_signal("exit_submenu")
+			self.get_viewport().set_input_as_handled()
 
 func is_focus_on_categories():
-	for child in categories.get_children():
-		if child.has_focus():
+	for button in self.categories_button_group.get_buttons():
+		if button.has_focus():
 			return true
 	return false
 	
-func _on_items_element_focused(item_and_amount: Array):
-	description.text = ItemService.id_to_item(item_and_amount[0]).description
+func _on_items_element_focused(ui_element):
+	var item = ItemService.id_to_item(ui_element.item_id)
+	self.help_text.text = item.description
+
+func _on_items_element_selected(ui_element):
+	self.selected_item = ui_element
+	var item: InventoryItem = ItemService.id_to_item(self.selected_item.item_id)
+	if not item.usable_in_menu:
+		return
+	assert('use' in item)
+	# set party select mode depending on item
+	self.party_list.on_grab_focus()
 
 func _on_items_cancel():
-	reset_controls()
+	self.reset_controls(false)
 	var button = categories_button_group.get_pressed_button()
 	if button == null:
-		button = first_category
+		button = self.first_category
 	
 	button.grab_click_focus()
 	button.grab_focus()
-	
+
+func _on_party_list_element_selected(element):
+	var item: InventoryItem = ItemService.id_to_item(self.selected_item.item_id)
+	var used = await item.use([element])
+	self.party_list.deselect()
+	if used and item.consumed_after_use:
+		self.inventory.remove(item.id, 1)
+		if self.inventory.has(item.id):
+			self.selected_item.amount = self.inventory.amounts[item.id]
+			self.selected_item.update_item()
+		else:
+			self.update_shown_items()
+			self._on_party_list_cancel()
+
+func _on_party_list_cancel():
+	self.selected_item = null
+	if self.items.size() > 0:
+		self.items.on_grab_focus()
+	else:
+		self._on_items_cancel()

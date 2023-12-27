@@ -40,13 +40,13 @@ func on_proxy_enter(proxy: PlayerProxy):
 		party_member.position = proxy.position
 		party_member.set_orientation(proxy.current_orientation)
 	
-func on_proxy_exit(proxy: PlayerProxy):
+func on_proxy_exit(_proxy: PlayerProxy):
 	self.set_physics_process(false)
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	var proxy: PlayerProxy = EntitiesService.get_proxy()
 	if proxy.velocity != Vector2.ZERO and active_members.size() > 1:
-		print("storing things")
+		
 		self.movement_cache[self.movement_pointers[0]] = {
 			"position": proxy.global_position,
 			"orientation": proxy.current_orientation,
@@ -76,7 +76,6 @@ func save(save_data: SaveData) -> void:
 	inventory.save(save_data)
 	
 func update_active_members(new_ordered_members: Array, update_proxy=true):
-	var old_active_members = self.active_members
 	var current_parent = self.active_members[0].get_parent() if self.active_members.size() > 0 else null
 	
 	var new_active_members = []
@@ -143,7 +142,6 @@ func get_leader():
 
 func add_to_room():
 	var room = EnvironmentService.get_room()
-	var last_added_child = null
 	for party_member in self.active_members:
 		room.add_child(party_member)
 	

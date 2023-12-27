@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Armor" load_steps=2 format=3 uid="uid://dsvsqh35ofygy"]
+
+[ext_resource type="Script" path="res://item/script/equipment/armor.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+defense = 13
+equippable_by = null
+id = "leather_vest"
+name = "Leather Vest"
+description = "Doesn't offer much protection, but it's better than nothing."
+max_amount = 99
+category = 1

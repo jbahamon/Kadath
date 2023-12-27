@@ -1,5 +1,8 @@
 extends Button
 
+func set_as_disabled(value):
+	self.disabled = value
+
 func _init():
 	self.action_mode = BaseButton.ACTION_MODE_BUTTON_PRESS
 	

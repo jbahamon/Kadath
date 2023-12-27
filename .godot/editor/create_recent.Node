@@ -1,3 +1,6 @@
+PanelContainer
+VBoxContainer
+Panel
 Control
 Node2D
 AnimationPlayer
@@ -8,12 +11,10 @@ Sprite2D
 CollisionShape2D
 StaticBody2D
 HFlowContainer
-PanelContainer
 MarginContainer
 HBoxContainer
 CenterContainer
 ColorRect
-VBoxContainer
 CanvasLayer
 Area2D
 Button
