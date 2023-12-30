@@ -15,5 +15,5 @@ max_amount = 99
 category = 0
 target_type = 3
 usable_in_menu = true
-usable_in_battle = false
+usable_in_battle = true
 consumed_after_use = true

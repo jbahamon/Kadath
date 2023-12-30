@@ -19,7 +19,6 @@ enum TargetType {
 
 @export var display_name: String
 @export var description: String = "Base battle action"
-@export var should_retarget_on_missing_target: bool
 @export var disabled: bool
 
 func reset():

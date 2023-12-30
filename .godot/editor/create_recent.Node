@@ -1,7 +1,8 @@
+Control
+VSeparator
 PanelContainer
 VBoxContainer
 Panel
-Control
 Node2D
 AnimationPlayer
 Label
@@ -21,4 +22,3 @@ Button
 GridContainer
 TextureButton
 HSeparator
-VSeparator

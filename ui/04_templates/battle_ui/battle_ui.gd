@@ -4,10 +4,11 @@ class_name BattleUI
 
 var BattleAction = preload("res://battle/action/battle_action.gd")
 var MultiTargetOption = load("res://ui/04_templates/battle_ui/multi_target_option.gd")
-
+var ItemEntry = preload("res://ui/02_molecules/item_entry/item_entry.tscn")
 
 @onready var party_status = $VBoxContainer/HBoxContainer/PartyStatus
 @onready var options = $VBoxContainer/HBoxContainer/Options
+@onready var spacer = $VBoxContainer/HBoxContainer/Spacer
 @onready var options_title: Label = $VBoxContainer/HBoxContainer/Options/OptionsTitle/Label
 @onready var options_list = $VBoxContainer/HBoxContainer/Options/OptionsList
 @onready var options_info = $VBoxContainer/HBoxContainer/Options/OptionsInfo
@@ -40,7 +41,8 @@ func initialize(party_members: Array):
 	self.set_info_text(null)
 	
 func start():
-	self.options.hide()
+	self.options.visible = false
+	self.spacer.visible = true
 	self.show()
 		
 func prompt(text: String):
@@ -60,11 +62,14 @@ func _unhandled_input(event):
 func reset_options_stack():
 	self.options_stack = []
 
-func set_options(new_options):
+func set_options(new_options, ui_class=null):
 	self.options_stack.push_back(new_options)
 	self.options.visible = true
+	self.spacer.visible = false
 	options_title.text = new_options["title"]
-	options_list.initialize(new_options["options"])
+	
+	var list_options = {"class_or_scene": ui_class} if ui_class != null else {}
+	options_list.initialize(new_options["options"], list_options)
 	options_list.on_grab_focus()
 	
 func on_option_selected(option):
@@ -96,6 +101,7 @@ func on_cancel():
 
 func hide_options():
 	self.options.visible = false
+	self.spacer.visible = true
 	options_list.release_focus()
 
 func hide_timeline():
@@ -109,7 +115,6 @@ func on_option_focused(option):
 	else:
 		self.options_info.visible = false
 		self.options_info_label.text = ''
-	
 
 func set_info_text(text):
 	if text != null and text.length() > 0:
@@ -123,8 +128,26 @@ func request_action_parameter(actor, actors: Array, argument_signature: Dictiona
 		BattleAction.ActionArgument.TARGET:
 			return await self.request_targets(actor, actors, argument_signature["targeting_type"])
 		BattleAction.ActionArgument.ITEM:
-			assert(false) #,"not yet implemented!")
+			return await self.request_item(actor, actors)
+
 			
+func request_item(actor, actors: Array):
+	assert(actor is PartyMember)
+	var inventory: Inventory = EntitiesService.get_party().inventory
+	var item_options = inventory.get_batle_items_amounts()
+	var new_options = {
+		"options": item_options,
+		"title": "Choose an item",
+	}
+	self.set_options(new_options, ItemEntry)
+	
+	var item_and_amount = await self.option_selected
+	
+	if item_and_amount == null:
+		return null
+	else:
+		return ItemService.id_to_item(item_and_amount[0])
+
 func request_targets(actor, actors: Array, targeting_type: int):
 	var target_options: Array
 	match targeting_type: 

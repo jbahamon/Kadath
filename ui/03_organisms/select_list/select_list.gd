@@ -11,6 +11,7 @@ signal done
 @export var bind_ui_elements = false
 @export var toggle: bool = false
 @export var args_for_null_element: Dictionary = {}
+@export var focused_if_visible = false
 
 var button_group: ButtonGroup = null
 
@@ -109,7 +110,7 @@ func _on_SelectPanel_visibility_changed():
 	self.set_process_unhandled_input(self.visible)
 
 func _unhandled_input(event):
-	if event.is_action_pressed("ui_cancel") and self.element_has_focus():
+	if event.is_action_pressed("ui_cancel") and (self.element_has_focus() or (self.visible and self.focused_if_visible)):
 		emit_signal("cancel")
 		get_viewport().set_input_as_handled()
 

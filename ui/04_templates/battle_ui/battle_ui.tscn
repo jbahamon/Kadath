@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://ex17k532alby"]
+[gd_scene load_steps=6 format=3 uid="uid://ex17k532alby"]
 
 [ext_resource type="Script" path="res://ui/04_templates/battle_ui/battle_ui.gd" id="1"]
 [ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="3"]
 [ext_resource type="PackedScene" uid="uid://brhpxl8pukdr" path="res://ui/03_organisms/select_list/select_list.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://bnihqcw4rnk07" path="res://ui/04_templates/battle_ui/party_status.tscn" id="9_v5mha"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v2vyy"]
 
 [node name="BattleUI" type="MarginContainer"]
 anchors_preset = 15
@@ -52,6 +54,7 @@ text = "Select your character"
 [node name="OptionsList" parent="VBoxContainer/HBoxContainer/Options" instance=ExtResource("9")]
 layout_mode = 2
 size_flags_vertical = 2
+focused_if_visible = true
 
 [node name="OptionsInfo" type="PanelContainer" parent="VBoxContainer/HBoxContainer/Options"]
 layout_mode = 2
@@ -64,6 +67,12 @@ text = "This is some info about the current command"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="Divider" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxEmpty_v2vyy")
 
 [node name="PartyStatus" parent="VBoxContainer/HBoxContainer" instance=ExtResource("9_v5mha")]
 layout_mode = 2

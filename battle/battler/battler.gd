@@ -115,7 +115,7 @@ func get_action_options() -> Array:
 		options.push_front(BattleService.common_action_options["win"])
 		options.push_front(BattleService.common_action_options["defend"])
 		options.push_front(BattleService.common_action_options["attack"])
-		#options.push_back(BattleService.common_action_options["item"])
+		options.push_back(BattleService.common_action_options["item"])
 		
 		
 		if BattleService.current_battle_parameters.get("escapable", false):

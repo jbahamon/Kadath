@@ -4,6 +4,7 @@ const Attack = preload("res://battle/action/attack.gd")
 const Defend = preload("res://battle/action/defend.gd")
 const Win = preload("res://battle/action/win.gd")
 const Lose = preload("res://battle/action/lose.gd")
+const Item = preload("res://battle/action/item.gd")
 const Escape = preload("res://battle/action/escape.gd")
 const BattleEndState = preload("res://battle/battle_end_state.gd")
 
@@ -44,6 +45,11 @@ func init_common_action_options():
 	lose.display_name = "Lose"
 	lose.description = "Lose the battle"
 	self.common_action_options["lose"] = lose
+	
+	var item = Item.new()
+	item.display_name = "Item"
+	item.description = "Use an item"
+	self.common_action_options["item"] = item
 	
 	var escape = Escape.new()
 	escape.display_name = "Escape"

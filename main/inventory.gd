@@ -76,7 +76,15 @@ func get_sorted_items_amounts(category = null) -> Array:
 			ids_and_amounts.push_back([item, amounts[item]])
 		
 	return ids_and_amounts
-
+	
+func get_batle_items_amounts() -> Array:
+	var ids_and_amounts = []
+	
+	for item in order:
+		if ItemService.id_to_item(item).usable_in_battle:
+			ids_and_amounts.push_back([item, amounts[item]])
+		
+	return ids_and_amounts
 func get_equipment(cls, equippable_flag: int) -> Array:
 	var ret = []
 	for item_id in order:
