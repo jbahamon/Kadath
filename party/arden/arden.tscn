@@ -17,11 +17,9 @@ icon = ExtResource("3_141jc")
 [node name="Battler" parent="." index="0"]
 anim_path = NodePath("../Anim")
 
-[node name="Skill" parent="Battler/Actions" index="0"]
-display_name = "Skill"
-
-[node name="Node" type="Node" parent="Battler/Actions/Skill" index="0"]
+[node name="Charge" type="Node" parent="Battler/Actions/Skill" index="0"]
 script = ExtResource("4_rmqgj")
+cost = 50
 display_name = "Charge"
 description = "Charge an enemy with your weapon"
 

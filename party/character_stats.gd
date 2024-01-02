@@ -30,15 +30,17 @@ func reset():
 	health = self.max_health
 	energy = self.max_energy
 
-func take_damage(damage: float):
-	health -= ceil(damage)
-	health = clamp(health, 0, max_health)
+func take_damage(damage: int):
+	health = clamp(health - damage, 0, max_health)
 
 func heal(amount: int):
-	health = clamp(health + amount, 0, max_health)
+	self.take_damage(-amount)
 
+func spend_energy(amount: int):
+	energy = clamp(energy - amount, 0, max_energy)
+	
 func recover_energy(amount: int):
-	energy = clamp(energy + amount, 0, max_energy)
+	self.spend_energy(-amount)
 
 func set_energy(value: int):
 	energy = clamp(value, 0, max_energy)

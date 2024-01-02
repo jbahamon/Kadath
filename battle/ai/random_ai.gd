@@ -8,7 +8,11 @@ func choose_action(actor, _actors: Array):
 	while true:
 		var action = options[0]
 		if action is CompositeBattleOption:
-			options = action.get_options()
+			var available_options = action.get_options()
+			options = []
+			for option in available_options:
+				if not option.is_disabled():
+					options.append(option)
 		else:
 			return action
 			

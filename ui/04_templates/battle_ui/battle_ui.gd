@@ -62,14 +62,12 @@ func _unhandled_input(event):
 func reset_options_stack():
 	self.options_stack = []
 
-func set_options(new_options, ui_class=null):
+func set_options(new_options):
 	self.options_stack.push_back(new_options)
 	self.options.visible = true
 	self.spacer.visible = false
 	options_title.text = new_options["title"]
-	
-	var list_options = {"class_or_scene": ui_class} if ui_class != null else {}
-	options_list.initialize(new_options["options"], list_options)
+	options_list.initialize(new_options["options"], new_options.get("list_options", {}))
 	options_list.on_grab_focus()
 	
 func on_option_selected(option):
@@ -78,6 +76,9 @@ func on_option_selected(option):
 			"is_sub_option": true,
 			"title": option.get_prompt(),
 			"options": option.get_options(),
+			"list_options": {
+				"disable_func": func(option): return option.is_disabled()
+			}
 		}
 		self.set_options(new_options)
 	else:
@@ -138,8 +139,9 @@ func request_item(actor, actors: Array):
 	var new_options = {
 		"options": item_options,
 		"title": "Choose an item",
+		"list_options": {"class_or_scene": ItemEntry}
 	}
-	self.set_options(new_options, ItemEntry)
+	self.set_options(new_options)
 	
 	var item_and_amount = await self.option_selected
 	

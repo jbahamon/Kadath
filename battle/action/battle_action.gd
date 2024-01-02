@@ -19,7 +19,9 @@ enum TargetType {
 
 @export var display_name: String
 @export var description: String = "Base battle action"
-@export var disabled: bool
+
+func is_disabled():
+	return false
 
 func reset():
 	assert(false, "%s missing overwrite of the reset method" % name)
