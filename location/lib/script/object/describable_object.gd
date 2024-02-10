@@ -13,7 +13,7 @@ func on_player_interaction(player_proxy: PlayerProxy):
 	player_proxy.set_mode(PlayerProxy.ProxyMode.CUTSCENE)
 	InputService.set_input_enabled(false)
 	
-	await DialogService.open_dialog(self.dialog_name, self)	
+	await DialogService.open_dialog(self.dialog_name)
 	
 	InputService.set_input_enabled(was_input_enabled)
 	player_proxy.set_mode(PlayerProxy.ProxyMode.GAMEPLAY)

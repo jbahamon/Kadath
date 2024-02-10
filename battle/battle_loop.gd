@@ -36,6 +36,8 @@ func do_battle():
 		self.update_preview()
 		
 		var current_actor = self.turn_queue.get_current_actor()
+		if current_actor is PartyMember:
+			print("holi")
 		var turn = await current_actor.battler.ai.get_turn(self.actors)
 
 		emit_signal("turn_start", turn)

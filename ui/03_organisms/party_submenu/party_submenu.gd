@@ -43,7 +43,7 @@ func on_item_requested(item_class, party_member: PartyMember):
 	self.party_member_stats.set_process_unhandled_input(false)
 	await self.set_item_mode()
 	
-	var item = await item_list.done
+	await item_list.done
 	
 	await self.set_party_list_mode()
 	

@@ -7,7 +7,7 @@ class_name NPCMovement
 func _process(_delta):
 	pass
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	pass
 	
 func start():

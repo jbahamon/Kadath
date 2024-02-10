@@ -132,7 +132,7 @@ func request_action_parameter(actor, actors: Array, argument_signature: Dictiona
 			return await self.request_item(actor, actors)
 
 			
-func request_item(actor, actors: Array):
+func request_item(actor, _actors: Array):
 	assert(actor is PartyMember)
 	var inventory: Inventory = EntitiesService.get_party().inventory
 	var item_options = inventory.get_batle_items_amounts()

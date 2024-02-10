@@ -12,8 +12,10 @@ enum TargetType {
 	OTHER
 }
 
-const walk_speed: float = 100.0
-const interaction_vector = Vector2(16, 16)
+@export var walk_speed: float = 100.0
+@export var interaction_vector = Vector2(16, 16)
+
+
 
 var input_vector = Vector2.ZERO
 var automated = false
@@ -25,6 +27,11 @@ var current_target_type = TargetType.PARTY
 @onready var raycast: RayCast2D = $RayCast2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var remote_transform: RemoteTransform2D = $RemoteTransform2D
+@onready var height = $CollisionShape2D.shape.height
+
+var top_position:
+	get: 
+		return self.position + Vector2(0, -self.height)
 
 func _unhandled_input(event) -> void:
 	if event.is_action_pressed("ui_accept"):
@@ -98,7 +105,6 @@ func set_target(new_target: Node, force: bool = false):
 	match(self.current_target_type):
 		TargetType.PARTY:
 			self.target = new_target.get_leader()
-			new_target.on_proxy_enter(self)
 		TargetType.OTHER:
 			self.target = new_target
 	
@@ -107,7 +113,8 @@ func set_target(new_target: Node, force: bool = false):
 
 	if self.target:
 		self.global_position = self.target.global_position
-		self.remote_transform.remote_path = self.remote_transform.get_path_to(self.target)
+		var path = self.remote_transform.get_path_to(self.target)
+		self.remote_transform.remote_path = path
 	self.set_physics_process(was_processing_physics)
 
 func get_display_name() -> String:
@@ -121,7 +128,8 @@ func move_to(target_position: Vector2, speed):
 	assert(speed > 0)
 	var previous_mode = self.current_mode
 	self.set_mode(ProxyMode.CUTSCENE)
-	var time = (global_position - target_position).length()/speed
+	var time = max((global_position - target_position).length()/speed - 1/30.0, 0)
+	
 	self.velocity = (target_position - global_position).normalized() * speed
 	await get_tree().create_timer(time).timeout
 	self.position = target_position

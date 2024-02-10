@@ -12,6 +12,10 @@ func _init():
 
 func initialize(init_proxy: PlayerProxy):
 	self.proxy = init_proxy
+	self.proxy.set_mode(PlayerProxy.ProxyMode.NOT_THERE)
+
+func bind_proxy():
+	self.proxy.set_target(self.party)
 	
 func get_entity(entity_name: String):
 	match entity_name:

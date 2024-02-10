@@ -29,8 +29,13 @@ func execute(actor):
 	hit.type = Hit.Element.NONE
 	hit.base_damage = INF
 	
+	var hits = []
 	for target in self.targets:
 		var prev_hp = target.battler.stats.health
-		target.take_hit(hit)
+		hits.append(
+			func (): await target.take_hit(hit)
+		)
 		print("%s attacked %s (HP: %d -> HP: %d)" % [actor.display_name, target.display_name, prev_hp, target.battler.stats.health])
+	
+	await DoAll.new(hits).execute()
 	self.reset()

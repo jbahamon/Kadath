@@ -79,7 +79,7 @@ func on_player_interaction(player_proxy: PlayerProxy):
 	player_proxy.set_mode(PlayerProxy.ProxyMode.CUTSCENE)
 	InputService.set_input_enabled(false)
 	
-	await DialogService.open_dialog(self.dialog_name, self)	
+	await DialogService.open_dialog(self.dialog_name)
 	
 	InputService.set_input_enabled(was_input_enabled)
 	player_proxy.set_mode(PlayerProxy.ProxyMode.GAMEPLAY)
@@ -90,9 +90,11 @@ func die():
 	self.queue_free()
 
 func stop_auto_movement():
+	self.set_physics_process(true)
 	self.movement_node.stop()
 	
 func start_auto_movement():
+	self.set_physics_process(false)
 	self.movement_node.start()
 
 
@@ -100,13 +102,12 @@ func move_to(target: Vector2, speed = WALK_SPEED):
 	assert(speed > 0)
 	var was_processing_physics = self.is_physics_processing()
 	var time = (self.global_position - target).length()/speed
-	self.movement_node.stop()
-	self.set_physics_process(true)
+	self.stop_auto_movement()
 	self.velocity = (target - self.global_position).normalized() * speed
 	await get_tree().create_timer(time).timeout
 	self.position = target
 	self.velocity = Vector2.ZERO
-	self.movement_node.start()
+	self.start_auto_movement()
 	self.set_physics_process(was_processing_physics)
 	
 func disable_collisions():

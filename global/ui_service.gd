@@ -7,6 +7,9 @@ var popup_layer: CanvasLayer
 func _init():
 	self.process_mode = Node.PROCESS_MODE_ALWAYS
 
+func _ready():
+	self.set_process_unhandled_input(false)
+	
 func initialize(init_popup_layer: CanvasLayer, init_menu_popup: Popup, init_save_popup: Popup):
 	init_menu_popup.popup_window = false
 	init_save_popup.popup_window = false

@@ -2,7 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://cb1f6r4xpgnc0" path="res://location/lib/resource/tile/cave.tres" id="1_qnjuv"]
 [ext_resource type="Script" path="res://location/000_prologue_kadath/room/02_hub.gd" id="2_nhaa6"]
-[ext_resource type="PackedScene" path="res://location/lib/script/object/battle_spot.tscn" id="3_tglgf"]
+[ext_resource type="PackedScene" uid="uid://k1y4abtqqro7" path="res://location/lib/script/object/battle_spot.tscn" id="3_tglgf"]
 [ext_resource type="Script" path="res://location/lib/script/object/enemy_spot.gd" id="4_pfasm"]
 [ext_resource type="PackedScene" uid="uid://sfld8pt3bwlw" path="res://location/lib/script/object/warp.tscn" id="5_3ltby"]
 [ext_resource type="PackedScene" uid="uid://co4ecuc835bk6" path="res://npc/enemy/enemy.tscn" id="6_5pgsn"]
@@ -161,7 +161,6 @@ shape = SubResource("RectangleShape2D_x5vo8")
 
 [node name="PathMovement" parent="Sentry1" instance=ExtResource("10_k3y1y")]
 speed = 80
-mode = 1
 starting_target_idx = 1
 
 [node name="Marker2D" type="Marker2D" parent="Sentry1/PathMovement"]
@@ -204,7 +203,6 @@ shape = SubResource("RectangleShape2D_2li33")
 
 [node name="PathMovement" parent="Sentry2" instance=ExtResource("10_k3y1y")]
 speed = 80
-mode = 1
 starting_target_idx = 3
 
 [node name="Marker2D" type="Marker2D" parent="Sentry2/PathMovement"]

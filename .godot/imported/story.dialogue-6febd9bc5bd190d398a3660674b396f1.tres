@@ -1,13 +1,16 @@
 [gd_resource type="Resource" script_class="DialogueResource" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_resource.gd" id="1_j3g8o"]
+[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_resource.gd" id="1_tc6im"]
 
 [resource]
-script = ExtResource("1_j3g8o")
+script = ExtResource("1_tc6im")
+using_states = PackedStringArray()
 titles = {
 "after_boss": "42",
+"after_chalice_battle": "110",
 "barrier": "93",
 "carter_call": "54",
+"chalice_right": "97",
 "entrance_carter": "19",
 "entrance_carter2": "28",
 "entrance_ghoul1": "10",
@@ -31,18 +34,136 @@ lines = {
 "10": {
 "character": "Ghoul",
 "character_replacements": Array[Dictionary]([]),
+"id": "10",
 "next_id": "11",
+"tags": PackedStringArray(),
 "text": "Oof! Not the way I had imagined our entrance...",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "Oof! Not the way I had imagined our entrance...",
 "type": "dialogue"
 },
-"11": {
+"100": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
+"id": "100",
+"next_id": "101",
+"next_id_after": "106",
+"responses": PackedStringArray("100", "103"),
+"tags": PackedStringArray(),
+"text": "Yes",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Yes",
+"type": "response"
+},
+"101": {
+"id": "101",
+"mutation": {
+"expression": Array[Dictionary]([{
+"type": "variable",
+"value": "DialogService"
+}, {
+"type": "dot"
+}, {
+"function": "add_response",
+"type": "function",
+"value": Array[Array]([Array[Dictionary]([{
+"type": "string",
+"value": "yes"
+}])])
+}])
+},
+"next_id": "102",
+"parent_id": "100",
+"type": "mutation"
+},
+"102": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
+"id": "102",
+"next_id": "106",
+"parent_id": "100",
+"tags": PackedStringArray(),
+"text": "You lean forward and touch the glyph.",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "You lean forward and touch the glyph.",
+"type": "dialogue"
+},
+"103": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
+"id": "103",
+"next_id": "104",
+"next_id_after": "106",
+"tags": PackedStringArray(),
+"text": "No",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "No",
+"type": "response"
+},
+"104": {
+"id": "104",
+"mutation": {
+"expression": Array[Dictionary]([{
+"type": "variable",
+"value": "DialogService"
+}, {
+"type": "dot"
+}, {
+"function": "add_response",
+"type": "function",
+"value": Array[Array]([Array[Dictionary]([{
+"type": "string",
+"value": "no"
+}])])
+}])
+},
+"next_id": "105",
+"parent_id": "103",
+"type": "mutation"
+},
+"105": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
+"id": "105",
+"next_id": "106",
+"parent_id": "103",
+"tags": PackedStringArray(),
+"text": "Maybe later.",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Maybe later.",
+"type": "dialogue"
+},
+"106": {
+"id": "106",
 "is_snippet": false,
 "next_id": "end",
 "type": "goto"
 },
+"108": {
+"id": "108",
+"next_id": "110",
+"text": "after_chalice_battle",
+"type": "title"
+},
+"11": {
+"id": "11",
+"is_snippet": false,
+"next_id": "end",
+"type": "goto"
+},
+"110": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
+"id": "110",
+"next_id": "",
+"tags": PackedStringArray(),
+"text": "Something seems to have changed.",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Something seems to have changed.",
+"type": "dialogue"
+},
 "14": {
+"id": "14",
 "next_id": "15",
 "text": "entrance_ghoul2",
 "type": "title"
@@ -50,18 +171,22 @@ lines = {
 "15": {
 "character": "Ghoul",
 "character_replacements": Array[Dictionary]([]),
+"id": "15",
 "next_id": "16",
+"tags": PackedStringArray(),
 "text": "Ugh... what happened? Where are the others?",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "Ugh... what happened? Where are the others?",
 "type": "dialogue"
 },
 "16": {
+"id": "16",
 "is_snippet": false,
 "next_id": "end",
 "type": "goto"
 },
 "18": {
+"id": "18",
 "next_id": "19",
 "text": "entrance_carter",
 "type": "title"
@@ -69,18 +194,22 @@ lines = {
 "19": {
 "character": "Carter",
 "character_replacements": Array[Dictionary]([]),
+"id": "19",
 "next_id": "20",
+"tags": PackedStringArray(),
 "text": "At last, we have arrived. Let us finish this.",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "At last, we have arrived. Let us finish this.",
 "type": "dialogue"
 },
 "20": {
+"id": "20",
 "is_snippet": false,
 "next_id": "end",
 "type": "goto"
 },
 "22": {
+"id": "22",
 "next_id": "23",
 "text": "entrance_pickman",
 "type": "title"
@@ -88,18 +217,22 @@ lines = {
 "23": {
 "character": "Pickman",
 "character_replacements": Array[Dictionary]([]),
+"id": "23",
 "next_id": "24",
+"tags": PackedStringArray(),
 "text": "Still want to do this? We just lost the majority of our allies.",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "Still want to do this? We just lost the majority of our allies.",
 "type": "dialogue"
 },
 "24": {
+"id": "24",
 "is_snippet": false,
 "next_id": "end",
 "type": "goto"
 },
 "27": {
+"id": "27",
 "next_id": "28",
 "text": "entrance_carter2",
 "type": "title"
@@ -107,18 +240,22 @@ lines = {
 "28": {
 "character": "Carter",
 "character_replacements": Array[Dictionary]([]),
+"id": "28",
 "next_id": "29",
+"tags": PackedStringArray(),
 "text": "I must.",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "I must.",
 "type": "dialogue"
 },
 "29": {
+"id": "29",
 "is_snippet": false,
 "next_id": "end",
 "type": "goto"
 },
 "31": {
+"id": "31",
 "next_id": "32",
 "text": "starting_instructions",
 "type": "title"
@@ -126,18 +263,22 @@ lines = {
 "32": {
 "character": "",
 "character_replacements": Array[Dictionary]([]),
+"id": "32",
 "next_id": "33",
+"tags": PackedStringArray(),
 "text": "Move around with [{ui_up}]/[{ui_left}]/[{ui_down}]/[{ui_right}]. You can interact with individuals and objects with [{ui_accept}], and cancel with [{ui_cancel}].",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "Move around with [{ui_up}]/[{ui_left}]/[{ui_down}]/[{ui_right}]. You can interact with individuals and objects with [{ui_accept}], and cancel with [{ui_cancel}].",
 "type": "dialogue"
 },
 "33": {
+"id": "33",
 "is_snippet": false,
 "next_id": "end",
 "type": "goto"
 },
 "35": {
+"id": "35",
 "next_id": "36",
 "text": "pickman_recruit",
 "type": "title"
@@ -145,7 +286,9 @@ lines = {
 "36": {
 "character": "Pickman",
 "character_replacements": Array[Dictionary]([]),
+"id": "36",
 "next_id": "37",
+"tags": PackedStringArray(),
 "text": "So you will not retreat.",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "So you will not retreat.",
@@ -154,7 +297,9 @@ lines = {
 "37": {
 "character": "Pickman",
 "character_replacements": Array[Dictionary]([]),
+"id": "37",
 "next_id": "38",
+"tags": PackedStringArray(),
 "text": "Very well, I shall see this through too.",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "Very well, I shall see this through too.",
@@ -163,23 +308,28 @@ lines = {
 "38": {
 "character": "",
 "character_replacements": Array[Dictionary]([]),
+"id": "38",
 "next_id": "39",
+"tags": PackedStringArray(),
 "text": "Pickman joined your party!",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "Pickman joined your party!",
 "type": "dialogue"
 },
 "39": {
+"id": "39",
 "is_snippet": false,
 "next_id": "end",
 "type": "goto"
 },
 "4": {
+"id": "4",
 "next_id": "5",
 "text": "narration_1",
 "type": "title"
 },
 "41": {
+"id": "41",
 "next_id": "42",
 "text": "after_boss",
 "type": "title"
@@ -187,18 +337,22 @@ lines = {
 "42": {
 "character": "Carter",
 "character_replacements": Array[Dictionary]([]),
+"id": "42",
 "next_id": "43",
+"tags": PackedStringArray(),
 "text": "Let's go.",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "Let's go.",
 "type": "dialogue"
 },
 "43": {
+"id": "43",
 "is_snippet": false,
 "next_id": "end",
 "type": "goto"
 },
 "45": {
+"id": "45",
 "next_id": "46",
 "text": "gods_callout",
 "type": "title"
@@ -206,18 +360,22 @@ lines = {
 "46": {
 "character": "Carter",
 "character_replacements": Array[Dictionary]([]),
+"id": "46",
 "next_id": "47",
+"tags": PackedStringArray(),
 "text": "Gods of Earth! Cease your hiding and grant me passage to the Sunset City.",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "Gods of Earth! Cease your hiding and grant me passage to the Sunset City.",
 "type": "dialogue"
 },
 "47": {
+"id": "47",
 "is_snippet": false,
 "next_id": "end",
 "type": "goto"
 },
 "49": {
+"id": "49",
 "next_id": "50",
 "text": "peters_warning",
 "type": "title"
@@ -225,7 +383,9 @@ lines = {
 "5": {
 "character": "",
 "character_replacements": Array[Dictionary]([]),
+"id": "5",
 "next_id": "6",
+"tags": PackedStringArray(),
 "text": "\"Three times Randolph Carter dreamed of the marvellous city, and three times was he snatched away while still he paused on the high terrace above it.\"",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "\"Three times Randolph Carter dreamed of the marvellous city, and three times was he snatched away while still he paused on the high terrace above it.\"",
@@ -234,18 +394,22 @@ lines = {
 "50": {
 "character": "Pickman",
 "character_replacements": Array[Dictionary]([]),
+"id": "50",
 "next_id": "51",
+"tags": PackedStringArray(),
 "text": "Wait. Something's wrong. The Other Gods, their messeng-",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "Wait. Something's wrong. The Other Gods, their messeng-",
 "type": "dialogue"
 },
 "51": {
+"id": "51",
 "is_snippet": false,
 "next_id": "end",
 "type": "goto"
 },
 "53": {
+"id": "53",
 "next_id": "54",
 "text": "carter_call",
 "type": "title"
@@ -253,18 +417,22 @@ lines = {
 "54": {
 "character": "Carter",
 "character_replacements": Array[Dictionary]([]),
+"id": "54",
 "next_id": "55",
+"tags": PackedStringArray(),
 "text": "Pickman!",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "Pickman!",
 "type": "dialogue"
 },
 "55": {
+"id": "55",
 "is_snippet": false,
 "next_id": "end",
 "type": "goto"
 },
 "57": {
+"id": "57",
 "next_id": "58",
 "text": "nyarlathotep_1",
 "type": "title"
@@ -272,7 +440,9 @@ lines = {
 "58": {
 "character": "????",
 "character_replacements": Array[Dictionary]([]),
+"id": "58",
 "next_id": "59",
+"tags": PackedStringArray(),
 "text": "Randolph Carter.",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "Randolph Carter.",
@@ -281,7 +451,9 @@ lines = {
 "59": {
 "character": "????",
 "character_replacements": Array[Dictionary]([]),
+"id": "59",
 "next_id": "60",
+"tags": PackedStringArray(),
 "text": "You have come to see the Great Ones, whom it is unlawful for men to see.",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "You have come to see the Great Ones, whom it is unlawful for men to see.",
@@ -290,7 +462,9 @@ lines = {
 "6": {
 "character": "",
 "character_replacements": Array[Dictionary]([]),
+"id": "6",
 "next_id": "7",
+"tags": PackedStringArray(),
 "text": "\"He resolved to find the gods on unknown Kadath in the cold waste, wherever that might be, and to win from them the sight and remembrance and shelter of the marvellous sunset city.\"",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "\"He resolved to find the gods on unknown Kadath in the cold waste, wherever that might be, and to win from them the sight and remembrance and shelter of the marvellous sunset city.\"",
@@ -299,7 +473,9 @@ lines = {
 "60": {
 "character": "????",
 "character_replacements": Array[Dictionary]([]),
+"id": "60",
 "next_id": "61",
+"tags": PackedStringArray(),
 "text": "Watchers have spoken of this thing, and the Other Gods have grunted as they rolled and tumbled mindlessly to the sound of thin flutes in the black ultimate void, where broods the daemon-sultan whose name no lips dare speak aloud.",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "Watchers have spoken of this thing, and the Other Gods have grunted as they rolled and tumbled mindlessly to the sound of thin flutes in the black ultimate void, where broods the daemon-sultan whose name no lips dare speak aloud.",
@@ -308,18 +484,22 @@ lines = {
 "61": {
 "character": "????",
 "character_replacements": Array[Dictionary]([]),
+"id": "61",
 "next_id": "62",
+"tags": PackedStringArray(),
 "text": "Because of YOU, Earth has no longer any gods that are gods.",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "Because of YOU, Earth has no longer any gods that are gods.",
 "type": "dialogue"
 },
 "62": {
+"id": "62",
 "is_snippet": false,
 "next_id": "end",
 "type": "goto"
 },
 "64": {
+"id": "64",
 "next_id": "65",
 "text": "nyarlathotep_2",
 "type": "title"
@@ -327,23 +507,28 @@ lines = {
 "65": {
 "character": "????",
 "character_replacements": Array[Dictionary]([]),
+"id": "65",
 "next_id": "66",
+"tags": PackedStringArray(),
 "text": "[shake rate=20.0 level=5 connected=1]And only the Other Gods from outer space hold sway on unremembered Kadath.[/shake]",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "[shake rate=20.0 level=5 connected=1]And only the Other Gods from outer space hold sway on unremembered Kadath.[/shake]",
 "type": "dialogue"
 },
 "66": {
+"id": "66",
 "is_snippet": false,
 "next_id": "end",
 "type": "goto"
 },
 "7": {
+"id": "7",
 "is_snippet": false,
 "next_id": "end",
 "type": "goto"
 },
 "73": {
+"id": "73",
 "next_id": "74",
 "text": "pushing_barrier",
 "type": "title"
@@ -351,18 +536,22 @@ lines = {
 "74": {
 "character": "",
 "character_replacements": Array[Dictionary]([]),
+"id": "74",
 "next_id": "75",
+"tags": PackedStringArray(),
 "text": "This is not the time to retreat. The journey to this place has been long and hard, and it's time to face the gods.",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "This is not the time to retreat. The journey to this place has been long and hard, and it's time to face the gods.",
 "type": "dialogue"
 },
 "75": {
+"id": "75",
 "is_snippet": false,
 "next_id": "end",
 "type": "goto"
 },
 "77": {
+"id": "77",
 "next_id": "78",
 "text": "guard_ghoul",
 "type": "title"
@@ -370,7 +559,9 @@ lines = {
 "78": {
 "character": "Ghoul",
 "character_replacements": Array[Dictionary]([]),
+"id": "78",
 "next_id": "79",
+"tags": PackedStringArray(),
 "text": "We'll guard the entrance... Y-You go ahead...",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "We'll guard the entrance... Y-You go ahead...",
@@ -379,18 +570,22 @@ lines = {
 "79": {
 "character": "Ghoul",
 "character_replacements": Array[Dictionary]([]),
+"id": "79",
 "next_id": "80",
+"tags": PackedStringArray(),
 "text": "B-by the way, if you want to change the controls, you can open the menu with [{ui_menu}] and head to the Settings section.",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "B-by the way, if you want to change the controls, you can open the menu with [{ui_menu}] and head to the Settings section.",
 "type": "dialogue"
 },
 "80": {
+"id": "80",
 "is_snippet": false,
 "next_id": "end",
 "type": "goto"
 },
 "82": {
+"id": "82",
 "next_id": "83",
 "text": "guard_ghoul_2",
 "type": "title"
@@ -398,7 +593,9 @@ lines = {
 "83": {
 "character": "Ghoul",
 "character_replacements": Array[Dictionary]([]),
+"id": "83",
 "next_id": "84",
+"tags": PackedStringArray(),
 "text": "So this is K-Kadath...? I-I think I'll stay here and guard the rear...",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "So this is K-Kadath...? I-I think I'll stay here and guard the rear...",
@@ -407,18 +604,22 @@ lines = {
 "84": {
 "character": "Ghoul",
 "character_replacements": Array[Dictionary]([]),
+"id": "84",
 "next_id": "85",
+"tags": PackedStringArray(),
 "text": "O-oh, remember you can change between walking and running by holding [{action_run}].",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "O-oh, remember you can change between walking and running by holding [{action_run}].",
 "type": "dialogue"
 },
 "85": {
+"id": "85",
 "is_snippet": false,
 "next_id": "end",
 "type": "goto"
 },
 "87": {
+"id": "87",
 "next_id": "88",
 "text": "pickman_waiting",
 "type": "title"
@@ -426,23 +627,28 @@ lines = {
 "88": {
 "character": "Pickman",
 "character_replacements": Array[Dictionary]([]),
+"id": "88",
 "next_id": "89",
+"tags": PackedStringArray(),
 "text": "Go ahead, then. We're still recovering from the landing.",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "Go ahead, then. We're still recovering from the landing.",
 "type": "dialogue"
 },
 "89": {
+"id": "89",
 "is_snippet": false,
 "next_id": "end!",
 "type": "goto"
 },
 "9": {
+"id": "9",
 "next_id": "10",
 "text": "entrance_ghoul1",
 "type": "title"
 },
 "91": {
+"id": "91",
 "next_id": "93",
 "text": "barrier",
 "type": "title"
@@ -450,11 +656,41 @@ lines = {
 "93": {
 "character": "Carter",
 "character_replacements": Array[Dictionary]([]),
-"next_id": "",
+"id": "93",
+"next_id": "97",
+"tags": PackedStringArray(),
 "text": "There must be a way to remove these. We should check the neighboring rooms.",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "There must be a way to remove these. We should check the neighboring rooms.",
 "type": "dialogue"
+},
+"95": {
+"id": "95",
+"next_id": "97",
+"text": "chalice_right",
+"type": "title"
+},
+"97": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
+"id": "97",
+"next_id": "99",
+"tags": PackedStringArray(),
+"text": "There is a curious glyph in the chalice. It seems to be pulsing with some sort of energy.",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "There is a curious glyph in the chalice. It seems to be pulsing with some sort of energy.",
+"type": "dialogue"
+},
+"99": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
+"id": "99",
+"next_id": "100",
+"tags": PackedStringArray(),
+"text": "Touch the glyph?",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Touch the glyph?",
+"type": "dialogue"
 }
 }
-metadata/dialogue_manager_version = "2.15.3"
+metadata/dialogue_manager_version = "2.32.3"

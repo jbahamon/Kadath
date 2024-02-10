@@ -28,7 +28,7 @@ SIMULTANEOUS
 		END
 		LOOK Peters RIGHT
 		LOOK PROXY LEFT
-		START_DIALOG entrance_ghoul SOURCE Peters
+		START_DIALOG entrance_ghoul
 	END
 END
 
@@ -53,7 +53,7 @@ END
 
 SIMULTANEOUS 
 	MOVE_CAMERA TO (16, -256) IN 1
-	START_DIALOG starting_instructions SOURCE NONE
+	START_DIALOG starting_instructions
 END
 
 ASSIGN_CAMERA PROXY

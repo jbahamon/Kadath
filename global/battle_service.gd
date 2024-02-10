@@ -71,7 +71,7 @@ func start_mook_battle(escapable: bool):
 	
 	self.start_battle(mooks, escapable)
 
-func start_battle(enemies: Array, escapable: bool):
+func start_battle(enemies: Array, escapable: bool, proxy_mode_on_finish=null):
 	if self.current_battle_parameters != null:
 		return
 	
@@ -79,6 +79,11 @@ func start_battle(enemies: Array, escapable: bool):
 		"escapable": escapable
 	}
 	
+	var end_proxy_mode = (
+		proxy_mode_on_finish 
+		if proxy_mode_on_finish != null 
+		else EntitiesService.get_proxy().current_mode
+	)
 	var battle_spot = self.get_nearest_battle_spot()
 	var non_party_actors = self.filter_non_party_actors(enemies, battle_spot)
 	self.pause_non_participants(non_party_actors)
@@ -105,12 +110,12 @@ func start_battle(enemies: Array, escapable: bool):
 			self.ui.hide()
 			await self.fade_and_delete_mooks(battle_end_state)
 			await self.tear_down_battle_positions(battle_end_state)
-			self.resume_non_participants()
+			self.resume_non_participants(end_proxy_mode)
 		BattleEndState.Result.WIN: 
 			await self.deal_rewards(battle_end_state.rewards)
 			self.ui.hide()
 			await self.tear_down_battle_positions(battle_end_state)
-			self.resume_non_participants()
+			self.resume_non_participants(end_proxy_mode)
 		BattleEndState.Result.LOSE: 
 			self.ui.hide()
 			print("game over :(")
@@ -146,6 +151,7 @@ func filter_non_party_actors(non_party_actors: Array, battle_spot):
 		return non_party_actors.slice(0, battle_spot.get_enemy_spots().size())
 	else:
 		return non_party_actors
+
 func rename_non_party_actors(non_party_actors: Array):
 	var actors_dict ={}
 	
@@ -184,8 +190,6 @@ func set_up_battle_positions(battle_spot, party_actors: Array, non_party_actors:
 		else:
 			spots_by_name[spot.enemy].append(spot)
 
-	# move camera to it in X time
-	
 	var cutscene_lines = []
 	
 	cutscene_lines.append("SIMULTANEOUS")
@@ -199,7 +203,18 @@ func set_up_battle_positions(battle_spot, party_actors: Array, non_party_actors:
 	var target_spots = []
 	
 	for non_party_actor in non_party_actors: 
-		var spot = spots_by_name[non_party_actor.display_name].pop_back()
+		var key = non_party_actor.display_name
+		var spots = spots_by_name.get(key)
+		if spots == null:
+			key = "*"
+			spots = spots_by_name.get(key)
+		
+		var spot = self.get_closest_to(spots, non_party_actor.global_position)
+		if spots.size() > 1:
+			spots.erase(spot)
+		else:
+			spots_by_name.erase(key)
+			
 		cutscene_lines.append(
 			"WALK %s TO (%d, %d) AT 50" % [
 				non_party_actor.name, 
@@ -207,7 +222,7 @@ func set_up_battle_positions(battle_spot, party_actors: Array, non_party_actors:
 				int(round(spot.global_position.y))
 			]
 		)
-		target_spots.append(spot.global_position)
+		target_spots.append(spot)
 		
 	for i in range(party_actors.size()): 
 		var party_actor = party_actors[i]
@@ -223,8 +238,8 @@ func set_up_battle_positions(battle_spot, party_actors: Array, non_party_actors:
 				],
 				"LOOK_AT %s AT (%d, %d)" % [
 					party_actor.name, 
-					int(round(closest_enemy.x)), 
-					int(round(closest_enemy.y))
+					int(round(closest_enemy.global_position.x)), 
+					int(round(closest_enemy.global_position.y))
 				],
 				"PLAY_ANIM %s battle_idle" % party_actor.name,
 				"END"
@@ -239,7 +254,7 @@ func get_closest_to(choices, current_position: Vector2):
 	var current_choice = null
 	var current_distance = INF
 	for choice in choices:
-		var distance = current_position.distance_to(choice)
+		var distance = current_position.distance_squared_to(choice.global_position)
 		if distance < current_distance:
 			current_choice = choice
 			current_distance = distance
@@ -299,12 +314,12 @@ func pause_non_participants(non_party_actors: Array):
 	self.current_battle_parameters["hidden_npcs"] = hidden_npcs
 	EntitiesService.get_proxy().set_mode(PlayerProxy.ProxyMode.NOT_THERE)
 
-func resume_non_participants():
+func resume_non_participants(end_proxy_mode):
 	for npc in self.current_battle_parameters["hidden_npcs"]:
 		npc.resume()
 		npc.visible = true
 	
-	EntitiesService.get_proxy().set_mode(PlayerProxy.ProxyMode.GAMEPLAY)
+	EntitiesService.get_proxy().set_mode(end_proxy_mode)
 	
 func mark_battle_as_escaped():
 	if self.current_battle_parameters == null:

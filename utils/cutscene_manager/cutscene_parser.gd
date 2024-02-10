@@ -61,7 +61,7 @@ func _init():
 	patterns["CALL"].compile("^(?<Entity>.+) (?<FunctionName>.+)( (?<Args>.*)$|$)")
 	
 	patterns["START_DIALOG"] = RegEx.new()
-	patterns["START_DIALOG"].compile("^(?<DialogId>[^ ]+ *)( SOURCE (?<Source>.+))?$")
+	patterns["START_DIALOG"].compile("^(?<DialogId>[^ ]+ *).*$")
 	
 	patterns["NARRATE"] = RegEx.new()
 	patterns["NARRATE"].compile("^(?<DialogId>.+) FOR (?<Duration>.+)$")
@@ -245,7 +245,6 @@ func parse_instruction(stack: Array, instruction_name: String, args: String):
 			var dialog_match: RegExMatch = self.patterns["START_DIALOG"].search(args)
 			instruction = StartDialog.new(
 				self.parse_string(dialog_match.get_string("DialogId")),
-				self.parse_string(dialog_match.get_string("Source"))
 			)
 		CutsceneInstruction.Type.NARRATE:
 			var narrate_match: RegExMatch = self.patterns["NARRATE"].search(args)

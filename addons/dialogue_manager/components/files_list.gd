@@ -5,12 +5,15 @@ extends VBoxContainer
 signal file_selected(file_path: String)
 signal file_popup_menu_requested(at_position: Vector2)
 signal file_double_clicked(file_path: String)
+signal file_middle_clicked(file_path: String)
 
 
-const DialogueConstants = preload("res://addons/dialogue_manager/constants.gd")
+const DialogueConstants = preload("../constants.gd")
 
 const MODIFIED_SUFFIX = "(*)"
 
+
+@export var icon: Texture2D
 
 @onready var filter_edit: LineEdit = $FilterEdit
 @onready var list: ItemList = $List
@@ -40,7 +43,7 @@ var filter: String:
 
 func _ready() -> void:
 	apply_theme()
-	
+
 	filter_edit.placeholder_text = DialogueConstants.translate("files_list.filter")
 
 
@@ -64,22 +67,22 @@ func update_file_map() -> void:
 	file_map = {}
 	for file in files:
 		var nice_file: String = get_nice_file(file)
-		
+
 		# See if a value with just the file name is already in the map
 		for key in file_map.keys():
 			if file_map[key] == nice_file:
 				var bit_count = nice_file.count("/") + 2
-				
+
 				var existing_nice_file = get_nice_file(key, bit_count)
 				nice_file = get_nice_file(file, bit_count)
-				
+
 				while nice_file == existing_nice_file:
 					bit_count += 1
 					existing_nice_file = get_nice_file(key, bit_count)
 					nice_file = get_nice_file(file, bit_count)
-				
+
 				file_map[key] = existing_nice_file
-		
+
 		file_map[file] = nice_file
 
 
@@ -96,8 +99,9 @@ func apply_filter() -> void:
 			var nice_file = file_map[file]
 			if file in unsaved_files:
 				nice_file += MODIFIED_SUFFIX
-			list.add_item(nice_file)
-	
+			var new_id := list.add_item(nice_file)
+			list.set_item_icon(new_id, icon)
+
 	select_file(current_file_path)
 
 
@@ -123,9 +127,14 @@ func _on_list_item_clicked(index: int, at_position: Vector2, mouse_button_index:
 		var file = file_map.find_key(item_text)
 		select_file(file)
 		file_selected.emit(file)
-	
+
 	if mouse_button_index == MOUSE_BUTTON_RIGHT:
 		file_popup_menu_requested.emit(at_position)
+
+	if mouse_button_index == MOUSE_BUTTON_MIDDLE:
+		var item_text = list.get_item_text(index).replace(MODIFIED_SUFFIX, "")
+		var file = file_map.find_key(item_text)
+		file_middle_clicked.emit(file)
 
 
 func _on_list_item_activated(index: int) -> void:

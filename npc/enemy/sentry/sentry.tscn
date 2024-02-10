@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://dpc8xvvcbyotf"]
+
+[ext_resource type="PackedScene" uid="uid://co4ecuc835bk6" path="res://npc/enemy/enemy.tscn" id="1_vbu6h"]
+[ext_resource type="PackedScene" uid="uid://cgc5b4s47chs0" path="res://npc/enemy/sentry/anim.tscn" id="2_571aw"]
+[ext_resource type="Resource" uid="uid://rlyl1hog6ic0" path="res://npc/enemy/sentry/stats.tres" id="3_l4u5g"]
+[ext_resource type="Script" path="res://battle/ai/random_ai.gd" id="4_bs2dh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f63i3"]
+size = Vector2(10, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l8i0k"]
+
+[node name="Sentry" instance=ExtResource("1_vbu6h")]
+position = Vector2(0, 0)
+display_name = "Sentry"
+
+[node name="Anim" parent="." index="0" instance=ExtResource("2_571aw")]
+
+[node name="Battler" parent="." index="1"]
+stats = ExtResource("3_l4u5g")
+
+[node name="AI" parent="Battler" index="1"]
+script = ExtResource("4_bs2dh")
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_f63i3")
+
+[node name="CollisionShape2D" parent="InteractableArea" index="0"]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_l8i0k")
+
+[editable path="Battler"]
+[editable path="Battler/Toast"]

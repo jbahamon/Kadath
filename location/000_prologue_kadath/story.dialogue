@@ -91,3 +91,20 @@ Pickman: Go ahead, then. We're still recovering from the landing.
 ~ barrier
 
 Carter: There must be a way to remove these. We should check the neighboring rooms.
+
+~ chalice_right
+
+There is a curious glyph in the chalice. It seems to be pulsing with some sort of energy.
+
+Touch the glyph?
+- Yes
+	do DialogService.add_response("yes")
+	You lean forward and touch the glyph.
+- No
+	do DialogService.add_response("no")
+	Maybe later.
+=> END
+
+~ after_chalice_battle
+
+Something seems to have changed.

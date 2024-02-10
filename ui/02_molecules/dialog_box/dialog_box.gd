@@ -8,7 +8,7 @@ func _ready():
 	
 func set_text(text: String):
 	text_label.text = text
-	text_label.visible_characters = 0
+	text_label.visible_ratio = 0.0
 	text_label.scroll_to_line(0)
 	
 func set_visible_ratio(ratio: float):

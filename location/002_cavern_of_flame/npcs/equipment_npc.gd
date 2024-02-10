@@ -3,9 +3,9 @@ extends FlagSetterNPC
 
 const NID_AFTER_GIVING_EQUIPMENT = 6
 
-func on_player_interaction(player_proxy: PlayerProxy):
+func on_player_interaction(proxy: PlayerProxy):
 	var was_flag_on = VarsService.get_flag(self.flag)
-	super.on_player_interaction(player_proxy)
+	super.on_player_interaction(proxy)
 	if not was_flag_on and VarsService.get_flag(self.flag) and\
 	 	self.dialog_nid != NID_AFTER_GIVING_EQUIPMENT:
 		

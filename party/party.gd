@@ -23,7 +23,7 @@ var movement_cache_index: int
 var movement_pointers: Array
 
 func _ready():
-	self.update_active_members(self.get_unlocked_characters(), false)
+	self.update_active_members()
 	self.set_physics_process(false)
 	self.movement_cache = []
 	self.movement_cache.resize(
@@ -70,12 +70,13 @@ func _physics_process(_delta):
 
 func load_game_data(save_data: SaveData) -> void:
 	inventory.load_game_data(save_data)
-	# self.update_active_members()
+	self.update_active_members()
 	
 func save(save_data: SaveData) -> void:
 	inventory.save(save_data)
 	
-func update_active_members(new_ordered_members: Array, update_proxy=true):
+func update_active_members():
+	var new_ordered_members = self.get_unlocked_characters()
 	var current_parent = self.active_members[0].get_parent() if self.active_members.size() > 0 else null
 	
 	var new_active_members = []
@@ -102,11 +103,7 @@ func update_active_members(new_ordered_members: Array, update_proxy=true):
 			last_added_child = party_member
 			
 	self.active_members = new_active_members
-	# since this is called during game initialization, some globals might not be there
-	if update_proxy:
-		var proxy: PlayerProxy = EntitiesService.get_proxy()
-		if proxy != null and proxy.current_target_type == PlayerProxy.TargetType.PARTY:
-			proxy.set_target(self, true)
+
 
 func get_unlocked_characters() -> Array:
 	# Returns all the characters that can be active in the party
@@ -134,7 +131,7 @@ func unlock(id: PartyMember.Id):
 	for member in get_children():
 		if member.id == id:
 			member.unlock()
-			self.update_active_members(self.get_unlocked_characters())
+			self.update_active_members()
 			return
 
 func get_leader():

@@ -6,7 +6,3 @@ func on_enter():
 	if VarsService.get_flag('kadath.hub.right_barrier'):
 		$RightBarrier.queue_free()
 		
-	var party = EntitiesService.get_party()
-	party.unlock(PartyMember.Id.PETERS)
-		
-		

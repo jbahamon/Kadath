@@ -2,40 +2,55 @@
 extends Node
 
 
-const DialogueConstants = preload("res://addons/dialogue_manager/constants.gd")
+const DialogueConstants = preload("./constants.gd")
 
 
 ### Editor config
 
 const DEFAULT_SETTINGS = {
-	"states" = [],
-	"missing_translations_are_errors" = false,
-	"wrap_lines" = false,
-	"new_with_template" = true,
-	"include_all_responses" = false,
-	"custom_test_scene_path" = "res://addons/dialogue_manager/test_scene.tscn"
+	states = [],
+	missing_translations_are_errors = false,
+	export_characters_in_translation = true,
+	wrap_lines = false,
+	new_with_template = true,
+	include_all_responses = false,
+	ignore_missing_state_values = false,
+	custom_test_scene_path = preload("./test_scene.tscn").resource_path,
+	default_csv_locale = "en",
+	balloon_path = "",
+	create_lines_for_responses_with_characters = true
 }
 
 
 static func prepare() -> void:
 	# Migrate previous keys
 	for key in [
-		"states", 
-		"missing_translations_are_errors", 
-		"wrap_lines", 
-		"new_with_template", 
-		"include_all_responses", 
+		"states",
+		"missing_translations_are_errors",
+		"export_characters_in_translation",
+		"wrap_lines",
+		"new_with_template",
+		"include_all_responses",
 		"custom_test_scene_path"
 	]:
 		if ProjectSettings.has_setting("dialogue_manager/%s" % key):
 			var value = ProjectSettings.get_setting("dialogue_manager/%s" % key)
 			ProjectSettings.set_setting("dialogue_manager/%s" % key, null)
 			set_setting(key, value)
-	
-	# Set up defaults
+
+	# Set up initial settings
 	for setting in DEFAULT_SETTINGS:
-		if ProjectSettings.has_setting("dialogue_manager/general/%s" % setting):
-			ProjectSettings.set_initial_value("dialogue_manager/general/%s" % setting, DEFAULT_SETTINGS[setting])
+		var setting_name: String = "dialogue_manager/general/%s" % setting
+		if not ProjectSettings.has_setting(setting_name):
+			set_setting(setting, DEFAULT_SETTINGS[setting])
+		ProjectSettings.set_initial_value(setting_name, DEFAULT_SETTINGS[setting])
+		if setting.ends_with("_path"):
+			ProjectSettings.add_property_info({
+				"name": setting_name,
+				"type": TYPE_STRING,
+				"hint": PROPERTY_HINT_FILE,
+			})
+
 	ProjectSettings.save()
 
 
@@ -52,6 +67,14 @@ static func get_setting(key: String, default):
 		return default
 
 
+static func get_settings(only_keys: PackedStringArray = []) -> Dictionary:
+	var settings: Dictionary = {}
+	for key in DEFAULT_SETTINGS.keys():
+		if only_keys.is_empty() or key in only_keys:
+			settings[key] = get_setting(key, DEFAULT_SETTINGS[key])
+	return settings
+
+
 ### User config
 
 
@@ -62,13 +85,15 @@ static func get_user_config() -> Dictionary:
 		carets = {},
 		run_title = "",
 		run_resource_path = "",
-		is_running_test_scene = false
+		is_running_test_scene = false,
+		has_dotnet_solution = false,
+		open_in_external_editor = false
 	}
-	
+
 	if FileAccess.file_exists(DialogueConstants.USER_CONFIG_PATH):
 		var file: FileAccess = FileAccess.open(DialogueConstants.USER_CONFIG_PATH, FileAccess.READ)
 		user_config.merge(JSON.parse_string(file.get_as_text()), true)
-	
+
 	return user_config
 
 
@@ -121,8 +146,8 @@ static func clear_recent_files() -> void:
 
 static func set_caret(path: String, cursor: Vector2) -> void:
 	var carets: Dictionary = get_user_value("carets", {})
-	carets[path] = { 
-		x = cursor.x, 
+	carets[path] = {
+		x = cursor.x,
 		y = cursor.y
 	}
 	set_user_value("carets", carets)

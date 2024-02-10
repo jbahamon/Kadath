@@ -113,6 +113,7 @@ func move_to_room(
 		proxy.set_target(new_proxy_target)
 	elif proxy.current_target_type == PlayerProxy.TargetType.PARTY:
 		var party = EntitiesService.get_party()
+		# We call the callback directly since the proxy isn't actually changing targets
 		party.on_proxy_enter(proxy)
 	
 	CameraService.update_camera_bounds(
