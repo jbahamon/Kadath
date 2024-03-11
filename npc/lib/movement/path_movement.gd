@@ -40,6 +40,9 @@ func start():
 		self.current_target_idx = self.starting_target_idx
 		self.update_target()
 		self.initialized = true
+	else:
+		self.parent.set_orientation(self.direction)
+		self.parent.velocity = direction * speed
 		
 func stop():
 	self.set_physics_process(false)

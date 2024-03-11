@@ -17,6 +17,11 @@ func initialize(init_popup_layer: CanvasLayer, init_menu_popup: Popup, init_save
 	self.popup_layer = init_popup_layer
 	self.menu_popup = init_menu_popup
 	self.save_popup = init_save_popup
+
+func exit():
+	self.popup_layer = null
+	self.menu_popup = null
+	self.save_popup = null
 	
 func _unhandled_input(event) -> void:
 	if event.is_action_pressed("ui_menu"): 

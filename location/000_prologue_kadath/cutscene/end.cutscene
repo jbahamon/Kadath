@@ -31,7 +31,6 @@ START_DIALOG peters_warning
 
 SIMULTANEOUS
 	LOOK PROXY RIGHT
-	MOVE Peters TO (64, 80) AT 30
 	CALL ROOM fade_companion
 	START_DIALOG carter_call
 END

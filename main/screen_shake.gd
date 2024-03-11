@@ -2,56 +2,38 @@ extends Node
 
 signal shake_finished
 
-const TRANS = Tween.TRANS_SINE
-const EASE = Tween.EASE_IN_OUT
-
-var amplitude: Vector2 = Vector2.ZERO
-var priority = 0
-
-@onready var duration_timer = $Duration
-@onready var frequency_timer = $Frequency
-@onready var shake_tween = get_tree().create_tween()
-
 @onready var camera = get_parent()
+@export var noise : FastNoiseLite 
+
+var amplitude := Vector2(16, 16) 
+var decay := 0.1 # trauma lost per second
+
+var trauma := 0.0
+var time = 0
+var time_scale = 500
 
 func _ready():
-	self.shake_tween.stop()
+	self.set_process(false)
 	
-func start(duration: float, frequency: float, new_amplitude: Vector2, new_priority: int):
-	if new_priority >= self.priority:
-		self.priority = new_priority
-		self.amplitude = new_amplitude
-
-		duration_timer.wait_time = duration
-		frequency_timer.wait_time = 1 / float(frequency)
-		duration_timer.start()
-		frequency_timer.start()
-
-		_new_shake()
-		
-		await duration_timer.timeout
+func _process(delta):
+	time += delta
+	if trauma > 0:
+		trauma = max(trauma - decay * delta, 0)
+		shake()
 	else:
 		emit_signal("shake_finished")
+		self.time = 0
+		self.set_process(false)
 
-func _new_shake():
-	var rand = Vector2()
-	rand.x = randf_range(-amplitude.x, amplitude.x)
-	rand.y = randf_range(-amplitude.y, amplitude.y)
-	shake_tween.kill()
-	shake_tween.tween_property(camera, "offset", rand, $Frequency.wait_time)
-	shake_tween.play()
-
-func _reset():
-	shake_tween.kill()
-	shake_tween.tween_property(camera, "offset", Vector2(), $Frequency.wait_time)
-	shake_tween.play()
-
-	priority = 0
-
-func _on_Freq_timeout():
-	_new_shake()
-
-func _on_Duration_timeout():
-	_reset()
-	frequency_timer.stop()
-	emit_signal("shake_finished")
+func shake(): 
+	var amt = pow(trauma, 2)
+	camera.offset.x = amplitude.x * amt * noise.get_noise_2d(time * time_scale, 0)
+	camera.offset.y = amplitude.y * amt * noise.get_noise_2d(0, time * time_scale)
+	
+func start(duration: float, shake_amplitude: Vector2):
+	self.noise.seed = randi()
+	self.decay = 1.0/duration
+	self.amplitude = shake_amplitude
+	self.trauma = 1.0
+	self.set_process(true)
+	return self.shake_finished

@@ -10,10 +10,10 @@ func _ready() -> void:
 		$SubViewportContainer/SubViewport
 	)
 	DialogService.initialize($DialogLayer/Dialog, $NarrationLayer)
-	EnvironmentService.initialize($SubViewportContainer/SubViewport/World)
 	EntitiesService.initialize(
 		$SubViewportContainer/SubViewport/World/PlayerProxy
 	)
+	EnvironmentService.initialize($SubViewportContainer/SubViewport/World)
 	InputService.initialize(self)
 	LayersService.initialize({
 		"MIX": $SubViewportContainer/SubViewport/OverlayLayer/Mix,
@@ -39,8 +39,8 @@ func move_to_starting_room():
 		# Note: move start_game to the above when doing the cutscene intro
 		EnvironmentService.update_whereabouts(
 			"000_prologue_kadath", 
-			"03_left_switch",
-			Vector2(0, -86), #Vector2.ZERO,
+			"05_boss_room",
+			Vector2(0, -6), #Vector2.ZERO,
 			Vector2.UP,
 			false
 		)
@@ -51,3 +51,13 @@ func bind_proxy():
 func start_game():
 	InputService.set_input_enabled(true)
 	EntitiesService.get_proxy().set_mode(PlayerProxy.ProxyMode.GAMEPLAY)
+
+func exit():
+	BattleService.exit()
+	CameraService.exit()
+	DialogService.exit()
+	EnvironmentService.exit()
+	EntitiesService.exit()
+	InputService.exit()
+	LayersService.exit()
+	UIService.exit()

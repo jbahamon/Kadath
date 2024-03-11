@@ -89,12 +89,10 @@ Pickman: Go ahead, then. We're still recovering from the landing.
 => END!
 
 ~ barrier
-
 Carter: There must be a way to remove these. We should check the neighboring rooms.
 
-~ chalice_right
-
-There is a curious glyph in the chalice. It seems to be pulsing with some sort of energy.
+~ chalice
+There is a curious glyph on the chalice. It seems to be pulsing with some sort of energy.
 
 Touch the glyph?
 - Yes
@@ -106,5 +104,21 @@ Touch the glyph?
 => END
 
 ~ after_chalice_battle
-
 Something seems to have changed.
+=> END
+
+~ chalice_done
+The chalice is filled with a red liquid.
+=> END
+
+~ paten
+You approach the ornamental plate and touch the glyph on it.
+=> END
+
+~ after_paten_activation
+Something seems to have changed.
+=> END
+
+~ paten_done
+The plate is filled with some kind of flesh.
+=> END

@@ -1,16 +1,18 @@
 [gd_resource type="Resource" script_class="DialogueResource" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_resource.gd" id="1_tc6im"]
+[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_resource.gd" id="1_fcyur"]
 
 [resource]
-script = ExtResource("1_tc6im")
+script = ExtResource("1_fcyur")
 using_states = PackedStringArray()
 titles = {
 "after_boss": "42",
-"after_chalice_battle": "110",
-"barrier": "93",
+"after_chalice_battle": "107",
+"after_paten_activation": "119",
+"barrier": "92",
 "carter_call": "54",
-"chalice_right": "97",
+"chalice": "95",
+"chalice_done": "111",
 "entrance_carter": "19",
 "entrance_carter2": "28",
 "entrance_ghoul1": "10",
@@ -22,6 +24,8 @@ titles = {
 "narration_1": "5",
 "nyarlathotep_1": "58",
 "nyarlathotep_2": "65",
+"paten": "115",
+"paten_done": "123",
 "peters_warning": "50",
 "pickman_recruit": "36",
 "pickman_waiting": "88",
@@ -46,62 +50,28 @@ lines = {
 "character": "",
 "character_replacements": Array[Dictionary]([]),
 "id": "100",
-"next_id": "101",
-"next_id_after": "106",
-"responses": PackedStringArray("100", "103"),
-"tags": PackedStringArray(),
-"text": "Yes",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "Yes",
-"type": "response"
-},
-"101": {
-"id": "101",
-"mutation": {
-"expression": Array[Dictionary]([{
-"type": "variable",
-"value": "DialogService"
-}, {
-"type": "dot"
-}, {
-"function": "add_response",
-"type": "function",
-"value": Array[Array]([Array[Dictionary]([{
-"type": "string",
-"value": "yes"
-}])])
-}])
-},
-"next_id": "102",
-"parent_id": "100",
-"type": "mutation"
-},
-"102": {
-"character": "",
-"character_replacements": Array[Dictionary]([]),
-"id": "102",
-"next_id": "106",
-"parent_id": "100",
+"next_id": "104",
+"parent_id": "98",
 "tags": PackedStringArray(),
 "text": "You lean forward and touch the glyph.",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "You lean forward and touch the glyph.",
 "type": "dialogue"
 },
-"103": {
+"101": {
 "character": "",
 "character_replacements": Array[Dictionary]([]),
-"id": "103",
-"next_id": "104",
-"next_id_after": "106",
+"id": "101",
+"next_id": "102",
+"next_id_after": "104",
 "tags": PackedStringArray(),
 "text": "No",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "No",
 "type": "response"
 },
-"104": {
-"id": "104",
+"102": {
+"id": "102",
 "mutation": {
 "expression": Array[Dictionary]([{
 "type": "variable",
@@ -117,33 +87,50 @@ lines = {
 }])])
 }])
 },
-"next_id": "105",
-"parent_id": "103",
+"next_id": "103",
+"parent_id": "101",
 "type": "mutation"
 },
-"105": {
+"103": {
 "character": "",
 "character_replacements": Array[Dictionary]([]),
-"id": "105",
-"next_id": "106",
-"parent_id": "103",
+"id": "103",
+"next_id": "104",
+"parent_id": "101",
 "tags": PackedStringArray(),
 "text": "Maybe later.",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "Maybe later.",
 "type": "dialogue"
 },
-"106": {
-"id": "106",
+"104": {
+"id": "104",
 "is_snippet": false,
 "next_id": "end",
 "type": "goto"
 },
-"108": {
-"id": "108",
-"next_id": "110",
+"106": {
+"id": "106",
+"next_id": "107",
 "text": "after_chalice_battle",
 "type": "title"
+},
+"107": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
+"id": "107",
+"next_id": "108",
+"tags": PackedStringArray(),
+"text": "Something seems to have changed.",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Something seems to have changed.",
+"type": "dialogue"
+},
+"108": {
+"id": "108",
+"is_snippet": false,
+"next_id": "end",
+"type": "goto"
 },
 "11": {
 "id": "11",
@@ -152,15 +139,96 @@ lines = {
 "type": "goto"
 },
 "110": {
+"id": "110",
+"next_id": "111",
+"text": "chalice_done",
+"type": "title"
+},
+"111": {
 "character": "",
 "character_replacements": Array[Dictionary]([]),
-"id": "110",
-"next_id": "",
+"id": "111",
+"next_id": "112",
+"tags": PackedStringArray(),
+"text": "The chalice is filled with a red liquid.",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "The chalice is filled with a red liquid.",
+"type": "dialogue"
+},
+"112": {
+"id": "112",
+"is_snippet": false,
+"next_id": "end",
+"type": "goto"
+},
+"114": {
+"id": "114",
+"next_id": "115",
+"text": "paten",
+"type": "title"
+},
+"115": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
+"id": "115",
+"next_id": "116",
+"tags": PackedStringArray(),
+"text": "You approach the ornamental plate and touch the glyph on it.",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "You approach the ornamental plate and touch the glyph on it.",
+"type": "dialogue"
+},
+"116": {
+"id": "116",
+"is_snippet": false,
+"next_id": "end",
+"type": "goto"
+},
+"118": {
+"id": "118",
+"next_id": "119",
+"text": "after_paten_activation",
+"type": "title"
+},
+"119": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
+"id": "119",
+"next_id": "120",
 "tags": PackedStringArray(),
 "text": "Something seems to have changed.",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "Something seems to have changed.",
 "type": "dialogue"
+},
+"120": {
+"id": "120",
+"is_snippet": false,
+"next_id": "end",
+"type": "goto"
+},
+"122": {
+"id": "122",
+"next_id": "123",
+"text": "paten_done",
+"type": "title"
+},
+"123": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
+"id": "123",
+"next_id": "124",
+"tags": PackedStringArray(),
+"text": "The plate is filled with some kind of flesh.",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "The plate is filled with some kind of flesh.",
+"type": "dialogue"
+},
+"124": {
+"id": "124",
+"is_snippet": false,
+"next_id": "end",
+"type": "goto"
 },
 "14": {
 "id": "14",
@@ -649,48 +717,82 @@ lines = {
 },
 "91": {
 "id": "91",
-"next_id": "93",
+"next_id": "92",
 "text": "barrier",
 "type": "title"
 },
-"93": {
+"92": {
 "character": "Carter",
 "character_replacements": Array[Dictionary]([]),
-"id": "93",
-"next_id": "97",
+"id": "92",
+"next_id": "95",
 "tags": PackedStringArray(),
 "text": "There must be a way to remove these. We should check the neighboring rooms.",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "There must be a way to remove these. We should check the neighboring rooms.",
 "type": "dialogue"
 },
+"94": {
+"id": "94",
+"next_id": "95",
+"text": "chalice",
+"type": "title"
+},
 "95": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
 "id": "95",
 "next_id": "97",
-"text": "chalice_right",
-"type": "title"
+"tags": PackedStringArray(),
+"text": "There is a curious glyph on the chalice. It seems to be pulsing with some sort of energy.",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "There is a curious glyph on the chalice. It seems to be pulsing with some sort of energy.",
+"type": "dialogue"
 },
 "97": {
 "character": "",
 "character_replacements": Array[Dictionary]([]),
 "id": "97",
-"next_id": "99",
-"tags": PackedStringArray(),
-"text": "There is a curious glyph in the chalice. It seems to be pulsing with some sort of energy.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "There is a curious glyph in the chalice. It seems to be pulsing with some sort of energy.",
-"type": "dialogue"
-},
-"99": {
-"character": "",
-"character_replacements": Array[Dictionary]([]),
-"id": "99",
-"next_id": "100",
+"next_id": "98",
 "tags": PackedStringArray(),
 "text": "Touch the glyph?",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "Touch the glyph?",
 "type": "dialogue"
+},
+"98": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
+"id": "98",
+"next_id": "99",
+"next_id_after": "104",
+"responses": PackedStringArray("98", "101"),
+"tags": PackedStringArray(),
+"text": "Yes",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Yes",
+"type": "response"
+},
+"99": {
+"id": "99",
+"mutation": {
+"expression": Array[Dictionary]([{
+"type": "variable",
+"value": "DialogService"
+}, {
+"type": "dot"
+}, {
+"function": "add_response",
+"type": "function",
+"value": Array[Array]([Array[Dictionary]([{
+"type": "string",
+"value": "yes"
+}])])
+}])
+},
+"next_id": "100",
+"parent_id": "98",
+"type": "mutation"
 }
 }
 metadata/dialogue_manager_version = "2.32.3"

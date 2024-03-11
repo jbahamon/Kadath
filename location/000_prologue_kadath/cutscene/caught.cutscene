@@ -1,0 +1,29 @@
+LOOK PROXY DOWN
+PLAY_ANIM PROXY idle
+
+SIMULTANEOUS
+	CALL LeftSentry1 stop_auto_movement
+	CALL LeftSentry2 stop_auto_movement
+	CALL RightSentry1 stop_auto_movement
+	CALL RightSentry2 stop_auto_movement
+	LOOK_AT LeftSentry1 AT PROXY
+	LOOK_AT LeftSentry2 AT PROXY
+	LOOK_AT RightSentry1 AT PROXY
+	LOOK_AT RightSentry2 AT PROXY
+END
+
+WAIT 0.5
+FADE_OVERLAY MIX TO (0,0,0,1) IN 0.5
+
+SET_POSITION PROXY TO (0, 0)
+LOOK PROXY UP
+PLAY_ANIM PROXY idle
+
+SIMULTANEOUS
+	CALL LeftSentry1 start_auto_movement
+	CALL LeftSentry2 start_auto_movement
+	CALL RightSentry1 start_auto_movement
+	CALL RightSentry2 start_auto_movement
+END
+
+FADE_OVERLAY MIX TO (0,0,0,0) IN 0.5

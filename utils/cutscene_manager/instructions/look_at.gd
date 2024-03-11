@@ -12,7 +12,7 @@ func execute(_tree: SceneTree):
 	if self.target is Vector2:
 		target_position = self.target
 	else:
-		var target_entity: Node2D = EntitiesService.get_entity(self.target_entity)
+		var target_entity: Node2D = EntitiesService.get_entity(self.target)
 		target_position = target_entity.position
 	
 	var entity: Node2D = EntitiesService.get_entity(self.entity_name)

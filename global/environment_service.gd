@@ -6,10 +6,14 @@ var world: Node
 
 func _init():
 	self.add_to_group("save")
-	
+
 func initialize(init_world: Node):
 	self.world = init_world
-	
+
+func exit():
+	current_location = null
+	current_room = null
+
 func get_world():
 	return self.world
 	

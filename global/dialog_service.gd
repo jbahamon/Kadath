@@ -9,6 +9,12 @@ func initialize(init_dialog, init_narration_layer):
 	self.dialog = init_dialog
 	self.narration_layer = init_narration_layer
 
+func exit():
+	self.dialog = null
+	self.narration_layer = null
+	self.current_dialog = null
+	self.current_responses = []
+	
 func load_location_dialogs(location: Location):
 	self.current_dialog = location.story
 

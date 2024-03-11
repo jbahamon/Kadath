@@ -7,7 +7,7 @@ var time = 0
 func start():
 	time = randf() * period
 	
-func _process(delta):
+func _physics_process(delta):
 	time += delta
 	if time > period:
 		choose_random_rotation()

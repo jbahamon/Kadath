@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cjysovi6kmyqe"]
+[gd_scene load_steps=18 format=3 uid="uid://cjysovi6kmyqe"]
 
 [ext_resource type="TileSet" uid="uid://cb1f6r4xpgnc0" path="res://location/lib/resource/tile/cave.tres" id="1_b76hr"]
 [ext_resource type="Script" path="res://location/000_prologue_kadath/room/04_right_switch.gd" id="2_ialqx"]
@@ -9,6 +9,12 @@
 [ext_resource type="PackedScene" uid="uid://dpc8xvvcbyotf" path="res://npc/enemy/sentry/sentry.tscn" id="6_gjqa7"]
 [ext_resource type="Script" path="res://party/character_stats.gd" id="7_hle0x"]
 [ext_resource type="Script" path="res://location/lib/script/object/enemy_spot.gd" id="7_y22tt"]
+
+[sub_resource type="Animation" id="Animation_1oyyj"]
+resource_name = "chalice_activate"
+
+[sub_resource type="Animation" id="Animation_tcv1a"]
+resource_name = "chalice_activated"
 
 [sub_resource type="Animation" id="Animation_1eavo"]
 resource_name = "default"
@@ -128,6 +134,8 @@ tracks/5/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wnve1"]
 _data = {
+"chalice_activate": SubResource("Animation_1oyyj"),
+"chalice_activated": SubResource("Animation_tcv1a"),
 "default": SubResource("Animation_1eavo"),
 "drop_enemies": SubResource("Animation_wepn1")
 }
@@ -200,6 +208,9 @@ texture = ExtResource("5_8q3b7")
 [node name="Sentry" parent="." instance=ExtResource("6_gjqa7")]
 position = Vector2(-65, -100)
 
+[node name="Sprite2D" parent="Sentry/Anim" index="0"]
+offset = Vector2(0, -80)
+
 [node name="Battler" parent="Sentry" index="1"]
 stats = SubResource("Resource_jhfrd")
 
@@ -207,10 +218,15 @@ stats = SubResource("Resource_jhfrd")
 disabled = true
 
 [node name="InteractableArea" parent="Sentry" index="3"]
+collision_mask = 0
 monitoring = false
 
 [node name="Sentry2" parent="." instance=ExtResource("6_gjqa7")]
+visible = false
 position = Vector2(65, -100)
+
+[node name="Sprite2D" parent="Sentry2/Anim" index="0"]
+offset = Vector2(0, -80)
 
 [node name="Battler" parent="Sentry2" index="1"]
 stats = SubResource("Resource_jhfrd")
@@ -219,10 +235,15 @@ stats = SubResource("Resource_jhfrd")
 disabled = true
 
 [node name="InteractableArea" parent="Sentry2" index="3"]
+collision_mask = 0
 monitoring = false
 
 [node name="Sentry3" parent="." instance=ExtResource("6_gjqa7")]
+visible = false
 position = Vector2(0, -33)
+
+[node name="Sprite2D" parent="Sentry3/Anim" index="0"]
+offset = Vector2(0, -80)
 
 [node name="Battler" parent="Sentry3" index="1"]
 stats = SubResource("Resource_jhfrd")
@@ -231,6 +252,7 @@ stats = SubResource("Resource_jhfrd")
 disabled = true
 
 [node name="InteractableArea" parent="Sentry3" index="3"]
+collision_mask = 0
 monitoring = false
 
 [node name="BattleSpot" parent="." instance=ExtResource("6_0iv0v")]

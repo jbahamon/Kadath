@@ -90,13 +90,13 @@ func die():
 	self.queue_free()
 
 func stop_auto_movement():
+	self.velocity = Vector2.ZERO
 	self.set_physics_process(true)
 	self.movement_node.stop()
 	
 func start_auto_movement():
 	self.set_physics_process(false)
 	self.movement_node.start()
-
 
 func move_to(target: Vector2, speed = WALK_SPEED):
 	assert(speed > 0)
@@ -131,3 +131,5 @@ func pause():
 func resume():
 	self.emit_signal("resumed")
 	
+func on_enter_battle():
+	self.interactable_collision.set_disabled(true)

@@ -25,6 +25,10 @@ func _init():
 func initialize(init_ui: BattleUI):
 	self.ui = init_ui
 
+func exit():
+	self.ui = null
+	self.current_battle_parameters = {}
+	
 func init_common_action_options():
 	var attack = Attack.new()
 	attack.display_name = "Attack"
@@ -202,7 +206,8 @@ func set_up_battle_positions(battle_spot, party_actors: Array, non_party_actors:
 	
 	var target_spots = []
 	
-	for non_party_actor in non_party_actors: 
+	for non_party_actor in non_party_actors:
+		non_party_actor.on_enter_battle()
 		var key = non_party_actor.display_name
 		var spots = spots_by_name.get(key)
 		if spots == null:

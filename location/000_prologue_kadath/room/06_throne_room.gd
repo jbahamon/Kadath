@@ -3,8 +3,8 @@ extends LocationRoom
 func fade_companion():
 	var companion = $Peters
 	var tween = get_tree().create_tween()
+	tween.tween_property(companion, "modulate", Color(0,0,0,1), 0.5)
 	tween.tween_property(companion, "modulate", Color(0,0,0,0), 0.5)
-	
 	await tween.finished
 	
 func darken_room():
@@ -22,4 +22,7 @@ func show_spooks():
 	await tween.finished
 	
 func show_title_card():
+	var party = EntitiesService.get_party()
+	party.set_physics_process(false)
+	
 	SceneSwitcher.go_to_scene("res://ui/04_templates/other/demo_end.tscn")

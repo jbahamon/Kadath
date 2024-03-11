@@ -1,11 +1,15 @@
 extends Node
 
-var camera: Camera2D
-var sub_viewport: SubViewport
+var camera: Camera2D = null
+var sub_viewport: SubViewport = null
 
 func initialize(init_camera: Camera2D, init_sub_viewport: SubViewport):
 	self.camera = init_camera
 	self.sub_viewport = init_sub_viewport
+
+func exit():
+	self.camera = null
+	self.sub_viewport = null
 
 func update_camera_bounds(origin: Vector2, tilemap_limits: Rect2i, tile_size: Vector2i):
 	
@@ -80,3 +84,6 @@ func get_visible_rect() -> Rect2i:
 		origin = camera.global_position - size/2.0
 	
 	return Rect2i(origin, size)
+
+func shake(duration: float = 1.0, amplitude: Vector2 = Vector2(16, 16)):
+	return self.camera.shake(duration, amplitude)

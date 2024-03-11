@@ -34,8 +34,6 @@ func initialize():
 	self.party_list.initialize(party_members, {"class_or_scene": PartyMemberListItem})
 	
 	self.inventory = party.inventory
-	self.inventory.set_item("potion", 3)
-	
 	self.reset_controls()
 	
 func reset_controls(reset_categories = true):

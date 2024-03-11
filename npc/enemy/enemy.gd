@@ -1,5 +1,8 @@
 extends BaseNPC
 
+signal touched(body)
+
+@export var battle_on_contact = true
 @onready var battler: Battler = $Battler
 
 var health:
@@ -10,8 +13,10 @@ var energy:
 	get:
 		return self.battler.stats.energy
 		
-func _on_interactable_area_body_entered(_body):
-	BattleService.start_mook_battle(true)
+func _on_interactable_area_body_entered(body):
+	emit_signal("touched", body)
+	if battle_on_contact:
+		BattleService.start_mook_battle(true)
 
 func show_toast(text: String, color: Color=Color.WHITE):
 	await self.battler.show_toast(text, color)

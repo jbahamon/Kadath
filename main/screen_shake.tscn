@@ -1,13 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://bibiysotd3rmq"]
+[gd_scene load_steps=3 format=3 uid="uid://bibiysotd3rmq"]
 
 [ext_resource type="Script" path="res://main/screen_shake.gd" id="1"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_r0xrx"]
+
 [node name="ScreenShake" type="Node"]
 script = ExtResource("1")
+noise = SubResource("FastNoiseLite_r0xrx")
 
 [node name="Frequency" type="Timer" parent="."]
 
 [node name="Duration" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="timeout" from="Frequency" to="." method="_on_Freq_timeout"]
 [connection signal="timeout" from="Duration" to="." method="_on_Duration_timeout"]

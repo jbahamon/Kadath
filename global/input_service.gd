@@ -7,7 +7,9 @@ var input_enabled = false
 func initialize(init_scene: Node):
 	self.scene = init_scene
 	
-
+func exit():
+	self.scene = null
+	
 func is_input_enabled():
 	return self.input_enabled
 	

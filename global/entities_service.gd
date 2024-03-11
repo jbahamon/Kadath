@@ -2,18 +2,27 @@ extends Node
 
 var PartyScene = preload("res://party/party.tscn")
 
-var party: Party
-var proxy: PlayerProxy
+var party: Party = null
+var proxy: PlayerProxy = null
 
 func _init():
-	self.party = PartyScene.instantiate()
-	self.add_child(party)
 	self.add_to_group("save")
 
 func initialize(init_proxy: PlayerProxy):
+	self.party = PartyScene.instantiate()
+	
+	# Starting equipment for prologue
+	self.party.inventory.set("potion", 10)
+	self.party.inventory.set("salts", 4)
+	self.add_child(party)
+
 	self.proxy = init_proxy
 	self.proxy.set_mode(PlayerProxy.ProxyMode.NOT_THERE)
 
+func exit():
+	self.party = null
+	self.proxy = null
+	
 func bind_proxy():
 	self.proxy.set_target(self.party)
 	
@@ -61,4 +70,6 @@ func on_exit_room():
 func on_enter_room():
 	self.party.add_to_room()
 	
-	
+func stop():
+	self.party.queue_free()
+	self.proxy.queue_free()

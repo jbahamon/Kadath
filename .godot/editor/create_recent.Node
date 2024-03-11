@@ -1,9 +1,9 @@
-NPCMovement
-Path2D
 Marker2D
 EnemySpot
 AnimationPlayer
+Path2D
 Sprite2D
+NPCMovement
 CompositeBattleOption
 Control
 VSeparator

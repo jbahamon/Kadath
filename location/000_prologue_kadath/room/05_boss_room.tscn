@@ -1,14 +1,67 @@
-[gd_scene load_steps=6 format=3 uid="uid://ip7anni7emmc"]
+[gd_scene load_steps=14 format=3 uid="uid://ip7anni7emmc"]
 
 [ext_resource type="TileSet" uid="uid://cb1f6r4xpgnc0" path="res://location/lib/resource/tile/cave.tres" id="1_f8iux"]
 [ext_resource type="Script" path="res://location/000_prologue_kadath/room/05_boss_room.gd" id="2_0db23"]
 [ext_resource type="PackedScene" uid="uid://sfld8pt3bwlw" path="res://location/lib/script/object/warp.tscn" id="3_eyb6e"]
+[ext_resource type="PackedScene" uid="uid://dpc8xvvcbyotf" path="res://npc/enemy/sentry/sentry.tscn" id="4_8nm5n"]
+[ext_resource type="PackedScene" uid="uid://k1y4abtqqro7" path="res://location/lib/script/object/battle_spot.tscn" id="5_jdwon"]
+[ext_resource type="Script" path="res://party/character_stats.gd" id="5_vkmne"]
+[ext_resource type="Script" path="res://location/lib/script/object/enemy_spot.gd" id="6_mblpi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4lfqm"]
 size = Vector2(69, 28)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5avj4"]
-size = Vector2(96, 20)
+size = Vector2(288, 19)
+
+[sub_resource type="Resource" id="Resource_fnxpo"]
+resource_local_to_scene = true
+script = ExtResource("5_vkmne")
+max_health = 1
+max_energy = 0
+attack = 1
+defense = 1
+magic_attack = 1
+magic_defense = 1
+luck = 1
+speed = 1
+
+[sub_resource type="Animation" id="Animation_jk7fo"]
+resource_name = "boss_enter"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Boss:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Boss/Anim/Sprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -120), Vector2(0, -12)]
+}
+
+[sub_resource type="Animation" id="Animation_q7lv6"]
+resource_name = "default"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rk4g2"]
+_data = {
+"boss_enter": SubResource("Animation_jk7fo"),
+"default": SubResource("Animation_q7lv6")
+}
 
 [node name="Room" type="TileMap"]
 y_sort_enabled = true
@@ -38,10 +91,56 @@ shape = SubResource("RectangleShape2D_4lfqm")
 [node name="NorthGate" type="Area2D" parent="."]
 position = Vector2(0, -157)
 collision_layer = 0
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NorthGate"]
 shape = SubResource("RectangleShape2D_5avj4")
 
+[node name="BossTrigger" type="Area2D" parent="."]
+position = Vector2(0, -86)
+collision_layer = 0
+monitorable = false
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossTrigger"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_5avj4")
+
+[node name="Boss" parent="." instance=ExtResource("4_8nm5n")]
+visible = false
+position = Vector2(0, -108)
+metadata/_edit_group_ = true
+
+[node name="Battler" parent="Boss" index="1"]
+stats = SubResource("Resource_fnxpo")
+
+[node name="CollisionShape2D" parent="Boss" index="2"]
+disabled = true
+
+[node name="BattleSpot" parent="." instance=ExtResource("5_jdwon")]
+position = Vector2(0, -108)
+
+[node name="Marker2D" type="Marker2D" parent="BattleSpot/PartySpots" index="0"]
+position = Vector2(-56, 58)
+
+[node name="Marker2D2" type="Marker2D" parent="BattleSpot/PartySpots" index="1"]
+position = Vector2(56, 58)
+
+[node name="EnemySpot" type="Marker2D" parent="BattleSpot/EnemySpots" index="0"]
+script = ExtResource("6_mblpi")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "default"
+libraries = {
+"": SubResource("AnimationLibrary_rk4g2")
+}
+
 [connection signal="body_entered" from="NorthGate" to="." method="_on_north_gate_body_entered"]
+[connection signal="body_entered" from="BossTrigger" to="." method="_on_boss_trigger_body_entered"]
 
 [editable path="SouthWarp"]
+[editable path="Boss"]
+[editable path="Boss/Anim"]
+[editable path="Boss/Battler"]
+[editable path="Boss/Battler/Toast"]
+[editable path="BattleSpot"]

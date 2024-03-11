@@ -12,7 +12,7 @@ script/source = "extends Area2D
 
 
 func on_player_interaction(player):
-		parent.on_player_interaction(player)
+	parent.on_player_interaction(player)
 	
 "
 
