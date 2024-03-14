@@ -13,7 +13,7 @@ func exit():
 
 func update_camera_bounds(origin: Vector2, tilemap_limits: Rect2i, tile_size: Vector2i):
 	
-	var screen_width = ProjectSettings.get_setting("display/window/size/viewport_width")
+	var screen_width = sub_viewport.size.x
 	var room_width = (tilemap_limits.end.x - tilemap_limits.position.x) * tile_size.x
 	
 	if room_width < screen_width:
@@ -24,7 +24,7 @@ func update_camera_bounds(origin: Vector2, tilemap_limits: Rect2i, tile_size: Ve
 		self.camera.limit_left = int(origin.x + tilemap_limits.position.x * tile_size.x)
 		self.camera.limit_right = int(origin.x + tilemap_limits.end.x * tile_size.x)
 	
-	var screen_height = ProjectSettings.get_setting("display/window/size/viewport_height")
+	var screen_height = sub_viewport.size.y
 	var room_height = (tilemap_limits.end.y - tilemap_limits.position.y) * tile_size.y
 	
 	if room_height < screen_height:

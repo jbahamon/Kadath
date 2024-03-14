@@ -88,10 +88,11 @@ script = ExtResource("4_pfasm")
 enemy = "Sentry"
 
 [node name="Warp" parent="." instance=ExtResource("5_3ltby")]
-position = Vector2(-24, 370)
+position = Vector2(-24, 392)
 room_id = "01_entrance"
-target_position = Vector2(0, -136)
-target_orientation = Vector2(0, -1)
+target_position = Vector2(0, -150)
+target_orientation = Vector2(0, 1)
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" parent="Warp" index="0"]
 position = Vector2(24, 1)

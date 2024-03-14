@@ -107,7 +107,6 @@ func move_to(target: Vector2, speed = WALK_SPEED):
 	await get_tree().create_timer(time).timeout
 	self.position = target
 	self.velocity = Vector2.ZERO
-	self.start_auto_movement()
 	self.set_physics_process(was_processing_physics)
 	
 func disable_collisions():
@@ -132,4 +131,5 @@ func resume():
 	self.emit_signal("resumed")
 	
 func on_enter_battle():
-	self.interactable_collision.set_disabled(true)
+	self.stop_auto_movement()
+	self.interactable_collision.call_deferred("set_disabled", true)
