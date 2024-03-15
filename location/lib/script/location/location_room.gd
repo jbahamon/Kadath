@@ -2,6 +2,7 @@ extends TileMap
 
 class_name LocationRoom
 
+@export var room_id: String
 @export var clear_color = Color.BLACK
 
 func on_enter():

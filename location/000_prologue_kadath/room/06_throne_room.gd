@@ -24,5 +24,6 @@ func show_spooks():
 func show_title_card():
 	var party = EntitiesService.get_party()
 	party.set_physics_process(false)
+	SceneSwitcher.current_scene.exit()
 	
 	SceneSwitcher.go_to_scene("res://ui/04_templates/other/demo_end.tscn")

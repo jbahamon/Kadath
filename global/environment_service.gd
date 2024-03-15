@@ -37,7 +37,7 @@ func update_whereabouts(
 	
 	fade = fade and old_location != null
 	
-	if (old_location != null and location_id != old_location.location_id and
+	if (old_location != null and location_id == old_location.location_id and
 		old_room != null and room_id == old_room.room_id):
 		return
 	
