@@ -22,6 +22,7 @@ script = ExtResource("2_i7pxu")
 tab_alignment = 1
 
 [node name="Party" parent="PauseMenuTabs" instance=ExtResource("4")]
+visible = false
 layout_mode = 2
 theme_override_styles/panel = ExtResource("9_rtvui")
 
@@ -30,7 +31,6 @@ visible = false
 layout_mode = 2
 
 [node name="Settings" type="PanelContainer" parent="PauseMenuTabs"]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -43,5 +43,7 @@ layout_mode = 2
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="exit_submenu" from="PauseMenuTabs/Party" to="PauseMenuTabs" method="focus_current_tab"]
 [connection signal="exit_submenu" from="PauseMenuTabs/Items" to="PauseMenuTabs" method="focus_current_tab"]
+[connection signal="exit_submenu" from="PauseMenuTabs/Settings" to="PauseMenuTabs" method="focus_current_tab"]
+[connection signal="exit" from="PauseMenuTabs/Settings/SettingsMenu" to="PauseMenuTabs/Settings" method="_on_settings_menu_exit"]
 
 [editable path="PauseMenuTabs/Party"]

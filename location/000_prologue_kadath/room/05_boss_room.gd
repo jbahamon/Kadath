@@ -15,7 +15,10 @@ func _on_boss_trigger_body_entered(body):
 	if not body is PlayerProxy:
 		return
 	$BossTrigger.set_deferred("monitoring", false)
-	EntitiesService.get_proxy().set_mode(PlayerProxy.ProxyMode.CUTSCENE)
+	
+	var proxy = EntitiesService.get_proxy()
+	proxy.set_mode(PlayerProxy.ProxyMode.CUTSCENE)
+	proxy.play_anim("idle")
 
 	animation_player.play("boss_enter")
 	await animation_player.animation_finished

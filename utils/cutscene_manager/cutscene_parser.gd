@@ -154,7 +154,7 @@ func parse_instruction(stack: Array, instruction_name: String, args: String):
 				movement = self.parse_vector2(move_match.get_string("Displacement"))
 			
 			var time_match = move_match.get_string("Time")
-			var time = self.parse_float(time_match) if time_match != null else 0
+			var time = self.parse_float(time_match) if time_match != null else 0.0
 			
 			instruction = MoveCamera.new(movement, mode, time)
 				

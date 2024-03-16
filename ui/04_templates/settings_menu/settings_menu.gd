@@ -1,5 +1,7 @@
 extends ScrollContainer
 
+signal exit
+
 # Order is important here
 const labels = {
 	"ui_up": "Up",
@@ -13,11 +15,14 @@ const labels = {
 }
 
 var buttons: Dictionary
+var focus_in_tree = false
 
 @onready var grid: GridContainer = $CenterContainer/Settings/InputVBox/InputControls
 @onready var input_popup: Popup = $Popups/ListenForInputPopup
 @onready var text_speed_slider = $CenterContainer/Settings/Sliders/TextSpeedSlider
 
+func _init():
+	set_process_unhandled_input(false)
 
 func _ready():
 	input_popup.popup_window = false
@@ -28,6 +33,7 @@ func _ready():
 		link_buttons()
 	
 	self.on_grab_focus()
+	
 
 func add_input_option(action: String, label_text: String):
 	add_label(label_text)
@@ -104,11 +110,16 @@ func _on_ListenForInputPopup_key_pressed(action: String, event: InputEventKey):
 	buttons[action].grab_click_focus()
 	buttons[action].text = "<%s>" % OS.get_keycode_string(event.keycode)
 
+func _unhandled_input(event):
+	if event.is_action_pressed("ui_cancel"):
+		emit_signal("exit")
+		get_viewport().set_input_as_handled()
+		set_process_unhandled_input(false)
+		
+		
 func on_grab_focus():
 	var first_element = $CenterContainer/Settings/Sliders/MusicVolumeSlider
 
 	first_element.grab_focus()
 	first_element.grab_click_focus()
-
-func on_release_focus():
-	return
+	set_process_unhandled_input(true)

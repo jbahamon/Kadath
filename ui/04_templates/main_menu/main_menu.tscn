@@ -81,3 +81,4 @@ mouse_filter = 2
 [connection signal="pressed" from="Main Menu/VBoxContainer/Menu Options/Settings" to="Main Menu" method="_on_Settings_pressed"]
 [connection signal="pressed" from="Main Menu/VBoxContainer/Menu Options/Quit" to="Main Menu" method="_on_Quit_pressed"]
 [connection signal="about_to_popup" from="Main Menu/Popups/Settings" to="Main Menu/Popups/Settings" method="on_about_to_popup"]
+[connection signal="exit" from="Main Menu/Popups/Settings/SettingsMenu" to="Main Menu/Popups/Settings" method="hide"]

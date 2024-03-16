@@ -196,4 +196,3 @@ func set_tab_disabled(i: int, value: bool):
 
 func set_current_tab(i: int):
 	tabs_container.get_child(i).button_pressed = true
-	

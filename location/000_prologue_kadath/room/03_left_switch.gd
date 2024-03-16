@@ -7,7 +7,7 @@ func on_enter():
 	if VarsService.get_flag("kadath.left_barrier"):
 		solve_room()
 	
-func _on_cultist_touched(proxy: PlayerProxy):
+func _on_cultist_touched(_proxy: PlayerProxy):
 	CutsceneService.play_cutscene_from_file("res://location/000_prologue_kadath/cutscene/caught.cutscene")
 
 func _on_paten_player_interaction(proxy: PlayerProxy):

@@ -94,11 +94,13 @@ frame = 3
 [node name="AnimationTree" parent="RightGhoul/Anim" index="1"]
 parameters/idle/blend_position = Vector2(-0.622146, -0.485294)
 
-[node name="Peters" parent="." instance=ExtResource("5_t4523")]
+[node name="Pickman" parent="." instance=ExtResource("5_t4523")]
 position = Vector2(-16, -136)
+display_name = "Pickman"
+dialog_name = "pickman_waiting"
 metadata/_edit_group_ = true
 
-[node name="Anim" parent="Peters" instance=ExtResource("8_xselo")]
+[node name="Anim" parent="Pickman" instance=ExtResource("8_xselo")]
 
 [connection signal="body_entered" from="NorthGate" to="NorthGate" method="_on_body_entered"]
 [connection signal="body_entered" from="SouthGate" to="SouthGate" method="_on_body_entered"]

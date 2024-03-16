@@ -17,4 +17,5 @@ script = ExtResource("1_y25qy")
 layout_mode = 2
 
 [node name="DialogBox" parent="." instance=ExtResource("3_bjf7l")]
+custom_minimum_size = Vector2(0, 148)
 layout_mode = 2

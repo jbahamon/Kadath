@@ -358,7 +358,7 @@ func deal_experience(party: Party, experience: int):
 		party_member.update_stats()
 		
 		if previous_level != party_member.level:
-			await self.ui.prompt("%s leveled up" % party_member.display_name)
+			await self.ui.prompt("%s leveled up!" % party_member.display_name)
 
 func deal_items(party: Party, loot_bag: Dictionary):
 	for loot in loot_bag:
