@@ -19,8 +19,6 @@ func execute(tree: SceneTree):
 	
 	if not self._completed:
 		await self.completed
-	
-		
 		
 func _call_instruction(tree: SceneTree, instruction) -> void:
 	await instruction.run(tree)

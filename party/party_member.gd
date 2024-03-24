@@ -8,11 +8,11 @@ var PartyMemberSummary = preload("res://ui/02_molecules/party_member_summary/par
 
 
 enum Id {
-	ARDEN = 1 << 0,
+	ALEX = 1 << 0,
 	VOLKI = 1 << 1,
 	GRUSKA = 1 << 2,
 	LENG = 1 << 3,
-	PETERS = 1 << 4,
+	PICKMAN = 1 << 4,
 	KURANES = 1 << 5,
 }
 
@@ -20,7 +20,7 @@ enum Id {
 @onready var anim = $Anim
 @onready var battler: Battler = $Battler
 
-@export_flags ("ARDEN", "ZOOG", "KIT", "LENG", "UPTON", "KURANES") var id: int = Id.ARDEN
+@export_flags ("ALEX", "ZOOG", "KIT", "LENG", "PICKMAN", "KURANES") var id: int = Id.ALEX
 @export var display_name: String
 @export var growth: Resource
 @export var unlocked = false
@@ -32,6 +32,7 @@ var equipped_helmet: Helmet : set = set_helmet
 var equipped_armor: Armor : set = set_armor
 var equipped_accessory: Accessory : set = set_accessory
 
+var current_orientation = Vector2.DOWN
 var velocity: Vector2 = Vector2.ZERO
 
 var health:
@@ -202,18 +203,21 @@ func get_current_anim():
 func play_anim(anim_name: String):
 	self.anim.play_anim(anim_name)
 	
-func set_orientation(orientation: Vector2):
-	self.anim.set_orientation(orientation)
+func set_orientation(new_orientation: Vector2):
+	self.current_orientation = new_orientation
+	self.anim.set_orientation(new_orientation)
 	
-func move_to(target: Vector2, speed: float):
+func move_to(target: Array, speed: float):
 	assert(speed > 0)
+	var target_position = Vector2(
+		target[0] if target[0] != null else self.global_position.x,
+		target[1] if target[1] != null else self.global_position.y
+	)
 	var was_processing_physics = self.is_physics_processing()
-	var time = (self.global_position - target).length()/speed
-	self.velocity = (target - self.global_position).normalized() * speed
+	var time = (self.global_position - target_position).length()/speed
+	self.velocity = (target_position - self.global_position).normalized() * speed
 	self.set_physics_process(true)
 	await get_tree().create_timer(time).timeout
+	self.global_position = target_position
 	self.velocity = Vector2.ZERO
 	self.set_physics_process(was_processing_physics)
-
-func unlock():
-	self.unlocked = true

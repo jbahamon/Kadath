@@ -83,8 +83,10 @@ script = ExtResource("2_0db23")
 room_id = "05_boss_room"
 
 [node name="SouthWarp" parent="." instance=ExtResource("3_eyb6e")]
-position = Vector2(0, 112)
+position = Vector2(0, 144)
 room_id = "02_hub"
+target_position = Vector2(0, -232)
+target_orientation = Vector2(0, 1)
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" parent="SouthWarp" index="0"]

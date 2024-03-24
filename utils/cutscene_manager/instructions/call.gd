@@ -12,6 +12,6 @@ func _init(init_entity_name: String, init_function_name: String, init_args: Arra
 func execute(_tree: SceneTree):
 	var entity: Node = EntitiesService.get_entity(self.entity_name)
 	await entity.callv(self.function_name, self.args)
-	
+
 func _to_string():
 	return "call %s.%s(%s)" % [self.entity_name, self.function_name, self.args]

@@ -1,10 +1,10 @@
 extends "res://utils/cutscene_manager/instructions/cutscene_instruction.gd"
 
 var entity_name: String
-var position: Vector2
+var position: Array
 var speed: float
 
-func _init(init_entity_name: String, init_position: Vector2, init_speed: float):
+func _init(init_entity_name: String, init_position: Array, init_speed: float):
 	self.entity_name = init_entity_name
 	self.position = init_position
 	self.speed = init_speed

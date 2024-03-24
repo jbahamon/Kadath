@@ -3,7 +3,7 @@ extends LocationRoom
 @onready var animation_player = $AnimationPlayer
 @onready var paten = $Paten
 
-func on_enter():
+func setup():
 	if VarsService.get_flag("kadath.left_barrier"):
 		solve_room()
 	

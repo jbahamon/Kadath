@@ -1,0 +1,13 @@
+PLAY_ANIM PROXY idle
+START_DIALOG pickman_catch_up
+LOOK PROXY DOWN
+CALL ROOM spawn_pickman
+WALK NPCPickman TO (_, 92) AT 60
+START_DIALOG pickman_recruit
+WALK NPCPickman TO (_, 71) AT 60
+SIMULTANEOUS
+	CALL NPCPickman queue_free
+	CALL ROOM unlock_pickman
+END
+
+START_DIALOG pickman_join

@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://jekjd0u7io0t"]
+
+[ext_resource type="PackedScene" uid="uid://bomxx7doloqmu" path="res://party/party_member.tscn" id="1_0oesc"]
+[ext_resource type="Resource" uid="uid://b4nbxe88mk82q" path="res://party/base_growth.tres" id="2_baeor"]
+[ext_resource type="Texture2D" uid="uid://c7iv4j4yioinv" path="res://party/alex/icon.png" id="3_qyy1i"]
+[ext_resource type="Script" path="res://party/alex/skill/charge.gd" id="4_kuvvg"]
+[ext_resource type="PackedScene" uid="uid://cvjv5trx5nv4o" path="res://party/alex/anim.tscn" id="5_de00w"]
+
+[node name="Alex" instance=ExtResource("1_0oesc")]
+id = 1
+display_name = "Alex"
+growth = ExtResource("2_baeor")
+unlocked = true
+experience = 1
+icon = ExtResource("3_qyy1i")
+
+[node name="Battler" parent="." index="0"]
+anim_path = NodePath("../Anim")
+
+[node name="Charge" type="Node" parent="Battler/Actions/Skill" index="0"]
+script = ExtResource("4_kuvvg")
+cost = 50
+display_name = "Charge"
+description = "Charge an enemy with your weapon"
+
+[node name="Anim" parent="." index="1" instance=ExtResource("5_de00w")]
+
+[editable path="Battler"]
+[editable path="Battler/Toast"]

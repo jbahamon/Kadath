@@ -26,10 +26,10 @@ func _ready() -> void:
 	# nodes in the tree. This has to happen before the player proxy can be bound to the party or
 	# whatever node is being controlled; otherwise there won't be a common parent to have a path 
 	# between them.
-	
+	InputService.set_input_enabled(true)
 	self.move_to_starting_room()
 	self.bind_proxy()
-	self.start_game()
+	
 	
 func move_to_starting_room():
 	if VarsService.loaded_slot >= 0:
@@ -40,18 +40,16 @@ func move_to_starting_room():
 		EnvironmentService.update_whereabouts(
 			"000_prologue_kadath", 
 			"05_boss_room",
-			Vector2(0, 0), #Vector2.ZERO,
+			Vector2.ZERO,
 			Vector2.UP,
 			false
 		)
+		EntitiesService.get_party().set_unlocked(PartyMember.Id.PICKMAN, true)
+		EntitiesService.get_proxy().set_mode(PlayerProxy.ProxyMode.GAMEPLAY)
 		
 func bind_proxy():
 	EntitiesService.bind_proxy()
 	
-func start_game():
-	InputService.set_input_enabled(true)
-	EntitiesService.get_proxy().set_mode(PlayerProxy.ProxyMode.GAMEPLAY)
-
 func exit():
 	BattleService.exit()
 	CameraService.exit()

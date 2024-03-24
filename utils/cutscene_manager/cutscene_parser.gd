@@ -36,11 +36,14 @@ func _init():
 	patterns["MOVE"] = RegEx.new()
 	patterns["MOVE"].compile("^(?<Character>.+) TO (?<Position>[^a-zA-Z]+)( AT (?<Speed>.+))?$")
 	
-	patterns["MOVE_CAMERA_TO"] = RegEx.new()
-	patterns["MOVE_CAMERA_TO"].compile("TO (?<Position>[^a-zA-Z]+)( IN (?<Time>.+))?$")
+	patterns["MOVE_CAMERA_TO_POSITION"] = RegEx.new()
+	patterns["MOVE_CAMERA_TO_POSITION"].compile("TO (?<Position>[^a-zA-Z]+)( IN (?<Time>.+))?$")
+	
+	patterns["MOVE_CAMERA_TO_ENTITY"] = RegEx.new()
+	patterns["MOVE_CAMERA_TO_ENTITY"].compile("TO (?<Entity>[^ ]+)( IN (?<Time>.+))?$")
 	
 	patterns["MOVE_CAMERA_BY"] = RegEx.new()
-	patterns["MOVE_CAMERA_BY"].compile("(?<Displacement>[^a-zA-Z]+)( IN (?<Time>.+))?$")
+	patterns["MOVE_CAMERA_BY"].compile("BY (?<Displacement>[^a-zA-Z]+)( IN (?<Time>.+))?$")
 	
 	patterns["SET_POSITION"] = RegEx.new()
 	patterns["SET_POSITION"].compile("^(?<Character>.+) TO (?<Position>.+)$")
@@ -58,7 +61,7 @@ func _init():
 	patterns["PLAY_ANIM"].compile("^(?<Character>.+) (?<Anim>.+)$")
 	
 	patterns["CALL"] = RegEx.new()
-	patterns["CALL"].compile("^(?<Entity>.+) (?<FunctionName>.+)( (?<Args>.*)$|$)")
+	patterns["CALL"].compile("^(?<Entity>[^ ]+) (?<FunctionName>[^ ]+)( (?<Args>.*)$|$)")
 	
 	patterns["START_DIALOG"] = RegEx.new()
 	patterns["START_DIALOG"].compile("^(?<DialogId>[^ ]+ *).*$")
@@ -138,25 +141,8 @@ func parse_instruction(stack: Array, instruction_name: String, args: String):
 			)
 		
 		CutsceneInstruction.Type.MOVE_CAMERA:
-			var mode: String
-			var move_match: RegExMatch = self.patterns["MOVE_CAMERA_TO"].search(args)
-			var movement = move_match.get_string("Position")
 			
-			if move_match != null:
-				if movement == null:
-					mode = "target_entity"
-				else:
-					mode = "target_position"
-					movement = self.parse_vector2(movement)
-			else:
-				mode = "displacement"
-				move_match = self.patterns["MOVE_CAMERA_BY"].search(args)
-				movement = self.parse_vector2(move_match.get_string("Displacement"))
-			
-			var time_match = move_match.get_string("Time")
-			var time = self.parse_float(time_match) if time_match != null else 0.0
-			
-			instruction = MoveCamera.new(movement, mode, time)
+			instruction = self.parse_move_camera(args)
 				
 		CutsceneInstruction.Type.ASSIGN_CAMERA:
 			instruction = AssignCamera.new(self.parse_string(args))
@@ -171,7 +157,7 @@ func parse_instruction(stack: Array, instruction_name: String, args: String):
 		CutsceneInstruction.Type.LOOK_AT:
 			var look_at_match: RegExMatch = self.patterns["LOOK_AT"].search(args)
 			
-			var target = self.parse_vector2(look_at_match.get_string("Target"))
+			var target = self.parse_vector2_opt(look_at_match.get_string("Target"))
 			
 			if target == null:
 				target = self.parse_string(look_at_match.get_string("Target"))
@@ -211,7 +197,7 @@ func parse_instruction(stack: Array, instruction_name: String, args: String):
 		CutsceneInstruction.Type.WALK:
 			var walk_match: RegExMatch = self.patterns["WALK"].search(args)
 			var entity = self.parse_string(walk_match.get_string("Character"))
-			var target = self.parse_vector2(walk_match.get_string("Position"))
+			var target = self.parse_vector2_opt(walk_match.get_string("Position"))
 			var speed = self.parse_float(walk_match.get_string("Speed"))
 			instruction = Sequential.new()
 			instruction.add_instruction(LookAt.new(entity, target))
@@ -224,7 +210,7 @@ func parse_instruction(stack: Array, instruction_name: String, args: String):
 			var speed_match = walk_match.get_string("Speed")
 			instruction = Move.new(
 				self.parse_string(walk_match.get_string("Character")),
-				self.parse_vector2(walk_match.get_string("Position")),
+				self.parse_vector2_opt(walk_match.get_string("Position")),
 				self.parse_float(speed_match) if speed_match != null else INF
 			)
 		CutsceneInstruction.Type.PLAY_ANIM:
@@ -315,6 +301,18 @@ func parse_vector2(position_string: String):
 		)
 	else:
 		return null
+		
+
+func parse_vector2_opt(array_string: String):
+	var position_match: RegExMatch = self.patterns["VECTOR2"].search(array_string)
+	
+	if position_match != null:
+		return [
+			float(position_match.get_string("X")) if position_match.get_string("X").strip_edges() != "_" else null,
+			float(position_match.get_string("Y")) if position_match.get_string("Y").strip_edges() != "_" else null
+		]
+	else:
+		return null
 
 func parse_direction(direction_string: String) -> Vector2:
 	match direction_string.strip_edges():
@@ -328,3 +326,37 @@ func parse_direction(direction_string: String) -> Vector2:
 			return Vector2.RIGHT
 		_:
 			return Vector2.DOWN
+
+func parse_move_camera(args: String):
+	var movement
+	var time_match
+	var time
+	
+	var move_match: RegExMatch = self.patterns["MOVE_CAMERA_TO_POSITION"].search(args)
+	if move_match != null:
+		time_match = move_match.get_string("Time")
+		time = self.parse_float(time_match) if time_match != null else 0.0
+		return MoveCamera.new(
+			self.parse_vector2(move_match.get_string("Position")),
+			"target_position",
+			time
+		)
+	
+	move_match = self.patterns["MOVE_CAMERA_TO_ENTITY"].search(args)
+	if move_match != null:
+		time_match = move_match.get_string("Time")
+		time = self.parse_float(time_match) if time_match != null else 0.0
+		return MoveCamera.new(
+			move_match.get_string("Entity"),
+			"target_entity",
+			time
+		)
+		
+	move_match = self.patterns["MOVE_CAMERA_BY"].search(args)
+	time_match = move_match.get_string("Time")
+	time = self.parse_float(time_match) if time_match != null else 0.0
+	return MoveCamera.new(
+		self.parse_vector2(move_match.get_string("Displacement")),
+		"displacement",
+		time
+	)

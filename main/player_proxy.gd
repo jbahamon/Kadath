@@ -15,8 +15,6 @@ enum TargetType {
 @export var walk_speed: float = 100.0
 @export var interaction_vector = Vector2(16, 16)
 
-
-
 var input_vector = Vector2.ZERO
 var automated = false
 var target: Node2D
@@ -124,15 +122,19 @@ func get_display_name() -> String:
 func _set_process_collisions(value: bool):
 	self.collision.set_deferred("disabled", not value)
 
-func move_to(target_position: Vector2, speed):
+func move_to(target: Array, speed):
 	assert(speed > 0)
+	var target_position = Vector2(
+		target[0] if target[0] != null else self.global_position.x,
+		target[1] if target[1] != null else self.global_position.y
+	)
 	var previous_mode = self.current_mode
 	self.set_mode(ProxyMode.CUTSCENE)
 	var time = max((global_position - target_position).length()/speed - 1/30.0, 0)
 	
 	self.velocity = (target_position - global_position).normalized() * speed
 	await get_tree().create_timer(time).timeout
-	self.position = target_position
+	self.global_position = target_position
 	self.velocity = Vector2.ZERO
 	self.set_mode(previous_mode)
 

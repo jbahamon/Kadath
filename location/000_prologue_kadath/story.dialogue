@@ -20,7 +20,7 @@ Carter: At last, we have arrived. Let us finish this.
 => END
 
 ~ entrance_pickman
-Pickman: Still want to do this? We just lost the majority of our allies.
+Pickman: Still want to do this? We just lost most of our allies.
 => END
 
 
@@ -32,9 +32,16 @@ Carter: I must.
 Move around with [{ui_up}]/[{ui_left}]/[{ui_down}]/[{ui_right}]. You can interact with individuals and objects with [{ui_accept}], and cancel with [{ui_cancel}].
 => END
 
+~ pickman_catch_up
+Pickman: Wait a second.
+=> END
+
 ~ pickman_recruit
-Pickman: So you will not retreat.
+Pickman: You will not retreat, huh...
 Pickman: Very well, I shall see this through too.
+=> END
+
+~ pickman_join
 Pickman joined your party!
 => END
 
@@ -46,7 +53,7 @@ Carter: Let's go.
 Carter: Gods of Earth! Cease your hiding and grant me passage to the Sunset City.
 => END
 
-~ peters_warning
+~ pickman_warning
 Pickman: Wait. Something's wrong. The Other Gods, their messeng-
 => END
 

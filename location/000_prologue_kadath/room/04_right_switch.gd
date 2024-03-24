@@ -5,7 +5,7 @@ const RESPONSE_YES = "yes"
 @onready var animation_player = $AnimationPlayer
 @onready var chalice = $Chalice
 
-func on_enter():
+func setup():
 	if VarsService.get_flag("kadath.right_barrier"):
 		solve_room()
 		

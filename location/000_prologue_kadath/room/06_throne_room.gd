@@ -1,7 +1,10 @@
 extends LocationRoom
 
+func lock_pickman():
+	EntitiesService.get_party().set_unlocked(PartyMember.Id.PICKMAN, false)
+	
 func fade_companion():
-	var companion = $Peters
+	var companion = $NPCPickman
 	var tween = get_tree().create_tween()
 	tween.tween_property(companion, "modulate", Color(0,0,0,1), 0.5)
 	tween.tween_property(companion, "modulate", Color(0,0,0,0), 0.5)

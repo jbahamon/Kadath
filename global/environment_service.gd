@@ -80,6 +80,7 @@ func move_to_room(
 	target_orientation: Vector2
 ) -> bool:
 	var room = current_location.instantiate_room(room_id)
+	room.setup()
 	var proxy: PlayerProxy = EntitiesService.get_proxy()
 	var proxy_target = proxy.target
 	var proxy_name = proxy_target.name if proxy_target != null else null

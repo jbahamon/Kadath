@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://dehii02b2xc8o"]
+
+[ext_resource type="PackedScene" uid="uid://bomxx7doloqmu" path="res://party/party_member.tscn" id="1_puo4q"]
+[ext_resource type="Resource" uid="uid://efimamnfjman" path="res://party/pickman/growth.tres" id="2_4fg7o"]
+[ext_resource type="Texture2D" uid="uid://df0sy0xr60rtd" path="res://party/pickman/icon.png" id="3_psao1"]
+[ext_resource type="PackedScene" uid="uid://cv5wwoeq1pjb7" path="res://party/pickman/anim.tscn" id="4_xux0q"]
+
+[node name="Pickman" instance=ExtResource("1_puo4q")]
+id = 16
+growth = ExtResource("2_4fg7o")
+icon = ExtResource("3_psao1")
+
+[node name="Battler" parent="." index="0"]
+anim_path = NodePath("../Anim")
+
+[node name="Anim" parent="." index="1" instance=ExtResource("4_xux0q")]
+
+[editable path="Battler"]
+[editable path="Battler/Toast"]

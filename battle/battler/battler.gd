@@ -134,7 +134,7 @@ func play_anim(anim_name: String):
 func set_orientation(orientation: Vector2):
 	self.get_parent().set_orientation(orientation)
 	
-func move_to(target_position: Vector2, move_speed: float):
+func move_to(target_position: Array, move_speed: float):
 	await self.get_parent().move_to(target_position, move_speed)
 
 func is_party_member():

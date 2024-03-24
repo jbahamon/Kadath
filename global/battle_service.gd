@@ -8,6 +8,7 @@ const Item = preload("res://battle/action/item.gd")
 const Escape = preload("res://battle/action/escape.gd")
 const BattleEndState = preload("res://battle/battle_end_state.gd")
 
+const FadeOverlay = preload("res://utils/cutscene_manager/instructions/fade_overlay.gd")
 # The Battle Service should handle initialization: this is, connecting characters
 # to the loop, and handling restoring everything to its normal state once the 
 # battle has finished
@@ -122,6 +123,12 @@ func start_battle(enemies: Array, escapable: bool, proxy_mode_on_finish=null):
 			self.resume_non_participants(end_proxy_mode)
 		BattleEndState.Result.LOSE: 
 			self.ui.hide()
+			var party = EntitiesService.get_party()
+			party.set_physics_process(false)
+			LayersService.get_layer("MIX").color = Color(0,0,0,0)
+			await FadeOverlay.new("MIX", Color.BLACK, 3.0).execute(get_tree())
+			SceneSwitcher.current_scene.exit()
+			SceneSwitcher.go_to_scene("res://ui/04_templates/other/demo_end.tscn")
 			print("game over :(")
 			
 	self.current_battle_parameters = null

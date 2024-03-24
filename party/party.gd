@@ -34,11 +34,25 @@ func _ready():
 
 func on_proxy_enter(proxy: PlayerProxy):
 	self.set_physics_process(true)
+	self.reset_movement()
+	
+func reset_movement():
+	var leader = self.get_leader()
 	self.movement_pointers.fill(0)
 	
+	# This is a bit of a weird fix.
+	# The proxy doesn't update the proxied entity's position right away. 
+	# So when resetting movement, the leader might not be in the 
+	# proxy's position/orientation. We enforce it
+	
+	var proxy = EntitiesService.get_proxy()
+	if proxy.current_target_type == PlayerProxy.TargetType.PARTY:
+		leader.position = proxy.position
+		leader.set_orientation(proxy.current_orientation)
+	
 	for party_member in self.active_members:
-		party_member.position = proxy.position
-		party_member.set_orientation(proxy.current_orientation)
+		party_member.position = leader.position
+		party_member.set_orientation(leader.current_orientation)
 	
 func on_proxy_exit(_proxy: PlayerProxy):
 	self.set_physics_process(false)
@@ -122,25 +136,38 @@ func get_display_name() -> String:
 	return self.active_members[0].display_name
 	
 func play_anim(anim_name: String):
-	self.active_members[0].play_anim(anim_name)
+	for member in self.active_members:
+		member.play_anim(anim_name)
 	
 func set_orientation(orientation: Vector2):
-	self.active_members[0].set_orientation(orientation)
+	for member in self.active_members:
+		member.set_orientation(orientation)
 	
-func unlock(id: PartyMember.Id):
-	for member in get_children():
+func set_unlocked(id: PartyMember.Id, unlocked: bool):
+	for member in (self.active_members + get_children()):
 		if member.id == id:
-			member.unlock()
-			self.update_active_members()
+			if member.unlocked != unlocked:
+				member.unlocked = unlocked
+				
+				self.remove_from_room()
+				self.update_active_members()
+				self.add_to_room()
+
 			return
 
+func is_unlocked(id: PartyMember.Id):
+	for member in get_children():
+		if member.id == id:
+			return member.unlocked
+	return false
+	
 func get_leader():
 	return self.active_members[0]
 
 func add_to_room():
 	var room = EnvironmentService.get_room()
-	for party_member in self.active_members:
-		room.add_child(party_member)
+	for i in range(self.active_members.size()):
+		room.add_child(self.active_members[self.active_members.size() - 1 - i])
 	
 func remove_from_room():
 	for party_member in active_members:

@@ -1,3 +1,6 @@
+Node
+CollisionShape2D
+Area2D
 Marker2D
 EnemySpot
 AnimationPlayer
@@ -13,8 +16,6 @@ Panel
 Node2D
 Label
 RichTextLabel
-Node
-CollisionShape2D
 StaticBody2D
 HFlowContainer
 MarginContainer
@@ -22,7 +23,6 @@ HBoxContainer
 CenterContainer
 ColorRect
 CanvasLayer
-Area2D
 Button
 GridContainer
 TextureButton

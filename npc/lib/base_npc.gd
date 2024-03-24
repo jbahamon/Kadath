@@ -98,14 +98,18 @@ func start_auto_movement():
 	self.set_physics_process(false)
 	self.movement_node.start()
 
-func move_to(target: Vector2, speed = WALK_SPEED):
+func move_to(target: Array, speed = WALK_SPEED):
 	assert(speed > 0)
+	var target_position = Vector2(
+		target[0] if target[0] != null else self.global_position.x,
+		target[1] if target[1] != null else self.global_position.y
+	)
 	var was_processing_physics = self.is_physics_processing()
-	var time = (self.global_position - target).length()/speed
+	var time = (self.global_position - target_position).length()/speed
 	self.stop_auto_movement()
-	self.velocity = (target - self.global_position).normalized() * speed
+	self.velocity = (target_position - self.global_position).normalized() * speed
 	await get_tree().create_timer(time).timeout
-	self.position = target
+	self.global_position = target_position
 	self.velocity = Vector2.ZERO
 	self.set_physics_process(was_processing_physics)
 	

@@ -19,7 +19,7 @@ display_name = "Sentry"
 [node name="Battler" parent="." index="1"]
 stats = ExtResource("3_l4u5g")
 
-[node name="AI" parent="Battler" index="1"]
+[node name="AI" parent="Battler" index="3"]
 script = ExtResource("4_bs2dh")
 
 [node name="CollisionShape2D" parent="." index="2"]

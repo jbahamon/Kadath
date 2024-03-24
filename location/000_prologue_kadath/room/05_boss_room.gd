@@ -1,7 +1,7 @@
 extends LocationRoom
 
 @onready var animation_player = $AnimationPlayer
-func on_enter():
+func setup():
 	if VarsService.get_flag("kadath.boss_defeated"):
 		$BossTrigger.monitoring = false
 	
