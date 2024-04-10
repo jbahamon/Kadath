@@ -16,9 +16,11 @@ func load_rooms() -> void:
 	
 	while true:
 		var file = dir.get_next()
+		
 		if file == "":
 			break
-		elif not file.begins_with(".") and file.ends_with(".tscn"):
+		elif not file.begins_with(".") and file.contains(".tscn"):
+			file = file.replace(".remap", "")
 			var room_path = "{path}/{file}".format({
 				"path": base_room_path,
 				"file": file

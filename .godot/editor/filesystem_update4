@@ -20,3 +20,4 @@ res://party/party_member.gd
 res://global/cutscene_service.gd
 res://global/battle_service.gd
 res://battle/action/lose.gd
+res://location/lib/script/location/location.gd
