@@ -21,7 +21,7 @@ func _process(delta):
 		trauma = max(trauma - decay * delta, 0)
 		shake()
 	else:
-		emit_signal("shake_finished")
+		self.shake_finished.emit()
 		self.time = 0
 		self.set_process(false)
 
@@ -37,3 +37,15 @@ func start(duration: float, shake_amplitude: Vector2):
 	self.trauma = 1.0
 	self.set_process(true)
 	return self.shake_finished
+
+func pause():
+	self.set_process(false)
+	
+func resume():
+	self.set_process(true)
+	
+func skip():
+	self.trauma = 0.0
+	self.shake_finished.emit()
+	self.time = 0
+	self.set_process(false)

@@ -88,10 +88,9 @@ func _on_category_pressed():
 		self.items.on_grab_focus()
 
 func _unhandled_input(event):
-	if event.is_action_pressed("ui_cancel"):
-		if self.is_focus_on_categories():
-			self.emit_signal("exit_submenu")
-			self.get_viewport().set_input_as_handled()
+	if event.is_action_pressed("ui_cancel") and self.is_focus_on_categories():
+		self.emit_signal("exit_submenu")
+		self.get_viewport().set_input_as_handled()
 
 func is_focus_on_categories():
 	for button in self.categories_button_group.get_buttons():

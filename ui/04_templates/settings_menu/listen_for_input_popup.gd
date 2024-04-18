@@ -8,10 +8,10 @@ var action: String
 
 
 func _ready():
-	set_process_unhandled_input(false)
+	self.set_process_unhandled_input(false)
 
 func on_about_to_popup():
-	set_process_unhandled_input(true)
+	self.set_process_unhandled_input(true)
 	
 func _unhandled_input(event):
 	if event is InputEventKey and event.pressed:

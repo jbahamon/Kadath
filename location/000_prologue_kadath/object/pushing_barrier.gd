@@ -13,11 +13,11 @@ func push_back(original_position: Vector2, speed: float):
 	await CutsceneService.play_custom_cutscene([
 		"LOOK PROXY DOWN",
 		"PLAY_ANIM PROXY idle",
-		"START_DIALOG pushing_barrier SOURCE NONE",
+		"START_DIALOGUE pushing_barrier SOURCE NONE",
 		"LOOK PROXY UP",
 		"WALK PROXY TO ({x},{y}) AT {speed}".format({
 			"x": target_position.x,
 			"y": target_position.y,
 			"speed": speed
 		}),
-	])
+	], {"pausable": false})

@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://bo1y3b4btisvv"]
 
-[ext_resource type="Script" path="res://ui/04_templates/dialog/dialog.gd" id="1_y25qy"]
+[ext_resource type="Script" path="res://ui/04_templates/dialogue_box/dialogue_box.gd" id="1_y25qy"]
 [ext_resource type="PackedScene" uid="uid://bw0gl4jgbt7fi" path="res://ui/02_molecules/dialog_source/dialog_source.tscn" id="2_exnik"]
 [ext_resource type="PackedScene" uid="uid://b8h7mj2g47i5t" path="res://ui/02_molecules/dialog_box/dialog_box.tscn" id="3_bjf7l"]
 
-[node name="Dialog" type="VBoxContainer"]
+[node name="DialogueBox" type="VBoxContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -13,9 +13,9 @@ grow_vertical = 2
 alignment = 2
 script = ExtResource("1_y25qy")
 
-[node name="DialogSource" parent="." instance=ExtResource("2_exnik")]
+[node name="Source" parent="." instance=ExtResource("2_exnik")]
 layout_mode = 2
 
-[node name="DialogBox" parent="." instance=ExtResource("3_bjf7l")]
+[node name="Content" parent="." instance=ExtResource("3_bjf7l")]
 custom_minimum_size = Vector2(0, 148)
 layout_mode = 2

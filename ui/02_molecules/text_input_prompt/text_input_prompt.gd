@@ -30,5 +30,5 @@ func close():
 	var text = line_edit.text
 	if text.strip_edges().length() > 0:
 		self.hide()
-		self.emit_signal("closed", text.strip_edges())
+		self.closed.emit(text.strip_edges())
 		self.queue_free()

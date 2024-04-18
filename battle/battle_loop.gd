@@ -40,9 +40,9 @@ func do_battle():
 			print("holi")
 		var turn = await current_actor.battler.ai.get_turn(self.actors)
 
-		emit_signal("turn_start", turn)
+		self.turn_start.emit(turn)
 		await turn.play()
-		emit_signal("turn_end", turn)
+		self.turn_end.emit(turn)
 		self.ui.update_player_state()
 		if is_battle_won():
 			self.ui.hide_timeline()
@@ -99,7 +99,7 @@ func mark_battle_as_escaped():
 	
 func on_actor_death(actor):
 	# One last chance for revival (e.g. auto revive skills, etc)
-	emit_signal("actor_dead", actor)
+	self.actor_dead.emit(actor)
 	
 	if actor.battler.is_alive:
 		return

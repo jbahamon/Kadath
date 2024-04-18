@@ -16,7 +16,7 @@ func _on_paten_player_interaction(proxy: PlayerProxy):
 	await self.move_player_to_paten(proxy)
 	
 	if VarsService.get_flag("kadath.left_barrier"):
-		await DialogService.open_dialog("paten_done")
+		await DialogueService.open_dialogue("paten_done")
 	else:
 		await self.interact_with_paten(proxy)
 	
@@ -35,14 +35,14 @@ func move_player_to_paten(proxy):
 		proxy.set_orientation(destination - proxy.position)
 		await proxy.move_to(destination, proxy.walk_speed)
 
-func interact_with_paten(proxy: PlayerProxy):
-	await DialogService.open_dialog("paten")
+func interact_with_paten(_proxy: PlayerProxy):
+	await DialogueService.open_dialogue("paten")
 
 	VarsService.set_flag("kadath.left_barrier", true)
 	animation_player.play("paten_activate")
 	await animation_player.animation_finished
 	solve_room()
-	await DialogService.open_dialog("after_paten_activation")
+	await DialogueService.open_dialogue("after_paten_activation")
 
 func solve_room():
 	

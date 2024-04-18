@@ -1,4 +1,4 @@
-extends "res://utils/cutscene_manager/instructions/cutscene_instruction.gd"
+extends CutsceneInstruction
 
 var entity_name: String
 var function_name: String
@@ -9,9 +9,9 @@ func _init(init_entity_name: String, init_function_name: String, init_args: Arra
 	self.function_name = init_function_name
 	self.args = init_args
 	
-func execute(_tree: SceneTree):
+func execute(_tree: SceneTree, _mode: ExecutionMode):
 	var entity: Node = EntitiesService.get_entity(self.entity_name)
-	await entity.callv(self.function_name, self.args)
+	entity.callv(self.function_name, self.args)
 
 func _to_string():
 	return "call %s.%s(%s)" % [self.entity_name, self.function_name, self.args]

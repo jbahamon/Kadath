@@ -17,16 +17,17 @@ func _ready():
 
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_cancel"):
-		hide()
+		self.hide()
+		self.get_viewport().set_input_as_handled()
 
 
 func update_options():
 	var new_file_previews = SavesService.get_file_previews()
 	for child in v_box.get_children():
-		v_box.remove_child(child)
+		self.v_box.remove_child(child)
 		child.queue_free()
 	
-	file_previews = new_file_previews
+	self.file_previews = new_file_previews
 	
 	var first_focusable = null	
 	for i in range(len(file_previews)):

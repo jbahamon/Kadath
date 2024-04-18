@@ -37,20 +37,20 @@ func initialize(items: Array):
 
 	
 func on_item_focused(item):
-	emit_signal("item_focused", item)
+	self.item_focused.emit(item)
 		
 func on_item_selected(item):
 	self.clear_items()
-	emit_signal("item_selected", item)
+	self.item_selected.emit(item)
 
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_cancel"):
 		self.on_cancel()
-		get_viewport().set_input_as_handled()
+		self.get_viewport().set_input_as_handled()
 
 func on_cancel():
 	self.clear_items()
-	emit_signal("item_selected", null)
+	self.item_selected.emit(null)
 	
 func clear_items():
 	self.set_process_unhandled_input(false)

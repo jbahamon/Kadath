@@ -57,7 +57,7 @@ func update_whereabouts(
 			old_location.free_rooms()
 
 		current_location = new_location
-		DialogService.load_location_dialogs(new_location)
+		DialogueService.load_location_dialogues(new_location)
 
 	if fade and old_location != null and old_room != null:
 		pass # await cutscene.animation_finished

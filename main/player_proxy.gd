@@ -22,6 +22,8 @@ var current_orientation = Vector2.ZERO
 var current_mode = ProxyMode.GAMEPLAY
 var current_target_type = TargetType.PARTY
 
+var move_timer = null
+
 @onready var raycast: RayCast2D = $RayCast2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var remote_transform: RemoteTransform2D = $RemoteTransform2D
@@ -33,11 +35,12 @@ var top_position:
 
 func _unhandled_input(event) -> void:
 	if event.is_action_pressed("ui_accept"):
-		raycast.force_raycast_update()
-		if raycast.is_colliding() and raycast.get_collider().has_method("on_player_interaction"):
+		self.raycast.force_raycast_update()
+		if self.raycast.is_colliding() and self.raycast.get_collider().has_method("on_player_interaction"):
 			self.target.play_anim("idle")
 			raycast.get_collider().on_player_interaction(self)
-
+		self.get_viewport().set_input_as_handled()
+		
 func _physics_process(_delta) -> void:
 	if self.current_mode == ProxyMode.GAMEPLAY:
 		var input_vector_changed = update_input_vector()
@@ -124,20 +127,29 @@ func _set_process_collisions(value: bool):
 
 func move_to(target: Array, speed):
 	assert(speed > 0)
+	var previous_mode = self.current_mode
+	self.set_mode(ProxyMode.CUTSCENE)
+	
 	var target_position = Vector2(
 		target[0] if target[0] != null else self.global_position.x,
 		target[1] if target[1] != null else self.global_position.y
 	)
-	var previous_mode = self.current_mode
-	self.set_mode(ProxyMode.CUTSCENE)
-	var time = max((global_position - target_position).length()/speed - 1/30.0, 0)
+	var time = max((self.global_position - target_position).length()/speed - 1/30.0, 0)
 	
-	self.velocity = (target_position - global_position).normalized() * speed
-	await get_tree().create_timer(time).timeout
+	if time > 0:
+		self.velocity = (target_position - self.global_position).normalized() * speed
+		self.move_timer = self.get_tree().create_timer(time, false)
+		await self.move_timer.timeout
+	
+	self.move_timer = null
 	self.global_position = target_position
 	self.velocity = Vector2.ZERO
 	self.set_mode(previous_mode)
 
+func skip_move_to():
+	if self.move_timer != null:
+		self.move_timer.timeout.emit()
+	
 func play_anim(anim_name: String):
 	self.target.play_anim(anim_name)
 	

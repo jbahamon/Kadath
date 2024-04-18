@@ -64,5 +64,5 @@ func _on_visibility_changed():
 		self.set_party_list_mode()
 
 func _on_party_list_cancel():
-	emit_signal("exit_submenu")
+	self.exit_submenu.emit()
 

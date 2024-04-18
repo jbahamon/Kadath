@@ -14,7 +14,7 @@ var energy:
 		return self.battler.stats.energy
 		
 func _on_interactable_area_body_entered(body):
-	emit_signal("touched", body)
+	self.touched.emit(body)
 	if battle_on_contact:
 		BattleService.start_mook_battle(true)
 

@@ -126,7 +126,7 @@ func start_battle(enemies: Array, escapable: bool, proxy_mode_on_finish=null):
 			var party = EntitiesService.get_party()
 			party.set_physics_process(false)
 			LayersService.get_layer("MIX").color = Color(0,0,0,0)
-			await FadeOverlay.new("MIX", Color.BLACK, 3.0).execute(get_tree())
+			await FadeOverlay.new("MIX", Color.BLACK, 3.0).execute(get_tree(), FadeOverlay.ExecutionMode.PLAY)
 			SceneSwitcher.current_scene.exit()
 			SceneSwitcher.go_to_scene("res://ui/04_templates/other/demo_end.tscn")
 			print("game over :(")
@@ -260,7 +260,7 @@ func set_up_battle_positions(battle_spot, party_actors: Array, non_party_actors:
 	
 	cutscene_lines.append("END")
 	
-	await CutsceneService.play_custom_cutscene(cutscene_lines)
+	await CutsceneService.play_custom_cutscene(cutscene_lines, {"pausable": false})
 	
 func get_closest_to(choices, current_position: Vector2):
 	var current_choice = null
@@ -280,16 +280,15 @@ func fade_and_delete_mooks(battle_end_state):
 	
 	for enemy_actor in battle_end_state.enemy_actors:
 		cutscene_lines.append(
-			"CALL %s die" % enemy_actor.name
+			"AWAIT %s die" % enemy_actor.name
 		)
 	cutscene_lines.append_array(["END", "FADE_OVERLAY MIX TO (0,0,0,0) IN 1"])
 	
-	await CutsceneService.play_custom_cutscene(cutscene_lines)
+	await CutsceneService.play_custom_cutscene(cutscene_lines, {"pausable": false})
 	
 
 func tear_down_battle_positions(battle_end_state):
 	var party: Party = EntitiesService.get_party()
-	
 	var proxy = EntitiesService.get_proxy()
 	var cutscene_lines = []
 	cutscene_lines.append("SIMULTANEOUS")
@@ -309,7 +308,7 @@ func tear_down_battle_positions(battle_end_state):
 			]
 		)
 	cutscene_lines.append("END")
-	await CutsceneService.play_custom_cutscene(cutscene_lines)
+	await CutsceneService.play_custom_cutscene(cutscene_lines, {"pausable": false})
 	party.set_physics_process(true)
 	party.on_proxy_enter(proxy)
 

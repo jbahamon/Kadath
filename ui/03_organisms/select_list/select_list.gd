@@ -111,14 +111,14 @@ func _on_SelectPanel_visibility_changed():
 
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_cancel") and (self.element_has_focus() or (self.visible and self.focused_if_visible)):
-		emit_signal("cancel")
-		get_viewport().set_input_as_handled()
+		self.emit_signal("cancel")
+		self.get_viewport().set_input_as_handled()
 
 func _on_cancel():
-	emit_signal("done")
+	self.emit_signal("done")
 
 func _on_element_selected(_element):
-	emit_signal("done")
+	self.emit_signal("done")
 	
 func size():
 	return container.get_child_count()

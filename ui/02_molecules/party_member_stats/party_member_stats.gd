@@ -26,8 +26,8 @@ var selected_button: Button = null
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_cancel") and self.element_has_focus():
 		self.set_process_unhandled_input(false)
-		emit_signal("focus_released")
-		get_viewport().set_input_as_handled()
+		self.focus_released.emit()
+		self.get_viewport().set_input_as_handled()
 		
 func on_party_member_focused(focused_party_member):
 	if focused_party_member != null:
@@ -69,8 +69,7 @@ func set_text(control: Control, item: Equipment, attribute: String, default: Str
 		control.text = default
 		
 func on_weapon_clicked():
-	emit_signal(
-		"item_requested", 
+	self.item_requested.emit(
 		Weapon, 
 		party_member
 	)
@@ -78,8 +77,7 @@ func on_weapon_clicked():
 	selected_button = weapon_name
 	
 func on_helmet_clicked():
-	emit_signal(
-		"item_requested", 
+	self.item_requested.emit(
 		Helmet, 
 		party_member
 	)
@@ -87,8 +85,7 @@ func on_helmet_clicked():
 	selected_button = helmet_name
 	
 func on_armor_clicked():
-	emit_signal(
-		"item_requested", 
+	self.item_requested.emit(
 		Armor, 
 		party_member
 	)
@@ -96,8 +93,7 @@ func on_armor_clicked():
 	selected_button = armor_name
 	
 func on_accessory_clicked():
-	emit_signal(
-		"item_requested", 
+	self.item_requested.emit(
 		Accessory, 
 		party_member
 	)

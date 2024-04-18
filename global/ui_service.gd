@@ -26,21 +26,28 @@ func exit():
 func _unhandled_input(event) -> void:
 	if event.is_action_pressed("ui_menu"): 
 		self.menu_popup.get_child(0).initialize()
-		self.__handle_popup(menu_popup)
+		self.__handle_popup(menu_popup, true, 1)
+		self.get_viewport().set_input_as_handled()
 		
-func show_popup(popup_node: Popup):
+func show_popup(popup_node: Window, pause_tree=true):
 	self.popup_layer.add_child(popup_node)
-	await self.__handle_popup(popup_node)
-	self.popup_layer.remove_child(popup_node)
+	await self.__handle_popup(popup_node, pause_tree)
+	self.popup_layer.call_deferred("remove_child", popup_node)
 
 func show_save_menu() -> void:
-	self.__handle_popup(menu_popup)
+	self.__handle_popup(menu_popup, true)
 	
-func __handle_popup(popup_node: Popup):
-	var content_node: Node = popup_node.get_child(0)
-	InputService.enter_menu_mode(content_node)
+func __handle_popup(popup_node: Window, pause_tree, ratio=null):
+	if pause_tree:
+		InputService.enter_menu_mode()
 	
-	popup_node.popup_centered_ratio(1)
+	if ratio == null:
+		popup_node.popup_centered()
+	else:
+		popup_node.popup_centered_ratio(ratio)
+		
 	await popup_node.popup_hide
-	InputService.exit_menu_mode(content_node)
+	
+	if pause_tree:
+		InputService.exit_menu_mode()
 

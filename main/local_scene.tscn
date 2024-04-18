@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://ui/04_templates/pause_menu/menu_popup.gd" id="6"]
 [ext_resource type="Script" path="res://main/local_scene.gd" id="7"]
 [ext_resource type="PackedScene" uid="uid://kjfr6yr534rp" path="res://ui/04_templates/saves_menu/saves_popup.tscn" id="8"]
-[ext_resource type="PackedScene" uid="uid://bo1y3b4btisvv" path="res://ui/04_templates/dialog/dialog.tscn" id="8_pwmoh"]
+[ext_resource type="PackedScene" uid="uid://bo1y3b4btisvv" path="res://ui/04_templates/dialogue_box/dialogue_box.tscn" id="8_pwmoh"]
 [ext_resource type="PackedScene" uid="uid://bg7hnqo1b5c6m" path="res://main/player_proxy.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://ex17k532alby" path="res://ui/04_templates/battle_ui/battle_ui.tscn" id="11_42lm3"]
 [ext_resource type="Script" path="res://main/camera.gd" id="14"]
@@ -105,6 +105,15 @@ script = ExtResource("14")
 
 [node name="ScreenShake" parent="SubViewportContainer/SubViewport/World/PlayerProxy/Camera2D" instance=ExtResource("15")]
 
+[node name="Camera2D2" type="Camera2D" parent="SubViewportContainer/SubViewport/World/PlayerProxy"]
+drag_left_margin = 0.0
+drag_top_margin = 0.0
+drag_right_margin = 0.0
+drag_bottom_margin = 0.0
+script = ExtResource("14")
+
+[node name="ScreenShake" parent="SubViewportContainer/SubViewport/World/PlayerProxy/Camera2D2" instance=ExtResource("15")]
+
 [node name="OverlayLayer" type="CanvasLayer" parent="SubViewportContainer/SubViewport"]
 
 [node name="Mix" type="ColorRect" parent="SubViewportContainer/SubViewport/OverlayLayer"]
@@ -132,9 +141,9 @@ libraries = {
 [node name="BattleUI" parent="BattleUILayer" instance=ExtResource("11_42lm3")]
 visible = false
 
-[node name="DialogLayer" type="CanvasLayer" parent="."]
+[node name="DialogueLayer" type="CanvasLayer" parent="."]
 
-[node name="Dialog" parent="DialogLayer" instance=ExtResource("8_pwmoh")]
+[node name="Dialogue" parent="DialogueLayer" instance=ExtResource("8_pwmoh")]
 characters_per_second = 25.0
 skip_speed_factor = 5.0
 
@@ -186,6 +195,15 @@ bbcode_enabled = true
 text = "Once there was a little boy"
 fit_content = true
 scroll_active = false
+
+[node name="CutscenePauseBG" type="ColorRect" parent="NarrationLayer"]
+process_mode = 2
+visible = false
+material = SubResource("4")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.976471, 0, 0, 0.501961)
 
 [node name="PopupLayer" type="CanvasLayer" parent="."]
 process_mode = 2

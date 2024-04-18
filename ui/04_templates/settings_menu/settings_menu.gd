@@ -22,7 +22,7 @@ var focus_in_tree = false
 @onready var text_speed_slider = $CenterContainer/Settings/Sliders/TextSpeedSlider
 
 func _init():
-	set_process_unhandled_input(false)
+	self.set_process_unhandled_input(false)
 
 func _ready():
 	input_popup.popup_window = false
@@ -112,9 +112,9 @@ func _on_ListenForInputPopup_key_pressed(action: String, event: InputEventKey):
 
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_cancel"):
-		emit_signal("exit")
-		get_viewport().set_input_as_handled()
-		set_process_unhandled_input(false)
+		self.emit_signal("exit")
+		self.get_viewport().set_input_as_handled()
+		self.set_process_unhandled_input(false)
 		
 		
 func on_grab_focus():
@@ -122,4 +122,4 @@ func on_grab_focus():
 
 	first_element.grab_focus()
 	first_element.grab_click_focus()
-	set_process_unhandled_input(true)
+	self.set_process_unhandled_input(true)

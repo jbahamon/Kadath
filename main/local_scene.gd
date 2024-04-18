@@ -9,7 +9,7 @@ func _ready() -> void:
 		$SubViewportContainer/SubViewport/World/PlayerProxy/Camera2D,
 		$SubViewportContainer/SubViewport
 	)
-	DialogService.initialize($DialogLayer/Dialog, $NarrationLayer)
+	DialogueService.initialize($DialogueLayer/Dialogue, $NarrationLayer)
 	EntitiesService.initialize(
 		$SubViewportContainer/SubViewport/World/PlayerProxy
 	)
@@ -18,7 +18,8 @@ func _ready() -> void:
 	LayersService.initialize({
 		"MIX": $SubViewportContainer/SubViewport/OverlayLayer/Mix,
 		"ADD": $SubViewportContainer/SubViewport/OverlayLayer/Add,
-		"CAMERA_BG": $SubViewportContainer/SubViewport/BGLayer/CameraBG
+		"CAMERA_BG": $SubViewportContainer/SubViewport/BGLayer/CameraBG,
+		"CUTSCENE_PAUSE": $NarrationLayer/CutscenePauseBG
 	})
 	UIService.initialize($PopupLayer, $MenuLayer/MenuPopup, $MenuLayer/SavesPopup)
 	
@@ -39,13 +40,12 @@ func move_to_starting_room():
 		# Note: move start_game to the above when doing the cutscene intro
 		EnvironmentService.update_whereabouts(
 			"000_prologue_kadath", 
-			"05_boss_room",
+			"01_entrance",
 			Vector2.ZERO,
 			Vector2.UP,
 			false
 		)
-		EntitiesService.get_party().set_unlocked(PartyMember.Id.PICKMAN, true)
-		EntitiesService.get_proxy().set_mode(PlayerProxy.ProxyMode.GAMEPLAY)
+		# EntitiesService.get_proxy().set_mode(PlayerProxy.ProxyMode.GAMEPLAY)
 		
 func bind_proxy():
 	EntitiesService.bind_proxy()
@@ -53,7 +53,7 @@ func bind_proxy():
 func exit():
 	BattleService.exit()
 	CameraService.exit()
-	DialogService.exit()
+	DialogueService.exit()
 	EnvironmentService.exit()
 	EntitiesService.exit()
 	InputService.exit()

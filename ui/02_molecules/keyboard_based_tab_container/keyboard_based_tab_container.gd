@@ -158,8 +158,8 @@ func _unhandled_input(event):
 	elif (event.is_action_pressed("ui_cancel") and 
 			tabs_button_group.get_pressed_button() != null and  
 			tabs_button_group.get_pressed_button().has_focus()):
-		emit_signal("cancel")
-		get_viewport().set_input_as_handled()
+		self.cancel.emit()
+		self.get_viewport().set_input_as_handled()
 
 func focus_current_tab():
 	var pressed_tab_button = tabs_button_group.get_pressed_button()

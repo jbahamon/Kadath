@@ -1,4 +1,4 @@
-extends "res://utils/cutscene_manager/instructions/cutscene_instruction.gd"
+extends CutsceneInstruction
 
 var overlay: String
 var color: Color
@@ -7,7 +7,7 @@ func _init(init_overlay: String, init_color: Color):
 	self.overlay = init_overlay
 	self.color = init_color
 
-func execute(_tree: SceneTree):
+func execute(_tree: SceneTree, _mode: ExecutionMode):
 	LayersService.get_layer(self.overlay).color = self.color
 
 func _to_string():

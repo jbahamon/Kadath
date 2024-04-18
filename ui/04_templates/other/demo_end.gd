@@ -2,7 +2,7 @@ extends CanvasLayer
 
 func _ready():
 	self.set_process_unhandled_key_input(false)
-	var timer = get_tree().create_timer(2.0)
+	var timer = get_tree().create_timer(2.0, false)
 	await timer.timeout
 	$Prompt.visible = true
 	self.set_process_unhandled_key_input(true)

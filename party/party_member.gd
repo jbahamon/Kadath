@@ -6,6 +6,7 @@ class_name PartyMember
 
 var PartyMemberSummary = preload("res://ui/02_molecules/party_member_summary/party_member_summary.tscn")
 
+signal move_to_done
 
 enum Id {
 	ALEX = 1 << 0,
@@ -64,7 +65,9 @@ var physical_armor: float:
 var elemental_armor: float:
 	get:
 		return 0.0
-	
+
+var move_timer
+
 func _ready():
 	assert(growth)
 	self.set_physics_process(false)
@@ -206,18 +209,44 @@ func play_anim(anim_name: String):
 func set_orientation(new_orientation: Vector2):
 	self.current_orientation = new_orientation
 	self.anim.set_orientation(new_orientation)
-	
-func move_to(target: Array, speed: float):
+
+func move_to(target: Array, speed):
 	assert(speed > 0)
 	var target_position = Vector2(
 		target[0] if target[0] != null else self.global_position.x,
 		target[1] if target[1] != null else self.global_position.y
 	)
 	var was_processing_physics = self.is_physics_processing()
-	var time = (self.global_position - target_position).length()/speed
-	self.velocity = (target_position - self.global_position).normalized() * speed
 	self.set_physics_process(true)
-	await get_tree().create_timer(time).timeout
+	if self.global_position != target_position:
+		self.resume_move_to(target, speed)
+		await self.move_to_done
+
+	self.move_timer = null
 	self.global_position = target_position
 	self.velocity = Vector2.ZERO
 	self.set_physics_process(was_processing_physics)
+
+func pause_move_to():
+	if self.move_timer != null:
+		self.move_timer.timeout.disconnect(self.on_move_timer_done)
+
+func resume_move_to(target: Array, speed):
+	var target_position = Vector2(
+		target[0] if target[0] != null else self.global_position.x,
+		target[1] if target[1] != null else self.global_position.y
+	)
+	var time = (self.global_position - target_position).length()/speed
+	
+	if time > 0:
+		self.velocity = (target_position - self.global_position).normalized() * speed
+		self.move_timer = self.get_tree().create_timer(time, false)
+		self.move_timer.timeout.connect(self.on_move_timer_done, CONNECT_ONE_SHOT)
+	else:
+		self.move_to_done.emit()
+
+func skip_move_to():
+	self.move_to_done.emit()
+	
+func on_move_timer_done():
+	self.move_to_done.emit()

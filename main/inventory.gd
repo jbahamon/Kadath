@@ -36,7 +36,7 @@ func add(item_id: String, amount: int = 1) -> void:
 		amounts[item_id] = min(amount, max_amount)
 		order.push_back(item_id)
 	
-	emit_signal("inventory_changed", Change.ADD)
+	self.inventory_changed.emit(Change.ADD)
 
 func set_item(item_id: String, amount: int) -> void:
 	var max_amount = ItemService.id_to_item(item_id).max_amount
@@ -44,7 +44,7 @@ func set_item(item_id: String, amount: int) -> void:
 		order.push_back(item_id)
 	amounts[item_id] = min(amount, max_amount)
 	
-	emit_signal("inventory_changed", Change.SET)		
+	self.inventory_changed.emit(Change.SET)		
 	
 func remove(item: String, amount: int = 1) -> void:
 	assert(item in amounts)
@@ -57,13 +57,13 @@ func remove(item: String, amount: int = 1) -> void:
 		amounts.erase(item)
 		order.erase(item)
 
-	emit_signal("inventory_changed", Change.REMOVE)
+	self.inventory_changed.emit(Change.REMOVE)
 	
 func swap_items(i1: int, i2: int) -> void:
 	var temp_item: InventoryItem = order[i1]
 	order[i1] = order[i2]
 	order[i2] = temp_item
-	emit_signal("inventory_changed", Change.SWAP)
+	self.inventory_changed.emit(Change.SWAP)
 
 func has(item_id: String):
 	return item_id in amounts
@@ -105,4 +105,4 @@ func sort():
 	for item in items:
 		self.order.append(item.id)
 		
-	emit_signal("inventory_changed", Change.SORT)
+	self.inventory_changed.emit(Change.SORT)

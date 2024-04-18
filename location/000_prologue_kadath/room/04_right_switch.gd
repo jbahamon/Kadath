@@ -15,7 +15,7 @@ func _on_chalice_player_interaction(proxy: PlayerProxy):
 	await self.move_player_to_chalice(proxy)
 	
 	if VarsService.get_flag("kadath.right_barrier"):
-		await DialogService.open_dialog("chalice_right_done")
+		await DialogueService.open_dialogue("chalice_right_done")
 		
 	else:
 		await self.attempt_chalice_interaction(proxy)
@@ -40,7 +40,7 @@ func move_player_to_chalice(proxy):
 	proxy.play_anim("idle")
 
 func attempt_chalice_interaction(proxy: PlayerProxy):
-	var responses = await DialogService.open_dialog("chalice")
+	var responses = await DialogueService.open_dialogue("chalice")
 
 	if responses[0] == RESPONSE_YES:
 		animation_player.play("drop_enemies")
@@ -53,7 +53,7 @@ func attempt_chalice_interaction(proxy: PlayerProxy):
 		VarsService.set_flag("kadath.right_barrier", true)
 		animation_player.play("chalice_activate")
 		await animation_player.animation_finished
-		await DialogService.open_dialog("after_chalice_battle")
+		await DialogueService.open_dialogue("after_chalice_battle")
 		proxy.set_mode(PlayerProxy.ProxyMode.GAMEPLAY)
 
 func solve_room():

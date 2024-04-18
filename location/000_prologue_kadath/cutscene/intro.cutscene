@@ -35,14 +35,14 @@ SIMULTANEOUS
 		END
 		LOOK NPCPickman RIGHT
 		LOOK PROXY LEFT
-		START_DIALOG entrance_carter
+		START_DIALOGUE entrance_carter
 	END
 END
 
 
 SIMULTANEOUS 
 	MOVE_CAMERA TO PROXY IN 1
-	START_DIALOG starting_instructions
+	START_DIALOGUE starting_instructions
 END	
 
 ASSIGN_CAMERA PROXY

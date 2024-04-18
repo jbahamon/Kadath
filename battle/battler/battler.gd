@@ -142,3 +142,13 @@ func is_party_member():
 
 func on_battle_end():
 	self.status_effects.clear()
+
+func pause_move_to():
+	self.get_parent().pause_move_to()
+	
+func resume_move_to():
+	self.get_parent().resume_move_to()
+
+func skip_move_to():
+	self.get_parent().skip_move_to()
+	

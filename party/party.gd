@@ -32,7 +32,7 @@ func _ready():
 	self.movement_pointers = []
 	self.movement_pointers.resize(PARTY_SIZE)
 
-func on_proxy_enter(proxy: PlayerProxy):
+func on_proxy_enter(_proxy: PlayerProxy):
 	self.set_physics_process(true)
 	self.reset_movement()
 	

@@ -19,5 +19,5 @@ func unlock_pickman():
 	EntitiesService.get_party().set_unlocked(PartyMember.Id.PICKMAN, true)
 	EntitiesService.get_party().reset_movement()
 	
-func _on_join_trigger_body_entered(body):
+func _on_join_trigger_body_entered(_body):
 	CutsceneService.play_cutscene_from_file("res://location/000_prologue_kadath/cutscene/catch_up.cutscene")

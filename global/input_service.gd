@@ -17,8 +17,8 @@ func set_input_enabled(value: bool):
 	UIService.set_process_unhandled_input(value)
 	self.input_enabled = value
 
-func enter_menu_mode(_menu) -> void:
+func enter_menu_mode() -> void:
 	get_tree().paused = true
 	
-func exit_menu_mode(_menu) -> void:
+func exit_menu_mode() -> void:
 	get_tree().paused = false

@@ -1,4 +1,4 @@
-extends "res://utils/cutscene_manager/instructions/cutscene_instruction.gd"
+extends CutsceneInstruction
 
 var entity_name: String
 var target
@@ -7,7 +7,7 @@ func _init(init_entity_name: String, init_target):
 	self.entity_name = init_entity_name
 	self.target = init_target
 	
-func execute(_tree: SceneTree):
+func execute(_tree: SceneTree, _mode: ExecutionMode):
 	var entity: Node2D = EntitiesService.get_entity(self.entity_name)
 	var target_position
 	

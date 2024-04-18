@@ -1,3 +1,5 @@
+class_name CutsceneInstruction
+
 enum Type {
 	SET_ROOM,
 	SET_OVERLAY,
@@ -24,7 +26,7 @@ enum Type {
 	WALK,
 	PLAY_ANIM,
 	
-	START_DIALOG,
+	START_DIALOGUE,
 	NARRATE,
 	
 	SIMULTANEOUS,
@@ -32,15 +34,29 @@ enum Type {
 	END,
 	WAIT,
 	
+	AWAIT,
 	CALL
 }
 
-func execute(_tree: SceneTree):
+enum ExecutionMode {
+	PLAY,
+	SKIP
+}
+func execute(_tree: SceneTree, _mode: ExecutionMode):
 	pass
 
-func run(tree: SceneTree):
+func run(tree: SceneTree, mode: ExecutionMode):
 	print(self)
-	await self.execute(tree)
+	await self.execute(tree, mode)
 
 func _to_string():
 	return "generic instruction"
+
+func skip(_tree: SceneTree):
+	pass
+	
+func pause(_tree: SceneTree):
+	pass
+
+func resume(_tree: SceneTree):
+	pass

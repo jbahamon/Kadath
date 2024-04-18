@@ -1,7 +1,7 @@
 # Onyx doors open
 # CALL Door open
 PLAY_ANIM PROXY idle
-START_DIALOG after_boss
+START_DIALOGUE after_boss
 # Party walks up , fade to black, change room
 
 SET_OVERLAY MIX TO (0,0,0,0.0)
@@ -18,7 +18,7 @@ SIMULTANEOUS
 	WALK NPCPickman TO (32, 80) AT 25
 END
 
-START_DIALOG gods_callout
+START_DIALOGUE gods_callout
 
 SIMULTANEOUS
 #	CALL CAMERA do_shake
@@ -26,19 +26,19 @@ SIMULTANEOUS
 END
 
 LOOK NPCPickman LEFT
-START_DIALOG pickman_warning
+START_DIALOGUE pickman_warning
 
 SIMULTANEOUS
 	LOOK PROXY RIGHT
-	CALL ROOM fade_companion
-	START_DIALOG carter_call
+	AWAIT ROOM fade_companion
+	START_DIALOGUE carter_call
 END
 
 CALL NPCPickman queue_free
 
 SIMULTANEOUS
-	CALL ROOM darken_room
-	START_DIALOG nyarlathotep_1
+	AWAIT ROOM darken_room
+	START_DIALOGUE nyarlathotep_1
 	SEQUENTIAL
 		WAIT 1
 		LOOK PROXY UP
@@ -46,8 +46,8 @@ SIMULTANEOUS
 END
 
 SIMULTANEOUS
-	CALL ROOM show_spooks
-	START_DIALOG nyarlathotep_2
+	AWAIT ROOM show_spooks
+	START_DIALOGUE nyarlathotep_2
 END
 
 SET_OVERLAY MIX TO (0,0,0, 1.0)

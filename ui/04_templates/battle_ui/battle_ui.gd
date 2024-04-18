@@ -43,7 +43,9 @@ func initialize(party_members: Array):
 func start():
 	self.options.visible = false
 	self.spacer.visible = true
+	self.options_list.set_process_unhandled_input(false)
 	self.show()
+	
 		
 func prompt(text: String):
 	self.waiting_for_prompt = true
@@ -58,6 +60,7 @@ func _unhandled_input(event):
 	):
 		self.set_info_text(null)
 		emit_signal("prompt_closed")
+		self.get_viewport().set_input_as_handled()
 
 func reset_options_stack():
 	self.options_stack = []
@@ -69,6 +72,7 @@ func set_options(new_options):
 	options_title.text = new_options["title"]
 	options_list.initialize(new_options["options"], new_options.get("list_options", {}))
 	options_list.on_grab_focus()
+	options_list.set_process_unhandled_input(true)
 	
 func on_option_selected(option):
 	if option is CompositeBattleOption:
@@ -104,6 +108,7 @@ func hide_options():
 	self.options.visible = false
 	self.spacer.visible = true
 	options_list.release_focus()
+	options_list.set_process_unhandled_input(false)
 
 func hide_timeline():
 	self.timeline_container.visible = false
