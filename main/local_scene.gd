@@ -40,12 +40,14 @@ func move_to_starting_room():
 		# Note: move start_game to the above when doing the cutscene intro
 		EnvironmentService.update_whereabouts(
 			"000_prologue_kadath", 
-			"01_entrance",
+			"05_boss_room",
 			Vector2.ZERO,
 			Vector2.UP,
 			false
 		)
-		# EntitiesService.get_proxy().set_mode(PlayerProxy.ProxyMode.GAMEPLAY)
+		
+		# this is only for testing purposes
+		EntitiesService.get_proxy().set_mode(PlayerProxy.ProxyMode.GAMEPLAY)
 		
 func bind_proxy():
 	EntitiesService.bind_proxy()

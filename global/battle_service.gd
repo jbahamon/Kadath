@@ -62,7 +62,6 @@ func init_common_action_options():
 	self.common_action_options["escape"] = escape
 	
 func start_mook_battle(escapable: bool):
-	
 	if self.current_battle_parameters != null: 
 		return
 		
@@ -84,6 +83,8 @@ func start_battle(enemies: Array, escapable: bool, proxy_mode_on_finish=null):
 		"escapable": escapable
 	}
 	
+	var was_input_enabled = InputService.is_input_enabled()
+	InputService.set_input_enabled(false)
 	var end_proxy_mode = (
 		proxy_mode_on_finish 
 		if proxy_mode_on_finish != null 
@@ -116,11 +117,13 @@ func start_battle(enemies: Array, escapable: bool, proxy_mode_on_finish=null):
 			await self.fade_and_delete_mooks(battle_end_state)
 			await self.tear_down_battle_positions(battle_end_state)
 			self.resume_non_participants(end_proxy_mode)
+			InputService.set_input_enabled(was_input_enabled)
 		BattleEndState.Result.WIN: 
 			await self.deal_rewards(battle_end_state.rewards)
 			self.ui.hide()
 			await self.tear_down_battle_positions(battle_end_state)
 			self.resume_non_participants(end_proxy_mode)
+			InputService.set_input_enabled(was_input_enabled)
 		BattleEndState.Result.LOSE: 
 			self.ui.hide()
 			var party = EntitiesService.get_party()

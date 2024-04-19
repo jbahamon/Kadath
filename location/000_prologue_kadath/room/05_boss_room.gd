@@ -15,6 +15,7 @@ func _on_boss_trigger_body_entered(body):
 	if not body is PlayerProxy:
 		return
 	$BossTrigger.set_deferred("monitoring", false)
+	InputService.set_input_enabled(false)
 	
 	var proxy = EntitiesService.get_proxy()
 	proxy.set_mode(PlayerProxy.ProxyMode.CUTSCENE)
@@ -23,7 +24,7 @@ func _on_boss_trigger_body_entered(body):
 	animation_player.play("boss_enter")
 	await animation_player.animation_finished
 	await CameraService.shake(CutsceneInstruction.ExecutionMode.PLAY, 1.0, Vector2(10, 32))
-	
+	InputService.set_input_enabled(true)
 	await BattleService.start_battle(
 		[$Boss],
 		false,

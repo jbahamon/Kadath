@@ -36,8 +36,6 @@ func do_battle():
 		self.update_preview()
 		
 		var current_actor = self.turn_queue.get_current_actor()
-		if current_actor is PartyMember:
-			print("holi")
 		var turn = await current_actor.battler.ai.get_turn(self.actors)
 
 		self.turn_start.emit(turn)
@@ -109,7 +107,7 @@ func on_actor_death(actor):
 	else:
 		self.add_rewards(actor.battler.rewards)
 		self.actors.erase(actor)
-		await actor.die()
+		await actor.die(CutsceneInstruction.ExecutionMode.PLAY)
 		
 	self.turn_queue.erase(actor)
 	self.update_preview()
