@@ -1,11 +1,13 @@
-res://ui/04_templates/cutscene_pause_popup
+res://battle/action/util
+res://location/999_tests
+res://battle/action
+res://party/pickman/skill
 C:/Users/Jorge/Documents/Godot/Kadath
 C:/Users/Jorge/Documents/Godot/Kadath/location/000_prologue_kadath/cutscene
 C:/Users/Jorge/Documents/Godot/Kadath/location/000_prologue_kadath/object
 res://location/000_prologue_kadath/room
 res://npc/enemy/sentry
 res://npc/enemy
-res://battle/action
 res://item/resource/consumable
 res://ui/04_templates/other
 res://ui/01_atoms/button

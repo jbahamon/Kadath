@@ -1,5 +1,6 @@
 extends "res://battle/action/base_skill.gd"
 
+@export var damage_factor: float = 3
 var target = null
 
 func reset():
@@ -29,9 +30,8 @@ func execute(actor):
 	var prev_hp = target.battler.stats.health
 	var hit = Hit.new()
 	hit.type = Hit.Element.PHYSICAL
-	hit.base_damage = actor.battler.physical_attack * 12
-	self.target.take_hit(hit)
-	
+	hit.base_damage = self.get_standard_attack_damage(actor) * self.damage_factor
+	await self.target.take_hit(hit)
 	
 	print(
 		"%s attacked %s (HP: %d -> HP: %d)" % [

@@ -16,7 +16,7 @@ func use(targets: Array):
 		var lambdas = []
 		for target in targets:
 			var recovery = self.health if self.recovery_mode == RecoveryMode.ABSOLUTE else int(round(target.health * self.health / 100.0))
-			target.heal(recovery)
+			target.heal(recovery, false)
 			lambdas.append(
 				func (): await target.show_toast(str(recovery), Color.LIGHT_GREEN)
 			)
@@ -26,7 +26,7 @@ func use(targets: Array):
 		var lambdas = []
 		for target in targets:
 			var recovery = self.energy if self.recovery_mode == RecoveryMode.ABSOLUTE else int(round(target.energy * self.energy / 100.0))
-			target.recover_energy(recovery)
+			target.recover_energy(recovery, false)
 			lambdas.append(
 				func ():
 					await target.show_toast(str(recovery), Color.LIGHT_SKY_BLUE)

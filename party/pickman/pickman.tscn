@@ -1,19 +1,63 @@
-[gd_scene load_steps=5 format=3 uid="uid://dehii02b2xc8o"]
+[gd_scene load_steps=11 format=3 uid="uid://dehii02b2xc8o"]
 
 [ext_resource type="PackedScene" uid="uid://bomxx7doloqmu" path="res://party/party_member.tscn" id="1_puo4q"]
-[ext_resource type="Resource" uid="uid://efimamnfjman" path="res://party/pickman/growth.tres" id="2_4fg7o"]
+[ext_resource type="Resource" uid="uid://b4nbxe88mk82q" path="res://party/base_growth.tres" id="2_dc8gg"]
 [ext_resource type="Texture2D" uid="uid://df0sy0xr60rtd" path="res://party/pickman/icon.png" id="3_psao1"]
+[ext_resource type="Script" path="res://party/pickman/skill/taxing_touch.gd" id="4_col3m"]
 [ext_resource type="PackedScene" uid="uid://cv5wwoeq1pjb7" path="res://party/pickman/anim.tscn" id="4_xux0q"]
+[ext_resource type="Script" path="res://party/pickman/skill/slab_slam.gd" id="5_5kqwp"]
+[ext_resource type="Script" path="res://party/pickman/action/feast.gd" id="5_beduq"]
+[ext_resource type="PackedScene" uid="uid://dwx2sfgjttusb" path="res://battle/action/util/line_of_effect.tscn" id="6_8tf6q"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kwkxb"]
+radius = 8.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7ecgo"]
+radius = 9.0
+height = 26.0
 
 [node name="Pickman" instance=ExtResource("1_puo4q")]
 id = 16
-growth = ExtResource("2_4fg7o")
+growth = ExtResource("2_dc8gg")
+experience = 1
 icon = ExtResource("3_psao1")
 
 [node name="Battler" parent="." index="0"]
 anim_path = NodePath("../Anim")
 
+[node name="TaxingTouch" type="Node" parent="Battler/Actions/Skill" index="0"]
+script = ExtResource("4_col3m")
+cost = 25
+display_name = "Taxing Touch"
+description = "Damage an enemy and impair its movement. Their next action will be delayed."
+
+[node name="SlabSlam" type="Node" parent="Battler/Actions/Skill" index="1"]
+script = ExtResource("5_5kqwp")
+power = 10.0
+line_power = 5.0
+cost = 15
+display_name = "Slab Slam"
+description = "Throw your tombstone at a target, hitting enemies along the way."
+
+[node name="LineOfEffect" parent="Battler/Actions/Skill/SlabSlam" index="0" instance=ExtResource("6_8tf6q")]
+visible = true
+
+[node name="ShapeCast2D" parent="Battler/Actions/Skill/SlabSlam/LineOfEffect" index="1"]
+visible = false
+shape = SubResource("CircleShape2D_kwkxb")
+collide_with_bodies = true
+
+[node name="Feast" type="Node" parent="Battler/Actions" index="1"]
+script = ExtResource("5_beduq")
+display_name = "Feast"
+description = "Feed on an enemy to do minor damage and recover HP and SP."
+
+[node name="CollisionShape2D" parent="Battler/Hitbox" index="0"]
+position = Vector2(0, -13)
+shape = SubResource("CapsuleShape2D_7ecgo")
+
 [node name="Anim" parent="." index="1" instance=ExtResource("4_xux0q")]
 
 [editable path="Battler"]
+[editable path="Battler/Actions/Skill/SlabSlam/LineOfEffect"]
 [editable path="Battler/Toast"]

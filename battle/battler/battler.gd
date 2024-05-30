@@ -16,6 +16,7 @@ signal died
 @onready var skills = $Skills
 @onready var ai: BattlerAI = $AI
 @onready var toast: Node2D = $Toast
+@onready var hitbox: Area2D = $Hitbox
 
 var anim: Node
 var status_effects = StatusEffectManager.new(self)
@@ -88,10 +89,16 @@ func take_hit(hit: Hit, in_battle: bool = true):
 		emit_signal("died", self.get_parent())
 	return damage
 	
-func heal(amount: int):
+func heal(amount: int, in_battle: bool = true):
+	if in_battle:
+		await self.toast.show_toast(str(amount), Color.LIGHT_GREEN)
+	
 	self.stats.heal(amount)
 	
-func recover_energy(amount: int):
+func recover_energy(amount: int, in_battle: bool = true):
+	if in_battle:
+		await self.toast.show_toast(str(amount), Color.STEEL_BLUE)
+	
 	self.stats.recover_energy(amount)
 	
 func get_damage_modifier(hit: Hit):
@@ -111,9 +118,9 @@ func get_action_options() -> Array:
 		
 		options = actions.get_children()
 		
-		options.push_front(BattleService.common_action_options["lose"])
-		options.push_front(BattleService.common_action_options["win"])
-		options.push_front(BattleService.common_action_options["defend"])
+		# options.push_front(BattleService.common_action_options["lose"])
+		# options.push_front(BattleService.common_action_options["win"])
+		# options.push_front(BattleService.common_action_options["defend"])
 		options.push_front(BattleService.common_action_options["attack"])
 		options.push_back(BattleService.common_action_options["item"])
 		
@@ -140,8 +147,12 @@ func move_to(target_position: Array, move_speed: float):
 func is_party_member():
 	return get_parent() is PartyMember
 
+func on_battle_start():
+	self.hitbox.set_deferred("monitorable", true)
+	
 func on_battle_end():
 	self.status_effects.clear()
+	self.hitbox.set_deferred("monitorable", false)
 
 func pause_move_to():
 	self.get_parent().pause_move_to()

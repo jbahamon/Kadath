@@ -12,7 +12,9 @@ enum TargetType {
 	OTHER
 }
 
-@export var walk_speed: float = 100.0
+@export var walk_speed: float = 60.0
+@export var run_speed: float = 120.0
+
 @export var interaction_vector = Vector2(16, 16)
 
 var input_vector = Vector2.ZERO
@@ -70,13 +72,17 @@ func update_input_vector():
 	return old_input_vector == input_vector
 
 func get_movement_speed() -> float:
-	return walk_speed
+	if Input.is_action_pressed("action_run"):
+		return self.run_speed
+	return self.walk_speed
 
 func update_animation() -> void:
 	if not self.target:
 		return
 	if velocity == Vector2.ZERO:
 		self.target.play_anim("idle")
+	elif Input.is_action_pressed("action_run"):
+		self.target.play_anim("run")
 	else:
 		self.target.play_anim("walk")
 		

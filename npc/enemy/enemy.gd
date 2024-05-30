@@ -3,6 +3,7 @@ extends BaseNPC
 signal touched(body)
 
 @export var battle_on_contact = true
+@export var enemy_id: String
 @onready var battler: Battler = $Battler
 
 var health:
@@ -23,14 +24,14 @@ func show_toast(text: String, color: Color=Color.WHITE):
 	
 # Battle methods
 
-func heal(amount: int):
-	self.battler.heal(amount)
+func heal(amount: int, in_battle: bool = true):
+	await self.battler.heal(amount, in_battle)
 	
-func recover_energy(amount: int):
-	self.battler.recover_energy(amount)
+func recover_energy(amount: int, in_battle: bool = true):
+	await self.battler.recover_energy(amount, in_battle)
 	
 func take_hit(hit: Hit):
-	await self.battler.take_hit(hit)
+	return await self.battler.take_hit(hit)
 	
 func get_allies(actors: Array):
 	var allies = []

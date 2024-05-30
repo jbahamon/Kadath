@@ -58,7 +58,7 @@ func get_preview(preview_size: int) -> Array:
 		var time = next_element.get_time_to_act()
 		
 		for element in self._elements:
-			element.remaining_charge = clamp(element.remaining_charge - time * element.actor.battler.speed, 0, 100)
+			element.remaining_charge = max(element.remaining_charge - time * element.actor.battler.speed, 0)
 		next_element.remaining_charge = CHARGE_TO_ACT
 	
 	for element in self._elements:
@@ -73,7 +73,7 @@ func get_current_actor():
 	var time = next_element.get_time_to_act()
 	
 	for element in self._elements:
-		element.remaining_charge = clamp(element.remaining_charge - time * element.actor.battler.speed, 0, 100)
+		element.remaining_charge = max(element.remaining_charge - time * element.actor.battler.speed, 0)
 	next_element.remaining_charge = CHARGE_TO_ACT
 	
 	next_element = self.get_next_element()
@@ -108,3 +108,10 @@ func get_next_element() -> TurnQueueElement:
 			max_time = time
 	
 	return chosen_element
+
+func add_charge(actor, charge):
+	for element in self._elements:
+		if element.actor == actor:
+			element.remaining_charge = max(element.remaining_charge + charge, 0)
+			return
+	

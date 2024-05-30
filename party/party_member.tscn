@@ -11,12 +11,12 @@ id = 5
 
 [node name="Battler" parent="." instance=ExtResource("2")]
 
-[node name="AI" parent="Battler" index="1"]
-script = ExtResource("3")
-
 [node name="Skill" type="Node" parent="Battler/Actions" index="0"]
 script = ExtResource("4_8ihmo")
 display_name = "Skill"
+
+[node name="AI" parent="Battler" index="3"]
+script = ExtResource("3")
 
 [editable path="Battler"]
 [editable path="Battler/Toast"]

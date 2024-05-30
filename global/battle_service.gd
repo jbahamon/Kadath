@@ -217,7 +217,7 @@ func set_up_battle_positions(battle_spot, party_actors: Array, non_party_actors:
 	var target_spots = []
 	
 	for non_party_actor in non_party_actors:
-		non_party_actor.on_enter_battle()
+		non_party_actor.on_battle_start()
 		var key = non_party_actor.display_name
 		var spots = spots_by_name.get(key)
 		if spots == null:
@@ -241,6 +241,7 @@ func set_up_battle_positions(battle_spot, party_actors: Array, non_party_actors:
 		
 	for i in range(party_actors.size()): 
 		var party_actor = party_actors[i]
+		party_actor.on_battle_start()
 		var spot = party_spots[i]
 		var closest_enemy = self.get_closest_to(target_spots, spot.global_position)
 		cutscene_lines.append_array(
@@ -303,6 +304,7 @@ func tear_down_battle_positions(battle_end_state):
 	)
 	
 	for party_actor in battle_end_state.party_actors:
+		party_actor.on_battle_end()
 		cutscene_lines.append(
 			"WALK %s TO (%d, %d) AT 50" % [
 				party_actor.name, 
@@ -387,4 +389,5 @@ func add_rewards(rewards):
 func remove_actor(actor):
 	self.loop.remove_actor(actor)
 
-	
+func delay_actor(actor, delay):
+	self.loop.delay_actor(actor, delay)

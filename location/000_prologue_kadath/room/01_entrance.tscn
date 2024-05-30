@@ -63,7 +63,6 @@ shape = SubResource("RectangleShape2D_pgvhv")
 [node name="LeftGhoul" parent="." instance=ExtResource("5_t4523")]
 position = Vector2(-32, -128)
 display_name = "Ghoul"
-dialog_name = "guard_ghoul"
 metadata/_edit_group_ = true
 
 [node name="Anim" parent="LeftGhoul" instance=ExtResource("6_c8udh")]
@@ -81,7 +80,6 @@ parameters/walk/blend_position = Vector2(0.275213, -0.0829694)
 [node name="RightGhoul" parent="." instance=ExtResource("5_t4523")]
 position = Vector2(38, -144)
 display_name = "Ghoul"
-dialog_name = "guard_ghoul_2"
 metadata/_edit_group_ = true
 
 [node name="Anim" parent="RightGhoul" instance=ExtResource("6_c8udh")]
@@ -98,7 +96,6 @@ parameters/idle/blend_position = Vector2(-0.622146, -0.485294)
 [node name="NPCPickman" parent="." instance=ExtResource("5_t4523")]
 position = Vector2(-16, -176)
 display_name = "Pickman"
-dialog_name = "pickman_waiting"
 metadata/_edit_group_ = true
 
 [node name="Anim" parent="NPCPickman" instance=ExtResource("8_xselo")]

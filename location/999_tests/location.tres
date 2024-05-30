@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Location" load_steps=4 format=3 uid="uid://dcia24k0p4wdt"]
+
+[ext_resource type="Script" path="res://location/lib/script/location/location.gd" id="1_4p4lo"]
+[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_resource.gd" id="2_x7gpr"]
+
+[sub_resource type="Resource" id="Resource_ddgk3"]
+script = ExtResource("2_x7gpr")
+using_states = []
+titles = {}
+character_names = []
+first_title = ""
+lines = {}
+
+[resource]
+script = ExtResource("1_4p4lo")
+location_id = "tests"
+story = SubResource("Resource_ddgk3")
+base_room_path = "res://location/999_tests/room/"

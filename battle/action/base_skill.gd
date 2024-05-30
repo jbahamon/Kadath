@@ -1,7 +1,7 @@
 extends BattleAction
 
 @export var cost: int
-
+@export var unlocked = true
 var is_player_skill: bool
 var battler
 
@@ -16,3 +16,5 @@ func _ready():
 func is_disabled():
 	return self.is_player_skill and self.battler.stats.energy < self.cost
 	
+func unlock():
+	self.unlocked = true

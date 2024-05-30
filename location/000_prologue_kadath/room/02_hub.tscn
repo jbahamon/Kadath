@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bfd8bve0jvodl"]
+[gd_scene load_steps=28 format=3 uid="uid://bfd8bve0jvodl"]
 
 [ext_resource type="TileSet" uid="uid://cb1f6r4xpgnc0" path="res://location/lib/resource/tile/cave.tres" id="1_qnjuv"]
 [ext_resource type="Script" path="res://location/000_prologue_kadath/room/02_hub.gd" id="2_nhaa6"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://battle/ai/random_ai.gd" id="8_hpgun"]
 [ext_resource type="PackedScene" uid="uid://cgc5b4s47chs0" path="res://npc/enemy/sentry/anim.tscn" id="9_hterd"]
 [ext_resource type="PackedScene" uid="uid://ds2ji50aao08o" path="res://npc/lib/movement/path_movement.tscn" id="10_k3y1y"]
+[ext_resource type="Script" path="res://party/character_stats.gd" id="10_xvirl"]
 [ext_resource type="PackedScene" uid="uid://dafsbbwqgmrh6" path="res://location/000_prologue_kadath/object/barrier.tscn" id="11_n8kss"]
 [ext_resource type="Texture2D" uid="uid://degp82d8h31nf" path="res://location/000_prologue_kadath/object/barrier-right.png" id="12_koaea"]
 [ext_resource type="Texture2D" uid="uid://cji50csd7so76" path="res://location/000_prologue_kadath/object/barrier-left.png" id="13_at7lb"]
@@ -33,13 +34,28 @@ _data = {
 }
 point_count = 5
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_73tx0"]
-size = Vector2(10, 10)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gepkt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x5vo8"]
 
+[sub_resource type="Resource" id="Resource_qmndb"]
+script = ExtResource("10_xvirl")
+max_health = 1
+max_energy = 0
+attack = 1
+defense = 1
+magic_attack = 1
+magic_defense = 1
+luck = 1
+speed = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7axh3"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_twg47"]
 size = Vector2(64, 32)
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(8, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0c4dq"]
 size = Vector2(80, 18)
@@ -133,6 +149,7 @@ curve = SubResource("Curve2D_agyu8")
 
 [node name="Sentry1" parent="." instance=ExtResource("6_5pgsn")]
 position = Vector2(-46, 218)
+enemy_id = "sentry"
 display_name = "Sentry"
 movement_type = 2
 custom_movement = NodePath("PathMovement")
@@ -140,9 +157,9 @@ custom_movement = NodePath("PathMovement")
 [node name="AI" parent="Sentry1/Battler" index="3"]
 script = ExtResource("8_hpgun")
 
-[node name="CollisionShape2D" parent="Sentry1" index="1"]
+[node name="CollisionShape2D" parent="Sentry1/Battler/Hitbox" index="0"]
 position = Vector2(0, -10)
-shape = SubResource("RectangleShape2D_73tx0")
+shape = SubResource("RectangleShape2D_gepkt")
 
 [node name="CollisionShape2D" parent="Sentry1/InteractableArea" index="0"]
 position = Vector2(0, -10)
@@ -157,13 +174,20 @@ path_2D_path = NodePath("../../Path2D")
 
 [node name="Sentry2" parent="." instance=ExtResource("6_5pgsn")]
 position = Vector2(46, 178)
+enemy_id = "sentry"
 display_name = "Sentry"
 movement_type = 2
 custom_movement = NodePath("PathMovement")
-metadata/_edit_group_ = true
+
+[node name="Battler" parent="Sentry2" index="0"]
+stats = SubResource("Resource_qmndb")
 
 [node name="AI" parent="Sentry2/Battler" index="3"]
 script = ExtResource("8_hpgun")
+
+[node name="CollisionShape2D" parent="Sentry2/Battler/Hitbox" index="0"]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_7axh3")
 
 [node name="Anim" parent="Sentry2" instance=ExtResource("9_hterd")]
 
@@ -205,8 +229,9 @@ display_name = "Pickman"
 starting_orientation = Vector2(0, -1)
 metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" parent="NPCPickman" index="0"]
-disabled = true
+[node name="BumpCollision" parent="NPCPickman" index="0"]
+position = Vector2(0, -7)
+shape = SubResource("1")
 
 [node name="CollisionShape2D" parent="NPCPickman/InteractableArea" index="0"]
 disabled = true

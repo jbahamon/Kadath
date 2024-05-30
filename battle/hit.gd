@@ -3,15 +3,15 @@ class_name Hit
 enum Element {
 	PHYSICAL,
 	
-	SPACE,
-	TIME,
-	MATTER,
+	METAL,
+	WOOD,
+	FIRE,
+	EARTH,
+	WATER,
 	
-	ELDER,
-	OUTER,
-	GREAT_OLD,
-	
-	NONE
+	ABYSS,
+	CHAOS,
+	NONE,
 }
 var base_damage: float
 var type: int

@@ -7,6 +7,7 @@
 [node name="Enemy" groups=["enemy"] instance=ExtResource("1")]
 script = ExtResource("2_yhkqm")
 battle_on_contact = true
+enemy_id = ""
 
 [node name="Battler" parent="." index="0" instance=ExtResource("2")]
 anim_path = NodePath("..")

@@ -133,3 +133,5 @@ func disconnect_actor(actor):
 	self.turn_end.disconnect(status_effects.on_turn_end)
 	self.actor_dead.disconnect(status_effects.on_actor_dead)
 
+func delay_actor(actor, delay):
+	self.turn_queue.add_charge(actor, delay)

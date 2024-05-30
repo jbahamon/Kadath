@@ -39,13 +39,13 @@ func move_to_starting_room():
 	else:
 		# Note: move start_game to the above when doing the cutscene intro
 		EnvironmentService.update_whereabouts(
-			"000_prologue_kadath", 
-			"05_boss_room",
+			"999_tests", 
+			"battle",
 			Vector2.ZERO,
 			Vector2.UP,
 			false
 		)
-		
+		EntitiesService.get_party().set_unlocked(PartyMember.Id.PICKMAN, true)
 		# this is only for testing purposes
 		EntitiesService.get_proxy().set_mode(PlayerProxy.ProxyMode.GAMEPLAY)
 		

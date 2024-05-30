@@ -1,3 +1,4 @@
+Location
 HealingItem
 StyleBoxEmpty
 StyleBoxTexture

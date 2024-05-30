@@ -22,8 +22,8 @@ const WALK_SPEED = 100.0
 @export var starting_orientation = Vector2.DOWN
 
 @onready var anim = $Anim
-@onready var collision: CollisionShape2D = $CollisionShape2D
-@onready var interactable_collision: CollisionShape2D = $InteractableArea/CollisionShape2D
+@onready var bump_collision: CollisionShape2D = $BumpCollision
+@onready var interactable_area: Area2D = $InteractableArea
 
 var movement_node: NPCMovement
 var move_timer = null
@@ -58,14 +58,14 @@ func set_orientation(orientation: Vector2):
 func on_proxy_enter(_proxy):
 	self.set_physics_process(false)
 	self.stop_auto_movement()
-	self.collision.disabled = true
-	self.interactable_collision.disabled = true
+	self.bump_collision.disabled = true
+	self.interactable_area.monitoring = false
 	
 func on_proxy_leave(_proxy):
 	self.set_physics_process(true)
 	self.start_auto_movement()
-	self.collision.disabled = false
-	self.interactable_collision.disabled = false
+	self.bump_collision.disabled = false
+	self.interactable_area.monitoring = false
 
 func on_player_interaction(player_proxy: PlayerProxy):
 	if self.dialogue_name == "":
@@ -75,7 +75,7 @@ func on_player_interaction(player_proxy: PlayerProxy):
 		self.global_position.direction_to(player_proxy.global_position).normalized()
 	)
 	self.stop_auto_movement()
-	self.interactable_collision.set_disabled(true)
+	self.interactable_area.monitoring = false
 	
 	var was_input_enabled = InputService.is_input_enabled()
 	player_proxy.set_mode(PlayerProxy.ProxyMode.CUTSCENE)
@@ -85,7 +85,7 @@ func on_player_interaction(player_proxy: PlayerProxy):
 	
 	InputService.set_input_enabled(was_input_enabled)
 	player_proxy.set_mode(PlayerProxy.ProxyMode.GAMEPLAY)
-	self.interactable_collision.set_disabled(false)
+	self.interactable_area.monitoring = true
 	self.start_auto_movement()
 	
 func die(_mode: CutsceneInstruction.ExecutionMode):
@@ -143,13 +143,13 @@ func on_move_timer_done():
 	self.move_to_done.emit()
 
 func disable_collisions():
-	self.collision.disabled = true
+	self.bump_collision.disabled = true
 	
 func enable_collisions():
-	self.collision.disabled = false
+	self.bump_collision.disabled = false
 
 func pause():
-	var was_colliding = not self.collision.disabled
+	var was_colliding = not self.bump_collision.disabled
 	var was_processing_physics = self.is_physics_processing()
 	self.set_physics_process(false)
 	await self.resumed
@@ -163,6 +163,6 @@ func pause():
 func resume():
 	self.resumed.emit()
 	
-func on_enter_battle():
+func on_battle_start():
 	self.stop_auto_movement()
-	self.interactable_collision.call_deferred("set_disabled", true)
+	self.interactable_area.set_deferred("monitoring", true)

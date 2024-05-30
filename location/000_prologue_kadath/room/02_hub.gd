@@ -9,7 +9,8 @@ func setup():
 	if EntitiesService.get_party().is_unlocked(PartyMember.Id.PICKMAN):
 		$JoinTrigger.monitoring = false
 		$NPCPickman.queue_free()
-		
+	
+	EntitiesService.get_party().get_node("Pickman").battler.stats.take_damage(50)
 func spawn_pickman():
 	$NPCPickman.visible = true
 	$NPCPickman.global_position.x = EntitiesService.get_proxy().global_position.x

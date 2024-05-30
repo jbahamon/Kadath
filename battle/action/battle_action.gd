@@ -20,6 +20,9 @@ enum TargetType {
 @export var display_name: String
 @export var description: String = "Base battle action"
 
+func get_standard_attack_damage(actor):
+	return actor.battler.physical_attack * 5
+
 func is_disabled():
 	return false
 

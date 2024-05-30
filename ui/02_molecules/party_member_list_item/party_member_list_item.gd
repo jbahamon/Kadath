@@ -37,11 +37,11 @@ func get_button():
 	return button
 	
 func heal(amount: int):
-	self.party_member.heal(amount)
+	self.party_member.heal(amount, false)
 	self.update()
 	
 func recover_energy(amount: int):
-	self.party_member.recover_energy(amount)
+	self.party_member.recover_energy(amount, false)
 	self.update()
 	
 func show_toast(text: String, color: Color = Color.WHITE):

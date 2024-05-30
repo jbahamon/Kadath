@@ -118,6 +118,9 @@ func load_game_data(save_game: Resource):
 	
 	battler.stats.health = data["health"]
 	battler.stats.energy = data["energy"]
+
+func unlock_skill(skill_id: String):
+	self.find_child("Battler/Actions/Skill/%s".format(skill_id)).unlock()
 	
 func set_weapon(weapon: Weapon):
 	var party: Party = self.get_parent()
@@ -186,14 +189,14 @@ func get_enemies(actors: Array):
 			enemies.append(actor)
 	return enemies
 	
-func take_hit(hit: Hit):
-	await self.battler.take_hit(hit)
+func take_hit(hit: Hit, in_battle: bool = true):
+	await self.battler.take_hit(hit, in_battle)
 
-func heal(amount: int):
-	self.battler.heal(amount)
+func heal(amount: int, in_battle: bool = true):
+	await self.battler.heal(amount, in_battle)
 	
-func recover_energy(amount: int):
-	self.battler.recover_energy(amount)
+func recover_energy(amount: int, in_battle: bool = true):
+	await self.battler.recover_energy(amount, in_battle)
 	
 func show_toast(text: String, color: Color=Color.WHITE):
 	await self.battler.show_toast(text, color)	
@@ -250,3 +253,9 @@ func skip_move_to():
 	
 func on_move_timer_done():
 	self.move_to_done.emit()
+
+func on_battle_start():
+	self.battler.on_battle_start()
+
+func on_battle_end():
+	self.battler.on_battle_end()

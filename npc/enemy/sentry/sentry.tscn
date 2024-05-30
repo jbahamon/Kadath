@@ -5,13 +5,13 @@
 [ext_resource type="Resource" uid="uid://rlyl1hog6ic0" path="res://npc/enemy/sentry/stats.tres" id="3_l4u5g"]
 [ext_resource type="Script" path="res://battle/ai/random_ai.gd" id="4_bs2dh"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f63i3"]
-size = Vector2(10, 10)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kip0d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l8i0k"]
 
 [node name="Sentry" instance=ExtResource("1_vbu6h")]
 position = Vector2(0, 0)
+enemy_id = "sentry"
 display_name = "Sentry"
 
 [node name="Anim" parent="." index="0" instance=ExtResource("2_571aw")]
@@ -22,9 +22,12 @@ stats = ExtResource("3_l4u5g")
 [node name="AI" parent="Battler" index="3"]
 script = ExtResource("4_bs2dh")
 
-[node name="CollisionShape2D" parent="." index="2"]
+[node name="CollisionShape2D" parent="Battler/Hitbox" index="0"]
 position = Vector2(0, -10)
-shape = SubResource("RectangleShape2D_f63i3")
+shape = SubResource("RectangleShape2D_kip0d")
+
+[node name="InteractableArea" parent="." index="3"]
+visible = false
 
 [node name="CollisionShape2D" parent="InteractableArea" index="0"]
 position = Vector2(0, -10)
