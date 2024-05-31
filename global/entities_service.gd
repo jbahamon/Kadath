@@ -5,11 +5,10 @@ var PartyScene = preload("res://party/party.tscn")
 var party: Party = null
 var proxy: PlayerProxy = null
 
-func _init():
-	self.add_to_group("save")
 
 func initialize(init_proxy: PlayerProxy):
 	self.party = PartyScene.instantiate()
+	self.party.add_to_group("save")
 	
 	# Starting equipment for prologue
 	self.party.inventory.set("potion", 10)

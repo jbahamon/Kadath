@@ -90,8 +90,13 @@ func _set_experience(value: int):
 	experience = max(0, value)
 	update_stats()
 
-func save(save_game: Resource):
-	save_game.data[SAVE_KEY] = {
+func save(save_data: SaveData):
+	var skills = {}
+	
+	for skill in self.battler.skills.get_children():
+		skills[skill.get_name()] = skill.unlocked
+	
+	save_data.data[SAVE_KEY] = {
 		"display_name": display_name,
 		"unlocked": unlocked,
 		"equipped_weapon": equipped_weapon.id if equipped_weapon != null else null,
@@ -101,10 +106,11 @@ func save(save_game: Resource):
 		"experience": experience,
 		"health": battler.stats.health,
 		"energy": battler.stats.energy,
+		"skills": skills,
 	}
 
-func load_game_data(save_game: Resource):
-	var data: Dictionary = save_game.data[SAVE_KEY]
+func load_game_data(save_data: SaveData):
+	var data: Dictionary = save_data.data[SAVE_KEY]
 	display_name = data["display_name"]
 	unlocked = data["unlocked"]
 	
@@ -118,6 +124,9 @@ func load_game_data(save_game: Resource):
 	
 	battler.stats.health = data["health"]
 	battler.stats.energy = data["energy"]
+	
+	for skill in self.battler.skills.get_children():
+		skill.unlocked = data["skills"][skill.get_name()]
 
 func unlock_skill(skill_id: String):
 	self.find_child("Battler/Actions/Skill/%s".format(skill_id)).unlock()
