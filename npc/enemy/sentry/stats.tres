@@ -12,4 +12,4 @@ defense = 1
 magic_attack = 1
 magic_defense = 1
 luck = 1
-speed = 1
+speed = 15

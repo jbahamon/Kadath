@@ -3,8 +3,6 @@ extends Node
 # Each node is responsible for finding itself in the save_game
 # dict so saves don"t rely on the nodes" path or their source file
 
-const SaveData = preload("res://main/save_data.gd")
-
 const MAX_SAVE_FILES = 6
 const SAVE_FOLDER: String = "res://debug/save"
 # TODO: Use project setting to save to res://debug vs user://

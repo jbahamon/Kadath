@@ -87,7 +87,7 @@ func set_responses(line: Dictionary):
 	self.point_to_response(0)
 	self.remaining_time = 0.2
 	
-	await self.get_tree().create_timer(0.2, false)
+	await self.get_tree().create_timer(0.2, false).timeout
 	
 	self.timer = null
 	current_state = State.WAITING_FOR_INPUT

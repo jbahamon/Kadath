@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bmg2w6n04njn4"]
+
+[ext_resource type="Shader" path="res://utils/material/highlight.gdshader" id="1_tep3b"]
+
+[resource]
+shader = ExtResource("1_tep3b")
+shader_parameter/add = Vector4(1, 1, 1, 0)

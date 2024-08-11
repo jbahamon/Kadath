@@ -1,30 +1,38 @@
-[gd_scene load_steps=7 format=3 uid="uid://dpc8xvvcbyotf"]
+[gd_scene load_steps=9 format=3 uid="uid://dpc8xvvcbyotf"]
 
 [ext_resource type="PackedScene" uid="uid://co4ecuc835bk6" path="res://npc/enemy/enemy.tscn" id="1_vbu6h"]
+[ext_resource type="Texture2D" uid="uid://56sux2p3oroq" path="res://npc/enemy/sentry/icon.png" id="2_2k4kj"]
 [ext_resource type="PackedScene" uid="uid://cgc5b4s47chs0" path="res://npc/enemy/sentry/anim.tscn" id="2_571aw"]
 [ext_resource type="Resource" uid="uid://rlyl1hog6ic0" path="res://npc/enemy/sentry/stats.tres" id="3_l4u5g"]
 [ext_resource type="Script" path="res://battle/ai/random_ai.gd" id="4_bs2dh"]
+[ext_resource type="Script" path="res://npc/enemy/sentry/attack.gd" id="5_5ijqc"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kip0d"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w7pdr"]
+radius = 13.0
+height = 42.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l8i0k"]
 
 [node name="Sentry" instance=ExtResource("1_vbu6h")]
 position = Vector2(0, 0)
 enemy_id = "sentry"
-display_name = "Sentry"
+icon = ExtResource("2_2k4kj")
+base_display_name = "Sentry"
 
 [node name="Anim" parent="." index="0" instance=ExtResource("2_571aw")]
 
 [node name="Battler" parent="." index="1"]
 stats = ExtResource("3_l4u5g")
 
+[node name="Attack" type="Node" parent="Battler/Actions" index="0"]
+script = ExtResource("5_5ijqc")
+
 [node name="AI" parent="Battler" index="3"]
 script = ExtResource("4_bs2dh")
 
 [node name="CollisionShape2D" parent="Battler/Hitbox" index="0"]
-position = Vector2(0, -10)
-shape = SubResource("RectangleShape2D_kip0d")
+position = Vector2(0, -12)
+shape = SubResource("CapsuleShape2D_w7pdr")
 
 [node name="InteractableArea" parent="." index="3"]
 visible = false

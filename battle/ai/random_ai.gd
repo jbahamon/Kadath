@@ -11,7 +11,7 @@ func choose_action(actor, _actors: Array):
 			var available_options = action.get_options()
 			options = []
 			for option in available_options:
-				if not option.is_disabled():
+				if not option.is_disabled(actor):
 					options.append(option)
 		else:
 			return action
@@ -42,9 +42,9 @@ func get_action_parameter(actor, actors: Array, argument_signature: Dictionary):
 func choose_targets(actor, actors: Array, targeting_type: int):
 	match targeting_type: 
 		BattleAction.TargetType.ONE_ENEMY:
-			return actor.get_enemies(actors)[0]
+			return actor.get_enemies(actors).pick_random()
 		BattleAction.TargetType.ONE_ALLY:
-			return actor.get_allies(actors)[0]
+			return actor.get_allies(actors).pick_random()
 		BattleAction.TargetType.ALL_ENEMIES:
 			return actor.get_enemies(actors)
 		BattleAction.TargetType.ALL_ALLIES:

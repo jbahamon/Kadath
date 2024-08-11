@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bl2fqcakxb5yf"]
+
+[ext_resource type="Script" path="res://ui/02_molecules/timeline_item/timeline_item.gd" id="1_tmgn2"]
+[ext_resource type="Texture2D" uid="uid://56sux2p3oroq" path="res://npc/enemy/sentry/icon.png" id="2_cs6nb"]
+
+[node name="TimelineItem" type="PanelContainer"]
+offset_right = 58.0
+offset_bottom = 58.0
+script = ExtResource("1_tmgn2")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("2_cs6nb")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 48
+text = "A"
+horizontal_alignment = 2

@@ -1,0 +1,51 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://cc6woheb28lq4"]
+
+[ext_resource type="Texture2D" uid="uid://bwqwdmp83g53m" path="res://location/000_prologue_kadath/object/chalice.png" id="1_0xops"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ri38g"]
+atlas = ExtResource("1_0xops")
+region = Rect2(0, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_valau"]
+atlas = ExtResource("1_0xops")
+region = Rect2(128, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jr5jg"]
+atlas = ExtResource("1_0xops")
+region = Rect2(192, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_83iao"]
+atlas = ExtResource("1_0xops")
+region = Rect2(256, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r0o55"]
+atlas = ExtResource("1_0xops")
+region = Rect2(64, 0, 64, 48)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ri38g")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_valau")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jr5jg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_83iao")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r0o55")
+}],
+"loop": true,
+"name": &"full",
+"speed": 2.0
+}]

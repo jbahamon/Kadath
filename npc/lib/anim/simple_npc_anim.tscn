@@ -1,7 +1,7 @@
 [gd_scene load_steps=26 format=3 uid="uid://3huenc8ltgbh"]
 
 [ext_resource type="Script" path="res://npc/lib/anim/character_anim.gd" id="1_h56ls"]
-[ext_resource type="Texture2D" uid="uid://bsc7om1lt7lx1" path="res://location/lib/image/human_npc_template.png" id="2_ruasa"]
+[ext_resource type="Texture2D" uid="uid://bsc7om1lt7lx1" path="res://npc/human_npc_template.png" id="2_ruasa"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_byccx"]
 animation = &"idle_down"
@@ -210,7 +210,6 @@ _data = {
 
 [node name="Anim" type="Marker2D"]
 script = ExtResource("1_h56ls")
-animation_names = PackedStringArray("idle", "walk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -218,12 +217,11 @@ texture = ExtResource("2_ruasa")
 centered = false
 offset = Vector2(-12, -34)
 hframes = 19
-frame = 5
+frame = 4
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_edbud")
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/idle/blend_position = Vector2(-0.0131176, 0.727941)
 parameters/walk/blend_position = Vector2(0, 0)
 

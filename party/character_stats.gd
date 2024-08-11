@@ -31,7 +31,9 @@ func reset():
 	energy = self.max_energy
 
 func take_damage(damage: int):
+	var prev_health = health
 	health = clamp(health - damage, 0, max_health)
+	return prev_health - health
 
 func heal(amount: int):
 	self.take_damage(-amount)

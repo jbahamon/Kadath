@@ -4,7 +4,14 @@ signal touched(body)
 
 @export var battle_on_contact = true
 @export var enemy_id: String
+@export var icon: Texture2D
 @onready var battler: Battler = $Battler
+
+var instance_id = ""
+
+var max_health:
+	get:
+		return self.battler.stats.max_health
 
 var health:
 	get:
@@ -13,7 +20,11 @@ var health:
 var energy:
 	get:
 		return self.battler.stats.energy
-		
+
+
+func get_display_name():
+	return self.base_display_name if self.instance_id == "" else "%s %s" % [self.base_display_name, self.instance_id]
+	
 func _on_interactable_area_body_entered(body):
 	self.touched.emit(body)
 	if battle_on_contact:

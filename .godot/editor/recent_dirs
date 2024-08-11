@@ -1,3 +1,7 @@
+res://location/000_prologue_kadath/object
+res://location/000_prologue_kadath/tile
+res://ui/03_organisms/skill_costs
+res://utils/material
 res://battle/action/util
 res://location/999_tests
 res://battle/action

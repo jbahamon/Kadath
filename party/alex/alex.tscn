@@ -30,22 +30,16 @@ anim_path = NodePath("../Anim")
 [node name="CrescentBlast" type="Node" parent="Battler/Actions/Skill" index="0"]
 script = ExtResource("4_e2q1k")
 power = 5.0
-cost = 10
 display_name = "Crescent Blast"
 description = "Hit enemies near a target with a magic projectile."
 
 [node name="AreaOfEffect" parent="Battler/Actions/Skill/CrescentBlast" index="0" instance=ExtResource("5_lilye")]
-
-[node name="Area2D" parent="Battler/Actions/Skill/CrescentBlast/AreaOfEffect" index="1"]
-collision_layer = 0
-collision_mask = 32
 
 [node name="CollisionShape2D" parent="Battler/Actions/Skill/CrescentBlast/AreaOfEffect/Area2D" index="0"]
 shape = SubResource("CircleShape2D_8u0il")
 
 [node name="ForcefulSlash" type="Node" parent="Battler/Actions/Skill" index="1"]
 script = ExtResource("5_cliwo")
-cost = 25
 display_name = "Forceful Slash"
 description = "Attack a single enemy with a vicious slash."
 
@@ -59,6 +53,7 @@ position = Vector2(0, -10)
 shape = SubResource("CapsuleShape2D_itmqi")
 
 [node name="Anim" parent="." index="1" instance=ExtResource("5_de00w")]
+use_parent_material = true
 
 [editable path="Battler"]
 [editable path="Battler/Actions/Skill/CrescentBlast/AreaOfEffect"]

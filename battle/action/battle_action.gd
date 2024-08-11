@@ -19,13 +19,20 @@ enum TargetType {
 
 @export var display_name: String
 @export var description: String = "Base battle action"
+@export var energy_cost: int = 0
+@export var unlocked = true
+
+const highlight_material = preload("res://utils/material/highlight.tres")
 
 func get_standard_attack_damage(actor):
 	return actor.battler.physical_attack * 5
 
-func is_disabled():
-	return false
+func is_disabled(actor):
+	return actor is PartyMember and actor.battler.stats.energy < self.energy_cost
 
+func unlock():
+	self.unlocked = true
+	
 func reset():
 	assert(false, "%s missing overwrite of the reset method" % name)
 
@@ -40,3 +47,6 @@ func pop_parameter():
 	
 func execute(_actor):
 	assert(false,"%s missing overwrite of the execute method" % name)
+
+func highlight(option):
+	pass

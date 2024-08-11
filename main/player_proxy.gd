@@ -131,14 +131,14 @@ func get_display_name() -> String:
 func _set_process_collisions(value: bool):
 	self.collision.set_deferred("disabled", not value)
 
-func move_to(target: Array, speed):
+func move_to(move_target: Array, speed):
 	assert(speed > 0)
 	var previous_mode = self.current_mode
 	self.set_mode(ProxyMode.CUTSCENE)
 	
 	var target_position = Vector2(
-		target[0] if target[0] != null else self.global_position.x,
-		target[1] if target[1] != null else self.global_position.y
+		move_target[0] if move_target[0] != null else self.global_position.x,
+		move_target[1] if move_target[1] != null else self.global_position.y
 	)
 	var time = max((self.global_position - target_position).length()/speed - 1/30.0, 0)
 	

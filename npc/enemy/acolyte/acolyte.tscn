@@ -1,0 +1,58 @@
+[gd_scene load_steps=11 format=3 uid="uid://cebhopaolaguc"]
+
+[ext_resource type="PackedScene" uid="uid://c17hneqpuil0l" path="res://npc/lib/base_npc.tscn" id="1_nqevg"]
+[ext_resource type="Script" path="res://npc/enemy/enemy.gd" id="2_mtvfo"]
+[ext_resource type="Texture2D" uid="uid://dc35jxbalkxg4" path="res://npc/enemy/acolyte/icon.png" id="3_grxgs"]
+[ext_resource type="PackedScene" uid="uid://dtaxhpmmjspek" path="res://battle/battler/battler.tscn" id="3_hxf52"]
+[ext_resource type="PackedScene" uid="uid://ckj6m5dbs657x" path="res://npc/enemy/acolyte/anim.tscn" id="4_dgo87"]
+[ext_resource type="Script" path="res://npc/enemy/acolyte/attack.gd" id="6_wx6wh"]
+[ext_resource type="Script" path="res://npc/enemy/acolyte/consume.gd" id="7_2l1cy"]
+[ext_resource type="Script" path="res://npc/enemy/acolyte/ai.gd" id="8_10wdh"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h6312"]
+height = 36.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pt4tg"]
+
+[node name="Acolyte" groups=["enemy"] instance=ExtResource("1_nqevg")]
+position = Vector2(0, 0)
+script = ExtResource("2_mtvfo")
+battle_on_contact = false
+enemy_id = "acolyte"
+icon = ExtResource("3_grxgs")
+base_display_name = "Acolyte"
+
+[node name="Anim" parent="." index="0" instance=ExtResource("4_dgo87")]
+
+[node name="Battler" parent="." index="1" instance=ExtResource("3_hxf52")]
+anim_path = NodePath("..")
+
+[node name="Attack" type="Node" parent="Battler/Actions" index="0"]
+script = ExtResource("6_wx6wh")
+
+[node name="Consume" type="Node" parent="Battler/Actions" index="1"]
+script = ExtResource("7_2l1cy")
+
+[node name="AI" parent="Battler" index="3"]
+script = ExtResource("8_10wdh")
+
+[node name="CollisionShape2D" parent="Battler/Hitbox" index="0"]
+position = Vector2(0, -15)
+shape = SubResource("CapsuleShape2D_h6312")
+
+[node name="BumpCollision" parent="." index="2"]
+visible = false
+disabled = true
+
+[node name="InteractableArea" parent="." index="3"]
+collision_layer = 24
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" parent="InteractableArea" index="0"]
+shape = SubResource("RectangleShape2D_pt4tg")
+
+[connection signal="body_entered" from="InteractableArea" to="." method="_on_interactable_area_body_entered"]
+
+[editable path="Battler"]
+[editable path="Battler/Toast"]

@@ -18,6 +18,6 @@ func get_actors_at(position: Vector2) -> Array:
 	
 	var actors = []
 	for hitbox in hitboxes:
-		actors.append(hitbox.get_parent())
+		actors.append(hitbox.get_parent().get_parent())
 		
 	return actors

@@ -104,10 +104,10 @@ There is a curious glyph on the chalice. It seems to be pulsing with some sort o
 
 Touch the glyph?
 - Yes
-	do DialogService.add_response("yes")
+	do DialogueService.add_response("yes")
 	You lean forward and touch the glyph.
 - No
-	do DialogService.add_response("no")
+	do DialogueService.add_response("no")
 	Maybe later.
 => END
 

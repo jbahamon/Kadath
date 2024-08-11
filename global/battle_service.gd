@@ -187,7 +187,7 @@ func rename_non_party_actors(non_party_actors: Array):
 			)
 			
 			for i in range(actors.size()):
-				actors[i].display_name = "%s %s" % [actors[i].display_name, suffix[i % suffix.length()]]
+				actors[i].instance_id = suffix[i % suffix.length()]
 	
 
 func set_up_battle_positions(battle_spot, party_actors: Array, non_party_actors: Array):
@@ -215,7 +215,7 @@ func set_up_battle_positions(battle_spot, party_actors: Array, non_party_actors:
 	)
 	
 	var target_spots = []
-	
+	var non_party_lines = []
 	for non_party_actor in non_party_actors:
 		non_party_actor.on_battle_start()
 		var key = non_party_actor.display_name
@@ -230,20 +230,27 @@ func set_up_battle_positions(battle_spot, party_actors: Array, non_party_actors:
 		else:
 			spots_by_name.erase(key)
 			
-		cutscene_lines.append(
-			"WALK %s TO (%d, %d) AT 50" % [
-				non_party_actor.name, 
-				int(round(spot.global_position.x)), 
-				int(round(spot.global_position.y))
+		non_party_lines.append(
+			[
+				non_party_actor,
+				"WALK %s TO (%d, %d) AT 50" % [
+					non_party_actor.name, 
+					int(round(spot.global_position.x)), 
+					int(round(spot.global_position.y))
+				]
 			]
 		)
 		target_spots.append(spot)
 		
+	var used_spots = []
+	
 	for i in range(party_actors.size()): 
 		var party_actor = party_actors[i]
 		party_actor.on_battle_start()
 		var spot = party_spots[i]
 		var closest_enemy = self.get_closest_to(target_spots, spot.global_position)
+		
+		used_spots.append(spot)
 		cutscene_lines.append_array(
 			[
 				"SEQUENTIAL",
@@ -262,6 +269,21 @@ func set_up_battle_positions(battle_spot, party_actors: Array, non_party_actors:
 			]
 		)
 	
+	for line in non_party_lines:
+		var closest_party_spot = self.get_closest_to(used_spots, line[0].global_position)
+		cutscene_lines.append_array(
+			[
+				"SEQUENTIAL",
+				line[1],
+				"LOOK_AT %s AT (%d, %d)" % [
+					line[0].name, 
+					int(round(closest_party_spot.global_position.x)), 
+					int(round(closest_party_spot.global_position.y))
+				],
+				"END"
+			]
+		)
+		
 	cutscene_lines.append("END")
 	
 	await CutsceneService.play_custom_cutscene(cutscene_lines, {"pausable": false})

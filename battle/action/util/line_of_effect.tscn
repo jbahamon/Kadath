@@ -1,6 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dwx2sfgjttusb"]
+[gd_scene load_steps=5 format=3 uid="uid://dwx2sfgjttusb"]
 
 [ext_resource type="Script" path="res://battle/action/util/line_of_effect.gd" id="1_j0n2e"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3hhld"]
+radius = 5.0
+height = 40.0
 
 [sub_resource type="Gradient" id="Gradient_y4o0m"]
 interpolation_mode = 1
@@ -17,17 +21,19 @@ fill_to = Vector2(1, 0.5)
 metadata/_snap_enabled = true
 
 [node name="LineOfEffect" type="Node2D"]
-visible = false
 script = ExtResource("1_j0n2e")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_3hhld")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
 modulate = Color(1, 1, 1, 0.266667)
 texture_filter = 1
 texture = SubResource("GradientTexture2D_d23hx")
-
-[node name="ShapeCast2D" type="ShapeCast2D" parent="."]
-enabled = false
-collision_mask = 32
-collide_with_areas = true
-collide_with_bodies = false

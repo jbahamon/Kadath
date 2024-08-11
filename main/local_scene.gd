@@ -41,7 +41,7 @@ func move_to_starting_room():
 		EnvironmentService.update_whereabouts(
 			"999_tests", 
 			"battle",
-			Vector2.ZERO,
+			Vector2(0, 35),
 			Vector2.UP,
 			false
 		)

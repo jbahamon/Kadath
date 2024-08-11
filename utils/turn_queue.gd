@@ -76,8 +76,6 @@ func get_current_actor():
 		element.remaining_charge = max(element.remaining_charge - time * element.actor.battler.speed, 0)
 	next_element.remaining_charge = CHARGE_TO_ACT
 	
-	next_element = self.get_next_element()
-	
 	return next_element.actor
 
 func _has_two_teams() -> bool:

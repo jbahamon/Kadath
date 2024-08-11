@@ -22,16 +22,16 @@ func execute(tree: SceneTree, mode: ExecutionMode):
 			self.position = CameraService.get_camera_global_position() + self.movement
 	
 	if self.time > 0 and mode == ExecutionMode.PLAY:
-		var tween = tree.create_tween()
+		self.tween = tree.create_tween()
 		
-		tween.tween_property(
+		self.tween.tween_property(
 			CameraService.get_camera(), 
 			"global_position", 
 			self.position,
 			self.time
 		)
 	
-		await tween.finished
+		await self.tween.finished
 	else:
 		CameraService.set_camera_position(self.position)
 	

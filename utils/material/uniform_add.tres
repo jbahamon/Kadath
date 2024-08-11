@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c48122ffiwrbb"]
+
+[ext_resource type="Shader" path="res://utils/material/uniform_add.gdshader" id="1_bxp34"]
+
+[resource]
+shader = ExtResource("1_bxp34")
+shader_parameter/add = Vector4(1, 1, 1, 0)

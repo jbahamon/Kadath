@@ -89,7 +89,7 @@ cache/0/40/0/kerning_overrides/40/0 = Vector2(0, 0)
 
 [resource]
 default_font = ExtResource("5")
-default_font_size = 40
+default_font_size = 30
 Button/colors/font_color = Color(1, 1, 1, 1)
 Button/colors/font_color_disabled = Color(0.831373, 0.831373, 0.831373, 0.568627)
 Button/colors/font_color_hover = Color(0, 1, 1, 1)

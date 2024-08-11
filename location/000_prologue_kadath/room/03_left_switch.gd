@@ -7,7 +7,7 @@ func setup():
 	if VarsService.get_flag("kadath.left_barrier"):
 		solve_room()
 	
-func _on_cultist_touched(_proxy: PlayerProxy):
+func _on_acolyte_touched(_proxy: PlayerProxy):
 	CutsceneService.play_cutscene_from_file("res://location/000_prologue_kadath/cutscene/caught.cutscene")
 
 func _on_paten_player_interaction(proxy: PlayerProxy):
@@ -46,7 +46,10 @@ func interact_with_paten(_proxy: PlayerProxy):
 
 func solve_room():
 	
-	$LeftSentry1.queue_free()
-	$LeftSentry2.queue_free()
-	$RightSentry1.queue_free()
-	$RightSentry2.queue_free()
+	$LeftAcolyte1.queue_free()
+	$LeftAcolyte2.queue_free()
+	$RightAcolyte1.queue_free()
+	$RightAcolyte2.queue_free()
+	
+	$AltarAcolyte1.frame_coords = Vector2(0, 6)
+	$AltarAcolyte2.frame_coords = Vector2(0, 6)

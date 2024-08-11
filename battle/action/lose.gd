@@ -10,7 +10,8 @@ func get_next_parameter_signature():
 		return {
 			"name": "targets",
 			"type": BattleAction.ActionArgument.TARGET,
-			"targeting_type": BattleAction.TargetType.ALL_ALLIES
+			"targeting_type": BattleAction.TargetType.ALL_ALLIES,
+			"prompt": "Lose",
 		}
 	else:
 		return null

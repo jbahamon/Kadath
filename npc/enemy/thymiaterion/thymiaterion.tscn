@@ -1,0 +1,53 @@
+[gd_scene load_steps=10 format=3 uid="uid://bngh72w54kdq0"]
+
+[ext_resource type="PackedScene" uid="uid://c17hneqpuil0l" path="res://npc/lib/base_npc.tscn" id="1_qtfsx"]
+[ext_resource type="Script" path="res://npc/enemy/enemy.gd" id="2_x8f4g"]
+[ext_resource type="Texture2D" uid="uid://bs4rf2sdoppyh" path="res://npc/enemy/thymiaterion/icon.png" id="3_h48do"]
+[ext_resource type="PackedScene" uid="uid://c1qvuen3txcsn" path="res://npc/enemy/thymiaterion/anim.tscn" id="3_j4650"]
+[ext_resource type="PackedScene" uid="uid://dtaxhpmmjspek" path="res://battle/battler/battler.tscn" id="3_rrahi"]
+[ext_resource type="Script" path="res://battle/action/attack.gd" id="5_vhpjn"]
+[ext_resource type="Script" path="res://battle/ai/random_ai.gd" id="6_hhc2v"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_phgn6"]
+radius = 20.0
+height = 48.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a00iy"]
+radius = 42.0119
+
+[node name="Thymiaterion" groups=["enemy"] instance=ExtResource("1_qtfsx")]
+position = Vector2(0, 0)
+script = ExtResource("2_x8f4g")
+battle_on_contact = true
+enemy_id = "thymiaterion"
+icon = ExtResource("3_h48do")
+base_display_name = "Thymiaterion"
+
+[node name="Anim" parent="." index="0" instance=ExtResource("3_j4650")]
+
+[node name="Battler" parent="." index="1" instance=ExtResource("3_rrahi")]
+anim_path = NodePath("..")
+
+[node name="Attack" type="Node" parent="Battler/Actions" index="0"]
+script = ExtResource("5_vhpjn")
+
+[node name="AI" parent="Battler" index="3"]
+script = ExtResource("6_hhc2v")
+
+[node name="CollisionShape2D" parent="Battler/Hitbox" index="0"]
+position = Vector2(0, -18)
+shape = SubResource("CapsuleShape2D_phgn6")
+
+[node name="InteractableArea" parent="." index="3"]
+collision_layer = 24
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" parent="InteractableArea" index="0"]
+position = Vector2(0, -17)
+shape = SubResource("CircleShape2D_a00iy")
+
+[connection signal="body_entered" from="InteractableArea" to="." method="_on_interactable_area_body_entered"]
+
+[editable path="Battler"]
+[editable path="Battler/Toast"]

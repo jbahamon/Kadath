@@ -1,29 +1,29 @@
 extends Node2D
 
-@onready var shape_cast: ShapeCast2D = $ShapeCast2D
+@onready var area: Area2D = $Area2D
+@onready var collision_shape = $Area2D/CollisionShape2D
 
 func reset():
 	self.position = Vector2.ZERO
 	self.shape_cast.set_deferred("enabled", false)
 
 func get_actors_in_line(from_position: Vector2, to_position: Vector2) -> Array:
-	self.global_position = from_position + Vector2(0, -10)
-	self.shape_cast.target_position = to_position - from_position + Vector2(0, -5)
-	self.shape_cast.set_deferred("enabled", true)
-	
+	from_position = from_position + Vector2(0, -10)
+	to_position = to_position + Vector2(0, -10)
+	self.area.global_position = 0.5 * (from_position + to_position)
+	self.collision_shape.shape.height = (from_position - to_position).length()
+	self.collision_shape.rotation = PI/2.0 + (- to_position + from_position).angle()
+	self.area.set_deferred("monitoring", true)
 	
 	var tree = get_tree()
 	await tree.process_frame
 	await tree.physics_frame
 	await tree.physics_frame
-	self.shape_cast.force_shapecast_update()
+
+	var hitboxes = self.area.get_overlapping_areas()
 	
-	assert(self.shape_cast.is_colliding())
 	var actors = []
-	for i in range(self.shape_cast.get_collision_count()):
-		print("Collision!")
-		var collider = self.shape_cast.get_collider(i)
-		actors.append(collider.get_parent().get_parent())
+	for hitbox in hitboxes:
+		actors.append(hitbox.get_parent().get_parent())
 		
-	
 	return actors

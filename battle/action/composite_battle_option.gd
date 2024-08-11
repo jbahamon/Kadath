@@ -9,3 +9,7 @@ func get_prompt():
 
 func get_options():
 	assert(false, "should be implemented in child class")
+
+func highlight_option(actor, option):
+	# should highlight current actor?
+	pass

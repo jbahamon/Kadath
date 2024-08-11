@@ -5,9 +5,11 @@
 [ext_resource type="Script" path="res://npc/enemy/enemy.gd" id="2_yhkqm"]
 
 [node name="Enemy" groups=["enemy"] instance=ExtResource("1")]
+position = Vector2(0, 0)
 script = ExtResource("2_yhkqm")
 battle_on_contact = true
 enemy_id = ""
+icon = null
 
 [node name="Battler" parent="." index="0" instance=ExtResource("2")]
 anim_path = NodePath("..")

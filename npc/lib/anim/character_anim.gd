@@ -4,6 +4,7 @@ extends Marker2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var animation_state = animation_tree.get("parameters/playback")
+@onready var sprite: Sprite2D = $Sprite2D
 
 var blend_position_names: Array
 func _ready():

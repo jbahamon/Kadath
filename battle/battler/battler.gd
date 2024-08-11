@@ -6,6 +6,8 @@ extends Node2D
 class_name Battler
 signal died
 
+const uniform_add: Material = preload("res://utils/material/uniform_add.tres")
+
 @export var anim_path: NodePath
 @export var stats: CharacterStats
 @export var turn_order_icon: Texture2D
@@ -78,16 +80,26 @@ func initialize(ui: BattleUI):
 	self.ai.interface = ui
 
 func take_hit(hit: Hit, in_battle: bool = true):
-	var damage = ceil(hit.base_damage * self.get_damage_modifier(hit) + randf_range(1, hit.base_damage*0.2))
+	var displayed_damage = ceil(
+		hit.base_damage * self.get_damage_modifier(hit) + randf_range(1, hit.base_damage*0.2)
+	)
 	
+	var actual_damage = self.stats.take_damage(displayed_damage)
+	
+	# If additional effects are done, maybe they would need to be moved to the hits
 	if in_battle:
-		await self.toast.show_toast(str(damage))
+		var parent = self.get_parent()
+		var prev_material = parent.material
+		parent.material = uniform_add
+		await get_tree().create_timer(0.2).timeout
+		parent.material = prev_material
+
+		await self.toast.show_toast(str(displayed_damage))
 		
-	self.stats.take_damage(damage)
-	
 	if in_battle and self.stats.health <= 0:
 		emit_signal("died", self.get_parent())
-	return damage
+
+	return actual_damage
 	
 func heal(amount: int, in_battle: bool = true):
 	if in_battle:
@@ -120,7 +132,7 @@ func get_action_options() -> Array:
 		
 		# options.push_front(BattleService.common_action_options["lose"])
 		# options.push_front(BattleService.common_action_options["win"])
-		# options.push_front(BattleService.common_action_options["defend"])
+		options.push_front(BattleService.common_action_options["defend"])
 		options.push_front(BattleService.common_action_options["attack"])
 		options.push_back(BattleService.common_action_options["item"])
 		
@@ -130,7 +142,6 @@ func get_action_options() -> Array:
 		
 	else:
 		options = actions.get_children()
-		options.append(BattleService.common_action_options["attack"])
 		
 	return options
 

@@ -433,16 +433,16 @@ libraries = {
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
+use_parent_material = true
 texture = ExtResource("2_4cush")
 offset = Vector2(0, -17)
 hframes = 6
 vframes = 44
-frame = 12
+frame = 145
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("21")
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/battle_idle/blend_position = Vector2(0, 0)
 parameters/idle/blend_position = Vector2(-0.0484331, 0.275)
 parameters/run/blend_position = Vector2(0, 0)

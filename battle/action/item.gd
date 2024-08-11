@@ -13,15 +13,17 @@ func get_next_parameter_signature():
 		return {
 			"name": "item",
 			"type": BattleAction.ActionArgument.ITEM,
+			"prompt": "Choose an item",
 		}
 	elif self.targets == null and self.item.needs_targets():
 		return {
 			"name": "targets",
 			"type": BattleAction.ActionArgument.TARGET,
-			"targeting_type": self.item.target_type
+			"targeting_type": self.item.target_type,
+			"prompt": "Use %s on..." % self.item.name,
 		}
 	else:
-		return null
+		return 
 	
 func push_parameter(parameter_name, value):
 	match parameter_name:

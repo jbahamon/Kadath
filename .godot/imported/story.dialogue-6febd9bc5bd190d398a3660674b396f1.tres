@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="DialogueResource" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_resource.gd" id="1_tkkpn"]
+[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_resource.gd" id="1_rdn1a"]
 
 [resource]
-script = ExtResource("1_tkkpn")
+script = ExtResource("1_rdn1a")
 using_states = PackedStringArray()
 titles = {
 "after_boss": "49",
@@ -100,7 +100,7 @@ lines = {
 "mutation": {
 "expression": Array[Dictionary]([{
 "type": "variable",
-"value": "DialogService"
+"value": "DialogueService"
 }, {
 "type": "dot"
 }, {
@@ -151,7 +151,7 @@ lines = {
 "mutation": {
 "expression": Array[Dictionary]([{
 "type": "variable",
-"value": "DialogService"
+"value": "DialogueService"
 }, {
 "type": "dot"
 }, {

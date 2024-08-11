@@ -2,14 +2,18 @@ LOOK PARTY DOWN
 PLAY_ANIM PARTY idle
 
 SIMULTANEOUS
-	CALL LeftSentry1 stop_auto_movement
-	CALL LeftSentry2 stop_auto_movement
-	CALL RightSentry1 stop_auto_movement
-	CALL RightSentry2 stop_auto_movement
-	LOOK_AT LeftSentry1 AT PROXY
-	LOOK_AT LeftSentry2 AT PROXY
-	LOOK_AT RightSentry1 AT PROXY
-	LOOK_AT RightSentry2 AT PROXY
+	CALL LeftAcolyte1 stop_auto_movement
+	CALL LeftAcolyte2 stop_auto_movement
+	CALL RightAcolyte1 stop_auto_movement
+	CALL RightAcolyte2 stop_auto_movement
+	PLAY_ANIM LeftAcolyte1 idle
+	PLAY_ANIM LeftAcolyte2 idle
+	PLAY_ANIM RightAcolyte1 idle
+	PLAY_ANIM RightAcolyte2 idle
+	LOOK_AT LeftAcolyte1 AT PROXY
+	LOOK_AT LeftAcolyte2 AT PROXY
+	LOOK_AT RightAcolyte1 AT PROXY
+	LOOK_AT RightAcolyte2 AT PROXY
 END
 
 WAIT 0.5
@@ -21,10 +25,15 @@ LOOK PROXY UP
 PLAY_ANIM PARTY idle
 
 SIMULTANEOUS
-	CALL LeftSentry1 start_auto_movement
-	CALL LeftSentry2 start_auto_movement
-	CALL RightSentry1 start_auto_movement
-	CALL RightSentry2 start_auto_movement
+	CALL LeftAcolyte1 start_auto_movement
+	CALL LeftAcolyte2 start_auto_movement
+	CALL RightAcolyte1 start_auto_movement
+	CALL RightAcolyte2 start_auto_movement
+
+	PLAY_ANIM LeftAcolyte1 walk
+	PLAY_ANIM LeftAcolyte2 walk
+	PLAY_ANIM RightAcolyte1 walk
+	PLAY_ANIM RightAcolyte2 walk
 END
 
 SIMULTANEOUS

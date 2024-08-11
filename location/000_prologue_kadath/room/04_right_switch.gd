@@ -26,10 +26,10 @@ func _on_chalice_player_interaction(proxy: PlayerProxy):
 func move_player_to_chalice(proxy):
 	if chalice.position.distance_squared_to(proxy.top_position) > 9:
 		
-		var destination = Vector2(proxy.position.x, chalice.position.y + proxy.height + 2)
+		var destination = [proxy.position.x, chalice.position.y + proxy.height + 2]
 
 		proxy.play_anim("walk")
-		proxy.set_orientation(destination - proxy.position)
+		proxy.set_orientation(Vector2(destination[0], destination[1]) - proxy.position)
 		await proxy.move_to(destination, proxy.walk_speed)
 		
 		destination = Vector2(chalice.position.x, proxy.position.y)
@@ -46,7 +46,7 @@ func attempt_chalice_interaction(proxy: PlayerProxy):
 		animation_player.play("drop_enemies")
 		await animation_player.animation_finished
 		await BattleService.start_battle(
-			[$Sentry, $Sentry2, $Sentry3],
+			[$Ampoule1, $Ampoule2, $Ampoule3],
 			false,
 			PlayerProxy.ProxyMode.CUTSCENE
 		)

@@ -1,7 +1,6 @@
 extends CharacterBody2D
 class_name BaseNPC
 
-var NPCMovement = preload("./movement/npc_movement.tscn")
 var RandomSpinMovement = preload("./movement/random_spin_movement.tscn")
 
 signal resumed
@@ -15,7 +14,7 @@ enum MovementType {
 
 const WALK_SPEED = 100.0
 
-@export var display_name: String
+@export var base_display_name: String
 @export var dialogue_name: String = ""
 @export var movement_type: MovementType = MovementType.NONE
 @export var custom_movement: NodePath
@@ -25,13 +24,17 @@ const WALK_SPEED = 100.0
 @onready var bump_collision: CollisionShape2D = $BumpCollision
 @onready var interactable_area: Area2D = $InteractableArea
 
+var display_name: String:
+	get:
+		return self.get_display_name()
+		
 var movement_node: NPCMovement
 var move_timer = null
 
 func _ready():
 	match movement_type:
 		MovementType.NONE:
-			movement_node = NPCMovement.instantiate()
+			movement_node = NPCMovement.new()
 			movement_node.parent = self
 		MovementType.RANDOM_SPIN:
 			movement_node = RandomSpinMovement.instantiate()
@@ -46,6 +49,9 @@ func _ready():
 	
 func _physics_process(delta):
 	self.move_and_collide(velocity * delta)
+
+func get_display_name():
+	return self.base_display_name
 
 # Animatable interface
 

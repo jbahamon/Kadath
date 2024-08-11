@@ -11,6 +11,7 @@ func get_turn(current_actors: Array) -> Turn:
 	self.interface.reset_options_stack()
 	var options = battler.get_action_options()
 	
+	self.interface.current_actor = battler.get_parent()
 	self.interface.set_options({
 		"title": "What will %s do?" % battler.get_parent().display_name,
 		"options": options
@@ -32,7 +33,7 @@ func get_turn(current_actors: Array) -> Turn:
 	var turn = Turn.new()
 	turn.actor = actor
 	turn.action = action
-	
+	self.interface.set_info_text(null)
 	self.interface.hide_options()
 	# self.interface.hide_timeline()
 
@@ -44,6 +45,7 @@ func wait_for_parameters(action: BattleAction, action_actor, actors: Array):
 	
 	while current_parameter_signature != null:
 		var new_parameter = await self.interface.request_action_parameter(
+			action,
 			action_actor, 
 			actors, 
 			current_parameter_signature

@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://oyekfni30vws"]
+
+[ext_resource type="Script" path="res://ui/03_organisms/skill_costs/skill_costs.gd" id="1_gb1ow"]
+[ext_resource type="Texture2D" uid="uid://df0sy0xr60rtd" path="res://party/pickman/icon.png" id="2_8g364"]
+
+[node name="SkillCosts" type="PanelContainer"]
+offset_top = 92.0
+offset_right = 118.0
+offset_bottom = 118.0
+size_flags_vertical = 0
+script = ExtResource("1_gb1ow")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 2
+columns = 2
+
+[node name="Control" type="Control" parent="GridContainer"]
+layout_mode = 2
+
+[node name="SP" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "SP"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_8g364")
+
+[node name="Label" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "10"
+horizontal_alignment = 2
+vertical_alignment = 2
