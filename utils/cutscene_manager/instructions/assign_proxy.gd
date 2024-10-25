@@ -7,7 +7,7 @@ func _init(init_entity_name_or_entity):
 
 func execute(_tree: SceneTree, _mode: ExecutionMode):
 	var new_parent
-	if self.entity is String:
+	if self.entity_name_or_entity is String:
 		new_parent = EntitiesService.get_entity(self.entity_name_or_entity) 
 	else:
 		new_parent = self.entity_name_or_entity

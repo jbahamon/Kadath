@@ -3,7 +3,6 @@ extends BattleAction
 var item = null
 var targets = null
 
-
 func reset():
 	self.item = null
 	self.targets = null
@@ -23,7 +22,7 @@ func get_next_parameter_signature():
 			"prompt": "Use %s on..." % self.item.name,
 		}
 	else:
-		return 
+		return null
 	
 func push_parameter(parameter_name, value):
 	match parameter_name:

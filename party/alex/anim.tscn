@@ -1,7 +1,7 @@
-[gd_scene load_steps=48 format=3 uid="uid://cvjv5trx5nv4o"]
+[gd_scene load_steps=48 format=3 uid="uid://dpj24nx6wivha"]
 
-[ext_resource type="Script" path="res://npc/lib/anim/character_anim.gd" id="1_d8s3w"]
-[ext_resource type="Texture2D" uid="uid://csnh5h03npwmv" path="res://party/alex/spritesheet.png" id="2_4cush"]
+[ext_resource type="Script" path="res://npc/lib/anim/character_anim.gd" id="1_iilho"]
+[ext_resource type="Texture2D" uid="uid://csnh5h03npwmv" path="res://party/alex/spritesheet.png" id="2_7x33y"]
 
 [sub_resource type="Animation" id="Animation_aq4sd"]
 resource_name = "battle_idle_down"
@@ -423,22 +423,23 @@ states/walk/position = Vector2(573, 149)
 transitions = ["idle", "walk", SubResource("19"), "walk", "idle", SubResource("20"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_hbppg"), "idle", "battle_idle", SubResource("AnimationNodeStateMachineTransition_4hlgj"), "battle_idle", "idle", SubResource("AnimationNodeStateMachineTransition_hkeja"), "run", "walk", SubResource("AnimationNodeStateMachineTransition_6p2r4"), "walk", "run", SubResource("AnimationNodeStateMachineTransition_c5m35")]
 
 [node name="Anim" type="Marker2D"]
-script = ExtResource("1_d8s3w")
+script = ExtResource("1_iilho")
 animation_names = ["idle", "walk", "battle_idle", "run"]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_gdtcw")
 }
+autoplay = "walk_right"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 use_parent_material = true
-texture = ExtResource("2_4cush")
+texture = ExtResource("2_7x33y")
 offset = Vector2(0, -17)
 hframes = 6
 vframes = 44
-frame = 145
+frame = 24
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("21")

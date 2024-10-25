@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cchn13mhn8gxu"]
+
+[ext_resource type="Script" path="res://battle/action/util/projectile.gd" id="2_cwyla"]
+
+[node name="Projectile" type="AnimatedSprite2D"]
+script = ExtResource("2_cwyla")

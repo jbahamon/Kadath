@@ -10,7 +10,7 @@ func initialize(init_dialogue_box, init_narration_layer):
 	self.narration_layer = init_narration_layer
 
 func exit():
-	self.dialogue = null
+	#self.dialogue = null
 	self.narration_layer = null
 	self.current_dialogue = null
 	self.current_responses = []

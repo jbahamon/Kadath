@@ -5,15 +5,15 @@
 [ext_resource type="Texture2D" uid="uid://bs4rf2sdoppyh" path="res://npc/enemy/thymiaterion/icon.png" id="3_h48do"]
 [ext_resource type="PackedScene" uid="uid://c1qvuen3txcsn" path="res://npc/enemy/thymiaterion/anim.tscn" id="3_j4650"]
 [ext_resource type="PackedScene" uid="uid://dtaxhpmmjspek" path="res://battle/battler/battler.tscn" id="3_rrahi"]
-[ext_resource type="Script" path="res://battle/action/attack.gd" id="5_vhpjn"]
 [ext_resource type="Script" path="res://battle/ai/random_ai.gd" id="6_hhc2v"]
+[ext_resource type="Script" path="res://battle/action/base_attack.gd" id="6_mwfm3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_phgn6"]
 radius = 20.0
 height = 48.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a00iy"]
-radius = 42.0119
+radius = 32.0
 
 [node name="Thymiaterion" groups=["enemy"] instance=ExtResource("1_qtfsx")]
 position = Vector2(0, 0)
@@ -29,7 +29,11 @@ base_display_name = "Thymiaterion"
 anim_path = NodePath("..")
 
 [node name="Attack" type="Node" parent="Battler/Actions" index="0"]
-script = ExtResource("5_vhpjn")
+script = ExtResource("6_mwfm3")
+jump_back_anim = "walk_back"
+idle_anim = "idle"
+walk_speed = 80
+jump_back_speed = 80
 
 [node name="AI" parent="Battler" index="3"]
 script = ExtResource("6_hhc2v")
@@ -38,13 +42,28 @@ script = ExtResource("6_hhc2v")
 position = Vector2(0, -18)
 shape = SubResource("CapsuleShape2D_phgn6")
 
+[node name="South" type="Marker2D" parent="Battler/Hitspots" index="0"]
+position = Vector2(0, 8)
+
+[node name="Center" type="Marker2D" parent="Battler/Hitspots" index="1"]
+position = Vector2(0, -16)
+
+[node name="North" type="Marker2D" parent="Battler/Hitspots" index="2"]
+position = Vector2(0, -12)
+
+[node name="West" type="Marker2D" parent="Battler/Hitspots" index="3"]
+position = Vector2(-22, 0)
+
+[node name="East" type="Marker2D" parent="Battler/Hitspots" index="4"]
+position = Vector2(22, 0)
+
 [node name="InteractableArea" parent="." index="3"]
 collision_layer = 24
 collision_mask = 1
 monitoring = true
 
 [node name="CollisionShape2D" parent="InteractableArea" index="0"]
-position = Vector2(0, -17)
+position = Vector2(0, -12)
 shape = SubResource("CircleShape2D_a00iy")
 
 [connection signal="body_entered" from="InteractableArea" to="." method="_on_interactable_area_body_entered"]

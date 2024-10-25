@@ -11,9 +11,8 @@ func get_next_parameter_signature():
 	else:
 		return null
 
-
 func execute(actor):
-	var prev_hp = target.battler.stats.health
+	var prev_hp = target.battler.health
 	var hit = Hit.new()
 	hit.type = Hit.Element.PHYSICAL
 	hit.base_damage = self.get_standard_attack_damage(actor)
@@ -24,7 +23,7 @@ func execute(actor):
 			actor.display_name, 
 			target.display_name, 
 			prev_hp, 
-			target.battler.stats.health
+			target.battler.health
 		])
 		
 	self.reset()

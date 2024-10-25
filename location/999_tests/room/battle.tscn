@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://location/lib/script/location/location_room.gd" id="1_sqx0k"]
 [ext_resource type="PackedScene" uid="uid://k1y4abtqqro7" path="res://location/lib/script/object/battle_spot.tscn" id="3_7js0j"]
 [ext_resource type="Script" path="res://location/lib/script/object/enemy_spot.gd" id="4_0er7e"]
-[ext_resource type="PackedScene" uid="uid://cebhopaolaguc" path="res://npc/enemy/acolyte/acolyte.tscn" id="5_5ocb3"]
+[ext_resource type="PackedScene" uid="uid://cebhopaolaguc" path="res://npc/enemy/acolyte/acolyte.tscn" id="5_ta6yq"]
 
 [node name="battle" type="TileMap"]
 tile_set = ExtResource("1_pgy5n")
@@ -46,12 +46,16 @@ script = ExtResource("4_0er7e")
 position = Vector2(63, -33)
 script = ExtResource("4_0er7e")
 
-[node name="Acolyte" parent="." instance=ExtResource("5_5ocb3")]
-position = Vector2(-40, -16)
+[node name="Acolyte" parent="." instance=ExtResource("5_ta6yq")]
+position = Vector2(-33, -26)
 battle_on_contact = true
 
-[node name="Acolyte2" parent="." instance=ExtResource("5_5ocb3")]
-position = Vector2(41, -15)
+[node name="Acolyte2" parent="." instance=ExtResource("5_ta6yq")]
+position = Vector2(37, -32)
+battle_on_contact = true
+
+[node name="Acolyte3" parent="." instance=ExtResource("5_ta6yq")]
+position = Vector2(-68, -3)
 battle_on_contact = true
 
 [editable path="BattleSpot"]

@@ -1,18 +1,36 @@
 extends "res://battle/action/simple_single_target.gd"
 
-func execute(actor):
-	var prev_hp = target.battler.stats.health
-	var hit = Hit.new()
-	hit.type = Hit.Element.PHYSICAL
-	hit.base_damage = self.get_standard_attack_damage(actor)
-	await self.target.take_hit(hit)
+@onready var tendrils: AnimatedSprite2D = get_node("../../Tendrils")
+@export var hit: Hit
+
 	
-	print(
-		"%s attacked %s (HP: %d -> HP: %d)" % [
-			actor.display_name, 
-			target.display_name, 
-			prev_hp, 
-			target.battler.stats.health
-		])
-		
+func execute(actor):
+	actor.play_anim("attack")
+	await actor.get_tree().create_timer(0.2)
+	
+	var center = target.battler.get_hitspot("Center")
+	tendrils.global_position = target.global_position
+	tendrils.offset = Vector2(0, center.y - tendrils.global_position.y)
+	
+	
+	tendrils.play("windup")
+	tendrils.visible = true
+	
+	await tendrils.animation_finished
+	tendrils.play("attack")
+	
+	hit.base_damage = self.get_standard_attack_damage(actor)
+	var tree = get_tree()
+	
+	await DoAll.new([
+		func(): await self.target.take_hit(hit),
+		func():
+			await tree.create_timer(0.6).timeout
+			tendrils.play_backwards("windup")
+			await tendrils.animation_finished
+			tendrils.visible = false
+			tendrils.position = Vector2.ZERO
+	]).execute()
+	
+	actor.play_anim("idle")
 	self.reset()

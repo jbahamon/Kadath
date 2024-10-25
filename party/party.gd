@@ -12,7 +12,7 @@ class_name Party
 const inventory_save_key = "Inventory"
 
 var inventory: Inventory = Inventory.new()
-var display_name = "party" # : get = get_display_name
+var display_name = "party"
 var active_members: Array
 
 const MOVEMENT_STANDING_OFFSET = 8

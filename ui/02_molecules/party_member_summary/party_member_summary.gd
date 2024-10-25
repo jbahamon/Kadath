@@ -17,8 +17,8 @@ func update():
 		self.character_name.text = party_member.display_name
 		var battler = party_member.battler
 
-		hp.text = "%d/%d" % [battler.stats.health, battler.stats.max_health]
-		ep.text = "%d/%d" % [battler.stats.energy, battler.stats.max_energy]
+		hp.text = "%d/%d" % [battler.health, battler.stats.max_health]
+		ep.text = "%d/%d" % [battler.energy, battler.stats.max_energy]
 	else:
 		self.visible = false
 	

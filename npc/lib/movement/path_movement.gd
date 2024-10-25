@@ -22,15 +22,17 @@ var idx_direction = 1
 # common in NPC behavior
 @export var path_2D_path: NodePath
 var points: PackedVector2Array
+var anim_name: String
 
 func _ready():
 	self.set_physics_process(false)
-	self.points = []
 	var path = get_node(path_2D_path)
 	var origin = path.global_position
 	var curve: Curve2D = path.get_curve()
-	for idx in range(curve.point_count):
-		self.points.append(origin + curve.get_point_position(idx))
+
+	self.points = range(curve.point_count).map(
+		func(idx): return origin + curve.get_point_position(idx)
+	)
 
 
 func start():

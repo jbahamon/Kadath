@@ -1,6 +1,6 @@
 extends Node
 const BattleLoop = preload("res://battle/battle_loop.gd")
-const Attack = preload("res://battle/action/attack.gd")
+const Attack = preload("res://battle/action/base_attack.gd")
 const Defend = preload("res://battle/action/defend.gd")
 const Win = preload("res://battle/action/win.gd")
 const Lose = preload("res://battle/action/lose.gd")
@@ -66,13 +66,11 @@ func start_mook_battle(escapable: bool):
 		return
 		
 	var rect: Rect2i = CameraService.get_visible_rect()
-	var mooks = []
+	
 	var world = EnvironmentService.get_world()
 	var enemies = world.get_tree().get_nodes_in_group("enemy")
-	for mook in enemies:
-		if rect.has_point(Vector2i(mook.position)):
-			mooks.append(mook)
-	
+	var mooks = enemies.filter(func(mook): return rect.has_point(Vector2i(mook.position)))
+
 	self.start_battle(mooks, escapable)
 
 func start_battle(enemies: Array, escapable: bool, proxy_mode_on_finish=null):
@@ -136,6 +134,8 @@ func start_battle(enemies: Array, escapable: bool, proxy_mode_on_finish=null):
 			
 	self.current_battle_parameters = null
 
+func get_actors():
+	return self.loop.actors
 
 func get_nearest_battle_spot():
 	var camera_position = CameraService.get_camera().get_screen_center_position()
@@ -254,7 +254,7 @@ func set_up_battle_positions(battle_spot, party_actors: Array, non_party_actors:
 		cutscene_lines.append_array(
 			[
 				"SEQUENTIAL",
-				"WALK %s TO (%d, %d) AT 50" % [
+				"RUN %s TO (%d, %d) AT 80" % [
 					party_actor.name, 
 					int(round(spot.global_position.x)), 
 					int(round(spot.global_position.y))

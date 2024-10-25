@@ -18,7 +18,7 @@ func get_next_parameter_signature():
 		}
 	else:
 		return null
-
+	
 func highlight_option(_actor, option):
 	if self.currently_highlighted_target != option:
 		self.stop_highlight()
@@ -48,5 +48,5 @@ func pop_parameter() -> bool:
 	self.stop_highlight()
 	return was_target_present
 	
-func execute(actor):
+func execute(_actor):
 	assert(false, "should be implemented in child class")

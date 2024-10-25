@@ -15,11 +15,11 @@ var max_health:
 
 var health:
 	get:
-		return self.battler.stats.health
+		return self.battler.health
 		
 var energy:
 	get:
-		return self.battler.stats.energy
+		return self.battler.energy
 
 
 func get_display_name():
@@ -45,15 +45,7 @@ func take_hit(hit: Hit):
 	return await self.battler.take_hit(hit)
 	
 func get_allies(actors: Array):
-	var allies = []
-	for actor in actors:
-		if not actor is PartyMember:
-			allies.append(actor)
-	return allies
+	return actors.filter(func(actor): return not actor is PartyMember)
 	
 func get_enemies(actors: Array):
-	var enemies = []
-	for actor in actors:
-		if actor is PartyMember:
-			enemies.append(actor)
-	return enemies
+	return actors.filter(func(actor): return actor is PartyMember)

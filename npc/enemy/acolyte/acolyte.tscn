@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cebhopaolaguc"]
+[gd_scene load_steps=26 format=3 uid="uid://cebhopaolaguc"]
 
 [ext_resource type="PackedScene" uid="uid://c17hneqpuil0l" path="res://npc/lib/base_npc.tscn" id="1_nqevg"]
 [ext_resource type="Script" path="res://npc/enemy/enemy.gd" id="2_mtvfo"]
@@ -7,10 +7,115 @@
 [ext_resource type="PackedScene" uid="uid://ckj6m5dbs657x" path="res://npc/enemy/acolyte/anim.tscn" id="4_dgo87"]
 [ext_resource type="Script" path="res://npc/enemy/acolyte/attack.gd" id="6_wx6wh"]
 [ext_resource type="Script" path="res://npc/enemy/acolyte/consume.gd" id="7_2l1cy"]
+[ext_resource type="Material" uid="uid://c48122ffiwrbb" path="res://utils/material/uniform_add.tres" id="7_kw41m"]
 [ext_resource type="Script" path="res://npc/enemy/acolyte/ai.gd" id="8_10wdh"]
+[ext_resource type="Script" path="res://battle/hit.gd" id="8_clbpf"]
+[ext_resource type="Shader" path="res://utils/material/highlight.gdshader" id="10_27jul"]
+[ext_resource type="Texture2D" uid="uid://dcxojxbnjqa6e" path="res://npc/enemy/acolyte/tendrils.png" id="11_g1knc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v5nwd"]
+shader = ExtResource("10_27jul")
+shader_parameter/add = Color(0.619608, 0.27451, 0.619608, 1)
+shader_parameter/mul = 0.25
+shader_parameter/frequency = 4.0
+shader_parameter/base_add = Color(0.309804, 0.137255, 0.309804, 0)
+
+[sub_resource type="Resource" id="Resource_agsw1"]
+script = ExtResource("8_clbpf")
+fixed_damage = true
+base_damage = 0.0
+type = 8
+anim_time = 0.0
+anim_duration = 1.5
+spark_time = 0.0
+spark_offset = Vector2(0, 0)
+hit_sound_time = 0.0
+miss_sound_time = 0.0
+palfx_material = SubResource("ShaderMaterial_v5nwd")
+palfx_time = 0.0
+palfx_duration = 1.2
+toast_time = 1.3
+
+[sub_resource type="Resource" id="Resource_6ha7t"]
+script = ExtResource("8_clbpf")
+fixed_damage = false
+base_damage = 0.0
+type = 8
+anim_time = 0.0
+anim_duration = 0.45
+spark_time = 0.0
+spark_offset = Vector2(0, 0)
+hit_sound_time = 0.0
+miss_sound_time = 0.0
+palfx_material = ExtResource("7_kw41m")
+palfx_time = 0.3
+palfx_duration = 0.3
+toast_time = 0.6
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h6312"]
 height = 36.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ovla"]
+atlas = ExtResource("11_g1knc")
+region = Rect2(185, 0, 37, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkpbh"]
+atlas = ExtResource("11_g1knc")
+region = Rect2(222, 0, 37, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lpe3l"]
+atlas = ExtResource("11_g1knc")
+region = Rect2(0, 0, 37, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q3vv8"]
+atlas = ExtResource("11_g1knc")
+region = Rect2(37, 0, 37, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_esrlh"]
+atlas = ExtResource("11_g1knc")
+region = Rect2(74, 0, 37, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kj2aa"]
+atlas = ExtResource("11_g1knc")
+region = Rect2(111, 0, 37, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gbl0n"]
+atlas = ExtResource("11_g1knc")
+region = Rect2(148, 0, 37, 19)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_io120"]
+animations = [{
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_6ovla")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_fkpbh")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 6.66
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_lpe3l")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_q3vv8")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_esrlh")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_kj2aa")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_gbl0n")
+}],
+"loop": false,
+"name": &"windup",
+"speed": 6.66
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pt4tg"]
 
@@ -23,15 +128,18 @@ icon = ExtResource("3_grxgs")
 base_display_name = "Acolyte"
 
 [node name="Anim" parent="." index="0" instance=ExtResource("4_dgo87")]
+use_parent_material = true
 
 [node name="Battler" parent="." index="1" instance=ExtResource("3_hxf52")]
 anim_path = NodePath("..")
 
-[node name="Attack" type="Node" parent="Battler/Actions" index="0"]
-script = ExtResource("6_wx6wh")
-
-[node name="Consume" type="Node" parent="Battler/Actions" index="1"]
+[node name="Consume" type="Node" parent="Battler/Actions" index="0"]
 script = ExtResource("7_2l1cy")
+sacrifice_hit = SubResource("Resource_agsw1")
+
+[node name="Attack" type="Node" parent="Battler/Actions" index="1"]
+script = ExtResource("6_wx6wh")
+hit = SubResource("Resource_6ha7t")
 
 [node name="AI" parent="Battler" index="3"]
 script = ExtResource("8_10wdh")
@@ -39,6 +147,18 @@ script = ExtResource("8_10wdh")
 [node name="CollisionShape2D" parent="Battler/Hitbox" index="0"]
 position = Vector2(0, -15)
 shape = SubResource("CapsuleShape2D_h6312")
+
+[node name="South" type="Marker2D" parent="Battler/Hitspots" index="0"]
+position = Vector2(0, 8)
+
+[node name="Center" type="Marker2D" parent="Battler/Hitspots" index="1"]
+position = Vector2(0, -14)
+
+[node name="Tendrils" type="AnimatedSprite2D" parent="Battler" index="6"]
+visible = false
+z_index = 2
+sprite_frames = SubResource("SpriteFrames_io120")
+animation = &"windup"
 
 [node name="BumpCollision" parent="." index="2"]
 visible = false

@@ -85,24 +85,17 @@ func get_batle_items_amounts() -> Array:
 			ids_and_amounts.push_back([item, amounts[item]])
 		
 	return ids_and_amounts
+	
 func get_equipment(cls, equippable_flag: int) -> Array:
-	var ret = []
-	for item_id in order:
-		var item = ItemService.id_to_item(item_id)
-		if cls.instance_has(item) and (item.equippable_by & equippable_flag):
-			ret.append(item)
-	return ret
+	return order.filter(
+		func(item_id):
+			var item = ItemService.id_to_item(item_id)
+			return cls.instance_has(item) and (item.equippable_by & equippable_flag)
+	)
 
 func sort():
-	var items = []
-	
-	for item_id in order:
-		items.append(ItemService.get_item(item_id))
-		
+	var items = order.map(func(item_id): return ItemService.get_item(item_id))
 	items.sort_custom(Callable(ItemService.ItemSorter,"sort_ascending"))
 	
-	self.order = []
-	for item in items:
-		self.order.append(item.id)
-		
+	self.order = items.map(func(item): return item.id)
 	self.inventory_changed.emit(Change.SORT)

@@ -25,7 +25,7 @@ func create_stats(experience: int) -> CharacterStats:
 	stats.magic_defense = _get_magic_defense(experience)
 	stats.speed = _get_speed(experience)
 	stats.luck = _get_luck(experience)
-	stats.reset()  # give stats full hp and mana on level up
+	
 	return stats
 
 

@@ -4,12 +4,12 @@
 [ext_resource type="Script" path="res://npc/enemy/enemy.gd" id="2_hy7sw"]
 [ext_resource type="PackedScene" uid="uid://dtaxhpmmjspek" path="res://battle/battler/battler.tscn" id="3_pj4xs"]
 [ext_resource type="PackedScene" uid="uid://b8t81sm0y5b4o" path="res://npc/enemy/guardian/anim.tscn" id="3_sm78d"]
-[ext_resource type="Script" path="res://npc/enemy/guardian/skills/shoot.gd" id="5_dotsf"]
-[ext_resource type="Script" path="res://npc/enemy/guardian/skills/whip.gd" id="6_0hvip"]
+[ext_resource type="Script" path="res://npc/enemy/guardian/action/shoot.gd" id="5_dotsf"]
+[ext_resource type="Script" path="res://npc/enemy/guardian/action/whip.gd" id="6_0hvip"]
 [ext_resource type="Script" path="res://battle/ai/random_ai.gd" id="6_et1g1"]
-[ext_resource type="Script" path="res://npc/enemy/guardian/skills/beam.gd" id="7_3iy11"]
-[ext_resource type="Script" path="res://npc/enemy/guardian/skills/chew.gd" id="7_eji6g"]
-[ext_resource type="Script" path="res://npc/enemy/guardian/skills/prepare.gd" id="9_s3ura"]
+[ext_resource type="Script" path="res://npc/enemy/guardian/action/beam.gd" id="7_3iy11"]
+[ext_resource type="Script" path="res://npc/enemy/guardian/action/chew.gd" id="7_eji6g"]
+[ext_resource type="Script" path="res://npc/enemy/guardian/action/prepare.gd" id="9_s3ura"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tv2y7"]
 radius = 28.0
@@ -27,7 +27,7 @@ icon = null
 [node name="Battler" parent="." index="1" instance=ExtResource("3_pj4xs")]
 anim_path = NodePath("..")
 
-[node name="Jump" type="Node" parent="Battler/Actions" index="0"]
+[node name="Stomp" type="Node" parent="Battler/Actions" index="0"]
 
 [node name="Shoot" type="Node" parent="Battler/Actions" index="1"]
 script = ExtResource("5_dotsf")
@@ -50,6 +50,18 @@ script = ExtResource("6_et1g1")
 [node name="CollisionShape2D" parent="Battler/Hitbox" index="0"]
 position = Vector2(0, -34)
 shape = SubResource("CapsuleShape2D_tv2y7")
+
+[node name="South" type="Marker2D" parent="Battler/Hitspots" index="0"]
+position = Vector2(0, 8)
+
+[node name="Center" type="Marker2D" parent="Battler/Hitspots" index="1"]
+position = Vector2(0, -20)
+
+[node name="West" type="Marker2D" parent="Battler/Hitspots" index="2"]
+position = Vector2(-40, 1)
+
+[node name="East" type="Marker2D" parent="Battler/Hitspots" index="3"]
+position = Vector2(40, 1)
 
 [node name="BumpCollision" parent="." index="2"]
 disabled = true

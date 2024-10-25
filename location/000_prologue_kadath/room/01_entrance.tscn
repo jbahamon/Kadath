@@ -1,13 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://drpy2qjgqwmt7"]
+[gd_scene load_steps=11 format=3 uid="uid://drpy2qjgqwmt7"]
 
 [ext_resource type="TileSet" uid="uid://b15m77bx602kw" path="res://location/000_prologue_kadath/tile/onyx_temple.tres" id="1_yo2kw"]
 [ext_resource type="Script" path="res://location/000_prologue_kadath/room/01_entrance.gd" id="2_kwr6c"]
 [ext_resource type="Script" path="res://location/lib/script/object/warp.gd" id="3_r0i0m"]
 [ext_resource type="Script" path="res://location/000_prologue_kadath/object/pushing_barrier.gd" id="4_60pw0"]
 [ext_resource type="PackedScene" uid="uid://qscnhsk7b4m7" path="res://npc/lib/simple_ghoul_npc.tscn" id="5_t4523"]
-[ext_resource type="PackedScene" uid="uid://3huenc8ltgbh" path="res://npc/lib/anim/simple_npc_anim.tscn" id="6_c8udh"]
-[ext_resource type="Texture2D" uid="uid://dq5du17wnwgxf" path="res://npc/ghoul_npc.png" id="7_iyhsx"]
-[ext_resource type="PackedScene" uid="uid://cv5wwoeq1pjb7" path="res://party/pickman/anim.tscn" id="8_xselo"]
+[ext_resource type="PackedScene" uid="uid://cgvqjsoj5bl6b" path="res://npc/lib/anim/ghoul_anim.tscn" id="6_vs25p"]
+[ext_resource type="PackedScene" uid="uid://cv5wwoeq1pjb7" path="res://party/pickman/anim.tscn" id="7_i8cuo"]
 [ext_resource type="Texture2D" uid="uid://dq08xiwl8vasy" path="res://location/000_prologue_kadath/object/gate.png" id="9_e6fbe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ke7di"]
@@ -62,36 +61,19 @@ shape = SubResource("RectangleShape2D_pgvhv")
 position = Vector2(-32, -128)
 metadata/_edit_group_ = true
 
-[node name="Anim" parent="LeftGhoul" instance=ExtResource("6_c8udh")]
-
-[node name="Sprite2D" parent="LeftGhoul/Anim" index="0"]
-texture = ExtResource("7_iyhsx")
-offset = Vector2(-14, -32)
-frame = 2
-
-[node name="AnimationTree" parent="LeftGhoul/Anim" index="1"]
-parameters/idle/blend_position = Vector2(0.549063, 0.198529)
-parameters/walk/blend_position = Vector2(0.275213, -0.0829694)
+[node name="Anim" parent="LeftGhoul" instance=ExtResource("6_vs25p")]
 
 [node name="RightGhoul" parent="." instance=ExtResource("5_t4523")]
 position = Vector2(38, -144)
 metadata/_edit_group_ = true
 
-[node name="Anim" parent="RightGhoul" instance=ExtResource("6_c8udh")]
-
-[node name="Sprite2D" parent="RightGhoul/Anim" index="0"]
-texture = ExtResource("7_iyhsx")
-offset = Vector2(-14, -33)
-frame = 3
-
-[node name="AnimationTree" parent="RightGhoul/Anim" index="1"]
-parameters/idle/blend_position = Vector2(-0.622146, -0.485294)
+[node name="Anim" parent="RightGhoul" instance=ExtResource("6_vs25p")]
 
 [node name="NPCPickman" parent="." instance=ExtResource("5_t4523")]
 position = Vector2(-16, -176)
 metadata/_edit_group_ = true
 
-[node name="Anim" parent="NPCPickman" instance=ExtResource("8_xselo")]
+[node name="Anim" parent="NPCPickman" instance=ExtResource("7_i8cuo")]
 
 [node name="Gate" type="Sprite2D" parent="."]
 position = Vector2(0, -288)
@@ -100,6 +82,3 @@ offset = Vector2(0, -48)
 
 [connection signal="body_entered" from="NorthGate" to="NorthGate" method="_on_body_entered"]
 [connection signal="body_entered" from="SouthGate" to="SouthGate" method="_on_body_entered"]
-
-[editable path="LeftGhoul/Anim"]
-[editable path="RightGhoul/Anim"]

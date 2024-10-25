@@ -1,14 +1,13 @@
 [gd_resource type="Resource" script_class="DialogueResource" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_resource.gd" id="1_rdn1a"]
+[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_resource.gd" id="1_350tc"]
 
 [resource]
-script = ExtResource("1_rdn1a")
+script = ExtResource("1_350tc")
 using_states = PackedStringArray()
 titles = {
 "after_boss": "49",
-"after_chalice_battle": "115",
-"after_paten_activation": "127",
+"after_chalice_activation": "115",
 "barrier": "99",
 "carter_call": "61",
 "chalice": "103",
@@ -24,8 +23,6 @@ titles = {
 "narration_1": "5",
 "nyarlathotep_1": "65",
 "nyarlathotep_2": "72",
-"paten": "123",
-"paten_done": "131",
 "pickman_catch_up": "36",
 "pickman_join": "45",
 "pickman_recruit": "40",
@@ -188,7 +185,7 @@ lines = {
 "114": {
 "id": "114",
 "next_id": "115",
-"text": "after_chalice_battle",
+"text": "after_chalice_activation",
 "type": "title"
 },
 "115": {
@@ -227,75 +224,6 @@ lines = {
 },
 "120": {
 "id": "120",
-"is_snippet": false,
-"next_id": "end",
-"type": "goto"
-},
-"122": {
-"id": "122",
-"next_id": "123",
-"text": "paten",
-"type": "title"
-},
-"123": {
-"character": "",
-"character_replacements": Array[Dictionary]([]),
-"id": "123",
-"next_id": "124",
-"tags": PackedStringArray(),
-"text": "You approach the ornamental plate and touch the glyph on it.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "You approach the ornamental plate and touch the glyph on it.",
-"type": "dialogue"
-},
-"124": {
-"id": "124",
-"is_snippet": false,
-"next_id": "end",
-"type": "goto"
-},
-"126": {
-"id": "126",
-"next_id": "127",
-"text": "after_paten_activation",
-"type": "title"
-},
-"127": {
-"character": "",
-"character_replacements": Array[Dictionary]([]),
-"id": "127",
-"next_id": "128",
-"tags": PackedStringArray(),
-"text": "Something seems to have changed.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "Something seems to have changed.",
-"type": "dialogue"
-},
-"128": {
-"id": "128",
-"is_snippet": false,
-"next_id": "end",
-"type": "goto"
-},
-"130": {
-"id": "130",
-"next_id": "131",
-"text": "paten_done",
-"type": "title"
-},
-"131": {
-"character": "",
-"character_replacements": Array[Dictionary]([]),
-"id": "131",
-"next_id": "132",
-"tags": PackedStringArray(),
-"text": "The plate is filled with some kind of flesh.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "The plate is filled with some kind of flesh.",
-"type": "dialogue"
-},
-"132": {
-"id": "132",
 "is_snippet": false,
 "next_id": "end",
 "type": "goto"

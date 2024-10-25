@@ -1,3 +1,5 @@
+ShaderMaterial
+Hit
 TileSet
 Location
 HealingItem

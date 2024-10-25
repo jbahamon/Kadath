@@ -7,16 +7,14 @@ enum ActionArgument {
 	ITEM,
 }
 
-enum TargetType { 
-	ONE_ENEMY,
-	ALL_ENEMIES,
-	
-	SELF,
+enum TargetType {
 	ONE_ALLY,
+	ONE_ENEMY,
 	ALL_ALLIES,
+	ALL_ENEMIES,
 	NONE,
+	CUSTOM
 }
-
 @export var display_name: String
 @export var description: String = "Base battle action"
 @export var energy_cost: int = 0
@@ -28,7 +26,7 @@ func get_standard_attack_damage(actor):
 	return actor.battler.physical_attack * 5
 
 func is_disabled(actor):
-	return actor is PartyMember and actor.battler.stats.energy < self.energy_cost
+	return actor is PartyMember and actor.battler.energy < self.energy_cost
 
 func unlock():
 	self.unlocked = true
@@ -48,5 +46,21 @@ func pop_parameter():
 func execute(_actor):
 	assert(false,"%s missing overwrite of the execute method" % name)
 
-func highlight(option):
+func highlight(_option):
 	pass
+	
+func get_targets_custom(_actor, _actors):
+	assert(false,"%s missing overwrite of the get_targets_custom method" % name)
+
+func get_targets(target_type, actor, actors):
+	match target_type:
+		TargetType.ONE_ALLY:
+			return TargetUtil.one_ally(actor, actors)
+		TargetType.ONE_ENEMY:
+			return TargetUtil.one_enemy(actor, actors)
+		TargetType.ALL_ALLIES:
+			return TargetUtil.all_allies(actor, actors)
+		TargetType.ALL_ENEMIES:
+			return TargetUtil.all_enemies(actor, actors)
+		TargetType.CUSTOM:
+			return self.get_targets_custom(actor, actors)

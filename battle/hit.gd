@@ -1,4 +1,8 @@
+extends Resource
+
 class_name Hit
+
+const uniform_add: Material = preload("res://utils/material/uniform_add.tres")
 
 enum Element {
 	PHYSICAL,
@@ -13,5 +17,33 @@ enum Element {
 	CHAOS,
 	NONE,
 }
-var base_damage: float
-var type: int
+
+@export_group("Damage")
+@export var fixed_damage = false
+@export var base_damage: float = 0.0
+@export var type: Element = Element.NONE
+
+@export_group("Animation")
+@export var anim_time: float = 0
+@export var anim_duration: float = 0.45
+
+@export_group("Spark")
+@export var spark_frames: SpriteFrames
+@export var spark_time: float
+@export var spark_offset: Vector2
+
+@export_group("Sound")
+@export var hit_sound: AudioStream
+@export var hit_sound_time: float
+@export var miss_sound: AudioStream
+@export var miss_sound_time: float
+
+@export_group("PalFX")
+@export var palfx_material: Material = uniform_add
+@export var palfx_time = 0.0
+@export var palfx_duration = 0.3
+
+@export_group("Toast")
+@export var toast_time = 0.3
+
+var effective_damage: int

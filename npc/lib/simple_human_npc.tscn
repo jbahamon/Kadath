@@ -1,22 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://c72m6bvkalkqd"]
 
 [ext_resource type="PackedScene" uid="uid://c17hneqpuil0l" path="res://npc/lib/base_npc.tscn" id="1_ashb3"]
-[ext_resource type="Script" path="res://party/character_anim.gd" id="2_f2m44"]
-
-[sub_resource type="Animation" id="18"]
-resource_name = "idle_down"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2(0, 0)]
-}
+[ext_resource type="Script" path="res://npc/lib/anim/character_anim.gd" id="2_f2m44"]
 
 [sub_resource type="Animation" id="19"]
 resource_name = "idle_left"
@@ -46,6 +31,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [Vector2(2, 0)]
+}
+
+[sub_resource type="Animation" id="18"]
+resource_name = "idle_south"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="21"]
@@ -133,9 +133,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kejjc"]
 _data = {
-"idle_down": SubResource("18"),
 "idle_left": SubResource("19"),
 "idle_right": SubResource("20"),
+"idle_south": SubResource("18"),
 "idle_up": SubResource("21"),
 "walk_down": SubResource("22"),
 "walk_left": SubResource("23"),
@@ -166,6 +166,7 @@ states/walk/position = Vector2(561, 113)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_es6k2"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_gyg4s"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_f7gk6")]
 
 [node name="SimpleNPC" instance=ExtResource("1_ashb3")]
+position = Vector2(0, 0)
 
 [node name="CharacterAnim" type="Marker2D" parent="." index="2"]
 script = ExtResource("2_f2m44")
@@ -179,6 +180,7 @@ libraries = {
 [node name="Sprite2D" type="Sprite2D" parent="CharacterAnim" index="1"]
 
 [node name="AnimationTree" type="AnimationTree" parent="CharacterAnim" index="2"]
+root_node = NodePath("../..")
 tree_root = SubResource("AnimationNodeStateMachine_aujsh")
 anim_player = NodePath("../AnimationPlayer")
 parameters/idle/blend_position = Vector2(0, 0)

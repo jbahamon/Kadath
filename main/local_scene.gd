@@ -23,14 +23,14 @@ func _ready() -> void:
 	})
 	UIService.initialize($PopupLayer, $MenuLayer/MenuPopup, $MenuLayer/SavesPopup)
 	
+	InputService.set_input_enabled(true)
+	
 	# Here's a tricky part. We have to move to the first room, which will put the appropriate
 	# nodes in the tree. This has to happen before the player proxy can be bound to the party or
 	# whatever node is being controlled; otherwise there won't be a common parent to have a path 
 	# between them.
-	InputService.set_input_enabled(true)
 	self.move_to_starting_room()
-	self.bind_proxy()
-	
+	EntitiesService.bind_proxy()
 	
 func move_to_starting_room():
 	if VarsService.loaded_slot >= 0:
@@ -38,19 +38,14 @@ func move_to_starting_room():
 		VarsService.loaded_slot = -1
 	else:
 		# Note: move start_game to the above when doing the cutscene intro
-		EnvironmentService.update_whereabouts(
-			"999_tests", 
-			"battle",
-			Vector2(0, 35),
+		await EnvironmentService.update_whereabouts(
+			"000_prologue_kadath", # "999_tests",
+			"04_right_switch",
+			Vector2(0, 0),
 			Vector2.UP,
-			false
+			false,
+			PlayerProxy.ProxyMode.GAMEPLAY
 		)
-		EntitiesService.get_party().set_unlocked(PartyMember.Id.PICKMAN, true)
-		# this is only for testing purposes
-		EntitiesService.get_proxy().set_mode(PlayerProxy.ProxyMode.GAMEPLAY)
-		
-func bind_proxy():
-	EntitiesService.bind_proxy()
 	
 func exit():
 	BattleService.exit()

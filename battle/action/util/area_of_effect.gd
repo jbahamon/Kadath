@@ -5,8 +5,8 @@ extends Node2D
 func reset():
 	self.position = Vector2.ZERO
 
-func get_actors_at(position: Vector2) -> Array:
-	self.global_position = position
+func get_actors_at(target_position: Vector2) -> Array:
+	self.global_position = target_position
 	self.area.set_deferred("monitoring", true)
 	
 	var tree = get_tree()
@@ -16,8 +16,4 @@ func get_actors_at(position: Vector2) -> Array:
 	
 	var hitboxes = self.area.get_overlapping_areas()
 	
-	var actors = []
-	for hitbox in hitboxes:
-		actors.append(hitbox.get_parent().get_parent())
-		
-	return actors
+	return hitboxes.map(func(hitbox): return hitbox.get_parent().get_parent())

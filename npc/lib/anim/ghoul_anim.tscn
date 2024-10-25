@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgvqjsoj5bl6b"]
+
+[ext_resource type="PackedScene" uid="uid://3huenc8ltgbh" path="res://npc/lib/anim/simple_npc_anim.tscn" id="1_mf8on"]
+[ext_resource type="Texture2D" uid="uid://co444tm2p2o0s" path="res://npc/ghoul_npc.png" id="2_xqgpw"]
+
+[node name="Anim" instance=ExtResource("1_mf8on")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_xqgpw")
+offset = Vector2(-14, -32)
+frame = 8

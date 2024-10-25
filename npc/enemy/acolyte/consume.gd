@@ -1,5 +1,6 @@
 extends BattleAction
 
+@export var sacrifice_hit: Hit
 var target
 var sacrifice
 var allies
@@ -10,17 +11,18 @@ func reset():
 	self.allies = null
 	
 func execute(actor):
+	actor.play_anim("attack")
 	
 	var remaining_hp = self.sacrifice.health
-	await sacrifice.battler.show_toast("%d" % remaining_hp, Color.WHITE)
-	sacrifice.battler.stats.health = 0
-	sacrifice.battler.emit_signal("died", sacrifice)
+	sacrifice_hit.base_damage = remaining_hp
 	
-	var heals = []
+	await sacrifice.take_hit(sacrifice_hit)
+	sacrifice.battler.health = 0
 	
-	for ally in allies:
-		heals.append(
-			func (): await ally.heal(remaining_hp, true)
-		)
+	var heals = allies.map(
+		func(ally): return func (): await ally.heal(remaining_hp, true)
+	)
+	
 	await DoAll.new(heals).execute()
+	actor.play_anim("idle")
 	self.reset()

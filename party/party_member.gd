@@ -15,13 +15,14 @@ enum Id {
 	LENG = 1 << 3,
 	PICKMAN = 1 << 4,
 	KURANES = 1 << 5,
+	CARTER = 1 << 6,
 }
 
 @onready var SAVE_KEY: String = "party_member_" + name
 @onready var anim = $Anim
 @onready var battler: Battler = $Battler
 
-@export_flags ("ALEX", "ZOOG", "KIT", "LENG", "PICKMAN", "KURANES") var id: int = Id.ALEX
+@export_flags ("Alex", "Volki", "Gruska", "Sylvie", "Pickman", "Kuranes", "Carter") var id: int = Id.ALEX
 @export var display_name: String
 @export var growth: Resource
 @export var unlocked = false
@@ -36,13 +37,21 @@ var equipped_accessory: Accessory : set = set_accessory
 var current_orientation = Vector2.DOWN
 var velocity: Vector2 = Vector2.ZERO
 
+var max_health:
+	get:
+		return self.battler.stats.max_health
+
+var max_energy:
+	get:
+		return self.battler.stats.max_energy
+		
 var health:
 	get:
-		return self.battler.stats.health
+		return self.battler.health
 
 var energy:
 	get:
-		return self.battler.stats.energy
+		return self.battler.energy
 
 var level: int:
 	get:
@@ -72,6 +81,7 @@ func _ready():
 	assert(growth)
 	self.set_physics_process(false)
 	battler.stats = growth.create_stats(experience)
+	battler.reset_stats()
 
 func _physics_process(delta):
 	self.position += velocity * delta
@@ -104,8 +114,8 @@ func save(save_data: SaveData):
 		"equipped_armor": equipped_armor.id if equipped_armor != null else null,
 		"equipped_accessory": equipped_accessory.id if equipped_accessory != null else null,
 		"experience": experience,
-		"health": battler.stats.health,
-		"energy": battler.stats.energy,
+		"health": battler.health,
+		"energy": battler.energy,
 		"skills": skills,
 	}
 
@@ -122,8 +132,8 @@ func load_game_data(save_data: SaveData):
 	experience = data["experience"]
 	battler.stats = growth.create_stats(experience)
 	
-	battler.stats.health = data["health"]
-	battler.stats.energy = data["energy"]
+	battler.health = data["health"]
+	battler.energy = data["energy"]
 	
 	for skill in self.battler.skills.get_children():
 		skill.unlocked = data["skills"][skill.get_name()]
@@ -183,23 +193,15 @@ func instance_ui_control():
 # Methods for battles	
 	
 func get_allies(actors: Array):
-	var allies = []
 	var script = get_script()
-	for actor in actors:
-		if script.instance_has(actor):
-			allies.append(actor)
-	return allies
+	return actors.filter(func(actor): return script.instance_has(actor))
 	
 func get_enemies(actors: Array):
-	var enemies = []
 	var script = get_script()
-	for actor in actors:
-		if not script.instance_has(actor):
-			enemies.append(actor)
-	return enemies
+	return actors.filter(func(actor): return not script.instance_has(actor))
 	
 func take_hit(hit: Hit, in_battle: bool = true):
-	await self.battler.take_hit(hit, in_battle)
+	return await self.battler.take_hit(hit, in_battle)
 
 func heal(amount: int, in_battle: bool = true):
 	await self.battler.heal(amount, in_battle)
@@ -217,6 +219,9 @@ func get_current_anim():
 
 func play_anim(anim_name: String):
 	self.anim.play_anim(anim_name)
+
+func has_anim(anim_name: String) -> bool:
+	return self.anim.has_anim(anim_name)
 	
 func set_orientation(new_orientation: Vector2):
 	self.current_orientation = new_orientation

@@ -155,6 +155,9 @@ func move_to(move_target: Array, speed):
 func skip_move_to():
 	if self.move_timer != null:
 		self.move_timer.timeout.emit()
+
+func has_anim(anim_name: String) -> bool:
+	return self.target.has_anim(anim_name)
 	
 func play_anim(anim_name: String):
 	self.target.play_anim(anim_name)

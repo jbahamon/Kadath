@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name BaseNPC
 
 var RandomSpinMovement = preload("./movement/random_spin_movement.tscn")
+var dissolve_shader = preload("res://utils/material/dissolve.gdshader")
 
 signal resumed
 signal move_to_done
@@ -58,6 +59,10 @@ func get_display_name():
 func play_anim(anim_name: String):
 	self.anim.play_anim(anim_name)
 	
+func has_anim(anim_name: String) -> bool:
+	return self.anim.has_anim(anim_name)
+	
+	
 func set_orientation(orientation: Vector2):
 	self.anim.set_orientation(orientation)
 	
@@ -94,8 +99,19 @@ func on_player_interaction(player_proxy: PlayerProxy):
 	self.interactable_area.monitoring = true
 	self.start_auto_movement()
 	
-func die(_mode: CutsceneInstruction.ExecutionMode):
+func die(mode: CutsceneInstruction.ExecutionMode):
+	if mode == CutsceneInstruction.ExecutionMode.PLAY:
+		var fade_tween = get_tree().create_tween()
+		var material = ShaderMaterial.new()
+		material.shader = dissolve_shader
+		self.material = material
+		material.set_shader_parameter("progress", 0.0)
+		fade_tween.tween_property(material, "shader_parameter/progress", 1.0, 0.75)
+		await fade_tween.finished
+		print("finished!")
+	
 	self.queue_free()
+
 
 func stop_auto_movement():
 	self.velocity = Vector2.ZERO

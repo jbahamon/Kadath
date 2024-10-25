@@ -204,7 +204,18 @@ func parse_instruction(stack: Array, instruction_name: String, args: String):
 			instruction.add_instruction(Call.new(entity, "play_anim", ["walk"]))
 			instruction.add_instruction(Move.new(entity, target, speed))
 			instruction.add_instruction(Call.new(entity, "play_anim", ["idle"]))
-			
+		
+		CutsceneInstruction.Type.RUN:
+			var walk_match: RegExMatch = self.patterns["WALK"].search(args)
+			var entity = self.parse_string(walk_match.get_string("Character"))
+			var target = self.parse_vector2_opt(walk_match.get_string("Position"))
+			var speed = self.parse_float(walk_match.get_string("Speed"))
+			instruction = Sequential.new()
+			instruction.add_instruction(LookAt.new(entity, target))
+			instruction.add_instruction(Call.new(entity, "play_anim", ["run"]))
+			instruction.add_instruction(Move.new(entity, target, speed))
+			instruction.add_instruction(Call.new(entity, "play_anim", ["idle"]))
+				
 		CutsceneInstruction.Type.MOVE:
 			var walk_match: RegExMatch = self.patterns["MOVE"].search(args)
 			var speed_match = walk_match.get_string("Speed")

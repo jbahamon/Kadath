@@ -1,8 +1,9 @@
 extends LocationRoom
 
+const CIRCUIT_LAYER = 3
+
 const RESPONSE_YES = "yes"
 
-@onready var animation_player = $AnimationPlayer
 @onready var chalice = $Chalice
 
 func setup():
@@ -34,7 +35,7 @@ func move_player_to_chalice(proxy):
 		
 		destination = Vector2(chalice.position.x, proxy.position.y)
 		proxy.set_orientation(destination - proxy.position)
-		await proxy.move_to(destination, proxy.walk_speed)
+		await proxy.move_to([destination.x, destination.y], proxy.walk_speed)
 
 	proxy.set_orientation(Vector2.UP)
 	proxy.play_anim("idle")
@@ -43,19 +44,28 @@ func attempt_chalice_interaction(proxy: PlayerProxy):
 	var responses = await DialogueService.open_dialogue("chalice")
 
 	if responses[0] == RESPONSE_YES:
-		animation_player.play("drop_enemies")
-		await animation_player.animation_finished
+		await proxy.play_anim("interact")
+		await get_tree().create_timer(0.6).timeout
+		await proxy.play_anim("idle")
+		await self.drop_enemies()
 		await BattleService.start_battle(
 			[$Ampoule1, $Ampoule2, $Ampoule3],
 			false,
-			PlayerProxy.ProxyMode.CUTSCENE
+			PlayerProxy.ProxyMode.CUTSCENE,
 		)
 		VarsService.set_flag("kadath.right_barrier", true)
-		animation_player.play("chalice_activate")
-		await animation_player.animation_finished
-		await DialogueService.open_dialogue("after_chalice_battle")
+		await EnvironmentService.fade_out()
+		self.solve_room()
+		await EnvironmentService.fade_in()
+		await DialogueService.open_dialogue("after_chalice_activation")
 		proxy.set_mode(PlayerProxy.ProxyMode.GAMEPLAY)
 
+func drop_enemies():
+	for ampoule in [$Ampoule1, $Ampoule2, $Ampoule3,]:
+		await get_tree().create_timer(0.5).timeout
+		ampoule.visible = true
+		await get_tree().create_tween().tween_property(ampoule.get_node("Anim/Sprite2D"), "offset:y", -60, 0.9).finished
+
 func solve_room():
-	animation_player.play("chalice_activated")
-	
+	$Chalice/Sprite2D.play("full")
+	self.set_layer_enabled(CIRCUIT_LAYER, true)

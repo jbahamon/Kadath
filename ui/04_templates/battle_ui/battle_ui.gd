@@ -2,7 +2,6 @@ extends MarginContainer
 
 class_name BattleUI
 
-var MultiTargetOption = load("res://ui/04_templates/battle_ui/multi_target_option.gd")
 var ItemEntry = preload("res://ui/02_molecules/item_entry/item_entry.tscn")
 
 @onready var party_status = $VBoxContainer/PartyStatusContainer/PartyStatus
@@ -24,14 +23,6 @@ signal cancel
 var current_actor
 var options_stack: Array = []
 var waiting_for_prompt: bool = false
-var all_allies_option = MultiTargetOption.new()
-var all_enemies_option = MultiTargetOption.new()
-
-func _init():
-	self.all_allies_option.display_name = "All allies"
-	self.all_allies_option.targets = []
-	self.all_enemies_option.display_name = "All enemies"
-	self.all_enemies_option.targets = []
 
 func initialize(party_members: Array):
 	party_status.initialize(party_members)
@@ -70,6 +61,7 @@ func set_options(new_options):
 	options_list.set_process_unhandled_input(true)
 	
 func on_option_selected(option):
+	self.timeline.highlight({})
 	if option is CompositeBattleOption:
 		var new_options = {
 			"from": option,
@@ -81,7 +73,7 @@ func on_option_selected(option):
 			}
 		}
 		
-		self.set_options(new_options)
+		self.set_options(new_options)	
 	else:
 		self.emit_signal("option_selected", option)
 		
@@ -110,7 +102,6 @@ func hide_timeline():
 	self.timeline.visible = false
 	
 func on_option_focused(option):
-	
 	if "description" in option:
 		self.set_info_text(option.description)
 	else:
@@ -135,7 +126,6 @@ func on_option_focused(option):
 			skill_costs.update_costs([[current_actor, option.energy_cost]])
 	else: 
 		self.timeline.highlight({})
-		
 
 func set_info_text(text):
 	if text != null and text.length() > 0:
@@ -144,20 +134,19 @@ func set_info_text(text):
 	else:
 		self.info_panel.modulate = Color.TRANSPARENT
 
-func request_action_parameter(from, actor, actors: Array, argument_signature: Dictionary):
+func request_action_parameter(action, actor, actors: Array, argument_signature: Dictionary):
 	match argument_signature["type"]:
 		BattleAction.ActionArgument.TARGET:
-			return await self.request_targets(from, actor, actors, argument_signature["targeting_type"], argument_signature.get("prompt"))
+			return await self.request_targets(argument_signature["targeting_type"], action, actor, actors, argument_signature.get("prompt"))
 		BattleAction.ActionArgument.ITEM:
-			return await self.request_item(from, actor, actors, argument_signature["prompt"])
+			return await self.request_item(action, actor, actors, argument_signature["prompt"])
 
-			
-func request_item(actor, _actors: Array, from, _request_prompt: String):
+func request_item(action, actor, _actors: Array, _request_prompt: String):
 	assert(actor is PartyMember)
 	var inventory: Inventory = EntitiesService.get_party().inventory
 	var item_options = inventory.get_batle_items_amounts()
 	var new_options = {
-		"from": from,
+		"from": action,
 		"options": item_options,
 		"title": "Choose an item",
 		"list_options": {"class_or_scene": ItemEntry}
@@ -171,24 +160,11 @@ func request_item(actor, _actors: Array, from, _request_prompt: String):
 	else:
 		return ItemService.id_to_item(item_and_amount[0])
 
-func request_targets(from, actor, actors: Array, targeting_type: int, request_prompt: String):
-	var target_options: Array
-	match targeting_type: 
-		BattleAction.TargetType.ONE_ENEMY:
-			target_options = actor.get_enemies(actors)
-		BattleAction.TargetType.ONE_ALLY:
-			target_options = actor.get_allies(actors)
-		BattleAction.TargetType.ALL_ENEMIES:
-			self.all_enemies_option.targets = actor.get_enemies(actors)
-			target_options = [self.all_enemies_option]
-		BattleAction.TargetType.ALL_ALLIES:
-			self.all_allies_option.targets = actor.get_allies(actors)
-			target_options = [self.all_allies_option]
-		BattleAction.TargetType.SELF:
-			target_options = [actor]
+func request_targets(targeting_type, action, actor, actors: Array, request_prompt: String):
+	var target_options: Array = action.get_targets(targeting_type, actor, actors)
 	
 	var new_options = {
-		"from": from,
+		"from": action,
 		"options": target_options,
 		"title": request_prompt,
 	}

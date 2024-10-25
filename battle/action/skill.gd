@@ -7,11 +7,4 @@ func get_prompt():
 	return self.prompt
 	
 func get_options():
-	var options = []
-	for child in self.get_children():
-		if child.unlocked:
-			options.append(child)
-	
-	return options
-	
-	
+	return self.get_children().filter(func(child): return child.unlocked)

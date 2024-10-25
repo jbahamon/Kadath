@@ -1,5 +1,6 @@
 extends "res://battle/ai/non_player_ai.gd"
 
+var Change = preload("res://npc/enemy/guardian/reaction/change.gd")
 var jump
 var shoot
 var whip
@@ -8,6 +9,7 @@ var prepare
 var beam
 
 var turn_counter = 0
+var second_phase = false
 
 func _ready() -> void:
 	var parent: Node = self.get_parent()
@@ -17,9 +19,10 @@ func _ready() -> void:
 	self.chew = parent.get_node("Actions/Chew")
 	self.prepare = parent.get_node("Actions/Chew")
 	self.beam = parent.get_node("Actions/Beam")
+	self.reactions = [Change.new()]
 
 func choose_action(actor, actors: Array):
-	if actor.health > floor(0.75 * actor.max_health):
+	if not second_phase:
 		
 		match turn_counter:
 			0, 1: 

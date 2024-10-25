@@ -4,7 +4,7 @@ extends "res://battle/action/line_to_target.gd"
 @export var line_power: float
 
 func execute(actor):
-	actor.battler.stats.spend_energy(self.energy_cost)
+	actor.battler.spend_energy(self.energy_cost)
 	var targets = await self.line_of_effect.get_actors_in_line(actor.global_position, self.target.global_position)
 	
 	var actor_party_member = actor is PartyMember
@@ -16,14 +16,17 @@ func execute(actor):
 	var hits = [
 		func (): await self.target.take_hit(first_hit)
 	]
-	for line_target in targets:
-		if (line_target is PartyMember) != actor_party_member and line_target != self.target:
+	
+	var additional_hits = targets.filter(
+		func(line_target): return (line_target is PartyMember) != actor_party_member and line_target != self.target
+	).map(
+		func (line_target):
 			var hit = Hit.new()
-			hit.type = Hit.Element.METAL
+			hit.type = Hit.Element.ABYSS
 			hit.base_damage = (actor.battler.stats.level + actor.battler.stats.magic_attack) * self.line_power
-			hits.append(
-				func (): await line_target.take_hit(hit)
-			)
+			return func (): await line_target.take_hit(hit)	
+	)
+	hits.append_array(additional_hits)
 	
 	await DoAll.new(hits).execute()
 	

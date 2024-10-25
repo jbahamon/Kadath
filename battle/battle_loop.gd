@@ -26,36 +26,36 @@ func initialize(init_actors: Array, init_ui: BattleUI):
 	for actor in actors:
 		actor.battler.initialize(init_ui)
 		turn_queue.add(actor)
-		self.connect_actor(actor)
 
 func do_battle():
 	battle_end_state = BattleEndState.new()
 	
 	while true:
-		
 		self.update_preview()
-		
 		var current_actor = self.turn_queue.get_current_actor()
 		var turn = await current_actor.battler.ai.get_turn(self.actors)
 
 		self.turn_start.emit(turn)
 		await turn.play()
+		
+		for actor in actors:
+			if not actor.battler.is_alive and not (actor is PartyMember and actor.battler.status_effects.has(DownedStatus.get_id())):
+				await self.on_actor_death(actor)
+				
+			if actor.battler.pending_reaction != null and actor.battler.is_alive:
+				await actor.battler.pending_reaction.execute()
+				actor.battler.pending_reaction = null
+		
 		self.turn_end.emit(turn)
 		self.ui.update_player_state()
 		if is_battle_won():
 			self.ui.hide_timeline()
-			var party_actors = []
-			for actor in actors:
-				self.disconnect_actor(actor)
-				if actor is PartyMember:
-					party_actors.append(actor)
+			var party_actors = actors.filter(func(actor): return actor is PartyMember)
 			self.battle_end_state.party_actors = party_actors
 			self.battle_end_state.result = BattleEndState.Result.WIN
 			return self.battle_end_state
 			
 		elif is_battle_lost():
-			for actor in actors:
-				self.disconnect_actor(actor)
 			self.battle_end_state.result = BattleEndState.Result.LOSE
 			return battle_end_state
 			
@@ -96,12 +96,6 @@ func mark_battle_as_escaped():
 	self.battle_end_state.result = BattleEndState.Result.ESCAPE
 	
 func on_actor_death(actor):
-	# One last chance for revival (e.g. auto revive skills, etc)
-	self.actor_dead.emit(actor)
-	
-	if actor.battler.is_alive:
-		return
-
 	if actor is PartyMember:
 		actor.battler.status_effects.add(DownedStatus.new())
 	else:
@@ -118,20 +112,6 @@ func add_rewards(rewards: BattleRewards):
 func update_preview():
 	self.preview = self.turn_queue.get_preview(self.preview_size)
 	self.ui.update_preview(self.preview)
-	
-func connect_actor(actor):
-	actor.battler.died.connect(self.on_actor_death)
-	var status_effects = actor.battler.status_effects
-	self.turn_start.connect(status_effects.on_turn_start)
-	self.turn_end.connect(status_effects.on_turn_end)
-	self.actor_dead.connect(status_effects.on_actor_dead)
-
-func disconnect_actor(actor):
-	actor.battler.died.disconnect(self.on_actor_death)
-	var status_effects = actor.battler.status_effects
-	self.turn_start.disconnect(status_effects.on_turn_start)
-	self.turn_end.disconnect(status_effects.on_turn_end)
-	self.actor_dead.disconnect(status_effects.on_actor_dead)
 
 func delay_actor(actor, delay):
 	self.turn_queue.add_charge(actor, delay)

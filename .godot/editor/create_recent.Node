@@ -1,6 +1,9 @@
-Node
-Sprite2D
 AnimatedSprite2D
+Node2D
+Marker2D
+Node
+EnemySpot
+Sprite2D
 CollisionShape2D
 StaticBody2D
 Control
@@ -9,6 +12,3 @@ PanelContainer
 VBoxContainer
 TextureRect
 GridContainer
-HBoxContainer
-MarginContainer
-CenterContainer

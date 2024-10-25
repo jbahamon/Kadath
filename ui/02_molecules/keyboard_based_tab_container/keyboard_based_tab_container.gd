@@ -120,12 +120,8 @@ func build_tab_button_for(child: Control):
 	return button
 
 func assign_tab_neighbours():
-	var children = tabs_container.get_children()
-	var buttons = []
-	for child in children:
-		if not child.disabled:
-			buttons.append(child)
-			
+	var buttons = tabs_container.get_children().filter(func(child): return not child.disabled)
+
 	for i in range(len(buttons)):
 		var button = buttons[i]
 		button.focus_neighbor_top = button.get_path_to(button)

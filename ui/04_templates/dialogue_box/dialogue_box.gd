@@ -95,14 +95,13 @@ func set_responses(line: Dictionary):
 	
 func point_to_response(index: int):
 	self.current_highlighted_response = index
-	var option_lines = []
-	
-	for i in range(self.current_responses.size()):
-		var text = self.current_responses[i].text
-		if i == index:
-			text = "> " + text
-		option_lines.append(text)
-			
+	var option_lines = range(self.current_responses.size()).map(
+		func(i):
+				var text = self.current_responses[i].text
+				if i == index:
+					text = "> " + text
+				return text
+	)
 	content.set_text("\n".join(option_lines))
 	content.set_visible_ratio(1.0)
 	

@@ -37,4 +37,6 @@ monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 
+[node name="Hitspots" type="Node2D" parent="."]
+
 [editable path="Toast"]

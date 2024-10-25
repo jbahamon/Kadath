@@ -40,19 +40,21 @@ func clear():
 	
 func add(new_effect: StatusEffect):
 	for effect in self._effects:
-		if effect.id == new_effect.id:
+		if effect.get_id() == new_effect.get_id():
 			effect.refresh(new_effect)
 			return
 	
 	_effects.append(new_effect)
+	new_effect.on_add(self.owner)
 	
 func remove(effect_id: StatusEffect):
 	var to_remove = []
 	for effect in self._effects:
-		if effect.id == effect_id:
+		if effect.get_id() == effect_id:
 			to_remove.append(effect)
 	
 	for effect in to_remove:
+		effect.on_remove(self.owner)
 		self._effects.erase(effect)
 	
 	return to_remove.size() > 0
@@ -68,6 +70,7 @@ func on_turn_start(turn: Turn) -> bool:
 				to_remove.append(effect)
 			
 	for effect in to_remove:
+		effect.on_remove(self.owner)
 		self._effects.erase(effect)
 		
 	return to_remove.size() > 0
@@ -83,8 +86,15 @@ func on_turn_end(turn: Turn):
 				to_remove.append(effect)
 			
 	for effect in to_remove:
+		effect.on_remove(self.owner)
 		self._effects.erase(effect)
-	
+
+func has(id):
+	for effect in self._effects:
+		if effect.get_id() == id:
+			return true
+	return false
+
 func on_actor_dead(actor):
 	var to_remove = []
 	

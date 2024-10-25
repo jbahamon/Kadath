@@ -19,13 +19,20 @@ const uniform_add: Material = preload("res://utils/material/uniform_add.tres")
 @onready var ai: BattlerAI = $AI
 @onready var toast: Node2D = $Toast
 @onready var hitbox: Area2D = $Hitbox
+@onready var hitspots: Node = $Hitspots
 
 var anim: Node
 var status_effects = StatusEffectManager.new(self)
+var pending_reaction = null
 
-var is_alive: bool:
+var health: int
+var energy: int : set = set_energy
+
+var is_alive: bool : 
 	get:
-		return self.stats.is_alive
+		return health > 0
+
+var level: int
 
 var physical_attack: float:
 	get:
@@ -64,54 +71,106 @@ var display_name: String:
 	set(_value):
 		pass
 
+
 func _ready():
 	assert(self.anim_path)
 	self.anim = get_node(self.anim_path)
 	self.toast.position = self.toast_offset
+	self.reset_stats()
 	
-func free():
-	self.status_effects._destroy()
-	super.free()
-	
-func show_toast(text: String, color: Color=Color.WHITE):
-	await self.toast.show_toast(text, color)
+func reset_stats():
+	health = self.stats.max_health
+	energy = self.stats.max_energy
 	
 func initialize(ui: BattleUI):
 	self.ai.interface = ui
 
+func free():
+	self.status_effects._destroy()
+	super.free()
+	
+func take_damage(damage: int):
+	var prev_health = health
+	health = clamp(health - damage, 0, self.stats.max_health)
+	return prev_health - health
+
+func spend_energy(amount: int):
+	energy = clamp(energy - amount, 0, self.stats.max_energy)
+
+func set_energy(value: int):
+	energy = clamp(value, 0, self.stats.max_energy)
+	
+func show_toast(text: String, color: Color=Color.WHITE):
+	await self.toast.show_toast(text, color)
+
 func take_hit(hit: Hit, in_battle: bool = true):
-	var displayed_damage = ceil(
-		hit.base_damage * self.get_damage_modifier(hit) + randf_range(1, hit.base_damage*0.2)
-	)
-	
-	var actual_damage = self.stats.take_damage(displayed_damage)
-	
-	# If additional effects are done, maybe they would need to be moved to the hits
-	if in_battle:
-		var parent = self.get_parent()
-		var prev_material = parent.material
-		parent.material = uniform_add
-		await get_tree().create_timer(0.2).timeout
-		parent.material = prev_material
-
-		await self.toast.show_toast(str(displayed_damage))
+	var damage
+	if hit.fixed_damage:
+		damage = hit.base_damage 
+	else:
+		damage = hit.base_damage * self.get_damage_modifier(hit) 
+		damage = ceil(damage + randf_range(1, damage * 0.2))
 		
-	if in_battle and self.stats.health <= 0:
-		emit_signal("died", self.get_parent())
+	var actual_damage = self.take_damage(damage)
+	var parent = self.get_parent()
+		
+	if in_battle:
+		var hit_events = []
+		var tree = self.get_tree()
 
-	return actual_damage
+		if hit.anim_duration > 0 and self.has_anim("hit"):
+			var idle_anim = "battle_idle" if self.has_anim("battle_idle") else "idle"
+				
+			hit_events.append(
+				func (): 
+					if hit.anim_time > 0:
+						await tree.create_timer(hit.anim_time).timeout
+					self.play_anim("hit")
+					await tree.create_timer(hit.anim_duration).timeout
+					self.play_anim(idle_anim)
+			)
+		
+		if hit.palfx_duration > 0:
+			var prev_material = parent.material
+			hit_events.append(
+				func ():
+					# Small correction since anim seems to change before the material :/
+					await tree.create_timer(hit.palfx_time + 0.05).timeout
+					parent.material = hit.palfx_material
+					await tree.create_timer(hit.palfx_duration).timeout
+					parent.material = prev_material
+			)
+
+		hit_events.append(
+			func(): 
+				await tree.create_timer(hit.toast_time).timeout
+				self.toast.position = self.toast_offset
+				self.toast.show_toast(str(damage))
+				await tree.create_timer(0.7).timeout # Toast duration
+		)
+		
+		await DoAll.new(hit_events).execute()
+		
+		if self.health <= 0:
+			emit_signal("died", parent)
+		else:
+			self.ai.check_reactions(parent, hit, BattleService.get_actors())
+
+	hit.effective_damage = actual_damage
 	
 func heal(amount: int, in_battle: bool = true):
 	if in_battle:
+		self.toast.position = self.toast_offset
 		await self.toast.show_toast(str(amount), Color.LIGHT_GREEN)
 	
-	self.stats.heal(amount)
+	self.take_damage(-amount)
 	
 func recover_energy(amount: int, in_battle: bool = true):
 	if in_battle:
+		self.toast.position = self.toast_offset
 		await self.toast.show_toast(str(amount), Color.STEEL_BLUE)
 	
-	self.stats.recover_energy(amount)
+	self.spend_energy(-amount)
 	
 func get_damage_modifier(hit: Hit):
 	var defense: float
@@ -145,9 +204,11 @@ func get_action_options() -> Array:
 		
 	return options
 
-
 func play_anim(anim_name: String):
 	self.get_parent().play_anim(anim_name)
+
+func has_anim(anim_name: String) -> bool:
+	return self.get_parent().has_anim(anim_name)
 	
 func set_orientation(orientation: Vector2):
 	self.get_parent().set_orientation(orientation)
@@ -173,4 +234,18 @@ func resume_move_to():
 
 func skip_move_to():
 	self.get_parent().skip_move_to()
+
+func get_hitspot(name: String):
+	var node = hitspots.get_node_or_null(name)
+	return node.global_position if node != null else self.global_position
 	
+func get_nearest_hitspot_to(position: Vector2):
+	var min_distance = INF
+	var nearest_spot = self.global_position
+	for spot in self.hitspots.get_children():
+		var distance = position.distance_squared_to(spot.global_position)
+		if distance < min_distance:
+			min_distance = distance
+			nearest_spot = spot.global_position
+			
+	return nearest_spot

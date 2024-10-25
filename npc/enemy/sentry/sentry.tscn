@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dpc8xvvcbyotf"]
+[gd_scene load_steps=14 format=3 uid="uid://dpc8xvvcbyotf"]
 
 [ext_resource type="PackedScene" uid="uid://co4ecuc835bk6" path="res://npc/enemy/enemy.tscn" id="1_vbu6h"]
 [ext_resource type="Texture2D" uid="uid://56sux2p3oroq" path="res://npc/enemy/sentry/icon.png" id="2_2k4kj"]
@@ -6,15 +6,38 @@
 [ext_resource type="Resource" uid="uid://rlyl1hog6ic0" path="res://npc/enemy/sentry/stats.tres" id="3_l4u5g"]
 [ext_resource type="Script" path="res://battle/ai/random_ai.gd" id="4_bs2dh"]
 [ext_resource type="Script" path="res://npc/enemy/sentry/attack.gd" id="5_5ijqc"]
+[ext_resource type="PackedScene" uid="uid://cchn13mhn8gxu" path="res://battle/action/util/projectile.tscn" id="7_885q8"]
+[ext_resource type="Texture2D" uid="uid://c1rb64dwco3s6" path="res://npc/enemy/sentry/projectile.png" id="8_csw5i"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w7pdr"]
 radius = 13.0
 height = 42.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_mo5rv"]
+atlas = ExtResource("8_csw5i")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lhgul"]
+atlas = ExtResource("8_csw5i")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3nu6t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mo5rv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lhgul")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.6
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l8i0k"]
 
 [node name="Sentry" instance=ExtResource("1_vbu6h")]
-position = Vector2(0, 0)
 enemy_id = "sentry"
 icon = ExtResource("2_2k4kj")
 base_display_name = "Sentry"
@@ -33,6 +56,25 @@ script = ExtResource("4_bs2dh")
 [node name="CollisionShape2D" parent="Battler/Hitbox" index="0"]
 position = Vector2(0, -12)
 shape = SubResource("CapsuleShape2D_w7pdr")
+
+[node name="Projectile" parent="Battler" index="5" instance=ExtResource("7_885q8")]
+visible = false
+sprite_frames = SubResource("SpriteFrames_3nu6t")
+
+[node name="South" type="Marker2D" parent="Battler/Hitspots" index="0"]
+position = Vector2(0, 17)
+
+[node name="North" type="Marker2D" parent="Battler/Hitspots" index="1"]
+position = Vector2(0, -12)
+
+[node name="Center" type="Marker2D" parent="Battler/Hitspots" index="2"]
+position = Vector2(0, -12)
+
+[node name="West" type="Marker2D" parent="Battler/Hitspots" index="3"]
+position = Vector2(-20, 12)
+
+[node name="East" type="Marker2D" parent="Battler/Hitspots" index="4"]
+position = Vector2(20, 12)
 
 [node name="InteractableArea" parent="." index="3"]
 visible = false

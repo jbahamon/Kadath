@@ -21,9 +21,5 @@ func get_actors_in_line(from_position: Vector2, to_position: Vector2) -> Array:
 	await tree.physics_frame
 
 	var hitboxes = self.area.get_overlapping_areas()
-	
-	var actors = []
-	for hitbox in hitboxes:
-		actors.append(hitbox.get_parent().get_parent())
-		
-	return actors
+
+	return hitboxes.map(func(hitbox): return hitbox.get_parent().get_parent())

@@ -10,13 +10,19 @@ func _init(lambdas):
 	self.instructions = lambdas
 	
 func execute():
-	self._pending = [] + self.instructions
 	self._completed = false
 	
-	for idx in range(len(instructions)):
-		self._call_instruction(instructions[idx])
+	if self.instructions.size() == 1:
+		await self.instructions[0].call()
+		self.emit_signal("done")
+		self._completed = true
+	else:
+		self._pending = [] + self.instructions
 	
-	if not self._completed:
+		for idx in range(len(instructions)):
+			self._call_instruction(instructions[idx])
+	
+	if not self._completed and self.instructions.size() > 0:
 		await self.done
 		
 func _call_instruction(instruction) -> void:

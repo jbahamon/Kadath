@@ -1,8 +1,24 @@
 extends LocationRoom
 
+const LEFT_CIRCUIT_LAYER = 3
+const RIGHT_CIRCUIT_LAYER = 4
+const POOL_LAYER = 5
+
 func setup():
+	if VarsService.get_flag('kadath.left_barrier'):
+		self.set_layer_enabled(LEFT_CIRCUIT_LAYER, true)
+		$Statue.play("flowing-empty")
+		
+	if VarsService.get_flag('kadath.right_barrier'):
+		self.set_layer_enabled(RIGHT_CIRCUIT_LAYER, true)
+		$Statue2.play("flowing-empty")
+	
 	if VarsService.get_flag('kadath.left_barrier') and VarsService.get_flag('kadath.right_barrier'):
+		self.set_layer_enabled(POOL_LAYER, true)
 		$Barrier.queue_free()
+		$Statue.play("flowing-full")
+		$Statue2.play("flowing-full")
+		$Bridge.visible = true
 		
 	if EntitiesService.get_party().is_unlocked(PartyMember.Id.PICKMAN):
 		$JoinTrigger.monitoring = false

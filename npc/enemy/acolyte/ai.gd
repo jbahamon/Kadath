@@ -30,9 +30,5 @@ func fill_action_parameters(action: BattleAction, actor, actors: Array):
 				min_dist = dist
 				sacrifice = ally
 		
-		action.allies = []
-		
-		for ally in allies:
-			if ally != sacrifice:
-				action.allies.append(ally)
+		action.allies = allies.filter(func(ally): return ally != sacrifice)
 		action.sacrifice = sacrifice

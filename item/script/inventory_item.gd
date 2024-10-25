@@ -2,6 +2,13 @@ extends Resource
 
 class_name InventoryItem
 
+enum TargetType {
+	ALL_ALLIES,
+	ALL_ENEMIES,
+	SINGLE,
+	
+	NONE
+}
 @export var id: String 
 @export var name: String
 @export var description: String

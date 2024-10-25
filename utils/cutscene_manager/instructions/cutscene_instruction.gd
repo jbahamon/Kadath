@@ -24,6 +24,7 @@ enum Type {
 	
 	MOVE,
 	WALK,
+	RUN,
 	PLAY_ANIM,
 	
 	START_DIALOGUE,

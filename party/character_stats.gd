@@ -5,8 +5,7 @@ extends Resource
 
 class_name CharacterStats
 
-var health: int
-var energy: int : set = set_energy
+
 @export var max_health: int = 1
 @export var max_energy: int = 0
 
@@ -17,35 +16,7 @@ var energy: int : set = set_energy
 @export var luck: int = 1
 @export var speed: int = 1
 
-var is_alive: bool : 
-	get:
-		return health > 0
-
 var level: int
-
-func _init():
-	reset()
-
-func reset():
-	health = self.max_health
-	energy = self.max_energy
-
-func take_damage(damage: int):
-	var prev_health = health
-	health = clamp(health - damage, 0, max_health)
-	return prev_health - health
-
-func heal(amount: int):
-	self.take_damage(-amount)
-
-func spend_energy(amount: int):
-	energy = clamp(energy - amount, 0, max_energy)
-	
-func recover_energy(amount: int):
-	self.spend_energy(-amount)
-
-func set_energy(value: int):
-	energy = clamp(value, 0, max_energy)
 
 func set_max_health(value: int):
 	if value == null:

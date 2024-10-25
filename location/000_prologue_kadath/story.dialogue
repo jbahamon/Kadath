@@ -111,22 +111,10 @@ Touch the glyph?
 	Maybe later.
 => END
 
-~ after_chalice_battle
+~ after_chalice_activation
 Something seems to have changed.
 => END
 
 ~ chalice_done
 The chalice is filled with a red liquid.
-=> END
-
-~ paten
-You approach the ornamental plate and touch the glyph on it.
-=> END
-
-~ after_paten_activation
-Something seems to have changed.
-=> END
-
-~ paten_done
-The plate is filled with some kind of flesh.
 => END

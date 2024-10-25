@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://b4nbxe88mk82q" path="res://party/base_growth.tres" id="2_dc8gg"]
 [ext_resource type="Texture2D" uid="uid://df0sy0xr60rtd" path="res://party/pickman/icon.png" id="3_psao1"]
 [ext_resource type="Script" path="res://party/pickman/skill/taxing_touch.gd" id="4_col3m"]
-[ext_resource type="PackedScene" uid="uid://cv5wwoeq1pjb7" path="res://party/pickman/anim.tscn" id="4_xux0q"]
+[ext_resource type="PackedScene" uid="uid://cv5wwoeq1pjb7" path="res://party/pickman/anim.tscn" id="4_pfdmg"]
 [ext_resource type="Script" path="res://party/pickman/skill/slab_slam.gd" id="5_5kqwp"]
 [ext_resource type="Script" path="res://party/pickman/action/feast.gd" id="5_beduq"]
 [ext_resource type="PackedScene" uid="uid://dwx2sfgjttusb" path="res://battle/action/util/line_of_effect.tscn" id="6_8tf6q"]
@@ -19,7 +19,10 @@ growth = ExtResource("2_dc8gg")
 experience = 1
 icon = ExtResource("3_psao1")
 
-[node name="Battler" parent="." index="0"]
+[node name="Anim" parent="." index="0" instance=ExtResource("4_pfdmg")]
+use_parent_material = true
+
+[node name="Battler" parent="." index="1"]
 anim_path = NodePath("../Anim")
 
 [node name="TaxingTouch" type="Node" parent="Battler/Actions/Skill" index="0"]
@@ -47,8 +50,20 @@ description = "Feed on an enemy to do minor damage and recover HP and SP."
 position = Vector2(0, -13)
 shape = SubResource("CapsuleShape2D_7ecgo")
 
-[node name="Anim" parent="." index="1" instance=ExtResource("4_xux0q")]
-use_parent_material = true
+[node name="South" type="Marker2D" parent="Battler/Hitspots" index="0"]
+position = Vector2(0, 8)
+
+[node name="North" type="Marker2D" parent="Battler/Hitspots" index="1"]
+position = Vector2(0, -12)
+
+[node name="Center" type="Marker2D" parent="Battler/Hitspots" index="2"]
+position = Vector2(0, -18)
+
+[node name="West" type="Marker2D" parent="Battler/Hitspots" index="3"]
+position = Vector2(-14, 1)
+
+[node name="East" type="Marker2D" parent="Battler/Hitspots" index="4"]
+position = Vector2(14, 1)
 
 [editable path="Battler"]
 [editable path="Battler/Actions/Skill/SlabSlam/LineOfEffect"]

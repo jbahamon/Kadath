@@ -1,14 +1,15 @@
-[gd_scene load_steps=42 format=3 uid="uid://bfd8bve0jvodl"]
+[gd_scene load_steps=46 format=3 uid="uid://bfd8bve0jvodl"]
 
 [ext_resource type="TileSet" uid="uid://b15m77bx602kw" path="res://location/000_prologue_kadath/tile/onyx_temple.tres" id="1_anh51"]
 [ext_resource type="Script" path="res://location/000_prologue_kadath/room/02_hub.gd" id="2_nhaa6"]
 [ext_resource type="PackedScene" uid="uid://k1y4abtqqro7" path="res://location/lib/script/object/battle_spot.tscn" id="3_tglgf"]
 [ext_resource type="Script" path="res://location/lib/script/object/enemy_spot.gd" id="4_pfasm"]
 [ext_resource type="PackedScene" uid="uid://sfld8pt3bwlw" path="res://location/lib/script/object/warp.tscn" id="5_3ltby"]
+[ext_resource type="PackedScene" uid="uid://cv5wwoeq1pjb7" path="res://party/pickman/anim.tscn" id="7_hj33k"]
 [ext_resource type="PackedScene" uid="uid://ds2ji50aao08o" path="res://npc/lib/movement/path_movement.tscn" id="10_k3y1y"]
 [ext_resource type="PackedScene" uid="uid://dpc8xvvcbyotf" path="res://npc/enemy/sentry/sentry.tscn" id="13_qq2j6"]
 [ext_resource type="PackedScene" uid="uid://qscnhsk7b4m7" path="res://npc/lib/simple_ghoul_npc.tscn" id="14_onopi"]
-[ext_resource type="PackedScene" uid="uid://cv5wwoeq1pjb7" path="res://party/pickman/anim.tscn" id="15_gwk0i"]
+[ext_resource type="PackedScene" uid="uid://bngh72w54kdq0" path="res://npc/enemy/thymiaterion/thymiaterion.tscn" id="15_ww8nm"]
 [ext_resource type="Texture2D" uid="uid://dq08xiwl8vasy" path="res://location/000_prologue_kadath/object/gate.png" id="16_vixlb"]
 [ext_resource type="Texture2D" uid="uid://bf8vls8u5sbww" path="res://location/000_prologue_kadath/object/torch-sheet.png" id="17_i3ee4"]
 [ext_resource type="Texture2D" uid="uid://djkqe12ggregf" path="res://location/000_prologue_kadath/object/bridge.png" id="17_wsu4k"]
@@ -89,7 +90,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 10.0
+"speed": 6.6
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4u1f4"]
@@ -139,7 +140,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 10.0
+"speed": 6.6
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eow8m"]
@@ -157,6 +158,18 @@ region = Rect2(84, 0, 42, 47)
 [sub_resource type="AtlasTexture" id="AtlasTexture_g0v5p"]
 atlas = ExtResource("19_vnvd8")
 region = Rect2(126, 0, 42, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vxihi"]
+atlas = ExtResource("19_vnvd8")
+region = Rect2(168, 0, 42, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_im7yn"]
+atlas = ExtResource("19_vnvd8")
+region = Rect2(210, 0, 42, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4roca"]
+atlas = ExtResource("19_vnvd8")
+region = Rect2(252, 0, 42, 47)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5j751"]
 animations = [{
@@ -179,7 +192,21 @@ animations = [{
 "texture": SubResource("AtlasTexture_g0v5p")
 }],
 "loop": true,
-"name": &"flowing",
+"name": &"flowing-empty",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vxihi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_im7yn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4roca")
+}],
+"loop": true,
+"name": &"flowing-full",
 "speed": 5.0
 }]
 
@@ -211,6 +238,7 @@ layer_4/y_sort_enabled = true
 layer_4/z_index = -2
 layer_4/tile_data = PackedInt32Array(-393201, 1, 1, -262129, 1, 1, -393200, 65537, 1, -262128, 65537, 1, -196592, 65537, 1, -196593, 1, 0, -196594, 131073, 268435456, -196595, 131073, 268435456, -196596, 131073, 268435456, -196597, 131073, 268435456, -196598, 131073, 268435456, -196599, 131073, 268435456, -196600, 131073, 268435456, -196601, 131073, 268435456, -196602, 131073, 268435456, -458748, 131073, 268435456, -196603, 1, 1342177280, -262139, 65537, 536870913, -327675, 65537, 536870913, -393211, 65537, 536870913, -196604, 1, 536870913, -262140, 1, 536870913, -327676, 1, 536870913, -393212, 65537, 805306368, -131060, 131073, 268435457, -131057, 131073, 268435457, -131058, 131073, 268435457, -131059, 131073, 268435457, -131061, 131073, 268435457, -131062, 131073, 268435457, -131063, 131073, 268435457, -131064, 131073, 268435457, -131065, 131073, 268435457, -131066, 131073, 268435457, -131067, 131073, 268435457, -131068, 196612, 1, -458747, 196612, 805306369, -131056, 196612, 1610612737)
 layer_5/name = "Pool"
+layer_5/enabled = false
 layer_5/y_sort_enabled = true
 layer_5/z_index = -4
 layer_5/tile_data = PackedInt32Array(-458756, 2, 0, -393220, 2, 0, -327684, 2, 0, -262148, 2, 0, -458755, 2, 0, -393219, 2, 0, -327683, 2, 0, -262147, 2, 0, -458754, 2, 0, -393218, 2, 0, -327682, 2, 0, -262146, 2, 0, -524287, 2, 0, -458751, 2, 0, -393215, 2, 0, -327679, 2, 0, -524286, 2, 0, -458750, 2, 0, -393214, 2, 0, -327678, 2, 0, -524285, 2, 0, -458749, 2, 0, -393213, 2, 0, -327677, 2, 0)
@@ -308,7 +336,7 @@ shape = SubResource("1")
 [node name="CollisionShape2D" parent="NPCPickman/InteractableArea" index="0"]
 disabled = true
 
-[node name="Anim" parent="NPCPickman" instance=ExtResource("15_gwk0i")]
+[node name="Anim" parent="NPCPickman" instance=ExtResource("7_hj33k")]
 
 [node name="JoinTrigger" type="Area2D" parent="."]
 position = Vector2(0, 48)
@@ -384,18 +412,14 @@ frame_progress = 0.755698
 [node name="Statue" type="AnimatedSprite2D" parent="."]
 position = Vector2(-64, -85)
 sprite_frames = SubResource("SpriteFrames_5j751")
-animation = &"flowing"
 autoplay = "default"
-frame_progress = 0.958456
 centered = false
 offset = Vector2(0, -47)
 
 [node name="Statue2" type="AnimatedSprite2D" parent="."]
 position = Vector2(22, -85)
 sprite_frames = SubResource("SpriteFrames_5j751")
-animation = &"flowing"
 autoplay = "default"
-frame_progress = 0.547244
 centered = false
 offset = Vector2(0, -47)
 flip_h = true
@@ -407,8 +431,11 @@ autoplay = "default"
 frame_progress = 0.797901
 
 [node name="Bridge" type="Sprite2D" parent="."]
-position = Vector2(0, -96)
+visible = false
+position = Vector2(0, -129)
 texture = ExtResource("17_wsu4k")
+centered = false
+offset = Vector2(-28, 0)
 
 [node name="Sentry" parent="." instance=ExtResource("13_qq2j6")]
 position = Vector2(-48, 216)
@@ -429,6 +456,38 @@ speed = 70
 starting_target_idx = 2
 path_2D_path = NodePath("../../Path2D")
 
+[node name="Thymiaterion" parent="." instance=ExtResource("15_ww8nm")]
+position = Vector2(-256, 15)
+
+[node name="Thymiaterion2" parent="." instance=ExtResource("15_ww8nm")]
+position = Vector2(256, 15)
+
+[node name="BattleSpot2" parent="." instance=ExtResource("3_tglgf")]
+position = Vector2(-208, -1)
+
+[node name="Marker2D" type="Marker2D" parent="BattleSpot2/PartySpots" index="0"]
+position = Vector2(32, -32)
+
+[node name="Marker2D2" type="Marker2D" parent="BattleSpot2/PartySpots" index="1"]
+position = Vector2(32, 16)
+
+[node name="EnemySpot" type="Marker2D" parent="BattleSpot2/EnemySpots" index="0"]
+position = Vector2(-48, 16)
+script = ExtResource("4_pfasm")
+
+[node name="BattleSpot3" parent="." instance=ExtResource("3_tglgf")]
+position = Vector2(208, -1)
+
+[node name="Marker2D" type="Marker2D" parent="BattleSpot3/PartySpots" index="0"]
+position = Vector2(-48, -32)
+
+[node name="Marker2D2" type="Marker2D" parent="BattleSpot3/PartySpots" index="1"]
+position = Vector2(-48, 16)
+
+[node name="EnemySpot" type="Marker2D" parent="BattleSpot3/EnemySpots" index="0"]
+position = Vector2(48, 16)
+script = ExtResource("4_pfasm")
+
 [connection signal="body_entered" from="JoinTrigger" to="." method="_on_join_trigger_body_entered"]
 
 [editable path="BattleSpot"]
@@ -437,3 +496,5 @@ path_2D_path = NodePath("../../Path2D")
 [editable path="LeftWarp"]
 [editable path="RightWarp"]
 [editable path="NPCPickman"]
+[editable path="BattleSpot2"]
+[editable path="BattleSpot3"]

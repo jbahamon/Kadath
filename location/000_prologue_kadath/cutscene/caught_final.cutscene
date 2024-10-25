@@ -1,0 +1,45 @@
+LOOK PARTY DOWN
+PLAY_ANIM PARTY idle
+
+SIMULTANEOUS
+	CALL LeftAcolyte1 stop_auto_movement
+	CALL LeftAcolyte2 stop_auto_movement
+	CALL RightAcolyte1 stop_auto_movement
+	CALL RightAcolyte2 stop_auto_movement
+	PLAY_ANIM LeftAcolyte1 idle
+	PLAY_ANIM LeftAcolyte2 idle
+	PLAY_ANIM RightAcolyte1 idle
+	PLAY_ANIM RightAcolyte2 idle
+	LOOK_AT LeftAcolyte1 AT PROXY
+	LOOK_AT LeftAcolyte2 AT PROXY
+	LOOK_AT RightAcolyte1 AT PROXY
+	LOOK_AT RightAcolyte2 AT PROXY
+END
+
+WAIT 0.5
+ FADE_OVERLAY MIX TO (0,0,0,1) IN 0.5
+
+SET_POSITION PROXY TO (0, -64)
+
+
+LOOK LeftAcolyte1 SOUTH
+SET_POSITION LeftAcolyte1 TO (-56, -104)
+
+LOOK LeftAcolyte2 SOUTH
+SET_POSITION LeftAcolyte2 TO (-24, -112)
+
+LOOK RightAcolyte1 SOUTH
+SET_POSITION RightAcolyte1 TO (24, -112)
+
+LOOK RightAcolyte2 SOUTH
+SET_POSITION RightAcolyte2 TO (56, -104)
+
+LOOK PROXY UP
+PLAY_ANIM PARTY idle
+
+SIMULTANEOUS
+	FADE_OVERLAY MIX TO (0,0,0,0) IN 0.5
+	CALL PARTY reset_movement
+END
+
+WAIT 1.5
