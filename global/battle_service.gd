@@ -116,9 +116,10 @@ func start_battle(enemies: Array, escapable: bool, proxy_mode_on_finish=null):
 			await self.tear_down_battle_positions(battle_end_state)
 			self.resume_non_participants(end_proxy_mode)
 			InputService.set_input_enabled(was_input_enabled)
-		BattleEndState.Result.WIN: 
+		BattleEndState.Result.WIN:
 			await self.deal_rewards(battle_end_state.rewards)
 			self.ui.hide()
+			self.revive_party_members(EntitiesService.get_party())
 			await self.tear_down_battle_positions(battle_end_state)
 			self.resume_non_participants(end_proxy_mode)
 			InputService.set_input_enabled(was_input_enabled)
@@ -254,7 +255,7 @@ func set_up_battle_positions(battle_spot, party_actors: Array, non_party_actors:
 		cutscene_lines.append_array(
 			[
 				"SEQUENTIAL",
-				"RUN %s TO (%d, %d) AT 80" % [
+				"RUN %s TO (%d, %d) AT 85" % [
 					party_actor.name, 
 					int(round(spot.global_position.x)), 
 					int(round(spot.global_position.y))
@@ -328,7 +329,7 @@ func tear_down_battle_positions(battle_end_state):
 	for party_actor in battle_end_state.party_actors:
 		party_actor.on_battle_end()
 		cutscene_lines.append(
-			"WALK %s TO (%d, %d) AT 50" % [
+			"RUN %s TO (%d, %d) AT 85" % [
 				party_actor.name, 
 				int(round(proxy.global_position.x)), 
 				int(round(proxy.global_position.y))
@@ -380,7 +381,7 @@ func deal_rewards(rewards: BattleRewards):
 
 func deal_experience(party: Party, experience: int):
 	await self.ui.prompt("Gained %d experience points!" % experience)
-	for party_member in party.active_members:
+	for party_member in party.get_active_members():
 		if !party_member.battler.is_alive:
 			continue
 			
@@ -405,11 +406,23 @@ func deal_money(_party: Party, money: int):
 	# WIP
 	# party.inventory.money
 
+func revive_party_members(party: Party):
+	for party_member in party.get_active_members():
+		if not party_member.is_alive:
+			party_member.battler.health = 1
+	
+	for party_member in party.get_inactive_members():
+		if not party_member.is_alive:
+			party_member.battler.health = 1
+
 func add_rewards(rewards):
 	self.loop.add_rewards(rewards)
 
-func remove_actor(actor):
-	self.loop.remove_actor(actor)
+func add_to_queue(actor):
+	self.loop.add_to_queue(actor)
+	
+func remove_from_queue(actor):
+	self.loop.remove_from_queue(actor)
 
 func delay_actor(actor, delay):
 	self.loop.delay_actor(actor, delay)

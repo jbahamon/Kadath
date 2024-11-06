@@ -32,6 +32,11 @@ var display_name: String:
 var movement_node: NPCMovement
 var move_timer = null
 
+var current_orientation: Vector2:
+	get:
+		return self.anim.current_orientation
+		
+
 func _ready():
 	match movement_type:
 		MovementType.NONE:
@@ -102,16 +107,14 @@ func on_player_interaction(player_proxy: PlayerProxy):
 func die(mode: CutsceneInstruction.ExecutionMode):
 	if mode == CutsceneInstruction.ExecutionMode.PLAY:
 		var fade_tween = get_tree().create_tween()
-		var material = ShaderMaterial.new()
-		material.shader = dissolve_shader
-		self.material = material
-		material.set_shader_parameter("progress", 0.0)
-		fade_tween.tween_property(material, "shader_parameter/progress", 1.0, 0.75)
+		var dissolve_material = ShaderMaterial.new()
+		dissolve_material.shader = dissolve_shader
+		self.material = dissolve_material
+		dissolve_material.set_shader_parameter("progress", 0.0)
+		fade_tween.tween_property(dissolve_material, "shader_parameter/progress", 1.0, 0.75)
 		await fade_tween.finished
-		print("finished!")
 	
 	self.queue_free()
-
 
 func stop_auto_movement():
 	self.velocity = Vector2.ZERO

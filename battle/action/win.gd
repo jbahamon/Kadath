@@ -25,7 +25,7 @@ func pop_parameter() -> bool:
 	self.targets = null
 	return had_targets
 	
-func execute(actor):
+func execute(_actor):
 	var hit = Hit.new()
 	hit.type = Hit.Element.NONE
 	hit.base_damage = INF

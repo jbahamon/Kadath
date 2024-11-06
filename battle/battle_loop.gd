@@ -39,7 +39,7 @@ func do_battle():
 		await turn.play()
 		
 		for actor in actors:
-			if not actor.battler.is_alive and not (actor is PartyMember and actor.battler.status_effects.has(DownedStatus.get_id())):
+			if not actor.battler.is_alive and not (actor is PartyMember and actor.battler.status_effects.has("downed")):
 				await self.on_actor_death(actor)
 				
 			if actor.battler.pending_reaction != null and actor.battler.is_alive:
@@ -53,11 +53,11 @@ func do_battle():
 			var party_actors = actors.filter(func(actor): return actor is PartyMember)
 			self.battle_end_state.party_actors = party_actors
 			self.battle_end_state.result = BattleEndState.Result.WIN
-			return self.battle_end_state
+			break
 			
 		elif is_battle_lost():
 			self.battle_end_state.result = BattleEndState.Result.LOSE
-			return battle_end_state
+			break
 			
 		elif self.battle_end_state.result == BattleEndState.Result.ESCAPE:
 			self.ui.hide_timeline()
@@ -69,41 +69,41 @@ func do_battle():
 					self.battle_end_state.enemy_actors.append(actor)
 				else:
 					self.battle_end_state.party_actors.append(actor)
+			break
 			
-			return self.battle_end_state
-		
-	return false
+	self.turn_queue.reset()
+	return self.battle_end_state
+
+func add_to_queue(actor):
+	self.turn_queue.add(actor)
+	
+func remove_from_queue(actor):
+	self.turn_queue.erase(actor)
 	
 func is_battle_won() -> bool:
 	if self.battle_end_state.result == BattleEndState.Result.WIN:
 		return true
 		
-	for actor in actors:
-		if not actor is PartyMember:
-			return false
-	return true
+	return actors.all(func(actor): return actor is PartyMember)
 	
 func is_battle_lost() -> bool:
 	if self.battle_end_state.result == BattleEndState.Result.LOSE:
 		return true
 	
-	for actor in actors:
-		if actor.battler.is_alive and actor is PartyMember:
-			return false
-	return true
-
+	return not actors.any(func (actor): return actor.battler.is_alive and actor is PartyMember)
+	
 func mark_battle_as_escaped():
 	self.battle_end_state.result = BattleEndState.Result.ESCAPE
 	
 func on_actor_death(actor):
 	if actor is PartyMember:
+		actor.play_anim("downed")
 		actor.battler.status_effects.add(DownedStatus.new())
 	else:
 		self.add_rewards(actor.battler.rewards)
 		self.actors.erase(actor)
 		await actor.die(CutsceneInstruction.ExecutionMode.PLAY)
-		
-	self.turn_queue.erase(actor)
+		self.remove_from_queue(actor)
 	self.update_preview()
 	
 func add_rewards(rewards: BattleRewards):

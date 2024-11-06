@@ -65,7 +65,7 @@ func update_whereabouts(
 		current_location = new_location
 		DialogueService.load_location_dialogues(new_location)
 
-	var room_moved = self.move_to_room(room_id, target_position, target_orientation)
+	var room_moved = self.move_to_room(room_id)
 	
 	if room_moved:
 		EntitiesService.on_enter_room()
@@ -81,11 +81,7 @@ func update_whereabouts(
 	InputService.set_input_enabled(was_input_enabled)
 	
 	
-func move_to_room(
-	room_id: String,
-	target_position: Vector2, 
-	target_orientation: Vector2,
-) -> bool:
+func move_to_room(room_id: String) -> bool:
 	var room = current_location.instantiate_room(room_id)
 	
 	if current_room != null and current_room == room:

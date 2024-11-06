@@ -4,7 +4,7 @@ var TimelineItem = preload("res://ui/02_molecules/timeline_item/timeline_item.ts
 
 func highlight(highlighted_items):
 	for timeline_item in self.get_children():
-		if timeline_item.actor_id in highlighted_items:
+		if timeline_item.battle_actor_id in highlighted_items:
 			timeline_item.highlight()
 		else:
 			timeline_item.stop_highlight()
@@ -12,11 +12,6 @@ func highlight(highlighted_items):
 func update_preview(preview: Array):
 	var icons_to_remove = self.get_child_count() - preview.size()
 	
-	var text_preview = "Preview: "
-	for item in preview:
-		text_preview = text_preview + item.display_name + " "
-	
-	print(text_preview)
 	if icons_to_remove > 0:
 		for _i in range(icons_to_remove):
 			var item = self.get_child(0)

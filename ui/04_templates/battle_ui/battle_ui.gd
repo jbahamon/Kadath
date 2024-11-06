@@ -73,7 +73,7 @@ func on_option_selected(option):
 			}
 		}
 		
-		self.set_options(new_options)	
+		self.set_options(new_options)
 	else:
 		self.emit_signal("option_selected", option)
 		
@@ -84,9 +84,15 @@ func on_cancel():
 		return
 	
 	var current_options = options_stack.pop_back()
-	var previous_options = options_stack.pop_back()
 	
-	self.set_options(previous_options)
+	var previous_options = options_stack.pop_back()
+
+	# if the previous option is an action, we need to re-push it. 
+	# Otherwise, the action itself will do it
+	
+	var origin = previous_options.get("from")
+	if not origin is BattleAction:
+		self.set_options(previous_options)
 		
 	# if it's a sub option, we shouldn't emit it as a "cancel", since it's
 	# only going through submenus

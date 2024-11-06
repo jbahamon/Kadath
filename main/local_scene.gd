@@ -39,8 +39,8 @@ func move_to_starting_room():
 	else:
 		# Note: move start_game to the above when doing the cutscene intro
 		await EnvironmentService.update_whereabouts(
-			"000_prologue_kadath", # "999_tests",
-			"04_right_switch",
+			"999_tests", # "000_prologue_kadath", 
+			"battle",
 			Vector2(0, 0),
 			Vector2.UP,
 			false,

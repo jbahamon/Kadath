@@ -196,7 +196,7 @@ func get_action_options() -> Array:
 		options.push_back(BattleService.common_action_options["item"])
 		
 		
-		if BattleService.current_battle_parameters.get("escapable", false):
+		if BattleService.current_battle_parameters.get("escapable", true):
 			options.append(BattleService.common_action_options["escape"])
 		
 	else:
@@ -235,15 +235,15 @@ func resume_move_to():
 func skip_move_to():
 	self.get_parent().skip_move_to()
 
-func get_hitspot(name: String):
-	var node = hitspots.get_node_or_null(name)
+func get_hitspot(hitspot_name: String):
+	var node = hitspots.get_node_or_null(hitspot_name)
 	return node.global_position if node != null else self.global_position
 	
-func get_nearest_hitspot_to(position: Vector2):
+func get_nearest_hitspot_to(target_position: Vector2):
 	var min_distance = INF
 	var nearest_spot = self.global_position
 	for spot in self.hitspots.get_children():
-		var distance = position.distance_squared_to(spot.global_position)
+		var distance = target_position.distance_squared_to(spot.global_position)
 		if distance < min_distance:
 			min_distance = distance
 			nearest_spot = spot.global_position

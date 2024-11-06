@@ -136,10 +136,12 @@ anim_path = NodePath("..")
 [node name="Consume" type="Node" parent="Battler/Actions" index="0"]
 script = ExtResource("7_2l1cy")
 sacrifice_hit = SubResource("Resource_agsw1")
+display_name = "Consume"
 
 [node name="Attack" type="Node" parent="Battler/Actions" index="1"]
 script = ExtResource("6_wx6wh")
 hit = SubResource("Resource_6ha7t")
+display_name = "Attack"
 
 [node name="AI" parent="Battler" index="3"]
 script = ExtResource("8_10wdh")

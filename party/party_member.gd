@@ -12,13 +12,23 @@ enum Id {
 	ALEX = 1 << 0,
 	VOLKI = 1 << 1,
 	GRUSKA = 1 << 2,
-	LENG = 1 << 3,
+	SYLVIE = 1 << 3,
 	PICKMAN = 1 << 4,
 	KURANES = 1 << 5,
 	CARTER = 1 << 6,
 }
 
-@onready var SAVE_KEY: String = "party_member_" + name
+const PARTY_IN_BATTLE_ID = {
+	Id.ALEX: "Alex",
+	Id.VOLKI: "Volki",
+	Id.GRUSKA: "Gruska",
+	Id.SYLVIE: "Sylvie",
+	Id.PICKMAN: "Pickman",
+	Id.KURANES: "Kuranes",
+	Id.CARTER: "Carter",	
+}
+
+@onready var SAVE_KEY: String = "party_member_" + PARTY_IN_BATTLE_ID[self.id]
 @onready var anim = $Anim
 @onready var battler: Battler = $Battler
 
@@ -44,7 +54,7 @@ var max_health:
 var max_energy:
 	get:
 		return self.battler.stats.max_energy
-		
+
 var health:
 	get:
 		return self.battler.health
@@ -75,6 +85,15 @@ var elemental_armor: float:
 	get:
 		return 0.0
 
+var is_alive: bool : 
+	get:
+		return self.battler.is_alive
+
+
+var in_battle_id: String:
+	get:
+		return PARTY_IN_BATTLE_ID[self.id]
+
 var move_timer
 
 func _ready():
@@ -89,12 +108,13 @@ func _physics_process(delta):
 func update_stats():
 	if battler == null:
 		return
-	# Update this character's stats to match select changes
+	# Update this character's stats to match stat changes
 	# that occurred during combat or through menu actions
 	var before_level = battler.stats.level
 	var after_level = growth.get_level(experience)
 	if before_level != after_level:
 		battler.stats = growth.create_stats(experience)
+		battler.reset_stats()
 
 func _set_experience(value: int):
 	experience = max(0, value)
@@ -193,12 +213,14 @@ func instance_ui_control():
 # Methods for battles	
 	
 func get_allies(actors: Array):
-	var script = get_script()
-	return actors.filter(func(actor): return script.instance_has(actor))
+	# var script = get_script()
+	#return actors.filter(func(actor): return script.instance_has(actor))
+	return actors.filter(func(actor): return actor is PartyMember)
 	
 func get_enemies(actors: Array):
-	var script = get_script()
-	return actors.filter(func(actor): return not script.instance_has(actor))
+	#var script = get_script()
+	#return actors.filter(func(actor): return not script.instance_has(actor))
+	return actors.filter(func(actor): return not actor is PartyMember)
 	
 func take_hit(hit: Hit, in_battle: bool = true):
 	return await self.battler.take_hit(hit, in_battle)
@@ -222,7 +244,7 @@ func play_anim(anim_name: String):
 
 func has_anim(anim_name: String) -> bool:
 	return self.anim.has_anim(anim_name)
-	
+
 func set_orientation(new_orientation: Vector2):
 	self.current_orientation = new_orientation
 	self.anim.set_orientation(new_orientation)

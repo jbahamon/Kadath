@@ -33,6 +33,8 @@ func execute(actor):
 	actor.play_anim(walk_anim)
 	
 	await actor.move_to([target_position.x, target_position.y], walk_speed)
+	
+	actor.set_orientation(actor.global_position.direction_to(target.global_position))
 	actor.play_anim(attack_anim)
 	await actor.get_tree().create_timer(windup_time).timeout
 	

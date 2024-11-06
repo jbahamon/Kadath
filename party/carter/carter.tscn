@@ -18,7 +18,7 @@ height = 24.0
 
 [node name="Carter" instance=ExtResource("1_tjmem")]
 id = 64
-display_name = "Alex"
+display_name = "Carter"
 growth = ExtResource("2_wrv80")
 unlocked = true
 experience = 1

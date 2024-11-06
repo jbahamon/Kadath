@@ -29,8 +29,8 @@ func update_camera_bounds(origin: Vector2, tilemap_limits: Rect2i, tile_size: Ve
 	
 	if room_height < screen_height:
 		var mid_point = origin.y + (tilemap_limits.position.y + tilemap_limits.end.y) * tile_size.y / 2.0
-		self.camera.limit_top = mid_point - roundi(screen_height/2.0)
-		camera.limit_bottom = mid_point + roundi(screen_height/2.0)
+		self.camera.limit_top = roundi(mid_point - screen_height/2.0)
+		camera.limit_bottom = roundi(mid_point + screen_height/2.0)
 	else:
 		camera.limit_top = int(origin.y + tilemap_limits.position.y * tile_size.y)
 		camera.limit_bottom =  int(origin.y + tilemap_limits.end.y * tile_size.y)

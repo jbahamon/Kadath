@@ -33,13 +33,15 @@ _data = [Vector2(0, 0), 0.0, 161.818, 0, 1, Vector2(0.611797, 99), 161.818, 0.0,
 point_count = 3
 
 [sub_resource type="Curve" id="7"]
+min_value = 10.0
 max_value = 999.0
-_data = [Vector2(0, 0), 0.0, 1984.39, 0, 1, Vector2(0.503429, 999), 1984.39, 0.0, 1, 0, Vector2(1, 999), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 10), 0.0, 1964.53, 0, 1, Vector2(0.503429, 999), 1964.53, 0.0, 1, 0, Vector2(1, 999), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="Curve" id="8"]
-max_value = 10.0
-_data = [Vector2(0, 1.54545), 0.0, 5.54545, 0, 1, Vector2(1, 7.09091), 5.54545, 0.0, 1, 0]
+min_value = 9.99
+max_value = 100.0
+_data = [Vector2(0, 10), 0.0, -2.90909, 0, 1, Vector2(1, 7.09091), -2.90909, 0.0, 1, 0]
 point_count = 2
 
 [resource]

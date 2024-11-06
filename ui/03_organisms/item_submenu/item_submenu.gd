@@ -93,11 +93,8 @@ func _unhandled_input(event):
 		self.get_viewport().set_input_as_handled()
 
 func is_focus_on_categories():
-	for button in self.categories_button_group.get_buttons():
-		if button.has_focus():
-			return true
-	return false
-	
+	return self.categories_button_group.get_buttons().any(func(button): return button.has_focus())
+
 func _on_items_element_focused(ui_element):
 	var item = ItemService.id_to_item(ui_element.item_id)
 	self.help_text.text = item.description
@@ -122,7 +119,7 @@ func _on_items_cancel():
 
 func _on_party_list_element_selected(element):
 	var item: InventoryItem = ItemService.id_to_item(self.selected_item.item_id)
-	var used = await item.use([element])
+	var used = await item.use([element], false)
 	self.party_list.deselect()
 	if used and item.consumed_after_use:
 		self.inventory.remove(item.id, 1)

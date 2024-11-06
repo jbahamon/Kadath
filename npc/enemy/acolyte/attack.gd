@@ -12,7 +12,6 @@ func execute(actor):
 	tendrils.global_position = target.global_position
 	tendrils.offset = Vector2(0, center.y - tendrils.global_position.y)
 	
-	
 	tendrils.play("windup")
 	tendrils.visible = true
 	

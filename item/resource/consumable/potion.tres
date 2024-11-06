@@ -5,15 +5,16 @@
 [resource]
 script = ExtResource("1_c5wgf")
 recovery_mode = 0
-health = 20
+energy_recovery_mode = 0
+health = 100
 energy = 0
 status_effects = Array[String]([])
 id = "potion"
 name = "Potion"
-description = "Consumed after use."
+description = "blap"
 max_amount = 99
 category = 0
-target_type = 3
-usable_in_menu = true
-usable_in_battle = true
+target_type = 0
+usable_in_menu = false
+usable_in_battle = false
 consumed_after_use = true

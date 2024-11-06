@@ -34,7 +34,8 @@ func fill_action_parameters(action: BattleAction, actor, actors: Array):
 func get_action_parameter(actor, action: BattleAction, actors: Array, argument_signature: Dictionary):
 	match argument_signature["type"]:
 		BattleAction.ActionArgument.TARGET:
-			return action.get_targets(argument_signature["targeting_type"], actor, actors).pick_random()
+			var targets = action.get_targets(argument_signature["targeting_type"], actor, actors)
+			return targets[0]
 		BattleAction.ActionArgument.ITEM:
 			assert(false) #,"not yet implemented!")
 

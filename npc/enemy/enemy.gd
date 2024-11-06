@@ -9,6 +9,10 @@ signal touched(body)
 
 var instance_id = ""
 
+var in_battle_id: String:
+	get:
+		return "%s_%s" % [self.display_name, instance_id]
+
 var max_health:
 	get:
 		return self.battler.stats.max_health
@@ -21,6 +25,9 @@ var energy:
 	get:
 		return self.battler.energy
 
+var is_alive: bool : 
+	get:
+		return self.battler.is_alive
 
 func get_display_name():
 	return self.base_display_name if self.instance_id == "" else "%s %s" % [self.base_display_name, self.instance_id]

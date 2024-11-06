@@ -26,11 +26,12 @@ var speed_modifier:
 		return modifier
 
 var _effects: Array
-var owner: Battler
+var owner
 
 func _init(init_owner):
 	self._effects = []
 	self.owner = init_owner
+
 	
 func _destroy():
 	self.owner = null
@@ -45,16 +46,18 @@ func add(new_effect: StatusEffect):
 			return
 	
 	_effects.append(new_effect)
-	new_effect.on_add(self.owner)
+	if new_effect.trigger & StatusEffect.Trigger.ADD:
+		new_effect.on_add(self.owner)
 	
-func remove(effect_id: StatusEffect):
+func remove(effect_id: String):
 	var to_remove = []
 	for effect in self._effects:
 		if effect.get_id() == effect_id:
 			to_remove.append(effect)
 	
 	for effect in to_remove:
-		effect.on_remove(self.owner)
+		if effect.trigger & StatusEffect.Trigger.REMOVE:
+			effect.on_remove(self.owner)
 		self._effects.erase(effect)
 	
 	return to_remove.size() > 0
@@ -90,10 +93,7 @@ func on_turn_end(turn: Turn):
 		self._effects.erase(effect)
 
 func has(id):
-	for effect in self._effects:
-		if effect.get_id() == id:
-			return true
-	return false
+	return self._effects.any(func(effect): return effect.get_id() == id)
 
 func on_actor_dead(actor):
 	var to_remove = []

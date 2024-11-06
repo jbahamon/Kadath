@@ -156,10 +156,10 @@ func set_unlocked(id: PartyMember.Id, unlocked: bool):
 			return
 
 func is_unlocked(id: PartyMember.Id):
-	for member in get_children():
-		if member.id == id:
-			return member.unlocked
-	return false
+	return (
+		self.active_members.any(func(member): return member.id == id and member.unlocked) or
+		self.get_children().any(func(member): return member.id == id and member.unlocked)
+	)
 	
 func get_leader():
 	return self.active_members[0]
@@ -175,4 +175,10 @@ func remove_from_room():
 		if parent != null:
 			parent.remove_child(party_member)
 
+func get_active_members():
+	return self.active_members
+
+func get_inactive_members():
+	return self.get_children()
+	
 	

@@ -11,8 +11,8 @@ func initialize(init_proxy: PlayerProxy):
 	self.party.add_to_group("save")
 	
 	# Starting equipment for prologue
-	self.party.inventory.set("potion", 10)
-	self.party.inventory.set("salts", 4)
+	self.party.inventory.set_item("potion", 10)
+	self.party.inventory.set_item("palingenesis_scroll", 40)
 	self.add_child(party)
 
 	self.proxy = init_proxy
@@ -55,7 +55,7 @@ func get_room_entity(entity_name: String):
 	return object
 
 func get_active_party_members():
-	return self.party.active_members
+	return self.party.get_active_members()
 
 func get_party():
 	return self.party

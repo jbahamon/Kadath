@@ -88,11 +88,10 @@ func on_grab_focus():
 		return
 	
 func element_has_focus() -> bool:
-	for control in container.get_children():
-		var button: Button = control.get_button()
-		if button.has_focus():
-			return true
-	return false
+	return container.get_children().any(
+		func (control): 
+			return control.get_button().has_focus()
+	)
 
 func clear_elements():
 	for control in container.get_children():

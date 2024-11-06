@@ -1,12 +1,20 @@
 extends Marker2D
 
-@export var animation_names: Array  = ["idle", "walk"]
+@export var animation_names: Array[String]  = ["idle", "walk"]
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var animation_state = animation_tree.get("parameters/playback")
 @onready var sprite: Sprite2D = $Sprite2D
 
 var blend_position_names: Array
+
+var current_orientation: Vector2:
+	get:
+		if self.blend_position_names.size() > 0:
+			return self.animation_tree[self.blend_position_names[0]]
+		else:
+			return Vector2.DOWN
+			
 func _ready():
 	self.blend_position_names = self.animation_names.map(
 		func(animation_name): 

@@ -1,14 +1,29 @@
 extends BattleAction
 
 @export var sacrifice_hit: Hit
-var target
 var sacrifice
 var allies
 
+func get_next_parameter_signature():
+	if sacrifice == null:
+		return {
+			"name": "target",
+			"type": BattleAction.ActionArgument.TARGET,
+			"prompt": "Choose a sacrifice for %s" % self.display_name,
+			"targeting_type": BattleAction.TargetType.ONE_ALLY,
+		}
+	elif allies == null:
+		return {
+			"name": "allies",
+			"type": BattleAction.ActionArgument.TARGET,
+			"prompt": "Who will be healed?",
+			"targeting_type": BattleAction.TargetType.ALL_ALLIES,
+		}
+	else:
+		return null
+		
 func reset():
-	self.target = null
 	self.sacrifice = null
-	self.allies = null
 	
 func execute(actor):
 	actor.play_anim("attack")
@@ -16,8 +31,8 @@ func execute(actor):
 	var remaining_hp = self.sacrifice.health
 	sacrifice_hit.base_damage = remaining_hp
 	
-	await sacrifice.take_hit(sacrifice_hit)
-	sacrifice.battler.health = 0
+	await self.sacrifice.take_hit(sacrifice_hit)
+	self.sacrifice.battler.health = 0
 	
 	var heals = allies.map(
 		func(ally): return func (): await ally.heal(remaining_hp, true)

@@ -66,15 +66,10 @@ func _on_button_pressed(index):
 		SceneSwitcher.go_to_scene("res://main/local_scene.tscn")
 	
 func has_file_with_data():
-	for item in file_previews:
-		if item != null:
-			return true
-	return false
-
+	return file_previews.any(func(item): return item != null)
 
 func _on_ConfirmationPopup_confirmed():
 	save_to_file(selected_index)
-
 
 func save_to_file(slot_index):
 	SavesService.save(slot_index)

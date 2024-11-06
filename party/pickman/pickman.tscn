@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://dehii02b2xc8o"]
 
 [ext_resource type="PackedScene" uid="uid://bomxx7doloqmu" path="res://party/party_member.tscn" id="1_puo4q"]
-[ext_resource type="Resource" uid="uid://b4nbxe88mk82q" path="res://party/base_growth.tres" id="2_dc8gg"]
+[ext_resource type="Resource" uid="uid://efimamnfjman" path="res://party/pickman/growth.tres" id="2_attsm"]
 [ext_resource type="Texture2D" uid="uid://df0sy0xr60rtd" path="res://party/pickman/icon.png" id="3_psao1"]
 [ext_resource type="Script" path="res://party/pickman/skill/taxing_touch.gd" id="4_col3m"]
 [ext_resource type="PackedScene" uid="uid://cv5wwoeq1pjb7" path="res://party/pickman/anim.tscn" id="4_pfdmg"]
@@ -15,12 +15,14 @@ height = 26.0
 
 [node name="Pickman" instance=ExtResource("1_puo4q")]
 id = 16
-growth = ExtResource("2_dc8gg")
-experience = 1
+display_name = "Pickman"
+growth = ExtResource("2_attsm")
+experience = 2
 icon = ExtResource("3_psao1")
 
 [node name="Anim" parent="." index="0" instance=ExtResource("4_pfdmg")]
 use_parent_material = true
+animation_names = Array[String](["idle", "walk", "run", "attack", "jump_back", "hit", "battle_idle/healthy", "battle_idle/tired", "downed"])
 
 [node name="Battler" parent="." index="1"]
 anim_path = NodePath("../Anim")

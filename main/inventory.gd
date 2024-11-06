@@ -17,7 +17,6 @@ var order = []
 
 @export var MAX_COINS = 9999999
 
-
 func load_game_data(save_data: SaveData) -> void:
 	self.amounts = save_data.data[save_key]["amounts"]
 	self.order = save_data.data[save_key]["order"]
