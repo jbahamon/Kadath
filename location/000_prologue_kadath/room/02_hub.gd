@@ -1,20 +1,20 @@
 extends LocationRoom
 
-const LEFT_CIRCUIT_LAYER = 3
-const RIGHT_CIRCUIT_LAYER = 4
-const POOL_LAYER = 5
+@onready var left_circuit_layer = $LeftCircuit
+@onready var right_circuit_layer = $RightCircuit
+@onready var pool_layer = $Pool
 
 func setup():
 	if VarsService.get_flag('kadath.left_barrier'):
-		self.set_layer_enabled(LEFT_CIRCUIT_LAYER, true)
+		self.left_circuit_layer.enabled = true
 		$Statue.play("flowing-empty")
 		
 	if VarsService.get_flag('kadath.right_barrier'):
-		self.set_layer_enabled(RIGHT_CIRCUIT_LAYER, true)
+		self.right_circuit_layer.enabled = true
 		$Statue2.play("flowing-empty")
 	
 	if VarsService.get_flag('kadath.left_barrier') and VarsService.get_flag('kadath.right_barrier'):
-		self.set_layer_enabled(POOL_LAYER, true)
+		self.pool_layer.enabled = true
 		$Barrier.queue_free()
 		$Statue.play("flowing-full")
 		$Statue2.play("flowing-full")

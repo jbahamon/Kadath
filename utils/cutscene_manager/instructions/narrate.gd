@@ -19,4 +19,3 @@ func _to_string():
 
 func skip(_tree: SceneTree):
 	DialogueService.skip_narration()
-

@@ -4,14 +4,14 @@ signal exit
 
 # Order is important here
 const labels = {
-	"ui_up": "Up",
-	"ui_accept": "Accept/Interact",
-	"ui_down": "Down",
-	"ui_cancel": "Cancel",
-	"ui_left": "Left",
-	"ui_menu": "Open Menu",
-	"ui_right": "Right",
-	"action_run": "Walk/run (hold)"
+	&"ui_up": "Up",
+	&"ui_accept": "Accept/Interact",
+	&"ui_down": "Down",
+	&"ui_cancel": "Cancel",
+	&"ui_left": "Left",
+	&"ui_menu": "Open Menu",
+	&"ui_right": "Right",
+	&"action_run": "Walk/run (hold)"
 }
 
 var buttons: Dictionary

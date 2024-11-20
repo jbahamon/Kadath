@@ -1,5 +1,6 @@
 extends LocationRoom
 
+
 func on_enter():
 	
 	if not VarsService.get_flag('kadath.entrance.intro'):

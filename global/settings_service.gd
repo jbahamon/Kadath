@@ -3,14 +3,14 @@ extends Node
 const CONFIG_FILE_NAME = "user://settings.cfg"
 
 const INPUT_ACTIONS = [
-	"ui_up",
-	"ui_down",
-	"ui_left",
-	"ui_right",
-	"ui_accept",
-	"ui_cancel",
-	"ui_menu",
-	"action_run"
+	&"ui_up",
+	&"ui_down",
+	&"ui_left",
+	&"ui_right",
+	&"ui_accept",
+	&"ui_cancel",
+	&"ui_menu",
+	&"action_run"
 ]
 
 var text_speed = 1 

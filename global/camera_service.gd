@@ -11,29 +11,29 @@ func exit():
 	self.camera = null
 	self.sub_viewport = null
 
-func update_camera_bounds(origin: Vector2, tilemap_limits: Rect2i, tile_size: Vector2i):
+func update_camera_bounds(origin: Vector2, limits: Rect2i):
 	
 	var screen_width = sub_viewport.size.x
-	var room_width = (tilemap_limits.end.x - tilemap_limits.position.x) * tile_size.x
+	var room_width = limits.end.x - limits.position.x
 	
 	if room_width < screen_width:
-		var mid_point = int(origin.x + (tilemap_limits.position.x + tilemap_limits.end.x) * tile_size.x / 2.0)
+		var mid_point = int(origin.x + (limits.position.x + limits.end.x) / 2.0)
 		self.camera.limit_left = int(mid_point - screen_width/2.0)
 		self.camera.limit_right = int(mid_point + screen_width/2.0)
 	else:
-		self.camera.limit_left = int(origin.x + tilemap_limits.position.x * tile_size.x)
-		self.camera.limit_right = int(origin.x + tilemap_limits.end.x * tile_size.x)
+		self.camera.limit_left = int(origin.x + limits.position.x)
+		self.camera.limit_right = int(origin.x + limits.end.x)
 	
 	var screen_height = sub_viewport.size.y
-	var room_height = (tilemap_limits.end.y - tilemap_limits.position.y) * tile_size.y
+	var room_height = limits.end.y - limits.position.y
 	
 	if room_height < screen_height:
-		var mid_point = origin.y + (tilemap_limits.position.y + tilemap_limits.end.y) * tile_size.y / 2.0
+		var mid_point = origin.y + (limits.position.y + limits.end.y)/ 2.0
 		self.camera.limit_top = roundi(mid_point - screen_height/2.0)
 		camera.limit_bottom = roundi(mid_point + screen_height/2.0)
 	else:
-		camera.limit_top = int(origin.y + tilemap_limits.position.y * tile_size.y)
-		camera.limit_bottom =  int(origin.y + tilemap_limits.end.y * tile_size.y)
+		camera.limit_top = int(origin.y + limits.position.y)
+		camera.limit_bottom =  int(origin.y + limits.end.y)
 
 	camera.align()
 	

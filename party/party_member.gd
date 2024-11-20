@@ -89,7 +89,6 @@ var is_alive: bool :
 	get:
 		return self.battler.is_alive
 
-
 var in_battle_id: String:
 	get:
 		return PARTY_IN_BATTLE_ID[self.id]

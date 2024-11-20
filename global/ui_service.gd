@@ -50,4 +50,3 @@ func __handle_popup(popup_node: Window, pause_tree, ratio=null):
 	
 	if pause_tree:
 		InputService.exit_menu_mode()
-

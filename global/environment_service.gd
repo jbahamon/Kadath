@@ -76,7 +76,7 @@ func update_whereabouts(
 		await self.fade_in()
 	
 	if room_moved:
-		current_room.on_enter()
+		await current_room.on_enter()
 		
 	InputService.set_input_enabled(was_input_enabled)
 	
@@ -108,8 +108,7 @@ func move_to_room(room_id: String) -> bool:
 	
 	CameraService.update_camera_bounds(
 		current_room.position,
-		current_room.get_used_rect(),
-		current_room.tile_set.tile_size
+		current_room.used_rect
 	)
 	
 	return true

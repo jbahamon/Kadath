@@ -15,6 +15,7 @@ dest_files=["res://.godot/imported/Eromantique.ttf-e1d98c9918426610f8d432084464f
 Rendering=null
 antialiasing=1
 generate_mipmaps=false
+disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48

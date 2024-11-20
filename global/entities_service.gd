@@ -48,10 +48,6 @@ func get_room_entity(entity_name: String):
 		
 	var object = room.get_node_or_null("./" + entity_name)
 	
-	if object != null:
-		return object
-		
-	object = self.party.get_node_or_null("./" + entity_name)
 	return object
 
 func get_active_party_members():

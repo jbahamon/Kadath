@@ -26,7 +26,7 @@ func _ready() -> void:
 	InputService.set_input_enabled(true)
 	
 	# Here's a tricky part. We have to move to the first room, which will put the appropriate
-	# nodes in the tree. This has to happen before the player proxy can be bound to the party or
+	# nodes in the tree. This has to ha6ppen before the player proxy can be bound to the party or
 	# whatever node is being controlled; otherwise there won't be a common parent to have a path 
 	# between them.
 	self.move_to_starting_room()
@@ -39,8 +39,8 @@ func move_to_starting_room():
 	else:
 		# Note: move start_game to the above when doing the cutscene intro
 		await EnvironmentService.update_whereabouts(
-			"999_tests", # "000_prologue_kadath", 
-			"battle",
+			"000_prologue_kadath", 
+			"01_entrance",
 			Vector2(0, 0),
 			Vector2.UP,
 			false,

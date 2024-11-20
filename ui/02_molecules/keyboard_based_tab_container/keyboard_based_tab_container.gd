@@ -144,7 +144,7 @@ func reset():
 			return
 	
 func _unhandled_input(event):
-	if event.is_action_pressed("ui_accept"):
+	if event.is_action_pressed(&"ui_accept"):
 		var pressed_tab_button = tabs_button_group.get_pressed_button()
 		if pressed_tab_button.has_focus() and current_content.has_method("on_grab_focus"):
 			overlay.visible = false

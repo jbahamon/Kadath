@@ -36,7 +36,7 @@ var top_position:
 		return self.position + Vector2(0, -self.height)
 
 func _unhandled_input(event) -> void:
-	if event.is_action_pressed("ui_accept"):
+	if event.is_action_pressed(&"ui_accept"):
 		self.raycast.force_raycast_update()
 		if self.raycast.is_colliding() and self.raycast.get_collider().has_method("on_player_interaction"):
 			self.target.play_anim("idle")

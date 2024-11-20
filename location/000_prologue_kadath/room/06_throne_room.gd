@@ -1,5 +1,8 @@
 extends LocationRoom
 
+@onready var floor = $Floor
+@onready var walls = $Walls
+
 var darken_tween = null
 var fade_tween = null
 var spooks_tween = null
@@ -21,11 +24,14 @@ func fade_companion(mode: CutsceneInstruction.ExecutionMode):
 func darken_room(mode: CutsceneInstruction.ExecutionMode):
 	if mode == CutsceneInstruction.ExecutionMode.PLAY:
 		self.darken_tween = get_tree().create_tween()
-		var method = func(color): self.set_layer_modulate(1, color); self.set_layer_modulate(0, color)
+		var method = func(color): 
+			self.walls.modulate = color
+			self.floor.modulate = color
 		self.darken_tween.tween_method(method, Color.WHITE, Color.TRANSPARENT, 5)
 		await self.darken_tween.finished
 	else:
-		self.set_layer_modulate(0, Color.TRANSPARENT)
+			self.walls.modulate = Color.TRANSPARENT
+			self.floor.modulate = Color.TRANSPARENT
 	
 func show_spooks(mode: CutsceneInstruction.ExecutionMode):
 	var spooks = $Spooks
@@ -53,7 +59,8 @@ func skip_call(function_name: String):
 	var tween
 	match function_name:
 		"darken_room":
-			self.set_layer_modulate(0, Color.TRANSPARENT)
+			self.walls.modulate = Color.TRANSPARENT
+			self.floor.modulate = Color.TRANSPARENT
 			tween = darken_tween
 		"fade_companion":
 			$NPCPickman.modulate = Color.TRANSPARENT
@@ -65,4 +72,3 @@ func skip_call(function_name: String):
 	if tween != null:
 		tween.finished.emit()
 		tween.kill()
-

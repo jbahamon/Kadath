@@ -628,6 +628,23 @@ tracks/0/keys = {
 "values": [Vector2i(0, 2), Vector2i(0, 3), Vector2i(0, 0), Vector2i(0, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_r4gmf"]
+resource_name = "use_item"
+length = 1.4
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 2), Vector2i(2, 12), Vector2i(0, 2)]
+}
+
 [sub_resource type="Animation" id="6"]
 resource_name = "walk_east"
 length = 0.9
@@ -698,23 +715,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2i(0, 7), Vector2i(1, 7), Vector2i(2, 7), Vector2i(3, 7), Vector2i(4, 7), Vector2i(5, 7)]
-}
-
-[sub_resource type="Animation" id="Animation_r4gmf"]
-resource_name = "use_item"
-length = 1.4
-step = 0.15
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.75),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 2), Vector2i(2, 12), Vector2i(0, 2)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gdtcw"]
@@ -1112,7 +1112,7 @@ graph_offset = Vector2(0, 183.85)
 [node name="Anim" type="Marker2D"]
 use_parent_material = true
 script = ExtResource("1_mfe0q")
-animation_names = ["idle", "walk", "run", "attack", "jump_back", "hit", "battle_idle/healthy", "battle_idle/tired", "downed", "interact"]
+animation_names = Array[String](["idle", "walk", "run", "attack", "jump_back", "hit", "battle_idle/healthy", "battle_idle/tired", "downed", "interact"])
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

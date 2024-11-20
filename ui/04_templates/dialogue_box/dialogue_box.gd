@@ -31,30 +31,34 @@ func _ready():
 func _unhandled_input(event):
 	match current_state:
 		State.ADVANCING:
-			if event.is_action_pressed("ui_accept") and tween != null:
+			if (event.is_action_pressed(&"ui_accept") or event.is_action_pressed(&"ui_cancel")) and tween != null:
 				tween.set_speed_scale(self.skip_speed_factor)
 				self.get_viewport().set_input_as_handled()
-			elif event.is_action_released("ui_accept") and tween != null:
+			elif (event.is_action_released(&"ui_accept") or event.is_action_released(&"ui_cancel")) and tween != null:
 				tween.set_speed_scale(1.0)
 				self.get_viewport().set_input_as_handled()
 
 		State.WAITING_FOR_INPUT:
-			if event.is_action_pressed("ui_accept"):
-				if self.current_responses.size() > 0:
+			if self.current_responses.size() == 0:
+				if event.is_action_pressed(&"ui_accept") or event.is_action_pressed(&"ui_cancel"):
+					self.show_next_line()
+					self.get_viewport().set_input_as_handled()
+			else:
+				if event.is_action_pressed(&"ui_accept"):
 					self.choose_response()
-				self.show_next_line()
-				self.get_viewport().set_input_as_handled()
-			elif event.is_action_pressed("ui_down") and self.current_responses.size() > 0:
-				self.point_to_response(posmod(self.current_highlighted_response + 1, self.current_responses.size()))
-				self.get_viewport().set_input_as_handled()
-			elif event.is_action_pressed("ui_up") and self.current_responses.size() > 0:
-				self.point_to_response(posmod(self.current_highlighted_response - 1, self.current_responses.size()))
-				self.get_viewport().set_input_as_handled()
-			elif event.is_action_pressed("ui_cancel") and self.current_responses.size() > 0:
-				self.point_to_response(0)
-				self.get_viewport().set_input_as_handled()
-	
-	
+					self.show_next_line()
+					self.get_viewport().set_input_as_handled()
+				if event.is_action_pressed(&"ui_down"):
+					self.point_to_response(posmod(self.current_highlighted_response + 1, self.current_responses.size()))
+					self.get_viewport().set_input_as_handled()
+				elif event.is_action_pressed(&"ui_up"):
+					self.point_to_response(posmod(self.current_highlighted_response - 1, self.current_responses.size()))
+					self.get_viewport().set_input_as_handled()
+				elif event.is_action_pressed(&"ui_cancel"):
+					self.point_to_response(0)
+					self.get_viewport().set_input_as_handled()
+
+				
 
 func queue_dialogue_lines(dialogue_lines: Array):
 	self.lines_queue.append_array(dialogue_lines)

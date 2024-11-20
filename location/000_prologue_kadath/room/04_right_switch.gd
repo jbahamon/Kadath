@@ -1,9 +1,8 @@
 extends LocationRoom
 
-const CIRCUIT_LAYER = 3
-
 const RESPONSE_YES = "yes"
 
+@onready var circuit_layer = $Circuit
 @onready var chalice = $Chalice
 
 func setup():
@@ -68,4 +67,4 @@ func drop_enemies():
 
 func solve_room():
 	$Chalice/Sprite2D.play("full")
-	self.set_layer_enabled(CIRCUIT_LAYER, true)
+	self.circuit_layer.enabled = true

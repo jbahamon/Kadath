@@ -3,28 +3,30 @@
 # ===============
 ~ narration_1
 "Three times Randolph Carter dreamed of the marvellous city, and three times was he snatched away while still he paused on the high terrace above it."
+=> END
+
+~ narration_2
 "He resolved to find the gods on unknown Kadath in the cold waste, wherever that might be, and to win from them the sight and remembrance and shelter of the marvellous sunset city."
 => END
 
 ~ entrance_ghoul1
-Ghoul: Oof! Not the way I had imagined our entrance...
+Ghoul: Ough! Not how I imagine arrival...
 => END
-
 
 ~ entrance_ghoul2
-Ghoul: Ugh... what happened? Where are the others?
-=> END
-
-~ entrance_carter
-Carter: At last, we have arrived. Let us finish this.
+Ghoul: Ugh... What happen? Where others?
 => END
 
 ~ entrance_pickman
-Pickman: Still want to do this? We just lost most of our allies.
+Pickman: Everyone else is gone...
 => END
 
+~ entrance_carter_1
+Carter: At last, we have arrived. Let us finish this.
+Pickman: Still want to do this?
+=> END
 
-~ entrance_carter2
+~ entrance_carter_2
 Carter: I must.
 => END
 
@@ -32,13 +34,30 @@ Carter: I must.
 Move around with [{ui_up}]/[{ui_left}]/[{ui_down}]/[{ui_right}]. You can interact with individuals and objects with [{ui_accept}], and cancel with [{ui_cancel}].
 => END
 
+~ idle_pickman
+Pickman: Go ahead. I'll join you once I've made sure these guys are OK.
+
+~ idle_left_ghoul
+if EntitiesService.get_party().is_unlocked(PartyMember.Id.PICKMAN):
+	Ghoul: We stay here. Be careful.
+else:
+	Ghoul: Everything still spinning... Where nightgaunts?
+=> END
+
+~ idle_right_ghoul
+if EntitiesService.get_party().is_unlocked(PartyMember.Id.PICKMAN):
+	Ghoul: Maybe others come. We wait for them.
+else:
+	Ghoul: One second we riding, next we thrown here. Everyone gone...
+=> END 
+
 ~ pickman_catch_up
-Pickman: Wait a second.
+Pickman: Wait!
 => END
 
 ~ pickman_recruit
-Pickman: You will not retreat, huh...
-Pickman: Very well, I shall see this through too.
+Pickman: Looks like we're not alone.
+Pickman: The others will stay at the entrance, but you'll have a better chance with me on your side.
 => END
 
 ~ pickman_join

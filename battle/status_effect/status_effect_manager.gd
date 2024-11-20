@@ -107,4 +107,3 @@ func on_actor_dead(actor):
 			
 	for effect in to_remove:
 		self._effects.erase(effect)
-

@@ -57,7 +57,6 @@ _data = {
 
 [node name="LocalScene" type="Node2D"]
 texture_filter = 1
-position = Vector2(0, 1)
 script = ExtResource("7")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
@@ -147,6 +146,8 @@ transparent = true
 script = ExtResource("6")
 
 [node name="PauseMenu" parent="MenuLayer/MenuPopup" instance=ExtResource("3")]
+offset_right = 347.0
+offset_bottom = 324.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -155,7 +156,6 @@ visible = false
 current_mode = 0
 
 [node name="NarrationLayer" type="CanvasLayer" parent="."]
-visible = false
 script = ExtResource("16_6ypov")
 
 [node name="VBox" type="VBoxContainer" parent="NarrationLayer"]
@@ -185,6 +185,26 @@ bbcode_enabled = true
 text = "Once there was a little boy"
 fit_content = true
 scroll_active = false
+
+[node name="MarginContainer" type="MarginContainer" parent="NarrationLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NarrationLayer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="Label" type="Label" parent="NarrationLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "[A] Continue"
 
 [node name="CutscenePauseBG" type="ColorRect" parent="NarrationLayer"]
 process_mode = 2

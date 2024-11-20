@@ -1,5 +1,5 @@
 extends LocationRoom
-const CIRCUIT_LAYER = 3
+@onready var circuit_layer = $Circuit
 
 @onready var chalice = $Chalice
 var failures = 0
@@ -52,7 +52,7 @@ func interact_with_chalice(_proxy: PlayerProxy):
 
 func solve_room():
 	$Chalice/AnimatedSprite2D.play("full")
-	self.set_layer_enabled(CIRCUIT_LAYER, true)
+	self.circuit_layer.enabled = true
 	
 	# Pending: call this from cutscene?
 	var acolytes = [

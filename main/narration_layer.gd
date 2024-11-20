@@ -1,20 +1,58 @@
 extends CanvasLayer
 
+signal advance
+
+const FADE_TIME = 1.5
 @export var transition_time: float = 1.0
 
-var current_timer = null
+@onready var label = $VBox/Margin/NarrationText
+@onready var advance_label = $MarginContainer/VBoxContainer/Label
 
-# Called when the node enters the scene tree for the first time.
+var should_skip = false
+var fade_tween = null
+
+func _ready() -> void:
+	self.set_process_unhandled_input(false)
+
 func narrate(text, duration):
+	self.should_skip = false
+	var label = $VBox/Margin/NarrationText
+	advance_label.hide()
+	label.modulate = Color.TRANSPARENT
+	label.text = text
 	self.visible = true
-	$VBox/Margin/NarrationText.text = text
 	
-	self.current_timer = get_tree().create_timer(duration, false)
-	await self.current_timer.timeout
+	self.fade_tween = get_tree().create_tween()
+	self.fade_tween.tween_property(label, "modulate", Color.WHITE, FADE_TIME)
+	await self.fade_tween.finished
 	
-	self.current_timer = null
+	if self.should_skip:
+		self.visible = false
+		return
+	
+	var advance_input = OS.get_keycode_string(InputMap.action_get_events(&"ui_accept")[0].keycode)
+	advance_label.text = "[ %s ] Advance" % advance_input
+	advance_label.show()
+	self.set_process_unhandled_input(true)
+	await self.advance
+	self.set_process_unhandled_input(false)
+	
+	advance_label.hide()
+	self.fade_tween = get_tree().create_tween()
+	self.fade_tween.tween_property(label, "modulate", Color.TRANSPARENT, FADE_TIME)
+	await self.fade_tween.finished
+	
 	self.visible = false
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_accept"):
+		self.advance.emit()
 	
 func skip():
-	if self.current_timer != null:
-		self.current_timer.timeout.emit()
+	self.should_skip = true
+	self.set_process_unhandled_input(false)
+	if self.fade_tween != null:
+			self.fade_tween.finished.emit()
+			self.fade_tween.kill()
+	
+	self.advance.emit()

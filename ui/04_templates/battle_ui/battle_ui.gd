@@ -42,8 +42,8 @@ func prompt(text: String):
 
 func _unhandled_input(event):
 	if waiting_for_prompt and (
-		event.is_action_pressed("ui_accept") or 
-		event.is_action_pressed("ui_cancel")
+		event.is_action_pressed(&"ui_accept") or 
+		event.is_action_pressed(&"ui_cancel")
 	):
 		self.set_info_text(null)
 		emit_signal("prompt_closed")

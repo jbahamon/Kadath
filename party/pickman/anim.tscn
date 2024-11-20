@@ -633,6 +633,23 @@ tracks/0/keys = {
 "values": [Vector2i(0, 2), Vector2i(0, 3), Vector2i(0, 0), Vector2i(0, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_0imr7"]
+resource_name = "use_item"
+length = 1.4
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 2), Vector2i(2, 12), Vector2i(0, 2)]
+}
+
 [sub_resource type="Animation" id="6"]
 resource_name = "walk_east"
 length = 0.9
@@ -703,23 +720,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2i(0, 7), Vector2i(1, 7), Vector2i(2, 7), Vector2i(3, 7), Vector2i(4, 7), Vector2i(5, 7)]
-}
-
-[sub_resource type="Animation" id="Animation_0imr7"]
-resource_name = "use_item"
-length = 1.4
-step = 0.15
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 2), Vector2i(2, 12), Vector2i(0, 2)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gdtcw"]
@@ -1109,11 +1109,11 @@ states/use_item/position = Vector2(492, 400.738)
 states/walk/node = SubResource("18")
 states/walk/position = Vector2(573, 149)
 transitions = ["idle", "walk", SubResource("19"), "walk", "idle", SubResource("20"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_hbppg"), "walk", "run", SubResource("AnimationNodeStateMachineTransition_5f7a7"), "run", "walk", SubResource("AnimationNodeStateMachineTransition_0csje"), "walk", "attack", SubResource("AnimationNodeStateMachineTransition_q212s"), "attack", "jump_back", SubResource("AnimationNodeStateMachineTransition_23l0q"), "idle", "battle_idle", SubResource("AnimationNodeStateMachineTransition_a3364"), "battle_idle", "idle", SubResource("AnimationNodeStateMachineTransition_4qcwb"), "battle_idle", "hit", SubResource("AnimationNodeStateMachineTransition_o5evy"), "hit", "battle_idle", SubResource("AnimationNodeStateMachineTransition_jhx27"), "jump_back", "battle_idle", SubResource("AnimationNodeStateMachineTransition_t7qqw"), "battle_idle", "walk", SubResource("AnimationNodeStateMachineTransition_j8rvy"), "walk", "battle_idle", SubResource("AnimationNodeStateMachineTransition_sg20g"), "downed", "battle_idle", SubResource("AnimationNodeStateMachineTransition_jhwjv"), "battle_idle", "downed", SubResource("AnimationNodeStateMachineTransition_6n4fe"), "interact", "idle", SubResource("AnimationNodeStateMachineTransition_c2dip"), "idle", "interact", SubResource("AnimationNodeStateMachineTransition_q1a1q"), "idle", "spin", SubResource("AnimationNodeStateMachineTransition_i1lol"), "spin", "idle", SubResource("AnimationNodeStateMachineTransition_iqso0"), "battle_idle", "use_item", SubResource("AnimationNodeStateMachineTransition_ogic4"), "use_item", "battle_idle", SubResource("AnimationNodeStateMachineTransition_jm2rr")]
-graph_offset = Vector2(-30, 242.738)
+graph_offset = Vector2(-30, 277.373)
 
 [node name="Anim" type="Marker2D"]
 script = ExtResource("1_ibgvo")
-animation_names = ["idle", "walk", "run", "attack", "jump_back", "hit", "battle_idle/healthy", "battle_idle/tired", "interact", "downed"]
+animation_names = Array[String](["idle", "walk", "run", "attack", "jump_back", "hit", "battle_idle/healthy", "battle_idle/tired", "interact", "downed"])
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

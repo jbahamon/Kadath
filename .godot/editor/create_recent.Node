@@ -1,5 +1,9 @@
-AnimatedSprite2D
+LocationRoom
 Node2D
+Label
+MarginContainer
+VBoxContainer
+AnimatedSprite2D
 Marker2D
 Node
 EnemySpot
@@ -7,8 +11,4 @@ Sprite2D
 CollisionShape2D
 StaticBody2D
 Control
-Label
 PanelContainer
-VBoxContainer
-TextureRect
-GridContainer
