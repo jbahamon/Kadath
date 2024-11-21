@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://bomxx7doloqmu" path="res://party/party_member.tscn" id="1_tjmem"]
 [ext_resource type="Resource" uid="uid://b4nbxe88mk82q" path="res://party/base_growth.tres" id="2_wrv80"]
 [ext_resource type="Texture2D" uid="uid://cahhrhysueqlh" path="res://party/carter/icon.png" id="3_q1d6i"]
-[ext_resource type="Script" path="res://party/alex/skill/crescent_blast.gd" id="4_7csxu"]
 [ext_resource type="PackedScene" uid="uid://t6dg7lnwshho" path="res://party/carter/anim.tscn" id="4_n1l83"]
+[ext_resource type="Script" path="res://party/carter/skill/crescent_blast.gd" id="5_8d58u"]
 [ext_resource type="PackedScene" uid="uid://ttxcbt6u2yh3" path="res://battle/action/util/area_of_effect.tscn" id="5_8ec5k"]
 [ext_resource type="Script" path="res://party/alex/skill/forceful_slash.gd" id="6_82w8g"]
 [ext_resource type="Script" path="res://party/alex/action/vision.gd" id="7_jds85"]
@@ -30,10 +30,12 @@ icon = ExtResource("3_q1d6i")
 anim_path = NodePath("../Anim")
 
 [node name="CrescentBlast" type="Node" parent="Battler/Actions/Skill" index="0"]
-script = ExtResource("4_7csxu")
-power = 5.0
+script = ExtResource("5_8d58u")
+power = 100.0
+aoe_power = 1.0
 display_name = "Crescent Blast"
-description = "Hit enemies near a target with a magic projectile."
+description = "A magical slash that explodes in an area on contact"
+energy_cost = 20
 
 [node name="AreaOfEffect" parent="Battler/Actions/Skill/CrescentBlast" index="0" instance=ExtResource("5_8ec5k")]
 

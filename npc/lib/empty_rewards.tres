@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="BattleRewards" load_steps=2 format=3 uid="uid://dlkfog15bgvgh"]
+
+[ext_resource type="Script" path="res://battle/battle_rewards.gd" id="1_h7pks"]
+
+[resource]
+script = ExtResource("1_h7pks")
+item_amounts = {}
+experience = 0
+money = 0

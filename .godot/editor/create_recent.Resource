@@ -1,3 +1,4 @@
+BattleRewards
 ShaderMaterial
 Hit
 TileSet

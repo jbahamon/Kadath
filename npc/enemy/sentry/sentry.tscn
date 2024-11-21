@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dpc8xvvcbyotf"]
+[gd_scene load_steps=15 format=3 uid="uid://dpc8xvvcbyotf"]
 
 [ext_resource type="PackedScene" uid="uid://co4ecuc835bk6" path="res://npc/enemy/enemy.tscn" id="1_vbu6h"]
 [ext_resource type="Texture2D" uid="uid://56sux2p3oroq" path="res://npc/enemy/sentry/icon.png" id="2_2k4kj"]
@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://rlyl1hog6ic0" path="res://npc/enemy/sentry/stats.tres" id="3_l4u5g"]
 [ext_resource type="Script" path="res://battle/ai/random_ai.gd" id="4_bs2dh"]
 [ext_resource type="Script" path="res://npc/enemy/sentry/attack.gd" id="5_5ijqc"]
+[ext_resource type="Resource" uid="uid://dlkfog15bgvgh" path="res://npc/lib/empty_rewards.tres" id="5_ll8bj"]
 [ext_resource type="PackedScene" uid="uid://cchn13mhn8gxu" path="res://battle/action/util/projectile.tscn" id="7_885q8"]
 [ext_resource type="Texture2D" uid="uid://c1rb64dwco3s6" path="res://npc/enemy/sentry/projectile.png" id="8_csw5i"]
 
@@ -46,6 +47,7 @@ base_display_name = "Sentry"
 
 [node name="Battler" parent="." index="1"]
 stats = ExtResource("3_l4u5g")
+rewards = ExtResource("5_ll8bj")
 
 [node name="Attack" type="Node" parent="Battler/Actions" index="0"]
 script = ExtResource("5_5ijqc")

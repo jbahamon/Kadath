@@ -353,6 +353,7 @@ metadata/_edit_group_ = true
 
 [node name="BumpCollision" parent="NPCPickman" index="0"]
 shape = SubResource("1")
+disabled = true
 
 [node name="CollisionShape2D" parent="NPCPickman/InteractableArea" index="0"]
 disabled = true

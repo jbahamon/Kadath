@@ -1,7 +1,7 @@
 extends PanelContainer
 
 @onready var text_label = $MarginContainer/HBoxContainer/RichTextLabel
-@onready var indicator = $MarginContainer/HBoxContainer/VBoxContainer/TextureRect
+@onready var indicator = $MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer
 func _ready():
 	text_label.visible_ratio = 1
 	set_advance_indicator_visibility(true)

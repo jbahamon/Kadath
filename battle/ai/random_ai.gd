@@ -38,4 +38,3 @@ func get_action_parameter(actor, action: BattleAction, actors: Array, argument_s
 			return targets[0]
 		BattleAction.ActionArgument.ITEM:
 			assert(false) #,"not yet implemented!")
-

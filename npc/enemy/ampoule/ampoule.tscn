@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dunwmva1f22su"]
+[gd_scene load_steps=17 format=3 uid="uid://dunwmva1f22su"]
 
 [ext_resource type="PackedScene" uid="uid://c17hneqpuil0l" path="res://npc/lib/base_npc.tscn" id="1_n3nn8"]
 [ext_resource type="Script" path="res://npc/enemy/enemy.gd" id="2_y1sju"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d0rd160lh4msk" path="res://npc/enemy/ampoule/anim.tscn" id="3_rqshg"]
 [ext_resource type="Texture2D" uid="uid://bwa4s06ml7ii5" path="res://npc/enemy/ampoule/icon.png" id="3_sr5ss"]
 [ext_resource type="Script" path="res://battle/ai/random_ai.gd" id="5_4cvli"]
+[ext_resource type="Resource" uid="uid://dlkfog15bgvgh" path="res://npc/lib/empty_rewards.tres" id="6_51ses"]
 [ext_resource type="Script" path="res://npc/enemy/ampoule/attack.gd" id="6_xyght"]
 [ext_resource type="Material" uid="uid://c48122ffiwrbb" path="res://utils/material/uniform_add.tres" id="7_8q5jg"]
 [ext_resource type="Script" path="res://npc/enemy/ampoule/drain.gd" id="7_oec2r"]
@@ -67,6 +68,7 @@ base_display_name = "Ampoule"
 
 [node name="Battler" parent="." index="1" instance=ExtResource("3_r5uaa")]
 anim_path = NodePath("..")
+rewards = ExtResource("6_51ses")
 toast_offset = Vector2(0, -35)
 
 [node name="Drain" type="Node" parent="Battler/Actions" index="0"]
@@ -79,9 +81,6 @@ hit = SubResource("Resource_kodc5")
 
 [node name="Toast" parent="Battler" index="2"]
 position = Vector2(0, -45)
-
-[node name="Label" parent="Battler/Toast" index="0"]
-visible = true
 
 [node name="AI" parent="Battler" index="3"]
 script = ExtResource("5_4cvli")

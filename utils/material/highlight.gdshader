@@ -7,5 +7,5 @@ uniform vec4 base_add : source_color = vec4(0, 0, 0, 0);
 
 
 void fragment(){
-  COLOR = texture(TEXTURE, UV) *1.25 + base_add + add * mul * vec4(vec3(sin(2.0 * frequency * float(TIME * PI))), 0) ;
+  COLOR = texture(TEXTURE, UV) + base_add + add * mul * vec4(vec3(sin(2.0 * frequency * float(TIME * PI))), 0) ;
 }

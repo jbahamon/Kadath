@@ -3,5 +3,5 @@
 [ext_resource type="Shader" path="res://utils/material/uniform_add.gdshader" id="1_bxp34"]
 
 [resource]
-render_priority = 0
 shader = ExtResource("1_bxp34")
+shader_parameter/add = Color(1, 1, 1, 0)

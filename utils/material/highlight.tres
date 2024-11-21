@@ -7,4 +7,4 @@ shader = ExtResource("1_tep3b")
 shader_parameter/add = Color(1, 1, 1, 0)
 shader_parameter/mul = 0.25
 shader_parameter/frequency = 1.0
-shader_parameter/base_add = Color(0, 0, 0, 0)
+shader_parameter/base_add = Color(0.25, 0.25, 0, 0)

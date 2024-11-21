@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bngh72w54kdq0"]
+[gd_scene load_steps=11 format=3 uid="uid://bngh72w54kdq0"]
 
 [ext_resource type="PackedScene" uid="uid://c17hneqpuil0l" path="res://npc/lib/base_npc.tscn" id="1_qtfsx"]
 [ext_resource type="Script" path="res://npc/enemy/enemy.gd" id="2_x8f4g"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c1qvuen3txcsn" path="res://npc/enemy/thymiaterion/anim.tscn" id="3_j4650"]
 [ext_resource type="PackedScene" uid="uid://dtaxhpmmjspek" path="res://battle/battler/battler.tscn" id="3_rrahi"]
 [ext_resource type="Script" path="res://battle/ai/random_ai.gd" id="6_hhc2v"]
+[ext_resource type="Resource" uid="uid://dlkfog15bgvgh" path="res://npc/lib/empty_rewards.tres" id="6_lqr72"]
 [ext_resource type="Script" path="res://battle/action/base_attack.gd" id="6_mwfm3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_phgn6"]
@@ -27,6 +28,7 @@ base_display_name = "Thymiaterion"
 
 [node name="Battler" parent="." index="1" instance=ExtResource("3_rrahi")]
 anim_path = NodePath("..")
+rewards = ExtResource("6_lqr72")
 
 [node name="Attack" type="Node" parent="Battler/Actions" index="0"]
 script = ExtResource("6_mwfm3")

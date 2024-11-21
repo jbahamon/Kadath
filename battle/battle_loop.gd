@@ -38,10 +38,16 @@ func do_battle():
 		self.turn_start.emit(turn)
 		await turn.play()
 		
+		var dead_actors = actors.filter(
+			func(actor): 
+				return (not actor.battler.is_alive and 
+						not (actor is PartyMember and actor.battler.status_effects.has("downed")))
+		)
+		
+		for actor in dead_actors:
+			await self.on_actor_death(actor)
+		
 		for actor in actors:
-			if not actor.battler.is_alive and not (actor is PartyMember and actor.battler.status_effects.has("downed")):
-				await self.on_actor_death(actor)
-				
 			if actor.battler.pending_reaction != null and actor.battler.is_alive:
 				await actor.battler.pending_reaction.execute()
 				actor.battler.pending_reaction = null

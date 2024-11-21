@@ -11,7 +11,7 @@ var instance_id = ""
 
 var in_battle_id: String:
 	get:
-		return "%s_%s" % [self.display_name, instance_id]
+		return "%s_%s" % [self.enemy_id, instance_id]
 
 var max_health:
 	get:

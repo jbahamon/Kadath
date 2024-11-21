@@ -23,7 +23,8 @@ func execute(actor):
 			var hit = Hit.new()
 			hit.type = Hit.Element.METAL
 			hit.base_damage = (actor.battler.stats.level + actor.battler.stats.magic_attack) * self.aoe_power
-			return func (): await aoe_target.take_hit(hit)
+			return func (): 
+				await aoe_target.take_hit(hit)
 		
 	)
 	hits.append_array(additional_hits)

@@ -70,7 +70,7 @@ func update_whereabouts(
 	if room_moved:
 		EntitiesService.on_enter_room()
 		
-	self.push_proxy(target_position, target_orientation, end_proxy_state)
+	await self.push_proxy(target_position, target_orientation, end_proxy_state)
 	
 	if fade:
 		await self.fade_in()
@@ -137,6 +137,7 @@ func push_proxy(
 	elif proxy.current_target_type == PlayerProxy.TargetType.PARTY:
 		var party = EntitiesService.get_party()
 		party.on_proxy_enter(proxy)
+		proxy.set_target(party)
 	
 	await get_tree().process_frame
 	proxy.set_mode(end_proxy_state if end_proxy_state != null else self.prev_proxy_mode)

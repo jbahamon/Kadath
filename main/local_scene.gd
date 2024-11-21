@@ -29,7 +29,7 @@ func _ready() -> void:
 	# nodes in the tree. This has to ha6ppen before the player proxy can be bound to the party or
 	# whatever node is being controlled; otherwise there won't be a common parent to have a path 
 	# between them.
-	self.move_to_starting_room()
+	await self.move_to_starting_room()
 	EntitiesService.bind_proxy()
 	
 func move_to_starting_room():
@@ -40,12 +40,13 @@ func move_to_starting_room():
 		# Note: move start_game to the above when doing the cutscene intro
 		await EnvironmentService.update_whereabouts(
 			"000_prologue_kadath", 
-			"01_entrance",
-			Vector2(0, 0),
+			"02_hub",
+			Vector2(0, 320),
 			Vector2.UP,
 			false,
 			PlayerProxy.ProxyMode.GAMEPLAY
 		)
+		#EntitiesService.get_proxy().set_mode(PlayerProxy.ProxyMode.GAMEPLAY)
 	
 func exit():
 	BattleService.exit()

@@ -1,10 +1,11 @@
-[gd_scene load_steps=26 format=3 uid="uid://cebhopaolaguc"]
+[gd_scene load_steps=27 format=3 uid="uid://cebhopaolaguc"]
 
 [ext_resource type="PackedScene" uid="uid://c17hneqpuil0l" path="res://npc/lib/base_npc.tscn" id="1_nqevg"]
 [ext_resource type="Script" path="res://npc/enemy/enemy.gd" id="2_mtvfo"]
 [ext_resource type="Texture2D" uid="uid://dc35jxbalkxg4" path="res://npc/enemy/acolyte/icon.png" id="3_grxgs"]
 [ext_resource type="PackedScene" uid="uid://dtaxhpmmjspek" path="res://battle/battler/battler.tscn" id="3_hxf52"]
 [ext_resource type="PackedScene" uid="uid://ckj6m5dbs657x" path="res://npc/enemy/acolyte/anim.tscn" id="4_dgo87"]
+[ext_resource type="Resource" uid="uid://dlkfog15bgvgh" path="res://npc/lib/empty_rewards.tres" id="6_vex3f"]
 [ext_resource type="Script" path="res://npc/enemy/acolyte/attack.gd" id="6_wx6wh"]
 [ext_resource type="Script" path="res://npc/enemy/acolyte/consume.gd" id="7_2l1cy"]
 [ext_resource type="Material" uid="uid://c48122ffiwrbb" path="res://utils/material/uniform_add.tres" id="7_kw41m"]
@@ -132,6 +133,7 @@ use_parent_material = true
 
 [node name="Battler" parent="." index="1" instance=ExtResource("3_hxf52")]
 anim_path = NodePath("..")
+rewards = ExtResource("6_vex3f")
 
 [node name="Consume" type="Node" parent="Battler/Actions" index="0"]
 script = ExtResource("7_2l1cy")
