@@ -71,7 +71,6 @@ var display_name: String:
 	set(_value):
 		pass
 
-
 func _ready():
 	assert(self.anim_path)
 	self.anim = get_node(self.anim_path)
@@ -191,9 +190,9 @@ func get_action_options() -> Array:
 		
 		# options.push_front(BattleService.common_action_options["lose"])
 		# options.push_front(BattleService.common_action_options["win"])
-		options.push_front(BattleService.common_action_options["defend"])
 		options.push_front(BattleService.common_action_options["attack"])
 		options.push_back(BattleService.common_action_options["item"])
+		options.push_back(BattleService.common_action_options["defend"])
 		
 		
 		if BattleService.current_battle_parameters.get("escapable", true):

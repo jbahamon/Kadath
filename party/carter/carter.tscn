@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://76qafquuir4k"]
+[gd_scene load_steps=12 format=3 uid="uid://76qafquuir4k"]
 
 [ext_resource type="PackedScene" uid="uid://bomxx7doloqmu" path="res://party/party_member.tscn" id="1_tjmem"]
 [ext_resource type="Resource" uid="uid://b4nbxe88mk82q" path="res://party/base_growth.tres" id="2_wrv80"]
 [ext_resource type="Texture2D" uid="uid://cahhrhysueqlh" path="res://party/carter/icon.png" id="3_q1d6i"]
 [ext_resource type="PackedScene" uid="uid://t6dg7lnwshho" path="res://party/carter/anim.tscn" id="4_n1l83"]
+[ext_resource type="Texture2D" uid="uid://dkgwdhrjgti27" path="res://party/carter/menu_sprite.png" id="4_y6us3"]
 [ext_resource type="Script" path="res://party/carter/skill/crescent_blast.gd" id="5_8d58u"]
 [ext_resource type="PackedScene" uid="uid://ttxcbt6u2yh3" path="res://battle/action/util/area_of_effect.tscn" id="5_8ec5k"]
 [ext_resource type="Script" path="res://party/alex/skill/forceful_slash.gd" id="6_82w8g"]
@@ -23,18 +24,24 @@ growth = ExtResource("2_wrv80")
 unlocked = true
 experience = 1
 icon = ExtResource("3_q1d6i")
+menu_texture = ExtResource("4_y6us3")
 
 [node name="Anim" parent="." index="0" instance=ExtResource("4_n1l83")]
 
 [node name="Battler" parent="." index="1"]
 anim_path = NodePath("../Anim")
 
+[node name="Vision" type="Node" parent="Battler/Actions" index="0" groups=["save"]]
+script = ExtResource("7_jds85")
+display_name = "Analyze"
+description = "Uncover enemy stats and weaknesses"
+
 [node name="CrescentBlast" type="Node" parent="Battler/Actions/Skill" index="0"]
 script = ExtResource("5_8d58u")
 power = 100.0
 aoe_power = 1.0
 display_name = "Crescent Blast"
-description = "A magical slash that explodes in an area on contact"
+description = "A magical slash that explodes in an area."
 energy_cost = 20
 
 [node name="AreaOfEffect" parent="Battler/Actions/Skill/CrescentBlast" index="0" instance=ExtResource("5_8ec5k")]
@@ -46,11 +53,6 @@ shape = SubResource("CircleShape2D_8u0il")
 script = ExtResource("6_82w8g")
 display_name = "Forceful Slash"
 description = "Attack a single enemy with a vicious slash."
-
-[node name="Vision" type="Node" parent="Battler/Actions" index="1" groups=["save"]]
-script = ExtResource("7_jds85")
-display_name = "Analyze"
-description = "Uncover enemy stats and weaknesses"
 
 [node name="CollisionShape2D" parent="Battler/Hitbox" index="0"]
 position = Vector2(0, -10)

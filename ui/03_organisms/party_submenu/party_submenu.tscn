@@ -60,7 +60,7 @@ args_for_null_element = {
 "display_name": "None"
 }
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
 layout_mode = 2
 
 [node name="InfoPanel" type="PanelContainer" parent="VBoxContainer"]

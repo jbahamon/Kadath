@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=17 format=3 uid="uid://cgihxoevv7qgc"]
+[gd_resource type="Theme" load_steps=19 format=3 uid="uid://cgihxoevv7qgc"]
 
 [ext_resource type="StyleBox" path="res://ui/01_atoms/tab/hover.tres" id="1"]
 [ext_resource type="StyleBox" path="res://ui/01_atoms/separator/hseparator.tres" id="2"]
@@ -17,6 +17,10 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2ojet"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2pq4c"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_30gon"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vxdk2"]
 
 [sub_resource type="FontFile" id="1"]
 fallbacks = Array[Font]([ExtResource("5")])
@@ -134,6 +138,8 @@ LineEdit/styles/normal = ExtResource("9")
 Panel/styles/panel = ExtResource("30")
 PanelContainer/styles/panel = ExtResource("30")
 PopupPanel/styles/panel = SubResource("StyleBoxEmpty_2pq4c")
+ProgressBar/styles/background = SubResource("StyleBoxEmpty_30gon")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_vxdk2")
 RichTextLabel/colors/font_outline_color = Color(0, 0, 0, 1)
 RichTextLabel/constants/outline_size = 10
 TabBar/colors/font_color_bg = Color(0.69, 0.69, 0.69, 1)

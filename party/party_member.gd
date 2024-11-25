@@ -38,6 +38,7 @@ const PARTY_IN_BATTLE_ID = {
 @export var unlocked = false
 @export var experience: int : set = _set_experience
 @export var icon: Texture2D
+@export var menu_texture: Texture2D
 
 var equipped_weapon: Weapon : set = set_weapon
 var equipped_helmet: Helmet : set = set_helmet
@@ -85,7 +86,7 @@ var elemental_armor: float:
 	get:
 		return 0.0
 
-var is_alive: bool : 
+var is_alive: bool :
 	get:
 		return self.battler.is_alive
 

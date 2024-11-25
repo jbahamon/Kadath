@@ -31,24 +31,25 @@ Carter: I must.
 => END
 
 ~ starting_instructions
-Move around with [{ui_up}]/[{ui_left}]/[{ui_down}]/[{ui_right}]. You can interact with individuals and objects with [{ui_accept}], and cancel with [{ui_cancel}].
+Move around with [ {ui_up} ]/[ {ui_left} ]/[ {ui_down} ]/[ {ui_right} ]. You can interact with individuals and objects with [ {ui_accept} ], and cancel with [ {ui_cancel} ]. Run with [ {action_run} ]
 => END
 
 ~ idle_pickman
-Pickman: Go ahead. I'll join you once I've made sure these guys are OK.
+Pickman: Go ahead. I'll join you once I've made sure these guys are OK. If you're in a hurry, use [ {action_run} ] to move faster.
+=> END 
 
 ~ idle_left_ghoul
 if EntitiesService.get_party().is_unlocked(PartyMember.Id.PICKMAN):
-	Ghoul: We stay here. Be careful.
+	Ghoul: We stay here. If you disoriented, open menu with [ {ui_menu} ] and check or change controls.
 else:
-	Ghoul: Everything still spinning... Where nightgaunts?
+	Ghoul: Everything still spinning... If you disoriented, open menu with [ {ui_menu} ] and check or change controls.
 => END
 
 ~ idle_right_ghoul
 if EntitiesService.get_party().is_unlocked(PartyMember.Id.PICKMAN):
-	Ghoul: Maybe others come. We wait for them.
+	Ghoul: Maybe others come. We wait for them. Be careful... Remember you can open menu with [ {ui_menu} ] and use items for heal.
 else:
-	Ghoul: One second we riding, next we thrown here. Everyone gone...
+	Ghoul: One second we riding, next we thrown here. If you hurt, you can open menu with [ {ui_menu} ] and use items for heal.
 => END 
 
 ~ pickman_catch_up

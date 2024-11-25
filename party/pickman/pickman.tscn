@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dehii02b2xc8o"]
+[gd_scene load_steps=11 format=3 uid="uid://dehii02b2xc8o"]
 
 [ext_resource type="PackedScene" uid="uid://bomxx7doloqmu" path="res://party/party_member.tscn" id="1_puo4q"]
 [ext_resource type="Resource" uid="uid://efimamnfjman" path="res://party/pickman/growth.tres" id="2_attsm"]
 [ext_resource type="Texture2D" uid="uid://df0sy0xr60rtd" path="res://party/pickman/icon.png" id="3_psao1"]
 [ext_resource type="Script" path="res://party/pickman/skill/taxing_touch.gd" id="4_col3m"]
 [ext_resource type="PackedScene" uid="uid://cv5wwoeq1pjb7" path="res://party/pickman/anim.tscn" id="4_pfdmg"]
+[ext_resource type="Texture2D" uid="uid://tfj36aej8dy4" path="res://party/pickman/menu_sprite_alt.png" id="4_svurb"]
 [ext_resource type="Script" path="res://party/pickman/skill/slab_slam.gd" id="5_5kqwp"]
 [ext_resource type="Script" path="res://party/pickman/action/feast.gd" id="5_beduq"]
 [ext_resource type="PackedScene" uid="uid://dwx2sfgjttusb" path="res://battle/action/util/line_of_effect.tscn" id="6_8tf6q"]
@@ -19,6 +20,7 @@ display_name = "Pickman"
 growth = ExtResource("2_attsm")
 experience = 2
 icon = ExtResource("3_psao1")
+menu_texture = ExtResource("4_svurb")
 
 [node name="Anim" parent="." index="0" instance=ExtResource("4_pfdmg")]
 use_parent_material = true
@@ -26,6 +28,11 @@ animation_names = Array[String](["idle", "walk", "run", "attack", "jump_back", "
 
 [node name="Battler" parent="." index="1"]
 anim_path = NodePath("../Anim")
+
+[node name="Feast" type="Node" parent="Battler/Actions" index="0"]
+script = ExtResource("5_beduq")
+display_name = "Feast"
+description = "Feed on an enemy to do minor damage and recover HP and SP."
 
 [node name="TaxingTouch" type="Node" parent="Battler/Actions/Skill" index="0"]
 script = ExtResource("4_col3m")
@@ -42,11 +49,6 @@ description = "Throw your tombstone at a target, hitting enemies along the way."
 energy_cost = 10
 
 [node name="LineOfEffect" parent="Battler/Actions/Skill/SlabSlam" index="0" instance=ExtResource("6_8tf6q")]
-
-[node name="Feast" type="Node" parent="Battler/Actions" index="1"]
-script = ExtResource("5_beduq")
-display_name = "Feast"
-description = "Feed on an enemy to do minor damage and recover HP and SP."
 
 [node name="CollisionShape2D" parent="Battler/Hitbox" index="0"]
 position = Vector2(0, -13)

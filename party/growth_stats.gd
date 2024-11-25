@@ -33,10 +33,17 @@ func get_level(experience: int) -> int:
 	var max_level: int = len(level_lookup)
 	assert(max_level > 0)
 	var level: int = 0
-	while level + 1 < max_level && experience > level_lookup[level + 1]:
+	while (level + 1) < max_level && experience > level_lookup[level + 1]:
 		level += 1
 	return level
 
+func get_experience_for_level_up(level, experience) -> int:
+	var max_level: int = len(level_lookup)
+	assert(max_level > 0)
+	if level >= max_level:
+		return 0
+	else:
+		return level_lookup[level + 1] - experience
 
 func _get_interpolated_level(value: int = 0) -> float:
 	# Calculate level, which updates all stats

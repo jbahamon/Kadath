@@ -18,3 +18,4 @@ experience = 100
 
 [node name="Pickman" parent="." instance=ExtResource("3_sov78")]
 visible = false
+unlocked = true

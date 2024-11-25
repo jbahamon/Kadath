@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://caki3n35ds5sk"]
+[gd_scene load_steps=8 format=3 uid="uid://caki3n35ds5sk"]
 
 [ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="1"]
 [ext_resource type="Script" path="res://ui/02_molecules/party_member_stats/party_member_stats.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://j8a0ncohd3ms" path="res://ui/01_atoms/assets/icons/By John Ivess/small-icon-accessory.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://dkgwdhrjgti27" path="res://party/carter/menu_sprite.png" id="3_enf6o"]
 [ext_resource type="Texture2D" uid="uid://x36nklmtfcye" path="res://ui/01_atoms/assets/icons/By John Ivess/small-icon-helmet.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://c1rsm0d2w3045" path="res://ui/01_atoms/assets/icons/By John Ivess/small-icon-armor.png" id="5"]
 [ext_resource type="Texture2D" uid="uid://c0df7sioi4vge" path="res://ui/01_atoms/assets/icons/By John Ivess/small-icon-sword.png" id="6"]
@@ -17,37 +18,99 @@ offset_left = -160.0
 offset_top = -120.0
 offset_right = 160.0
 offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("1")
 script = ExtResource("2")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="Filler1" type="Control" parent="HBoxContainer"]
+[node name="SummaryContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Panel" type="VBoxContainer" parent="HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 4.0
+size_flags_vertical = 0
+theme_override_constants/separation = 10
 alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Panel"]
+[node name="LeftFiller" type="Control" parent="VBoxContainer/SummaryContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Sprite" type="TextureRect" parent="VBoxContainer/SummaryContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_enf6o")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/SummaryContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Level" type="Label" parent="VBoxContainer/SummaryContainer/VBoxContainer"]
+layout_mode = 2
+text = "Lv. 20"
+
+[node name="NextLevel" type="Label" parent="VBoxContainer/SummaryContainer/VBoxContainer"]
+layout_mode = 2
+text = "Next level: 2000 XP"
+
+[node name="RightFiller" type="Control" parent="VBoxContainer/SummaryContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 
-[node name="Equipment" type="GridContainer" parent="HBoxContainer/Panel/MarginContainer"]
+[node name="SpecialCommandLabel" type="Label" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
-columns = 3
+size_flags_horizontal = 3
+text = "Special Command: Analyze"
 
-[node name="WeaponIcon" type="TextureRect" parent="HBoxContainer/Panel/MarginContainer/Equipment"]
+[node name="CommandDescription" type="Label" parent="VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
-size_flags_horizontal = 5
+text = "Obtain information about the target, revealing their health, vulnerabilities, behavior and other information."
+autowrap_mode = 3
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Equipment"
+
+[node name="EquipmentContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="LeftFiller" type="Control" parent="VBoxContainer/EquipmentContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Equipment" type="GridContainer" parent="VBoxContainer/EquipmentContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 4.0
+columns = 4
+
+[node name="WeaponIcon" type="TextureRect" parent="VBoxContainer/EquipmentContainer/Equipment"]
+layout_mode = 2
+size_flags_horizontal = 0
 size_flags_vertical = 4
 texture = ExtResource("6")
 
-[node name="WeaponName" type="Button" parent="HBoxContainer/Panel/MarginContainer/Equipment"]
+[node name="WeaponLabel" type="Label" parent="VBoxContainer/EquipmentContainer/Equipment"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Weapon"
+vertical_alignment = 1
+
+[node name="WeaponName" type="Button" parent="VBoxContainer/EquipmentContainer/Equipment"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -62,19 +125,26 @@ toggle_mode = true
 action_mode = 0
 text = "Wooden Stick"
 
-[node name="WeaponStats" type="Label" parent="HBoxContainer/Panel/MarginContainer/Equipment"]
+[node name="WeaponStats" type="Label" parent="VBoxContainer/EquipmentContainer/Equipment"]
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 text = "0"
+vertical_alignment = 1
 
-[node name="HelmetIcon" type="TextureRect" parent="HBoxContainer/Panel/MarginContainer/Equipment"]
+[node name="HelmetIcon" type="TextureRect" parent="VBoxContainer/EquipmentContainer/Equipment"]
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 4
 texture = ExtResource("4")
 
-[node name="HelmetName" type="Button" parent="HBoxContainer/Panel/MarginContainer/Equipment"]
+[node name="HelmetLabel" type="Label" parent="VBoxContainer/EquipmentContainer/Equipment"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Helmet"
+vertical_alignment = 1
+
+[node name="HelmetName" type="Button" parent="VBoxContainer/EquipmentContainer/Equipment"]
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 7
@@ -89,19 +159,26 @@ toggle_mode = true
 action_mode = 0
 text = "--"
 
-[node name="HelmetStats" type="Label" parent="HBoxContainer/Panel/MarginContainer/Equipment"]
+[node name="HelmetStats" type="Label" parent="VBoxContainer/EquipmentContainer/Equipment"]
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 text = "0"
+vertical_alignment = 1
 
-[node name="ArmorIcon" type="TextureRect" parent="HBoxContainer/Panel/MarginContainer/Equipment"]
+[node name="ArmorIcon" type="TextureRect" parent="VBoxContainer/EquipmentContainer/Equipment"]
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 4
 texture = ExtResource("5")
 
-[node name="ArmorName" type="Button" parent="HBoxContainer/Panel/MarginContainer/Equipment"]
+[node name="ArmorLabel" type="Label" parent="VBoxContainer/EquipmentContainer/Equipment"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Armor"
+vertical_alignment = 1
+
+[node name="ArmorName" type="Button" parent="VBoxContainer/EquipmentContainer/Equipment"]
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
@@ -116,19 +193,26 @@ toggle_mode = true
 action_mode = 0
 text = "Leather Armor"
 
-[node name="ArmorStats" type="Label" parent="HBoxContainer/Panel/MarginContainer/Equipment"]
+[node name="ArmorStats" type="Label" parent="VBoxContainer/EquipmentContainer/Equipment"]
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 text = "15"
+vertical_alignment = 1
 
-[node name="AccessoryIcon" type="TextureRect" parent="HBoxContainer/Panel/MarginContainer/Equipment"]
+[node name="AccessoryIcon" type="TextureRect" parent="VBoxContainer/EquipmentContainer/Equipment"]
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 4
 texture = ExtResource("3")
 
-[node name="AccessoryName" type="Button" parent="HBoxContainer/Panel/MarginContainer/Equipment"]
+[node name="AccessoryLabel" type="Label" parent="VBoxContainer/EquipmentContainer/Equipment"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Accessory"
+vertical_alignment = 1
+
+[node name="AccessoryName" type="Button" parent="VBoxContainer/EquipmentContainer/Equipment"]
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
@@ -142,80 +226,122 @@ toggle_mode = true
 action_mode = 0
 text = "--"
 
-[node name="Control" type="Control" parent="HBoxContainer/Panel/MarginContainer/Equipment"]
+[node name="Control" type="Control" parent="VBoxContainer/EquipmentContainer/Equipment"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Stats" type="GridContainer" parent="HBoxContainer/Panel"]
+[node name="RightFiller" type="Control" parent="VBoxContainer/EquipmentContainer"]
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_horizontal = 3
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Stats"
+
+[node name="StatsContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="LeftFiller" type="Control" parent="VBoxContainer/StatsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Stats" type="GridContainer" parent="VBoxContainer/StatsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
 columns = 4
 
-[node name="AttackLabel" type="Label" parent="HBoxContainer/Panel/Stats"]
+[node name="HPLabel" type="Label" parent="VBoxContainer/StatsContainer/Stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Max HP
+"
+
+[node name="HPValue" type="Label" parent="VBoxContainer/StatsContainer/Stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "10"
+
+[node name="EPLabel" type="Label" parent="VBoxContainer/StatsContainer/Stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Max SP"
+
+[node name="EPValue" type="Label" parent="VBoxContainer/StatsContainer/Stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1"
+
+[node name="AttackLabel" type="Label" parent="VBoxContainer/StatsContainer/Stats"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Attack"
 
-[node name="AttackValue" type="Label" parent="HBoxContainer/Panel/Stats"]
+[node name="AttackValue" type="Label" parent="VBoxContainer/StatsContainer/Stats"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "10"
 
-[node name="MagicAttackLabel" type="Label" parent="HBoxContainer/Panel/Stats"]
+[node name="MagicAttackLabel" type="Label" parent="VBoxContainer/StatsContainer/Stats"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Magic Attack"
 
-[node name="MagicAttackValue" type="Label" parent="HBoxContainer/Panel/Stats"]
+[node name="MagicAttackValue" type="Label" parent="VBoxContainer/StatsContainer/Stats"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "10"
 
-[node name="DefenseLabel" type="Label" parent="HBoxContainer/Panel/Stats"]
+[node name="DefenseLabel" type="Label" parent="VBoxContainer/StatsContainer/Stats"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Defense"
 
-[node name="DefenseValue" type="Label" parent="HBoxContainer/Panel/Stats"]
+[node name="DefenseValue" type="Label" parent="VBoxContainer/StatsContainer/Stats"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "10"
 
-[node name="MagicDefenseLabel" type="Label" parent="HBoxContainer/Panel/Stats"]
+[node name="MagicDefenseLabel" type="Label" parent="VBoxContainer/StatsContainer/Stats"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Magic Defense"
 
-[node name="MagicDefenseValue" type="Label" parent="HBoxContainer/Panel/Stats"]
+[node name="MagicDefenseValue" type="Label" parent="VBoxContainer/StatsContainer/Stats"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "10"
 
-[node name="SpeedLabel" type="Label" parent="HBoxContainer/Panel/Stats"]
+[node name="SpeedLabel" type="Label" parent="VBoxContainer/StatsContainer/Stats"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Speed"
 
-[node name="SpeedValue" type="Label" parent="HBoxContainer/Panel/Stats"]
+[node name="SpeedValue" type="Label" parent="VBoxContainer/StatsContainer/Stats"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "10"
 
-[node name="LuckLabel" type="Label" parent="HBoxContainer/Panel/Stats"]
+[node name="LuckLabel" type="Label" parent="VBoxContainer/StatsContainer/Stats"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Luck"
 
-[node name="LuckValue" type="Label" parent="HBoxContainer/Panel/Stats"]
+[node name="LuckValue" type="Label" parent="VBoxContainer/StatsContainer/Stats"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "10"
 
-[node name="Filler2" type="Control" parent="HBoxContainer"]
+[node name="RightFiller" type="Control" parent="VBoxContainer/StatsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[connection signal="pressed" from="HBoxContainer/Panel/MarginContainer/Equipment/WeaponName" to="." method="on_weapon_clicked"]
-[connection signal="pressed" from="HBoxContainer/Panel/MarginContainer/Equipment/HelmetName" to="." method="on_helmet_clicked"]
-[connection signal="pressed" from="HBoxContainer/Panel/MarginContainer/Equipment/ArmorName" to="." method="on_armor_clicked"]
-[connection signal="pressed" from="HBoxContainer/Panel/MarginContainer/Equipment/AccessoryName" to="." method="on_accessory_clicked"]
+[connection signal="pressed" from="VBoxContainer/EquipmentContainer/Equipment/WeaponName" to="." method="on_weapon_clicked"]
+[connection signal="pressed" from="VBoxContainer/EquipmentContainer/Equipment/HelmetName" to="." method="on_helmet_clicked"]
+[connection signal="pressed" from="VBoxContainer/EquipmentContainer/Equipment/ArmorName" to="." method="on_armor_clicked"]
+[connection signal="pressed" from="VBoxContainer/EquipmentContainer/Equipment/AccessoryName" to="." method="on_accessory_clicked"]

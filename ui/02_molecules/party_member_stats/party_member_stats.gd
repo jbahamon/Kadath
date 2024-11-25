@@ -3,20 +3,26 @@ extends PanelContainer
 signal item_requested(cls, party_member)
 signal focus_released
 
-@onready var weapon_name: Button = $HBoxContainer/Panel/MarginContainer/Equipment/WeaponName
-@onready var weapon_stats: Label = $HBoxContainer/Panel/MarginContainer/Equipment/WeaponStats
-@onready var helmet_name: Button = $HBoxContainer/Panel/MarginContainer/Equipment/HelmetName
-@onready var helmet_stats: Label = $HBoxContainer/Panel/MarginContainer/Equipment/HelmetStats
-@onready var armor_name: Button = $HBoxContainer/Panel/MarginContainer/Equipment/ArmorName
-@onready var armor_stats: Label = $HBoxContainer/Panel/MarginContainer/Equipment/ArmorStats
-@onready var accessory_name: Button = $HBoxContainer/Panel/MarginContainer/Equipment/AccessoryName
+@onready var sprite: TextureRect = $VBoxContainer/SummaryContainer/Sprite
+@onready var level: Label = $VBoxContainer/SummaryContainer/VBoxContainer/Level
+@onready var next_level: Label = $VBoxContainer/SummaryContainer/VBoxContainer/NextLevel
 
-@onready var attack_value: Label = $HBoxContainer/Panel/Stats/AttackValue
-@onready var defense_value: Label = $HBoxContainer/Panel/Stats/DefenseValue
-@onready var magic_attack_value: Label = $HBoxContainer/Panel/Stats/MagicAttackValue
-@onready var magic_defense_value: Label = $HBoxContainer/Panel/Stats/MagicDefenseValue
-@onready var speed_value: Label = $HBoxContainer/Panel/Stats/SpeedValue
-@onready var luck_value: Label = $HBoxContainer/Panel/Stats/LuckValue
+@onready var weapon_name: Button = $VBoxContainer/EquipmentContainer/Equipment/WeaponName
+@onready var weapon_stats: Label = $VBoxContainer/EquipmentContainer/Equipment/WeaponStats
+@onready var helmet_name: Button = $VBoxContainer/EquipmentContainer/Equipment/HelmetName
+@onready var helmet_stats: Label = $VBoxContainer/EquipmentContainer/Equipment/HelmetStats
+@onready var armor_name: Button = $VBoxContainer/EquipmentContainer/Equipment/ArmorName
+@onready var armor_stats: Label = $VBoxContainer/EquipmentContainer/Equipment/ArmorStats
+@onready var accessory_name: Button = $VBoxContainer/EquipmentContainer/Equipment/AccessoryName
+
+@onready var health_value: Label = $VBoxContainer/StatsContainer/Stats/HPValue
+@onready var energy_value: Label = $VBoxContainer/StatsContainer/Stats/EPValue
+@onready var attack_value: Label = $VBoxContainer/StatsContainer/Stats/AttackValue
+@onready var defense_value: Label = $VBoxContainer/StatsContainer/Stats/DefenseValue
+@onready var magic_attack_value: Label = $VBoxContainer/StatsContainer/Stats/MagicAttackValue
+@onready var magic_defense_value: Label = $VBoxContainer/StatsContainer/Stats/MagicDefenseValue
+@onready var speed_value: Label = $VBoxContainer/StatsContainer/Stats/SpeedValue
+@onready var luck_value: Label = $VBoxContainer/StatsContainer/Stats/LuckValue
 
 var party_member
 
@@ -50,7 +56,15 @@ func update_ui_info():
 	set_text(armor_stats, party_member.equipped_armor, "defense", "0")
 	set_text(accessory_name, party_member.equipped_accessory, "name", "--")
 	
+	sprite.texture = party_member.menu_texture
+	sprite.custom_minimum_size = sprite.texture.get_size() * 3
 	var battler = party_member.battler
+	level.text = "Lv. %d" % battler.stats.level
+	var exp_for_next_level = party_member.growth.get_experience_for_level_up(battler.stats.level, party_member.experience)
+	next_level.text = "To next level: %s" % (exp_for_next_level if exp_for_next_level > 0 else "--")
+	
+	health_value.text = str(battler.stats.max_health)
+	energy_value.text = str(battler.stats.max_energy)
 	attack_value.text = str(battler.stats.attack)
 	defense_value.text = str(battler.stats.defense)
 	magic_attack_value.text = str(battler.stats.magic_attack)
