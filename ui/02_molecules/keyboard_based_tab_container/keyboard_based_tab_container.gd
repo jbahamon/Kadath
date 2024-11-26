@@ -108,7 +108,6 @@ func build_tab_button_for(child: Control):
 
 	if "icon" in child:
 		button.icon = child.icon
-		
 	
 	button.text = child.name
 	button.toggle_mode = true
@@ -164,6 +163,7 @@ func focus_current_tab():
 		current_content.on_release_focus()
 	pressed_tab_button.grab_click_focus()
 	pressed_tab_button.grab_focus()
+	UIService.set_menu_help(current_content.help_text, current_content.controls_text)
 	content_container.modulate = inactive_content_modulate
 
 func on_button_focused(button: Button):
@@ -177,6 +177,7 @@ func on_content_toggled(toggled: bool, content: Control):
 		current_content = content
 		current_content.size_flags_horizontal = SIZE_EXPAND_FILL
 		current_content.size_flags_vertical = SIZE_EXPAND_FILL
+		UIService.set_menu_help(content.help_text, content.controls_text)
 
 func set_tab_disabled(i: int, value: bool):
 	var tab_button: Button = tabs_container.get_child(i)

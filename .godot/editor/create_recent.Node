@@ -1,7 +1,8 @@
-TextureRect
 HBoxContainer
 Label
+PanelContainer
 VBoxContainer
+TextureRect
 Sprite2D
 HSeparator
 VSeparator
@@ -11,4 +12,3 @@ MarginContainer
 ProgressBar
 CenterContainer
 LocationRoom
-Node2D

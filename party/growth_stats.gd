@@ -1,7 +1,7 @@
 extends Resource
 class_name GrowthStats
 
-@export var level_lookup: Array = []
+@export var level_lookup: Array[int] = []
 @export var max_health_curve: Curve
 @export var max_energy_curve: Curve
 @export var attack_curve: Curve
@@ -33,9 +33,9 @@ func get_level(experience: int) -> int:
 	var max_level: int = len(level_lookup)
 	assert(max_level > 0)
 	var level: int = 0
-	while (level + 1) < max_level && experience > level_lookup[level + 1]:
+	while level < max_level && experience > level_lookup[level]:
 		level += 1
-	return level
+	return level + 1
 
 func get_experience_for_level_up(level, experience) -> int:
 	var max_level: int = len(level_lookup)
@@ -43,7 +43,7 @@ func get_experience_for_level_up(level, experience) -> int:
 	if level >= max_level:
 		return 0
 	else:
-		return level_lookup[level + 1] - experience
+		return level_lookup[level] - experience
 
 func _get_interpolated_level(value: int = 0) -> float:
 	# Calculate level, which updates all stats

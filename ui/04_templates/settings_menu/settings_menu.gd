@@ -111,7 +111,7 @@ func _on_ListenForInputPopup_key_pressed(action: String, event: InputEventKey):
 	buttons[action].text = "<%s>" % OS.get_keycode_string(event.keycode)
 
 func _unhandled_input(event):
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed(&"ui_cancel") and self.get_parent().visible:
 		self.emit_signal("exit")
 		self.get_viewport().set_input_as_handled()
 		self.set_process_unhandled_input(false)

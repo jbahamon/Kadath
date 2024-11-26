@@ -50,3 +50,7 @@ func __handle_popup(popup_node: Window, pause_tree, ratio=null):
 	
 	if pause_tree:
 		InputService.exit_menu_mode()
+
+func set_menu_help(help_text: String, controls_text: String):
+	menu_popup.help_label.text = help_text
+	menu_popup.controls_label.text = controls_text.format(VarsService.strings)

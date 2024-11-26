@@ -15,14 +15,14 @@ signal focus_released
 @onready var armor_stats: Label = $VBoxContainer/EquipmentContainer/Equipment/ArmorStats
 @onready var accessory_name: Button = $VBoxContainer/EquipmentContainer/Equipment/AccessoryName
 
-@onready var health_value: Label = $VBoxContainer/StatsContainer/Stats/HPValue
-@onready var energy_value: Label = $VBoxContainer/StatsContainer/Stats/EPValue
-@onready var attack_value: Label = $VBoxContainer/StatsContainer/Stats/AttackValue
-@onready var defense_value: Label = $VBoxContainer/StatsContainer/Stats/DefenseValue
-@onready var magic_attack_value: Label = $VBoxContainer/StatsContainer/Stats/MagicAttackValue
-@onready var magic_defense_value: Label = $VBoxContainer/StatsContainer/Stats/MagicDefenseValue
-@onready var speed_value: Label = $VBoxContainer/StatsContainer/Stats/SpeedValue
-@onready var luck_value: Label = $VBoxContainer/StatsContainer/Stats/LuckValue
+@onready var health_value: Label = $VBoxContainer/SummaryContainer/Stats/HPValue
+@onready var energy_value: Label = $VBoxContainer/SummaryContainer/Stats/EPValue
+@onready var attack_value: Label = $VBoxContainer/SummaryContainer/Stats/AttackValue
+@onready var defense_value: Label = $VBoxContainer/SummaryContainer/Stats/DefenseValue
+@onready var magic_attack_value: Label = $VBoxContainer/SummaryContainer/Stats/MagicAttackValue
+@onready var magic_defense_value: Label = $VBoxContainer/SummaryContainer/Stats/MagicDefenseValue
+@onready var speed_value: Label = $VBoxContainer/SummaryContainer/Stats/SpeedValue
+@onready var luck_value: Label = $VBoxContainer/SummaryContainer/Stats/LuckValue
 
 var party_member
 
@@ -61,7 +61,9 @@ func update_ui_info():
 	var battler = party_member.battler
 	level.text = "Lv. %d" % battler.stats.level
 	var exp_for_next_level = party_member.growth.get_experience_for_level_up(battler.stats.level, party_member.experience)
-	next_level.text = "To next level: %s" % (exp_for_next_level if exp_for_next_level > 0 else "--")
+	
+	var next_level_str = ("%s XP" % exp_for_next_level if exp_for_next_level > 0 else "--")
+	next_level.text = "To next level: %s" % next_level_str
 	
 	health_value.text = str(battler.stats.max_health)
 	energy_value.text = str(battler.stats.max_energy)

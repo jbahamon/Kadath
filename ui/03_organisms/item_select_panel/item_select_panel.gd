@@ -59,5 +59,3 @@ func clear_items():
 			container.remove_child(child)
 			child.queue_free()
 		
-
-

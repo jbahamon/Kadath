@@ -26,10 +26,14 @@ script = ExtResource("2")
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Stats"
+
 [node name="SummaryContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 0
-theme_override_constants/separation = 10
+size_flags_vertical = 3
+theme_override_constants/separation = 30
 alignment = 1
 
 [node name="LeftFiller" type="Control" parent="VBoxContainer/SummaryContainer"]
@@ -45,7 +49,7 @@ texture = ExtResource("3_enf6o")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/SummaryContainer"]
 layout_mode = 2
-alignment = 1
+size_flags_vertical = 4
 
 [node name="Level" type="Label" parent="VBoxContainer/SummaryContainer/VBoxContainer"]
 layout_mode = 2
@@ -55,26 +59,97 @@ text = "Lv. 20"
 layout_mode = 2
 text = "Next level: 2000 XP"
 
+[node name="Stats" type="GridContainer" parent="VBoxContainer/SummaryContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 4.0
+columns = 4
+
+[node name="HPLabel" type="Label" parent="VBoxContainer/SummaryContainer/Stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Max HP
+"
+
+[node name="HPValue" type="Label" parent="VBoxContainer/SummaryContainer/Stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "10"
+
+[node name="EPLabel" type="Label" parent="VBoxContainer/SummaryContainer/Stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Max SP"
+
+[node name="EPValue" type="Label" parent="VBoxContainer/SummaryContainer/Stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1"
+
+[node name="AttackLabel" type="Label" parent="VBoxContainer/SummaryContainer/Stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Attack"
+
+[node name="AttackValue" type="Label" parent="VBoxContainer/SummaryContainer/Stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "10"
+
+[node name="MagicAttackLabel" type="Label" parent="VBoxContainer/SummaryContainer/Stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Magic Attack"
+
+[node name="MagicAttackValue" type="Label" parent="VBoxContainer/SummaryContainer/Stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "10"
+
+[node name="DefenseLabel" type="Label" parent="VBoxContainer/SummaryContainer/Stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Defense"
+
+[node name="DefenseValue" type="Label" parent="VBoxContainer/SummaryContainer/Stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "10"
+
+[node name="MagicDefenseLabel" type="Label" parent="VBoxContainer/SummaryContainer/Stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Magic Defense"
+
+[node name="MagicDefenseValue" type="Label" parent="VBoxContainer/SummaryContainer/Stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "10"
+
+[node name="SpeedLabel" type="Label" parent="VBoxContainer/SummaryContainer/Stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Speed"
+
+[node name="SpeedValue" type="Label" parent="VBoxContainer/SummaryContainer/Stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "10"
+
+[node name="LuckLabel" type="Label" parent="VBoxContainer/SummaryContainer/Stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Luck"
+
+[node name="LuckValue" type="Label" parent="VBoxContainer/SummaryContainer/Stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "10"
+
 [node name="RightFiller" type="Control" parent="VBoxContainer/SummaryContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
-visible = false
-layout_mode = 2
-
-[node name="SpecialCommandLabel" type="Label" parent="VBoxContainer"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Special Command: Analyze"
-
-[node name="CommandDescription" type="Label" parent="VBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(100, 50)
-layout_mode = 2
-text = "Obtain information about the target, revealing their health, vulnerabilities, behavior and other information."
-autowrap_mode = 3
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
 layout_mode = 2
@@ -85,7 +160,7 @@ text = "Equipment"
 
 [node name="EquipmentContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 0
+size_flags_vertical = 3
 
 [node name="LeftFiller" type="Control" parent="VBoxContainer/EquipmentContainer"]
 layout_mode = 2
@@ -234,112 +309,20 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-text = "Stats"
-
-[node name="StatsContainer" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-alignment = 1
-
-[node name="LeftFiller" type="Control" parent="VBoxContainer/StatsContainer"]
+[node name="SpecialCommandLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+text = "Special Command: Analyze"
+vertical_alignment = 1
 
-[node name="Stats" type="GridContainer" parent="VBoxContainer/StatsContainer"]
+[node name="CommandDescription" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 4.0
-columns = 4
-
-[node name="HPLabel" type="Label" parent="VBoxContainer/StatsContainer/Stats"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Max HP
-"
-
-[node name="HPValue" type="Label" parent="VBoxContainer/StatsContainer/Stats"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "10"
-
-[node name="EPLabel" type="Label" parent="VBoxContainer/StatsContainer/Stats"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Max SP"
-
-[node name="EPValue" type="Label" parent="VBoxContainer/StatsContainer/Stats"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "1"
-
-[node name="AttackLabel" type="Label" parent="VBoxContainer/StatsContainer/Stats"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Attack"
-
-[node name="AttackValue" type="Label" parent="VBoxContainer/StatsContainer/Stats"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "10"
-
-[node name="MagicAttackLabel" type="Label" parent="VBoxContainer/StatsContainer/Stats"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Magic Attack"
-
-[node name="MagicAttackValue" type="Label" parent="VBoxContainer/StatsContainer/Stats"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "10"
-
-[node name="DefenseLabel" type="Label" parent="VBoxContainer/StatsContainer/Stats"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Defense"
-
-[node name="DefenseValue" type="Label" parent="VBoxContainer/StatsContainer/Stats"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "10"
-
-[node name="MagicDefenseLabel" type="Label" parent="VBoxContainer/StatsContainer/Stats"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Magic Defense"
-
-[node name="MagicDefenseValue" type="Label" parent="VBoxContainer/StatsContainer/Stats"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "10"
-
-[node name="SpeedLabel" type="Label" parent="VBoxContainer/StatsContainer/Stats"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Speed"
-
-[node name="SpeedValue" type="Label" parent="VBoxContainer/StatsContainer/Stats"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "10"
-
-[node name="LuckLabel" type="Label" parent="VBoxContainer/StatsContainer/Stats"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Luck"
-
-[node name="LuckValue" type="Label" parent="VBoxContainer/StatsContainer/Stats"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "10"
-
-[node name="RightFiller" type="Control" parent="VBoxContainer/StatsContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
+text = "Obtains information about enemies: health, vulnerabilities, behavior and other information."
+vertical_alignment = 1
 
 [connection signal="pressed" from="VBoxContainer/EquipmentContainer/Equipment/WeaponName" to="." method="on_weapon_clicked"]
 [connection signal="pressed" from="VBoxContainer/EquipmentContainer/Equipment/HelmetName" to="." method="on_helmet_clicked"]

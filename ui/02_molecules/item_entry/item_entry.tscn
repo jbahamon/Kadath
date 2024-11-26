@@ -11,6 +11,7 @@ size_flags_vertical = 5
 script = ExtResource("2")
 
 [node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 mouse_filter = 2
 action_mode = 0
@@ -23,8 +24,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 6
-theme_override_constants/margin_right = 6
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_right = 18
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Button/MarginContainer"]
 layout_mode = 2
@@ -43,7 +44,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Pendant"
 vertical_alignment = 1
-clip_text = true
 
 [node name="Amount" type="Label" parent="Button/MarginContainer/HBoxContainer"]
 layout_mode = 2

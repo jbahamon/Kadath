@@ -44,7 +44,7 @@ point_count = 2
 
 [resource]
 script = ExtResource("1_xqohj")
-level_lookup = [0, 100]
+level_lookup = Array[int]([25, 50, 75, 100])
 max_health_curve = SubResource("7")
 max_energy_curve = SubResource("6")
 attack_curve = SubResource("1")

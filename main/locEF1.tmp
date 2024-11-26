@@ -149,9 +149,6 @@ script = ExtResource("6")
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Settings" parent="MenuLayer/MenuPopup/PauseMenu/Container/PauseMenuTabs" index="2"]
-visible = false
-
 [node name="SavesPopup" parent="MenuLayer" instance=ExtResource("8")]
 visible = false
 current_mode = 0
@@ -220,10 +217,9 @@ color = Color(0.976471, 0, 0, 0.501961)
 [node name="PopupLayer" type="CanvasLayer" parent="."]
 process_mode = 2
 
-[connection signal="cancel" from="MenuLayer/MenuPopup/PauseMenu/Container/PauseMenuTabs" to="MenuLayer/MenuPopup" method="_on_pause_menu_tabs_cancel"]
 [connection signal="about_to_popup" from="MenuLayer/SavesPopup" to="." method="_on_menu_about_to_show"]
 [connection signal="popup_hide" from="MenuLayer/SavesPopup" to="." method="_on_menu_popup_hide"]
 
 [editable path="SubViewportContainer/SubViewport/World/PlayerProxy"]
 [editable path="MenuLayer/MenuPopup/PauseMenu"]
-[editable path="MenuLayer/MenuPopup/PauseMenu/Container/PauseMenuTabs/Party"]
+[editable path="MenuLayer/MenuPopup/PauseMenu/VBoxContainer/PauseMenuTabs/Party"]

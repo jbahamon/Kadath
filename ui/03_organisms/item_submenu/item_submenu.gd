@@ -2,10 +2,14 @@ extends PanelContainer
 
 signal exit_submenu
 
+const select_controls = "[ {ui_up} ]/[ {ui_down} ] : Select  [ {ui_cancel} ]: Return  [ {ui_accept} ]: Confirm"
+
 var ItemEntry = preload("res://ui/02_molecules/item_entry/item_entry.tscn")
 var PartyMemberListItem = preload("res://ui/02_molecules/party_member_list_item/party_member_list_item.tscn")
 
 @export var icon: Texture2D 
+@export var help_text: String
+@export var controls_text: String
 
 @onready var categories: Container = $VBoxContainer/HBoxContainer/Categories
 @onready var first_category: Button = $VBoxContainer/HBoxContainer/Categories.get_children()[0]
@@ -15,7 +19,6 @@ var PartyMemberListItem = preload("res://ui/02_molecules/party_member_list_item/
 @onready var key_items_button: Button = $VBoxContainer/HBoxContainer/Categories/KeyItems
 
 @onready var items = $VBoxContainer/HBoxContainer/Items
-@onready var help_text: Label = $VBoxContainer/HelpText
 @onready var party_list = $VBoxContainer/HBoxContainer/PartyList
 
 var inventory: Inventory
@@ -43,7 +46,6 @@ func reset_controls(reset_categories = true):
 		self.current_category = null
 	
 	self.update_shown_items()
-	self.help_text.text = " "
 	
 	
 func on_grab_focus():
@@ -65,17 +67,17 @@ func update_shown_items():
 	)
 	
 func _on_consumables_focus_entered():
-	self.help_text.text = "Consumable items, including recovery items"
+	UIService.set_menu_help("Consumable items, including recovery items", select_controls)
 	self.consumables_button.button_pressed = true
 	self._on_category_focused(ItemService.ItemCategory.CONSUMABLE)
 	
 func _on_equipment_focus_entered():
-	self.help_text.text = "Weapons, armor and accessories"
+	UIService.set_menu_help("Weapons, armor and accessories", select_controls)
 	self.equipment_button.button_pressed = true
 	self._on_category_focused(ItemService.ItemCategory.EQUIPMENT)
 	
 func _on_key_items_focus_entered():
-	self.help_text.text = "Important items that might be of use during your journeys"
+	UIService.set_menu_help("Important items that might be of use during your journeys", select_controls)
 	self.key_items_button.button_pressed = true
 	self._on_category_focused(ItemService.ItemCategory.KEY)
 
@@ -97,7 +99,7 @@ func is_focus_on_categories():
 
 func _on_items_element_focused(ui_element):
 	var item = ItemService.id_to_item(ui_element.item_id)
-	self.help_text.text = item.description
+	UIService.set_menu_help(item.description, select_controls)
 
 func _on_items_element_selected(ui_element):
 	self.selected_item = ui_element
@@ -118,8 +120,9 @@ func _on_items_cancel():
 	button.grab_focus()
 
 func _on_party_list_element_selected(element):
+	self.party_list.element_selected.disconnect(self._on_party_list_element_selected)
 	var item: InventoryItem = ItemService.id_to_item(self.selected_item.item_id)
-	var used = await item.use([element], false)
+	var used = await item.use([element])
 	self.party_list.deselect()
 	if used and item.consumed_after_use:
 		self.inventory.remove(item.id, 1)
@@ -129,6 +132,7 @@ func _on_party_list_element_selected(element):
 		else:
 			self.update_shown_items()
 			self._on_party_list_cancel()
+	self.party_list.element_selected.connect(self._on_party_list_element_selected)
 
 func _on_party_list_cancel():
 	self.selected_item = null
