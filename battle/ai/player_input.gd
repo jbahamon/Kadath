@@ -1,7 +1,5 @@
 extends BattlerAI
 
-signal turn_chosen
-
 func get_turn(current_actors: Array) -> Turn:
 	# self.interface.show_timeline()
 	var battler = self.get_parent()

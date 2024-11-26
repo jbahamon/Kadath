@@ -14,7 +14,7 @@ func execute():
 	
 	if self.instructions.size() == 1:
 		await self.instructions[0].call()
-		self.emit_signal("done")
+		self.done.emit()
 		self._completed = true
 	else:
 		self._pending = [] + self.instructions
@@ -30,5 +30,5 @@ func _call_instruction(instruction) -> void:
 	self._pending.erase(instruction)
 	
 	if self._pending.is_empty() and not self._completed:
-		self.emit_signal("done")
+		self.done.emit()
 		self._completed = true

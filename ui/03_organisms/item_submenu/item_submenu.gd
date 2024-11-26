@@ -91,7 +91,7 @@ func _on_category_pressed():
 
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_cancel") and self.is_focus_on_categories():
-		self.emit_signal("exit_submenu")
+		self.exit_submenu.emit()
 		self.get_viewport().set_input_as_handled()
 
 func is_focus_on_categories():

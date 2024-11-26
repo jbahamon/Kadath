@@ -4,7 +4,6 @@
 extends Node2D
 
 class_name Battler
-signal died
 
 const uniform_add: Material = preload("res://utils/material/uniform_add.tres")
 
@@ -150,9 +149,7 @@ func take_hit(hit: Hit, in_battle: bool = true):
 		
 		await DoAll.new(hit_events).execute()
 		
-		if self.health <= 0:
-			emit_signal("died", parent)
-		else:
+		if self.health > 0:
 			self.ai.check_reactions(parent, hit, BattleService.get_actors())
 
 	hit.effective_damage = actual_damage

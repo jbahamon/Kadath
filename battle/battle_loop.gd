@@ -1,9 +1,5 @@
 const BattleEndState = preload("res://battle/battle_end_state.gd")
 
-signal actor_dead(actor)
-signal turn_start(turn)
-signal turn_end(turn)
-
 # This class is responsible for running the battle's steps.
 # It should handle choosing turn order, pre and post action events (such as 
 # status damage, etc) and win/lose conditions
@@ -35,7 +31,6 @@ func do_battle():
 		var current_actor = self.turn_queue.get_current_actor()
 		var turn = await current_actor.battler.ai.get_turn(self.actors)
 
-		self.turn_start.emit(turn)
 		await turn.play()
 		
 		var dead_actors = actors.filter(
@@ -52,7 +47,6 @@ func do_battle():
 				await actor.battler.pending_reaction.execute()
 				actor.battler.pending_reaction = null
 		
-		self.turn_end.emit(turn)
 		self.ui.update_player_state()
 		if is_battle_won():
 			self.ui.hide_timeline()

@@ -67,7 +67,7 @@ func _init():
 	patterns["START_DIALOGUE"].compile("^(?<DialogueId>[^ ]+ *).*$")
 	
 	patterns["NARRATE"] = RegEx.new()
-	patterns["NARRATE"].compile("^(?<DialogueId>.+) FOR (?<Duration>.+)$")
+	patterns["NARRATE"].compile("^(?<DialogueId>.+)$")
 	
 	patterns["COLOR"] = RegEx.new()
 	patterns["COLOR"].compile("\\([ ]*(?<R>[^ ,)]+)[ ]*,[ ]*(?<G>[^ ,)]+)[ ]*,[ ]*(?<B>[^ ,)]+)[ ]*,[ ]*(?<A>[^ ,)]+)[ ]*\\)")
@@ -254,7 +254,6 @@ func parse_instruction(stack: Array, instruction_name: String, args: String):
 			var narrate_match: RegExMatch = self.patterns["NARRATE"].search(args)
 			instruction = Narrate.new(
 				self.parse_string(narrate_match.get_string("DialogueId")),
-				self.parse_float(narrate_match.get_string("Duration"))
 			)
 		CutsceneInstruction.Type.HIDE:
 			instruction = Call.new(

@@ -31,10 +31,10 @@ menu_texture = ExtResource("4_y6us3")
 [node name="Battler" parent="." index="1"]
 anim_path = NodePath("../Anim")
 
-[node name="Vision" type="Node" parent="Battler/Actions" index="0" groups=["save"]]
+[node name="Analyze" type="Node" parent="Battler/Actions" index="0" groups=["save"]]
 script = ExtResource("7_jds85")
 display_name = "Analyze"
-description = "Uncover enemy stats and weaknesses"
+description = "Uncover enemy stats and weaknesses."
 
 [node name="CrescentBlast" type="Node" parent="Battler/Actions/Skill" index="0"]
 script = ExtResource("5_8d58u")

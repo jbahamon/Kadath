@@ -5,8 +5,8 @@ SET_OVERLAY ADD TO (0, 0, 0, 1)
 SET_OVERLAY MIX TO (0,0,0,1)
 MOVE_CAMERA TO (0, -80)
 
-NARRATE narration_1 FOR 3
-NARRATE narration_2 FOR 3
+NARRATE narration_1
+NARRATE narration_2
 
 SET_POSITION LeftGhoul TO (-80, 88)
 SET_POSITION NPCPickman TO (-40, 88)

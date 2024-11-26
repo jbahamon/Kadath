@@ -1,7 +1,7 @@
 extends LocationRoom
 
-@onready var floor = $Floor
-@onready var walls = $Walls
+@onready var floor_layer = $Floor
+@onready var walls_layer = $Walls
 
 var darken_tween = null
 var fade_tween = null
@@ -25,13 +25,13 @@ func darken_room(mode: CutsceneInstruction.ExecutionMode):
 	if mode == CutsceneInstruction.ExecutionMode.PLAY:
 		self.darken_tween = get_tree().create_tween()
 		var method = func(color): 
-			self.walls.modulate = color
-			self.floor.modulate = color
+			self.walls_layer.modulate = color
+			self.floor_layer.modulate = color
 		self.darken_tween.tween_method(method, Color.WHITE, Color.TRANSPARENT, 5)
 		await self.darken_tween.finished
 	else:
-			self.walls.modulate = Color.TRANSPARENT
-			self.floor.modulate = Color.TRANSPARENT
+			self.walls_layer.modulate = Color.TRANSPARENT
+			self.floor_layer.modulate = Color.TRANSPARENT
 	
 func show_spooks(mode: CutsceneInstruction.ExecutionMode):
 	var spooks = $Spooks

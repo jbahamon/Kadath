@@ -45,6 +45,7 @@ size_flags_vertical = 3
 script = ExtResource("5")
 icon = ExtResource("18")
 help_text = "Change the game's controls and other settings."
+controls_text = "[ {ui_left} ]/[ {ui_right} ] : Select  [ {ui_cancel} ]: Close  [ {ui_accept} ]: Confirm"
 
 [node name="SettingsMenu" parent="Container/PauseMenuTabs/Settings" instance=ExtResource("3")]
 layout_mode = 2

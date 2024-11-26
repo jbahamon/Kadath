@@ -4,6 +4,7 @@ func set_as_disabled(value):
 	self.disabled = value
 
 func _init():
+	self.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	self.action_mode = BaseButton.ACTION_MODE_BUTTON_PRESS
 	
 func get_button():

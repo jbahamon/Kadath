@@ -33,32 +33,32 @@ func exit():
 func init_common_action_options():
 	var attack = Attack.new()
 	attack.display_name = "Attack"
-	attack.description = "Attack with the equipped weapon"
+	attack.description = "Attack with the equipped weapon."
 	self.common_action_options["attack"] = attack
 	
 	var defend = Defend.new()
 	defend.display_name = "Defend"
-	defend.description = "Raise your defenses until your next move"
+	defend.description = "Raise this party member's defenses until their next action."
 	self.common_action_options["defend"] = defend
 	
 	var win = Win.new()
 	win.display_name = "Win"
-	win.description = "Win the battle"
+	win.description = "Win the battle."
 	self.common_action_options["win"] = win
 	
 	var lose = Lose.new()
 	lose.display_name = "Lose"
-	lose.description = "Lose the battle"
+	lose.description = "Lose the battle."
 	self.common_action_options["lose"] = lose
 	
 	var item = Item.new()
 	item.display_name = "Item"
-	item.description = "Use an item"
+	item.description = "Use an item."
 	self.common_action_options["item"] = item
 	
 	var escape = Escape.new()
 	escape.display_name = "Escape"
-	escape.description = "Try to run away"
+	escape.description = "Try to run away."
 	self.common_action_options["escape"] = escape
 	
 func start_mook_battle(escapable: bool):

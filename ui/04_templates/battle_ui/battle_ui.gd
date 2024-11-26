@@ -18,7 +18,6 @@ var ItemEntry = preload("res://ui/02_molecules/item_entry/item_entry.tscn")
 
 signal option_selected(option)
 signal prompt_closed
-signal cancel
 
 var current_actor
 var options_stack: Array = []
@@ -46,7 +45,7 @@ func _unhandled_input(event):
 		event.is_action_pressed(&"ui_cancel")
 	):
 		self.set_info_text(null)
-		emit_signal("prompt_closed")
+		self.prompt_closed.emit()
 		self.get_viewport().set_input_as_handled()
 
 func reset_options_stack():
@@ -75,7 +74,7 @@ func on_option_selected(option):
 		
 		self.set_options(new_options)
 	else:
-		self.emit_signal("option_selected", option)
+		self.option_selected.emit(option)
 		
 func on_cancel():
 	# If there's nothing to go back to, we just re-focus the list.
@@ -84,7 +83,6 @@ func on_cancel():
 		return
 	
 	var current_options = options_stack.pop_back()
-	
 	var previous_options = options_stack.pop_back()
 
 	# if the previous option is an action, we need to re-push it. 
@@ -97,7 +95,7 @@ func on_cancel():
 	# if it's a sub option, we shouldn't emit it as a "cancel", since it's
 	# only going through submenus
 	if not current_options.get("is_sub_option", false):
-		self.emit_signal("option_selected", null)
+		self.option_selected.emit(null)
 
 func hide_options():
 	self.options.visible = false

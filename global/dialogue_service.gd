@@ -77,13 +77,13 @@ func resume_dialogue():
 func skip_dialogue():
 	dialogue_box.skip()
 
-func narrate(dialogue_id: String, duration: float) -> void:
+func narrate(dialogue_id: String) -> void:
 	var dialogue_line = await self.current_dialogue.get_next_dialogue_line(dialogue_id)
 	
 	if not dialogue_line:
 		return
 
-	await narration_layer.narrate(dialogue_line.text.format(VarsService.strings), duration)
+	await narration_layer.narrate(dialogue_line.text.format(VarsService.strings))
 
 func skip_narration():
 	narration_layer.skip()

@@ -89,9 +89,9 @@ func stop_highlight():
 		return
 
 	if self.item.is_multi_target():
-		var targets = self.currently_highlighted_targets.get_targets()
-		for i in range(targets.size()):
-			targets[i].material = stored_materials[i]
+		var highlighted_targets = self.currently_highlighted_targets.get_targets()
+		for i in range(highlighted_targets.size()):
+			highlighted_targets[i].material = stored_materials[i]
 	else:
 		self.currently_highlighted_targets.material = self.stored_materials
 		

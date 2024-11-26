@@ -14,9 +14,8 @@ var fade_tween = null
 func _ready() -> void:
 	self.set_process_unhandled_input(false)
 
-func narrate(text, duration):
+func narrate(text):
 	self.should_skip = false
-	var label = $VBox/Margin/NarrationText
 	advance_label.hide()
 	label.modulate = Color.TRANSPARENT
 	label.text = text

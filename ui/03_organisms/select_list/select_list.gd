@@ -66,10 +66,10 @@ func initialize(elements: Array, other_params: Dictionary = {}):
 			button.toggle_mode = true
 	
 func on_element_focused(element):
-	emit_signal("element_focused", element)
+	self.element_focused.emit(element)
 		
 func on_element_selected(element):
-	emit_signal("element_selected", element)
+	self.element_selected.emit(element)
 
 func on_grab_focus():
 	if toggle:
@@ -110,14 +110,14 @@ func _on_SelectPanel_visibility_changed():
 
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_cancel") and (self.element_has_focus() or (self.visible and self.focused_if_visible)):
-		self.emit_signal("cancel")
+		self.cancel.emit()
 		self.get_viewport().set_input_as_handled()
 
 func _on_cancel():
-	self.emit_signal("done")
+	self.done.emit()
 
 func _on_element_selected(_element):
-	self.emit_signal("done")
+	self.done.emit()
 	
 func size():
 	return container.get_child_count()

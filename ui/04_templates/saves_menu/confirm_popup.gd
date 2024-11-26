@@ -13,4 +13,4 @@ func _on_No_pressed():
 
 func _on_Yes_pressed():
 	self.hide()
-	emit_signal("confirmed")
+	self.confirmed.emit()

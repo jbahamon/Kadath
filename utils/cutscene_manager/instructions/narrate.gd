@@ -1,21 +1,18 @@
 extends CutsceneInstruction
 
 var dialogue_id
-var duration
 
-func _init(init_dialogue_id: String, init_duration: float):
+func _init(init_dialogue_id: String):
 	self.dialogue_id = init_dialogue_id
-	self.duration = init_duration
 	
 func execute(_tree: SceneTree, mode: ExecutionMode):
 	if mode == ExecutionMode.PLAY:
 		await DialogueService.narrate(
 			self.dialogue_id,
-			self.duration
 		)
 
 func _to_string():
-	return "narrate %s for %f" % [self.dialogue_id, self.duration]
+	return "narrate %s" % self.dialogue_id
 
 func skip(_tree: SceneTree):
 	DialogueService.skip_narration()

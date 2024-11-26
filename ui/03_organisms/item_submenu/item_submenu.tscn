@@ -92,13 +92,6 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_w1ay6")
 bind_ui_elements = true
 toggle = true
 
-[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="HelpText" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 1
-
 [connection signal="focus_entered" from="VBoxContainer/HBoxContainer/Categories/Consumables" to="." method="_on_consumables_focus_entered"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Categories/Consumables" to="." method="_on_category_pressed"]
 [connection signal="focus_entered" from="VBoxContainer/HBoxContainer/Categories/Equipment" to="." method="_on_equipment_focus_entered"]

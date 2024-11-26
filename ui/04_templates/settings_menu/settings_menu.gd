@@ -18,6 +18,7 @@ var buttons: Dictionary
 var focus_in_tree = false
 
 @onready var grid: GridContainer = $CenterContainer/Settings/InputVBox/InputControls
+@onready var block_mouse_popup: Popup = $Popups/BlockClicksPopup
 @onready var input_popup: Popup = $Popups/ListenForInputPopup
 @onready var text_speed_slider = $CenterContainer/Settings/Sliders/TextSpeedSlider
 
@@ -47,7 +48,6 @@ func add_label(label_text: String):
 	
 func add_button(action: String):
 	var button = Button.new()
-	button.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var actions = InputMap.action_get_events(action)
 	if actions.is_empty():
 		button.text = "---"
@@ -91,6 +91,9 @@ func link_buttons():
 func _button_pressed(action: String):
 	buttons[action].release_focus()
 	input_popup.update_action(action, labels[action])
+	
+	for button_action in buttons:
+		buttons[button_action].mouse_filter = Control.MOUSE_FILTER_IGNORE
 	input_popup.popup_centered()
 
 
@@ -106,13 +109,16 @@ func _on_ListenForInputPopup_key_pressed(action: String, event: InputEventKey):
 	for old_event in events:
 		if not old_event is InputEventKey: 
 			InputMap.action_add_event(action, event)
+	
+	for button_action in buttons:
+		buttons[button_action].mouse_filter = Control.MOUSE_FILTER_STOP
 	buttons[action].grab_focus()
 	buttons[action].grab_click_focus()
 	buttons[action].text = "<%s>" % OS.get_keycode_string(event.keycode)
 
 func _unhandled_input(event):
 	if event.is_action_pressed(&"ui_cancel") and self.get_parent().visible:
-		self.emit_signal("exit")
+		self.exit.emit()
 		self.get_viewport().set_input_as_handled()
 		self.set_process_unhandled_input(false)
 		
