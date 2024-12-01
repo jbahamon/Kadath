@@ -1,9 +1,15 @@
 extends Node
 
+const BASE_TEXT_SPEED = 10.0
+const TEXT_SPEED_FACTOR = 2.5
+
 var dialogue_box
 var narration_layer
 var current_dialogue: DialogueResource
 var current_responses: Array = []
+
+var characters_per_second = 15.0
+
 
 func initialize(init_dialogue_box, init_narration_layer):
 	self.dialogue_box = init_dialogue_box
@@ -18,6 +24,9 @@ func exit():
 func load_location_dialogues(location: Location):
 	self.current_dialogue = location.story
 
+func set_text_speed(speed: int):
+	self.dialogue_box.characters_per_second = BASE_TEXT_SPEED + speed * TEXT_SPEED_FACTOR
+	
 func add_response(response):
 	self.current_responses.append(response)
 	

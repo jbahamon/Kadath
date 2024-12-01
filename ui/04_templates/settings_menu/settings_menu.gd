@@ -11,16 +11,23 @@ const labels = {
 	&"ui_left": "Left",
 	&"ui_menu": "Open Menu",
 	&"ui_right": "Right",
-	&"action_run": "Walk/run (hold)"
+	&"action_run": "Run"
 }
 
 var buttons: Dictionary
 var focus_in_tree = false
 
+@onready var music_volume: Slider = $CenterContainer/Settings/VolumeSliders/MusicVolumeSlider
+@onready var sfx_volume: Slider = $CenterContainer/Settings/VolumeSliders/SFXVolumeSlider
+@onready var ui_volume: Slider = $CenterContainer/Settings/VolumeSliders/UIVolumeSlider
+
 @onready var grid: GridContainer = $CenterContainer/Settings/InputVBox/InputControls
 @onready var block_mouse_popup: Popup = $Popups/BlockClicksPopup
 @onready var input_popup: Popup = $Popups/ListenForInputPopup
-@onready var text_speed_slider = $CenterContainer/Settings/Sliders/TextSpeedSlider
+@onready var text_speed: Slider = $CenterContainer/Settings/UISliders/TextSpeedSlider
+
+@onready var hold_run_checkbox: CheckBox = $CenterContainer/Settings/RunBehaviorContainer/Hold
+@onready var toggle_run_checkbox: CheckBox = $CenterContainer/Settings/RunBehaviorContainer/Toggle
 
 func _init():
 	self.set_process_unhandled_input(false)
@@ -33,6 +40,14 @@ func _ready():
 		add_input_option(action, label_text)
 		link_buttons()
 	
+	var group = ButtonGroup.new()
+	self.hold_run_checkbox.button_group = group
+	self.toggle_run_checkbox.button_group = group
+	
+	self.toggle_run_checkbox.set_pressed_no_signal(SettingsService.toggle_run)
+	self.hold_run_checkbox.set_pressed_no_signal(not SettingsService.toggle_run)
+	
+	self.text_speed.set_value_no_signal(SettingsService.text_speed)
 	self.on_grab_focus()
 	
 
@@ -74,7 +89,7 @@ func link_buttons():
 		if i > 1:
 			button.focus_neighbor_top = button.get_path_to(buttons[keys[i - 2]])
 		else:
-			button.focus_neighbor_top = button.get_path_to(text_speed_slider)
+			button.focus_neighbor_top = button.get_path_to(text_speed)
 			
 		if (i + 1) < len(keys):
 			if i % 2 == 0:
@@ -85,7 +100,11 @@ func link_buttons():
 		if (i + 2) < len(keys):
 			button.focus_neighbor_bottom = button.get_path_to(buttons[keys[i + 2]])
 		else:
-			button.focus_neighbor_bottom = button.get_path_to(button)
+			button.focus_neighbor_bottom = button.get_path_to(hold_run_checkbox)
+			
+			if i % 2 == 0:
+				hold_run_checkbox.focus_neighbor_top = hold_run_checkbox.get_path_to(button)
+				toggle_run_checkbox.focus_neighbor_top = toggle_run_checkbox.get_path_to(button)
 	
 	
 func _button_pressed(action: String):
@@ -96,7 +115,6 @@ func _button_pressed(action: String):
 		buttons[button_action].mouse_filter = Control.MOUSE_FILTER_IGNORE
 	input_popup.popup_centered()
 
-
 func _on_ListenForInputPopup_key_pressed(action: String, event: InputEventKey):
 	
 	var events = InputMap.action_get_events(action)
@@ -104,7 +122,7 @@ func _on_ListenForInputPopup_key_pressed(action: String, event: InputEventKey):
 	InputMap.action_erase_events(action)
 	InputMap.action_add_event(action, event)
 	
-	SettingsService.update_config()
+	SettingsService.update_inputs()
 	
 	for old_event in events:
 		if not old_event is InputEventKey: 
@@ -124,8 +142,20 @@ func _unhandled_input(event):
 		
 		
 func on_grab_focus():
-	var first_element = $CenterContainer/Settings/Sliders/MusicVolumeSlider
+	var first_element = $CenterContainer/Settings/VolumeSliders/MusicVolumeSlider
 
 	first_element.grab_focus()
 	first_element.grab_click_focus()
 	self.set_process_unhandled_input(true)
+
+func update_sfx_volume(value):
+	SettingsService.update_volume("sfx_volume", self.sfx_volume.value)
+
+func update_music_volume(value):
+	SettingsService.update_volume("music_volume", self.music_volume.value)
+
+func update_ui_volume(value):
+	SettingsService.update_volume("ui_volume", self.ui_volume.value)
+	
+func update_run_behavior(value):
+	SettingsService.update_run_behavior(value)

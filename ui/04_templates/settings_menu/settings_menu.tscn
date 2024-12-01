@@ -25,42 +25,71 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Sliders" type="GridContainer" parent="CenterContainer/Settings"]
+[node name="VolumeLabel" type="Label" parent="CenterContainer/Settings"]
+layout_mode = 2
+text = "Audio"
+
+[node name="VolumeSliders" type="GridContainer" parent="CenterContainer/Settings"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 2
 
-[node name="MusicVolumeLabel" type="Label" parent="CenterContainer/Settings/Sliders"]
+[node name="MusicVolumeLabel" type="Label" parent="CenterContainer/Settings/VolumeSliders"]
 layout_mode = 2
 text = "Music Volume:"
 
-[node name="MusicVolumeSlider" type="HSlider" parent="CenterContainer/Settings/Sliders"]
+[node name="MusicVolumeSlider" type="HSlider" parent="CenterContainer/Settings/VolumeSliders"]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_neighbor_top = NodePath(".")
 mouse_filter = 2
 step = 5.0
-tick_count = 2
+tick_count = 10
 ticks_on_borders = true
 
-[node name="SFXVolumeLabel" type="Label" parent="CenterContainer/Settings/Sliders"]
+[node name="SFXVolumeLabel" type="Label" parent="CenterContainer/Settings/VolumeSliders"]
 layout_mode = 2
 text = "SFX Volume:"
 
-[node name="SFXVolumeSlider" type="HSlider" parent="CenterContainer/Settings/Sliders"]
+[node name="SFXVolumeSlider" type="HSlider" parent="CenterContainer/Settings/VolumeSliders"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 step = 5.0
-tick_count = 2
+tick_count = 10
 ticks_on_borders = true
 
-[node name="Text Speed" type="Label" parent="CenterContainer/Settings/Sliders"]
+[node name="UIVolumeLabel" type="Label" parent="CenterContainer/Settings/VolumeSliders"]
+layout_mode = 2
+text = "UI Volume:"
+
+[node name="UIVolumeSlider" type="HSlider" parent="CenterContainer/Settings/VolumeSliders"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+step = 5.0
+tick_count = 5
+ticks_on_borders = true
+
+[node name="HSeparator2" type="HSeparator" parent="CenterContainer/Settings"]
+layout_mode = 2
+
+[node name="UILabel" type="Label" parent="CenterContainer/Settings"]
+layout_mode = 2
+text = "Interface"
+
+[node name="UISliders" type="GridContainer" parent="CenterContainer/Settings"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+
+[node name="Text Speed" type="Label" parent="CenterContainer/Settings/UISliders"]
 layout_mode = 2
 text = "Text Speed:"
 
-[node name="TextSpeedSlider" type="HSlider" parent="CenterContainer/Settings/Sliders"]
+[node name="TextSpeedSlider" type="HSlider" parent="CenterContainer/Settings/UISliders"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
@@ -71,13 +100,17 @@ ticks_on_borders = true
 [node name="HSeparator" type="HSeparator" parent="CenterContainer/Settings"]
 layout_mode = 2
 
+[node name="ControlsLabel" type="Label" parent="CenterContainer/Settings"]
+layout_mode = 2
+text = "Controls"
+
 [node name="InputVBox" type="VBoxContainer" parent="CenterContainer/Settings"]
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ConfigureLabel" type="Label" parent="CenterContainer/Settings/InputVBox"]
 layout_mode = 2
-text = "Configure Input (you can use your mouse for this):"
+text = "You can use your mouse for this."
 
 [node name="InputControls" type="GridContainer" parent="CenterContainer/Settings/InputVBox"]
 layout_mode = 2
@@ -85,6 +118,27 @@ size_flags_horizontal = 4
 size_flags_vertical = 3
 theme = ExtResource("1")
 columns = 4
+
+[node name="RunBehaviorContainer" type="HBoxContainer" parent="CenterContainer/Settings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/Settings/RunBehaviorContainer"]
+layout_mode = 2
+text = "Run button behavior:"
+
+[node name="Hold" type="CheckBox" parent="CenterContainer/Settings/RunBehaviorContainer"]
+layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_right = NodePath("../Toggle")
+mouse_filter = 2
+text = "Hold"
+
+[node name="Toggle" type="CheckBox" parent="CenterContainer/Settings/RunBehaviorContainer"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Hold")
+focus_neighbor_right = NodePath(".")
+mouse_filter = 2
+text = "Toggle"
 
 [node name="Popups" type="Node" parent="."]
 
@@ -115,6 +169,10 @@ text = "Press key for \"Up\"..."
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[connection signal="value_changed" from="CenterContainer/Settings/VolumeSliders/MusicVolumeSlider" to="." method="update_music_volume"]
+[connection signal="value_changed" from="CenterContainer/Settings/VolumeSliders/SFXVolumeSlider" to="." method="update_sfx_volume"]
+[connection signal="value_changed" from="CenterContainer/Settings/VolumeSliders/UIVolumeSlider" to="." method="update_ui_volume"]
+[connection signal="toggled" from="CenterContainer/Settings/RunBehaviorContainer/Toggle" to="." method="update_run_behavior"]
 [connection signal="about_to_popup" from="Popups/BlockClicksPopup" to="Popups/BlockClicksPopup" method="on_about_to_popup"]
 [connection signal="about_to_popup" from="Popups/ListenForInputPopup" to="Popups/ListenForInputPopup" method="on_about_to_popup"]
 [connection signal="focus_exited" from="Popups/ListenForInputPopup" to="Popups/ListenForInputPopup" method="_on_focus_exited"]

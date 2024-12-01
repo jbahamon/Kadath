@@ -40,8 +40,8 @@ func move_to_starting_room():
 		# Note: move start_game to the above when doing the cutscene intro
 		await EnvironmentService.update_whereabouts(
 			"000_prologue_kadath", 
-			"01_entrance",
-			Vector2(0, 0), # 320
+			"02_hub",
+			Vector2(0, 320),
 			Vector2.UP,
 			false,
 			PlayerProxy.ProxyMode.GAMEPLAY

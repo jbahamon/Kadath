@@ -1,14 +1,14 @@
-HBoxContainer
 Label
+HBoxContainer
+CheckBox
+HSeparator
 PanelContainer
 VBoxContainer
 TextureRect
 Sprite2D
-HSeparator
 VSeparator
 Control
 TextureProgressBar
 MarginContainer
 ProgressBar
 CenterContainer
-LocationRoom

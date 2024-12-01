@@ -17,8 +17,8 @@ enum TargetType {
 
 @export var interaction_vector = Vector2(16, 16)
 
+var is_running = false
 var input_vector = Vector2.ZERO
-var automated = false
 var target: Node2D
 var current_orientation = Vector2.ZERO
 var current_mode = ProxyMode.GAMEPLAY
@@ -72,16 +72,20 @@ func update_input_vector():
 	return old_input_vector == input_vector
 
 func get_movement_speed() -> float:
-	if Input.is_action_pressed("action_run"):
-		return self.run_speed
-	return self.walk_speed
+	if SettingsService.toggle_run:
+		if Input.is_action_just_pressed("action_run"):
+			self.is_running = not self.is_running
+	else:
+		self.is_running = Input.is_action_pressed("action_run")
+
+	return self.run_speed if self.is_running else self.walk_speed
 
 func update_animation() -> void:
 	if not self.target:
 		return
 	if velocity == Vector2.ZERO:
 		self.target.play_anim("idle")
-	elif Input.is_action_pressed("action_run"):
+	elif self.is_running:
 		self.target.play_anim("run")
 	else:
 		self.target.play_anim("walk")
