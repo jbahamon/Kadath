@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Armor" load_steps=2 format=3 uid="uid://f7fpj2rva4rp"]
+
+[ext_resource type="Script" path="res://item/script/equipment/armor.gd" id="1_xbfqs"]
+
+[resource]
+script = ExtResource("1_xbfqs")
+defense = 50
+equippable_by = 16
+id = "ruby_braces"
+display_name = "Ruby Braces"
+description = "Ruby-encrusted bracelets, bearing strange and alien inscriptions."
+max_amount = 99
+category = 1
+target_type = 4
+usable_in_menu = false
+usable_in_battle = false
+consumed_after_use = true

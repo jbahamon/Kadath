@@ -1,5 +1,6 @@
 PLAY_ANIM PROXY idle
 START_DIALOGUE pickman_catch_up
+SET_POSITION PROXY TO (_, 70)
 LOOK PROXY DOWN
 CALL ROOM spawn_pickman
 WALK NPCPickman TO (_, 92) AT 60

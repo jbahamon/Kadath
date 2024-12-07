@@ -90,7 +90,7 @@ func get_equipment(cls, equippable_flag: int) -> Array:
 		func(item_id):
 			var item = ItemService.id_to_item(item_id)
 			return cls.instance_has(item) and (item.equippable_by & equippable_flag)
-	)
+	).map(func (item_id): return ItemService.id_to_item(item_id))
 
 func sort():
 	var items = order.map(func(item_id): return ItemService.get_item(item_id))

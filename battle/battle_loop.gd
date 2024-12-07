@@ -79,7 +79,7 @@ func add_to_queue(actor):
 	
 func remove_from_queue(actor):
 	self.turn_queue.erase(actor)
-	
+
 func is_battle_won() -> bool:
 	if self.battle_end_state.result == BattleEndState.Result.WIN:
 		return true

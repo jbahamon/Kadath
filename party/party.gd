@@ -54,6 +54,7 @@ func reset_movement():
 		party_member.position = leader.position
 		party_member.set_orientation(leader.current_orientation)
 	
+	
 func on_proxy_exit(_proxy: PlayerProxy):
 	self.set_physics_process(false)
 	

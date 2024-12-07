@@ -10,7 +10,7 @@ enum TargetType {
 	NONE
 }
 @export var id: String 
-@export var name: String
+@export var display_name: String
 @export var description: String
 @export var max_amount: int = 99
 @export var category: ItemService.ItemCategory

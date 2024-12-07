@@ -67,7 +67,6 @@ layout_mode = 2
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="cancel" from="VBoxContainer/HBoxContainer/PartyList" to="." method="_on_party_list_cancel"]
 [connection signal="element_focused" from="VBoxContainer/HBoxContainer/PartyList" to="VBoxContainer/HBoxContainer/PartyMemberStats" method="on_party_member_focused"]
-[connection signal="element_selected" from="VBoxContainer/HBoxContainer/PartyList" to="." method="_on_party_list_element_selected"]
 [connection signal="element_selected" from="VBoxContainer/HBoxContainer/PartyList" to="VBoxContainer/HBoxContainer/PartyMemberStats" method="on_party_member_selected"]
 [connection signal="focus_entered" from="VBoxContainer/HBoxContainer/PartyList" to="." method="on_grab_focus"]
 [connection signal="focus_released" from="VBoxContainer/HBoxContainer/PartyMemberStats" to="." method="on_grab_focus"]

@@ -26,7 +26,7 @@ func assign_null(_args: Dictionary):
 
 func update_item():
 	var item = ItemService.id_to_item(self.item_id)
-	self.item_name_label.text = item.name
+	self.item_name_label.text = item.display_name
 	if item.max_amount == 1:
 		self.amount_label.text = ""
 	else:

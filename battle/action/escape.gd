@@ -13,5 +13,8 @@ func pop_parameter():
 	return null
 	
 func execute(_actor):
-	BattleService.mark_battle_as_escaped()
+	if BattleService.try_escape():
+		BattleService.mark_battle_as_escaped()
+	else:
+		print("boo hoo")
 	

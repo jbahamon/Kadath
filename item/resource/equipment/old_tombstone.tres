@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=2 format=3 uid="uid://wl6fh0blf57v"]
+
+[ext_resource type="Script" path="res://item/script/equipment/weapon.gd" id="1_6cng4"]
+
+[resource]
+script = ExtResource("1_6cng4")
+attack = 30
+equippable_by = 16
+id = "old_tombstone"
+display_name = "Old Tombstone"
+description = "Brought by Pickman from the Ghoul Burrows."
+max_amount = 99
+category = 1
+target_type = 4
+usable_in_menu = false
+usable_in_battle = false
+consumed_after_use = true

@@ -213,7 +213,6 @@ animations = [{
 [node name="Room" type="Node2D"]
 y_sort_enabled = true
 texture_filter = 1
-position = Vector2(0, 1)
 script = ExtResource("2_nhaa6")
 room_id = "02_hub"
 used_rect = Rect2i(-320, -352, 640, 736)

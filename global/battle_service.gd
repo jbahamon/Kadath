@@ -78,7 +78,8 @@ func start_battle(enemies: Array, escapable: bool, proxy_mode_on_finish=null):
 		return
 	
 	self.current_battle_parameters = {
-		"escapable": escapable
+		"escapable": escapable,
+		"escape_tries": 0,
 	}
 	
 	var was_input_enabled = InputService.is_input_enabled()
@@ -360,11 +361,36 @@ func resume_non_participants(end_proxy_mode):
 	
 	EntitiesService.get_proxy().set_mode(end_proxy_mode)
 	
+func try_escape() -> bool:
+	var player_speeds = []
+	var enemy_speeds = []
+	
+	for actor in self.loop.actors:
+		if not actor.is_alive:
+			continue
+		if actor is PartyMember:
+			player_speeds.append(actor.battler.stats.speed)
+		else:
+			enemy_speeds.append(actor.battler.stats.speed)
+
+	player_speeds.sort()
+	enemy_speeds.sort()
+	
+	var player_speed = 0
+	var enemy_speed = 0
+	for i in range(player_speeds.size()):
+		player_speed += pow(0.7, i) * player_speeds[player_speeds.size() - i]
+	for i in range(enemy_speeds.size()):
+		enemy_speed += pow(0.7, i) * enemy_speeds[enemy_speeds.size() - i]
+	
+	var probability = 0.5 * (player_speed/enemy_speed) + 0.2 * self.current_battle_parameters["escape_tries"]
+	
+	self.current_battle_parameters["escape_tries"] += 1
+	return randf() < probability
+	
 func mark_battle_as_escaped():
-	if self.current_battle_parameters == null:
-		return
-	else:
-		self.loop.mark_battle_as_escaped()
+	assert(self.current_battle_parameters != null)
+	self.loop.mark_battle_as_escaped()
 	
 func deal_rewards(rewards: BattleRewards):
 	var party = EntitiesService.get_party()

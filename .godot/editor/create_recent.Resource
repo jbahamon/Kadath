@@ -1,3 +1,6 @@
+Weapon
+Equipment
+Armor
 BattleRewards
 ShaderMaterial
 Hit

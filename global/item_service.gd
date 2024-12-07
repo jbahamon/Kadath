@@ -13,7 +13,7 @@ func _init():
 	self.item_definitions = {}
 	for folder in ["consumable", "equipment", "key"]:
 		for file_name in self.get_all_files("res://item/resource/%s/" % folder, "tres"):
-			var item_resource: InventoryItem = load(file_name)
+			var item_resource = load(file_name)
 			self.item_definitions[item_resource.id] = item_resource
 	print(self.item_definitions)
 	

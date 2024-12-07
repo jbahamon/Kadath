@@ -146,8 +146,6 @@ transparent = true
 script = ExtResource("6")
 
 [node name="PauseMenu" parent="MenuLayer/MenuPopup" instance=ExtResource("3")]
-offset_right = 347.0
-offset_bottom = 324.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 

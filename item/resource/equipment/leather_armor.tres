@@ -11,3 +11,7 @@ name = "Leather Vest"
 description = "Doesn't offer much protection, but it's better than nothing."
 max_amount = 99
 category = 1
+target_type = 4
+usable_in_menu = false
+usable_in_battle = false
+consumed_after_use = true

@@ -55,11 +55,29 @@ var physical_defense: float:
 			defense = self.stats.defense
 			
 		return defense * status_effects.physical_defense_modifier
-		
-var elemental_defense: float:
-	get:
-		return 1.0
 
+var magic_attack: float:
+	get:
+		var m_attack
+		var parent = self.get_parent()
+		if parent is PartyMember:
+			m_attack = self.stats.magic_attack + parent.physical_armor
+		else:
+			m_attack = self.stats.magic_attack
+			
+		return m_attack * status_effects.magic_attack_modifier
+
+var magic_defense: float:
+	get:
+		var m_defense
+		var parent = self.get_parent()
+		if parent is PartyMember:
+			m_defense = self.stats.magic_defense + parent.magic_armor
+		else:
+			m_defense = self.stats.magic_defense
+			
+		return m_defense * status_effects.magic_defense_modifier
+		
 var speed: float:
 	get:
 		return self.stats.speed * self.status_effects.speed_modifier

@@ -21,6 +21,8 @@ growth = ExtResource("2_attsm")
 experience = 2
 icon = ExtResource("3_psao1")
 menu_texture = ExtResource("4_svurb")
+starting_weapon_id = "old_tombstone"
+starting_armor_id = "ruby_braces"
 
 [node name="Anim" parent="." index="0" instance=ExtResource("4_pfdmg")]
 use_parent_material = true

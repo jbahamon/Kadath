@@ -184,8 +184,8 @@ func parse_instruction(stack: Array, instruction_name: String, args: String):
 			var set_position_match: RegExMatch = self.patterns["SET_POSITION"].search(args)
 			instruction = Call.new(
 				self.parse_string(set_position_match.get_string("Character")),
-				"set_position",
-				[self.parse_vector2(set_position_match.get_string("Position"))]
+				"set",
+				["position", self.parse_vector2(set_position_match.get_string("Position"))]
 			)
 			
 		CutsceneInstruction.Type.DISABLE_COLLISIONS:

@@ -1,4 +1,5 @@
 C:/Users/Jorge/Documents/Godot/Kadath/location/000_prologue_kadath/cutscene
+res://item/resource/equipment
 res://npc/lib
 res://utils/material
 res://npc/enemy/acolyte
@@ -19,4 +20,3 @@ res://item/resource/consumable
 res://ui/04_templates/other
 res://ui/01_atoms/button
 res://global
-res://battle/battler

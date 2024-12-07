@@ -67,17 +67,17 @@ func update_shown_items():
 	)
 	
 func _on_consumables_focus_entered():
-	UIService.set_menu_help("Consumable items, including recovery items", select_controls)
+	UIService.set_menu_help("Consumable items, including recovery items.", select_controls)
 	self.consumables_button.button_pressed = true
 	self._on_category_focused(ItemService.ItemCategory.CONSUMABLE)
 	
 func _on_equipment_focus_entered():
-	UIService.set_menu_help("Weapons, armor and accessories", select_controls)
+	UIService.set_menu_help("Weapons, armor and accessories.", select_controls)
 	self.equipment_button.button_pressed = true
 	self._on_category_focused(ItemService.ItemCategory.EQUIPMENT)
 	
 func _on_key_items_focus_entered():
-	UIService.set_menu_help("Important items that might be of use during your journeys", select_controls)
+	UIService.set_menu_help("Important items that might be of use during your journeys.", select_controls)
 	self.key_items_button.button_pressed = true
 	self._on_category_focused(ItemService.ItemCategory.KEY)
 

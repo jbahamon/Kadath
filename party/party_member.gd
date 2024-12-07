@@ -15,7 +15,8 @@ enum Id {
 	SYLVIE = 1 << 3,
 	PICKMAN = 1 << 4,
 	KURANES = 1 << 5,
-	CARTER = 1 << 6,
+	ZKAUBA = 1 << 6,
+	CARTER = 1 << 7,
 }
 
 const PARTY_IN_BATTLE_ID = {
@@ -25,6 +26,7 @@ const PARTY_IN_BATTLE_ID = {
 	Id.SYLVIE: "Sylvie",
 	Id.PICKMAN: "Pickman",
 	Id.KURANES: "Kuranes",
+	Id.ZKAUBA: "Zkauba",
 	Id.CARTER: "Carter",	
 }
 
@@ -32,7 +34,7 @@ const PARTY_IN_BATTLE_ID = {
 @onready var anim = $Anim
 @onready var battler: Battler = $Battler
 
-@export_flags ("Alex", "Volki", "Gruska", "Sylvie", "Pickman", "Kuranes", "Carter") var id: int = Id.ALEX
+@export_flags ("Alex", "Volki", "Gruska", "Sylvie", "Pickman", "Kuranes", "Zkauba", "Carter") var id: int = Id.ALEX
 @export var display_name: String
 @export var growth: Resource
 @export var unlocked = false
@@ -40,10 +42,14 @@ const PARTY_IN_BATTLE_ID = {
 @export var icon: Texture2D
 @export var menu_texture: Texture2D
 
-var equipped_weapon: Weapon : set = set_weapon
-var equipped_helmet: Helmet : set = set_helmet
-var equipped_armor: Armor : set = set_armor
-var equipped_accessory: Accessory : set = set_accessory
+@export var starting_weapon_id: String
+@export var starting_armor_id: String
+@export var starting_accessory_id: String
+
+var equipped_weapon: Weapon
+var equipped_armor: Armor
+var equipped_accessory: Accessory
+
 
 var current_orientation = Vector2.DOWN
 var velocity: Vector2 = Vector2.ZERO
@@ -78,13 +84,14 @@ var physical_attack_bonus: float:
 var physical_armor: float:
 	get:
 		return float(
-			(equipped_helmet.defense if equipped_helmet != null else 0) +
 			(equipped_armor.defense if equipped_armor != null else 0)
 		)
 	
-var elemental_armor: float:
+var magic_armor: float:
 	get:
-		return 0.0
+		return float(
+			(equipped_armor.magic_defense if equipped_armor != null else 0)
+		)
 
 var is_alive: bool :
 	get:
@@ -101,6 +108,15 @@ func _ready():
 	self.set_physics_process(false)
 	battler.stats = growth.create_stats(experience)
 	battler.reset_stats()
+	
+	if self.starting_weapon_id != null:
+		self.equipped_weapon = ItemService.id_to_item(self.starting_weapon_id)
+	
+	if self.starting_armor_id != null:
+		self.equipped_armor = ItemService.id_to_item(self.starting_armor_id)
+		
+	if self.starting_accessory_id != null:
+		self.equipped_accessory = ItemService.id_to_item(self.starting_accessory_id)
 
 func _physics_process(delta):
 	self.position += velocity * delta
@@ -130,7 +146,6 @@ func save(save_data: SaveData):
 		"display_name": display_name,
 		"unlocked": unlocked,
 		"equipped_weapon": equipped_weapon.id if equipped_weapon != null else null,
-		"equipped_helmet": equipped_helmet.id if equipped_helmet != null else null,
 		"equipped_armor": equipped_armor.id if equipped_armor != null else null,
 		"equipped_accessory": equipped_accessory.id if equipped_accessory != null else null,
 		"experience": experience,
@@ -145,7 +160,6 @@ func load_game_data(save_data: SaveData):
 	unlocked = data["unlocked"]
 	
 	equipped_weapon = ItemService.id_to_item(data["equipped_weapon"]) if data["equipped_weapon"] != null else null
-	equipped_helmet = ItemService.id_to_item(data["equipped_helmet"]) if data["equipped_helmet"] != null else null 
 	equipped_armor = ItemService.id_to_item(data["equipped_armor"]) if data["equipped_armor"] != null else null
 	equipped_accessory = ItemService.id_to_item(data["equipped_accessory"]) if data["equipped_accessory"] != null else null
 	
@@ -160,50 +174,6 @@ func load_game_data(save_data: SaveData):
 
 func unlock_skill(skill_id: String):
 	self.find_child("Battler/Actions/Skill/%s".format(skill_id)).unlock()
-	
-func set_weapon(weapon: Weapon):
-	var party: Party = self.get_parent()
-	assert(party != null)
-	if party != null:
-		if equipped_weapon != null:
-			party.inventory.add(equipped_weapon.id)
-		if weapon != null:
-			party.inventory.remove(weapon.id)
-	
-	equipped_weapon = weapon
-	
-func set_helmet(helmet: Helmet):
-	var party: Party = self.get_parent()
-	assert(party != null)
-	if party != null:
-		if self.equipped_helmet != null:
-			party.inventory.add(equipped_helmet.id)
-		if helmet != null:
-			party.inventory.remove(helmet.id)
-	
-	equipped_helmet = helmet
-	
-func set_armor(armor: Armor):
-	var party: Party = self.get_parent()
-	assert(party != null || equipped_armor == null)
-	if party != null:
-		if equipped_armor != null:
-			party.inventory.add(equipped_armor.id)
-		if armor != null:
-			party.inventory.remove(armor.id)
-	
-	equipped_armor = armor
-	
-func set_accessory(accessory: Accessory):
-	var party: Party = self.get_parent()
-	assert(party != null || equipped_accessory == null)
-	if party != null:
-		if equipped_accessory != null:
-			party.inventory.add(equipped_accessory.id)
-		if accessory != null:
-			party.inventory.remove(accessory.id)
-	
-	equipped_accessory = accessory
 
 func instance_ui_control():
 	var control = PartyMemberSummary.instantiate()
@@ -213,13 +183,9 @@ func instance_ui_control():
 # Methods for battles	
 	
 func get_allies(actors: Array):
-	# var script = get_script()
-	#return actors.filter(func(actor): return script.instance_has(actor))
 	return actors.filter(func(actor): return actor is PartyMember)
 	
 func get_enemies(actors: Array):
-	#var script = get_script()
-	#return actors.filter(func(actor): return not script.instance_has(actor))
 	return actors.filter(func(actor): return not actor is PartyMember)
 	
 func take_hit(hit: Hit, in_battle: bool = true):

@@ -7,9 +7,6 @@ signal exit_submenu
 const party_member_help = "Choose a party member to change their equipment."
 const party_member_controls = "[ {ui_up} ]/[ {ui_down} ] : Select  [ {ui_cancel} ]: Return  [ {ui_accept} ]: Confirm"
 
-const equipment_help = "Choose the equipment to change."
-const equipment_controls = "[ {ui_up} ]/[ {ui_down} ] : Select  [ {ui_cancel} ]: Return  [ {ui_accept} ]: Confirm"
-
 const item_help = "Choose the item to equip."
 const item_controls = "[ {ui_up} ]/[ {ui_down} ] : Select  [ {ui_cancel} ]: Return  [ {ui_accept} ]: Confirm"
 
@@ -21,7 +18,6 @@ const item_controls = "[ {ui_up} ]/[ {ui_down} ] : Select  [ {ui_cancel} ]: Retu
 @export var icon: Texture2D
 @export var help_text: String
 @export var controls_text: String
-
 
 var inventory: Inventory
 
@@ -51,13 +47,16 @@ func on_grab_focus():
 
 func on_item_requested(item_class, party_member: PartyMember):
 	var items = self.inventory.get_equipment(item_class, party_member.id)
-	items.append(null)
+	# TODO Armor can be removed but need to implement stat previews
+	if item_class != Weapon and item_class != Armor:
+		items.append(null)
 	self.item_list.initialize(items)
 	
 	self.party_member_stats.set_process_unhandled_input(false)
 	await self.set_item_mode()
 	
-	await item_list.done
+	if items.size() > 0:
+		await item_list.done
 	
 	await self.set_party_list_mode()
 	
@@ -79,7 +78,3 @@ func _on_visibility_changed():
 
 func _on_party_list_cancel():
 	self.exit_submenu.emit()
-
-
-func _on_party_list_element_selected(_party_member: PartyMember) -> void:
-	UIService.set_menu_help(equipment_help, equipment_controls)

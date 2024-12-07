@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="DialogueResource" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_resource.gd" id="1_ctuo4"]
+[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_resource.gd" id="1_7du06"]
 
 [resource]
-script = ExtResource("1_ctuo4")
+script = ExtResource("1_7du06")
 using_states = PackedStringArray()
 titles = {
 "after_boss": "69",
@@ -792,9 +792,9 @@ lines = {
 "next_id": "62",
 "notes": "",
 "tags": PackedStringArray(),
-"text": "The others will stay at the entrance, but you'll have a better chance with me on your side.",
+"text": "The others will stay at the entrance, but you'll have a better chance with me by your side.",
 "text_replacements": Array[Dictionary]([]),
-"translation_key": "The others will stay at the entrance, but you'll have a better chance with me on your side.",
+"translation_key": "The others will stay at the entrance, but you'll have a better chance with me by your side.",
 "type": &"dialogue"
 },
 "62": {
@@ -1086,7 +1086,7 @@ Pickman: Wait!
 
 ~ pickman_recruit
 Pickman: Looks like we're not alone.
-Pickman: The others will stay at the entrance, but you'll have a better chance with me on your side.
+Pickman: The others will stay at the entrance, but you'll have a better chance with me by your side.
 => END
 
 ~ pickman_join

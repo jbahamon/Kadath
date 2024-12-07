@@ -12,7 +12,7 @@ void fragment() {
 	// Get size of texture in pixels
 	float size_x = float(textureSize(TEXTURE, 0).x);
 	float size_y = float(textureSize(TEXTURE, 0).y);
-	// 
+	//
 	vec4 pixelColor = texture(TEXTURE, UV);
 	// Create a new "UV" which remaps every UV value to a snapped pixel value
 	vec2 UVr = vec2(floor(UV.x*size_x)/size_x, floor(UV.y*size_y)/size_y);
@@ -20,8 +20,8 @@ void fragment() {
 	float visible = step(progress, random(UVr));
 	// Draw the pixel, or not depending on if it is visible or not
 	float avg = ((pixelColor.r + pixelColor.g + pixelColor.b) / 3.0  * 2.0);
-	
+
     vec4 front = vec4(vec3(avg), min(visible, pixelColor.a)) ;
 	COLOR = mix(front, vec4(tint_color, front.a), intensity);
-	
+
 }

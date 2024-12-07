@@ -17,6 +17,20 @@ var physical_defense_modifier:
 		for effect in self._effects:
 			modifier *= effect.physical_defense_modifier
 		return modifier
+
+var magic_attack_modifier:
+	get:
+		var modifier = 1.0
+		for effect in self._effects:
+			modifier *= effect.magic_attack_modifier
+		return modifier
+	
+var magic_defense_modifier:
+	get:
+		var modifier = 1.0
+		for effect in self._effects:
+			modifier *= effect.magic_defense_modifier
+		return modifier
 		
 var speed_modifier:
 	get:
@@ -32,7 +46,6 @@ func _init(init_owner):
 	self._effects = []
 	self.owner = init_owner
 
-	
 func _destroy():
 	self.owner = null
 

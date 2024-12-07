@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=2 format=3 uid="uid://c3whei6s88pkp"]
+
+[ext_resource type="Script" path="res://item/script/equipment/weapon.gd" id="1_qnd8o"]
+
+[resource]
+script = ExtResource("1_qnd8o")
+attack = 30
+equippable_by = 128
+id = "scimitar"
+display_name = "Scimitar"
+description = "A sword with a sharp, curved blade."
+max_amount = 99
+category = 1
+target_type = 4
+usable_in_menu = false
+usable_in_battle = false
+consumed_after_use = true
