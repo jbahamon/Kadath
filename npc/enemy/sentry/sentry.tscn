@@ -25,15 +25,15 @@ region = Rect2(16, 0, 16, 16)
 [sub_resource type="SpriteFrames" id="SpriteFrames_3nu6t"]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 4.0,
 "texture": SubResource("AtlasTexture_mo5rv")
 }, {
-"duration": 1.0,
+"duration": 4.0,
 "texture": SubResource("AtlasTexture_lhgul")
 }],
 "loop": true,
 "name": &"default",
-"speed": 6.6
+"speed": 60.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l8i0k"]
@@ -41,6 +41,7 @@ animations = [{
 [node name="Sentry" instance=ExtResource("1_vbu6h")]
 enemy_id = "sentry"
 icon = ExtResource("2_2k4kj")
+enemy_info = "A simple construct. Attacks indiscriminately."
 base_display_name = "Sentry"
 
 [node name="Anim" parent="." index="0" instance=ExtResource("2_571aw")]
@@ -61,7 +62,9 @@ shape = SubResource("CapsuleShape2D_w7pdr")
 
 [node name="Projectile" parent="Battler" index="5" instance=ExtResource("7_885q8")]
 visible = false
+z_index = 1
 sprite_frames = SubResource("SpriteFrames_3nu6t")
+frame_progress = 0.485089
 
 [node name="South" type="Marker2D" parent="Battler/Hitspots" index="0"]
 position = Vector2(0, 17)
@@ -77,9 +80,6 @@ position = Vector2(-20, 12)
 
 [node name="East" type="Marker2D" parent="Battler/Hitspots" index="4"]
 position = Vector2(20, 12)
-
-[node name="InteractableArea" parent="." index="3"]
-visible = false
 
 [node name="CollisionShape2D" parent="InteractableArea" index="0"]
 position = Vector2(0, -10)

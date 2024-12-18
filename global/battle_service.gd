@@ -1,4 +1,5 @@
 extends Node
+
 const BattleLoop = preload("res://battle/battle_loop.gd")
 const Attack = preload("res://battle/action/base_attack.gd")
 const Defend = preload("res://battle/action/defend.gd")
@@ -379,9 +380,10 @@ func try_escape() -> bool:
 	var player_speed = 0
 	var enemy_speed = 0
 	for i in range(player_speeds.size()):
-		player_speed += pow(0.7, i) * player_speeds[player_speeds.size() - i]
+		player_speed += pow(0.6, i) * player_speeds[player_speeds.size() - 1 - i]
+		
 	for i in range(enemy_speeds.size()):
-		enemy_speed += pow(0.7, i) * enemy_speeds[enemy_speeds.size() - i]
+		enemy_speed += pow(0.6, i) * enemy_speeds[enemy_speeds.size() - 1 - i]
 	
 	var probability = 0.5 * (player_speed/enemy_speed) + 0.2 * self.current_battle_parameters["escape_tries"]
 	
@@ -452,3 +454,14 @@ func remove_from_queue(actor):
 
 func delay_actor(actor, delay):
 	self.loop.delay_actor(actor, delay)
+
+func prompt(text: String):
+	await self.ui.prompt(text)
+	
+func announce(text: String, wait_time=0):
+	self.ui.set_info_text(text)
+	if wait_time > 0:
+		await get_tree().create_timer(wait_time).timeout
+
+func get_party_actors():
+	return self.loop.actors.filter(func (it): return it is PartyMember)

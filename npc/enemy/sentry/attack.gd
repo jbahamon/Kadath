@@ -40,6 +40,10 @@ func shoot_projectile(actor, hit):
 	var destination = target.battler.get_hitspot("Center")
 	
 	var time = origin.distance_to(destination) / speed
+	var room = EnvironmentService.get_room()
+	actor.battler.remove_child(projectile)
+	room.add_child(projectile)
+	
 	projectile.global_position = origin
 	projectile.visible = true
 	projectile.speed = origin.direction_to(destination) * speed
@@ -48,6 +52,9 @@ func shoot_projectile(actor, hit):
 	
 	projectile.visible = false
 	projectile.position = Vector2.ZERO
+	
+	room.remove_child(projectile)
+	actor.battler.add_child(projectile)
 	
 	await target.take_hit(hit)
 	

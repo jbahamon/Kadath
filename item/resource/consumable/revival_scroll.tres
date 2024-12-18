@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=2 format=3 uid="uid://bt6mq1oatcvne"]
 
-[ext_resource type="Script" path="res://item/script/consumable/palingenesis_scroll.gd" id="1_hdfe3"]
+[ext_resource type="Script" path="res://item/script/consumable/revival_scroll.gd" id="1_hdfe3"]
 
 [resource]
 script = ExtResource("1_hdfe3")
@@ -9,12 +9,12 @@ energy_recovery_mode = 0
 health = 50
 energy = 0
 status_effects = Array[String](["downed"])
-id = "palingenesis_scroll"
-display_name = "Palingenesis Scroll"
+id = "revival_scroll"
+display_name = "Revival Scroll"
 description = "Offers minor healing, but can bring back a downed ally."
 max_amount = 99
 category = 0
 target_type = 5
-usable_in_menu = false
+usable_in_menu = true
 usable_in_battle = true
 consumed_after_use = true

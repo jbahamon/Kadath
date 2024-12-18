@@ -62,6 +62,7 @@ script = ExtResource("2_y1sju")
 battle_on_contact = false
 enemy_id = "ampoule"
 icon = ExtResource("3_sr5ss")
+enemy_info = "Filled with a suspicious liquid. Attempts to absorb nutrients to repair itself."
 base_display_name = "Ampoule"
 
 [node name="Anim" parent="." index="0" instance=ExtResource("3_rqshg")]

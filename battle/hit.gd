@@ -20,7 +20,7 @@ enum Element {
 
 @export_group("Damage")
 @export var fixed_damage = false
-@export var base_damage: float = 0.0
+@export var base_damage: int = 0
 @export var type: Element = Element.NONE
 
 @export_group("Animation")

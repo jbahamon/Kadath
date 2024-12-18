@@ -52,7 +52,7 @@ func load_config() -> bool:
 	return true
 	
 func create_config():
-	var config_file = ConfigFile.new()
+	self.config_file = ConfigFile.new()
 	config_file.load(CONFIG_FILE_NAME)
 	
 	for action in INPUT_ACTIONS:

@@ -126,6 +126,7 @@ script = ExtResource("2_mtvfo")
 battle_on_contact = false
 enemy_id = "acolyte"
 icon = ExtResource("3_grxgs")
+enemy_info = "Something unpleasant hides under those clothes. Willing to sacrifice a companion to heal the rest."
 base_display_name = "Acolyte"
 
 [node name="Anim" parent="." index="0" instance=ExtResource("4_dgo87")]

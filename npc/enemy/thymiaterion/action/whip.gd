@@ -8,7 +8,7 @@ func execute(actor):
 	await self.target.take_hit(hit)
 	
 	print(
-		"%s attacked %s (HP: %d -> HP: %d)" % [
+		"%s used Whip on %s (HP: %d -> HP: %d)" % [
 			actor.display_name, 
 			target.display_name, 
 			prev_hp, 

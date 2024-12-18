@@ -5,8 +5,8 @@
 
 [resource]
 script = ExtResource("2_e24n7")
-fixed_damage = false
-base_damage = 0.0
+fixed_damage = true
+base_damage = 1.0
 type = 0
 anim_time = 0.0
 anim_duration = 0.45

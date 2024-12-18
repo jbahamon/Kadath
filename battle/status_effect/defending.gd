@@ -1,7 +1,7 @@
 extends StatusEffect
 
 func _init():
-	self.defense_modifier = 0.5
+	self.physical_defense_modifier = 0.5
 	self.magic_defense_modifier = 0.5
 	self.trigger = StatusEffect.Trigger.TURN_START
 

@@ -1,72 +1,83 @@
-[gd_scene load_steps=11 format=3 uid="uid://bngh72w54kdq0"]
+[gd_scene load_steps=14 format=3 uid="uid://ihknndack3n4"]
 
-[ext_resource type="PackedScene" uid="uid://c17hneqpuil0l" path="res://npc/lib/base_npc.tscn" id="1_qtfsx"]
-[ext_resource type="Script" path="res://npc/enemy/enemy.gd" id="2_x8f4g"]
-[ext_resource type="Texture2D" uid="uid://bs4rf2sdoppyh" path="res://npc/enemy/thymiaterion/icon.png" id="3_h48do"]
-[ext_resource type="PackedScene" uid="uid://c1qvuen3txcsn" path="res://npc/enemy/thymiaterion/anim.tscn" id="3_j4650"]
-[ext_resource type="PackedScene" uid="uid://dtaxhpmmjspek" path="res://battle/battler/battler.tscn" id="3_rrahi"]
-[ext_resource type="Script" path="res://battle/ai/random_ai.gd" id="6_hhc2v"]
-[ext_resource type="Resource" uid="uid://dlkfog15bgvgh" path="res://npc/lib/empty_rewards.tres" id="6_lqr72"]
-[ext_resource type="Script" path="res://battle/action/base_attack.gd" id="6_mwfm3"]
+[ext_resource type="PackedScene" uid="uid://c17hneqpuil0l" path="res://npc/lib/base_npc.tscn" id="1_q5d36"]
+[ext_resource type="Script" path="res://npc/enemy/enemy.gd" id="2_udeox"]
+[ext_resource type="Texture2D" uid="uid://i0fxdua2akyb" path="res://npc/enemy/thymiaterion/icon.png" id="3_rflw6"]
+[ext_resource type="PackedScene" uid="uid://b8t81sm0y5b4o" path="res://npc/enemy/thymiaterion/anim.tscn" id="4_ifidb"]
+[ext_resource type="PackedScene" uid="uid://dtaxhpmmjspek" path="res://battle/battler/battler.tscn" id="5_2gha7"]
+[ext_resource type="Script" path="res://npc/enemy/thymiaterion/action/shoot.gd" id="6_7xjpy"]
+[ext_resource type="Script" path="res://npc/enemy/thymiaterion/action/jump.gd" id="6_uy2te"]
+[ext_resource type="Script" path="res://npc/enemy/thymiaterion/action/whip.gd" id="7_q7jpk"]
+[ext_resource type="Script" path="res://npc/enemy/thymiaterion/action/beam.gd" id="8_sm7w2"]
+[ext_resource type="Script" path="res://npc/enemy/thymiaterion/action/chew.gd" id="9_dmayn"]
+[ext_resource type="Script" path="res://npc/enemy/thymiaterion/action/prepare.gd" id="10_hat3u"]
+[ext_resource type="Script" path="res://npc/enemy/thymiaterion/ai.gd" id="11_ikq4e"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_phgn6"]
-radius = 20.0
-height = 48.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tv2y7"]
+radius = 28.0
+height = 80.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_a00iy"]
-radius = 32.0
-
-[node name="Thymiaterion" groups=["enemy"] instance=ExtResource("1_qtfsx")]
+[node name="Thymiaterion" groups=["enemy"] instance=ExtResource("1_q5d36")]
 position = Vector2(0, 0)
-script = ExtResource("2_x8f4g")
+collision_layer = 24
+collision_mask = 1
+script = ExtResource("2_udeox")
 battle_on_contact = true
 enemy_id = "thymiaterion"
-icon = ExtResource("3_h48do")
+icon = ExtResource("3_rflw6")
+enemy_info = "This huge statue seems to mix single-target shots and a quake that hits everyone."
 base_display_name = "Thymiaterion"
+dialogue_name = "????"
 
-[node name="Anim" parent="." index="0" instance=ExtResource("3_j4650")]
+[node name="Anim" parent="." index="0" instance=ExtResource("4_ifidb")]
 
-[node name="Battler" parent="." index="1" instance=ExtResource("3_rrahi")]
+[node name="Battler" parent="." index="1" instance=ExtResource("5_2gha7")]
 anim_path = NodePath("..")
-rewards = ExtResource("6_lqr72")
 
-[node name="Attack" type="Node" parent="Battler/Actions" index="0"]
-script = ExtResource("6_mwfm3")
-jump_back_anim = "walk_back"
-idle_anim = "idle"
-walk_speed = 80
-jump_back_speed = 80
+[node name="Jump" type="Node" parent="Battler/Actions" index="0"]
+script = ExtResource("6_uy2te")
+
+[node name="Shoot" type="Node" parent="Battler/Actions" index="1"]
+script = ExtResource("6_7xjpy")
+
+[node name="Whip" type="Node" parent="Battler/Actions" index="2"]
+script = ExtResource("7_q7jpk")
+
+[node name="Beam" type="Node" parent="Battler/Actions" index="3"]
+script = ExtResource("8_sm7w2")
+
+[node name="Chew" type="Node" parent="Battler/Actions" index="4"]
+script = ExtResource("9_dmayn")
+
+[node name="Prepare" type="Node" parent="Battler/Actions" index="5"]
+script = ExtResource("10_hat3u")
 
 [node name="AI" parent="Battler" index="3"]
-script = ExtResource("6_hhc2v")
+script = ExtResource("11_ikq4e")
 
 [node name="CollisionShape2D" parent="Battler/Hitbox" index="0"]
-position = Vector2(0, -18)
-shape = SubResource("CapsuleShape2D_phgn6")
+position = Vector2(0, -34)
+shape = SubResource("CapsuleShape2D_tv2y7")
 
 [node name="South" type="Marker2D" parent="Battler/Hitspots" index="0"]
 position = Vector2(0, 8)
 
 [node name="Center" type="Marker2D" parent="Battler/Hitspots" index="1"]
-position = Vector2(0, -16)
+position = Vector2(0, -20)
 
-[node name="North" type="Marker2D" parent="Battler/Hitspots" index="2"]
-position = Vector2(0, -12)
+[node name="West" type="Marker2D" parent="Battler/Hitspots" index="2"]
+position = Vector2(-40, 1)
 
-[node name="West" type="Marker2D" parent="Battler/Hitspots" index="3"]
-position = Vector2(-22, 0)
+[node name="East" type="Marker2D" parent="Battler/Hitspots" index="3"]
+position = Vector2(40, 1)
 
-[node name="East" type="Marker2D" parent="Battler/Hitspots" index="4"]
-position = Vector2(22, 0)
+[node name="BumpCollision" parent="." index="2"]
+disabled = true
 
 [node name="InteractableArea" parent="." index="3"]
 collision_layer = 24
 collision_mask = 1
 monitoring = true
-
-[node name="CollisionShape2D" parent="InteractableArea" index="0"]
-position = Vector2(0, -12)
-shape = SubResource("CircleShape2D_a00iy")
 
 [connection signal="body_entered" from="InteractableArea" to="." method="_on_interactable_area_body_entered"]
 

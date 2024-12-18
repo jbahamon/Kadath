@@ -5,7 +5,9 @@ signal touched(body)
 @export var battle_on_contact = true
 @export var enemy_id: String
 @export var icon: Texture2D
+@export var enemy_info: String
 @onready var battler: Battler = $Battler
+
 
 var instance_id = ""
 

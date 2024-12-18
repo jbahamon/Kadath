@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rcfyijuewhqe"
-path="res://.godot/imported/guardian.png-23c85682de7a5348b8ea14e46350b3dc.ctex"
+uid="uid://bs4rf2sdoppyh"
+path="res://.godot/imported/icon.png-fafb2166cc53da6b99ab6a6c0a71af70.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://npc/enemy/guardian/guardian.png"
-dest_files=["res://.godot/imported/guardian.png-23c85682de7a5348b8ea14e46350b3dc.ctex"]
+source_file="res://npc/enemy/torchere/icon.png"
+dest_files=["res://.godot/imported/icon.png-fafb2166cc53da6b99ab6a6c0a71af70.ctex"]
 
 [params]
 

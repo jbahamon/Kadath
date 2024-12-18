@@ -26,7 +26,7 @@ func get_next_parameter_signature():
 
 func execute(actor):
 	var original_position = actor.global_position
-	hit.base_damage = self.get_standard_attack_damage(actor)
+	hit.base_damage = 1 #self.get_standard_attack_damage(actor)
 	
 	var target_position = target.battler.get_nearest_hitspot_to(actor.global_position)
 	actor.set_orientation(actor.global_position.direction_to(target_position))

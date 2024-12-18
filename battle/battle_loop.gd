@@ -30,7 +30,7 @@ func do_battle():
 		self.update_preview()
 		var current_actor = self.turn_queue.get_current_actor()
 		var turn = await current_actor.battler.ai.get_turn(self.actors)
-
+		self.ui.hide_timeline()
 		await turn.play()
 		
 		var dead_actors = actors.filter(
@@ -44,12 +44,11 @@ func do_battle():
 		
 		for actor in actors:
 			if actor.battler.pending_reaction != null and actor.battler.is_alive:
-				await actor.battler.pending_reaction.execute()
+				await actor.battler.pending_reaction.execute(actor, actors)
 				actor.battler.pending_reaction = null
 		
 		self.ui.update_player_state()
 		if is_battle_won():
-			self.ui.hide_timeline()
 			var party_actors = actors.filter(func(actor): return actor is PartyMember)
 			self.battle_end_state.party_actors = party_actors
 			self.battle_end_state.result = BattleEndState.Result.WIN
@@ -60,7 +59,6 @@ func do_battle():
 			break
 			
 		elif self.battle_end_state.result == BattleEndState.Result.ESCAPE:
-			self.ui.hide_timeline()
 			self.battle_end_state.party_actors = []
 			self.battle_end_state.enemy_actors = []
 			
@@ -70,7 +68,7 @@ func do_battle():
 				else:
 					self.battle_end_state.party_actors.append(actor)
 			break
-			
+		
 	self.turn_queue.reset()
 	return self.battle_end_state
 

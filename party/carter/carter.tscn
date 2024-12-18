@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://76qafquuir4k"]
+[gd_scene load_steps=11 format=3 uid="uid://76qafquuir4k"]
 
 [ext_resource type="PackedScene" uid="uid://bomxx7doloqmu" path="res://party/party_member.tscn" id="1_tjmem"]
 [ext_resource type="Resource" uid="uid://1ulgpa1j7pky" path="res://party/carter/growth.tres" id="2_jpdcx"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" path="res://party/carter/skill/crescent_blast.gd" id="5_8d58u"]
 [ext_resource type="PackedScene" uid="uid://ttxcbt6u2yh3" path="res://battle/action/util/area_of_effect.tscn" id="5_8ec5k"]
 [ext_resource type="Script" path="res://party/alex/skill/forceful_slash.gd" id="6_82w8g"]
-[ext_resource type="Script" path="res://party/alex/action/vision.gd" id="7_jds85"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8u0il"]
 radius = 50.0
@@ -32,11 +31,6 @@ starting_armor_id = "sturdy_vest"
 
 [node name="Battler" parent="." index="1"]
 anim_path = NodePath("../Anim")
-
-[node name="Analyze" type="Node" parent="Battler/Actions" index="0" groups=["save"]]
-script = ExtResource("7_jds85")
-display_name = "Analyze"
-description = "Uncover enemy stats and weaknesses."
 
 [node name="CrescentBlast" type="Node" parent="Battler/Actions/Skill" index="0"]
 script = ExtResource("5_8d58u")

@@ -128,6 +128,7 @@ transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition
 
 [sub_resource type="Animation" id="Animation_ytc5h"]
 resource_name = "crouch_east"
+step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -143,6 +144,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_axgvu"]
 resource_name = "crouch_north"
+step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -158,6 +160,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_ay85p"]
 resource_name = "crouch_south"
+step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -173,6 +176,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_hdamy"]
 resource_name = "crouch_west"
+step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -188,6 +192,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_14he7"]
 resource_name = "hit_east"
+step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -203,6 +208,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_rpesf"]
 resource_name = "hit_north"
+step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -218,6 +224,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_mv7ku"]
 resource_name = "hit_south"
+step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -233,6 +240,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_o2ibl"]
 resource_name = "hit_west"
+step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -248,6 +256,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_eh1ju"]
 resource_name = "idle_east"
+step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -263,6 +272,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_rxwbq"]
 resource_name = "idle_north"
+step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -278,6 +288,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_v4tpb"]
 resource_name = "idle_south"
+step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -293,6 +304,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_3wqdt"]
 resource_name = "idle_west"
+step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -310,6 +322,7 @@ tracks/0/keys = {
 resource_name = "walk_east"
 length = 0.8
 loop_mode = 1
+step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -327,6 +340,7 @@ tracks/0/keys = {
 resource_name = "walk_north"
 length = 0.8
 loop_mode = 1
+step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -344,6 +358,7 @@ tracks/0/keys = {
 resource_name = "walk_south"
 length = 0.8
 loop_mode = 1
+step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -361,6 +376,7 @@ tracks/0/keys = {
 resource_name = "walk_west"
 length = 0.8
 loop_mode = 1
+step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true

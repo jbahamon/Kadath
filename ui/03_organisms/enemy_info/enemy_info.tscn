@@ -1,0 +1,61 @@
+[gd_scene load_steps=2 format=3 uid="uid://oqul5liq5pdc"]
+
+[ext_resource type="Script" path="res://ui/03_organisms/enemy_info/enemy_info.gd" id="1_a27t5"]
+
+[node name="EnemyInfo" type="PanelContainer"]
+script = ExtResource("1_a27t5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="HP" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "HP: "
+
+[node name="HPData" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "10/10"
+
+[node name="Summary" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "A cute monster thing. Vulnerable to poisoning."
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="WeaknessLabel" type="Label" parent="VBoxContainer/GridContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "	Weak to:"
+
+[node name="WeaknessList" type="Label" parent="VBoxContainer/GridContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Fire"
+
+[node name="ResistLabel" type="Label" parent="VBoxContainer/GridContainer"]
+visible = false
+layout_mode = 2
+text = "Resists:"
+
+[node name="ResistList" type="Label" parent="VBoxContainer/GridContainer"]
+visible = false
+layout_mode = 2
+text = "Water"
+
+[node name="AbsorbLabel" type="Label" parent="VBoxContainer/GridContainer"]
+visible = false
+layout_mode = 2
+text = "Absorbs:
+"
+
+[node name="AbsorbList" type="Label" parent="VBoxContainer/GridContainer"]
+visible = false
+layout_mode = 2
+text = "Wood"

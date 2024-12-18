@@ -13,5 +13,7 @@ func pop_parameter():
 	return null
 	
 func execute(actor):
-	print("%s did nothing" % actor.display_name)
+	print("waitin")
+	await BattleService.announce("%s is preparing..." % actor.display_name)
+	
 	

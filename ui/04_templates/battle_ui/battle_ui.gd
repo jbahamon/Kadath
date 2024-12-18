@@ -10,7 +10,7 @@ var ItemEntry = preload("res://ui/02_molecules/item_entry/item_entry.tscn")
 @onready var options_list = $VBoxContainer/OptionsContainer/OptionsList
 
 @onready var skill_costs = $VBoxContainer/OptionsContainer/SkillCosts
-
+@onready var enemy_info = $VBoxContainer/OptionsContainer/EnemyInfo
 @onready var timeline = $VBoxContainer/Timeline
 
 @onready var info_panel = $VBoxContainer/InfoPanel
@@ -34,8 +34,10 @@ func start():
 	self.show()
 		
 func prompt(text: String):
-	self.waiting_for_prompt = true
 	self.set_info_text(text)
+	# We wait for a single frame to avoid using current inputs
+	await get_tree().process_frame
+	self.waiting_for_prompt = true
 	await self.prompt_closed
 	self.waiting_for_prompt = false
 
@@ -103,7 +105,7 @@ func hide_options():
 	options_list.set_process_unhandled_input(false)
 
 func hide_timeline():
-	self.timeline.visible = false
+	self.timeline.modulate = Color.TRANSPARENT
 	
 func on_option_focused(option):
 	if "description" in option:
@@ -115,10 +117,16 @@ func on_option_focused(option):
 	if parent_option != null:
 		parent_option.highlight_option(current_actor, option)
 	
-	skill_costs.update_costs([])
+	skill_costs.hide()
+	enemy_info.hide()
 	
 	if option is PartyMember or option is BaseNPC:
 		self.timeline.highlight({option.display_name: true})
+		
+		if option is BaseNPC:
+			enemy_info.show()
+			enemy_info.update(option)
+			
 	elif option is Array and option.size() > 0 and (option[0] is PartyMember or option[0] is BaseNPC):
 		var highlights = {}
 		for actor in options:
@@ -178,6 +186,7 @@ func request_targets(targeting_type, action, actor, actors: Array, request_promp
 
 func update_preview(actors: Array):
 	self.timeline.update_preview(actors)
+	self.timeline.modulate = Color.WHITE
 	
 func update_player_state():
 	party_status.update()

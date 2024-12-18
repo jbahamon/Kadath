@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://ds2ji50aao08o" path="res://npc/lib/movement/path_movement.tscn" id="10_k3y1y"]
 [ext_resource type="PackedScene" uid="uid://dpc8xvvcbyotf" path="res://npc/enemy/sentry/sentry.tscn" id="13_qq2j6"]
 [ext_resource type="PackedScene" uid="uid://qscnhsk7b4m7" path="res://npc/lib/simple_ghoul_npc.tscn" id="14_onopi"]
-[ext_resource type="PackedScene" uid="uid://bngh72w54kdq0" path="res://npc/enemy/thymiaterion/thymiaterion.tscn" id="15_ww8nm"]
+[ext_resource type="PackedScene" uid="uid://bngh72w54kdq0" path="res://npc/enemy/torchere/torchere.tscn" id="15_ww8nm"]
 [ext_resource type="Texture2D" uid="uid://dq08xiwl8vasy" path="res://location/000_prologue_kadath/object/gate.png" id="16_vixlb"]
 [ext_resource type="Texture2D" uid="uid://bf8vls8u5sbww" path="res://location/000_prologue_kadath/object/torch-sheet.png" id="17_i3ee4"]
 [ext_resource type="Texture2D" uid="uid://djkqe12ggregf" path="res://location/000_prologue_kadath/object/bridge.png" id="17_wsu4k"]

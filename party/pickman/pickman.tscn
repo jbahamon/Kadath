@@ -34,7 +34,7 @@ anim_path = NodePath("../Anim")
 [node name="Feast" type="Node" parent="Battler/Actions" index="0"]
 script = ExtResource("5_beduq")
 display_name = "Feast"
-description = "Feed on an enemy to do minor damage and recover HP and SP."
+description = "Deal reduced damage to an enemy to recover some HP/SP."
 
 [node name="TaxingTouch" type="Node" parent="Battler/Actions/Skill" index="0"]
 script = ExtResource("4_col3m")

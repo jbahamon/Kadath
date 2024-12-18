@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://i0fxdua2akyb"
-path="res://.godot/imported/icon.png-9ebe4ddb966cf1cfc972d1a2bbc64419.ctex"
+uid="uid://ccxp1qxrgvxdf"
+path="res://.godot/imported/torchere.png-de5fb55ac1edfd4346aef8540895e047.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://npc/enemy/guardian/icon.png"
-dest_files=["res://.godot/imported/icon.png-9ebe4ddb966cf1cfc972d1a2bbc64419.ctex"]
+source_file="res://npc/enemy/torchere/torchere.png"
+dest_files=["res://.godot/imported/torchere.png-de5fb55ac1edfd4346aef8540895e047.ctex"]
 
 [params]
 

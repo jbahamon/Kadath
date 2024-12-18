@@ -12,7 +12,7 @@ func initialize(init_proxy: PlayerProxy):
 	
 	# Starting equipment for prologue
 	self.party.inventory.set_item("potion", 10)
-	self.party.inventory.set_item("palingenesis_scroll", 40)
+	self.party.inventory.set_item("revival_scroll", 40)
 	self.add_child(party)
 
 	self.proxy = init_proxy

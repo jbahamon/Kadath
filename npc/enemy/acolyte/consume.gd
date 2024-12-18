@@ -1,5 +1,6 @@
 extends BattleAction
 
+const blurb = "Consume"
 @export var sacrifice_hit: Hit
 var sacrifice
 var allies
@@ -26,6 +27,7 @@ func reset():
 	self.sacrifice = null
 	
 func execute(actor):
+	BattleService.announce(self.blurb)
 	actor.play_anim("attack")
 	
 	var remaining_hp = self.sacrifice.health
@@ -39,5 +41,6 @@ func execute(actor):
 	)
 	
 	await DoAll.new(heals).execute()
+	BattleService.announce("")
 	actor.play_anim("idle")
 	self.reset()

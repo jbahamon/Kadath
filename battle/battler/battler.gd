@@ -35,48 +35,39 @@ var level: int
 
 var physical_attack: float:
 	get:
-		var attack
 		var parent = self.get_parent()
 		if parent is PartyMember:
-			attack = (self.stats.attack * 0.7 + 
+			return (self.stats.attack * 0.7 + 
 				parent.physical_attack_bonus * 0.3) 
 		else:
-			attack = self.stats.attack 
-			
-		return attack * self.status_effects.physical_attack_modifier
+			return self.stats.attack 
 
 var physical_defense: float:
 	get:
-		var defense
 		var parent = self.get_parent()
 		if parent is PartyMember:
-			defense = self.stats.defense + parent.physical_armor
+			return self.stats.defense + parent.physical_armor
 		else:
-			defense = self.stats.defense
+			return self.stats.defense
 			
-		return defense * status_effects.physical_defense_modifier
 
 var magic_attack: float:
 	get:
-		var m_attack
 		var parent = self.get_parent()
 		if parent is PartyMember:
-			m_attack = self.stats.magic_attack + parent.physical_armor
+			return self.stats.magic_attack + parent.physical_armor
 		else:
-			m_attack = self.stats.magic_attack
-			
-		return m_attack * status_effects.magic_attack_modifier
+			return self.stats.magic_attack
+
 
 var magic_defense: float:
 	get:
-		var m_defense
 		var parent = self.get_parent()
 		if parent is PartyMember:
-			m_defense = self.stats.magic_defense + parent.magic_armor
+			return self.stats.magic_defense + parent.magic_armor
 		else:
-			m_defense = self.stats.magic_defense
+			return self.stats.magic_defense
 			
-		return m_defense * status_effects.magic_defense_modifier
 		
 var speed: float:
 	get:
@@ -188,13 +179,15 @@ func recover_energy(amount: int, in_battle: bool = true):
 	
 func get_damage_modifier(hit: Hit):
 	var defense: float
-	
+	var mul: float
 	if hit.type == Hit.Element.PHYSICAL:
 		defense = self.physical_defense
+		mul = self.status_effects.physical_defense_modifier
 	else:
-		defense = self.elemental_defense
+		defense = self.magic_defense
+		mul = self.status_effects.magic_defense_modifier
 		
-	return (202 - min(defense, 200))/202
+	return (202 - min(defense, 200))/202 * mul
 	
 func get_action_options() -> Array:
 	var parent = self.get_parent()

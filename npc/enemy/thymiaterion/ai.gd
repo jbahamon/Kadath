@@ -1,6 +1,6 @@
 extends "res://battle/ai/non_player_ai.gd"
 
-var Change = preload("res://npc/enemy/guardian/reaction/change.gd")
+var Change = preload("res://npc/enemy/thymiaterion/reaction/change.gd")
 var jump
 var shoot
 var whip
@@ -17,7 +17,7 @@ func _ready() -> void:
 	self.shoot = parent.get_node("Actions/Shoot")
 	self.whip = parent.get_node("Actions/Whip")
 	self.chew = parent.get_node("Actions/Chew")
-	self.prepare = parent.get_node("Actions/Chew")
+	self.prepare = parent.get_node("Actions/Prepare")
 	self.beam = parent.get_node("Actions/Beam")
 	self.reactions = [Change.new()]
 
@@ -49,8 +49,6 @@ func choose_action(actor, actors: Array):
 				return self.beam
 
 func fill_action_parameters(action: BattleAction, actor, actors: Array):
-	
-	action.target = actor.get_enemies(actors).pick_random()
 	if action == self.jump or action == beam:
 		action.targets = actor.get_enemies(actors)
 	elif action == self.shoot or action == self.whip:
@@ -64,4 +62,3 @@ func fill_action_parameters(action: BattleAction, actor, actors: Array):
 				min_hp = enemy.health 
 				target = enemy
 		action.target = target
-

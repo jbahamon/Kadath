@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://ex17k532alby"]
+[gd_scene load_steps=8 format=3 uid="uid://ex17k532alby"]
 
 [ext_resource type="Script" path="res://ui/04_templates/battle_ui/battle_ui.gd" id="1"]
 [ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="3"]
 [ext_resource type="PackedScene" uid="uid://bqmykxfryt4p7" path="res://ui/03_organisms/timeline/timeline.tscn" id="3_81xqm"]
 [ext_resource type="PackedScene" uid="uid://oyekfni30vws" path="res://ui/03_organisms/skill_costs/skill_costs.tscn" id="6_qp326"]
+[ext_resource type="PackedScene" uid="uid://oqul5liq5pdc" path="res://ui/03_organisms/enemy_info/enemy_info.tscn" id="7_gtig5"]
 [ext_resource type="PackedScene" uid="uid://brhpxl8pukdr" path="res://ui/03_organisms/select_list/select_list.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://bnihqcw4rnk07" path="res://ui/04_templates/battle_ui/party_status.tscn" id="9_v5mha"]
 
@@ -67,8 +68,14 @@ size_flags_vertical = 2
 focused_if_visible = true
 
 [node name="SkillCosts" parent="VBoxContainer/OptionsContainer" instance=ExtResource("6_qp326")]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 0
+
+[node name="EnemyInfo" parent="VBoxContainer/OptionsContainer" instance=ExtResource("7_gtig5")]
+visible = false
+layout_mode = 2
+size_flags_vertical = 0
 
 [node name="Spacer3" type="Control" parent="VBoxContainer/OptionsContainer"]
 layout_mode = 2

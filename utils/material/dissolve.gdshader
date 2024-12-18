@@ -21,7 +21,7 @@ void fragment() {
 	// Draw the pixel, or not depending on if it is visible or not
 	float avg = ((pixelColor.r + pixelColor.g + pixelColor.b) / 3.0  * 2.0);
 
-    vec4 front = vec4(vec3(avg), min(visible, pixelColor.a)) ;
+    vec4 front = vec4(vec3(avg), min(visible, pixelColor.a/2.0)) ;
 	COLOR = mix(front, vec4(tint_color, front.a), intensity);
 
 }
