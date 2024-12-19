@@ -1,3 +1,4 @@
+res://npc/enemy/thymiaterion
 C:/Users/Jorge/Documents/Godot/Kadath/location/000_prologue_kadath/cutscene
 res://item/resource/equipment
 res://npc/lib
@@ -19,4 +20,3 @@ res://npc/enemy
 res://item/resource/consumable
 res://ui/04_templates/other
 res://ui/01_atoms/button
-res://global

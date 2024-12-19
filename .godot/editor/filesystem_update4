@@ -23,3 +23,8 @@ res://battle/action/escape.gd
 res://battle/battle_loop.gd
 res://ui/04_templates/battle_ui/battle_ui.gd
 res://ui/03_organisms/select_list/select_list.gd
+res://npc/enemy/thymiaterion/action/shoot.gd
+res://npc/enemy/thymiaterion/action/whip.gd
+res://battle/action/util/projectile.gd
+res://npc/enemy/thymiaterion/action/jump.gd
+res://npc/enemy/thymiaterion/anim.tscn

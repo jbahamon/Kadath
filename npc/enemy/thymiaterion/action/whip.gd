@@ -5,6 +5,7 @@ func execute(actor):
 	var hit = Hit.new()
 	hit.type = Hit.Element.PHYSICAL
 	hit.base_damage = self.get_standard_attack_damage(actor)
+	actor.play_anim("whip")
 	await self.target.take_hit(hit)
 	
 	print(
