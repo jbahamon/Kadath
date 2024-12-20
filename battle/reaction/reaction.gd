@@ -1,8 +1,8 @@
 class_name Reaction
 
-func is_triggered_by(actor, hit: Hit, actors: Array) -> bool:
+func is_triggered_by(_actor, _hit: Hit, _actors: Array) -> bool:
 	assert(false, "missing override of is_triggered_by method")
 	return false
 	
-func execute(actor, actors):
+func execute(_actor, _actors):
 	assert(false, "missing override of execute method")

@@ -22,7 +22,7 @@ func _ready() -> void:
 	self.prepare_chew = parent.get_node("Actions/PrepareChew")
 	self.reactions = [Change.new()]
 
-func choose_action(actor, actors: Array):
+func choose_action(_actor, _actors: Array):
 	if not second_phase:
 		
 		match turn_counter:

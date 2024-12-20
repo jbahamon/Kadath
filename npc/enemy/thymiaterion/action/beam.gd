@@ -1,6 +1,6 @@
 extends BattleAction
 
-var Counter = preload("res://npc/enemy/thymiaterion/reaction/Counter.gd")
+var Counter = preload("res://npc/enemy/thymiaterion/reaction/counter.gd")
 
 var targets = []
 var counter_reaction = Counter.new()

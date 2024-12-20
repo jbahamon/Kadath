@@ -32,3 +32,5 @@ res://npc/enemy/thymiaterion/anim.gd
 res://party/carter/anim.tscn
 res://npc/enemy/thymiaterion/action/beam.gd
 res://npc/enemy/thymiaterion/reaction/change.gd
+res://battle/reaction/reaction.gd
+res://npc/enemy/thymiaterion/reaction/counter.gd
