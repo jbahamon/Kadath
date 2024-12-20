@@ -10,4 +10,3 @@ func execute(actor, actors):
 	print("second phase...")
 	actor.battler.ai.second_phase = true
 	actor.battler.ai.remove_reaction(self)
-	actor.play_anim("RESET")

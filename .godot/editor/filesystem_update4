@@ -28,3 +28,7 @@ res://npc/enemy/thymiaterion/action/whip.gd
 res://battle/action/util/projectile.gd
 res://npc/enemy/thymiaterion/action/jump.gd
 res://npc/enemy/thymiaterion/anim.tscn
+res://npc/enemy/thymiaterion/anim.gd
+res://party/carter/anim.tscn
+res://npc/enemy/thymiaterion/action/beam.gd
+res://npc/enemy/thymiaterion/reaction/change.gd

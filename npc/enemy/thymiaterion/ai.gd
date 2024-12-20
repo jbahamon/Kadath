@@ -4,9 +4,10 @@ var Change = preload("res://npc/enemy/thymiaterion/reaction/change.gd")
 var jump
 var shoot
 var whip
+var prepare_chew
 var chew
-var prepare
 var beam
+var counter
 
 var turn_counter = 0
 var second_phase = false
@@ -17,8 +18,8 @@ func _ready() -> void:
 	self.shoot = parent.get_node("Actions/Shoot")
 	self.whip = parent.get_node("Actions/Whip")
 	self.chew = parent.get_node("Actions/Chew")
-	self.prepare = parent.get_node("Actions/Prepare")
-	self.beam = parent.get_node("Actions/Beam")
+	self.counter = parent.get_node("Actions/PrepareBeamCounter")
+	self.prepare_chew = parent.get_node("Actions/PrepareChew")
 	self.reactions = [Change.new()]
 
 func choose_action(actor, actors: Array):
@@ -40,13 +41,13 @@ func choose_action(actor, actors: Array):
 				return self.whip
 			2:
 				turn_counter += 1
-				return self.chew
+				return self.whip
 			3, 4: 
 				turn_counter += 1
-				return self.prepare
+				return self.whip
 			5:
 				turn_counter = 0
-				return self.beam
+				return self.whip
 
 func fill_action_parameters(action: BattleAction, actor, actors: Array):
 	if action == self.jump or action == beam:

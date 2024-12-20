@@ -93,14 +93,14 @@ script = ExtResource("6_7xjpy")
 [node name="Whip" type="Node" parent="Battler/Actions" index="2"]
 script = ExtResource("7_q7jpk")
 
-[node name="Beam" type="Node" parent="Battler/Actions" index="3"]
+[node name="PrepareBeamCounter" type="Node" parent="Battler/Actions" index="3"]
 script = ExtResource("8_sm7w2")
 
-[node name="Chew" type="Node" parent="Battler/Actions" index="4"]
-script = ExtResource("9_dmayn")
-
-[node name="Prepare" type="Node" parent="Battler/Actions" index="5"]
+[node name="PrepareChew" type="Node" parent="Battler/Actions" index="4"]
 script = ExtResource("10_hat3u")
+
+[node name="Chew" type="Node" parent="Battler/Actions" index="5"]
+script = ExtResource("9_dmayn")
 
 [node name="AI" parent="Battler" index="3"]
 script = ExtResource("11_ikq4e")
