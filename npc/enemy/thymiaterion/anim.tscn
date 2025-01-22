@@ -1,7 +1,22 @@
-[gd_scene load_steps=56 format=3 uid="uid://b8t81sm0y5b4o"]
+[gd_scene load_steps=59 format=3 uid="uid://b8t81sm0y5b4o"]
 
 [ext_resource type="Script" path="res://npc/enemy/thymiaterion/anim.gd" id="1_gh5iw"]
 [ext_resource type="Texture2D" uid="uid://rcfyijuewhqe" path="res://npc/enemy/thymiaterion/thymiaterion.png" id="2_id4eq"]
+
+[sub_resource type="Animation" id="Animation_0qmuu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-44, -89)]
+}
 
 [sub_resource type="Animation" id="Animation_jvvon"]
 resource_name = "chew"
@@ -23,8 +38,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_o3dnm"]
 resource_name = "close_eye"
-length = 0.9
-loop_mode = 2
+length = 0.400002
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -33,7 +47,7 @@ tracks/0/path = NodePath(".:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6),
+"times": PackedFloat32Array(0, 0.133333, 0.266667),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [Vector2i(1, 7), Vector2i(0, 7), Vector2i(0, 4)]
@@ -77,7 +91,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_38m6e"]
 resource_name = "jump"
-length = 1.0
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -106,7 +119,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_vfdhw"]
 resource_name = "open_eye"
-length = 0.9
+length = 0.400002
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -115,7 +128,7 @@ tracks/0/path = NodePath(".:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6),
+"times": PackedFloat32Array(0, 0.133333, 0.266667),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [Vector2i(0, 4), Vector2i(0, 7), Vector2i(1, 7)]
@@ -192,7 +205,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_128uv"]
 resource_name = "walk_left_2"
-length = 0.75
+length = 0.333336
 loop_mode = 1
 step = 0.0166667
 tracks/0/type = "value"
@@ -202,7 +215,7 @@ tracks/0/path = NodePath(".:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2i(4, 5), Vector2i(3, 5), Vector2i(2, 5), Vector2i(1, 5), Vector2i(0, 5)]
@@ -228,7 +241,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_a1ouw"]
 resource_name = "walk_right_2"
-length = 0.75
+length = 0.333336
 loop_mode = 1
 step = 0.0166667
 tracks/0/type = "value"
@@ -238,7 +251,7 @@ tracks/0/path = NodePath(".:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2i(0, 5), Vector2i(1, 5), Vector2i(2, 5), Vector2i(3, 5), Vector2i(4, 5)]
@@ -259,21 +272,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2i(0, 9), Vector2i(1, 9), Vector2i(2, 9), Vector2i(3, 9), Vector2i(4, 9), Vector2i(5, 9), Vector2i(6, 9)]
-}
-
-[sub_resource type="Animation" id="Animation_0qmuu"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-44, -89)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gwp5b"]
@@ -323,6 +321,7 @@ advance_expression = "battler.ai.second_phase"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_np3gi"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_xn01i"]
+allow_transition_to_self = true
 states/idle/node = SubResource("AnimationNodeAnimation_i1blh")
 states/idle/position = Vector2(540, 47)
 states/idle_2/node = SubResource("AnimationNodeAnimation_bs0k1")
@@ -331,6 +330,9 @@ transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4vtyu"]
 animation = &"jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vsmdr"]
+animation = &"idle_2"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v2y0l"]
 animation = &"open_eye"
@@ -360,7 +362,6 @@ animation = &"whip"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cpe4l"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vwv22"]
-switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kb78a"]
@@ -396,6 +397,10 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p1rii"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_m35w5"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lr0os"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_no7s7"]
 states/RESET/node = SubResource("AnimationNodeAnimation_swsxt")
 states/RESET/position = Vector2(326, 226)
@@ -408,6 +413,8 @@ states/idle/node = SubResource("AnimationNodeStateMachine_xn01i")
 states/idle/position = Vector2(573, 195)
 states/jump/node = SubResource("AnimationNodeAnimation_4vtyu")
 states/jump/position = Vector2(458, 100)
+states/morph/node = SubResource("AnimationNodeAnimation_vsmdr")
+states/morph/position = Vector2(350, 148.746)
 states/open_eye/node = SubResource("AnimationNodeAnimation_v2y0l")
 states/open_eye/position = Vector2(585, 69)
 states/open_mouth/node = SubResource("AnimationNodeAnimation_pcvnm")
@@ -422,8 +429,8 @@ states/walk_right_2/node = SubResource("AnimationNodeAnimation_ys6sq")
 states/walk_right_2/position = Vector2(421, 445.55)
 states/whip/node = SubResource("AnimationNodeAnimation_hxum2")
 states/whip/position = Vector2(579, 426)
-transitions = ["idle", "open_eye", SubResource("AnimationNodeStateMachineTransition_f7uov"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_4wc66"), "open_eye", "close_eye", SubResource("AnimationNodeStateMachineTransition_cpe4l"), "RESET", "idle", SubResource("AnimationNodeStateMachineTransition_vwv22"), "jump", "RESET", SubResource("AnimationNodeStateMachineTransition_kb78a"), "close_eye", "RESET", SubResource("AnimationNodeStateMachineTransition_yn3qj"), "idle", "open_mouth", SubResource("AnimationNodeStateMachineTransition_f5t0u"), "open_mouth", "chew", SubResource("AnimationNodeStateMachineTransition_wxhhv"), "chew", "open_mouth", SubResource("AnimationNodeStateMachineTransition_7c5lg"), "open_mouth", "RESET", SubResource("AnimationNodeStateMachineTransition_duwir"), "idle", "tongue_out", SubResource("AnimationNodeStateMachineTransition_sk2j4"), "tongue_out", "whip", SubResource("AnimationNodeStateMachineTransition_fhyfj"), "whip", "tongue_in", SubResource("AnimationNodeStateMachineTransition_s5wpn"), "tongue_in", "RESET", SubResource("AnimationNodeStateMachineTransition_80kym"), "idle", "walk_right_2", SubResource("AnimationNodeStateMachineTransition_aa88s"), "idle", "walk_left_2", SubResource("AnimationNodeStateMachineTransition_rtg7b"), "walk_left_2", "RESET", SubResource("AnimationNodeStateMachineTransition_p6jle"), "walk_right_2", "RESET", SubResource("AnimationNodeStateMachineTransition_p1rii")]
-graph_offset = Vector2(0, 65.5497)
+transitions = ["idle", "open_eye", SubResource("AnimationNodeStateMachineTransition_f7uov"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_4wc66"), "open_eye", "close_eye", SubResource("AnimationNodeStateMachineTransition_cpe4l"), "RESET", "idle", SubResource("AnimationNodeStateMachineTransition_vwv22"), "jump", "RESET", SubResource("AnimationNodeStateMachineTransition_kb78a"), "close_eye", "RESET", SubResource("AnimationNodeStateMachineTransition_yn3qj"), "idle", "open_mouth", SubResource("AnimationNodeStateMachineTransition_f5t0u"), "open_mouth", "chew", SubResource("AnimationNodeStateMachineTransition_wxhhv"), "chew", "open_mouth", SubResource("AnimationNodeStateMachineTransition_7c5lg"), "open_mouth", "RESET", SubResource("AnimationNodeStateMachineTransition_duwir"), "idle", "tongue_out", SubResource("AnimationNodeStateMachineTransition_sk2j4"), "tongue_out", "whip", SubResource("AnimationNodeStateMachineTransition_fhyfj"), "whip", "tongue_in", SubResource("AnimationNodeStateMachineTransition_s5wpn"), "tongue_in", "RESET", SubResource("AnimationNodeStateMachineTransition_80kym"), "idle", "walk_right_2", SubResource("AnimationNodeStateMachineTransition_aa88s"), "idle", "walk_left_2", SubResource("AnimationNodeStateMachineTransition_rtg7b"), "walk_left_2", "RESET", SubResource("AnimationNodeStateMachineTransition_p6jle"), "walk_right_2", "RESET", SubResource("AnimationNodeStateMachineTransition_p1rii"), "idle", "morph", SubResource("AnimationNodeStateMachineTransition_m35w5"), "morph", "RESET", SubResource("AnimationNodeStateMachineTransition_lr0os")]
+graph_offset = Vector2(0, 29.7464)
 
 [node name="Anim" type="Marker2D"]
 use_parent_material = true
@@ -437,7 +444,6 @@ centered = false
 offset = Vector2(-44, -89)
 hframes = 7
 vframes = 10
-frame = 37
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")

@@ -4,11 +4,11 @@
 
 [resource]
 script = ExtResource("1_vwups")
-max_health = 4
+max_health = 40000
 max_energy = 0
 attack = 1
 defense = 1
 magic_attack = 1
 magic_defense = 1
 luck = 1
-speed = 15
+speed = 1

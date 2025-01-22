@@ -173,11 +173,9 @@ func set_orientation(orientation: Vector2):
 	if self.target:
 		self.target.set_orientation(orientation)
 
-	raycast.set_target_position(Vector2(
-		interaction_vector.x * orientation.x, 
-		interaction_vector.y * orientation.y
-	))
-
+	orientation = VarsService.round_orientation_with_bias(orientation)
+	raycast.set_target_position(orientation)
+	
 func set_mode(mode: ProxyMode):
 	self.current_mode = mode
 	match(self.current_mode):

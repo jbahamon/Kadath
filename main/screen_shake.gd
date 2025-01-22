@@ -30,7 +30,8 @@ func shake():
 	camera.offset.x = amplitude.x * amt * noise.get_noise_2d(time * time_scale, 0)
 	camera.offset.y = amplitude.y * amt * noise.get_noise_2d(0, time * time_scale)
 	
-func start(duration: float, shake_amplitude: Vector2):
+func start(duration: float, shake_amplitude: Vector2, time_scale_factor: float):
+	self.time_scale = 500 * time_scale_factor
 	self.noise.seed = randi()
 	self.decay = 1.0/duration
 	self.amplitude = shake_amplitude

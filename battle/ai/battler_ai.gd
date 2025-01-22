@@ -11,13 +11,13 @@ func get_turn(_actors: Array) -> Turn:
 	return null
 
 func push_reaction(reaction):
-	self.reactions.push_front(reaction)
+	if reaction not in self.reactions:
+		self.reactions.push_front(reaction)
 
 func remove_reaction(reaction):
 	self.reactions.erase(reaction)
 	
-func check_reactions(actor, hit, actors):
+func check_reactions(actor, hit_from, hit, actors):
 	for reaction in self.reactions:
-		if reaction.is_triggered_by(actor, hit, actors):
-			self.get_parent().pending_reaction = reaction
+		if reaction.check(actor, hit_from, hit, actors):
 			return

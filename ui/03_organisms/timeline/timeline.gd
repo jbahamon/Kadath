@@ -28,4 +28,3 @@ func update_preview(preview: Array):
 		i += 1
 		
 	self.visible = true
-

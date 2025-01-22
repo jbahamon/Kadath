@@ -50,8 +50,8 @@ func heal(amount: int, in_battle: bool = true):
 func recover_energy(amount: int, in_battle: bool = true):
 	await self.battler.recover_energy(amount, in_battle)
 	
-func take_hit(hit: Hit):
-	return await self.battler.take_hit(hit)
+func take_hit(actor, hit: Hit):
+	return await self.battler.take_hit(actor, hit)
 	
 func get_allies(actors: Array):
 	return actors.filter(func(actor): return not actor is PartyMember)

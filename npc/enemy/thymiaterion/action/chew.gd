@@ -1,18 +1,61 @@
-extends "res://battle/action/simple_single_target.gd"
+extends BattleAction
 
-@export var normal_attack_factor = 0.5
-@export var heal_factor = 0.75
-@export var energy_gain_factor = 0.1
+@export var hit: Hit
 
+var targets = []
+
+func reset():
+	self.targets = []
+	
 func execute(actor):
-	var hit = Hit.new()
-	hit.type = Hit.Element.PHYSICAL
-	hit.base_damage = self.get_standard_attack_damage(actor) * self.normal_attack_factor
+	actor.play_anim("open_mouth")
+	var target_info = self.targets.map(func(target): return {
+		"position": target.global_position,
+		"z_index": target.z_index
+	})
 	
-	await self.target.take_hit(hit)
+	var tween: Tween = get_tree().create_tween()
+	tween.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC).set_parallel(true)
+
+	var target_position = actor.global_position + Vector2(0, -38)
+	for target in targets:
+		target.z_index = actor.z_index + 1
+		target.play_anim("hit")
+		tween.tween_property(target, "global_position", target_position, 1.5)
+		tween.tween_property(target, "scale", Vector2(0.5, 0.5), 1.5)
+		
+	await tween.finished
+	for target in targets:
+		target.visible = false
+
+	actor.play_anim("chew")
+	await get_tree().create_timer(2.1).timeout
 	
-	# For balance, we could make it so it heals less with each use. 
-	# Like 0.8^n_usages and start from a big one.
-	await actor.heal(ceil(self.heal_factor * hit.effective_damage))
+	tween = get_tree().create_tween()
+	tween.set_ease(Tween.EASE_IN).set_parallel(true)
+	actor.play_anim("open_mouth")
+	
+	for i in range(targets.size()):
+		targets[i].visible = true
+		targets[i].scale = Vector2.ONE
+		tween.tween_property(targets[i], "global_position:x", target_info[i]["position"].x, 0.8)
+		tween.tween_property(targets[i], "global_position:y", target_info[i]["position"].y, 0.8	).set_trans(Tween.TRANS_QUAD)
+	await tween.finished
+	
+	for i in range(targets.size()):
+		targets[i].z_index = target_info[i]["z_index"]
+	
+	actor.play_anim("idle")
+	
+	var shake_func = func (): 
+		await CameraService.shake(CutsceneInstruction.ExecutionMode.PLAY, 1.0, Vector2(0, 4), 0.5)
+	var hits = self.targets.map(
+		func(target): 
+			return func(): 
+				await target.take_hit(actor, hit)
+				target.play_anim("battle_idle")
+	)
+	hits.append(shake_func)
+	await DoAll.new(hits).execute()
 	
 	self.reset()

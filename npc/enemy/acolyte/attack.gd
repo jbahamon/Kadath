@@ -18,11 +18,11 @@ func execute(actor):
 	await tendrils.animation_finished
 	tendrils.play("attack")
 	
-	hit.base_damage = self.get_standard_attack_damage(actor)
+	hit.base_damage = actor.battler.physical_attack
 	var tree = get_tree()
 	
 	await DoAll.new([
-		func(): await self.target.take_hit(hit),
+		func(): await self.target.take_hit(actor, hit),
 		func():
 			await tree.create_timer(0.6).timeout
 			tendrils.play_backwards("windup")

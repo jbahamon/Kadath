@@ -25,7 +25,7 @@ func execute(actor):
 	]).execute()
 	
 	actor.play_anim("grab")
-	hit.base_damage = self.get_standard_attack_damage(actor)  * self.normal_attack_factor
+	hit.base_damage = actor.battler.physical_attack  * self.normal_attack_factor
 	
 	var idle_anim = "battle_idle" if target.has_anim("battle_idle") else "idle"
 	var tree = actor.get_tree()
@@ -35,7 +35,7 @@ func execute(actor):
 			await tree.create_timer(0.3).timeout
 			self.target.play_anim("hit"),
 		func():
-			await self.target.take_hit(hit)
+			await self.target.take_hit(actor, hit)
 	]).execute()
 
 	await tree.create_timer(0.3).timeout

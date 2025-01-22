@@ -14,7 +14,7 @@ func execute(actor):
 	first_hit.base_damage = (actor.battler.stats.level + actor.battler.stats.magic_attack) * self.power
 	
 	var hits = [
-		func (): await self.target.take_hit(first_hit)
+		func (): await self.target.take_hit(actor, first_hit)
 	]
 	var additional_hits = targets.filter(
 		func(aoe_target): return (aoe_target is PartyMember) != actor_party_member and aoe_target != self.target
@@ -24,7 +24,7 @@ func execute(actor):
 			hit.type = Hit.Element.METAL
 			hit.base_damage = (actor.battler.stats.level + actor.battler.stats.magic_attack) * self.aoe_power
 			return func (): 
-				await aoe_target.take_hit(hit)
+				await aoe_target.take_hit(actor, hit)
 		
 	)
 	hits.append_array(additional_hits)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://ihknndack3n4"]
+[gd_scene load_steps=43 format=3 uid="uid://ihknndack3n4"]
 
 [ext_resource type="PackedScene" uid="uid://c17hneqpuil0l" path="res://npc/lib/base_npc.tscn" id="1_q5d36"]
 [ext_resource type="Script" path="res://npc/enemy/enemy.gd" id="2_udeox"]
@@ -10,13 +10,16 @@
 [ext_resource type="Material" uid="uid://c48122ffiwrbb" path="res://utils/material/uniform_add.tres" id="7_ofsbi"]
 [ext_resource type="Script" path="res://npc/enemy/thymiaterion/action/whip.gd" id="7_q7jpk"]
 [ext_resource type="Script" path="res://battle/hit.gd" id="8_3rnnk"]
-[ext_resource type="Script" path="res://npc/enemy/thymiaterion/action/beam.gd" id="8_sm7w2"]
+[ext_resource type="Script" path="res://npc/enemy/thymiaterion/action/counter.gd" id="8_sm7w2"]
 [ext_resource type="Script" path="res://npc/enemy/thymiaterion/action/chew.gd" id="9_dmayn"]
 [ext_resource type="Script" path="res://npc/enemy/thymiaterion/action/prepare.gd" id="10_hat3u"]
 [ext_resource type="Script" path="res://npc/enemy/thymiaterion/ai.gd" id="11_ikq4e"]
+[ext_resource type="Script" path="res://npc/enemy/thymiaterion/action/beam.gd" id="12_pqd4o"]
 [ext_resource type="PackedScene" uid="uid://cchn13mhn8gxu" path="res://battle/action/util/projectile.tscn" id="13_k444w"]
 [ext_resource type="Texture2D" uid="uid://c82yel13pptcd" path="res://npc/enemy/thymiaterion/projectile.png" id="14_bmb23"]
 [ext_resource type="Texture2D" uid="uid://c77yarfa7vsom" path="res://npc/enemy/thymiaterion/projectile_trail.png" id="15_5g141"]
+[ext_resource type="Shader" path="res://utils/material/uniform_add.gdshader" id="16_rswvq"]
+[ext_resource type="Texture2D" uid="uid://cuaphveq6enwc" path="res://npc/enemy/thymiaterion/beam.png" id="19_b00tx"]
 
 [sub_resource type="Resource" id="Resource_afjib"]
 script = ExtResource("8_3rnnk")
@@ -33,6 +36,42 @@ palfx_material = ExtResource("7_ofsbi")
 palfx_time = 0.0
 palfx_duration = 1.0
 toast_time = 1.0
+
+[sub_resource type="Resource" id="Resource_ue8ew"]
+script = ExtResource("8_3rnnk")
+fixed_damage = false
+base_damage = 300
+type = 8
+anim_time = 0.15
+anim_duration = 0.5
+spark_time = 0.0
+spark_offset = Vector2(0, 0)
+hit_sound_time = 0.0
+miss_sound_time = 0.0
+palfx_material = ExtResource("7_ofsbi")
+palfx_time = 0.15
+palfx_duration = 0.5
+toast_time = 0.5
+
+[sub_resource type="Resource" id="Resource_snqd0"]
+script = ExtResource("8_3rnnk")
+fixed_damage = false
+base_damage = 100
+type = 0
+anim_time = 0.0
+anim_duration = 0.0
+spark_time = 0.0
+spark_offset = Vector2(0, 0)
+hit_sound_time = 0.0
+miss_sound_time = 0.0
+palfx_material = ExtResource("7_ofsbi")
+palfx_time = 0.0
+palfx_duration = 0.5
+toast_time = 0.4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fi27y"]
+shader = ExtResource("16_rswvq")
+shader_parameter/add = Color(0, 0, 0, 0)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tv2y7"]
 radius = 28.0
@@ -66,6 +105,98 @@ particles_anim_h_frames = 10
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_rehu0"]
+atlas = ExtResource("19_b00tx")
+region = Rect2(0, 0, 24, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o6erh"]
+atlas = ExtResource("19_b00tx")
+region = Rect2(24, 0, 24, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kmyhy"]
+atlas = ExtResource("19_b00tx")
+region = Rect2(48, 0, 24, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5a5dm"]
+atlas = ExtResource("19_b00tx")
+region = Rect2(72, 0, 24, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eu0i6"]
+atlas = ExtResource("19_b00tx")
+region = Rect2(96, 0, 24, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_orhm2"]
+atlas = ExtResource("19_b00tx")
+region = Rect2(120, 0, 24, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6u0sv"]
+atlas = ExtResource("19_b00tx")
+region = Rect2(144, 0, 24, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xolcd"]
+atlas = ExtResource("19_b00tx")
+region = Rect2(168, 0, 24, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3y3by"]
+atlas = ExtResource("19_b00tx")
+region = Rect2(192, 0, 24, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tlfnv"]
+atlas = ExtResource("19_b00tx")
+region = Rect2(216, 0, 24, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qcl1e"]
+atlas = ExtResource("19_b00tx")
+region = Rect2(240, 0, 24, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j4j30"]
+atlas = ExtResource("19_b00tx")
+region = Rect2(264, 0, 24, 250)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_le483"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rehu0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o6erh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kmyhy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5a5dm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eu0i6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_orhm2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6u0sv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xolcd")
+}, {
+"duration": 60.0,
+"texture": SubResource("AtlasTexture_3y3by")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_tlfnv")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_qcl1e")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_j4j30")
+}],
+"loop": false,
+"name": &"default",
+"speed": 60.0
+}]
+
 [node name="Thymiaterion" groups=["enemy"] instance=ExtResource("1_q5d36")]
 position = Vector2(0, 0)
 collision_layer = 24
@@ -93,17 +224,27 @@ script = ExtResource("6_7xjpy")
 [node name="Whip" type="Node" parent="Battler/Actions" index="2"]
 script = ExtResource("7_q7jpk")
 
-[node name="PrepareBeamCounter" type="Node" parent="Battler/Actions" index="3"]
+[node name="Counter" type="Node" parent="Battler/Actions" index="3"]
 script = ExtResource("8_sm7w2")
+description = "Counterattack stance engaged."
 
-[node name="PrepareChew" type="Node" parent="Battler/Actions" index="4"]
+[node name="Beam" type="Node" parent="Battler/Actions" index="4"]
+script = ExtResource("12_pqd4o")
+hit = SubResource("Resource_ue8ew")
+description = "Counterattack triggered."
+
+[node name="PrepareChew" type="Node" parent="Battler/Actions" index="5"]
 script = ExtResource("10_hat3u")
+description = "Preparing attack..."
 
-[node name="Chew" type="Node" parent="Battler/Actions" index="5"]
+[node name="Chew" type="Node" parent="Battler/Actions" index="6"]
 script = ExtResource("9_dmayn")
+hit = SubResource("Resource_snqd0")
+description = "Devouring Void"
 
 [node name="AI" parent="Battler" index="3"]
 script = ExtResource("11_ikq4e")
+change_material = SubResource("ShaderMaterial_fi27y")
 
 [node name="CollisionShape2D" parent="Battler/Hitbox" index="0"]
 position = Vector2(0, -34)
@@ -130,6 +271,7 @@ frame_progress = 0.635706
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Battler/Projectile" index="0"]
 z_index = -1
 material = SubResource("CanvasItemMaterial_upm3e")
+emitting = false
 amount = 4
 lifetime = 0.3
 fract_delta = false
@@ -140,6 +282,12 @@ spread = 20.0
 gravity = Vector2(0, 0)
 anim_speed_min = 1.0
 anim_speed_max = 1.0
+
+[node name="Beam" type="AnimatedSprite2D" parent="Battler" index="7"]
+visible = false
+z_index = 1
+position = Vector2(0, 90)
+sprite_frames = SubResource("SpriteFrames_le483")
 
 [node name="BumpCollision" parent="." index="2"]
 disabled = true

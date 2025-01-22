@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dtaxhpmmjspek"]
+[gd_scene load_steps=7 format=3 uid="uid://dtaxhpmmjspek"]
 
 [ext_resource type="Script" path="res://battle/battler/battler.gd" id="1"]
 [ext_resource type="Resource" uid="uid://cdcbv6worc83n" path="res://battle/battler/placeholder_stats.tres" id="2_04g3y"]
 [ext_resource type="Script" path="res://battle/battle_rewards.gd" id="3"]
+[ext_resource type="Script" path="res://battle/battler/hitspots.gd" id="5_5au3e"]
 [ext_resource type="PackedScene" uid="uid://32gtywhjjdwk" path="res://ui/02_molecules/toast/toast.tscn" id="5_sffqa"]
 
 [sub_resource type="Resource" id="1"]
@@ -38,5 +39,6 @@ monitoring = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 
 [node name="Hitspots" type="Node2D" parent="."]
+script = ExtResource("5_5au3e")
 
 [editable path="Toast"]

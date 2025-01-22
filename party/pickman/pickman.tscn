@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dehii02b2xc8o"]
+[gd_scene load_steps=15 format=3 uid="uid://dehii02b2xc8o"]
 
 [ext_resource type="PackedScene" uid="uid://bomxx7doloqmu" path="res://party/party_member.tscn" id="1_puo4q"]
 [ext_resource type="Resource" uid="uid://efimamnfjman" path="res://party/pickman/growth.tres" id="2_attsm"]
@@ -9,6 +9,28 @@
 [ext_resource type="Script" path="res://party/pickman/skill/slab_slam.gd" id="5_5kqwp"]
 [ext_resource type="Script" path="res://party/pickman/action/feast.gd" id="5_beduq"]
 [ext_resource type="PackedScene" uid="uid://dwx2sfgjttusb" path="res://battle/action/util/line_of_effect.tscn" id="6_8tf6q"]
+[ext_resource type="Shader" path="res://utils/material/uniform_add.gdshader" id="8_2lvfg"]
+[ext_resource type="Script" path="res://battle/hit.gd" id="9_vg70b"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_it3w0"]
+shader = ExtResource("8_2lvfg")
+shader_parameter/add = Color(0.392157, 0.392157, 0, 0)
+
+[sub_resource type="Resource" id="Resource_nr4ru"]
+script = ExtResource("9_vg70b")
+fixed_damage = false
+base_damage = 0
+type = 0
+anim_time = 0.3
+anim_duration = 0.367
+spark_time = 0.0
+spark_offset = Vector2(0, 0)
+hit_sound_time = 0.0
+miss_sound_time = 0.0
+palfx_material = SubResource("ShaderMaterial_it3w0")
+palfx_time = 0.3
+palfx_duration = 0.7
+toast_time = 0.45
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7ecgo"]
 radius = 9.0
@@ -26,7 +48,6 @@ starting_armor_id = "ruby_braces"
 
 [node name="Anim" parent="." index="0" instance=ExtResource("4_pfdmg")]
 use_parent_material = true
-animation_names = Array[String](["idle", "walk", "run", "attack", "jump_back", "hit", "battle_idle/healthy", "battle_idle/tired", "downed"])
 
 [node name="Battler" parent="." index="1"]
 anim_path = NodePath("../Anim")
@@ -38,6 +59,8 @@ description = "Deal reduced damage to an enemy to recover some HP/SP."
 
 [node name="TaxingTouch" type="Node" parent="Battler/Actions/Skill" index="0"]
 script = ExtResource("4_col3m")
+damage_factor = 0.75
+hit = SubResource("Resource_nr4ru")
 display_name = "Taxing Touch"
 description = "Damage an enemy and impair its movement. Their next action will be delayed."
 energy_cost = 10

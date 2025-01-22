@@ -7,7 +7,6 @@ func _input(event):
 		
 		CutsceneService.play_custom_cutscene([
 			"ASSIGN_PROXY NONE",
-			"AWAIT ROOM do_hit",
 			"WAIT 1",
 			"ASSIGN_PROXY PARTY"
 		]) 
@@ -15,7 +14,4 @@ func _input(event):
 func on_enter():
 	EntitiesService.get_proxy().set_orientation(Vector2.DOWN)
 	
-func do_hit(_mode):
-	await EntitiesService.get_active_party_members()[0].battler.take_hit(hit)
-		
 		

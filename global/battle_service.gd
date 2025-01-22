@@ -1,15 +1,22 @@
 extends Node
 
 const BattleLoop = preload("res://battle/battle_loop.gd")
-const Attack = preload("res://battle/action/base_attack.gd")
+const Attack = preload("res://battle/action/party_member_attack.gd")
 const Defend = preload("res://battle/action/defend.gd")
 const Win = preload("res://battle/action/win.gd")
 const Lose = preload("res://battle/action/lose.gd")
-const Item = preload("res://battle/action/item.gd")
+const Item = preload("res://battle/action/item.gd")	
 const Escape = preload("res://battle/action/escape.gd")
 const BattleEndState = preload("res://battle/battle_end_state.gd")
 
 const FadeOverlay = preload("res://utils/cutscene_manager/instructions/fade_overlay.gd")
+
+enum Event {
+	TURN_START,
+	TURN_END,
+	BEFORE_ACTOR_DEATH,
+	AFTER_ACTOR_DEATH
+}
 # The Battle Service should handle initialization: this is, connecting characters
 # to the loop, and handling restoring everything to its normal state once the 
 # battle has finished
@@ -39,7 +46,7 @@ func init_common_action_options():
 	
 	var defend = Defend.new()
 	defend.display_name = "Defend"
-	defend.description = "Raise this party member's defenses until their next action."
+	defend.description = "Raise this party member's defenses until their next turn."
 	self.common_action_options["defend"] = defend
 	
 	var win = Win.new()
@@ -458,10 +465,23 @@ func delay_actor(actor, delay):
 func prompt(text: String):
 	await self.ui.prompt(text)
 	
-func announce(text: String, wait_time=0):
+func announce(text: String, wait_time: float=0.0):
 	self.ui.set_info_text(text)
 	if wait_time > 0:
 		await get_tree().create_timer(wait_time).timeout
 
 func get_party_actors():
 	return self.loop.actors.filter(func (it): return it is PartyMember)
+
+func get_non_party_actors():
+	return self.loop.actors.filter(func (it): return not it is PartyMember)
+
+func observe_event(event: Event, observer):
+	self.loop.observe_event(event, observer)
+
+func stop_observe_event(event: Event, observer):
+	self.loop.stop_observe_event(event, observer)
+
+func notify_death(actor):
+	if current_battle_parameters != null:
+		self.loop.pending_deaths.push_back(actor)

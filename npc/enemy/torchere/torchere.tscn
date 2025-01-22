@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bngh72w54kdq0"]
+[gd_scene load_steps=14 format=3 uid="uid://bngh72w54kdq0"]
 
 [ext_resource type="PackedScene" uid="uid://c17hneqpuil0l" path="res://npc/lib/base_npc.tscn" id="1_qtfsx"]
 [ext_resource type="Script" path="res://npc/enemy/enemy.gd" id="2_x8f4g"]
@@ -8,6 +8,24 @@
 [ext_resource type="Script" path="res://battle/ai/random_ai.gd" id="6_hhc2v"]
 [ext_resource type="Resource" uid="uid://dlkfog15bgvgh" path="res://npc/lib/empty_rewards.tres" id="6_lqr72"]
 [ext_resource type="Script" path="res://battle/action/base_attack.gd" id="6_mwfm3"]
+[ext_resource type="Material" uid="uid://c48122ffiwrbb" path="res://utils/material/uniform_add.tres" id="8_7l7ab"]
+[ext_resource type="Script" path="res://battle/hit.gd" id="9_yhwd8"]
+
+[sub_resource type="Resource" id="Resource_m2jmt"]
+script = ExtResource("9_yhwd8")
+fixed_damage = false
+base_damage = 0
+type = 8
+anim_time = 0.0
+anim_duration = 0.45
+spark_time = 0.0
+spark_offset = Vector2(0, 0)
+hit_sound_time = 0.0
+miss_sound_time = 0.0
+palfx_material = ExtResource("8_7l7ab")
+palfx_time = 0.0
+palfx_duration = 0.3
+toast_time = 0.3
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_phgn6"]
 radius = 20.0
@@ -37,6 +55,7 @@ jump_back_anim = "walk_back"
 idle_anim = "idle"
 walk_speed = 80
 jump_back_speed = 80
+hit = SubResource("Resource_m2jmt")
 
 [node name="AI" parent="Battler" index="3"]
 script = ExtResource("6_hhc2v")

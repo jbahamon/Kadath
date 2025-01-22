@@ -11,10 +11,10 @@ var unlocking_ids = {
 func execute(actor):
 	var hit = Hit.new()
 	hit.type = Hit.Element.PHYSICAL
-	hit.base_damage = self.get_standard_attack_damage(actor) * self.normal_attack_factor
+	hit.base_damage = actor.battler.physical_attack * self.normal_attack_factor
 	
 	var enemy_id = self.target.enemy_id
-	await self.target.take_hit(hit)
+	await self.target.take_hit(actor, hit)
 	
 	# For balance, we could make it so it heals less with each use. 
 	# Like 0.8^n_usages and start from a big one.

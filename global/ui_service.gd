@@ -4,6 +4,8 @@ var menu_popup: Popup
 var save_popup: Popup
 var popup_layer: CanvasLayer
 
+const PROMPT_WAIT_TIME = 2.0
+
 func _init():
 	self.process_mode = Node.PROCESS_MODE_ALWAYS
 

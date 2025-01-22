@@ -5,7 +5,9 @@ func get_turn(actors: Array) -> Turn:
 	# Can be based on state of the actor
 	var actor = get_parent().get_parent()
 	
-	var action = self.choose_action(actor, actors)
+	await get_tree().create_timer(0.5).timeout
+	var action = await self.choose_action(actor, actors)
+	
 	self.fill_action_parameters(action, actor, actors)
 	
 	var turn = Turn.new()

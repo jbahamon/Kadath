@@ -33,7 +33,7 @@ func execute(actor):
 	var remaining_hp = self.sacrifice.health
 	sacrifice_hit.base_damage = remaining_hp
 	
-	await self.sacrifice.take_hit(sacrifice_hit)
+	await self.sacrifice.take_hit(actor, sacrifice_hit)
 	self.sacrifice.battler.health = 0
 	
 	var heals = allies.map(

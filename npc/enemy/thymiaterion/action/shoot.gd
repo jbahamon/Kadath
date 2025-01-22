@@ -6,7 +6,7 @@ extends "res://battle/action/simple_single_target.gd"
 func execute(actor):
 	var hit = Hit.new()
 	hit.type = Hit.Element.PHYSICAL
-	hit.base_damage = self.get_standard_attack_damage(actor)
+	hit.base_damage = actor.battler.physical_attack
 	
 	await get_tree().create_timer(0.525).timeout
 	await self.shoot_projectile(actor, hit)
@@ -40,6 +40,7 @@ func shoot_projectile(actor, hit):
 	room.remove_child(projectile)
 	actor.battler.add_child(projectile)
 	
-	await target.take_hit(hit)
+	await target.take_hit(actor, hit)
+	
 	
 	

@@ -2,10 +2,10 @@ extends Camera2D
 
 @onready var screen_shake = $ScreenShake
 
-func shake(mode: CutsceneInstruction.ExecutionMode, duration: float, amplitude: Vector2):
+func shake(mode: CutsceneInstruction.ExecutionMode, duration: float, amplitude: Vector2, time_scale_factor: float):
 	match mode:
 		CutsceneInstruction.ExecutionMode.PLAY:
-			return self.screen_shake.start(duration, amplitude)
+			return self.screen_shake.start(duration, amplitude, time_scale_factor)
 	
 	
 func pause_call(function_name: String):

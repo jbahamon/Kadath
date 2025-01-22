@@ -3,9 +3,10 @@ class_name StatusEffect
 enum Trigger {
 	TURN_START = 1,
 	TURN_END = 2,
-	ACTOR_DEAD = 4,
-	ADD = 8,
-	REMOVE = 16,
+	BEFORE_ACTOR_DEATH = 4,
+	AFTER_ACTOR_DEATH = 8,
+	ADD = 16,
+	REMOVE = 32,
 }
 
 var trigger = 0

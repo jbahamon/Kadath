@@ -7,8 +7,8 @@ func execute(actor):
 	var prev_hp = target.battler.health
 	var hit = Hit.new()
 	hit.type = Hit.Element.PHYSICAL
-	hit.base_damage = self.get_standard_attack_damage(actor) * self.damage_factor
-	await self.target.take_hit(hit)
+	hit.base_damage = actor.battler.physical_attack * self.damage_factor
+	await self.target.take_hit(actor, hit)
 	
 	print(
 		"%s attacked %s (HP: %d -> HP: %d)" % [

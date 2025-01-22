@@ -22,9 +22,6 @@ enum TargetType {
 
 const highlight_material = preload("res://utils/material/highlight.tres")
 
-func get_standard_attack_damage(actor):
-	return actor.battler.physical_attack * 5
-
 func is_disabled(actor):
 	return actor is PartyMember and actor.battler.energy < self.energy_cost
 

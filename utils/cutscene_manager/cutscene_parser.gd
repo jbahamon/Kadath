@@ -76,7 +76,7 @@ func _init():
 	patterns["VECTOR2"].compile("\\([ ]*(?<X>[^ ,)]+)[ ]*,[ ]*(?<Y>[^ ,)]+)[ ]*\\)")
 
 	patterns["SHAKE"] = RegEx.new()
-	patterns["SHAKE"].compile("^FOR (?<Duration>.+) FREQ (?<Frequency>.+) STR (?<Amplitude>.+) PRIORITY (?<Priority>.+)$")
+	patterns["SHAKE"].compile("^FOR (?<Duration>.+) FREQ (?<Frequency>.+) STR (?<Amplitude>.+) TIME_SCALE (?<TimeScaleFactor>.+)$")
 
 
 func parse_cutscene_from_file(cutscene_name: String): 
@@ -175,7 +175,7 @@ func parse_instruction(stack: Array, instruction_name: String, args: String):
 					self.parse_float(shake_match.get_string("Duration")),
 					self.parse_float(shake_match.get_string("Frequency")),
 					self.parse_vector2(shake_match.get_string("Amplitude")),
-					self.parse_int(shake_match.get_string("Priority")),
+					self.parse_vector2(shake_match.get_string("TimeScaleFactor")),
 				]
 			)
 				

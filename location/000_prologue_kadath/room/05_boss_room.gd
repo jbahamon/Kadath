@@ -23,11 +23,10 @@ func _on_boss_trigger_body_entered(body):
 
 	animation_player.play("boss_enter")
 	await animation_player.animation_finished
-	await CameraService.shake(CutsceneInstruction.ExecutionMode.PLAY, 1.0, Vector2(10, 32))
+	await CameraService.shake(CutsceneInstruction.ExecutionMode.PLAY, 1.0, Vector2(10, 32), 1.0)
 	InputService.set_input_enabled(true)
 	await BattleService.start_battle(
 		[$Boss],
 		false,
 		PlayerProxy.ProxyMode.GAMEPLAY
 	)
-

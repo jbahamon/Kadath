@@ -14,7 +14,7 @@ func execute(actor):
 	first_hit.base_damage = (actor.battler.stats.level + actor.battler.stats.magic_attack) * self.power
 
 	var hits = [
-		func (): await self.target.take_hit(first_hit)
+		func (): await self.target.take_hit(actor, first_hit)
 	]
 	
 	var additional_hits = targets.filter(
@@ -24,7 +24,7 @@ func execute(actor):
 			var hit = Hit.new()
 			hit.type = Hit.Element.ABYSS
 			hit.base_damage = (actor.battler.stats.level + actor.battler.stats.magic_attack) * self.line_power
-			return func (): await line_target.take_hit(hit)	
+			return func (): await line_target.take_hit(actor, hit)
 	)
 	hits.append_array(additional_hits)
 	

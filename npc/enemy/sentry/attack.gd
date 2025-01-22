@@ -6,7 +6,7 @@ func execute(actor):
 	var prev_hp = target.battler.health
 	var hit = Hit.new()
 	hit.type = Hit.Element.PHYSICAL
-	hit.base_damage = self.get_standard_attack_damage(actor)
+	hit.base_damage = actor.battler.physical_attack
 	
 	actor.play_anim("attack")
 	
@@ -56,6 +56,6 @@ func shoot_projectile(actor, hit):
 	room.remove_child(projectile)
 	actor.battler.add_child(projectile)
 	
-	await target.take_hit(hit)
+	await target.take_hit(actor, hit)
 	
 	

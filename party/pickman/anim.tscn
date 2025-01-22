@@ -1,4 +1,4 @@
-[gd_scene load_steps=126 format=3 uid="uid://cv5wwoeq1pjb7"]
+[gd_scene load_steps=158 format=3 uid="uid://cv5wwoeq1pjb7"]
 
 [ext_resource type="Script" path="res://npc/lib/anim/character_anim.gd" id="1_ibgvo"]
 [ext_resource type="Texture2D" uid="uid://dlvuo81uss6l2" path="res://party/pickman/spritesheet - alt.png" id="2_oruxv"]
@@ -213,6 +213,142 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [Vector2i(0, 28), Vector2i(1, 28)]
+}
+
+[sub_resource type="Animation" id="Animation_vrc2y"]
+resource_name = "crit_east"
+length = 0.66667
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.283333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(0, 36), Vector2i(1, 36)]
+}
+
+[sub_resource type="Animation" id="Animation_25igp"]
+resource_name = "crit_north"
+length = 0.66667
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.283333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(0, 35), Vector2i(1, 35)]
+}
+
+[sub_resource type="Animation" id="Animation_boyo7"]
+resource_name = "crit_south"
+length = 0.66667
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.283333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(0, 37), Vector2i(1, 37)]
+}
+
+[sub_resource type="Animation" id="Animation_0pw8s"]
+resource_name = "crit_start_east"
+length = 0.266669
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 36)]
+}
+
+[sub_resource type="Animation" id="Animation_duua0"]
+resource_name = "crit_start_north"
+length = 0.266669
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 35)]
+}
+
+[sub_resource type="Animation" id="Animation_exus2"]
+resource_name = "crit_start_south"
+length = 0.266669
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 37)]
+}
+
+[sub_resource type="Animation" id="Animation_o34jg"]
+resource_name = "crit_start_west"
+length = 0.266669
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 38)]
+}
+
+[sub_resource type="Animation" id="Animation_nes51"]
+resource_name = "crit_west"
+length = 0.66667
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.283333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(0, 38), Vector2i(1, 38)]
 }
 
 [sub_resource type="Animation" id="Animation_r77ty"]
@@ -649,6 +785,74 @@ tracks/0/keys = {
 "values": [Vector2i(0, 2), Vector2i(0, 3), Vector2i(0, 0), Vector2i(0, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_r2sxs"]
+resource_name = "taxing_touch_east"
+length = 0.66667
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(0, 41), Vector2i(1, 41)]
+}
+
+[sub_resource type="Animation" id="Animation_vg0tm"]
+resource_name = "taxing_touch_north"
+length = 0.66667
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(0, 40), Vector2i(1, 40)]
+}
+
+[sub_resource type="Animation" id="Animation_x7c4o"]
+resource_name = "taxing_touch_south"
+length = 0.66667
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(0, 42), Vector2i(1, 42)]
+}
+
+[sub_resource type="Animation" id="Animation_lkc7v"]
+resource_name = "taxing_touch_west"
+length = 0.66667
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(0, 43), Vector2i(1, 43)]
+}
+
 [sub_resource type="Animation" id="Animation_0imr7"]
 resource_name = "use_item"
 length = 1.4
@@ -752,6 +956,14 @@ _data = {
 "battle_tired_north": SubResource("Animation_562xw"),
 "battle_tired_south": SubResource("Animation_eqsab"),
 "battle_tired_west": SubResource("Animation_6in78"),
+"crit_east": SubResource("Animation_vrc2y"),
+"crit_north": SubResource("Animation_25igp"),
+"crit_south": SubResource("Animation_boyo7"),
+"crit_start_east": SubResource("Animation_0pw8s"),
+"crit_start_north": SubResource("Animation_duua0"),
+"crit_start_south": SubResource("Animation_exus2"),
+"crit_start_west": SubResource("Animation_o34jg"),
+"crit_west": SubResource("Animation_nes51"),
 "downed_east": SubResource("Animation_r77ty"),
 "downed_north": SubResource("Animation_aat5u"),
 "downed_south": SubResource("Animation_lko33"),
@@ -777,6 +989,10 @@ _data = {
 "run_south": SubResource("Animation_wjtjm"),
 "run_west": SubResource("Animation_o7v78"),
 "spin": SubResource("Animation_ya6d0"),
+"taxing_touch_east": SubResource("Animation_r2sxs"),
+"taxing_touch_north": SubResource("Animation_vg0tm"),
+"taxing_touch_south": SubResource("Animation_x7c4o"),
+"taxing_touch_west": SubResource("Animation_lkc7v"),
 "use_item": SubResource("Animation_0imr7"),
 "walk_east": SubResource("6"),
 "walk_north": SubResource("7"),
@@ -875,6 +1091,56 @@ states/healthy/position = Vector2(426, 122)
 states/tired/node = SubResource("AnimationNodeBlendSpace2D_upyl0")
 states/tired/position = Vector2(426, 250)
 transitions = ["Start", "healthy", SubResource("AnimationNodeStateMachineTransition_o6ing"), "Start", "tired", SubResource("AnimationNodeStateMachineTransition_r3qpp"), "healthy", "End", SubResource("AnimationNodeStateMachineTransition_pi8kd"), "tired", "End", SubResource("AnimationNodeStateMachineTransition_eypbm")]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r471w"]
+animation = &"crit_south"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0yuqf"]
+animation = &"crit_north"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_783t4"]
+animation = &"crit_east"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dsnah"]
+animation = &"crit_west"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_jsgcd"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_r471w")
+blend_point_0/pos = Vector2(0, 1.1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_0yuqf")
+blend_point_1/pos = Vector2(0, -1.1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_783t4")
+blend_point_2/pos = Vector2(1, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_dsnah")
+blend_point_3/pos = Vector2(-1, 0)
+min_space = Vector2(-1, -1.1)
+max_space = Vector2(1, 1.1)
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wir8g"]
+animation = &"crit_start_south"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3317a"]
+animation = &"crit_start_north"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_77eb4"]
+animation = &"crit_start_east"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yeuwe"]
+animation = &"crit_start_west"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_jf6w2"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_wir8g")
+blend_point_0/pos = Vector2(0, 1.1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_3317a")
+blend_point_1/pos = Vector2(0, -1.1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_77eb4")
+blend_point_2/pos = Vector2(1, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_yeuwe")
+blend_point_3/pos = Vector2(-1, 0)
+min_space = Vector2(-1, -1.1)
+max_space = Vector2(1, 1.1)
+blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hadvi"]
 animation = &"downed_south"
@@ -1027,6 +1293,31 @@ blend_mode = 1
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ugijt"]
 animation = &"spin"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1o7go"]
+animation = &"taxing_touch_south"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_d8jbn"]
+animation = &"taxing_touch_north"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_72gw3"]
+animation = &"taxing_touch_east"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6cby2"]
+animation = &"taxing_touch_west"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_v6viy"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_1o7go")
+blend_point_0/pos = Vector2(0, 1.1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_d8jbn")
+blend_point_1/pos = Vector2(0, -1.1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_72gw3")
+blend_point_2/pos = Vector2(1, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_6cby2")
+blend_point_3/pos = Vector2(-1, 0)
+min_space = Vector2(-1, -1.1)
+max_space = Vector2(1, 1.1)
+blend_mode = 1
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qas5h"]
 animation = &"use_item"
 
@@ -1100,12 +1391,26 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jm2rr"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_num44"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qqylx"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3r11f"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wc15l"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vvtta"]
+
 [sub_resource type="AnimationNodeStateMachine" id="21"]
 states/Start/position = Vector2(276, 149)
 states/attack/node = SubResource("AnimationNodeBlendSpace2D_l2foe")
-states/attack/position = Vector2(673, 252)
+states/attack/position = Vector2(727, 149)
 states/battle_idle/node = SubResource("AnimationNodeStateMachine_opkjt")
 states/battle_idle/position = Vector2(492, 252)
+states/crit/node = SubResource("AnimationNodeBlendSpace2D_jsgcd")
+states/crit/position = Vector2(727, 334.528)
+states/crit_start/node = SubResource("AnimationNodeBlendSpace2D_jf6w2")
+states/crit_start/position = Vector2(592, 334.528)
 states/downed/node = SubResource("AnimationNodeBlendSpace2D_5eeji")
 states/downed/position = Vector2(271, 250.164)
 states/hit/node = SubResource("AnimationNodeBlendSpace2D_ou8yo")
@@ -1115,21 +1420,23 @@ states/idle/position = Vector2(405, 149)
 states/interact/node = SubResource("AnimationNodeBlendSpace2D_82ew1")
 states/interact/position = Vector2(405, 74.1639)
 states/jump_back/node = SubResource("AnimationNodeBlendSpace2D_cyaih")
-states/jump_back/position = Vector2(621, 336.209)
+states/jump_back/position = Vector2(727, 252)
 states/run/node = SubResource("AnimationNodeBlendSpace2D_xr1uu")
-states/run/position = Vector2(573, 66)
+states/run/position = Vector2(524, 69)
 states/spin/node = SubResource("AnimationNodeAnimation_ugijt")
 states/spin/position = Vector2(276, 74.1639)
+states/taxing_touch/node = SubResource("AnimationNodeBlendSpace2D_v6viy")
+states/taxing_touch/position = Vector2(689, 66.833)
 states/use_item/node = SubResource("AnimationNodeAnimation_qas5h")
 states/use_item/position = Vector2(492, 400.738)
 states/walk/node = SubResource("18")
-states/walk/position = Vector2(573, 149)
-transitions = ["idle", "walk", SubResource("19"), "walk", "idle", SubResource("20"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_hbppg"), "walk", "run", SubResource("AnimationNodeStateMachineTransition_5f7a7"), "run", "walk", SubResource("AnimationNodeStateMachineTransition_0csje"), "walk", "attack", SubResource("AnimationNodeStateMachineTransition_q212s"), "attack", "jump_back", SubResource("AnimationNodeStateMachineTransition_23l0q"), "idle", "battle_idle", SubResource("AnimationNodeStateMachineTransition_a3364"), "battle_idle", "idle", SubResource("AnimationNodeStateMachineTransition_4qcwb"), "battle_idle", "hit", SubResource("AnimationNodeStateMachineTransition_o5evy"), "hit", "battle_idle", SubResource("AnimationNodeStateMachineTransition_jhx27"), "jump_back", "battle_idle", SubResource("AnimationNodeStateMachineTransition_t7qqw"), "battle_idle", "walk", SubResource("AnimationNodeStateMachineTransition_j8rvy"), "walk", "battle_idle", SubResource("AnimationNodeStateMachineTransition_sg20g"), "downed", "battle_idle", SubResource("AnimationNodeStateMachineTransition_jhwjv"), "battle_idle", "downed", SubResource("AnimationNodeStateMachineTransition_6n4fe"), "interact", "idle", SubResource("AnimationNodeStateMachineTransition_c2dip"), "idle", "interact", SubResource("AnimationNodeStateMachineTransition_q1a1q"), "idle", "spin", SubResource("AnimationNodeStateMachineTransition_i1lol"), "spin", "idle", SubResource("AnimationNodeStateMachineTransition_iqso0"), "battle_idle", "use_item", SubResource("AnimationNodeStateMachineTransition_ogic4"), "use_item", "battle_idle", SubResource("AnimationNodeStateMachineTransition_jm2rr")]
-graph_offset = Vector2(-30, 277.373)
+states/walk/position = Vector2(524, 149)
+transitions = ["idle", "walk", SubResource("19"), "walk", "idle", SubResource("20"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_hbppg"), "walk", "run", SubResource("AnimationNodeStateMachineTransition_5f7a7"), "run", "walk", SubResource("AnimationNodeStateMachineTransition_0csje"), "walk", "attack", SubResource("AnimationNodeStateMachineTransition_q212s"), "attack", "jump_back", SubResource("AnimationNodeStateMachineTransition_23l0q"), "idle", "battle_idle", SubResource("AnimationNodeStateMachineTransition_a3364"), "battle_idle", "idle", SubResource("AnimationNodeStateMachineTransition_4qcwb"), "battle_idle", "hit", SubResource("AnimationNodeStateMachineTransition_o5evy"), "hit", "battle_idle", SubResource("AnimationNodeStateMachineTransition_jhx27"), "jump_back", "battle_idle", SubResource("AnimationNodeStateMachineTransition_t7qqw"), "battle_idle", "walk", SubResource("AnimationNodeStateMachineTransition_j8rvy"), "walk", "battle_idle", SubResource("AnimationNodeStateMachineTransition_sg20g"), "downed", "battle_idle", SubResource("AnimationNodeStateMachineTransition_jhwjv"), "battle_idle", "downed", SubResource("AnimationNodeStateMachineTransition_6n4fe"), "interact", "idle", SubResource("AnimationNodeStateMachineTransition_c2dip"), "idle", "interact", SubResource("AnimationNodeStateMachineTransition_q1a1q"), "idle", "spin", SubResource("AnimationNodeStateMachineTransition_i1lol"), "spin", "idle", SubResource("AnimationNodeStateMachineTransition_iqso0"), "battle_idle", "use_item", SubResource("AnimationNodeStateMachineTransition_ogic4"), "use_item", "battle_idle", SubResource("AnimationNodeStateMachineTransition_jm2rr"), "battle_idle", "crit_start", SubResource("AnimationNodeStateMachineTransition_num44"), "crit_start", "crit", SubResource("AnimationNodeStateMachineTransition_qqylx"), "crit", "jump_back", SubResource("AnimationNodeStateMachineTransition_3r11f"), "run", "taxing_touch", SubResource("AnimationNodeStateMachineTransition_wc15l"), "taxing_touch", "run", SubResource("AnimationNodeStateMachineTransition_vvtta")]
+graph_offset = Vector2(-30, -13.167)
 
 [node name="Anim" type="Marker2D"]
 script = ExtResource("1_ibgvo")
-animation_names = Array[String](["idle", "walk", "run", "attack", "jump_back", "hit", "battle_idle/healthy", "battle_idle/tired", "interact", "downed"])
+animation_names = Array[String](["idle", "walk", "run", "attack", "jump_back", "hit", "battle_idle/healthy", "battle_idle/tired", "interact", "downed", "crit", "crit_start", "taxing_touch"])
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -1154,10 +1461,13 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/attack/blend_position = Vector2(0.00093019, 0.904762)
 parameters/battle_idle/healthy/blend_position = Vector2(-0.312384, 0.459584)
 parameters/battle_idle/tired/blend_position = Vector2(0, 0)
+parameters/crit/blend_position = Vector2(0.0135922, -0.623009)
+parameters/crit_start/blend_position = Vector2(0, 0)
 parameters/downed/blend_position = Vector2(0, 0)
 parameters/hit/blend_position = Vector2(0, 0)
 parameters/idle/blend_position = Vector2(-0.191349, 0.537885)
 parameters/interact/blend_position = Vector2(0, 0)
 parameters/jump_back/blend_position = Vector2(0, 0)
 parameters/run/blend_position = Vector2(-0.00716281, 0.356828)
+parameters/taxing_touch/blend_position = Vector2(0, 0)
 parameters/walk/blend_position = Vector2(0.166791, 0.440969)

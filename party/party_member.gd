@@ -188,8 +188,8 @@ func get_allies(actors: Array):
 func get_enemies(actors: Array):
 	return actors.filter(func(actor): return not actor is PartyMember)
 	
-func take_hit(hit: Hit, in_battle: bool = true):
-	return await self.battler.take_hit(hit, in_battle)
+func take_hit(actor, hit: Hit, in_battle: bool = true):
+	return await self.battler.take_hit(actor, hit, in_battle)
 
 func heal(amount: int, in_battle: bool = true):
 	await self.battler.heal(amount, in_battle)

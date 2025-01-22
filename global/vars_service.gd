@@ -1,8 +1,9 @@
 extends Node
 
+const VERTICAL_ORIENTATION_BIAS = 1.1
 var loaded_slot = -1
 var starting_location_name = "000_prologue_kadath"
-var starting_room_name = "02_hub"
+var starting_room_name = "01_entrance"
 var strings: Dictionary = {}
 var current_flags: Dictionary = {}
 
@@ -31,3 +32,11 @@ func set_flag(flag_name: String, value: bool) -> void:
 
 func get_flag(flag_name: String) -> bool:
 	return current_flags.get(flag_name, false)
+
+func round_orientation_with_bias(orientation: Vector2):
+	if abs(orientation.x) > abs(orientation.y * VarsService.VERTICAL_ORIENTATION_BIAS):
+		return Vector2.RIGHT if orientation.x > 0 else Vector2.LEFT
+		
+	else:
+		return Vector2.DOWN if orientation.y > 0 else Vector2.UP
+	

@@ -110,7 +110,7 @@ func set_energy(value: int):
 func show_toast(text: String, color: Color=Color.WHITE):
 	await self.toast.show_toast(text, color)
 
-func take_hit(hit: Hit, in_battle: bool = true):
+func take_hit(actor, hit: Hit, in_battle: bool = true):
 	var damage
 	if hit.fixed_damage:
 		damage = hit.base_damage 
@@ -152,14 +152,15 @@ func take_hit(hit: Hit, in_battle: bool = true):
 			func(): 
 				await tree.create_timer(hit.toast_time).timeout
 				self.toast.position = self.toast_offset
-				self.toast.show_toast(str(damage))
-				await tree.create_timer(0.7).timeout # Toast duration
+				await self.toast.show_toast(str(damage))
 		)
 		
 		await DoAll.new(hit_events).execute()
 		
 		if self.health > 0:
-			self.ai.check_reactions(parent, hit, BattleService.get_actors())
+			self.ai.check_reactions(parent, actor, hit, BattleService.get_actors())
+		else:
+			BattleService.notify_death(get_parent())
 
 	hit.effective_damage = actual_damage
 	
@@ -242,17 +243,29 @@ func resume_move_to():
 func skip_move_to():
 	self.get_parent().skip_move_to()
 
+func has_hitspot(hitspot_name: String):
+	return hitspots.has_node(hitspot_name)
+
 func get_hitspot(hitspot_name: String):
 	var node = hitspots.get_node_or_null(hitspot_name)
 	return node.global_position if node != null else self.global_position
-	
-func get_nearest_hitspot_to(target_position: Vector2):
+
+func get_hitspot_for(attacker_position: Vector2) -> Vector2:
+	var max_prod = -INF
 	var min_distance = INF
-	var nearest_spot = self.global_position
-	for spot in self.hitspots.get_children():
-		var distance = target_position.distance_squared_to(spot.global_position)
-		if distance < min_distance:
-			min_distance = distance
-			nearest_spot = spot.global_position
+	var best_spot = self.global_position
+	for spot_name in self.hitspots.orientations:
+		var orientation = VarsService.round_orientation_with_bias(global_position - attacker_position)
+		var prod = orientation.dot(hitspots.orientations[spot_name])
+		
+		if prod < max_prod:
+			continue
 			
-	return nearest_spot
+		var spot = hitspots.get_node(spot_name)
+		var distance = attacker_position.distance_squared_to(spot.global_position)
+		if distance < min_distance:
+			max_prod = prod
+			min_distance = distance
+			best_spot = spot.global_position
+	
+	return best_spot
