@@ -14,7 +14,7 @@ func _init(init_overlay: String, init_color: Color, init_time: float):
 	self.tween = null
 
 func execute(tree: SceneTree, mode: ExecutionMode):
-	self.overlay_object = LayersService.get_layer(overlay)
+	self.overlay_object = FXService.get_layer(overlay)
 	
 	var original_color = self.overlay_object.color
 	if time > 0 and mode == ExecutionMode.PLAY:

@@ -1,14 +1,2 @@
 AnimatedSprite2D
-AnimationTree
-CPUParticles2D
-HBoxContainer
-HSeparator
-GridContainer
-VBoxContainer
-Label
-PanelContainer
-LocationRoom
-CheckBox
-TextureRect
 Sprite2D
-VSeparator

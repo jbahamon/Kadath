@@ -136,7 +136,7 @@ func start_battle(enemies: Array, escapable: bool, proxy_mode_on_finish=null):
 			self.ui.hide()
 			var party = EntitiesService.get_party()
 			party.set_physics_process(false)
-			LayersService.get_layer("MIX").color = Color(0,0,0,0)
+			FXService.get_layer("MIX").color = Color(0,0,0,0)
 			await FadeOverlay.new("MIX", Color.BLACK, 3.0).execute(get_tree(), FadeOverlay.ExecutionMode.PLAY)
 			SceneSwitcher.current_scene.exit()
 			SceneSwitcher.go_to_scene("res://ui/04_templates/other/demo_end.tscn")

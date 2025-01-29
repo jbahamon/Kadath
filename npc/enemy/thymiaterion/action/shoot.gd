@@ -9,38 +9,22 @@ func execute(actor):
 	hit.base_damage = actor.battler.physical_attack
 	
 	await get_tree().create_timer(0.525).timeout
-	await self.shoot_projectile(actor, hit)
-	await get_tree().create_timer(0.525).timeout
-	self.reset()
-
-func shoot_projectile(actor, hit):
-	var speed = 250.0
-	var origin: Vector2 = actor.global_position + Vector2(0, -80)
+	var origin = actor.global_position + Vector2(0, -80)
 	var destination = target.battler.get_hitspot("Center")
 	
-	var time = origin.distance_to(destination) / speed
-	var room = EnvironmentService.get_room()
-	actor.battler.remove_child(projectile)
-	room.add_child(projectile)
-	
-	projectile.global_position = origin
-	projectile.visible = true
-	
-	var direction = origin.direction_to(destination)
-	trail.direction = -direction
+	trail.direction = -origin.direction_to(destination)
 	trail.emitting = true
-	projectile.speed = direction * speed
-	
-	await get_tree().create_timer(time).timeout
-	
+
+	await self.shoot_projectile(
+		actor, 
+		projectile,
+		{
+			"origin": origin,
+			"destination": destination,
+			"speed": 250.0
+		}
+	)
 	trail.emitting = false
-	projectile.visible = false
-	projectile.position = Vector2.ZERO
-	
-	room.remove_child(projectile)
-	actor.battler.add_child(projectile)
-	
 	await target.take_hit(actor, hit)
-	
-	
-	
+	await get_tree().create_timer(0.525).timeout
+	self.reset()

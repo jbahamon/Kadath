@@ -18,6 +18,8 @@ enum Element {
 	NONE,
 }
 
+@export var animation_only = false
+
 @export_group("Damage")
 @export var fixed_damage = false
 @export var base_damage: int = 0
@@ -31,6 +33,12 @@ enum Element {
 @export var spark_frames: SpriteFrames
 @export var spark_time: float
 @export var spark_offset: Vector2
+
+@export_group("Shake")
+@export var shake_time: float = 0.0
+@export var shake_duration: float = 0.5
+@export var shake_amplitude: Vector2 = Vector2(8, 0)
+@export var shake_time_scale: float = 2.0
 
 @export_group("Sound")
 @export var hit_sound: AudioStream

@@ -12,8 +12,5 @@ func push_parameter(_parameter_name, _value):
 func pop_parameter():
 	return null
 	
-func execute(actor):
-	print("waitin")
-	await BattleService.announce("%s is preparing..." % actor.display_name)
-	
-	
+func execute(_actor):
+	await BattleService.announce(self.description, UIService.PROMPT_WAIT_TIME)

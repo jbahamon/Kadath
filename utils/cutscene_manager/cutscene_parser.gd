@@ -14,6 +14,7 @@ var LookAt = preload("res://utils/cutscene_manager/instructions/look_at.gd")
 
 var Await = preload("res://utils/cutscene_manager/instructions/await.gd")
 var Call = preload("res://utils/cutscene_manager/instructions/call.gd")
+var Shake = preload("res://utils/cutscene_manager/instructions/shake.gd")
 var StartDialogue = preload("res://utils/cutscene_manager/instructions/start_dialogue.gd")
 var Narrate = preload("res://utils/cutscene_manager/instructions/narrate.gd")
 
@@ -76,8 +77,7 @@ func _init():
 	patterns["VECTOR2"].compile("\\([ ]*(?<X>[^ ,)]+)[ ]*,[ ]*(?<Y>[^ ,)]+)[ ]*\\)")
 
 	patterns["SHAKE"] = RegEx.new()
-	patterns["SHAKE"].compile("^FOR (?<Duration>.+) FREQ (?<Frequency>.+) STR (?<Amplitude>.+) TIME_SCALE (?<TimeScaleFactor>.+)$")
-
+	patterns["SHAKE"].compile("^(?<Entity>[^ ]+) FOR (?<Duration>.+) STR (?<Amplitude>.+) TIME_SCALE (?<TimeScaleFactor>.+)$")
 
 func parse_cutscene_from_file(cutscene_name: String): 
 	var cutscene_file = FileAccess.open(cutscene_name, FileAccess.READ)
@@ -168,15 +168,11 @@ func parse_instruction(stack: Array, instruction_name: String, args: String):
 			)
 		CutsceneInstruction.Type.SHAKE:
 			var shake_match: RegExMatch = self.patterns["SHAKE"].search(args)
-			instruction = Call.new(
-				"CAMERA",
-				"shake",
-				[
-					self.parse_float(shake_match.get_string("Duration")),
-					self.parse_float(shake_match.get_string("Frequency")),
-					self.parse_vector2(shake_match.get_string("Amplitude")),
-					self.parse_vector2(shake_match.get_string("TimeScaleFactor")),
-				]
+			instruction = Shake.new(
+				self.parse_string(shake_match.get_string("Entity")),
+				self.parse_float(shake_match.get_string("Duration")),
+				self.parse_vector2(shake_match.get_string("Amplitude")),
+				self.parse_vector2(shake_match.get_string("TimeScaleFactor")),
 			)
 				
 			

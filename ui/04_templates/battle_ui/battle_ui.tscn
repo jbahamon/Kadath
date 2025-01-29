@@ -73,15 +73,23 @@ layout_mode = 2
 size_flags_horizontal = 0
 
 [node name="EnemyInfo" parent="VBoxContainer/OptionsContainer" instance=ExtResource("7_gtig5")]
-visible = false
+custom_minimum_size = Vector2(420, 0)
 layout_mode = 2
 size_flags_vertical = 0
 
 [node name="Spacer3" type="Control" parent="VBoxContainer/OptionsContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-size_flags_stretch_ratio = 3.0
+size_flags_stretch_ratio = 5.0
+
+[node name="Spacer4" type="Control" parent="VBoxContainer/OptionsContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
 
 [node name="InfoPanel" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2

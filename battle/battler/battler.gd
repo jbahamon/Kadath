@@ -14,7 +14,6 @@ const uniform_add: Material = preload("res://utils/material/uniform_add.tres")
 @export var toast_offset: Vector2 = Vector2(0,-32)
 
 @onready var actions = $Actions
-@onready var skills = $Skills
 @onready var ai: BattlerAI = $AI
 @onready var toast: Node2D = $Toast
 @onready var hitbox: Area2D = $Hitbox
@@ -111,15 +110,18 @@ func show_toast(text: String, color: Color=Color.WHITE):
 	await self.toast.show_toast(text, color)
 
 func take_hit(actor, hit: Hit, in_battle: bool = true):
-	var damage
-	if hit.fixed_damage:
-		damage = hit.base_damage 
-	else:
-		damage = hit.base_damage * self.get_damage_modifier(hit) 
-		damage = ceil(damage + randf_range(1, damage * 0.2))
-		
-	var actual_damage = self.take_damage(damage)
 	var parent = self.get_parent()
+	var damage
+	var actual_damage = 0
+	
+	if not hit.animation_only:
+		if hit.fixed_damage:
+			damage = hit.base_damage 
+		else:
+			damage = hit.base_damage * self.get_damage_modifier(hit) 
+			damage = ceil(damage + randf_range(1, damage * 0.2))
+			
+		actual_damage = self.take_damage(damage)
 		
 	if in_battle:
 		var hit_events = []
@@ -147,13 +149,30 @@ func take_hit(actor, hit: Hit, in_battle: bool = true):
 					await tree.create_timer(hit.palfx_duration).timeout
 					parent.material = prev_material
 			)
-
-		hit_events.append(
-			func(): 
-				await tree.create_timer(hit.toast_time).timeout
-				self.toast.position = self.toast_offset
-				await self.toast.show_toast(str(damage))
-		)
+		
+		if hit.shake_duration > 0:
+			hit_events.append(
+				func():
+					if hit.shake_time > 0:
+						await tree.create_timer(hit.shake_time).timeout
+					var shaker = FXService.shake(
+						parent.anim, 
+						hit.shake_duration, 
+						hit.shake_amplitude, 
+						hit.shake_time_scale,
+						FXService.DecayMode.NONE
+					)
+					await shaker.shake_finished
+			)
+			
+		if not hit.animation_only:
+			hit_events.append(
+				func(): 
+					if hit.toast_time > 0:
+						await tree.create_timer(hit.toast_time).timeout
+					self.toast.position = self.toast_offset
+					await self.toast.show_toast(str(damage))
+			)
 		
 		await DoAll.new(hit_events).execute()
 		

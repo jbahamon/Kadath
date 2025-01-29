@@ -15,7 +15,7 @@ id = 5
 script = ExtResource("4_8ihmo")
 display_name = "Skill"
 
-[node name="AI" parent="Battler" index="3"]
+[node name="AI" parent="Battler" index="2"]
 script = ExtResource("3")
 
 [editable path="Battler"]

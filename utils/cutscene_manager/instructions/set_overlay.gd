@@ -8,7 +8,7 @@ func _init(init_overlay: String, init_color: Color):
 	self.color = init_color
 
 func execute(_tree: SceneTree, _mode: ExecutionMode):
-	LayersService.get_layer(self.overlay).color = self.color
+	FXService.get_layer(self.overlay).color = self.color
 
 func _to_string():
 	return "set_overlay to %s" % str(self.color)

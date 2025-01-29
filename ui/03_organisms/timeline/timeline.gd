@@ -26,5 +26,3 @@ func update_preview(preview: Array):
 	for timeline_item in self.get_children():
 		timeline_item.set_actor(preview[i])
 		i += 1
-		
-	self.visible = true

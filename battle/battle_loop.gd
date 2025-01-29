@@ -43,7 +43,7 @@ func do_battle():
 		self.ui.hide_timeline()
 		await turn.play()
 		
-		self.check_deaths_and_reactions()
+		await self.check_deaths_and_reactions()
 			
 		for observer in self.observers[BattleService.Event.TURN_END]:
 			await observer.on_turn_end(current_actor)

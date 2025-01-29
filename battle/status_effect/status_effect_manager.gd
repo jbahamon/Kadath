@@ -126,7 +126,7 @@ func on_turn_end(turn_actor):
 	var to_remove = []
 	for effect in self._effects.values():
 		if effect.trigger & StatusEffect.Trigger.TURN_END:
-			effect.on_turn_start(turn_actor, owner)
+			effect.on_turn_end(turn_actor, owner)
 			
 			if effect.marked_for_removal:
 				to_remove.append(effect.get_id())

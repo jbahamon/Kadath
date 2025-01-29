@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("2_8d1kd")
+animation_only = false
 fixed_damage = true
 base_damage = 1.0
 type = 0

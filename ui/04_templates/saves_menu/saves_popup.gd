@@ -24,7 +24,7 @@ func _unhandled_input(event):
 func update_options():
 	var new_file_previews = SavesService.get_file_previews()
 	for child in v_box.get_children():
-		self.v_box.remove_child(child)
+		v_box.remove_child(child)
 		child.queue_free()
 	
 	self.file_previews = new_file_previews

@@ -27,7 +27,10 @@ func highlight_option(actor, option):
 	self.start_highlight(actor, option)
 
 func start_highlight(actor, option):
-	for highlight_target in await self.line_of_effect.get_actors_in_line(actor.global_position, option.global_position):
+	var actors = await self.line_of_effect.get_actors_in_line(actor.global_position, option.global_position)
+	var is_party_member = actor is PartyMember
+	actors = actors.filter(func(other_actor): return (other_actor is PartyMember) != is_party_member)
+	for highlight_target in actors:
 		highlighted_targets.append(highlight_target)
 		self.stored_materials[highlight_target.get_name()] = highlight_target.material
 		highlight_target.material = self.highlight_material

@@ -13,13 +13,14 @@ func is_triggered_by(actor, _hit, _actors):
 
 func execute(actor, _actors):
 	actor.battler.ai.second_phase = true
+	actor.enemy_info = "Avoid hitting it when it's in its counterattack stance."
 	actor.battler.ai.turn_counter = 0
 	
 	actor.battler.ai.remove_reaction(self)
 	actor.material = change_material
 	var tween: Tween = actor.get_tree().create_tween()
 	tween.tween_method(func(c): self.change_material.set("shader_parameter/add", c), Color(Color.BLACK, 0.0), Color.TRANSPARENT, 1.0)
-	CameraService.shake(CutsceneInstruction.ExecutionMode.PLAY, 2.0, Vector2(16, 16), 1.0)
+	FXService.env_shake(2.0, Vector2(16, 16), 1.0)
 	await tween.finished
 	actor.play_anim("morph")
 	tween = actor.get_tree().create_tween()

@@ -19,43 +19,17 @@ func execute(actor):
 			actor.play_anim("idle"),
 		func (): 
 			await half_timer.timeout
-			await self.shoot_projectile(actor, hit),
+			await self.shoot_projectile(
+				actor, 
+				projectile,
+				{
+					"origin": actor.global_position + Vector2(0, -28),
+					"destination": target.battler.get_hitspot("Center"),
+					"speed": 300.0,
+				}
+			)
+			await target.take_hit(actor, hit)
 	]
 	await DoAll.new(actions).execute()
 	
-	
-	print(
-		"%s attacked %s (HP: %d -> HP: %d)" % [
-			actor.display_name, 
-			target.display_name, 
-			prev_hp, 
-			target.battler.health
-		])
-	
 	self.reset()
-
-func shoot_projectile(actor, hit):
-	var speed = 300.0
-	var origin: Vector2 = actor.global_position + Vector2(0, -28)
-	var destination = target.battler.get_hitspot("Center")
-	
-	var time = origin.distance_to(destination) / speed
-	var room = EnvironmentService.get_room()
-	actor.battler.remove_child(projectile)
-	room.add_child(projectile)
-	
-	projectile.global_position = origin
-	projectile.visible = true
-	projectile.speed = origin.direction_to(destination) * speed
-	
-	await get_tree().create_timer(time).timeout
-	
-	projectile.visible = false
-	projectile.position = Vector2.ZERO
-	
-	room.remove_child(projectile)
-	actor.battler.add_child(projectile)
-	
-	await target.take_hit(actor, hit)
-	
-	

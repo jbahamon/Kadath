@@ -15,7 +15,7 @@ func _ready() -> void:
 	)
 	EnvironmentService.initialize($SubViewportContainer/SubViewport/World)
 	InputService.initialize(self)
-	LayersService.initialize({
+	FXService.initialize({
 		"MIX": $SubViewportContainer/SubViewport/OverlayLayer/Mix,
 		"ADD": $SubViewportContainer/SubViewport/OverlayLayer/Add,
 		"CAMERA_BG": $SubViewportContainer/SubViewport/BGLayer/CameraBG,
@@ -55,5 +55,5 @@ func exit():
 	EnvironmentService.exit()
 	EntitiesService.exit()
 	InputService.exit()
-	LayersService.exit()
+	FXService.exit()
 	UIService.exit()

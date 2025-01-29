@@ -13,7 +13,7 @@ func execute(actor):
 	await get_tree().create_timer(1.0).timeout
 	
 	var shake_func = func (): 
-		await CameraService.shake(CutsceneInstruction.ExecutionMode.PLAY, 1.0, Vector2(0, 8), 1.0)
+		await FXService.env_shake(1.0, Vector2(0, 8), 1.0).shake_finished
 		actor.play_anim("idle")
 		
 	var hits = self.targets.map(func(target): return func(): await target.take_hit(actor, hit))

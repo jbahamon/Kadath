@@ -139,7 +139,7 @@ func _set_experience(value: int):
 func save(save_data: SaveData):
 	var skills = {}
 	
-	for skill in self.battler.skills.get_children():
+	for skill in self.battler.actions.get_node("Skills").get_children():
 		skills[skill.get_name()] = skill.unlocked
 	
 	save_data.data[SAVE_KEY] = {

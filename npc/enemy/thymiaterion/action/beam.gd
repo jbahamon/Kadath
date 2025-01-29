@@ -39,7 +39,7 @@ func shoot_beam(actor):
 	await DoAll.new([
 		func():
 			#await get_tree().create_timer(0.3).timeout
-			await CameraService.shake(CutsceneInstruction.ExecutionMode.PLAY, 0.8, Vector2(0, 8), 3.0),
+			await FXService.env_shake(2.0, Vector2(16, 16), 1.0).shake_finished,
 		func():
 			await beam.animation_finished
 			actor.play_anim("close_eye")

@@ -1,4 +1,7 @@
 C:/Users/Jorge/Documents/Godot/Kadath/location/000_prologue_kadath/cutscene
+res://battle/action/util
+res://party/pickman
+res://party/carter
 res://npc/enemy/thymiaterion
 res://item/resource/equipment
 res://npc/lib
@@ -10,7 +13,6 @@ res://npc/lib/anim
 res://location/000_prologue_kadath/object
 res://location/000_prologue_kadath/tile
 res://ui/03_organisms/skill_costs
-res://battle/action/util
 res://location/999_tests
 res://party/pickman/skill
 C:/Users/Jorge/Documents/Godot/Kadath
@@ -18,5 +20,3 @@ C:/Users/Jorge/Documents/Godot/Kadath/location/000_prologue_kadath/object
 res://location/000_prologue_kadath/room
 res://npc/enemy
 res://item/resource/consumable
-res://ui/04_templates/other
-res://ui/01_atoms/button

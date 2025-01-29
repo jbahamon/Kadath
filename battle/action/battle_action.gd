@@ -61,3 +61,54 @@ func get_targets(target_type, actor, actors):
 			return TargetUtil.all_enemies(actor, actors)
 		TargetType.CUSTOM:
 			return self.get_targets_custom(actor, actors)
+
+func move_to_target(actor, target, speed, anim):
+	var target_position 
+	if target is not Vector2:
+		target_position = target.battler.get_hitspot_for(actor.global_position)
+	else:
+		target_position = target
+		
+	var orientation = actor.global_position.direction_to(target_position)
+	actor.set_orientation(orientation)
+	
+	actor.play_anim(anim)
+	
+	await actor.move_to([target_position.x, target_position.y], speed)
+	
+	orientation = actor.global_position.direction_to(target.global_position)
+	actor.set_orientation(orientation)
+
+func shoot_projectile(actor, projectile, projectile_options: Dictionary):
+	var speed = projectile_options["speed"]
+	var origin = projectile_options["origin"]
+	var destination = projectile_options["destination"]
+	var time = origin.distance_to(destination) / speed
+	var room = EnvironmentService.get_room()
+	actor.battler.remove_child(projectile)
+	
+	room.add_child(projectile)
+	
+	if projectile_options.get("rotate", false):
+		projectile.rotation = VarsService.round_orientation_with_bias(actor.current_orientation).angle()
+		
+	projectile.global_position = origin
+	projectile.visible = true
+	projectile.speed = origin.direction_to(destination) * speed
+	projectile.set_process(true)
+		
+	await get_tree().create_timer(time).timeout
+	
+	projectile.set_process(false)
+	projectile.speed = Vector2.ZERO
+	projectile.position = destination
+	
+	if projectile_options.get("skip_reset", false):
+		return
+		
+	projectile.visible = false
+	projectile.position = Vector2.ZERO
+	
+	room.remove_child(projectile)
+	actor.battler.add_child(projectile)
+	

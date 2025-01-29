@@ -49,7 +49,7 @@ func play_cutscene(cutscene_instruction, options):
 		self.set_process_unhandled_input(true)
 	await self.current_cutscene.execute(get_tree(), CutsceneInstruction.ExecutionMode.PLAY)
 	self.set_process_unhandled_input(false)
-	var bg: ColorRect = LayersService.get_layer("CUTSCENE_PAUSE")
+	var bg: ColorRect = FXService.get_layer("CUTSCENE_PAUSE")
 	
 	bg.visible = false
 		
@@ -67,7 +67,7 @@ func pause_cutscene():
 	assert(self.current_cutscene != null)
 	self.current_cutscene.pause(get_tree())
 	
-	var bg: ColorRect = LayersService.get_layer("CUTSCENE_PAUSE")
+	var bg: ColorRect = FXService.get_layer("CUTSCENE_PAUSE")
 	bg.visible = true
 	UIService.show_popup(self.popup)
 	

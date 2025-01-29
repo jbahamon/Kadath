@@ -84,6 +84,3 @@ func get_visible_rect() -> Rect2i:
 		origin = camera.global_position - size/2.0
 	
 	return Rect2i(origin, size)
-
-func shake(mode: CutsceneInstruction.ExecutionMode, duration: float = 1.0, amplitude: Vector2 = Vector2(16, 16), time_scale_factor=1.0):
-	return self.camera.shake(mode, duration, amplitude, time_scale_factor)

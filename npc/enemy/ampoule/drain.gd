@@ -11,16 +11,14 @@ func execute(actor):
 	var original_position = actor.global_position
 	var center = target.battler.get_hitspot("Center")
 	var target_position = target.global_position + Vector2(0, 2)
-	
-	actor.set_orientation(actor.global_position.direction_to(target_position))
-	actor.play_anim("idle")
 	actor.z_index = 3
 	
 	var tween: Tween = actor.get_tree().create_tween()
 	var y_offset = center.y - target_position.y
 	tween.tween_property(actor.get_node("Anim"), "position", Vector2(0, center.y - target_position.y), 0.75)
+	
 	await DoAll.new([
-		func (): await actor.move_to([target_position.x, target_position.y + 1], 140),
+		func (): await self.move_to_target(actor, target_position, 140, "idle"),
 		func (): await tween.finished
 	]).execute()
 	

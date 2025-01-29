@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c2luykmp4iss7"]
+[gd_scene load_steps=15 format=3 uid="uid://c2luykmp4iss7"]
 
 [ext_resource type="PackedScene" uid="uid://c3okprgd6vbwj" path="res://ui/04_templates/pause_menu/pause_menu.tscn" id="3"]
 [ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="4"]
@@ -8,8 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://bo1y3b4btisvv" path="res://ui/04_templates/dialogue_box/dialogue_box.tscn" id="8_pwmoh"]
 [ext_resource type="PackedScene" uid="uid://bg7hnqo1b5c6m" path="res://main/player_proxy.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://ex17k532alby" path="res://ui/04_templates/battle_ui/battle_ui.tscn" id="11_42lm3"]
-[ext_resource type="Script" path="res://main/camera.gd" id="14"]
-[ext_resource type="PackedScene" uid="uid://bibiysotd3rmq" path="res://main/screen_shake.tscn" id="15"]
 [ext_resource type="Script" path="res://main/narration_layer.gd" id="16_6ypov"]
 
 [sub_resource type="CanvasItemMaterial" id="4"]
@@ -99,9 +97,6 @@ drag_left_margin = 0.0
 drag_top_margin = 0.0
 drag_right_margin = 0.0
 drag_bottom_margin = 0.0
-script = ExtResource("14")
-
-[node name="ScreenShake" parent="SubViewportContainer/SubViewport/World/PlayerProxy/Camera2D" instance=ExtResource("15")]
 
 [node name="OverlayLayer" type="CanvasLayer" parent="SubViewportContainer/SubViewport"]
 

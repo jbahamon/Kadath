@@ -2,7 +2,7 @@ extends "res://battle/action/simple_single_target.gd"
 
 var base_hit = preload("res://battle/action/party_attack_hit.tres")
 
-@export var walk_speed = 180
+@export var run_speed = 180
 @export var crit_speed = 360
 
 @export var jump_back_speed = 220
@@ -31,7 +31,12 @@ func execute(actor):
 	
 	hit.base_damage = 1 # actor.battler.physical_attack * (1.5 if is_crit else 2.0)
 	
-	await self.move_actor_to_position(actor, is_crit)
+	await self.move_to_target(
+		actor, 
+		target, 
+		crit_speed if is_crit else run_speed, 
+		"crit_start" if is_crit else "run"
+	)
 	
 	actor.play_anim("crit" if is_crit else "attack")
 	await actor.get_tree().create_timer(crit_windup_time if is_crit else windup_time).timeout
@@ -45,27 +50,15 @@ func execute(actor):
 			actor.play_anim("battle_idle")
 			
 			var enemies: Array = BattleService.get_non_party_actors() if actor is PartyMember else BattleService.get_party_actors()
-			var enemy_center = enemies.reduce(func(accum, actor): return accum + actor.global_position, Vector2.ZERO) / enemies.size()
+			var enemy_center = enemies.reduce(func(accum, curr_actor): return accum + curr_actor.global_position, Vector2.ZERO) / enemies.size()
 			actor.set_orientation(actor.global_position.direction_to(enemy_center))
 	]
 	
 	if is_crit:
 		actions.append(
 			func(): 
-				CameraService.shake(CutsceneInstruction.ExecutionMode.PLAY, 1, Vector2(3, 8), crit_hit_time/2.0)
+				await FXService.env_shake(1, Vector2(3, 8), crit_hit_time/2.0).shake_finished
 		)
 	await DoAll.new(actions).execute()
 	
 	self.reset()
-
-func move_actor_to_position(actor, is_crit):
-	var target_position = target.battler.get_hitspot_for(actor.global_position)
-	var orientation = actor.global_position.direction_to(target_position)
-	actor.set_orientation(orientation)
-	
-	actor.play_anim("crit_start" if is_crit else "run")
-	
-	await actor.move_to([target_position.x, target_position.y], crit_speed if is_crit else walk_speed)
-	
-	if not is_crit:
-		actor.set_orientation(actor.global_position.direction_to(target.global_position))

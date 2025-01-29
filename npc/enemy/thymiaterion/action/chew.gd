@@ -8,6 +8,7 @@ func reset():
 	self.targets = []
 	
 func execute(actor):
+	await BattleService.announce(self.description, UIService.PROMPT_WAIT_TIME)
 	actor.play_anim("open_mouth")
 	var target_info = self.targets.map(func(target): return {
 		"position": target.global_position,
@@ -48,7 +49,7 @@ func execute(actor):
 	actor.play_anim("idle")
 	
 	var shake_func = func (): 
-		await CameraService.shake(CutsceneInstruction.ExecutionMode.PLAY, 1.0, Vector2(0, 4), 0.5)
+		await FXService.env_shake(1.0, Vector2(0, 4), 0.5).shake_finished
 	var hits = self.targets.map(
 		func(target): 
 			return func(): 

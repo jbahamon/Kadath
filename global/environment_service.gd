@@ -50,7 +50,7 @@ func update_whereabouts(
 	self.pop_proxy()
 	
 	if fade:
-		LayersService.get_layer("MIX").color = Color(0,0,0,0)
+		FXService.get_layer("MIX").color = Color(0,0,0,0)
 		if old_location != null and old_room != null:
 			await self.fade_out()
 	
@@ -103,7 +103,7 @@ func move_to_room(room_id: String) -> bool:
 	
 	room.setup()
 	
-	var clear_bg = LayersService.get_layer("CAMERA_BG")
+	var clear_bg = FXService.get_layer("CAMERA_BG")
 	clear_bg.color = room.clear_color
 	
 	CameraService.update_camera_bounds(
@@ -163,6 +163,6 @@ func fade_in():
 	await FadeOverlay.new("MIX", Color(0,0,0,0), 0.4).execute(get_tree(), FadeOverlay.ExecutionMode.PLAY)
 	
 func fade_out():
-	LayersService.get_layer("MIX").color = Color(0,0,0,0)
+	FXService.get_layer("MIX").color = Color(0,0,0,0)
 	await FadeOverlay.new("MIX", Color.BLACK, 0.4).execute(get_tree(), FadeOverlay.ExecutionMode.PLAY)
 	

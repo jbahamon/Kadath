@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Hit" load_steps=3 format=3 uid="uid://bxn1knt3mpjgm"]
+
+[ext_resource type="Material" uid="uid://c48122ffiwrbb" path="res://utils/material/uniform_add.tres" id="1_j3q23"]
+[ext_resource type="Script" path="res://battle/hit.gd" id="2_aa7kj"]
+
+[resource]
+script = ExtResource("2_aa7kj")
+animation_only = true
+fixed_damage = false
+base_damage = 0
+type = 8
+anim_time = 0.0
+anim_duration = 0.1
+spark_time = 0.0
+spark_offset = Vector2(0, 0)
+hit_sound_time = 0.0
+miss_sound_time = 0.0
+palfx_material = ExtResource("1_j3q23")
+palfx_time = 0.0
+palfx_duration = 0.1
+toast_time = 0.0

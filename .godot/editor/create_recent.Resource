@@ -1,9 +1,9 @@
+Hit
 Weapon
 Equipment
 Armor
 BattleRewards
 ShaderMaterial
-Hit
 TileSet
 Location
 HealingItem

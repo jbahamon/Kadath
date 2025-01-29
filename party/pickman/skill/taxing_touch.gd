@@ -10,7 +10,7 @@ func execute(actor):
 	
 	hit.base_damage = actor.battler.physical_attack * self.damage_factor
 	
-	await self.move_to_position(actor)
+	await self.move_to_target(actor, target, 180, "run")
 	actor.play_anim("taxing_touch")
 	
 	BattleService.delay_actor(target, self.delay)
@@ -26,19 +26,5 @@ func execute(actor):
 			await actor.move_to([original_position.x, original_position.y], 220)
 			actor.play_anim("battle_idle")
 	]).execute()
-	
-	
+
 	self.reset()
-	
-func move_to_position(actor):
-	var target_position = target.battler.get_hitspot_for(actor.global_position)
-	var orientation = actor.global_position.direction_to(target_position)
-	actor.set_orientation(orientation)
-	
-	actor.play_anim("run")
-	
-	await actor.move_to([target_position.x, target_position.y], 180)
-	
-	orientation = actor.global_position.direction_to(target.global_position)
-	actor.set_orientation(orientation)
-	
