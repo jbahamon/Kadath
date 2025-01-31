@@ -38,7 +38,7 @@ var top_position:
 func _unhandled_input(event) -> void:
 	if event.is_action_pressed(&"ui_accept"):
 		self.raycast.force_raycast_update()
-		if self.raycast.is_colliding() and self.raycast.get_collider().has_method("on_player_interaction"):
+		if self.raycast.is_colliding():
 			self.target.play_anim("idle")
 			raycast.get_collider().on_player_interaction(self)
 		self.get_viewport().set_input_as_handled()
@@ -55,7 +55,7 @@ func _physics_process(_delta) -> void:
 	set_velocity(velocity)
 	move_and_slide()
 	
-	if self.raycast.is_colliding() and self.raycast.get_collider().has_method("on_player_interaction"):
+	if self.raycast.is_colliding():
 		EntitiesService.interaction_indicator.visible = true
 		EntitiesService.interaction_indicator.global_position = raycast.get_collider().global_position
 	else:
