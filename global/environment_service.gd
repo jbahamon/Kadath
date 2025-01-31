@@ -114,7 +114,7 @@ func move_to_room(room_id: String) -> bool:
 	return true
 	
 func pop_proxy():
-	var proxy: PlayerProxy = EntitiesService.get_proxy()
+	var proxy: PlayerProxy = EntitiesService.proxy
 	self.prev_proxy_mode = proxy.current_mode
 	proxy.set_mode(PlayerProxy.ProxyMode.NOT_THERE)
 
@@ -123,7 +123,7 @@ func push_proxy(
 	target_orientation: Vector2,
 	end_proxy_state,
 ):
-	var proxy: PlayerProxy = EntitiesService.get_proxy()
+	var proxy: PlayerProxy = EntitiesService.proxy
 	var proxy_target = proxy.target
 	var proxy_name = proxy_target.name if proxy_target != null else null
 	var new_proxy_target = null
@@ -135,7 +135,7 @@ func push_proxy(
 		new_proxy_target = EntitiesService.get_entity(proxy_name)
 		proxy.set_target(new_proxy_target)
 	elif proxy.current_target_type == PlayerProxy.TargetType.PARTY:
-		var party = EntitiesService.get_party()
+		var party = EntitiesService.party
 		party.on_proxy_enter(proxy)
 		proxy.set_target(party)
 	

@@ -9,7 +9,7 @@ func on_player_interaction(proxy: PlayerProxy):
 	if not was_flag_on and VarsService.get_flag(self.flag) and\
 	 	self.dialog_nid != NID_AFTER_GIVING_EQUIPMENT:
 		
-		var inventory: Inventory = EntitiesService.get_party().inventory
+		var inventory: Inventory = EntitiesService.party.inventory
 		inventory.add("leather_cap")
 		inventory.add("leather_armor")
 		inventory.add("stick")

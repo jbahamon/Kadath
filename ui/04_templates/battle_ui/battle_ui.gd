@@ -155,7 +155,7 @@ func request_action_parameter(action, actor, actors: Array, argument_signature: 
 
 func request_item(action, actor, _actors: Array, _request_prompt: String):
 	assert(actor is PartyMember)
-	var inventory: Inventory = EntitiesService.get_party().inventory
+	var inventory: Inventory = EntitiesService.party.inventory
 	var item_options = inventory.get_batle_items_amounts()
 	var new_options = {
 		"from": action,

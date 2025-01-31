@@ -11,7 +11,7 @@ func execute(_tree: SceneTree, _mode: ExecutionMode):
 		new_parent = EntitiesService.get_entity(self.entity_name_or_entity) 
 	else:
 		new_parent = self.entity_name_or_entity
-	var proxy: PlayerProxy = EntitiesService.get_proxy()
+	var proxy: PlayerProxy = EntitiesService.proxy
 	
 	proxy.set_target(new_parent)
 

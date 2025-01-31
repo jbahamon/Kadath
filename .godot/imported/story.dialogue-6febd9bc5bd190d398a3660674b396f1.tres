@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="DialogueResource" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_resource.gd" id="1_7du06"]
+[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_resource.gd" id="1_ph3d8"]
 
 [resource]
-script = ExtResource("1_7du06")
+script = ExtResource("1_ph3d8")
 using_states = PackedStringArray()
 titles = {
 "after_boss": "69",
@@ -569,9 +569,8 @@ lines = {
 }, {
 "type": "dot"
 }, {
-"function": "get_party",
-"type": &"function",
-"value": Array[Array]([])
+"type": "variable",
+"value": "party"
 }, {
 "type": "dot"
 }, {
@@ -654,9 +653,8 @@ lines = {
 }, {
 "type": "dot"
 }, {
-"function": "get_party",
-"type": &"function",
-"value": Array[Array]([])
+"type": "variable",
+"value": "party"
 }, {
 "type": "dot"
 }, {
@@ -1067,14 +1065,14 @@ Pickman: Go ahead. I'll join you once I've made sure these guys are OK. If you'r
 => END 
 
 ~ idle_left_ghoul
-if EntitiesService.get_party().is_unlocked(PartyMember.Id.PICKMAN):
+if EntitiesService.party.is_unlocked(PartyMember.Id.PICKMAN):
 	Ghoul: We stay here. If you disoriented, open menu with [ {ui_menu} ] and check or change controls.
 else:
 	Ghoul: Everything still spinning... If you disoriented, open menu with [ {ui_menu} ] and check or change controls.
 => END
 
 ~ idle_right_ghoul
-if EntitiesService.get_party().is_unlocked(PartyMember.Id.PICKMAN):
+if EntitiesService.party.is_unlocked(PartyMember.Id.PICKMAN):
 	Ghoul: Maybe others come. We wait for them. Be careful... Remember you can open menu with [ {ui_menu} ] and use items for heal.
 else:
 	Ghoul: One second we riding, next we thrown here. If you hurt, you can open menu with [ {ui_menu} ] and use items for heal.

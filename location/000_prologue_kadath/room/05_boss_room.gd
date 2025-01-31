@@ -17,7 +17,7 @@ func _on_boss_trigger_body_entered(body):
 	$BossTrigger.set_deferred("monitoring", false)
 	InputService.set_input_enabled(false)
 	
-	var proxy = EntitiesService.get_proxy()
+	var proxy = EntitiesService.proxy
 	proxy.set_mode(PlayerProxy.ProxyMode.CUTSCENE)
 	proxy.play_anim("idle")
 

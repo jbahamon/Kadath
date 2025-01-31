@@ -60,7 +60,7 @@ func execute(actor):
 	actor.play_anim("battle_idle")
 	
 	if actor is PartyMember and used and self.item.consumed_after_use:
-		EntitiesService.get_party().inventory.remove(self.item.id, 1)
+		EntitiesService.party.inventory.remove(self.item.id, 1)
 
 	self.reset()
 

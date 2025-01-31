@@ -4,9 +4,9 @@ var PartyScene = preload("res://party/party.tscn")
 
 var party: Party = null
 var proxy: PlayerProxy = null
+var interaction_indicator: Sprite2D = null
 
-
-func initialize(init_proxy: PlayerProxy):
+func initialize(init_proxy: PlayerProxy, init_interaction_indicator: Sprite2D):
 	self.party = PartyScene.instantiate()
 	self.party.add_to_group("save")
 	
@@ -17,6 +17,8 @@ func initialize(init_proxy: PlayerProxy):
 
 	self.proxy = init_proxy
 	self.proxy.set_mode(PlayerProxy.ProxyMode.NOT_THERE)
+	
+	self.interaction_indicator = init_interaction_indicator
 
 func exit():
 	self.party = null
@@ -30,13 +32,13 @@ func get_entity(entity_name: String):
 		"CAMERA":
 			return CameraService.get_camera()
 		"PROXY":
-			return self.get_proxy()
+			return self.proxy
 		"ROOM":
 			return EnvironmentService.get_room()
 		"WORLD":
 			return EnvironmentService.get_world()
 		"PARTY":
-			return self.get_party()
+			return self.party
 		_:
 			return self.get_room_entity(entity_name)
 			
@@ -52,12 +54,6 @@ func get_room_entity(entity_name: String):
 
 func get_active_party_members():
 	return self.party.get_active_members()
-
-func get_party():
-	return self.party
-
-func get_proxy():
-	return self.proxy
 
 func on_exit_room():
 	self.party.remove_from_room()

@@ -100,9 +100,9 @@ drag_right_margin = 0.0
 drag_bottom_margin = 0.0
 
 [node name="InteractionIndicator" type="Sprite2D" parent="SubViewportContainer/SubViewport/World"]
+visible = false
 texture = ExtResource("3_tkv25")
-centered = false
-offset = Vector2(-11, -48)
+offset = Vector2(-10, -64)
 
 [node name="OverlayLayer" type="CanvasLayer" parent="SubViewportContainer/SubViewport"]
 

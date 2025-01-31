@@ -37,12 +37,12 @@ func play_cutscene(cutscene_instruction, options):
 	var was_input_enabled = InputService.is_input_enabled()
 	InputService.set_input_enabled(false)
 	
-	var proxy = EntitiesService.get_proxy()
+	var proxy = EntitiesService.proxy
 	var prev_proxy_mode = proxy.current_mode
 	if prev_proxy_mode == PlayerProxy.ProxyMode.GAMEPLAY:
 		proxy.set_mode(PlayerProxy.ProxyMode.CUTSCENE)
 	
-	var party: Party = EntitiesService.get_party()
+	var party: Party = EntitiesService.party
 	var was_party_physics_enabled = party.is_physics_processing()
 	party.set_physics_process(false)
 	if self.pausable:

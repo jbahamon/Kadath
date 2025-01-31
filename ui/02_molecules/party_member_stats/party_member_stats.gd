@@ -109,7 +109,7 @@ func on_accessory_clicked():
 func on_item_selected(item):
 	assert(selected_property != null)
 	assert(party_member != null)
-	var party: Party = EntitiesService.get_party()
+	var party: Party = EntitiesService.party
 	var equipped_item = party_member.get(selected_property)
 	if equipped_item != null:
 		party.inventory.add(equipped_item.id)

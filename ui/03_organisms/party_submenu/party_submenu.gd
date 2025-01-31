@@ -65,7 +65,7 @@ func on_item_requested(item_class, party_member: PartyMember):
 	self.party_member_stats.on_grab_focus()
 
 func update_party_data():
-	var party = EntitiesService.get_party()
+	var party = EntitiesService.party
 	self.inventory = party.inventory
 	var party_members = party.get_active_members()
 	party_list.initialize(party_members, {"class_or_scene": PartyMemberListItem})

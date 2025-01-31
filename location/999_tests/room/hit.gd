@@ -12,6 +12,6 @@ func _input(event):
 		]) 
 
 func on_enter():
-	EntitiesService.get_proxy().set_orientation(Vector2.DOWN)
+	EntitiesService.proxy.set_orientation(Vector2.DOWN)
 	
 		

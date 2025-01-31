@@ -35,7 +35,7 @@ func on_player_interaction(player_proxy: PlayerProxy):
 			self.dialog_nid = DialogNodes.IN_QUEST
 		DialogNodes.QUEST_DONE:
 			VarsService.set_flag(VarsService.Flags.TUTORIAL_FINISHED, true)
-			var inventory = EntitiesService.get_party().get_inventory()
+			var inventory = EntitiesService.party.get_inventory()
 			if not inventory.has("amulet"):
 				inventory.add("amulet")
 			self.dialog_nid = DialogNodes.AFTER_AMULET_RECEIVED
@@ -55,4 +55,3 @@ func get_slot(_nid, _slots):
 		return DialogNodes.QUEST_DONE
 			
 		
-

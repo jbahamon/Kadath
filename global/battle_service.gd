@@ -95,7 +95,7 @@ func start_battle(enemies: Array, escapable: bool, proxy_mode_on_finish=null):
 	var end_proxy_mode = (
 		proxy_mode_on_finish 
 		if proxy_mode_on_finish != null 
-		else EntitiesService.get_proxy().current_mode
+		else EntitiesService.proxy.current_mode
 	)
 	var battle_spot = self.get_nearest_battle_spot()
 	var non_party_actors = self.filter_non_party_actors(enemies, battle_spot)
@@ -128,13 +128,13 @@ func start_battle(enemies: Array, escapable: bool, proxy_mode_on_finish=null):
 		BattleEndState.Result.WIN:
 			await self.deal_rewards(battle_end_state.rewards)
 			self.ui.hide()
-			self.revive_party_members(EntitiesService.get_party())
+			self.revive_party_members(EntitiesService.party)
 			await self.tear_down_battle_positions(battle_end_state)
 			self.resume_non_participants(end_proxy_mode)
 			InputService.set_input_enabled(was_input_enabled)
 		BattleEndState.Result.LOSE: 
 			self.ui.hide()
-			var party = EntitiesService.get_party()
+			var party = EntitiesService.party
 			party.set_physics_process(false)
 			FXService.get_layer("MIX").color = Color(0,0,0,0)
 			await FadeOverlay.new("MIX", Color.BLACK, 3.0).execute(get_tree(), FadeOverlay.ExecutionMode.PLAY)
@@ -201,7 +201,7 @@ func rename_non_party_actors(non_party_actors: Array):
 	
 
 func set_up_battle_positions(battle_spot, party_actors: Array, non_party_actors: Array):
-	var party: Party = EntitiesService.get_party()
+	var party: Party = EntitiesService.party
 	party.set_physics_process(false)
 	
 	var party_spots = battle_spot.get_party_spots()
@@ -324,8 +324,8 @@ func fade_and_delete_mooks(battle_end_state):
 	
 
 func tear_down_battle_positions(battle_end_state):
-	var party: Party = EntitiesService.get_party()
-	var proxy = EntitiesService.get_proxy()
+	var party: Party = EntitiesService.party
+	var proxy = EntitiesService.proxy
 	var cutscene_lines = []
 	cutscene_lines.append("SIMULTANEOUS")
 	cutscene_lines.append(
@@ -360,14 +360,14 @@ func pause_non_participants(non_party_actors: Array):
 			npc.visible = false
 	
 	self.current_battle_parameters["hidden_npcs"] = hidden_npcs
-	EntitiesService.get_proxy().set_mode(PlayerProxy.ProxyMode.NOT_THERE)
+	EntitiesService.proxy.set_mode(PlayerProxy.ProxyMode.NOT_THERE)
 
 func resume_non_participants(end_proxy_mode):
 	for npc in self.current_battle_parameters["hidden_npcs"]:
 		npc.resume()
 		npc.visible = true
 	
-	EntitiesService.get_proxy().set_mode(end_proxy_mode)
+	EntitiesService.proxy.set_mode(end_proxy_mode)
 	
 func try_escape() -> bool:
 	var player_speeds = []
@@ -402,7 +402,7 @@ func mark_battle_as_escaped():
 	self.loop.mark_battle_as_escaped()
 	
 func deal_rewards(rewards: BattleRewards):
-	var party = EntitiesService.get_party()
+	var party = EntitiesService.party
 	var experience = rewards.experience
 	if experience > 0:
 		await deal_experience(party, experience)

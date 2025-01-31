@@ -39,14 +39,14 @@ Pickman: Go ahead. I'll join you once I've made sure these guys are OK. If you'r
 => END 
 
 ~ idle_left_ghoul
-if EntitiesService.get_party().is_unlocked(PartyMember.Id.PICKMAN):
+if EntitiesService.party.is_unlocked(PartyMember.Id.PICKMAN):
 	Ghoul: We stay here. If you disoriented, open menu with [ {ui_menu} ] and check or change controls.
 else:
 	Ghoul: Everything still spinning... If you disoriented, open menu with [ {ui_menu} ] and check or change controls.
 => END
 
 ~ idle_right_ghoul
-if EntitiesService.get_party().is_unlocked(PartyMember.Id.PICKMAN):
+if EntitiesService.party.is_unlocked(PartyMember.Id.PICKMAN):
 	Ghoul: Maybe others come. We wait for them. Be careful... Remember you can open menu with [ {ui_menu} ] and use items for heal.
 else:
 	Ghoul: One second we riding, next we thrown here. If you hurt, you can open menu with [ {ui_menu} ] and use items for heal.

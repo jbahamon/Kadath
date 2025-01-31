@@ -15,7 +15,7 @@ enum TargetType {
 @export var walk_speed: float = 60.0
 @export var run_speed: float = 120.0
 
-@export var interaction_vector = Vector2(16, 16)
+@export var interaction_vector_length = 16
 
 var is_running = false
 var input_vector = Vector2.ZERO
@@ -54,6 +54,12 @@ func _physics_process(_delta) -> void:
 	
 	set_velocity(velocity)
 	move_and_slide()
+	
+	if self.raycast.is_colliding() and self.raycast.get_collider().has_method("on_player_interaction"):
+		EntitiesService.interaction_indicator.visible = true
+		EntitiesService.interaction_indicator.global_position = raycast.get_collider().global_position
+	else:
+		EntitiesService.interaction_indicator.visible = false
 
 func update_velocity() -> void:
 	if input_vector != Vector2.ZERO:
@@ -174,7 +180,7 @@ func set_orientation(orientation: Vector2):
 		self.target.set_orientation(orientation)
 
 	orientation = VarsService.round_orientation_with_bias(orientation)
-	raycast.set_target_position(orientation)
+	raycast.set_target_position(orientation * interaction_vector_length)
 	
 func set_mode(mode: ProxyMode):
 	self.current_mode = mode

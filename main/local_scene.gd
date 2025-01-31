@@ -11,7 +11,9 @@ func _ready() -> void:
 	)
 	DialogueService.initialize($DialogueLayer/Dialogue, $NarrationLayer)
 	EntitiesService.initialize(
-		$SubViewportContainer/SubViewport/World/PlayerProxy
+		$SubViewportContainer/SubViewport/World/PlayerProxy,
+		$SubViewportContainer/SubViewport/World/InteractionIndicator
+		
 	)
 	EnvironmentService.initialize($SubViewportContainer/SubViewport/World)
 	InputService.initialize(self)
@@ -39,14 +41,14 @@ func move_to_starting_room():
 	else:
 		# Note: move start_game to the above when doing the cutscene intro
 		await EnvironmentService.update_whereabouts(
-			"999_tests", #"000_prologue_kadath", 
-			"battle", #"02_hub",
-			Vector2.ZERO,#Vector2(0, 320),
+			"000_prologue_kadath", 
+			"02_hub",
+			Vector2(0, 320),
 			Vector2.UP,
 			false,
 			PlayerProxy.ProxyMode.GAMEPLAY
 		)
-		#EntitiesService.get_proxy().set_mode(PlayerProxy.ProxyMode.GAMEPLAY)
+		#EntitiesService.proxy.set_mode(PlayerProxy.ProxyMode.GAMEPLAY)
 	
 func exit():
 	BattleService.exit()

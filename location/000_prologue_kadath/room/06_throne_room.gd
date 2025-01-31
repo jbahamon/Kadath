@@ -8,7 +8,7 @@ var fade_tween = null
 var spooks_tween = null
 
 func lock_pickman():
-	EntitiesService.get_party().set_unlocked(PartyMember.Id.PICKMAN, false)
+	EntitiesService.party.set_unlocked(PartyMember.Id.PICKMAN, false)
 	
 func fade_companion(mode: CutsceneInstruction.ExecutionMode):
 	var companion = $NPCPickman
@@ -44,7 +44,7 @@ func show_spooks(mode: CutsceneInstruction.ExecutionMode):
 		spooks.modulate = Color.WHITE
 	
 func show_title_card():
-	var party = EntitiesService.get_party()
+	var party = EntitiesService.party
 	party.set_physics_process(false)
 	SceneSwitcher.current_scene.exit()
 	SceneSwitcher.go_to_scene("res://ui/04_templates/other/demo_end.tscn")

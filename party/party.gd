@@ -45,7 +45,7 @@ func reset_movement():
 	# So when resetting movement, the leader might not be in the 
 	# proxy's position/orientation. We enforce it
 	
-	var proxy = EntitiesService.get_proxy()
+	var proxy = EntitiesService.proxy
 	if proxy.current_target_type == PlayerProxy.TargetType.PARTY:
 		leader.position = proxy.position
 		leader.set_orientation(proxy.current_orientation)
@@ -59,7 +59,7 @@ func on_proxy_exit(_proxy: PlayerProxy):
 	self.set_physics_process(false)
 	
 func _physics_process(_delta):
-	var proxy: PlayerProxy = EntitiesService.get_proxy()
+	var proxy: PlayerProxy = EntitiesService.proxy
 	if proxy.velocity != Vector2.ZERO and active_members.size() > 1:
 		
 		self.movement_cache[self.movement_pointers[0]] = {

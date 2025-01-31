@@ -32,7 +32,7 @@ func _ready():
 	self.key_items_button.button_group = self.categories_button_group
 	
 func initialize():
-	var party = EntitiesService.get_party()
+	var party = EntitiesService.party
 	var party_members = party.get_unlocked_characters()
 	self.party_list.initialize(party_members, {"class_or_scene": PartyMemberListItem})
 	
