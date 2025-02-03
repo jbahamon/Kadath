@@ -29,7 +29,7 @@ point_count = 3
 
 [sub_resource type="Curve" id="6"]
 max_value = 99.0
-_data = [Vector2(0, 0), 0.0, 161.818, 0, 1, Vector2(0.611797, 99), 161.818, 0.0, 1, 1, Vector2(1, 99), 0.0, 0.0, 1, 0]
+_data = [Vector2(0, 0), 0.0, 1.63399, 0, 1, Vector2(0.612, 1), 1.63399, 252.577, 1, 1, Vector2(1, 99), 252.577, 0.0, 1, 0]
 point_count = 3
 
 [sub_resource type="Curve" id="7"]

@@ -37,6 +37,6 @@ func get_button():
 
 func set_as_disabled(value):
 	var color = get_theme_color("font_color_disabled" if value else "font_color", "Button")
-	$Button.disabled = value
 	$Button/MarginContainer/HBoxContainer/ItemName.add_theme_color_override("font_color", color)
 	$Button/MarginContainer/HBoxContainer/Amount.add_theme_color_override("font_color", color)
+	$Button.disabled = value

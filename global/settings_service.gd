@@ -23,6 +23,10 @@ var toggle_run = false
 var config_file: ConfigFile
 var timer: Timer
 
+var enable_screen_shake = true
+var enable_flashing = true
+
+#TODO: maybe use merge if settings get too big
 func _init():
 	if not load_config():
 		create_config()
@@ -91,6 +95,14 @@ func update_text_speed(new_text_speed):
 func update_volume(volume_setting, volume_value):
 	config_file.set_value("sound", volume_setting, volume_value)
 	config_file.save(CONFIG_FILE_NAME)
+	self.save_file()
+
+func update_enable_screen_shake(value):
+	self.enable_screen_shake = value
+	self.save_file()
+	
+func update_enable_flashing(value):
+	self.enable_flashing = value
 	self.save_file()
 	
 func save_file():

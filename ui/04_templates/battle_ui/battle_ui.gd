@@ -6,7 +6,9 @@ var ItemEntry = preload("res://ui/02_molecules/item_entry/item_entry.tscn")
 
 @onready var party_status = $VBoxContainer/PartyStatusContainer/PartyStatus
 @onready var options = $VBoxContainer/OptionsContainer
-@onready var options_title: Label = $VBoxContainer/OptionsContainer/OptionsTitle/Label
+
+@onready var options_title_container = $VBoxContainer/TitleContainer
+@onready var options_title: Label = $VBoxContainer/TitleContainer/OptionsTitle/Label
 @onready var options_list = $VBoxContainer/OptionsContainer/OptionsList
 
 @onready var skill_costs = $VBoxContainer/OptionsContainer/SkillCosts
@@ -29,6 +31,7 @@ func initialize(party_members: Array):
 	self.set_info_text(null)
 	
 func start():
+	self.options_title_container.visible = false
 	self.options.visible = false
 	self.options_list.set_process_unhandled_input(false)
 	self.show()
@@ -55,6 +58,7 @@ func reset_options_stack():
 
 func set_options(new_options):
 	self.options_stack.push_back(new_options)
+	self.options_title_container.visible = true
 	self.options.visible = true
 	options_title.text = new_options["title"]
 	options_list.initialize(new_options["options"], new_options.get("list_options", {}))
@@ -100,6 +104,7 @@ func on_cancel():
 		self.option_selected.emit(null)
 
 func hide_options():
+	self.options_title_container.visible = false
 	self.options.visible = false
 	options_list.release_focus()
 	options_list.set_process_unhandled_input(false)

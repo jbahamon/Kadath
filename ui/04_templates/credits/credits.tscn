@@ -1,0 +1,86 @@
+[gd_scene load_steps=4 format=3 uid="uid://j77euw727jqq"]
+
+[ext_resource type="Script" path="res://ui/04_templates/credits/credits.gd" id="1_0jtww"]
+[ext_resource type="FontFile" uid="uid://7rvrjv6h33bx" path="res://ui/01_atoms/assets/fonts/By Valiegraphie/Uncial_WIP.ttf" id="2_ra433"]
+[ext_resource type="FontFile" uid="uid://60oeotvtq5qv" path="res://ui/01_atoms/assets/fonts/By Wuchta/Letterstyle(1).ttf" id="3_ivw60"]
+
+[node name="Credits" type="CanvasLayer"]
+script = ExtResource("1_0jtww")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 80
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Spacer" type="Control" parent="MarginContainer/ScrollContainer/VBox"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MarginContainer/ScrollContainer/VBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ra433")
+theme_override_font_sizes/font_size = 60
+text = "Credits"
+horizontal_alignment = 1
+
+[node name="Graphics" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBox"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MarginContainer/ScrollContainer/VBox/Graphics"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ivw60")
+theme_override_font_sizes/font_size = 15
+text = "Graphics"
+
+[node name="Sound" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBox"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MarginContainer/ScrollContainer/VBox/Sound"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ivw60")
+theme_override_font_sizes/font_size = 15
+text = "Sound"
+
+[node name="Code" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBox"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MarginContainer/ScrollContainer/VBox/Code"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ivw60")
+theme_override_font_sizes/font_size = 15
+text = "Code"
+
+[node name="Other" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBox"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MarginContainer/ScrollContainer/VBox/Other"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ivw60")
+theme_override_font_sizes/font_size = 15
+text = "Sound"
+
+[node name="Title2" type="Label" parent="MarginContainer/ScrollContainer/VBox"]
+layout_mode = 2
+text = "...And you!"

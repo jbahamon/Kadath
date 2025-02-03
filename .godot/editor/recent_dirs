@@ -1,4 +1,6 @@
 C:/Users/Jorge/Documents/Godot/Kadath/location/000_prologue_kadath/cutscene
+C:/Users/Jorge/Documents/Godot/Kadath
+res://ui/04_templates/battle_ui
 res://battle/action/util
 res://party/pickman
 res://party/carter
@@ -15,8 +17,6 @@ res://location/000_prologue_kadath/tile
 res://ui/03_organisms/skill_costs
 res://location/999_tests
 res://party/pickman/skill
-C:/Users/Jorge/Documents/Godot/Kadath
 C:/Users/Jorge/Documents/Godot/Kadath/location/000_prologue_kadath/object
 res://location/000_prologue_kadath/room
 res://npc/enemy
-res://item/resource/consumable

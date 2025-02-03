@@ -13,6 +13,7 @@
 
 [sub_resource type="Resource" id="Resource_m2jmt"]
 script = ExtResource("9_yhwd8")
+animation_only = false
 fixed_damage = false
 base_damage = 0
 type = 8
@@ -20,6 +21,10 @@ anim_time = 0.0
 anim_duration = 0.45
 spark_time = 0.0
 spark_offset = Vector2(0, 0)
+shake_time = 0.0
+shake_duration = 0.5
+shake_amplitude = Vector2(8, 0)
+shake_time_scale = 2.0
 hit_sound_time = 0.0
 miss_sound_time = 0.0
 palfx_material = ExtResource("8_7l7ab")
@@ -57,7 +62,7 @@ walk_speed = 80
 jump_back_speed = 80
 hit = SubResource("Resource_m2jmt")
 
-[node name="AI" parent="Battler" index="3"]
+[node name="AI" parent="Battler" index="2"]
 script = ExtResource("6_hhc2v")
 
 [node name="CollisionShape2D" parent="Battler/Hitbox" index="0"]
@@ -80,7 +85,7 @@ position = Vector2(-22, 0)
 position = Vector2(22, 0)
 
 [node name="InteractableArea" parent="." index="3"]
-collision_layer = 24
+collision_layer = 16
 collision_mask = 1
 monitoring = true
 

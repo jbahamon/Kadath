@@ -26,6 +26,9 @@ var focus_in_tree = false
 @onready var input_popup: Popup = $Popups/ListenForInputPopup
 @onready var text_speed: Slider = $CenterContainer/Settings/UISliders/TextSpeedSlider
 
+@onready var enable_shake_checkbox: CheckBox = $CenterContainer/Settings/EnableShake
+@onready var enable_flash_checkbox: CheckBox = $CenterContainer/Settings/EnableFlash
+
 @onready var hold_run_checkbox: CheckBox = $CenterContainer/Settings/RunBehaviorContainer/Hold
 @onready var toggle_run_checkbox: CheckBox = $CenterContainer/Settings/RunBehaviorContainer/Toggle
 
@@ -39,6 +42,9 @@ func _ready():
 		var label_text = labels[action]
 		add_input_option(action, label_text)
 		link_buttons()
+	
+	self.enable_shake_checkbox.set_pressed_no_signal(SettingsService.enable_screen_shake)
+	self.enable_flash_checkbox.set_pressed_no_signal(SettingsService.enable_flashing)
 	
 	var group = ButtonGroup.new()
 	self.hold_run_checkbox.button_group = group
@@ -159,3 +165,9 @@ func update_ui_volume(value):
 	
 func update_run_behavior(value):
 	SettingsService.update_run_behavior(value)
+
+func update_enable_shake(toggled_on: bool) -> void:
+	SettingsService.update_enable_screen_shake(toggled_on)
+
+func update_enable_flash(toggled_on: bool) -> void:
+	SettingsService.update_enable_flashing(toggled_on)

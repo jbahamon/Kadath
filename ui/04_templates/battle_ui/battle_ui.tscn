@@ -40,56 +40,40 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="OptionsContainer" type="GridContainer" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 8
-columns = 3
-
-[node name="OptionsTitle" type="PanelContainer" parent="VBoxContainer/OptionsContainer"]
+[node name="TitleContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/OptionsContainer/OptionsTitle"]
+[node name="OptionsTitle" type="PanelContainer" parent="VBoxContainer/TitleContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="VBoxContainer/TitleContainer/OptionsTitle"]
 layout_mode = 2
 text = "Select your character"
 
-[node name="Spacer" type="Control" parent="VBoxContainer/OptionsContainer"]
+[node name="OptionsContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_stretch_ratio = 3.0
-
-[node name="Spacer2" type="Control" parent="VBoxContainer/OptionsContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 3.0
+size_flags_vertical = 8
 
 [node name="OptionsList" parent="VBoxContainer/OptionsContainer" instance=ExtResource("9")]
+custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
+size_flags_horizontal = 0
 size_flags_vertical = 2
+size_flags_stretch_ratio = 0.1
 focused_if_visible = true
 
 [node name="SkillCosts" parent="VBoxContainer/OptionsContainer" instance=ExtResource("6_qp326")]
-visible = false
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 
 [node name="EnemyInfo" parent="VBoxContainer/OptionsContainer" instance=ExtResource("7_gtig5")]
-custom_minimum_size = Vector2(420, 0)
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
+size_flags_horizontal = 0
 size_flags_vertical = 0
-
-[node name="Spacer3" type="Control" parent="VBoxContainer/OptionsContainer"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 5.0
-
-[node name="Spacer4" type="Control" parent="VBoxContainer/OptionsContainer"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 5.0
 
 [node name="InfoPanel" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2

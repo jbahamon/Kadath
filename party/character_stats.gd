@@ -27,4 +27,3 @@ func set_max_energy(value: int):
 	if value == null:
 		return
 	max_energy = max(0, value)
-

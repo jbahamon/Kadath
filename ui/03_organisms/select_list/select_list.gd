@@ -37,10 +37,6 @@ func initialize(elements: Array, other_params: Dictionary = {}):
 			control.assign_element(element)
 		else:
 			control.assign_null(self.args_for_null_element)
-		
-		if disable_func != null:
-			control.set_as_disabled(disable_func.call(element))
-			
 		container.add_child(control)
 	
 		var button: Button = control.get_button()
@@ -50,6 +46,11 @@ func initialize(elements: Array, other_params: Dictionary = {}):
 		button.focus_entered.connect(self.on_element_focused.bind(bound_object))
 
 		buttons.append(button)
+		
+		# Note that disabling must be done after adding the button is added
+		#  to the UI; otherwise sizing is affected 
+		if disable_func != null:
+			control.set_as_disabled(disable_func.call(element))
 	
 	for i in range(len(buttons)):
 		var button = buttons[i]

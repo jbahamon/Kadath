@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://dujv42su4t2r2"]
 
 [ext_resource type="Script" path="res://ui/04_templates/other/demo_end.gd" id="1_5fmkn"]
-[ext_resource type="FontFile" uid="uid://hqhqwk215tl2" path="res://ui/01_atoms/assets/fonts/By Wuchta/Fancy Ink.ttf" id="1_8xirb"]
 [ext_resource type="FontFile" uid="uid://7rvrjv6h33bx" path="res://ui/01_atoms/assets/fonts/By Valiegraphie/Uncial_WIP.ttf" id="1_c5wy5"]
 [ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="1_lqdow"]
+[ext_resource type="FontFile" uid="uid://60oeotvtq5qv" path="res://ui/01_atoms/assets/fonts/By Wuchta/Letterstyle(1).ttf" id="3_wdvdb"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_5fmkn")
@@ -39,20 +39,20 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
-[node name="Title" type="RichTextLabel" parent="Title/VBoxContainer"]
+[node name="Subtitle" type="RichTextLabel" parent="Title/VBoxContainer"]
 texture_filter = 1
 clip_contents = false
 layout_mode = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.376471, 0.192157, 0.411765, 1)
-theme_override_fonts/normal_font = ExtResource("1_8xirb")
+theme_override_fonts/normal_font = ExtResource("3_wdvdb")
 theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
 text = " [wave rate=20.0 level=5 connected=1]Dream Quest:[/wave]"
 fit_content = true
 scroll_active = false
 
-[node name="Subtitle" type="RichTextLabel" parent="Title/VBoxContainer"]
+[node name="Title" type="RichTextLabel" parent="Title/VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0.188235, 0.611765, 0.560784, 1)

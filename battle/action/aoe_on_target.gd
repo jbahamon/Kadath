@@ -30,7 +30,7 @@ func highlight_option(actor, option):
 	self.start_highlight(actor, option)
 
 func start_highlight(actor, option):
-	var actors = await self.area_of_effect.get_actors_in_line(actor.global_position, option.global_position)
+	var actors = await self.area_of_effect.get_actors_at(option.global_position)
 	var is_party_member = actor is PartyMember
 	actors = actors.filter(func(other_actor): return (other_actor is PartyMember) != is_party_member)
 	

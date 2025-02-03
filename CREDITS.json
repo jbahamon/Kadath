@@ -1,0 +1,148 @@
+[
+	{
+		"category": "graphics",
+		"author_name": "Daniel Cook",
+		"author_url": "https://lostgarden.com/",
+		"asset_name": "Remastered Tyrian Graphics",
+		"asset_url": "https://lostgarden.com/2007/04/05/free-game-graphics-tyrian-ships-and-tiles/",
+		"asset_usage": "Various projectiles, effects and tiles"
+	},
+	
+	{
+		"category": "graphics",
+		"author_name": "Ivess",
+		"author_url": "https://ivess.itch.io/",
+		"asset_name": "Ivess's Pixelart RPG Icons",
+		"asset_url": "https://ivess.itch.io/ivess-fantasy-rpg-icon-pack",
+		"asset_usage": "Equipment icons"
+	},
+	
+	{
+		"category": "graphics",
+		"author_name": "Quintino Pixels",
+		"author_url": "https://quintino-pixels.itch.io/",
+		"asset_name": "Skill Icons Set",
+		"asset_url": "https://quintino-pixels.itch.io/free-pixel-art-skill-icons-pack",
+		"asset_usage": "Equipment icons"
+	},
+	
+	{
+		"category": "graphics",
+		"author_name": "ssugmi",
+		"author_url": "https://ssugmi.itch.io/",
+		"asset_name": "16x16 RPG Assets",
+		"asset_url": "https://ssugmi.itch.io/16x16-rpg-assets",
+		"asset_usage": "Menu icons"
+	},
+	
+	{
+		"category": "graphics",
+		"author_name": "HenrySoftware",
+		"author_url": "https://henrysoftware.itch.io/",
+		"asset_name": "Godot Pixel Interface",
+		"asset_url": "https://henrysoftware.itch.io/godot-pixel-interface",
+		"asset_usage": "Various UI elements and fonts"
+	},
+	
+	{
+		"category": "graphics",
+		"author_name": "Adigun Azikiwe Polack",
+		"author_url": "https://x.com/AdigunPolack",
+		"asset_name": "Irishalini",
+		"asset_url": "https://x.com/AdigunPolack/status/1343526693395435520",
+		"asset_usage": "Font used in most of the UI"
+	},
+	
+	
+	{
+		"category": "graphics",
+		"author_name": "Valiegraphie",
+		"author_url": "https://valiegraphie.itch.io",
+		"asset_name": "Uncial Pixel Font",
+		"asset_url": "https://valiegraphie.itch.io/uncial-pixel-font",
+		"asset_usage": "Game title font"
+	},
+	
+	{
+		"category": "graphics",
+		"author_name": "wuchta",
+		"author_url": "https://wuchta.itch.io/",
+		"asset_name": "Letterstyle - font",
+		"asset_url": "https://wuchta.itch.io/letterstyle",
+		"asset_usage": "Game title font"
+	},
+	
+	
+	
+	{
+		"category": "graphics",
+		"author_name": "PIPOSCHPATZ",
+		"author_url": "https://piposchpatz.itch.io/",
+		"asset_name": "UI borders Art Deco pixel art",
+		"asset_url": "https://piposchpatz.itch.io/ui-borders-art-deco-pixel-art",
+		"asset_usage": "UI borders/corners included for potential future use"
+	},
+	
+	{
+		"category": "graphics",
+		"author_name": "Sr.Toasty",
+		"author_url": "https://srtoasty.itch.io/",
+		"asset_name": "UI assets pack 2 :)",
+		"asset_url": "https://srtoasty.itch.io/ui-assets-pack-2",
+		"asset_usage": "UI elements included for potential future use"
+	},
+	
+	
+	{
+		"category": "graphics",
+		"author_name": "kgpaints",
+		"author_url": "https://linktr.ee/kgpaints",
+		"asset_name": "Too Much Ink",
+		"asset_url": "https://kgpaints.itch.io/too-much-ink",
+		"asset_usage": "Font included for potential future use"
+	},
+	
+	{
+		"category": "graphics",
+		"author_name": "Adigun Azikiwe Polack",
+		"author_url": "https://x.com/AdigunPolack",
+		"asset_name": "Eromantique",
+		"asset_url": "https://x.com/AdigunPolack/status/1361565671033868290",
+		"asset_usage": "Font included for potential future use"
+	},
+	
+	
+	{
+		"category": "code",
+		"author_name": "GDQuest",
+		"author_url": "https://www.gdquest.com/",
+		"asset_name": "Godot 4 Open RPG",
+		"asset_url": "https://github.com/gdquest-demos/godot-open-rpg",
+		"asset_usage": "Various ideas for battles, inventory and other code structuring"
+	},
+	{
+		"category": "code",
+		"author_name": "Nathan Hoad",
+		"author_url": "https://nathanhoad.net/",
+		"asset_name": "Dialogue Manager",
+		"asset_url": "https://github.com/nathanhoad/godot_dialogue_manager",
+		"asset_usage": "Dialogue storage and lookup"
+	},
+	{
+		"category": "code",
+		"author_name": "Lisandro Lorea",
+		"author_url": "https://redmagegames.com/",
+		"asset_name": "MultiAwait",
+		"asset_url": "https://gist.github.com/noidexe/6fe6786d7d946d3cbdf335bcc64a8c62",
+		"asset_usage": "Technique for awaiting multiple signals"
+	},
+	{
+		"category": "code",
+		"author_name": "Markolainen",
+		"author_url": "https://godotshaders.com/author/markolainen/",
+		"asset_name": "Pixel perfect dissolving",
+		"asset_url": "https://godotshaders.com/shader/pixel-perfect-dissolving/",
+		"asset_usage": "Enemy death effect"
+	},
+	
+]

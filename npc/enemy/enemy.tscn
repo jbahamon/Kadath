@@ -10,12 +10,13 @@ script = ExtResource("2_yhkqm")
 battle_on_contact = true
 enemy_id = ""
 icon = null
+enemy_info = ""
 
 [node name="Battler" parent="." index="0" instance=ExtResource("2")]
 anim_path = NodePath("..")
 
 [node name="InteractableArea" parent="." index="2"]
-collision_layer = 24
+collision_layer = 16
 collision_mask = 1
 monitoring = true
 

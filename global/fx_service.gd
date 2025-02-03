@@ -15,11 +15,16 @@ func get_layer(layer_id: String):
 	return self.layers.get(layer_id)
 
 func env_shake(duration: float, amplitude: Vector2, time_scale_factor: float):
-	return self.shake(CameraService.get_camera(), duration, amplitude, time_scale_factor, Shaker.DecayMode.LINEAR)
+	if not SettingsService.enable_screen_shake:
+		amplitude = Vector2.ZERO
+		
+	return self.shake(CameraService.camera, duration, amplitude, time_scale_factor, Shaker.DecayMode.LINEAR)
 	
 func shake(object: Node, duration: float, amplitude: Vector2, time_scale_factor: float, decay_mode):
 	var shaker = Shaker.new()
 	object.add_child(shaker)
 	
+	if object == CameraService.camera and not SettingsService.enable_screen_shake:
+		amplitude = Vector2.ZERO
 	shaker.start(duration, amplitude, time_scale_factor, decay_mode)
 	return shaker

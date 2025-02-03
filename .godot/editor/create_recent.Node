@@ -1,2 +1,12 @@
+MarginContainer
+Control
+VBoxContainer
+Label
+RichTextLabel
+ScrollContainer
+VScrollBar
+ColorRect
+CanvasLayer
+HBoxContainer
 Sprite2D
 AnimatedSprite2D

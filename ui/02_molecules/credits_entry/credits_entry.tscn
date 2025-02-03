@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://byygevy0ads50"]
+
+[ext_resource type="Script" path="res://ui/02_molecules/credits_entry/credits_entry.gd" id="1_uxhhn"]
+
+[node name="MarginContainer" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+script = ExtResource("1_uxhhn")
+
+[node name="CreditsEntry" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="AssetUsage" type="Label" parent="CreditsEntry"]
+layout_mode = 2
+text = "Battle Music"
+
+[node name="AssetName" type="RichTextLabel" parent="CreditsEntry"]
+clip_contents = false
+layout_mode = 2
+bbcode_enabled = true
+text = "    Song Name (song asset link, if any)"
+fit_content = true
+meta_underlined = false
+
+[node name="AuthorName" type="RichTextLabel" parent="CreditsEntry"]
+clip_contents = false
+layout_mode = 2
+bbcode_enabled = true
+text = "    By Author [url](author link, if any)[/url]"
+fit_content = true
+scroll_active = false
+meta_underlined = false
+
+[connection signal="meta_clicked" from="CreditsEntry/AssetName" to="." method="url_clicked"]
+[connection signal="meta_clicked" from="CreditsEntry/AuthorName" to="." method="url_clicked"]

@@ -75,6 +75,26 @@ ticks_on_borders = true
 [node name="HSeparator2" type="HSeparator" parent="CenterContainer/Settings"]
 layout_mode = 2
 
+[node name="VideoLabel" type="Label" parent="CenterContainer/Settings"]
+layout_mode = 2
+text = "Video
+"
+
+[node name="EnableShake" type="CheckBox" parent="CenterContainer/Settings"]
+layout_mode = 2
+focus_neighbor_left = NodePath(".")
+mouse_filter = 2
+text = "Enable screen shake"
+
+[node name="EnableFlash" type="CheckBox" parent="CenterContainer/Settings"]
+layout_mode = 2
+focus_neighbor_left = NodePath(".")
+mouse_filter = 2
+text = "Enable flashing effects"
+
+[node name="HSeparator3" type="HSeparator" parent="CenterContainer/Settings"]
+layout_mode = 2
+
 [node name="UILabel" type="Label" parent="CenterContainer/Settings"]
 layout_mode = 2
 text = "Interface"
@@ -172,6 +192,8 @@ vertical_alignment = 1
 [connection signal="value_changed" from="CenterContainer/Settings/VolumeSliders/MusicVolumeSlider" to="." method="update_music_volume"]
 [connection signal="value_changed" from="CenterContainer/Settings/VolumeSliders/SFXVolumeSlider" to="." method="update_sfx_volume"]
 [connection signal="value_changed" from="CenterContainer/Settings/VolumeSliders/UIVolumeSlider" to="." method="update_ui_volume"]
+[connection signal="toggled" from="CenterContainer/Settings/EnableShake" to="." method="update_enable_shake"]
+[connection signal="toggled" from="CenterContainer/Settings/EnableFlash" to="." method="update_enable_flash"]
 [connection signal="toggled" from="CenterContainer/Settings/RunBehaviorContainer/Toggle" to="." method="update_run_behavior"]
 [connection signal="about_to_popup" from="Popups/BlockClicksPopup" to="Popups/BlockClicksPopup" method="on_about_to_popup"]
 [connection signal="about_to_popup" from="Popups/ListenForInputPopup" to="Popups/ListenForInputPopup" method="on_about_to_popup"]

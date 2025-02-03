@@ -4,7 +4,7 @@ extends PanelContainer
 
 func update_costs(costs: Array):
 	if costs.size() == 0:
-		self.modulate = Color.TRANSPARENT
+		self.hide()
 		return
 	
 	var current_children = self.grid.get_child_count() - 2
@@ -33,5 +33,5 @@ func update_costs(costs: Array):
 		var label = self.grid.get_child(2 * (i + 1) + 1)
 		label.text = "   %s" % cost
 		
-	self.modulate = Color.WHITE
+	self.show()
 	

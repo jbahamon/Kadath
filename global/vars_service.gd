@@ -1,5 +1,6 @@
 extends Node
 
+const CREDITS_FILE = "res://CREDITS.json"
 const VERTICAL_ORIENTATION_BIAS = 1.1
 var loaded_slot = -1
 var starting_location_name = "000_prologue_kadath"
