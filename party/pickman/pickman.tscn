@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dehii02b2xc8o"]
+[gd_scene load_steps=37 format=3 uid="uid://dehii02b2xc8o"]
 
 [ext_resource type="PackedScene" uid="uid://bomxx7doloqmu" path="res://party/party_member.tscn" id="1_puo4q"]
 [ext_resource type="Resource" uid="uid://efimamnfjman" path="res://party/pickman/growth.tres" id="2_attsm"]
@@ -7,13 +7,43 @@
 [ext_resource type="PackedScene" uid="uid://cv5wwoeq1pjb7" path="res://party/pickman/anim.tscn" id="4_pfdmg"]
 [ext_resource type="Texture2D" uid="uid://tfj36aej8dy4" path="res://party/pickman/menu_sprite_alt.png" id="4_svurb"]
 [ext_resource type="Script" path="res://party/pickman/skill/slab_slam.gd" id="5_5kqwp"]
+[ext_resource type="Script" path="res://battle/action/party_member_attack.gd" id="5_88ji1"]
 [ext_resource type="Script" path="res://party/pickman/action/feast.gd" id="5_beduq"]
+[ext_resource type="AudioStream" uid="uid://2uv1lnv2x7w8" path="res://sound/fx/hit/Mid Low Rising  - JuhaniJunkala.wav" id="6_6nf0o"]
 [ext_resource type="PackedScene" uid="uid://dwx2sfgjttusb" path="res://battle/action/util/line_of_effect.tscn" id="6_8tf6q"]
 [ext_resource type="Material" uid="uid://c48122ffiwrbb" path="res://utils/material/uniform_add.tres" id="7_gtc6k"]
 [ext_resource type="Shader" path="res://utils/material/uniform_add.gdshader" id="8_2lvfg"]
 [ext_resource type="Script" path="res://battle/hit.gd" id="9_vg70b"]
+[ext_resource type="AudioStream" uid="uid://br4wdh8hmf5oq" path="res://sound/fx/slash/Two Part Clean - SAGE.wav" id="10_7gvwc"]
+[ext_resource type="AudioStream" uid="uid://bxvelfr4dar0c" path="res://sound/fx/slash/Mid Clean - colorsCrimsonTears.wav" id="12_6tu3v"]
 [ext_resource type="PackedScene" uid="uid://cchn13mhn8gxu" path="res://battle/action/util/projectile.tscn" id="13_6c0bp"]
 [ext_resource type="Texture2D" uid="uid://b1rat22ms3yjv" path="res://party/pickman/thrown_weapon.png" id="13_ff2xh"]
+[ext_resource type="AudioStream" uid="uid://bexpt6uc1ats5" path="res://sound/fx/charge/Adrenaline - BrainzPlayz.wav" id="15_1ocom"]
+[ext_resource type="AudioStream" uid="uid://bojiuydt7dm8s" path="res://sound/fx/whoosh/Harsh Short - JuhaniJunkala.wav" id="16_spx3k"]
+[ext_resource type="AudioStream" uid="uid://38nt6e7wplf1" path="res://sound/fx/whoosh/Mid Ascending - MadameBerry.wav" id="17_0ybgc"]
+[ext_resource type="AudioStream" uid="uid://b8b8awqask8bq" path="res://sound/fx/hit/Mid Deep - KronBits.wav" id="18_n1fsx"]
+
+[sub_resource type="Resource" id="Resource_fbkg1"]
+script = ExtResource("9_vg70b")
+animation_only = false
+fixed_damage = true
+base_damage = 1.0
+type = 0
+anim_time = 0.0
+anim_duration = 0.45
+spark_time = 0.0
+spark_offset = Vector2(0, 0)
+shake_time = 0.0
+shake_duration = 0.5
+shake_amplitude = Vector2(8, 0)
+shake_time_scale = 2.0
+hit_sound = ExtResource("6_6nf0o")
+hit_sound_time = 0.0
+miss_sound_time = 0.0
+palfx_material = ExtResource("7_gtc6k")
+palfx_time = 0.0
+palfx_duration = 0.3
+toast_time = 0.3
 
 [sub_resource type="Resource" id="Resource_jh7if"]
 script = ExtResource("9_vg70b")
@@ -29,6 +59,7 @@ shake_time = 0.0
 shake_duration = 0.5
 shake_amplitude = Vector2(8, 0)
 shake_time_scale = 2.0
+hit_sound = ExtResource("10_7gvwc")
 hit_sound_time = 0.0
 miss_sound_time = 0.0
 palfx_material = ExtResource("7_gtc6k")
@@ -54,7 +85,8 @@ shake_time = 0.0
 shake_duration = 0.5
 shake_amplitude = Vector2(8, 0)
 shake_time_scale = 2.0
-hit_sound_time = 0.0
+hit_sound = ExtResource("12_6tu3v")
+hit_sound_time = 0.3
 miss_sound_time = 0.0
 palfx_material = SubResource("ShaderMaterial_it3w0")
 palfx_time = 0.3
@@ -75,6 +107,7 @@ shake_time = 0.0
 shake_duration = 0.4
 shake_amplitude = Vector2(8, 8)
 shake_time_scale = 3.0
+hit_sound = ExtResource("18_n1fsx")
 hit_sound_time = 0.0
 miss_sound_time = 0.0
 palfx_material = ExtResource("7_gtc6k")
@@ -189,7 +222,13 @@ starting_armor_id = "ruby_braces"
 [node name="Battler" parent="." index="0"]
 anim_path = NodePath("../Anim")
 
-[node name="Feast" type="Node" parent="Battler/Actions" index="0"]
+[node name="Attack" type="Node" parent="Battler/Actions" index="0"]
+script = ExtResource("5_88ji1")
+hit = SubResource("Resource_fbkg1")
+display_name = "Attack"
+description = "Attack with your equipped weapon"
+
+[node name="Feast" type="Node" parent="Battler/Actions" index="1"]
 script = ExtResource("5_beduq")
 hit = SubResource("Resource_jh7if")
 display_name = "Feast"
@@ -207,6 +246,9 @@ energy_cost = 10
 script = ExtResource("5_5kqwp")
 power = 10.0
 line_power = 5.0
+channel_sound = ExtResource("15_1ocom")
+throw_sound = ExtResource("16_spx3k")
+jump_sound = ExtResource("17_0ybgc")
 animation_hit = SubResource("Resource_pa7h3")
 main_hit = SubResource("Resource_eq6g4")
 secondary_hit = SubResource("Resource_c51c5")
@@ -243,6 +285,7 @@ offset = Vector2(0, -18)
 
 [node name="Anim" parent="." index="1" instance=ExtResource("4_pfdmg")]
 use_parent_material = true
+animation_names = Array[String](["idle", "walk", "run", "attack", "jump_back", "hit", "battle_idle/healthy", "battle_idle/tired", "interact", "downed", "crit", "crit_start", "taxing_touch", "slam_start", "slam_jump", "slam_hit", "feast", "attack"])
 
 [editable path="Battler"]
 [editable path="Battler/Actions/Skill/SlabSlam/LineOfEffect"]

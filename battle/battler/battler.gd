@@ -165,6 +165,14 @@ func take_hit(actor, hit: Hit, in_battle: bool = true):
 					await shaker.shake_finished
 			)
 			
+		if hit.hit_sound != null:
+			hit_events.append(
+				func():
+					if hit.hit_sound_time > 0:
+						await tree.create_timer(hit.hit_sound_time).timeout
+					FXService.play_sfx_at(hit.hit_sound, self.global_position)
+			)
+			
 		if not hit.animation_only:
 			hit_events.append(
 				func(): 
@@ -218,7 +226,6 @@ func get_action_options() -> Array:
 		
 		# options.push_front(BattleService.common_action_options["lose"])
 		# options.push_front(BattleService.common_action_options["win"])
-		options.push_front(BattleService.common_action_options["attack"])
 		options.push_back(BattleService.common_action_options["item"])
 		options.push_back(BattleService.common_action_options["defend"])
 		

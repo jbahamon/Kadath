@@ -2,12 +2,10 @@ extends "res://battle/action/simple_single_target.gd"
 
 @onready var projectile = get_node("../../Projectile")
 @onready var trail: CPUParticles2D = get_node("../../Projectile/CPUParticles2D")
+@export var projectile_sound: AudioStream
+@export var hit: Hit
 
 func execute(actor):
-	var hit = Hit.new()
-	hit.type = Hit.Element.PHYSICAL
-	hit.base_damage = actor.battler.physical_attack
-	
 	await get_tree().create_timer(0.525).timeout
 	var origin = actor.global_position + Vector2(0, -80)
 	var destination = target.battler.get_hitspot("Center")
@@ -21,7 +19,8 @@ func execute(actor):
 		{
 			"origin": origin,
 			"destination": destination,
-			"speed": 250.0
+			"speed": 250.0,
+			"shoot_sound": self.projectile_sound
 		}
 	)
 	trail.emitting = false

@@ -71,13 +71,13 @@ func move_to_target(actor, target, speed, anim):
 		
 	var orientation = actor.global_position.direction_to(target_position)
 	actor.set_orientation(orientation)
-	
 	actor.play_anim(anim)
 	
 	await actor.move_to([target_position.x, target_position.y], speed)
 	
-	orientation = actor.global_position.direction_to(target.global_position)
-	actor.set_orientation(orientation)
+	if target is not Vector2:
+		orientation = actor.global_position.direction_to(target.global_position)
+		actor.set_orientation(orientation)
 
 func shoot_projectile(actor, projectile, projectile_options: Dictionary):
 	var speed = projectile_options["speed"]
@@ -88,6 +88,9 @@ func shoot_projectile(actor, projectile, projectile_options: Dictionary):
 	actor.battler.remove_child(projectile)
 	
 	room.add_child(projectile)
+	
+	if "shoot_sound" in projectile_options:
+		FXService.play_sfx_at(projectile_options["shoot_sound"], origin)
 	
 	if projectile_options.get("rotate", false):
 		projectile.rotation = VarsService.round_orientation_with_bias(actor.current_orientation).angle()

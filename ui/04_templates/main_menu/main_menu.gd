@@ -33,4 +33,3 @@ func _on_Continue_Game_pressed():
 func _on_Settings_pressed():
 	print(settings.exclusive)
 	settings.popup_centered_ratio(1)
-

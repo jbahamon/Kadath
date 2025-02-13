@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://ui/02_molecules/timeline_item/timeline_item.gd" id="1_tmgn2"]
 [ext_resource type="Texture2D" uid="uid://56sux2p3oroq" path="res://npc/enemy/sentry/icon.png" id="2_cs6nb"]
 
+
 [node name="TimelineItem" type="PanelContainer"]
 offset_right = 58.0
 offset_bottom = 58.0

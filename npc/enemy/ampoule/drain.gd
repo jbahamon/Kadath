@@ -4,6 +4,7 @@ const blurb = "Phlebotomy"
 @export var normal_attack_factor = 0.75
 @export var heal_factor = 1
 @export var hit: Hit
+@export var drain_sound: AudioStream
 
 func execute(actor):
 	# walk to target
@@ -23,7 +24,6 @@ func execute(actor):
 	]).execute()
 	
 	actor.play_anim("grab")
-	hit.base_damage = actor.battler.physical_attack  * self.normal_attack_factor
 	
 	var idle_anim = "battle_idle" if target.has_anim("battle_idle") else "idle"
 	var tree = actor.get_tree()

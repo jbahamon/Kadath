@@ -18,7 +18,6 @@ func execute(actor):
 	await tendrils.animation_finished
 	tendrils.play("attack")
 	
-	hit.base_damage = actor.battler.physical_attack
 	var tree = get_tree()
 	
 	await DoAll.new([

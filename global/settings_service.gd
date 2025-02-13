@@ -13,9 +13,12 @@ const INPUT_ACTIONS = [
 	&"action_run"
 ]	
 
-var music_volume: float = 0.5
-var sfx_volume: float = 0.5
-var ui_volume: float = 0.5
+var volume = {
+	&"SFX": 0.5,
+	&"UI": 0.5,
+	&"BGM": 0.5
+	
+}
 
 var text_speed = 2
 var toggle_run = false
@@ -48,9 +51,14 @@ func load_config() -> bool:
 			InputMap.action_add_event(action, event)
 			VarsService.on_action_updated(action, event)
 	
-	for volume_setting in ["ui_volume", "music_volume", "sfx_volume"]:
-		# TODO actually use these
-		config_file.get_value("sound", volume_setting, 5)
+	for bus_name in [&"BGM", &"SFX", &"UI"]:
+		var linear_volume = config_file.get_value("sound", bus_name, 0.5)
+		self.volume[bus_name] = linear_volume
+		AudioServer.set_bus_volume_db(
+			AudioServer.get_bus_index(bus_name), 
+			linear_to_db(linear_volume)
+		)
+	
 		
 	text_speed = config_file.get_value("ui", "text_speed", 2)
 	return true
@@ -65,9 +73,13 @@ func create_config():
 		for event in events:
 			VarsService.on_action_updated(action, event)
 	
-	for volume_setting in ["ui_volume", "music_volume", "sfx_volume"]:
-		# TODO actually use these
-		config_file.set_value("sound", volume_setting, 5)
+	for bus_name in [&"BGM", &"SFX", &"UI"]:
+		self.volume[bus_name] = 0.5
+		config_file.set_value("sound", bus_name, 0.5)
+		AudioServer.set_bus_volume_db(
+			AudioServer.get_bus_index(bus_name), 
+			linear_to_db(0.5)
+		)
 		
 	config_file.set_value("ui", "text_speed", text_speed)
 	config_file.save(CONFIG_FILE_NAME)
@@ -92,9 +104,14 @@ func update_text_speed(new_text_speed):
 	DialogueService.set_text_speed(new_text_speed)
 	self.save_file()
 
-func update_volume(volume_setting, volume_value):
-	config_file.set_value("sound", volume_setting, volume_value)
+func update_volume(bus_name, volume_value):
+	config_file.set_value("sound", bus_name, volume_value)
 	config_file.save(CONFIG_FILE_NAME)
+	self.volume[bus_name] = volume_value
+	AudioServer.set_bus_volume_db(
+		AudioServer.get_bus_index(bus_name), 
+		linear_to_db(volume_value)
+	)
 	self.save_file()
 
 func update_enable_screen_shake(value):

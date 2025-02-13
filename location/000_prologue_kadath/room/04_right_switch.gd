@@ -11,7 +11,7 @@ func setup():
 		
 func _on_chalice_player_interaction(proxy: PlayerProxy):
 	proxy.set_mode(PlayerProxy.ProxyMode.CUTSCENE)
-	InputService.set_input_enabled(false)
+	InputService.input_enabled = false
 	await self.move_player_to_chalice(proxy)
 	
 	if VarsService.get_flag("kadath.right_barrier"):
@@ -20,7 +20,7 @@ func _on_chalice_player_interaction(proxy: PlayerProxy):
 	else:
 		await self.attempt_chalice_interaction(proxy)
 	
-	InputService.set_input_enabled(true)
+	InputService.input_enabled = true
 	proxy.set_mode(PlayerProxy.ProxyMode.GAMEPLAY)
 
 func move_player_to_chalice(proxy):
@@ -49,8 +49,10 @@ func attempt_chalice_interaction(proxy: PlayerProxy):
 		await self.drop_enemies()
 		await BattleService.start_battle(
 			[$Ampoule1, $Ampoule2, $Ampoule3],
-			false,
-			PlayerProxy.ProxyMode.CUTSCENE,
+			{
+				"escapable": false,
+				"end_proxy_mode": PlayerProxy.ProxyMode.CUTSCENE
+			},
 		)
 		VarsService.set_flag("kadath.right_barrier", true)
 		await EnvironmentService.fade_out()

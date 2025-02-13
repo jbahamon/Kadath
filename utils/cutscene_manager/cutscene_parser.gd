@@ -17,6 +17,7 @@ var Call = preload("res://utils/cutscene_manager/instructions/call.gd")
 var Shake = preload("res://utils/cutscene_manager/instructions/shake.gd")
 var StartDialogue = preload("res://utils/cutscene_manager/instructions/start_dialogue.gd")
 var Narrate = preload("res://utils/cutscene_manager/instructions/narrate.gd")
+var SetMusic = preload("res://utils/cutscene_manager/instructions/set_music.gd")
 
 var AssignProxy = preload("res://utils/cutscene_manager/instructions/assign_proxy.gd")
 
@@ -78,6 +79,9 @@ func _init():
 
 	patterns["SHAKE"] = RegEx.new()
 	patterns["SHAKE"].compile("^(?<Entity>[^ ]+) FOR (?<Duration>.+) STR (?<Amplitude>.+) TIME_SCALE (?<TimeScaleFactor>.+)$")
+
+	patterns["SET_MUSIC"] = RegEx.new()
+	patterns["SET_MUSIC"].compile("^TO \"(?<SongName>.+)\"( AT (?<Offset>.+))?$")
 
 func parse_cutscene_from_file(cutscene_name: String): 
 	var cutscene_file = FileAccess.open(cutscene_name, FileAccess.READ)
@@ -214,11 +218,11 @@ func parse_instruction(stack: Array, instruction_name: String, args: String):
 				
 		CutsceneInstruction.Type.MOVE:
 			var walk_match: RegExMatch = self.patterns["MOVE"].search(args)
-			var speed_match = walk_match.get_string("Speed")
+			var speed = walk_match.get_string("Speed")
 			instruction = Move.new(
 				self.parse_string(walk_match.get_string("Character")),
 				self.parse_vector2_opt(walk_match.get_string("Position")),
-				self.parse_float(speed_match) if speed_match != null else INF
+				self.parse_float(speed) if speed != null else INF
 			)
 		CutsceneInstruction.Type.PLAY_ANIM:
 			var anim_match: RegExMatch = self.patterns["PLAY_ANIM"].search(args)
@@ -250,6 +254,16 @@ func parse_instruction(stack: Array, instruction_name: String, args: String):
 			var narrate_match: RegExMatch = self.patterns["NARRATE"].search(args)
 			instruction = Narrate.new(
 				self.parse_string(narrate_match.get_string("DialogueId")),
+			)
+			
+		CutsceneInstruction.Type.SET_MUSIC:
+			var song_match: RegExMatch = self.patterns["SET_MUSIC"].search(args)
+			var song = self.parse_string(song_match.get_string("SongName"))
+			var offset = song_match.get_string("Offset")
+			
+			instruction = SetMusic.new(
+				"res://sound/music/%s.ogg" % song if song != "NONE" else null,
+				parse_float(offset) if offset != null else 0.0
 			)
 		CutsceneInstruction.Type.HIDE:
 			instruction = Call.new(

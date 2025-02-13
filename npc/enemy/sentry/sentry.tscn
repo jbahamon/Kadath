@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dpc8xvvcbyotf"]
+[gd_scene load_steps=20 format=3 uid="uid://dpc8xvvcbyotf"]
 
 [ext_resource type="PackedScene" uid="uid://co4ecuc835bk6" path="res://npc/enemy/enemy.tscn" id="1_vbu6h"]
 [ext_resource type="Texture2D" uid="uid://56sux2p3oroq" path="res://npc/enemy/sentry/icon.png" id="2_2k4kj"]
@@ -8,7 +8,33 @@
 [ext_resource type="Script" path="res://npc/enemy/sentry/attack.gd" id="5_5ijqc"]
 [ext_resource type="Resource" uid="uid://dlkfog15bgvgh" path="res://npc/lib/empty_rewards.tres" id="5_ll8bj"]
 [ext_resource type="PackedScene" uid="uid://cchn13mhn8gxu" path="res://battle/action/util/projectile.tscn" id="7_885q8"]
+[ext_resource type="Material" uid="uid://c48122ffiwrbb" path="res://utils/material/uniform_add.tres" id="7_h305g"]
+[ext_resource type="AudioStream" uid="uid://bq2b66vmiocgp" path="res://sound/fx/hit/Short - MadameBerry.wav" id="7_hyyc1"]
+[ext_resource type="Script" path="res://battle/hit.gd" id="8_bp5c2"]
 [ext_resource type="Texture2D" uid="uid://c1rb64dwco3s6" path="res://npc/enemy/sentry/projectile.png" id="8_csw5i"]
+[ext_resource type="AudioStream" uid="uid://b4njyu8hefq3c" path="res://sound/fx/shoot/Short Beam - Kenney.wav" id="10_yt064"]
+
+[sub_resource type="Resource" id="Resource_1sln2"]
+script = ExtResource("8_bp5c2")
+animation_only = false
+fixed_damage = false
+base_damage = 10
+type = 0
+anim_time = 0.0
+anim_duration = 0.45
+spark_time = 0.0
+spark_offset = Vector2(0, 0)
+shake_time = 0.0
+shake_duration = 0.5
+shake_amplitude = Vector2(8, 0)
+shake_time_scale = 2.0
+hit_sound = ExtResource("7_hyyc1")
+hit_sound_time = 0.0
+miss_sound_time = 0.0
+palfx_material = ExtResource("7_h305g")
+palfx_time = 0.0
+palfx_duration = 0.3
+toast_time = 0.3
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w7pdr"]
 radius = 13.0
@@ -52,19 +78,15 @@ rewards = ExtResource("5_ll8bj")
 
 [node name="Attack" type="Node" parent="Battler/Actions" index="0"]
 script = ExtResource("5_5ijqc")
+hit = SubResource("Resource_1sln2")
+shoot_sound = ExtResource("10_yt064")
 
-[node name="AI" parent="Battler" index="3"]
+[node name="AI" parent="Battler" index="2"]
 script = ExtResource("4_bs2dh")
 
 [node name="CollisionShape2D" parent="Battler/Hitbox" index="0"]
 position = Vector2(0, -12)
 shape = SubResource("CapsuleShape2D_w7pdr")
-
-[node name="Projectile" parent="Battler" index="5" instance=ExtResource("7_885q8")]
-visible = false
-z_index = 1
-sprite_frames = SubResource("SpriteFrames_3nu6t")
-frame_progress = 0.485089
 
 [node name="South" type="Marker2D" parent="Battler/Hitspots" index="0"]
 position = Vector2(0, 17)
@@ -80,6 +102,12 @@ position = Vector2(-20, 12)
 
 [node name="East" type="Marker2D" parent="Battler/Hitspots" index="4"]
 position = Vector2(20, 12)
+
+[node name="Projectile" parent="Battler" index="5" instance=ExtResource("7_885q8")]
+visible = false
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_3nu6t")
+frame_progress = 0.485089
 
 [node name="CollisionShape2D" parent="InteractableArea" index="0"]
 position = Vector2(0, -10)

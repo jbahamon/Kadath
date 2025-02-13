@@ -1,7 +1,5 @@
 extends "res://battle/action/simple_single_target.gd"
 
-var base_hit = preload("res://battle/action/party_attack_hit.tres")
-
 @export var run_speed = 180
 @export var crit_speed = 360
 
@@ -12,7 +10,7 @@ var base_hit = preload("res://battle/action/party_attack_hit.tres")
 @export var hit_time = 24.0/60.0
 @export var crit_hit_time = 43.0/60.0
 
-@export var hit: Hit = base_hit
+@export var hit: Hit
 
 func get_next_parameter_signature():
 	if target == null:
@@ -27,9 +25,9 @@ func get_next_parameter_signature():
 
 func execute(actor):
 	var original_position = actor.global_position
-	var is_crit = randf() < 0 #actor.equipped_weapon.crit_chance
+	var is_crit = randf() < actor.equipped_weapon.crit_chance
 	
-	hit.base_damage = 1 # actor.battler.physical_attack * (1.5 if is_crit else 2.0)
+	self.hit.base_damage = actor.battler.physical_attack * (1.5 if is_crit else 2.0)
 	
 	await self.move_to_target(
 		actor, 

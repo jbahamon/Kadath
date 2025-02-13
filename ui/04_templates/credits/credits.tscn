@@ -54,10 +54,10 @@ theme_override_fonts/font = ExtResource("3_ivw60")
 theme_override_font_sizes/font_size = 15
 text = "Graphics"
 
-[node name="Sound" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBox"]
+[node name="Sounds" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBox"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="MarginContainer/ScrollContainer/VBox/Sound"]
+[node name="Title" type="Label" parent="MarginContainer/ScrollContainer/VBox/Sounds"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_ivw60")
 theme_override_font_sizes/font_size = 15

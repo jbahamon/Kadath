@@ -25,7 +25,6 @@ func get_next_parameter_signature():
 
 func execute(actor):
 	var original_position = actor.global_position
-	hit.base_damage = actor.battler.physical_attack
 	
 	await self.move_to_target(actor, target, walk_speed, walk_anim)
 	

@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://ui/02_molecules/dialog_source/dialog_source.gd" id="1_mlvvw"]
 [ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="1_yt6ah"]
 
+
 [node name="DialogSource" type="PanelContainer"]
 offset_right = 206.0
 offset_bottom = 54.0

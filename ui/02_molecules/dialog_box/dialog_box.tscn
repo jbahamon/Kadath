@@ -50,12 +50,16 @@ layout_mode = 2
 size_flags_vertical = 4
 alignment = 2
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="RichTextLabel" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 8
-text = "[ Z ]
-"
-horizontal_alignment = 2
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "[ Z ]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 texture_filter = 2

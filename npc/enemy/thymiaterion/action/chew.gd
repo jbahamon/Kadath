@@ -1,7 +1,7 @@
 extends BattleAction
 
 @export var hit: Hit
-
+@export var chew_sound: AudioStream
 var targets = []
 
 func reset():
@@ -30,7 +30,13 @@ func execute(actor):
 		target.visible = false
 
 	actor.play_anim("chew")
-	await get_tree().create_timer(2.1).timeout
+	FXService.play_sfx(chew_sound)
+	await get_tree().create_timer(0.7).timeout
+	FXService.play_sfx(chew_sound)
+	await get_tree().create_timer(0.7).timeout
+	FXService.play_sfx(chew_sound)
+	await get_tree().create_timer(0.7).timeout
+	
 	
 	tween = get_tree().create_tween()
 	tween.set_ease(Tween.EASE_IN).set_parallel(true)

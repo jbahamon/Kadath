@@ -2,20 +2,16 @@ extends Node
 
 var scene: Node
 
-var input_enabled = false
+var input_enabled = false:
+	set(value):
+		UIService.set_process_unhandled_input(value)
+		input_enabled = value
 
 func initialize(init_scene: Node):
 	self.scene = init_scene
 	
 func exit():
 	self.scene = null
-	
-func is_input_enabled():
-	return self.input_enabled
-	
-func set_input_enabled(value: bool):
-	UIService.set_process_unhandled_input(value)
-	self.input_enabled = value
 
 func enter_menu_mode() -> void:
 	get_tree().paused = true

@@ -34,8 +34,8 @@ func play_cutscene(cutscene_instruction, options):
 	self.current_cutscene = cutscene_instruction
 	self.pausable = options.get("pausable", true)
 	
-	var was_input_enabled = InputService.is_input_enabled()
-	InputService.set_input_enabled(false)
+	var was_input_enabled = InputService.input_enabled
+	InputService.input_enabled = false
 	
 	var proxy = EntitiesService.proxy
 	var prev_proxy_mode = proxy.current_mode
@@ -56,7 +56,7 @@ func play_cutscene(cutscene_instruction, options):
 	var enable_input_on_finish = options.get("enable_input_on_finish")
 	var proxy_mode_on_finish = options.get("proxy_mode_on_finish")
 	
-	InputService.set_input_enabled(was_input_enabled if enable_input_on_finish == null else enable_input_on_finish)
+	InputService.input_enabled = was_input_enabled if enable_input_on_finish == null else enable_input_on_finish
 	proxy.set_mode(prev_proxy_mode if proxy_mode_on_finish == null else proxy_mode_on_finish)
 	party.set_physics_process(was_party_physics_enabled)
 	if was_party_physics_enabled:

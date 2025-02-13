@@ -12,14 +12,16 @@ func _on_acolyte_touched(_proxy: PlayerProxy):
 	failures += 1
 	
 	if failures < 4:
-		CutsceneService.play_cutscene_from_file("res://location/000_prologue_kadath/cutscene/caught.cutscene")
+		CutsceneService.play_cutscene_from_file("res://location/000_prologue_kadath/cutscene/caught.txt")
 	else:
-		await CutsceneService.play_cutscene_from_file("res://location/000_prologue_kadath/cutscene/caught_final.cutscene")
-		BattleService.start_mook_battle(false)
+		await CutsceneService.play_cutscene_from_file("res://location/000_prologue_kadath/cutscene/caught_final.txt")
+		BattleService.start_mook_battle({
+			"escapable": false
+		})
 
 func _on_chalice_player_interaction(proxy: PlayerProxy):
 	proxy.set_mode(PlayerProxy.ProxyMode.CUTSCENE)
-	InputService.set_input_enabled(false)
+	InputService.input_enabled = false
 	await self.move_player_to_chalice(proxy)
 	
 	if VarsService.get_flag("kadath.left_barrier"):
@@ -27,7 +29,7 @@ func _on_chalice_player_interaction(proxy: PlayerProxy):
 	else:
 		await self.interact_with_chalice(proxy)
 	
-	InputService.set_input_enabled(true)
+	InputService.input_enabled = true
 	proxy.set_mode(PlayerProxy.ProxyMode.GAMEPLAY)
 
 func move_player_to_chalice(proxy):

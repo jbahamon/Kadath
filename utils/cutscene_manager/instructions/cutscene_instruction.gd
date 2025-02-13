@@ -18,6 +18,7 @@ enum Type {
 	
 	ASSIGN_PROXY,
 	
+	SET_MUSIC,
 	SET_POSITION,
 	LOOK,
 	LOOK_AT,

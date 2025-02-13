@@ -4,6 +4,7 @@
 [ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="3"]
 [ext_resource type="Script" path="res://ui/04_templates/saves_menu/confirm_popup.gd" id="4"]
 
+
 [node name="SavesPopup" type="PopupPanel"]
 visible = true
 theme = ExtResource("3")

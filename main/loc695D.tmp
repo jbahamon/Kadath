@@ -1,0 +1,243 @@
+[gd_scene load_steps=16 format=3 uid="uid://c2luykmp4iss7"]
+
+[ext_resource type="PackedScene" uid="uid://c3okprgd6vbwj" path="res://ui/04_templates/pause_menu/pause_menu.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://dptewnwfygfww" path="res://ui/01_atoms/assets/icons/By Daniel Cook/interaction_indicator.png" id="3_tkv25"]
+[ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="4"]
+[ext_resource type="Script" path="res://ui/04_templates/pause_menu/menu_popup.gd" id="6"]
+[ext_resource type="Script" path="res://main/local_scene.gd" id="7"]
+[ext_resource type="PackedScene" uid="uid://kjfr6yr534rp" path="res://ui/04_templates/saves_menu/saves_popup.tscn" id="8"]
+[ext_resource type="PackedScene" uid="uid://bo1y3b4btisvv" path="res://ui/04_templates/dialogue_box/dialogue_box.tscn" id="8_pwmoh"]
+[ext_resource type="PackedScene" uid="uid://bg7hnqo1b5c6m" path="res://main/player_proxy.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://ex17k532alby" path="res://ui/04_templates/battle_ui/battle_ui.tscn" id="11_42lm3"]
+[ext_resource type="Script" path="res://main/narration_layer.gd" id="16_6ypov"]
+
+[sub_resource type="CanvasItemMaterial" id="4"]
+
+[sub_resource type="CanvasItemMaterial" id="3"]
+blend_mode = 1
+
+[sub_resource type="Animation" id="1"]
+resource_name = "fade_from_black"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="2"]
+length = 0.5
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e58ng"]
+_data = {
+"fade_from_black": SubResource("1"),
+"fade_to_black": SubResource("2")
+}
+
+[node name="LocalScene" type="Node2D"]
+texture_filter = 1
+script = ExtResource("7")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_left = 1.0
+offset_right = 1279.0
+offset_bottom = 720.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+audio_listener_enable_2d = true
+size = Vector2i(426, 240)
+size_2d_override = Vector2i(426, 240)
+render_target_update_mode = 4
+
+[node name="BGLayer" type="CanvasLayer" parent="SubViewportContainer/SubViewport"]
+layer = -1
+
+[node name="CameraBG" type="ColorRect" parent="SubViewportContainer/SubViewport/BGLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="World" type="Node2D" parent="SubViewportContainer/SubViewport"]
+y_sort_enabled = true
+
+[node name="PlayerProxy" parent="SubViewportContainer/SubViewport/World" groups=["save"] instance=ExtResource("9")]
+floor_stop_on_slope = false
+walk_speed = 80.0
+
+[node name="RayCast2D" parent="SubViewportContainer/SubViewport/World/PlayerProxy" index="1"]
+hit_from_inside = true
+
+[node name="Camera2D" type="Camera2D" parent="SubViewportContainer/SubViewport/World/PlayerProxy"]
+drag_left_margin = 0.0
+drag_top_margin = 0.0
+drag_right_margin = 0.0
+drag_bottom_margin = 0.0
+
+[node name="InteractionIndicator" type="Sprite2D" parent="SubViewportContainer/SubViewport/World"]
+texture = ExtResource("3_tkv25")
+centered = false
+offset = Vector2(-11, -48)
+
+[node name="SFXPlayer" type="AudioStreamPlayer2D" parent="SubViewportContainer/SubViewport/World"]
+bus = &"SFX"
+area_mask = 0
+
+[node name="OverlayLayer" type="CanvasLayer" parent="SubViewportContainer/SubViewport"]
+
+[node name="Mix" type="ColorRect" parent="SubViewportContainer/SubViewport/OverlayLayer"]
+material = SubResource("4")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(1, 1, 1, 0)
+
+[node name="Add" type="ColorRect" parent="SubViewportContainer/SubViewport/OverlayLayer"]
+material = SubResource("3")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0)
+
+[node name="LocalCutscene" type="AnimationPlayer" parent="SubViewportContainer/SubViewport"]
+root_node = NodePath("../../..")
+libraries = {
+"": SubResource("AnimationLibrary_e58ng")
+}
+
+[node name="BattleUILayer" type="CanvasLayer" parent="."]
+
+[node name="BattleUI" parent="BattleUILayer" instance=ExtResource("11_42lm3")]
+visible = false
+
+[node name="DialogueLayer" type="CanvasLayer" parent="."]
+
+[node name="Dialogue" parent="DialogueLayer" instance=ExtResource("8_pwmoh")]
+characters_per_second = 25.0
+skip_speed_factor = 5.0
+
+[node name="MenuLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="MenuPopup" type="PopupPanel" parent="MenuLayer"]
+transparent_bg = true
+size = Vector2i(347, 324)
+transparent = true
+script = ExtResource("6")
+
+[node name="PauseMenu" parent="MenuLayer/MenuPopup" instance=ExtResource("3")]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Settings" parent="MenuLayer/MenuPopup/PauseMenu/Container/PauseMenuTabs" index="2"]
+visible = false
+
+[node name="SavesPopup" parent="MenuLayer" instance=ExtResource("8")]
+visible = false
+current_mode = 0
+
+[node name="NarrationLayer" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("16_6ypov")
+
+[node name="VBox" type="VBoxContainer" parent="NarrationLayer"]
+top_level = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Margin" type="MarginContainer" parent="NarrationLayer/VBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="NarrationText" type="RichTextLabel" parent="NarrationLayer/VBox/Margin"]
+layout_mode = 2
+theme = ExtResource("4")
+theme_type_variation = &"HeaderLarge"
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "Once there was a little boy"
+fit_content = true
+scroll_active = false
+
+[node name="MarginContainer" type="MarginContainer" parent="NarrationLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NarrationLayer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="Label" type="Label" parent="NarrationLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "[A] Continue"
+
+[node name="CutscenePauseBG" type="ColorRect" parent="NarrationLayer"]
+process_mode = 2
+visible = false
+material = SubResource("4")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.976471, 0, 0, 0.501961)
+
+[node name="PopupLayer" type="CanvasLayer" parent="."]
+process_mode = 2
+
+[node name="BGMPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+bus = &"BGM"
+
+[node name="UIPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+bus = &"UI"
+
+[connection signal="cancel" from="MenuLayer/MenuPopup/PauseMenu/Container/PauseMenuTabs" to="MenuLayer/MenuPopup" method="_on_pause_menu_tabs_cancel"]
+[connection signal="about_to_popup" from="MenuLayer/SavesPopup" to="." method="_on_menu_about_to_show"]
+[connection signal="popup_hide" from="MenuLayer/SavesPopup" to="." method="_on_menu_popup_hide"]
+
+[editable path="SubViewportContainer/SubViewport/World/PlayerProxy"]
+[editable path="MenuLayer/MenuPopup/PauseMenu"]
+[editable path="MenuLayer/MenuPopup/PauseMenu/Container/PauseMenuTabs/Party"]

@@ -12,7 +12,7 @@
 		"category": "graphics",
 		"author_name": "Ivess",
 		"author_url": "https://ivess.itch.io/",
-		"asset_name": "Ivess's Pixelart RPG Icons",
+		"asset_name": "Ivess's Fantasy RPG Icons Pack",
 		"asset_url": "https://ivess.itch.io/ivess-fantasy-rpg-icon-pack",
 		"asset_usage": "Equipment icons"
 	},
@@ -72,8 +72,6 @@
 		"asset_usage": "Game title font"
 	},
 	
-	
-	
 	{
 		"category": "graphics",
 		"author_name": "PIPOSCHPATZ",
@@ -111,6 +109,199 @@
 		"asset_usage": "Font included for potential future use"
 	},
 	
+	{
+		"category": "sounds",
+		"author_name": "Juhani Junkala",
+		"author_url": "https://www.youtube.com/@subspaceaudio6850",
+		"asset_name": "JRPG Pack 5 Action",
+		"asset_url": "https://opengameart.org/content/jrpg-pack-5-action",
+		"asset_usage": "Prologue BGM"
+	},
+	
+	{
+		"category": "sounds",
+		"author_name": "Original music by Marllon Silva (xDeviruchi)",
+		"author_literal": true,
+		"author_url": "https://www.youtube.com/xdeviruchi",
+		"asset_name": "16-Bit Fantasy & Adventure Music Pack",
+		"asset_url": "https://xdeviruchi.itch.io/16-bit-fantasy-adventure-music-pack",
+		"asset_usage": "Thymiaterion battle BGM"
+	},
+	
+	{
+		"category": "sounds",
+		"author_name": "nekoninja",
+		"author_url": "https://freesound.org/people/nekoninja/",
+		"asset_name": "samurai slash",
+		"asset_url": "https://freesound.org/people/nekoninja/sounds/370204/",
+		"asset_usage": "Bladed weapon sounds"
+	},
+	
+	{
+		"category": "sounds",
+		"author_name": "nekoninja",
+		"author_url": "https://freesound.org/people/nekoninja/",
+		"asset_name": "Samurai Slash2",
+		"asset_url": "https://freesound.org/people/nekoninja/sounds/512785/",
+		"asset_usage": "Bladed weapon sounds"
+	},
+	{
+		"category": "sounds",
+		"author_name": "DASK",
+		"author_url": "https://linktr.ee/DagurasuSk",
+		"asset_name": "RETRO SOUNDS",
+		"asset_url": "https://dagurasusk.itch.io/retrosounds",
+		"asset_usage": "Various battle sound effects"
+	},
+	
+	{
+		"category": "sounds",
+		"author_name": "Spring Spring",
+		"author_url": "https://spring-enterprises.neocities.org/",
+		"asset_name": "Attack of The Enormous Mutant Badgers - Sound Effects",
+		"asset_url": "https://opengameart.org/content/attack-of-the-enormous-mutant-badgers-sound-effects",
+		"asset_usage": "Various battle sound effects"
+	},
+	
+	{
+		"category": "sounds",
+		"author_name": "YourPalRob",
+		"author_url": "https://yourpalrob.itch.io/",
+		"asset_name": "Classic Arcade Sound Effects",
+		"asset_url": "https://yourpalrob.itch.io/classic-arcade-sound-effects",
+		"asset_usage": "Various battle sound effects"
+	},
+	
+	
+	
+	{
+		"category": "sounds",
+		"author_name": "Rosalila Studio",
+		"author_url": "https://opengameart.org/users/rosalila",
+		"asset_name": "Flatshot Complete SFX Pack",
+		"asset_url": "https://opengameart.org/content/flatshot-complete-sfx-pack",
+		"asset_usage": "Various battle sound effects"
+	},
+	
+	{
+		"category": "sounds",
+		"author_name": "KronBits",
+		"author_url": "https://kronbits.itch.io/",
+		"asset_name": "200 Free SFX",
+		"asset_url": "https://kronbits.itch.io/freesfx",
+		"asset_usage": "Various battle sound effects"
+	},
+	
+	{
+		"category": "sounds",
+		"author_name": "BrainzPlayz",
+		"author_url": "https://brainzplayz.itch.io/",
+		"asset_name": "Retro Sounds 32-Bit",
+		"asset_url": "https://brainzplayz.itch.io/retro-sounds-32-bit",
+		"asset_usage": "Tech charge sound"
+	},
+	
+		{
+		"category": "sounds",
+		"author_name": "MadameBerry",
+		"author_url": "https://madameberry.com/",
+		"asset_name": "Patreon Menu Soundpacks",
+		"asset_url": "https://opengameart.org/content/patreon-menu-soundpacks",
+		"asset_usage": "Various battle sound effects"
+	},
+	
+	{
+		"category": "sounds",
+		"author_name": "hosch/Lunar Wire",
+		"author_url": "https://lunar-wire.itch.io/",
+		"asset_name": "8 Bit Sound Effects",
+		"asset_url": "https://opengameart.org/content/8-bit-sound-effects-2",
+		"asset_usage": "Various battle sound effects"
+	},
+	
+	{
+		"category": "sounds",
+		"author_name": "Leohpaz",
+		"author_url": "https://leohpaz.itch.io/",
+		"asset_name": "RPG Essentials SFX",
+		"asset_url": "https://leohpaz.itch.io/rpg-essentials-sfx-free",
+		"asset_usage": "Various battle sound effects"
+	},
+	
+	{
+		"category": "sounds",
+		"author_name": "Swiss Arcade Game Entertainment",
+		"author_url": "https://phoenix1291.itch.io/",
+		"asset_name": "SFX: The Ultimate 2017 16 bit Mini pack",
+		"asset_url": "https://opengameart.org/content/sfx-the-ultimate-2017-16-bit-mini-pack",
+		"asset_usage": "Various battle sound effects"
+	},
+	
+	
+	{
+		"category": "sounds",
+		"author_name": "harvey656",
+		"author_url": "https://harvey656.itch.io/",
+		"asset_name": "8-bit Game Sound Effects Collection",
+		"asset_url": "https://harvey656.itch.io/8-bit-game-sound-effects-collection",
+		"asset_usage": "Various battle sound effects"
+	},
+	
+	
+	
+	{
+		"category": "sounds",
+		"author_name": "Coffee 'Valen' Bat",
+		"author_url": "https://coffeebat.neocities.org/",
+		"asset_name": "Sweet Sounds - A GB Studio Sound Effect Pack",
+		"asset_url": "https://coffeevalenbat.itch.io/sweet-sounds-sfx-pack",
+		"asset_usage": "Various battle sound effects"
+	},
+	
+	{
+		"category": "sounds",
+		"author_name": "Jesús Lastra",
+		"author_url": "https://linktr.ee/jalastram",
+		"asset_name": "Sound Effects | SFX024",
+		"asset_url": "https://opengameart.org/content/sound-effects-sfx024",
+		"asset_usage": "Enemy death sound"
+	},
+	
+	{
+		"category": "sounds",
+		"author_name": "Juhani Junkala",
+		"author_url": "https://www.youtube.com/@subspaceaudio6850",
+		"asset_name": "The Essential Retro Video Game Sound Effects Collection [512 sounds]",
+		"asset_url": "https://opengameart.org/content/512-sound-effects-8-bit-style",
+		"asset_usage": "Various battle sound effects"
+	},
+	
+		
+	{
+		"category": "sounds",
+		"author_name": "colorsCrimsonTears",
+		"author_url": "https://freesound.org/people/colorsCrimsonTears/",
+		"asset_name": "Various sounds",
+		"asset_usage": "Various battle sound effects"
+	},
+	
+	{
+		"category": "sounds",
+		"author_name": "VOiD1 Gaming",
+		"author_url": "https://www.void1gaming.com/",
+		"asset_name": "HALFTONE Sound Effects Pack LITE",
+		"asset_url": "https://void1gaming.itch.io/halftone-sound-effects-pack-lite",
+		"asset_usage": "Various battle sound effects"
+	},
+	
+	{
+		"category": "sounds",
+		"author_name": "Kenney",
+		"author_url": "http://www.kenney.nl/",
+		"asset_name": "Kenney Game Assets All-in-1",
+		"asset_url": "https://kenney.itch.io/kenney-game-assets",
+		"asset_usage": "Various battle sound effects"
+	},
 	
 	{
 		"category": "code",
@@ -122,7 +313,7 @@
 	},
 	{
 		"category": "code",
-		"author_name": "Nathan Hoad",
+		"author_name": "Nathan Hoad and contributors",
 		"author_url": "https://nathanhoad.net/",
 		"asset_name": "Dialogue Manager",
 		"asset_url": "https://github.com/nathanhoad/godot_dialogue_manager",
@@ -143,6 +334,15 @@
 		"asset_name": "Pixel perfect dissolving",
 		"asset_url": "https://godotshaders.com/shader/pixel-perfect-dissolving/",
 		"asset_usage": "Enemy death effect"
+	},
+	
+	{
+		"category": "code",
+		"author_name": "Labbed",
+		"author_url": "https://labbed.net/",
+		"asset_name": "LabChirp",
+		"asset_url": "https://labbed.net/software/labchirp/",
+		"asset_usage": "Various battle sound effects"
 	},
 	
 ]

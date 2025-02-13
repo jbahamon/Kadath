@@ -1,5 +1,7 @@
 extends BattleAction
 
+var escape_sound = preload("res://sound/fx/flee/Default - CoffeeBat.wav")
+
 func reset():
 	pass
 	
@@ -18,8 +20,9 @@ func execute(_actor):
 		if actor.is_alive:
 			actor.set_orientation(-actor.current_orientation)
 			actor.play_anim("run")
-	if false:
+	if BattleService.try_escape():
 		await BattleService.prompt("Fled the battle!")
+		FXService.play_sfx(self.escape_sound)
 		BattleService.mark_battle_as_escaped()
 	else:
 		await BattleService.prompt("Tried to escape, but failed...")

@@ -45,19 +45,19 @@ func shake():
 		parent.position.x = base_offset.x + amplitude.x * amt * noise.get_noise_2d(time * time_scale, 0)
 		parent.position.y = base_offset.x +amplitude.y * amt * noise.get_noise_2d(0, time * time_scale)
 		
-func start(duration: float, shake_amplitude: Vector2, time_scale_factor: float, decay_mode: DecayMode):
+func start(shake_duration: float, shake_amplitude: Vector2, time_scale_factor: float, decay_mode: DecayMode):
 	self.parent = get_parent()
 	self.target = &"offset" if "offset" in self.parent else &"position"
 	self.base_offset = self.parent.get(self.target)
-	self.duration = duration
+	self.duration = shake_duration
 	self.time_scale = 500 * time_scale_factor
 	self.noise.seed = randi()
-	self.decay = 1.0/duration if decay_mode == DecayMode.LINEAR else 0
+	self.decay = 1.0/shake_duration if decay_mode == DecayMode.LINEAR else 0
 	self.amplitude = shake_amplitude
 	self.trauma = 1.0
 	
 	self.set_process(true)
-	self.connect("shake_finished", self._on_end, CONNECT_ONE_SHOT)
+	self.shake_finished.connect(self._on_end, CONNECT_ONE_SHOT)
 	return self.shake_finished
 
 func _on_end():

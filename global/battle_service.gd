@@ -1,7 +1,6 @@
 extends Node
 
 const BattleLoop = preload("res://battle/battle_loop.gd")
-const Attack = preload("res://battle/action/party_member_attack.gd")
 const Defend = preload("res://battle/action/defend.gd")
 const Win = preload("res://battle/action/win.gd")
 const Lose = preload("res://battle/action/lose.gd")
@@ -10,6 +9,10 @@ const Escape = preload("res://battle/action/escape.gd")
 const BattleEndState = preload("res://battle/battle_end_state.gd")
 
 const FadeOverlay = preload("res://utils/cutscene_manager/instructions/fade_overlay.gd")
+const DEFAULT_BATTLE_BGM = preload("res://sound/music/LUShvalleySound/LVSD-F0005_NormalBattle_SFC.ogg")
+
+var battle_start_sound: AudioStream = preload("res://sound/ui/Battle Start - KronBits.wav")
+var turn_start_sound: AudioStream = preload("res://sound/ui/Turn Start - colorsCrimsonTears.wav")
 
 enum Event {
 	TURN_START,
@@ -39,10 +42,6 @@ func exit():
 	self.current_battle_parameters = {}
 	
 func init_common_action_options():
-	var attack = Attack.new()
-	attack.display_name = "Attack"
-	attack.description = "Attack with the equipped weapon."
-	self.common_action_options["attack"] = attack
 	
 	var defend = Defend.new()
 	defend.display_name = "Defend"
@@ -69,7 +68,7 @@ func init_common_action_options():
 	escape.description = "Try to run away."
 	self.common_action_options["escape"] = escape
 	
-func start_mook_battle(escapable: bool):
+func start_mook_battle(settings: Dictionary):
 	if self.current_battle_parameters != null: 
 		return
 		
@@ -79,24 +78,22 @@ func start_mook_battle(escapable: bool):
 	var enemies = world.get_tree().get_nodes_in_group("enemy")
 	var mooks = enemies.filter(func(mook): return rect.has_point(Vector2i(mook.position)))
 
-	self.start_battle(mooks, escapable)
+	self.start_battle(mooks, settings)
 
-func start_battle(enemies: Array, escapable: bool, proxy_mode_on_finish=null):
+func start_battle(enemies: Array, settings: Dictionary):
 	if self.current_battle_parameters != null:
 		return
 	
 	self.current_battle_parameters = {
-		"escapable": escapable,
+		"escapable": true,
 		"escape_tries": 0,
-	}
+		"bgm": EnvironmentService.current_location.battle_bgm_override if EnvironmentService.current_location.battle_bgm_override != null else DEFAULT_BATTLE_BGM,
+		"end_proxy_mode": EntitiesService.proxy.current_mode
+	}.merged(settings, true)
 	
-	var was_input_enabled = InputService.is_input_enabled()
-	InputService.set_input_enabled(false)
-	var end_proxy_mode = (
-		proxy_mode_on_finish 
-		if proxy_mode_on_finish != null 
-		else EntitiesService.proxy.current_mode
-	)
+	var was_input_enabled = InputService.input_enabled
+	InputService.input_enabled = false
+
 	var battle_spot = self.get_nearest_battle_spot()
 	var non_party_actors = self.filter_non_party_actors(enemies, battle_spot)
 	self.pause_non_participants(non_party_actors)
@@ -106,11 +103,19 @@ func start_battle(enemies: Array, escapable: bool, proxy_mode_on_finish=null):
 
 	self.loop.initialize(actors, self.ui)
 	self.ui.initialize(party_actors)
-
+	
+	var previous_bgm = MusicService.current_song
+	
 	# starting cutscene
 	await self.set_up_battle_positions(battle_spot, party_actors, non_party_actors)
 	self.rename_non_party_actors(non_party_actors)
 	
+	var bgm_position = MusicService.player.get_playback_position()
+	MusicService.play_song(self.current_battle_parameters["bgm"])
+	FXService.play_sfx(self.battle_start_sound)
+	
+	await get_tree().create_timer(0.5).timeout
+
 	# just to ensure we're not keeping references to enemies that might be freed during battle
 	non_party_actors = []
 	actors = []
@@ -121,17 +126,22 @@ func start_battle(enemies: Array, escapable: bool, proxy_mode_on_finish=null):
 	match battle_end_state.result:
 		BattleEndState.Result.ESCAPE:
 			self.ui.hide()
+			MusicService.player.stop()
 			await self.fade_and_delete_mooks(battle_end_state)
+			MusicService.play_song(previous_bgm, bgm_position)
 			await self.tear_down_battle_positions(battle_end_state)
-			self.resume_non_participants(end_proxy_mode)
-			InputService.set_input_enabled(was_input_enabled)
+			self.resume_non_participants(self.current_battle_parameters["end_proxy_mode"])
+			InputService.input_enabled = was_input_enabled
+			
 		BattleEndState.Result.WIN:
 			await self.deal_rewards(battle_end_state.rewards)
 			self.ui.hide()
+			MusicService.play_song(previous_bgm, bgm_position)
 			self.revive_party_members(EntitiesService.party)
 			await self.tear_down_battle_positions(battle_end_state)
-			self.resume_non_participants(end_proxy_mode)
-			InputService.set_input_enabled(was_input_enabled)
+			self.resume_non_participants(self.current_battle_parameters["end_proxy_mode"])
+			InputService.input_enabled = was_input_enabled
+			
 		BattleEndState.Result.LOSE: 
 			self.ui.hide()
 			var party = EntitiesService.party
@@ -316,7 +326,7 @@ func fade_and_delete_mooks(battle_end_state):
 	
 	for enemy_actor in battle_end_state.enemy_actors:
 		cutscene_lines.append(
-			"AWAIT %s die" % enemy_actor.name
+			"AWAIT %s fade" % enemy_actor.name
 		)
 	cutscene_lines.append_array(["END", "FADE_OVERLAY MIX TO (0,0,0,0) IN 1"])
 	

@@ -21,9 +21,9 @@ func save(save_data: SaveData) -> void:
 	
 func on_action_updated(action: String, event: InputEvent) -> void:
 	if event is InputEventKey:
-		strings[action] = OS.get_keycode_string(
-			event.get_keycode_with_modifiers()
-		)
+		var keycode = event.get_keycode_with_modifiers()
+		strings[action] = OS.get_keycode_string(keycode)
+		print("holi")
 
 func set_string(string_name: String, value: String) -> void:
 	strings[string_name] = value

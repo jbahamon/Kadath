@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bw0gl4jgbt7fi" path="res://ui/02_molecules/dialog_source/dialog_source.tscn" id="2_exnik"]
 [ext_resource type="PackedScene" uid="uid://b8h7mj2g47i5t" path="res://ui/02_molecules/dialog_box/dialog_box.tscn" id="3_bjf7l"]
 
+
 [node name="DialogueBox" type="VBoxContainer"]
 anchors_preset = 15
 anchor_right = 1.0

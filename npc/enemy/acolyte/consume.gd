@@ -2,6 +2,7 @@ extends BattleAction
 
 const blurb = "Consume"
 @export var sacrifice_hit: Hit
+@export var heal_sound: AudioStream
 var sacrifice
 var allies
 
@@ -39,7 +40,7 @@ func execute(actor):
 	var heals = allies.map(
 		func(ally): return func (): await ally.heal(remaining_hp, true)
 	)
-	
+	FXService.play_sfx_at(self.heal_sound, actor.global_position)
 	await DoAll.new(heals).execute()
 	BattleService.announce("")
 	actor.play_anim("idle")

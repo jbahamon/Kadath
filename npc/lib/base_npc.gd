@@ -3,6 +3,7 @@ class_name BaseNPC
 
 var RandomSpinMovement = preload("./movement/random_spin_movement.tscn")
 var dissolve_shader = preload("res://utils/material/dissolve.gdshader")
+var death_sound = preload("res://sound/fx/death/Default - harvey656.wav")
 
 signal resumed
 signal move_to_done
@@ -93,19 +94,23 @@ func on_player_interaction(player_proxy: PlayerProxy):
 	self.stop_auto_movement()
 	self.interactable_area.monitoring = false
 	
-	var was_input_enabled = InputService.is_input_enabled()
+	var was_input_enabled = InputService.input_enabled
 	player_proxy.set_mode(PlayerProxy.ProxyMode.CUTSCENE)
-	InputService.set_input_enabled(false)
+	InputService.input_enabled = false
 	
 	await DialogueService.open_dialogue(self.dialogue_name)
 	
-	InputService.set_input_enabled(was_input_enabled)
+	InputService.input_enabled = was_input_enabled
 	player_proxy.set_mode(PlayerProxy.ProxyMode.GAMEPLAY)
 	self.interactable_area.monitoring = true
 	self.start_auto_movement()
+
+func fade(_mode: CutsceneInstruction.ExecutionMode):
+	self.queue_free()
 	
 func die(mode: CutsceneInstruction.ExecutionMode):
 	if mode == CutsceneInstruction.ExecutionMode.PLAY:
+		FXService.play_sfx_at(death_sound, self.position)
 		var fade_tween = get_tree().create_tween()
 		var dissolve_material = ShaderMaterial.new()
 		dissolve_material.shader = dissolve_shader

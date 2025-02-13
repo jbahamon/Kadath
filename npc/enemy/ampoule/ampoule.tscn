@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dunwmva1f22su"]
+[gd_scene load_steps=19 format=3 uid="uid://dunwmva1f22su"]
 
 [ext_resource type="PackedScene" uid="uid://c17hneqpuil0l" path="res://npc/lib/base_npc.tscn" id="1_n3nn8"]
 [ext_resource type="Script" path="res://npc/enemy/enemy.gd" id="2_y1sju"]
@@ -10,8 +10,10 @@
 [ext_resource type="Script" path="res://npc/enemy/ampoule/attack.gd" id="6_xyght"]
 [ext_resource type="Material" uid="uid://c48122ffiwrbb" path="res://utils/material/uniform_add.tres" id="7_8q5jg"]
 [ext_resource type="Script" path="res://npc/enemy/ampoule/drain.gd" id="7_oec2r"]
+[ext_resource type="AudioStream" uid="uid://drgm032b34j27" path="res://sound/fx/charge/Low - Kenney.wav" id="8_ku7rv"]
 [ext_resource type="Script" path="res://battle/hit.gd" id="8_qy48h"]
 [ext_resource type="Shader" path="res://utils/material/highlight.gdshader" id="10_f02lv"]
+[ext_resource type="AudioStream" uid="uid://75x8hmnabi18" path="res://sound/fx/scratch/Double Short - JuhaniJunkala.wav" id="12_cvi7s"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i8b0q"]
 shader = ExtResource("10_f02lv")
@@ -34,6 +36,7 @@ shake_time = 0.0
 shake_duration = 0.5
 shake_amplitude = Vector2(8, 0)
 shake_time_scale = 2.0
+hit_sound = ExtResource("8_ku7rv")
 hit_sound_time = 0.0
 miss_sound_time = 0.0
 palfx_material = SubResource("ShaderMaterial_i8b0q")
@@ -55,6 +58,7 @@ shake_time = 0.0
 shake_duration = 0.5
 shake_amplitude = Vector2(8, 0)
 shake_time_scale = 2.0
+hit_sound = ExtResource("12_cvi7s")
 hit_sound_time = 0.0
 miss_sound_time = 0.0
 palfx_material = ExtResource("7_8q5jg")

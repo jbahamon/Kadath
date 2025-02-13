@@ -23,17 +23,18 @@ func get_world():
 func get_room() -> LocationRoom:
 	return current_room
 
-func get_location() -> Location:
-	return current_location
-
 func update_whereabouts(
 	location_id: String, 
 	room_id: String,
 	target_position: Vector2, 
 	target_orientation: Vector2,
-	fade: bool,
-	end_proxy_state = null
+	settings
 	) -> void:
+	
+	var transition_settings = {
+		"fade": true,
+		"end_proxy_state": null
+	}.merged(settings, true)
 	
 	var location_path = "res://location/%s/location.tres" % location_id
 	var old_location = current_location
@@ -43,19 +44,19 @@ func update_whereabouts(
 		old_room != null and room_id == old_room.room_id):
 		return
 	
-	var was_input_enabled = InputService.is_input_enabled()
+	var was_input_enabled = InputService.input_enabled
 	
-	InputService.set_input_enabled(false)
+	InputService.input_enabled = false
 	
 	self.pop_proxy()
 	
-	if fade:
+	if transition_settings["fade"]:
 		FXService.get_layer("MIX").color = Color(0,0,0,0)
 		if old_location != null and old_room != null:
 			await self.fade_out()
 	
 	if old_location == null or location_id != old_location.location_id:
-		
+		MusicService.stop()
 		var new_location: Location = load(location_path)
 		new_location.load_rooms()
 	
@@ -64,21 +65,24 @@ func update_whereabouts(
 
 		current_location = new_location
 		DialogueService.load_location_dialogues(new_location)
-
 	var room_moved = self.move_to_room(room_id)
 	
 	if room_moved:
+		if self.current_room.bgm != null:
+			MusicService.play_song(self.current_room.bgm)
+		else:
+			MusicService.play_song(self.current_location.base_bgm)
 		EntitiesService.on_enter_room()
 		
-	await self.push_proxy(target_position, target_orientation, end_proxy_state)
+	await self.push_proxy(target_position, target_orientation, transition_settings["end_proxy_state"])
 	
-	if fade:
+	if transition_settings["fade"]:
 		await self.fade_in()
 	
 	if room_moved:
 		await current_room.on_enter()
 		
-	InputService.set_input_enabled(was_input_enabled)
+	InputService.input_enabled = was_input_enabled
 	
 	
 func move_to_room(room_id: String) -> bool:
@@ -149,7 +153,9 @@ func load_game_data(save_data: SaveData) -> void:
 		save_data.data["room"],
 		Vector2.ZERO,
 		Vector2.DOWN,
-		true
+		{
+			"fade": true
+		}
 	)
 
 func save(save_data: SaveData) -> void:

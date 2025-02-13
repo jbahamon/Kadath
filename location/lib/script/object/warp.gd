@@ -12,9 +12,11 @@ func _on_body_entered(body):
 
 func warp_to_destination():
 	await EnvironmentService.update_whereabouts( 
-		EnvironmentService.get_location().location_id, 
+		EnvironmentService.current_location.location_id, 
 		self.room_id,
 		target_position,
 		target_orientation,
-		true
+		{
+			"fade": true
+		}
 	)

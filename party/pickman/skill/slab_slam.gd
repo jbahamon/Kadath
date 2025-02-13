@@ -1,7 +1,12 @@
 extends "res://battle/action/line_to_target.gd"
 
+
 @export var power: float
 @export var line_power: float
+
+@export var channel_sound: AudioStream
+@export var throw_sound: AudioStream
+@export var jump_sound: AudioStream
 
 @export var animation_hit: Hit
 @export var main_hit: Hit
@@ -14,7 +19,7 @@ func execute(actor):
 	var original_position = actor.global_position
 	var original_weapon_offset = weapon.offset
 	
-	await self.throw_weapon(actor, targets)
+	await self.throw_weapon(actor)
 	
 	await DoAll.new([
 		func(): await self.weapon_bounce(),
@@ -30,13 +35,16 @@ func execute(actor):
 	
 	self.reset()
 	
-func throw_weapon(actor, targets):
+func throw_weapon(actor):
 	var orientation = actor.global_position.direction_to(target.global_position)
 	actor.set_orientation(orientation)
 	actor.play_anim("slam_start")
+	FXService.play_sfx_at(self.channel_sound, actor.global_position)
 	await FXService.shake(actor.anim, 0.67, Vector2(8,8), 4.0, FXService.DecayMode.NONE).shake_finished
 
+	FXService.play_sfx_at(self.throw_sound, actor.global_position)
 	weapon.play("spin")
+	FXService.play_sfx_at(self.jump_sound, actor.global_position)
 	await self.shoot_projectile(
 		actor,
 		weapon,
@@ -59,6 +67,7 @@ func weapon_bounce():
 func jump(actor):
 	actor.play_anim("slam_jump")
 	await actor.get_tree().create_timer(0.2).timeout
+	FXService.play_sfx_at(self.jump_sound, actor.global_position)
 	var tween: Tween = actor.get_tree().create_tween().set_parallel().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 	tween.tween_property(actor, "global_position", target.global_position, 0.6)
 	tween.tween_property(actor.anim, "position", Vector2(0, -80), 0.6)

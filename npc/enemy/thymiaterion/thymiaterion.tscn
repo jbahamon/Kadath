@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://ihknndack3n4"]
+[gd_scene load_steps=52 format=3 uid="uid://ihknndack3n4"]
 
 [ext_resource type="PackedScene" uid="uid://c17hneqpuil0l" path="res://npc/lib/base_npc.tscn" id="1_q5d36"]
 [ext_resource type="Script" path="res://npc/enemy/enemy.gd" id="2_udeox"]
@@ -11,15 +11,22 @@
 [ext_resource type="Script" path="res://npc/enemy/thymiaterion/action/whip.gd" id="7_q7jpk"]
 [ext_resource type="Script" path="res://battle/hit.gd" id="8_3rnnk"]
 [ext_resource type="Script" path="res://npc/enemy/thymiaterion/action/counter.gd" id="8_sm7w2"]
+[ext_resource type="AudioStream" uid="uid://cj0t4dxmvx2ky" path="res://sound/fx/explosion/Long Deep - SAGE.wav" id="9_a8e47"]
 [ext_resource type="Script" path="res://npc/enemy/thymiaterion/action/chew.gd" id="9_dmayn"]
 [ext_resource type="Script" path="res://npc/enemy/thymiaterion/action/prepare.gd" id="10_hat3u"]
 [ext_resource type="Script" path="res://npc/enemy/thymiaterion/ai.gd" id="11_ikq4e"]
+[ext_resource type="AudioStream" uid="uid://bt8tfh3wrprlt" path="res://sound/fx/shoot/Starfall - KronBits.wav" id="11_upkwk"]
 [ext_resource type="Script" path="res://npc/enemy/thymiaterion/action/beam.gd" id="12_pqd4o"]
+[ext_resource type="AudioStream" uid="uid://cnak34od31obi" path="res://sound/fx/hit/Basic - Rosalila Studio.wav" id="12_vynq4"]
 [ext_resource type="PackedScene" uid="uid://cchn13mhn8gxu" path="res://battle/action/util/projectile.tscn" id="13_k444w"]
+[ext_resource type="AudioStream" uid="uid://bonrytymjwsto" path="res://sound/fx/hit/Short Slap - Spring Spring.wav" id="14_52gi2"]
 [ext_resource type="Texture2D" uid="uid://c82yel13pptcd" path="res://npc/enemy/thymiaterion/projectile.png" id="14_bmb23"]
 [ext_resource type="Texture2D" uid="uid://c77yarfa7vsom" path="res://npc/enemy/thymiaterion/projectile_trail.png" id="15_5g141"]
 [ext_resource type="Shader" path="res://utils/material/uniform_add.gdshader" id="16_rswvq"]
+[ext_resource type="AudioStream" uid="uid://3aixhsb313oh" path="res://sound/fx/hit/Long Explodey - JuhaniJunkala.wav" id="17_tk20k"]
 [ext_resource type="Texture2D" uid="uid://cuaphveq6enwc" path="res://npc/enemy/thymiaterion/beam.png" id="19_b00tx"]
+[ext_resource type="AudioStream" uid="uid://di7wtmrx7jsha" path="res://sound/fx/slash/Mid Light Clean - colorsCrimsonTears.wav" id="20_osccg"]
+[ext_resource type="AudioStream" uid="uid://bq2b66vmiocgp" path="res://sound/fx/hit/Short - MadameBerry.wav" id="21_s5p7s"]
 
 [sub_resource type="Resource" id="Resource_afjib"]
 script = ExtResource("8_3rnnk")
@@ -42,6 +49,50 @@ palfx_time = 0.0
 palfx_duration = 1.0
 toast_time = 1.0
 
+[sub_resource type="Resource" id="Resource_hi56n"]
+script = ExtResource("8_3rnnk")
+animation_only = false
+fixed_damage = false
+base_damage = 0
+type = 8
+anim_time = 0.0
+anim_duration = 0.45
+spark_time = 0.0
+spark_offset = Vector2(0, 0)
+shake_time = 0.0
+shake_duration = 0.5
+shake_amplitude = Vector2(8, 0)
+shake_time_scale = 2.0
+hit_sound = ExtResource("12_vynq4")
+hit_sound_time = 0.0
+miss_sound_time = 0.0
+palfx_material = ExtResource("7_ofsbi")
+palfx_time = 0.0
+palfx_duration = 0.3
+toast_time = 0.3
+
+[sub_resource type="Resource" id="Resource_bt27i"]
+script = ExtResource("8_3rnnk")
+animation_only = false
+fixed_damage = false
+base_damage = 0
+type = 8
+anim_time = 0.0
+anim_duration = 0.45
+spark_time = 0.0
+spark_offset = Vector2(0, 0)
+shake_time = 0.0
+shake_duration = 0.5
+shake_amplitude = Vector2(8, 0)
+shake_time_scale = 2.0
+hit_sound = ExtResource("14_52gi2")
+hit_sound_time = 0.0
+miss_sound_time = 0.0
+palfx_material = ExtResource("7_ofsbi")
+palfx_time = 0.0
+palfx_duration = 0.3
+toast_time = 0.3
+
 [sub_resource type="Resource" id="Resource_ue8ew"]
 script = ExtResource("8_3rnnk")
 animation_only = false
@@ -56,6 +107,7 @@ shake_time = 0.0
 shake_duration = 0.5
 shake_amplitude = Vector2(8, 0)
 shake_time_scale = 2.0
+hit_sound = ExtResource("17_tk20k")
 hit_sound_time = 0.0
 miss_sound_time = 0.0
 palfx_material = ExtResource("7_ofsbi")
@@ -77,6 +129,7 @@ shake_time = 0.0
 shake_duration = 0.5
 shake_amplitude = Vector2(8, 0)
 shake_time_scale = 2.0
+hit_sound = ExtResource("20_osccg")
 hit_sound_time = 0.0
 miss_sound_time = 0.0
 palfx_material = ExtResource("7_ofsbi")
@@ -232,12 +285,16 @@ anim_path = NodePath("..")
 [node name="Jump" type="Node" parent="Battler/Actions" index="0"]
 script = ExtResource("6_uy2te")
 hit = SubResource("Resource_afjib")
+bump_sound = ExtResource("9_a8e47")
 
 [node name="Shoot" type="Node" parent="Battler/Actions" index="1"]
 script = ExtResource("6_7xjpy")
+projectile_sound = ExtResource("11_upkwk")
+hit = SubResource("Resource_hi56n")
 
 [node name="Whip" type="Node" parent="Battler/Actions" index="2"]
 script = ExtResource("7_q7jpk")
+hit = SubResource("Resource_bt27i")
 
 [node name="Counter" type="Node" parent="Battler/Actions" index="3"]
 script = ExtResource("8_sm7w2")
@@ -255,6 +312,7 @@ description = "Preparing attack..."
 [node name="Chew" type="Node" parent="Battler/Actions" index="6"]
 script = ExtResource("9_dmayn")
 hit = SubResource("Resource_snqd0")
+chew_sound = ExtResource("21_s5p7s")
 description = "Devouring Void"
 
 [node name="AI" parent="Battler" index="2"]

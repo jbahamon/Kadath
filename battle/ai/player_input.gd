@@ -10,10 +10,15 @@ func get_turn(current_actors: Array) -> Turn:
 	var options = battler.get_action_options()
 	
 	self.interface.current_actor = battler.get_parent()
+	
+	UIService.opening_menu = true
+	UIService.play_notification(BattleService.turn_start_sound)
+	
 	self.interface.set_options({
 		"title": "What will %s do?" % battler.get_parent().display_name,
 		"options": options
 	})
+	UIService.opening_menu = false
 	
 	while true:
 		match state:
@@ -33,7 +38,6 @@ func get_turn(current_actors: Array) -> Turn:
 	turn.action = action
 	self.interface.set_info_text(null)
 	self.interface.hide_options()
-	# self.interface.hide_timeline()
 
 	return turn
 

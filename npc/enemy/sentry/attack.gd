@@ -1,12 +1,10 @@
 extends "res://battle/action/simple_single_target.gd"
 
 @onready var projectile = get_node("../../Projectile")
+@export var hit: Hit
+@export var shoot_sound: AudioStream
 
 func execute(actor):
-	var prev_hp = target.battler.health
-	var hit = Hit.new()
-	hit.type = Hit.Element.PHYSICAL
-	hit.base_damage = actor.battler.physical_attack
 	
 	actor.play_anim("attack")
 	
@@ -26,6 +24,7 @@ func execute(actor):
 					"origin": actor.global_position + Vector2(0, -28),
 					"destination": target.battler.get_hitspot("Center"),
 					"speed": 300.0,
+					"shoot_sound": self.shoot_sound,
 				}
 			)
 			await target.take_hit(actor, hit)

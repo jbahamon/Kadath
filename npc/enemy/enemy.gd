@@ -37,7 +37,9 @@ func get_display_name():
 func _on_interactable_area_body_entered(body):
 	self.touched.emit(body)
 	if battle_on_contact:
-		BattleService.start_mook_battle(true)
+		BattleService.start_mook_battle({
+			"escapable": true
+		})
 
 func show_toast(text: String, color: Color=Color.WHITE):
 	await self.battler.show_toast(text, color)

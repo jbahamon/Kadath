@@ -5,7 +5,7 @@ const SCROLL_STEP = 50
 
 @onready var containers = {
 	"graphics": $MarginContainer/ScrollContainer/VBox/Graphics,
-	"sound": $MarginContainer/ScrollContainer/VBox/Sound,
+	"sounds": $MarginContainer/ScrollContainer/VBox/Sounds,
 	"code": $MarginContainer/ScrollContainer/VBox/Code,
 	"other": $MarginContainer/ScrollContainer/VBox/Other
 }

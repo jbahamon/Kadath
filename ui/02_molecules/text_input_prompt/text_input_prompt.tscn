@@ -3,6 +3,7 @@
 [ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="1"]
 [ext_resource type="Script" path="res://ui/02_molecules/text_input_prompt/text_input_prompt.gd" id="2"]
 
+
 [node name="PopupPanel" type="PopupPanel"]
 size = Vector2i(182, 113)
 visible = true

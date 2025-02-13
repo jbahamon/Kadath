@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://76qafquuir4k"]
+[gd_scene load_steps=29 format=3 uid="uid://76qafquuir4k"]
 
 [ext_resource type="PackedScene" uid="uid://bomxx7doloqmu" path="res://party/party_member.tscn" id="1_tjmem"]
 [ext_resource type="Resource" uid="uid://1ulgpa1j7pky" path="res://party/carter/growth.tres" id="2_jpdcx"]
@@ -7,11 +7,62 @@
 [ext_resource type="Texture2D" uid="uid://dkgwdhrjgti27" path="res://party/carter/menu_sprite.png" id="4_y6us3"]
 [ext_resource type="Script" path="res://party/carter/skill/crescent_blast.gd" id="5_8d58u"]
 [ext_resource type="PackedScene" uid="uid://ttxcbt6u2yh3" path="res://battle/action/util/area_of_effect.tscn" id="5_8ec5k"]
+[ext_resource type="Script" path="res://battle/action/party_member_attack.gd" id="6_vud1e"]
+[ext_resource type="AudioStream" uid="uid://drjfpr601ic6g" path="res://sound/fx/slash/Light Bloody - nekoninja.wav" id="7_t7ac3"]
+[ext_resource type="Material" uid="uid://c48122ffiwrbb" path="res://utils/material/uniform_add.tres" id="7_wnelk"]
 [ext_resource type="Texture2D" uid="uid://dsics6xs4ns1r" path="res://party/carter/aoe.png" id="8_bncje"]
 [ext_resource type="Script" path="res://party/carter/skill/charge.gd" id="8_m04rn"]
+[ext_resource type="Script" path="res://battle/hit.gd" id="8_u204t"]
 [ext_resource type="Texture2D" uid="uid://dn6j26nefycu5" path="res://party/carter/charge_particle.png" id="9_gqyon"]
 [ext_resource type="PackedScene" uid="uid://cchn13mhn8gxu" path="res://battle/action/util/projectile.tscn" id="10_ib2sa"]
 [ext_resource type="Texture2D" uid="uid://i5fn63spd1aj" path="res://party/carter/blast_projectile.png" id="10_w08ur"]
+[ext_resource type="AudioStream" uid="uid://uottfqh0eivc" path="res://sound/fx/charge/Short Magic Charge - KronBits.wav" id="11_afuqa"]
+[ext_resource type="AudioStream" uid="uid://slj7vubis1w4" path="res://sound/fx/scratch/Short - JuhaniJunkala.wav" id="12_8jthm"]
+[ext_resource type="AudioStream" uid="uid://dgox5q5n3kpp2" path="res://sound/fx/magic/explosion/Magical - Kenney.wav" id="13_d4bhm"]
+[ext_resource type="AudioStream" uid="uid://ruyhjiabko6l" path="res://sound/fx/charge/Long Magic Charge - KronBits.wav" id="17_1sv2e"]
+
+[sub_resource type="Resource" id="Resource_l5rln"]
+script = ExtResource("8_u204t")
+animation_only = false
+fixed_damage = false
+base_damage = 1.0
+type = 0
+anim_time = 0.0
+anim_duration = 0.45
+spark_time = 0.0
+spark_offset = Vector2(0, 0)
+shake_time = 0.0
+shake_duration = 0.5
+shake_amplitude = Vector2(8, 0)
+shake_time_scale = 2.0
+hit_sound = ExtResource("7_t7ac3")
+hit_sound_time = 0.0
+miss_sound_time = 0.0
+palfx_material = ExtResource("7_wnelk")
+palfx_time = 0.0
+palfx_duration = 0.3
+toast_time = 0.3
+
+[sub_resource type="Resource" id="Resource_nu6sb"]
+script = ExtResource("8_u204t")
+animation_only = false
+fixed_damage = false
+base_damage = 0
+type = 8
+anim_time = 0.0
+anim_duration = 0.45
+spark_time = 0.0
+spark_offset = Vector2(0, 0)
+shake_time = 0.0
+shake_duration = 0.5
+shake_amplitude = Vector2(8, 0)
+shake_time_scale = 2.0
+hit_sound_time = 0.0
+miss_sound_time = 0.0
+palfx_material = ExtResource("7_wnelk")
+palfx_time = 0.0
+palfx_duration = 0.3
+toast_time = 0.3
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8u0il"]
 radius = 50.0
@@ -60,14 +111,25 @@ starting_weapon_id = "scimitar"
 starting_armor_id = "sturdy_vest"
 
 [node name="Anim" parent="." index="0" instance=ExtResource("4_n1l83")]
+animation_names = Array[String](["idle", "walk", "run", "attack", "jump_back", "hit", "battle_idle/healthy", "battle_idle/tired", "downed", "interact", "crit_start", "crit", "charge", "blast"])
 
 [node name="Battler" parent="." index="1"]
 anim_path = NodePath("../Anim")
+
+[node name="Attack" type="Node" parent="Battler/Actions" index="0"]
+script = ExtResource("6_vud1e")
+hit = SubResource("Resource_l5rln")
+display_name = "Attack"
+description = "Attack with your equipped weapon"
 
 [node name="CrescentBlast" type="Node" parent="Battler/Actions/Skill" index="0"]
 script = ExtResource("5_8d58u")
 power = 100.0
 aoe_power = 1.0
+charge_sound = ExtResource("11_afuqa")
+throw_sound = ExtResource("12_8jthm")
+explosion_sound = ExtResource("13_d4bhm")
+main_hit = SubResource("Resource_nu6sb")
 display_name = "Crescent Blast"
 description = "A magical slash that explodes in an area."
 energy_cost = 20
@@ -82,6 +144,7 @@ shape = SubResource("CircleShape2D_8u0il")
 
 [node name="Charge" type="Node" parent="Battler/Actions/Skill" index="1"]
 script = ExtResource("8_m04rn")
+charge_sound = ExtResource("17_1sv2e")
 display_name = "Eldritch Channeling"
 description = "Power up any attack this party member performs during their next turn."
 

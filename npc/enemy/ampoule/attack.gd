@@ -19,7 +19,7 @@ func execute(actor):
 	]).execute()
 	
 	actor.play_anim("clamp")
-	hit.base_damage = actor.battler.physical_attack * self.normal_attack_factor
+	
 	await self.target.take_hit(actor, hit)
 	actor.play_anim("idle")
 	

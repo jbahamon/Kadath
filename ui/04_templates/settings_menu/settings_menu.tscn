@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cu30gjjhspgly"]
+[gd_scene load_steps=6 format=3 uid="uid://cu30gjjhspgly"]
 
 [ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="1"]
 [ext_resource type="Script" path="res://ui/04_templates/settings_menu/settings_menu.gd" id="2"]
 [ext_resource type="Script" path="res://ui/04_templates/settings_menu/listen_for_input_popup.gd" id="3"]
+[ext_resource type="AudioStream" uid="uid://b8b8awqask8bq" path="res://sound/fx/hit/Mid Deep - KronBits.wav" id="3_jaouc"]
 [ext_resource type="StyleBox" uid="uid://brc46g1cj5k2v" path="res://ui/01_atoms/panel/panel.tres" id="3_yfoi0"]
 
 [node name="SettingsMenu" type="ScrollContainer"]
@@ -14,6 +15,7 @@ size_flags_vertical = 3
 theme = ExtResource("1")
 follow_focus = true
 script = ExtResource("2")
+sfx_sample = ExtResource("3_jaouc")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 2
@@ -44,7 +46,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 focus_neighbor_top = NodePath(".")
 mouse_filter = 2
-step = 5.0
+max_value = 1.0
+step = 0.05
 tick_count = 10
 ticks_on_borders = true
 
@@ -56,7 +59,8 @@ text = "SFX Volume:"
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
-step = 5.0
+max_value = 1.0
+step = 0.05
 tick_count = 10
 ticks_on_borders = true
 
@@ -68,8 +72,9 @@ text = "UI Volume:"
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
-step = 5.0
-tick_count = 5
+max_value = 1.0
+step = 0.05
+tick_count = 10
 ticks_on_borders = true
 
 [node name="HSeparator2" type="HSeparator" parent="CenterContainer/Settings"]
@@ -189,8 +194,13 @@ text = "Press key for \"Up\"..."
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
 [connection signal="value_changed" from="CenterContainer/Settings/VolumeSliders/MusicVolumeSlider" to="." method="update_music_volume"]
+[connection signal="focus_entered" from="CenterContainer/Settings/VolumeSliders/SFXVolumeSlider" to="." method="_on_sfx_volume_slider_focus_entered"]
+[connection signal="focus_exited" from="CenterContainer/Settings/VolumeSliders/SFXVolumeSlider" to="." method="_on_volume_slider_focus_exited"]
 [connection signal="value_changed" from="CenterContainer/Settings/VolumeSliders/SFXVolumeSlider" to="." method="update_sfx_volume"]
+[connection signal="focus_entered" from="CenterContainer/Settings/VolumeSliders/UIVolumeSlider" to="." method="_on_ui_volume_slider_focus_entered"]
 [connection signal="value_changed" from="CenterContainer/Settings/VolumeSliders/UIVolumeSlider" to="." method="update_ui_volume"]
 [connection signal="toggled" from="CenterContainer/Settings/EnableShake" to="." method="update_enable_shake"]
 [connection signal="toggled" from="CenterContainer/Settings/EnableFlash" to="." method="update_enable_flash"]

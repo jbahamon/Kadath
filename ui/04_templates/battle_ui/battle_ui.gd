@@ -16,7 +16,9 @@ var ItemEntry = preload("res://ui/02_molecules/item_entry/item_entry.tscn")
 @onready var timeline = $VBoxContainer/Timeline
 
 @onready var info_panel = $VBoxContainer/InfoPanel
-@onready var info_label = $VBoxContainer/InfoPanel/InfoLabel
+@onready var info_label = $VBoxContainer/InfoPanel/HBoxContainer/InfoLabel
+@onready var advance_label = $VBoxContainer/InfoPanel/HBoxContainer/AdvanceIndicator
+@onready var advance_icon = $VBoxContainer/InfoPanel/HBoxContainer/AdvanceIcon
 
 signal option_selected(option)
 signal prompt_closed
@@ -37,7 +39,15 @@ func start():
 	self.show()
 		
 func prompt(text: String):
-	self.set_info_text(text)
+	var advance_keycode = InputMap.action_get_events(&"ui_accept")[0].keycode
+	var cancel_keycode = InputMap.action_get_events(&"ui_cancel")[0].keycode
+	var advance_indicator = "[pulse freq=1.0 color=#ffffff40 ease=-2.0][ %s ] / [ %s ][/pulse]" % [ 
+		OS.get_keycode_string(advance_keycode),
+		OS.get_keycode_string(cancel_keycode) 
+	]
+		
+	self.set_info_text(text, advance_indicator)
+	
 	# We wait for a single frame to avoid using current inputs
 	await get_tree().process_frame
 	self.waiting_for_prompt = true
@@ -141,11 +151,18 @@ func on_option_focused(option):
 		self.timeline.highlight({})
 		if option.energy_cost > 0:
 			skill_costs.update_costs([[current_actor, option.energy_cost]])
-	else: 
+	else:
 		self.timeline.highlight({})
 
-func set_info_text(text):
+func set_info_text(text, advance_text=null):
 	if text != null and text.length() > 0:
+		self.advance_label.text = "" if advance_text == null else advance_text
+		
+		if advance_text != null:
+			self.advance_icon.show()
+		else:
+			self.advance_icon.hide()
+			
 		self.info_label.text = text
 		self.info_panel.modulate = Color.WHITE
 	else:

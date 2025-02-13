@@ -17,15 +17,26 @@ func _ready() -> void:
 	)
 	EnvironmentService.initialize($SubViewportContainer/SubViewport/World)
 	InputService.initialize(self)
-	FXService.initialize({
-		"MIX": $SubViewportContainer/SubViewport/OverlayLayer/Mix,
-		"ADD": $SubViewportContainer/SubViewport/OverlayLayer/Add,
-		"CAMERA_BG": $SubViewportContainer/SubViewport/BGLayer/CameraBG,
-		"CUTSCENE_PAUSE": $NarrationLayer/CutscenePauseBG
-	})
-	UIService.initialize($PopupLayer, $MenuLayer/MenuPopup, $MenuLayer/SavesPopup)
+	FXService.initialize(
+		{
+			"MIX": $SubViewportContainer/SubViewport/OverlayLayer/Mix,
+			"ADD": $SubViewportContainer/SubViewport/OverlayLayer/Add,
+			"CAMERA_BG": $SubViewportContainer/SubViewport/BGLayer/CameraBG,
+			"CUTSCENE_PAUSE": $NarrationLayer/CutscenePauseBG
+		}, 
+		$SFXPlayer,
+		$SubViewportContainer/SubViewport/World/SFXPlayer
+	)
+	UIService.initialize(
+		$PopupLayer, 
+		$MenuLayer/MenuPopup, 
+		$MenuLayer/SavesPopup, 
+		$UIControlPlayer, 
+		$UINotificationPlayer
+	)
 	
-	InputService.set_input_enabled(true)
+	MusicService.initialize($BGMPlayer)
+	InputService.input_enabled = true
 	
 	# Here's a tricky part. We have to move to the first room, which will put the appropriate
 	# nodes in the tree. This has to happen before the player proxy can be bound to the party or
@@ -42,11 +53,13 @@ func move_to_starting_room():
 		# Note: move start_game to the above when doing the cutscene intro
 		await EnvironmentService.update_whereabouts(
 			"000_prologue_kadath", 
-			"02_hub",
-			Vector2(0, 320),
+			"05_boss_room",
+			Vector2(0, 0),
 			Vector2.UP,
-			false,
-			PlayerProxy.ProxyMode.GAMEPLAY
+			{
+				"fade": false,
+				"end_proxy_state": PlayerProxy.ProxyMode.GAMEPLAY
+			}
 		)
 		#EntitiesService.proxy.set_mode(PlayerProxy.ProxyMode.GAMEPLAY)
 	

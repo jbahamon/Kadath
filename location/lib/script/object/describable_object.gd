@@ -9,13 +9,13 @@ func on_player_interaction(player_proxy: PlayerProxy):
 	super.on_player_interaction(player_proxy)
 	self.interactable_collision.set_disabled(true)
 	
-	var was_input_enabled = InputService.is_input_enabled()
+	var was_input_enabled = InputService.input_enabled
 	player_proxy.set_mode(PlayerProxy.ProxyMode.CUTSCENE)
-	InputService.set_input_enabled(false)
+	InputService.input_enabled = false
 	
 	await DialogueService.open_dialogue(self.dialogue_name)
 	
-	InputService.set_input_enabled(was_input_enabled)
+	InputService.input_enabled = was_input_enabled
 	player_proxy.set_mode(PlayerProxy.ProxyMode.GAMEPLAY)
 	self.interactable_collision.set_disabled(false)
 	

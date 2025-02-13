@@ -1,11 +1,10 @@
-[gd_scene load_steps=24 format=4 uid="uid://ip7anni7emmc"]
+[gd_scene load_steps=22 format=4 uid="uid://ip7anni7emmc"]
 
 [ext_resource type="TileSet" uid="uid://b15m77bx602kw" path="res://location/000_prologue_kadath/tile/onyx_temple.tres" id="1_eenkp"]
 [ext_resource type="Script" path="res://location/000_prologue_kadath/room/05_boss_room.gd" id="2_0db23"]
 [ext_resource type="PackedScene" uid="uid://sfld8pt3bwlw" path="res://location/lib/script/object/warp.tscn" id="3_eyb6e"]
-[ext_resource type="PackedScene" uid="uid://dpc8xvvcbyotf" path="res://npc/enemy/sentry/sentry.tscn" id="4_8nm5n"]
 [ext_resource type="PackedScene" uid="uid://k1y4abtqqro7" path="res://location/lib/script/object/battle_spot.tscn" id="5_jdwon"]
-[ext_resource type="Script" path="res://party/character_stats.gd" id="5_vkmne"]
+[ext_resource type="PackedScene" uid="uid://ihknndack3n4" path="res://npc/enemy/thymiaterion/thymiaterion.tscn" id="6_2020d"]
 [ext_resource type="Script" path="res://location/lib/script/object/enemy_spot.gd" id="6_mblpi"]
 [ext_resource type="Texture2D" uid="uid://jjuk5n1nrjr" path="res://location/000_prologue_kadath/object/right_door.png" id="8_lox2j"]
 [ext_resource type="Texture2D" uid="uid://colu5a43monrs" path="res://location/000_prologue_kadath/object/left_door.png" id="9_33mal"]
@@ -17,25 +16,13 @@ size = Vector2(69, 28)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5avj4"]
 size = Vector2(288, 19)
 
-[sub_resource type="Resource" id="Resource_fnxpo"]
-resource_local_to_scene = true
-script = ExtResource("5_vkmne")
-max_health = 1
-max_energy = 0
-attack = 1
-defense = 1
-magic_attack = 1
-magic_defense = 1
-luck = 1
-speed = 1
-
 [sub_resource type="Animation" id="Animation_jk7fo"]
 resource_name = "boss_enter"
 length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Boss:visible")
+tracks/0/path = NodePath("Thymiaterion:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -47,14 +34,28 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Boss/Anim/Sprite2D:offset")
+tracks/1/path = NodePath("Thymiaterion/Anim/Sprite2D:offset")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, -120), Vector2(0, -12)]
+"values": [Vector2(-44, -197), Vector2(-44, -89)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_fall_sound"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_q7lv6"]
@@ -121,7 +122,7 @@ y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("2_0db23")
 room_id = "05_boss_room"
-used_rect = Rect2i(14, -224, 288, 352)
+used_rect = Rect2i(-144, -224, 288, 352)
 
 [node name="Floor" type="TileMapLayer" parent="."]
 y_sort_enabled = true
@@ -134,7 +135,7 @@ y_sort_origin = -16
 [node name="Walls" type="TileMapLayer" parent="."]
 y_sort_enabled = true
 use_parent_material = true
-tile_map_data = PackedByteArray("AAD4/wIAAAALAAIAAAD4/wEAAAALAAIAAAD4//n/AAALAAIAAAD4//r/AAALAAIAAAD4//v/AAALAAIAAAD4//z/AAALAAIAAAD4//3/AAALAAIAAAD4//7/AAALAAIAAAD4////AAALAAIAAAD4/wAAAAALAAIAAAAHAPj/AAAIAAEAAAAHAAIAAAAIAAEAAAAHAAEAAAAIAAEAAAAHAAAAAAAIAAEAAAAHAP//AAAIAAEAAAAHAP7/AAAIAAEAAAAHAP3/AAAIAAEAAAAHAPz/AAAIAAEAAAAHAPv/AAAIAAEAAAAHAPr/AAAIAAEAAAAHAPn/AAAIAAEAAAAHAAMAAAAIAAEAAAD4/wMAAAALAAIAAAD4/wYAAAAJAAIAAAD5/wYAAAAJAAIAAAD6/wYAAAAJAAIAAAD7/wYAAAAJAAIAAAD8/wYAAAAJAAIAAAD9/wYAAAALAAIAAAAHAAYAAAAJAAIAAAAGAAYAAAAJAAIAAAAFAAYAAAAJAAIAAAAEAAYAAAAJAAIAAAADAAYAAAAJAAIAAAACAAYAAAAIAAEAAAAHAAQAAAAIAAEAAAAHAAUAAAAFAAEAAAACAAUAAAAIAAAAAAAGAAUAAAAKAAAAAAAFAAUAAAAKAAAAAAAEAAUAAAAKAAAAAAADAAUAAAAKAAAAAAD9/wUAAAALAAAAAAD8/wUAAAAKAAAAAAD7/wUAAAAKAAAAAAD6/wUAAAAKAAAAAAD5/wUAAAAKAAAAAAD4/wUAAAAGAAEAAAD4/wQAAAALAAIAAAD8//b/AAALAAMAAAD7//b/AAAJAAMAAAD6//b/AAAJAAMAAAD5//b/AAAJAAMAAAD4//b/AAAGAAIAAAAHAPb/AAAFAAIAAAAGAPb/AAAJAAMAAAAFAPb/AAAJAAMAAAAEAPb/AAAJAAMAAAADAPb/AAAIAAMAAAD4//X/AAAJAAIAAAD5//X/AAAJAAIAAAD6//X/AAAJAAIAAAD7//X/AAAJAAIAAAD8//X/AAALAAEAAAAHAPX/AAAJAAIAAAAGAPX/AAAJAAIAAAAFAPX/AAAJAAIAAAAEAPX/AAAJAAIAAAADAPX/AAAFAAAAAAAIAP7/AAAJAAIAAAAIAP3/AAAJAAIAAAAIAPz/AAAJAAIAAAAIAPv/AAAJAAIAAAAIAPr/AAAJAAIAAAAIAPn/AAAJAAIAAAAIAPj/AAAJAAIAAAAIAPf/AAAJAAIAAAAIAPb/AAAJAAIAAAAIAPX/AAAJAAIAAAD3//7/AAAJAAIAAAD3//3/AAAJAAIAAAD3//z/AAAJAAIAAAD3//v/AAAJAAIAAAD3//r/AAAJAAIAAAD3//n/AAAJAAIAAAD3//j/AAAJAAIAAAD3//f/AAAJAAIAAAD3//b/AAAJAAIAAAD4//f/AAALAAIAAAD4//j/AAALAAIAAAAHAPf/AAAIAAEAAAD3//X/AAAJAAIAAAD3/wYAAAAJAAIAAAD3/wUAAAAJAAIAAAD3/wQAAAAJAAIAAAD3/wMAAAAJAAIAAAD3/wIAAAAJAAIAAAD3/wEAAAAJAAIAAAD3/wAAAAAJAAIAAAD3////AAAJAAIAAAD9/wcAAAALAAIAAAD8/wcAAAAJAAIAAAD7/wcAAAAJAAIAAAD6/wcAAAAJAAIAAAD5/wcAAAAJAAIAAAD4/wcAAAAJAAIAAAD3/wcAAAAJAAIAAAAHAAcAAAAJAAIAAAAGAAcAAAAJAAIAAAAFAAcAAAAJAAIAAAAEAAcAAAAJAAIAAAADAAcAAAAJAAIAAAACAAcAAAAIAAEAAAAIAAcAAAAJAAIAAAAIAAYAAAAGAAIAAAAIAAUAAAAJAAIAAAAIAAQAAAAJAAIAAAAIAAMAAAAJAAIAAAAIAAIAAAAGAAIAAAAIAAEAAAAJAAIAAAAIAAAAAAAJAAIAAAAIAP//AAAJAAIAAAD9//X/AAADAAIAAAD9//T/AAAAAAAAAAACAPX/AAABAAIAAAACAPT/AAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAD4/wIAAAALAAIAAAD4/wEAAAALAAIAAAD4//n/AAALAAIAAAD4//r/AAALAAIAAAD4//v/AAALAAIAAAD4//z/AAALAAIAAAD4//3/AAALAAIAAAD4//7/AAALAAIAAAD4////AAALAAIAAAD4/wAAAAALAAIAAAAHAPj/AAAIAAEAAAAHAAIAAAAIAAEAAAAHAAEAAAAIAAEAAAAHAAAAAAAIAAEAAAAHAP//AAAIAAEAAAAHAP7/AAAIAAEAAAAHAP3/AAAIAAEAAAAHAPz/AAAIAAEAAAAHAPv/AAAIAAEAAAAHAPr/AAAIAAEAAAAHAPn/AAAIAAEAAAAHAAMAAAAIAAEAAAD4/wMAAAALAAIAAAD4/wYAAAAJAAIAAAD5/wYAAAAJAAIAAAD6/wYAAAAJAAIAAAD7/wYAAAAJAAIAAAD8/wYAAAAJAAIAAAD9/wYAAAALAAIAAAAHAAYAAAAJAAIAAAAGAAYAAAAJAAIAAAAFAAYAAAAJAAIAAAAEAAYAAAAJAAIAAAADAAYAAAAJAAIAAAACAAYAAAAIAAEAAAAHAAQAAAAIAAEAAAAHAAUAAAAFAAEAAAACAAUAAAAIAAAAAAAGAAUAAAAKAAAAAAAFAAUAAAAKAAAAAAAEAAUAAAAKAAAAAAADAAUAAAAKAAAAAAD9/wUAAAALAAAAAAD8/wUAAAAKAAAAAAD7/wUAAAAKAAAAAAD6/wUAAAAKAAAAAAD5/wUAAAAKAAAAAAD4/wUAAAAGAAEAAAD4/wQAAAALAAIAAAD8//b/AAALAAMAAAD7//b/AAAJAAMAAAD6//b/AAAJAAMAAAD5//b/AAAJAAMAAAD4//b/AAAGAAIAAAAHAPb/AAAFAAIAAAAGAPb/AAAJAAMAAAAFAPb/AAAJAAMAAAAEAPb/AAAJAAMAAAADAPb/AAAIAAMAAAD4//X/AAAJAAIAAAD5//X/AAAJAAIAAAD6//X/AAAJAAIAAAD7//X/AAAJAAIAAAD8//X/AAALAAEAAAAHAPX/AAAJAAIAAAAGAPX/AAAJAAIAAAAFAPX/AAAJAAIAAAAEAPX/AAAJAAIAAAADAPX/AAAFAAAAAAAIAP7/AAAJAAIAAAAIAP3/AAAJAAIAAAAIAPz/AAAJAAIAAAAIAPv/AAAJAAIAAAAIAPr/AAAJAAIAAAAIAPn/AAAJAAIAAAAIAPj/AAAJAAIAAAAIAPf/AAAJAAIAAAAIAPb/AAAJAAIAAAAIAPX/AAAJAAIAAAD3//7/AAAJAAIAAAD3//3/AAAJAAIAAAD3//z/AAAJAAIAAAD3//v/AAAJAAIAAAD3//r/AAAJAAIAAAD3//n/AAAJAAIAAAD3//j/AAAJAAIAAAD3//f/AAAJAAIAAAD3//b/AAAJAAIAAAD4//f/AAALAAIAAAD4//j/AAALAAIAAAAHAPf/AAAIAAEAAAD3//X/AAAJAAIAAAD3/wYAAAAJAAIAAAD3/wUAAAAJAAIAAAD3/wQAAAAJAAIAAAD3/wMAAAAJAAIAAAD3/wIAAAAJAAIAAAD3/wEAAAAJAAIAAAD3/wAAAAAJAAIAAAD3////AAAJAAIAAAD9/wcAAAALAAIAAAD8/wcAAAAJAAIAAAD7/wcAAAAJAAIAAAD6/wcAAAAJAAIAAAD5/wcAAAAJAAIAAAD4/wcAAAAJAAIAAAD3/wcAAAAJAAIAAAAHAAcAAAAJAAIAAAAGAAcAAAAJAAIAAAAFAAcAAAAJAAIAAAAEAAcAAAAJAAIAAAADAAcAAAAJAAIAAAACAAcAAAAIAAEAAAAIAAcAAAAJAAIAAAAIAAYAAAAJAAIAAAAIAAUAAAAJAAIAAAAIAAQAAAAJAAIAAAAIAAMAAAAJAAIAAAAIAAIAAAAJAAIAAAAIAAEAAAAJAAIAAAAIAAAAAAAJAAIAAAAIAP//AAAJAAIAAAD9//X/AAADAAIAAAD9//T/AAAAAAAAAAACAPX/AAABAAIAAAACAPT/AAAAAAAAAAA=")
 tile_set = ExtResource("1_eenkp")
 y_sort_origin = -16
 
@@ -166,16 +167,8 @@ metadata/_edit_group_ = true
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_5avj4")
 
-[node name="Boss" parent="." instance=ExtResource("4_8nm5n")]
-visible = false
-position = Vector2(0, -108)
-metadata/_edit_group_ = true
-
-[node name="Battler" parent="Boss" index="1"]
-stats = SubResource("Resource_fnxpo")
-
 [node name="BattleSpot" parent="." instance=ExtResource("5_jdwon")]
-position = Vector2(0, -108)
+position = Vector2(0, -102)
 
 [node name="Marker2D" type="Marker2D" parent="BattleSpot/PartySpots" index="0"]
 position = Vector2(-56, 58)
@@ -184,7 +177,12 @@ position = Vector2(-56, 58)
 position = Vector2(56, 58)
 
 [node name="EnemySpot" type="Marker2D" parent="BattleSpot/EnemySpots" index="0"]
+position = Vector2(0, -26)
 script = ExtResource("6_mblpi")
+
+[node name="Thymiaterion" parent="." instance=ExtResource("6_2020d")]
+visible = false
+position = Vector2(0, -128)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -219,8 +217,8 @@ offset = Vector2(0.5, -20)
 [connection signal="body_entered" from="BossTrigger" to="." method="_on_boss_trigger_body_entered"]
 
 [editable path="SouthWarp"]
-[editable path="Boss"]
-[editable path="Boss/Anim"]
-[editable path="Boss/Battler"]
-[editable path="Boss/Battler/Toast"]
 [editable path="BattleSpot"]
+[editable path="Thymiaterion"]
+[editable path="Thymiaterion/Anim"]
+[editable path="Thymiaterion/Battler"]
+[editable path="Thymiaterion/Battler/Toast"]

@@ -1,5 +1,7 @@
 extends "res://battle/action/simple_single_target.gd"
 
+@export var hit: Hit
+
 func execute(actor):
 	var original_position = actor.global_position
 	var target_position = Vector2(target.global_position.x, original_position.y)
@@ -11,9 +13,6 @@ func execute(actor):
 	
 	await actor.move_to([target_position.x, target_position.y], 120)
 	
-	var hit = Hit.new()
-	hit.type = Hit.Element.PHYSICAL
-	hit.base_damage = actor.battler.physical_attack
 	actor.play_anim("whip")
 	await get_tree().create_timer(1.8).timeout
 	

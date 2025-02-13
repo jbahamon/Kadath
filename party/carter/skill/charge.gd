@@ -2,7 +2,10 @@ extends BattleAction
 
 var Charged = preload("res://party/carter/status_effect/charged.gd")
 
+@export var charge_sound: AudioStream
+
 @onready var particles = get_node("../../../ChargeParticles")
+
 
 func reset():
 	pass
@@ -18,6 +21,7 @@ func pop_parameter() -> bool:
 	
 func execute(actor):
 	var prev_material = actor.material
+	FXService.play_sfx_at(self.charge_sound, actor.global_position)
 	actor.material = highlight_material
 	actor.play_anim("charge")
 	particles.visible = true

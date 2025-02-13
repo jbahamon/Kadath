@@ -5,6 +5,8 @@ class_name Location
 @export var location_id: String 
 @export var story: DialogueResource
 @export var base_room_path: String
+@export var base_bgm: AudioStream
+@export var battle_bgm_override: AudioStream
 
 var room_classes: Dictionary = {}
 

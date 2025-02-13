@@ -2,7 +2,10 @@ extends "res://battle/action/aoe_on_target.gd"
 
 @export var power: float
 @export var aoe_power: float
-
+@export var charge_sound: AudioStream
+@export var throw_sound: AudioStream
+@export var explosion_sound: AudioStream
+@export var main_hit: Hit
 @onready var projectile: AnimatedSprite2D = get_node("../../../BlastProjectile")
 
 func execute(actor):
@@ -12,17 +15,15 @@ func execute(actor):
 	
 	actor.play_anim("blast")
 	var targets = await self.area_of_effect.get_actors_at(self.target.global_position)
-	
-	await actor.get_tree().create_timer(0.67).timeout
+	FXService.play_sfx_at(self.charge_sound, actor.global_position)
+	await actor.get_tree().create_timer(1).timeout
 	
 	var actor_party_member = actor is PartyMember
 	
-	var first_hit = Hit.new()
-	first_hit.type = Hit.Element.METAL
-	first_hit.base_damage = (actor.battler.stats.level + actor.battler.stats.magic_attack) * self.power
+	main_hit.base_damage = (actor.battler.stats.level + actor.battler.stats.magic_attack) * self.power
 	
 	var hits = [
-		func (): await self.target.take_hit(actor, first_hit)
+		func (): await self.target.take_hit(actor, main_hit)
 	]
 	var additional_hits = targets.filter(
 		func(aoe_target): return (aoe_target is PartyMember) != actor_party_member and aoe_target != self.target
@@ -38,6 +39,8 @@ func execute(actor):
 	hits.append_array(additional_hits)
 	
 	actor.material = previous_material
+	
+	FXService.play_sfx_at(self.throw_sound, actor.global_position)
 	await self.shoot_projectile(
 		actor,
 		projectile,
@@ -48,11 +51,12 @@ func execute(actor):
 			"rotate": true,
 		}
 	)
-		
+	FXService.play_sfx_at(self.explosion_sound, target.battler.get_hitspot("Center"))
+	
 	await DoAll.new([
 		func(): 
-			await actor.get_tree().create_timer(0.5).timeout
-			await DoAll.new(hits).execute(),
+			await DoAll.new(hits).execute()
+			await actor.get_tree().create_timer(0.5).timeout,
 		func(): area_of_effect.animate()
 	]).execute()
 	
