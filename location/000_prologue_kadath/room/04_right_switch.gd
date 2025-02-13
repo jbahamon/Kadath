@@ -5,6 +5,8 @@ const RESPONSE_YES = "yes"
 @onready var circuit_layer = $Circuit
 @onready var chalice = $Chalice
 
+@export var drop_sound: AudioStream
+
 func setup():
 	if VarsService.get_flag("kadath.right_barrier"):
 		solve_room()
@@ -65,6 +67,7 @@ func drop_enemies():
 	for ampoule in [$Ampoule1, $Ampoule2, $Ampoule3,]:
 		await get_tree().create_timer(0.5).timeout
 		ampoule.visible = true
+		FXService.play_sfx_at(self.drop_sound, ampoule.global_position)
 		await get_tree().create_tween().tween_property(ampoule.get_node("Anim/Sprite2D"), "offset:y", -60, 0.9).finished
 
 func solve_room():

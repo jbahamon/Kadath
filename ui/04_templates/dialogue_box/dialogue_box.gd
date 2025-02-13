@@ -3,6 +3,7 @@ extends VBoxContainer
 signal response_chosen(response)
 signal closed
 
+@export var open_sound: AudioStream
 @export var characters_per_second = 15.0
 @export var skip_speed_factor = 2.0
 
@@ -26,7 +27,7 @@ var timer
 var remaining_time
 
 func _ready():
-	self.close_dialogue()
+	self.close_dialogue(false)
 
 func _unhandled_input(event):
 	match current_state:
@@ -135,11 +136,14 @@ func set_text(line: Dictionary):
 func open_dialogue():
 	self.set_process_unhandled_input(true)
 	self.show()
+	UIService.play_focus_sound()
 	self.show_next_line()
 	
-func close_dialogue():
+func close_dialogue(play_sound=true):
 	self.set_process_unhandled_input(false)
 	self.hide()
+	if play_sound:
+		UIService.play_focus_sound()
 	self.current_state = State.CLOSED
 	self.closed.emit()
 
@@ -181,4 +185,4 @@ func skip():
 			pass
 		State.CLOSED:
 			pass
-	self.close_dialogue()
+	self.close_dialogue(false)

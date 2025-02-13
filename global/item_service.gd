@@ -6,7 +6,6 @@ enum ItemCategory {
 	KEY
 }
 
-
 var item_definitions: Dictionary
 
 func _init():
@@ -15,7 +14,6 @@ func _init():
 		for file_name in self.get_all_files("res://item/resource/%s/" % folder, "tres"):
 			var item_resource = load(file_name)
 			self.item_definitions[item_resource.id] = item_resource
-	print(self.item_definitions)
 	
 func id_to_item(id: String) -> InventoryItem:
 	return self.item_definitions.get(id)

@@ -7,6 +7,8 @@ var proxy: PlayerProxy = null
 var interaction_indicator: Sprite2D = null
 
 func initialize(init_proxy: PlayerProxy, init_interaction_indicator: Sprite2D):
+	self.interaction_indicator = init_interaction_indicator
+
 	self.party = PartyScene.instantiate()
 	self.party.add_to_group("save")
 	
@@ -18,8 +20,6 @@ func initialize(init_proxy: PlayerProxy, init_interaction_indicator: Sprite2D):
 	self.proxy = init_proxy
 	self.proxy.set_mode(PlayerProxy.ProxyMode.NOT_THERE)
 	
-	self.interaction_indicator = init_interaction_indicator
-
 func exit():
 	self.party = null
 	self.proxy = null

@@ -43,11 +43,10 @@ func connect_buttons(root):
 
 func connect_to_button(node: Node):
 	if node is BaseButton:
-		node.focus_entered.connect(self.on_button_focused)
-		node.pressed.connect(self.on_button_pressed)
+		node.focus_entered.connect(self.play_focus_sound)
+		# node.pressed.connect(self.on_button_pressed)
 
-	
-func on_button_focused():
+func play_focus_sound():
 	if opening_menu:
 		return
 	self.control_player.stream = focus_sound
@@ -58,7 +57,6 @@ func on_button_pressed():
 		return
 	self.control_player.stream = pressed_sound
 	self.control_player.play()
-
 
 func on_close_popup():
 	self.notification_player.stream = close_popup_sound

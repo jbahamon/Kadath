@@ -34,11 +34,6 @@ func use(targets: Array):
 			)
 		await DoAll.new(lambdas).execute()
 
-	if self.status_effects.size() > 0:
-		for target in targets:
-			for status_effect in self.status_effects: 
-				target.battler.status_effects.remove(status_effect)
-	
 	return true
 
 func use_in_battle(targets: Array):

@@ -126,7 +126,8 @@ func start_battle(enemies: Array, settings: Dictionary):
 	match battle_end_state.result:
 		BattleEndState.Result.ESCAPE:
 			self.ui.hide()
-			MusicService.player.stop()
+			if previous_bgm != self.current_battle_parameters["bgm"]:
+				MusicService.player.stop()
 			await self.fade_and_delete_mooks(battle_end_state)
 			MusicService.play_song(previous_bgm, bgm_position)
 			await self.tear_down_battle_positions(battle_end_state)

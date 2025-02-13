@@ -2,6 +2,7 @@ extends Node
 
 const FadeOverlay = preload("res://utils/cutscene_manager/instructions/fade_overlay.gd")
 
+var change_room_sound = preload("res://sound/fx/flee/Default - CoffeeBat.wav")
 var current_location: Location = null
 var current_room: LocationRoom = null
 var world: Node
@@ -51,6 +52,7 @@ func update_whereabouts(
 	self.pop_proxy()
 	
 	if transition_settings["fade"]:
+		FXService.play_sfx(self.change_room_sound)
 		FXService.get_layer("MIX").color = Color(0,0,0,0)
 		if old_location != null and old_room != null:
 			await self.fade_out()
@@ -68,6 +70,7 @@ func update_whereabouts(
 	var room_moved = self.move_to_room(room_id)
 	
 	if room_moved:
+		
 		if self.current_room.bgm != null:
 			MusicService.play_song(self.current_room.bgm)
 		else:

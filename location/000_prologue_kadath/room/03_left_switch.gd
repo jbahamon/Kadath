@@ -1,6 +1,9 @@
 extends LocationRoom
-@onready var circuit_layer = $Circuit
 
+@export var found_sound: AudioStream
+@export var teleport_sound: AudioStream
+@export var slash_sound: AudioStream
+@onready var circuit_layer = $Circuit
 @onready var chalice = $Chalice
 var failures = 0
 
@@ -10,7 +13,7 @@ func setup():
 	
 func _on_acolyte_touched(_proxy: PlayerProxy):
 	failures += 1
-	
+	FXService.play_sfx(self.found_sound)
 	if failures < 4:
 		CutsceneService.play_cutscene_from_file("res://location/000_prologue_kadath/cutscene/caught.txt")
 	else:
@@ -31,6 +34,9 @@ func _on_chalice_player_interaction(proxy: PlayerProxy):
 	
 	InputService.input_enabled = true
 	proxy.set_mode(PlayerProxy.ProxyMode.GAMEPLAY)
+	
+func play_teleport_sound():
+	FXService.play_sfx(self.teleport_sound)
 
 func move_player_to_chalice(proxy):
 	if chalice.position.distance_squared_to(proxy.top_position) > 9:
@@ -48,6 +54,9 @@ func interact_with_chalice(_proxy: PlayerProxy):
 	await DialogueService.open_dialogue("chalice")
 	VarsService.set_flag("kadath.left_barrier", true)
 	await EnvironmentService.fade_out()
+	FXService.play_sfx_at(self.slash_sound, Vector2(0,0))
+	await FXService.spatial_sfx_player.finished
+	await get_tree().create_timer(0.5).timeout
 	self.solve_room()
 	await EnvironmentService.fade_in()
 	await DialogueService.open_dialogue("after_chalice_activation")

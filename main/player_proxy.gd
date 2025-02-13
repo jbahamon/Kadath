@@ -35,6 +35,10 @@ var top_position:
 	get: 
 		return self.position + Vector2(0, -self.height)
 
+func _init() -> void:
+	self.set_physics_process(false)
+	self.set_process_unhandled_input(false)
+	
 func _unhandled_input(event) -> void:
 	if event.is_action_pressed(&"ui_accept"):
 		self.raycast.force_raycast_update()
@@ -55,18 +59,19 @@ func _physics_process(_delta) -> void:
 	set_velocity(velocity)
 	move_and_slide()
 	
-	if self.raycast.is_colliding():
-		EntitiesService.interaction_indicator.visible = true
-		EntitiesService.interaction_indicator.global_position = raycast.get_collider().global_position
-	else:
-		EntitiesService.interaction_indicator.visible = false
+	self.update_raycast()
 
 func update_velocity() -> void:
 	if input_vector != Vector2.ZERO:
 		velocity = input_vector.normalized() * get_movement_speed()
 	else:
 		velocity = Vector2.ZERO
-
+func update_raycast():
+	if self.raycast.is_colliding():
+		EntitiesService.interaction_indicator.visible = true
+		EntitiesService.interaction_indicator.global_position = raycast.get_collider().global_position
+	else:
+		EntitiesService.interaction_indicator.visible = false
 func update_input_vector():
 	var old_input_vector = input_vector
 
@@ -139,6 +144,8 @@ func get_display_name() -> String:
 	return self.target.display_name
 	
 func _set_process_collisions(value: bool):
+	self.raycast.enabled = value
+	self.update_raycast()
 	self.collision.set_deferred("disabled", not value)
 
 func move_to(move_target: Array, speed):
@@ -196,6 +203,7 @@ func set_mode(mode: ProxyMode):
 			self.set_physics_process(true)
 			self.set_process_unhandled_input(false)
 			self._set_process_collisions(true)
+			
 		ProxyMode.NOT_THERE:
 			self.set_physics_process(false)
 			self.set_process_unhandled_input(false)

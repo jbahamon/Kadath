@@ -31,5 +31,4 @@ func _on_Continue_Game_pressed():
 	saves.popup_centered_ratio(1)
 
 func _on_Settings_pressed():
-	print(settings.exclusive)
 	settings.popup_centered_ratio(1)

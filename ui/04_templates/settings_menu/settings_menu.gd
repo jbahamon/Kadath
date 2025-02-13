@@ -34,7 +34,6 @@ var focus_in_tree = false
 
 @onready var sample_player: AudioStreamPlayer = $AudioStreamPlayer
 @export var sfx_sample: AudioStream
-@export var ui_sample: AudioStream
 
 func _init():
 	self.set_process_unhandled_input(false)
@@ -46,9 +45,9 @@ func _ready():
 	self.sfx_volume.set_value_no_signal(SettingsService.volume[&"SFX"])
 	self.ui_volume.set_value_no_signal(SettingsService.volume[&"UI"])
 	
-	self.music_volume.focus_entered.connect(UIService.on_button_focused)
-	self.sfx_volume.focus_entered.connect(UIService.on_button_focused)
-	self.ui_volume.focus_entered.connect(UIService.on_button_focused)
+	self.music_volume.focus_entered.connect(UIService.play_focus_sound)
+	self.sfx_volume.focus_entered.connect(UIService.play_focus_sound)
+	self.ui_volume.focus_entered.connect(UIService.play_focus_sound)
 	
 	buttons = {}
 	for action in labels.keys():
@@ -71,7 +70,6 @@ func _ready():
 	# FIXME is this needed for the main menu
 	# self.on_grab_focus()
 	
-
 func add_input_option(action: String, label_text: String):
 	add_label(label_text)
 	add_button(action)
@@ -170,12 +168,14 @@ func on_grab_focus():
 	self.set_process_unhandled_input(true)
 
 func update_sfx_volume(value):
+	FXService.play_sfx(self.sfx_sample)
 	SettingsService.update_volume(&"SFX", self.sfx_volume.value)
 
 func update_music_volume(value):
 	SettingsService.update_volume(&"BGM", self.music_volume.value)
 
 func update_ui_volume(value):
+	UIService.play_focus_sound()
 	SettingsService.update_volume(&"UI", self.ui_volume.value)
 	
 func update_run_behavior(value):
@@ -186,16 +186,3 @@ func update_enable_shake(toggled_on: bool) -> void:
 
 func update_enable_flash(toggled_on: bool) -> void:
 	SettingsService.update_enable_flashing(toggled_on)
-
-func _on_sfx_volume_slider_focus_entered() -> void:
-	self.sample_player.stream = self.sfx_sample
-	self.sample_player.set_bus(&"SFX")
-	self.sample_player.play()
-
-func _on_ui_volume_slider_focus_entered() -> void:
-	self.sample_player.stream = self.ui_sample
-	self.sample_player.set_bus(&"UI")
-	self.sample_player.play()
-
-func _on_volume_slider_focus_exited() -> void:
-	self.sample_player.stop()
