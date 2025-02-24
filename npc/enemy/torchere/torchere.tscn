@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://bngh72w54kdq0"]
 
 [ext_resource type="PackedScene" uid="uid://c17hneqpuil0l" path="res://npc/lib/base_npc.tscn" id="1_qtfsx"]
-[ext_resource type="Script" path="res://npc/enemy/enemy.gd" id="2_x8f4g"]
+[ext_resource type="Script" path="res://npc/lib/enemy.gd" id="2_x8f4g"]
 [ext_resource type="Texture2D" uid="uid://bs4rf2sdoppyh" path="res://npc/enemy/torchere/icon.png" id="3_h48do"]
 [ext_resource type="PackedScene" uid="uid://c1qvuen3txcsn" path="res://npc/enemy/torchere/anim.tscn" id="3_j4650"]
 [ext_resource type="PackedScene" uid="uid://dtaxhpmmjspek" path="res://battle/battler/battler.tscn" id="3_rrahi"]

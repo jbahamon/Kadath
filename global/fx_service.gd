@@ -2,15 +2,11 @@ extends Node
 
 var Shaker = preload("res://utils/shaker.gd")
 
-var sfx_player: AudioStreamPlayer
-var spatial_sfx_player: AudioStreamPlayer2D
 var DecayMode = Shaker.DecayMode
 var layers: Dictionary
 
-func initialize(init_layers: Dictionary, player: AudioStreamPlayer, spatial_player: AudioStreamPlayer2D):
+func initialize(init_layers: Dictionary):
 	self.layers = init_layers
-	self.sfx_player = player
-	self.spatial_sfx_player = spatial_player
 	
 func exit():
 	self.layers = {}
@@ -34,10 +30,18 @@ func shake(object: Node, duration: float, amplitude: Vector2, time_scale_factor:
 	return shaker
 
 func play_sfx(sound: AudioStream):
-	self.sfx_player.stream = sound
-	self.sfx_player.play()
+	var player = AudioStreamPlayer.new()
+	self.get_tree().root.add_child(player)
+	player.stream = sound
+	player.finished.connect(player.queue_free)
+	player.play()
+	return player
 
 func play_sfx_at(sound: AudioStream, position: Vector2):
-	self.spatial_sfx_player.stream = sound
-	self.spatial_sfx_player.position = Vector2.ZERO
-	self.spatial_sfx_player.play()
+	var player = AudioStreamPlayer2D.new()
+	EnvironmentService.world.add_child(player)
+	player.stream = sound
+	player.position = position
+	player.finished.connect(player.queue_free)
+	player.play()
+	return player

@@ -1,4 +1,4 @@
-[gd_scene load_steps=169 format=3 uid="uid://t6dg7lnwshho"]
+[gd_scene load_steps=170 format=3 uid="uid://t6dg7lnwshho"]
 
 [ext_resource type="Script" path="res://npc/lib/anim/character_anim.gd" id="1_mfe0q"]
 [ext_resource type="Texture2D" uid="uid://8wps7xhl5m8v" path="res://party/carter/spritesheet.png" id="2_se6io"]
@@ -1008,6 +1008,23 @@ tracks/0/keys = {
 "values": [Vector2i(0, 7), Vector2i(1, 7), Vector2i(2, 7), Vector2i(3, 7), Vector2i(4, 7), Vector2i(5, 7)]
 }
 
+[sub_resource type="Animation" id="Animation_2mirt"]
+resource_name = "defend_east"
+length = 0.266669
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 10)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gdtcw"]
 _data = {
 "attack_east": SubResource("Animation_bghb4"),
@@ -1038,6 +1055,7 @@ _data = {
 "crit_start_south": SubResource("Animation_ueekw"),
 "crit_start_west": SubResource("Animation_0etep"),
 "crit_west": SubResource("Animation_mo6rd"),
+"defend_east": SubResource("Animation_2mirt"),
 "downed_east": SubResource("Animation_ka3lx"),
 "downed_north": SubResource("Animation_mfu3t"),
 "downed_south": SubResource("Animation_7ll2g"),

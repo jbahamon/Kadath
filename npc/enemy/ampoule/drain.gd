@@ -5,6 +5,7 @@ const blurb = "Phlebotomy"
 @export var heal_factor = 1
 @export var hit: Hit
 @export var drain_sound: AudioStream
+@export var heal_sound: AudioStream
 
 func execute(actor):
 	# walk to target
@@ -31,13 +32,16 @@ func execute(actor):
 	await DoAll.new([
 		func(): 
 			await tree.create_timer(0.3).timeout
-			self.target.play_anim("hit"),
+			self.target.play_anim("hit")
+			FXService.play_sfx_at(self.drain_sound, actor.position)
+			FXService.play_sfx_at(self.heal_sound, actor.global_position),
 		func():
 			await self.target.take_hit(actor, hit)
 	]).execute()
 
 	await tree.create_timer(0.3).timeout
 	actor.battler.toast_offset.y += y_offset
+	
 	await actor.heal(ceil(self.heal_factor * hit.effective_damage))
 	BattleService.announce("")
 	self.target.play_anim(idle_anim)

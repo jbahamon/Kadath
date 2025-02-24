@@ -14,7 +14,7 @@ func execute(actor):
 	await get_tree().create_timer(1.0).timeout
 	
 	var shake_func = func (): 
-		FXService.play_sfx_at(self.bump_sound, self.actor.position)
+		FXService.play_sfx_at(self.bump_sound, actor.position)
 		await FXService.env_shake(1.0, Vector2(0, 8), 1.0).shake_finished
 		actor.play_anim("idle")
 		

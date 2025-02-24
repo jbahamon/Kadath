@@ -145,6 +145,17 @@
 		"asset_url": "https://freesound.org/people/nekoninja/sounds/512785/",
 		"asset_usage": "Bladed weapon sounds"
 	},
+	
+	
+	{
+		"category": "sounds",
+		"author_name": "zipdisq™",
+		"author_url": "https://freesound.org/people/nekoninja/",
+		"asset_name": "zipChip Sound Effects Pack",
+		"asset_url": "https://zipdisq.itch.io/",
+		"asset_usage": "Various sound effects"
+	},
+	
 	{
 		"category": "sounds",
 		"author_name": "DASK",
@@ -209,7 +220,7 @@
 		"asset_url": "https://opengameart.org/content/patreon-menu-soundpacks",
 		"asset_usage": "Various battle sound effects"
 	},
-	
+		
 	{
 		"category": "sounds",
 		"author_name": "hosch/Lunar Wire",
@@ -226,6 +237,34 @@
 		"asset_name": "RPG Essentials SFX",
 		"asset_url": "https://leohpaz.itch.io/rpg-essentials-sfx-free",
 		"asset_usage": "Various battle sound effects"
+	},
+	
+	{
+		"category": "sounds",
+		"author_name": "Owlish Arts",
+		"author_url": "http://www.owlisharts.com.au/",
+		"asset_name": "Pack: 8-Bit Video Game",
+		"asset_url": "https://freesound.org/people/OwlStorm/packs/22895/",
+		"asset_usage": "Various battle sound effects"
+	},
+	
+	
+	{
+		"category": "sounds",
+		"author_name": "Taiki / ReincarnatedEchoes",
+		"author_url": "https://freesound.org/people/ReincarnatedEchoes/",
+		"asset_name": "Heart collect/Healing (Retro)",
+		"asset_url": "https://freesound.org/people/ReincarnatedEchoes/sounds/644306/",
+		"asset_usage": "Healing sound"
+	},
+	
+	{
+		"category": "sounds",
+		"author_name": "Someoneman",
+		"author_url": "https://opengameart.org/users/someoneman",
+		"asset_name": "Cure Magic",
+		"asset_url": "https://opengameart.org/content/cure-magic",
+		"asset_usage": "Healing spell sounds"
 	},
 	
 	{

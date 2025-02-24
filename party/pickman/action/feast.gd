@@ -4,6 +4,8 @@ extends "res://battle/action/simple_single_target.gd"
 @export var heal_factor = 0.75
 @export var energy_gain_factor = 0.1
 @export var hit: Hit
+@export var heal_sound: AudioStream
+
 var unlocking_ids = {
 	"" : ""
 }
@@ -19,6 +21,7 @@ func execute(actor):
 	actor.play_anim("battle_idle")
 	# For balance, we could make it so it heals less with each use. 
 	# Like 0.8^n_usages and start from a big one.
+	FXService.play_sfx_at(self.heal_sound, actor.global_position)
 	await actor.heal(ceil(self.heal_factor * hit.effective_damage))
 	await get_tree().create_timer(0.1).timeout
 	await actor.recover_energy(ceil(self.energy_gain_factor * hit.effective_damage))

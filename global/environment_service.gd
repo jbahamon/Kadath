@@ -5,13 +5,13 @@ const FadeOverlay = preload("res://utils/cutscene_manager/instructions/fade_over
 var change_room_sound = preload("res://sound/fx/flee/Default - CoffeeBat.wav")
 var current_location: Location = null
 var current_room: LocationRoom = null
-var world: Node
+var world: Node2D
 var prev_proxy_mode = PlayerProxy.ProxyMode.NOT_THERE
 
 func _init():
 	self.add_to_group("save")
 
-func initialize(init_world: Node):
+func initialize(init_world: Node2D):
 	self.world = init_world
 
 func exit():
@@ -34,7 +34,8 @@ func update_whereabouts(
 	
 	var transition_settings = {
 		"fade": true,
-		"end_proxy_state": null
+		"end_proxy_state": null,
+		"play_bgm": true,
 	}.merged(settings, true)
 	
 	var location_path = "res://location/%s/location.tres" % location_id
@@ -71,10 +72,13 @@ func update_whereabouts(
 	
 	if room_moved:
 		
-		if self.current_room.bgm != null:
-			MusicService.play_song(self.current_room.bgm)
+		if transition_settings["play_bgm"]:
+			if self.current_room.bgm != null:
+				MusicService.play_song(self.current_room.bgm)
+			else:
+				MusicService.play_song(self.current_location.base_bgm)
 		else:
-			MusicService.play_song(self.current_location.base_bgm)
+			MusicService.stop()
 		EntitiesService.on_enter_room()
 		
 	await self.push_proxy(target_position, target_orientation, transition_settings["end_proxy_state"])

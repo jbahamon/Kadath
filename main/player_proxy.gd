@@ -66,12 +66,14 @@ func update_velocity() -> void:
 		velocity = input_vector.normalized() * get_movement_speed()
 	else:
 		velocity = Vector2.ZERO
+		
 func update_raycast():
 	if self.raycast.is_colliding():
 		EntitiesService.interaction_indicator.visible = true
 		EntitiesService.interaction_indicator.global_position = raycast.get_collider().global_position
 	else:
 		EntitiesService.interaction_indicator.visible = false
+
 func update_input_vector():
 	var old_input_vector = input_vector
 

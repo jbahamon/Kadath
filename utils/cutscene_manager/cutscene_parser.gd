@@ -17,7 +17,8 @@ var Call = preload("res://utils/cutscene_manager/instructions/call.gd")
 var Shake = preload("res://utils/cutscene_manager/instructions/shake.gd")
 var StartDialogue = preload("res://utils/cutscene_manager/instructions/start_dialogue.gd")
 var Narrate = preload("res://utils/cutscene_manager/instructions/narrate.gd")
-var SetMusic = preload("res://utils/cutscene_manager/instructions/set_music.gd")
+var PlayMusic = preload("res://utils/cutscene_manager/instructions/play_music.gd")
+var PlaySound = preload("res://utils/cutscene_manager/instructions/play_sound.gd")
 
 var AssignProxy = preload("res://utils/cutscene_manager/instructions/assign_proxy.gd")
 
@@ -80,8 +81,12 @@ func _init():
 	patterns["SHAKE"] = RegEx.new()
 	patterns["SHAKE"].compile("^(?<Entity>[^ ]+) FOR (?<Duration>.+) STR (?<Amplitude>.+) TIME_SCALE (?<TimeScaleFactor>.+)$")
 
-	patterns["SET_MUSIC"] = RegEx.new()
-	patterns["SET_MUSIC"].compile("^TO \"(?<SongName>.+)\"( AT (?<Offset>.+))?$")
+	patterns["PLAY_MUSIC"] = RegEx.new()
+	patterns["PLAY_MUSIC"].compile("^\"(?<SongName>.+)\"( AT (?<Offset>.+))?$")
+	
+	patterns["PLAY_SOUND"] = RegEx.new()
+	patterns["PLAY_SOUND"].compile("^\"(?<StreamPath>.+)\" IN (?<Channel>[^ ]+)( AT (?<Position>.+))?$")
+	
 
 func parse_cutscene_from_file(cutscene_name: String): 
 	var cutscene_file = FileAccess.open(cutscene_name, FileAccess.READ)
@@ -176,7 +181,7 @@ func parse_instruction(stack: Array, instruction_name: String, args: String):
 				self.parse_string(shake_match.get_string("Entity")),
 				self.parse_float(shake_match.get_string("Duration")),
 				self.parse_vector2(shake_match.get_string("Amplitude")),
-				self.parse_vector2(shake_match.get_string("TimeScaleFactor")),
+				self.parse_float(shake_match.get_string("TimeScaleFactor")),
 			)
 				
 			
@@ -256,14 +261,26 @@ func parse_instruction(stack: Array, instruction_name: String, args: String):
 				self.parse_string(narrate_match.get_string("DialogueId")),
 			)
 			
-		CutsceneInstruction.Type.SET_MUSIC:
-			var song_match: RegExMatch = self.patterns["SET_MUSIC"].search(args)
+		CutsceneInstruction.Type.PLAY_MUSIC:
+			var song_match: RegExMatch = self.patterns["PLAY_MUSIC"].search(args)
 			var song = self.parse_string(song_match.get_string("SongName"))
 			var offset = song_match.get_string("Offset")
 			
-			instruction = SetMusic.new(
+			instruction = PlayMusic.new(
 				"res://sound/music/%s.ogg" % song if song != "NONE" else null,
 				parse_float(offset) if offset != null else 0.0
+			)
+			
+		CutsceneInstruction.Type.PLAY_SOUND:
+			var sound_match: RegExMatch = self.patterns["PLAY_SOUND"].search(args)
+			var stream = self.parse_string(sound_match.get_string("StreamPath"))
+			var channel = self.parse_string(sound_match.get_string("Channel"))
+			var position = sound_match.get_string("Position")
+			
+			instruction = PlaySound.new(
+				"res://sound/%s" % stream,
+				channel,
+				self.parse_vector2(position) if position != null else null
 			)
 		CutsceneInstruction.Type.HIDE:
 			instruction = Call.new(

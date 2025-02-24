@@ -23,9 +23,7 @@ func _ready() -> void:
 			"ADD": $SubViewportContainer/SubViewport/OverlayLayer/Add,
 			"CAMERA_BG": $SubViewportContainer/SubViewport/BGLayer/CameraBG,
 			"CUTSCENE_PAUSE": $NarrationLayer/CutscenePauseBG
-		}, 
-		$SFXPlayer,
-		$SubViewportContainer/SubViewport/World/SFXPlayer
+		}
 	)
 	UIService.initialize(
 		$PopupLayer, 
@@ -53,15 +51,15 @@ func move_to_starting_room():
 		# Note: move start_game to the above when doing the cutscene intro
 		await EnvironmentService.update_whereabouts(
 			"000_prologue_kadath", 
-			"03_left_switch",
+			"02_hub",
 			Vector2(0, 0),
 			Vector2.UP,
 			{
 				"fade": false,
+				"play_bgm": false,
 				"end_proxy_state": PlayerProxy.ProxyMode.GAMEPLAY
 			}
 		)
-		#EntitiesService.proxy.set_mode(PlayerProxy.ProxyMode.GAMEPLAY)
 	
 func exit():
 	BattleService.exit()

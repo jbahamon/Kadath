@@ -1,10 +1,11 @@
 [gd_scene load_steps=23 format=3 uid="uid://cdhfej7dcp7bi"]
 
-[ext_resource type="PackedScene" uid="uid://co4ecuc835bk6" path="res://npc/enemy/enemy.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://co4ecuc835bk6" path="res://npc/lib/enemy.tscn" id="1"]
 [ext_resource type="PackedScene" path="res://battle/action/attack.tscn" id="2"]
 [ext_resource type="Script" path="res://battle/ai/random_ai.gd" id="4"]
 [ext_resource type="Resource" path="res://npc/enemy/shadow_critter/shadow_critter_stats.tres" id="5"]
 [ext_resource type="PackedScene" uid="uid://3huenc8ltgbh" path="res://npc/lib/anim/simple_npc_anim.tscn" id="5_330tp"]
+
 
 [sub_resource type="Animation" id="38"]
 resource_name = "attack_down"

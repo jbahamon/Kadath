@@ -19,6 +19,9 @@ tile_map_data = PackedByteArray("AAD5//b/BgAAAAAAAAD5//f/BgAAAAAAAAD5//j/BgAAAAA
 tile_set = ExtResource("1_pgy5n")
 y_sort_origin = -16
 
+[node name="Thymiaterion" parent="." instance=ExtResource("5_crprv")]
+position = Vector2(-1, -41)
+
 [node name="BattleSpot" parent="." instance=ExtResource("3_7js0j")]
 position = Vector2(0, -40)
 
@@ -51,9 +54,5 @@ script = ExtResource("4_0er7e")
 [node name="EnemySpot6" type="Marker2D" parent="BattleSpot/EnemySpots" index="5"]
 position = Vector2(63, -33)
 script = ExtResource("4_0er7e")
-
-[node name="Thymiaterion" parent="." instance=ExtResource("5_crprv")]
-position = Vector2(0, -56)
-enemy_info = "This huge statue seems to use single-target shots and a quake that hits everyone."
 
 [editable path="BattleSpot"]

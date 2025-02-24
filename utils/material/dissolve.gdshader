@@ -1,4 +1,5 @@
 shader_type canvas_item;
+render_mode blend_add;
 
 uniform vec3 tint_color : source_color = vec3(1.0, 0.0, 0.0);
 uniform float intensity : hint_range(0, 1) = 0.5;

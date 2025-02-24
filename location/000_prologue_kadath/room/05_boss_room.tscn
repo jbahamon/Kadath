@@ -1,7 +1,8 @@
-[gd_scene load_steps=22 format=4 uid="uid://ip7anni7emmc"]
+[gd_scene load_steps=23 format=4 uid="uid://ip7anni7emmc"]
 
 [ext_resource type="TileSet" uid="uid://b15m77bx602kw" path="res://location/000_prologue_kadath/tile/onyx_temple.tres" id="1_eenkp"]
 [ext_resource type="Script" path="res://location/000_prologue_kadath/room/05_boss_room.gd" id="2_0db23"]
+[ext_resource type="AudioStream" uid="uid://cnxcr63hb0yvy" path="res://sound/fx/hit/Long Low - Owlish.wav" id="2_5e214"]
 [ext_resource type="PackedScene" uid="uid://sfld8pt3bwlw" path="res://location/lib/script/object/warp.tscn" id="3_eyb6e"]
 [ext_resource type="PackedScene" uid="uid://k1y4abtqqro7" path="res://location/lib/script/object/battle_spot.tscn" id="5_jdwon"]
 [ext_resource type="PackedScene" uid="uid://ihknndack3n4" path="res://npc/enemy/thymiaterion/thymiaterion.tscn" id="6_2020d"]
@@ -121,6 +122,7 @@ animations = [{
 y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("2_0db23")
+fall_sound = ExtResource("2_5e214")
 room_id = "05_boss_room"
 used_rect = Rect2i(-144, -224, 288, 352)
 

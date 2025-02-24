@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=3 uid="uid://dpc8xvvcbyotf"]
 
-[ext_resource type="PackedScene" uid="uid://co4ecuc835bk6" path="res://npc/enemy/enemy.tscn" id="1_vbu6h"]
+[ext_resource type="PackedScene" uid="uid://co4ecuc835bk6" path="res://npc/lib/enemy.tscn" id="1_vbu6h"]
 [ext_resource type="Texture2D" uid="uid://56sux2p3oroq" path="res://npc/enemy/sentry/icon.png" id="2_2k4kj"]
 [ext_resource type="PackedScene" uid="uid://cgc5b4s47chs0" path="res://npc/enemy/sentry/anim.tscn" id="2_571aw"]
 [ext_resource type="Resource" uid="uid://rlyl1hog6ic0" path="res://npc/enemy/sentry/stats.tres" id="3_l4u5g"]

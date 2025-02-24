@@ -1,7 +1,7 @@
-[gd_scene load_steps=52 format=3 uid="uid://ihknndack3n4"]
+[gd_scene load_steps=53 format=3 uid="uid://ihknndack3n4"]
 
 [ext_resource type="PackedScene" uid="uid://c17hneqpuil0l" path="res://npc/lib/base_npc.tscn" id="1_q5d36"]
-[ext_resource type="Script" path="res://npc/enemy/enemy.gd" id="2_udeox"]
+[ext_resource type="Script" path="res://npc/lib/boss.gd" id="2_vhqlt"]
 [ext_resource type="Texture2D" uid="uid://i0fxdua2akyb" path="res://npc/enemy/thymiaterion/icon.png" id="3_rflw6"]
 [ext_resource type="PackedScene" uid="uid://b8t81sm0y5b4o" path="res://npc/enemy/thymiaterion/anim.tscn" id="4_ifidb"]
 [ext_resource type="PackedScene" uid="uid://dtaxhpmmjspek" path="res://battle/battler/battler.tscn" id="5_2gha7"]
@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://npc/enemy/thymiaterion/action/whip.gd" id="7_q7jpk"]
 [ext_resource type="Script" path="res://battle/hit.gd" id="8_3rnnk"]
 [ext_resource type="Script" path="res://npc/enemy/thymiaterion/action/counter.gd" id="8_sm7w2"]
-[ext_resource type="AudioStream" uid="uid://cj0t4dxmvx2ky" path="res://sound/fx/explosion/Long Deep - SAGE.wav" id="9_a8e47"]
+[ext_resource type="AudioStream" uid="uid://cnxcr63hb0yvy" path="res://sound/fx/hit/Long Low - Owlish.wav" id="9_2mf5u"]
 [ext_resource type="Script" path="res://npc/enemy/thymiaterion/action/chew.gd" id="9_dmayn"]
 [ext_resource type="Script" path="res://npc/enemy/thymiaterion/action/prepare.gd" id="10_hat3u"]
 [ext_resource type="Script" path="res://npc/enemy/thymiaterion/ai.gd" id="11_ikq4e"]
@@ -27,6 +27,8 @@
 [ext_resource type="Texture2D" uid="uid://cuaphveq6enwc" path="res://npc/enemy/thymiaterion/beam.png" id="19_b00tx"]
 [ext_resource type="AudioStream" uid="uid://di7wtmrx7jsha" path="res://sound/fx/slash/Mid Light Clean - colorsCrimsonTears.wav" id="20_osccg"]
 [ext_resource type="AudioStream" uid="uid://bq2b66vmiocgp" path="res://sound/fx/hit/Short - MadameBerry.wav" id="21_s5p7s"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_srhvi"]
 
 [sub_resource type="Resource" id="Resource_afjib"]
 script = ExtResource("8_3rnnk")
@@ -266,10 +268,11 @@ animations = [{
 }]
 
 [node name="Thymiaterion" groups=["enemy"] instance=ExtResource("1_q5d36")]
+material = SubResource("ShaderMaterial_srhvi")
 position = Vector2(0, 0)
 collision_layer = 24
 collision_mask = 1
-script = ExtResource("2_udeox")
+script = ExtResource("2_vhqlt")
 battle_on_contact = true
 enemy_id = "thymiaterion"
 icon = ExtResource("3_rflw6")
@@ -285,7 +288,7 @@ anim_path = NodePath("..")
 [node name="Jump" type="Node" parent="Battler/Actions" index="0"]
 script = ExtResource("6_uy2te")
 hit = SubResource("Resource_afjib")
-bump_sound = ExtResource("9_a8e47")
+bump_sound = ExtResource("9_2mf5u")
 
 [node name="Shoot" type="Node" parent="Battler/Actions" index="1"]
 script = ExtResource("6_7xjpy")

@@ -1,7 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://dunwmva1f22su"]
+[gd_scene load_steps=21 format=3 uid="uid://dunwmva1f22su"]
 
 [ext_resource type="PackedScene" uid="uid://c17hneqpuil0l" path="res://npc/lib/base_npc.tscn" id="1_n3nn8"]
-[ext_resource type="Script" path="res://npc/enemy/enemy.gd" id="2_y1sju"]
+[ext_resource type="Script" path="res://npc/lib/enemy.gd" id="2_y1sju"]
 [ext_resource type="PackedScene" uid="uid://dtaxhpmmjspek" path="res://battle/battler/battler.tscn" id="3_r5uaa"]
 [ext_resource type="PackedScene" uid="uid://d0rd160lh4msk" path="res://npc/enemy/ampoule/anim.tscn" id="3_rqshg"]
 [ext_resource type="Texture2D" uid="uid://bwa4s06ml7ii5" path="res://npc/enemy/ampoule/icon.png" id="3_sr5ss"]
@@ -10,9 +10,11 @@
 [ext_resource type="Script" path="res://npc/enemy/ampoule/attack.gd" id="6_xyght"]
 [ext_resource type="Material" uid="uid://c48122ffiwrbb" path="res://utils/material/uniform_add.tres" id="7_8q5jg"]
 [ext_resource type="Script" path="res://npc/enemy/ampoule/drain.gd" id="7_oec2r"]
-[ext_resource type="AudioStream" uid="uid://drgm032b34j27" path="res://sound/fx/charge/Low - Kenney.wav" id="8_ku7rv"]
 [ext_resource type="Script" path="res://battle/hit.gd" id="8_qy48h"]
+[ext_resource type="AudioStream" uid="uid://bxvelfr4dar0c" path="res://sound/fx/slash/Mid Clean - colorsCrimsonTears.wav" id="8_ywc4h"]
 [ext_resource type="Shader" path="res://utils/material/highlight.gdshader" id="10_f02lv"]
+[ext_resource type="AudioStream" uid="uid://cbeps10r2yhs4" path="res://sound/fx/recovery/Default - ReincarnatedEchoes.wav" id="11_5i8ek"]
+[ext_resource type="AudioStream" uid="uid://tvxig8l7bd42" path="res://sound/fx/charge/Low Short - MadameBerry.wav" id="11_khgnc"]
 [ext_resource type="AudioStream" uid="uid://75x8hmnabi18" path="res://sound/fx/scratch/Double Short - JuhaniJunkala.wav" id="12_cvi7s"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i8b0q"]
@@ -28,16 +30,16 @@ animation_only = false
 fixed_damage = false
 base_damage = 0
 type = 8
-anim_time = 0.0
+anim_time = 0.3
 anim_duration = 0.0
 spark_time = 0.0
 spark_offset = Vector2(0, 0)
-shake_time = 0.0
+shake_time = 0.3
 shake_duration = 0.5
 shake_amplitude = Vector2(8, 0)
 shake_time_scale = 2.0
-hit_sound = ExtResource("8_ku7rv")
-hit_sound_time = 0.0
+hit_sound = ExtResource("8_ywc4h")
+hit_sound_time = 0.3
 miss_sound_time = 0.0
 palfx_material = SubResource("ShaderMaterial_i8b0q")
 palfx_time = 0.3
@@ -89,6 +91,8 @@ toast_offset = Vector2(0, -35)
 [node name="Drain" type="Node" parent="Battler/Actions" index="0"]
 script = ExtResource("7_oec2r")
 hit = SubResource("Resource_d3xko")
+drain_sound = ExtResource("11_khgnc")
+heal_sound = ExtResource("11_5i8ek")
 
 [node name="Attack" type="Node" parent="Battler/Actions" index="1"]
 script = ExtResource("6_xyght")

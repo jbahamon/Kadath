@@ -17,6 +17,8 @@ func play_song(song: AudioStream, position: float = 0.0):
 		player.play(position)
 	else:
 		player.stop()
+	
+	return player
 
 func stop():
 	self.current_song = null

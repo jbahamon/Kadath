@@ -3,8 +3,8 @@ extends Node
 var open_popup_sound: AudioStream = preload("res://sound/fx/whoosh/Sharp Short - Lunar Wire.wav")
 var close_popup_sound: AudioStream = preload("res://sound/fx/whoosh/Sharp Short - Lunar Wire.wav")
 
-var focus_sound: AudioStream = preload("res://sound/ui/Kenney/Hover.wav")
-var pressed_sound: AudioStream = preload("res://sound/ui/Leohpaz/051_use_item_01.wav")
+var focus_sound: AudioStream = preload("res://sound/ui/blops/High - Kenney.wav")
+var pressed_sound: AudioStream = preload("res://sound/ui/interaction/Button Press - zipdisq.wav")
 var menu_popup: Popup
 var save_popup: Popup
 var popup_layer: CanvasLayer
@@ -86,6 +86,7 @@ func show_popup(popup_node: Window, pause_tree=true):
 func play_notification(sound):
 	self.notification_player.stream = sound
 	self.notification_player.play()
+	return self.notification_player
 
 func show_save_menu() -> void:
 	self.__handle_popup(menu_popup, true)

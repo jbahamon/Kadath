@@ -9,7 +9,7 @@ FADE_OVERLAY MIX TO (0,0,0,1.0) IN 1
 
 # Party walks up to the center of the room, but nobody's to be seen
 SET_ROOM 06_throne_room
-SET_MUSIC TO "NONE"
+PLAY_MUSIC "NONE"
 SET_POSITION PROXY TO (0, 112)
 CALL ROOM lock_pickman
 

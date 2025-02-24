@@ -2,6 +2,8 @@ extends InventoryItem
 
 class_name HealingItem
 
+var recovery_sound = preload("res://sound/fx/recovery/Default - ReincarnatedEchoes.wav")
+
 enum RecoveryMode {
 	ABSOLUTE,
 	PERCENTAGE
@@ -13,6 +15,9 @@ enum RecoveryMode {
 @export var status_effects: Array[String] = []
 
 func use(targets: Array):
+	
+	FXService.play_sfx(recovery_sound)
+	
 	if self.health != 0:
 		var lambdas = []
 		for target in targets:
@@ -38,6 +43,12 @@ func use(targets: Array):
 
 func use_in_battle(targets: Array):
 	var lambdas = []
+	
+	if targets.size() > 1:
+		FXService.play_sfx(recovery_sound)
+	else:
+		FXService.play_sfx_at(recovery_sound, targets[0].global_position)
+		
 	for target in targets:
 		lambdas.append(
 			func (): 

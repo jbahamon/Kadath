@@ -1,6 +1,6 @@
 extends LocationRoom
 
-var fall_sound = preload("res://sound/fx/hit/Long Reverb - JuhaniJunkala.wav")
+@export var fall_sound: AudioStream
 
 @onready var animation_player = $AnimationPlayer
 func setup():

@@ -2,7 +2,8 @@ extends "res://battle/action/simple_single_target.gd"
 
 @onready var tendrils: AnimatedSprite2D = get_node("../../Tendrils")
 @export var hit: Hit
-
+@export var sliming_sound: AudioStream
+@export var droning_sound: AudioStream
 	
 func execute(actor):
 	actor.play_anim("attack")
@@ -15,6 +16,8 @@ func execute(actor):
 	tendrils.play("windup")
 	tendrils.visible = true
 	
+	FXService.play_sfx_at(self.droning_sound, self.target.global_position)
+	FXService.play_sfx_at(self.sliming_sound, self.target.global_position)
 	await tendrils.animation_finished
 	tendrils.play("attack")
 	

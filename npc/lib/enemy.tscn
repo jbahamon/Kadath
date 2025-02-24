@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c17hneqpuil0l" path="res://npc/lib/base_npc.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://dtaxhpmmjspek" path="res://battle/battler/battler.tscn" id="2"]
-[ext_resource type="Script" path="res://npc/enemy/enemy.gd" id="2_yhkqm"]
+[ext_resource type="Script" path="res://npc/lib/enemy.gd" id="2_yhkqm"]
 
 [node name="Enemy" groups=["enemy"] instance=ExtResource("1")]
 position = Vector2(0, 0)

@@ -10,4 +10,8 @@ SIMULTANEOUS
 	CALL ROOM unlock_pickman
 END
 
-START_DIALOGUE pickman_join
+SIMULTANEOUS
+	START_DIALOGUE pickman_join
+	SEQUENTIAL
+		WAIT 0.7
+		CALL ROOM play_fanfare

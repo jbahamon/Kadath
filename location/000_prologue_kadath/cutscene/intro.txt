@@ -1,6 +1,8 @@
 ASSIGN_CAMERA WORLD
 DISABLE_COLLISIONS PROXY
 
+PLAY_MUSIC "NONE"
+
 SET_OVERLAY ADD TO (0, 0, 0, 1)
 SET_OVERLAY MIX TO (0,0,0,1)
 MOVE_CAMERA TO (0, -80)
@@ -19,6 +21,7 @@ HIDE Carter
 HIDE RightGhoul
 
 SIMULTANEOUS
+	PLAY_MUSIC "JuhaniJunkala/Army Approaching"
 	FADE_OVERLAY MIX TO (0,0,0,0) IN 2
 	MOVE_CAMERA TO (_, -146) IN 2
 END
@@ -27,9 +30,14 @@ PLAY_ANIM LeftGhoul hit
 SET_POSITION LeftGhoul TO (0, 0)
 LOOK LeftGhoul RIGHT
 SHOW LeftGhoul
+PLAY_SOUND "fx/hit/Mid Low Reverb - JuhaniJunkala.wav" IN SFX AT (0, 0)
 MOVE LeftGhoul TO (-24, -96) AT 150
 PLAY_ANIM LeftGhoul crouch
-MOVE LeftGhoul TO (-32, -128) AT 30
+SIMULTANEOUS
+	SHAKE CAMERA FOR 0.75 STR (4,4) TIME_SCALE 1
+	PLAY_SOUND "fx/scratch/Double Short - JuhaniJunkala.wav" IN SFX AT (-24, -96)
+	MOVE LeftGhoul TO (-32, -128) AT 30
+END
 START_DIALOGUE entrance_ghoul1
 PLAY_ANIM LeftGhoul idle
 LOOK LeftGhoul DOWN
@@ -38,10 +46,16 @@ PLAY_ANIM RightGhoul hit
 SET_POSITION RightGhoul TO (8, -16)
 LOOK RightGhoul LEFT
 SHOW RightGhoul
+PLAY_SOUND "fx/hit/Mid Low Reverb - JuhaniJunkala.wav" IN SFX AT (0, 0)
 MOVE RightGhoul TO (32, -112) AT 150
 LOOK LeftGhoul RIGHT
 PLAY_ANIM RightGhoul crouch
-MOVE RightGhoul TO (40, -144) AT 30
+
+SIMULTANEOUS
+	SHAKE CAMERA FOR 0.75 STR (4,4) TIME_SCALE 1
+	PLAY_SOUND "/fx/scratch/Double Short - JuhaniJunkala.wav" IN SFX AT (32, -112)
+	MOVE RightGhoul TO (40, -144) AT 30
+END
 PLAY_ANIM RightGhoul idle
 START_DIALOGUE entrance_ghoul2
 
@@ -55,6 +69,7 @@ MOVE NPCPickman TO (-16, -144) AT 150
 LOOK LeftGhoul RIGHT
 LOOK RightGhoul LEFT
 PLAY_ANIM NPCPickman jump_back
+PLAY_SOUND "fx/hit/Short Slap - Spring Spring.wav" IN SFX AT (-16, -144)
 MOVE NPCPickman TO (-16, -176) AT 30
 PLAY_ANIM NPCPickman idle
 START_DIALOGUE entrance_pickman
@@ -69,6 +84,7 @@ MOVE PROXY TO (0, -96) AT 150
 LOOK LeftGhoul RIGHT
 LOOK RightGhoul LEFT
 PLAY_ANIM PROXY jump_back
+PLAY_SOUND "fx/hit/Short Slap - Spring Spring.wav" IN SFX AT (0, -96)
 MOVE PROXY TO (0, -128) AT 30
 PLAY_ANIM PROXY idle
 START_DIALOGUE entrance_carter_1

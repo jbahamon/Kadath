@@ -4,9 +4,9 @@ var PartyScene = preload("res://party/party.tscn")
 
 var party: Party = null
 var proxy: PlayerProxy = null
-var interaction_indicator: Sprite2D = null
+var interaction_indicator = null
 
-func initialize(init_proxy: PlayerProxy, init_interaction_indicator: Sprite2D):
+func initialize(init_proxy: PlayerProxy, init_interaction_indicator):
 	self.interaction_indicator = init_interaction_indicator
 
 	self.party = PartyScene.instantiate()

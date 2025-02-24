@@ -1,9 +1,12 @@
 extends BattleAction
 
+const base_use_sound = preload("res://sound/fx/item/Default - harvey656.wav")
+
 var item = null
 var targets = null
 var currently_highlighted_targets = null
 var stored_materials = []
+
 func reset():
 	self.item = null
 	self.targets = null
@@ -20,7 +23,7 @@ func get_next_parameter_signature():
 			"name": "targets",
 			"type": BattleAction.ActionArgument.TARGET,
 			"targeting_type": self.item.target_type,
-			"prompt": "Use %s on..." % self.item.name,
+			"prompt": "Use %s on..." % self.item.display_name,
 		}
 	else:
 		return null
@@ -46,7 +49,9 @@ func pop_parameter() -> bool:
 	
 func execute(actor):
 	actor.play_anim("use_item")
-	await actor.get_tree().create_timer(0.55).timeout
+	await actor.get_tree().create_timer(0.25).timeout
+	FXService.play_sfx_at(self.base_use_sound, actor.global_position)
+	await actor.get_tree().create_timer(0.65).timeout
 	var used 
 	if not self.item.needs_targets():
 		used = await self.item.use_in_battle()

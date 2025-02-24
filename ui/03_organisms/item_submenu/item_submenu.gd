@@ -121,6 +121,7 @@ func _on_items_cancel():
 
 func _on_party_list_element_selected(element):
 	self.party_list.element_selected.disconnect(self._on_party_list_element_selected)
+	self.party_list.cancel.disconnect(self._on_party_list_cancel)
 	var item: InventoryItem = ItemService.id_to_item(self.selected_item.item_id)
 	var used = await item.use([element])
 	self.party_list.deselect()
@@ -132,6 +133,7 @@ func _on_party_list_element_selected(element):
 		else:
 			self.update_shown_items()
 			self._on_party_list_cancel()
+	self.party_list.cancel.connect(self._on_party_list_cancel)
 	self.party_list.element_selected.connect(self._on_party_list_element_selected)
 
 func _on_party_list_cancel():

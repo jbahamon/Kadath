@@ -59,6 +59,11 @@ func on_proxy_exit(_proxy: PlayerProxy):
 	self.set_physics_process(false)
 	
 func _physics_process(_delta):
+	if not self.is_physics_processing():
+		# This is needed because sometimes (e.g. on interaction) party imitation
+		# must be stopped while processing a physics frane
+		return
+		
 	var proxy: PlayerProxy = EntitiesService.proxy
 	if proxy.velocity != Vector2.ZERO and active_members.size() > 1:
 		

@@ -1,3 +1,5 @@
+res://ui/01_atoms/assets/icons/original
+res://npc/lib
 C:/Users/Jorge/Documents/Godot/Kadath/sound/music/LUShvalleySound
 C:/Users/Jorge/Documents/Godot/Kadath/sound/music/BertCole
 res://global
@@ -9,7 +11,6 @@ res://party/pickman
 res://party/carter
 res://npc/enemy/thymiaterion
 res://item/resource/equipment
-res://npc/lib
 res://utils/material
 res://npc/enemy/acolyte
 res://battle/action
@@ -19,5 +20,3 @@ res://location/000_prologue_kadath/object
 res://location/000_prologue_kadath/tile
 res://ui/03_organisms/skill_costs
 res://location/999_tests
-res://party/pickman/skill
-res://location/000_prologue_kadath/room

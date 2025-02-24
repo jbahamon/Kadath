@@ -44,18 +44,19 @@ func move_player_to_chalice(proxy):
 
 		proxy.play_anim("walk")
 		proxy.set_orientation(destination - proxy.position)
-		await proxy.move_to(destination, proxy.walk_speed)
+		await proxy.move_to([destination.x, destination.y], proxy.walk_speed)
 		
 		destination = Vector2(chalice.position.x, proxy.position.y)
 		proxy.set_orientation(destination - proxy.position)
-		await proxy.move_to(destination, proxy.walk_speed)
-
+		await proxy.move_to([destination.x, destination.y], proxy.walk_speed)
+	proxy.set_orientation(Vector2.UP)
+	proxy.play_anim("idle")
+	
 func interact_with_chalice(_proxy: PlayerProxy):
 	await DialogueService.open_dialogue("chalice")
 	VarsService.set_flag("kadath.left_barrier", true)
 	await EnvironmentService.fade_out()
-	FXService.play_sfx_at(self.slash_sound, Vector2(0,0))
-	await FXService.spatial_sfx_player.finished
+	await FXService.play_sfx_at(self.slash_sound, Vector2(0,0)).finished
 	await get_tree().create_timer(0.5).timeout
 	self.solve_room()
 	await EnvironmentService.fade_in()
