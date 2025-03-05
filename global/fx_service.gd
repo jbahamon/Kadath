@@ -31,6 +31,7 @@ func shake(object: Node, duration: float, amplitude: Vector2, time_scale_factor:
 
 func play_sfx(sound: AudioStream):
 	var player = AudioStreamPlayer.new()
+	player.bus = &"SFX"
 	self.get_tree().root.add_child(player)
 	player.stream = sound
 	player.finished.connect(player.queue_free)
@@ -39,9 +40,29 @@ func play_sfx(sound: AudioStream):
 
 func play_sfx_at(sound: AudioStream, position: Vector2):
 	var player = AudioStreamPlayer2D.new()
+	player.bus = &"SFX"
 	EnvironmentService.world.add_child(player)
 	player.stream = sound
 	player.position = position
 	player.finished.connect(player.queue_free)
 	player.play()
 	return player
+
+func play_gfx_at(effect_frames: SpriteFrames, position: Vector2, offset: Vector2, duration = -1.0):
+	var effect = AnimatedSprite2D.new()
+	var room = EnvironmentService.get_room()
+	effect.sprite_frames = effect_frames
+	room.add_child(effect)
+	effect.global_position = position
+	effect.offset = offset
+	effect.play(&"default")
+	
+	if duration > 0:
+		await get_tree().create_timer(duration).timeout
+	else:
+		await effect.animation_finished
+	
+	room.remove_child(effect)
+	
+	effect.visible = false
+	effect.queue_free()

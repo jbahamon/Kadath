@@ -1,0 +1,25 @@
+[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://b6bdmj3w67u27"]
+
+[ext_resource type="Texture2D" uid="uid://dr333he4l0fvu" path="res://battle/fx/status/channeled.png" id="1_bsopg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1cm5b"]
+atlas = ExtResource("1_bsopg")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2xrdb"]
+atlas = ExtResource("1_bsopg")
+region = Rect2(16, 0, 16, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1cm5b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xrdb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]

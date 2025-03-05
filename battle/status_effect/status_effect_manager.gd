@@ -1,5 +1,7 @@
 class_name StatusEffectManager
 
+signal added_or_removed(effects)
+
 var size:
 	get:
 		return self._effects.size()
@@ -63,7 +65,9 @@ func add(new_effect: StatusEffect):
 		new_effect.refresh(new_effect)
 	else:
 		self._effects[new_effect.get_id()] = new_effect
-		
+	
+	self.added_or_removed.emit(self._effects.values())
+	
 	if new_effect.trigger & StatusEffect.Trigger.ADD:
 		await new_effect.on_add(self.owner)
 	
@@ -97,7 +101,7 @@ func remove(effect_id: String):
 		effect.on_remove(self.owner)
 	
 	self._effects.erase(effect_id)
-		
+	
 	if effect.trigger & StatusEffect.Trigger.TURN_START:
 		self.turn_start_triggers -= 1
 		if self.turn_start_triggers <= 0:
@@ -121,6 +125,9 @@ func on_turn_start(turn_actor):
 			
 	for effect_id in to_remove:
 		self.remove(effect_id)
+		
+	if to_remove.size() > 0:
+		self.added_or_removed.emit(self._effects.values())
 
 func on_turn_end(turn_actor):
 	var to_remove = []
@@ -133,6 +140,9 @@ func on_turn_end(turn_actor):
 			
 	for effect_id in to_remove:
 		self.remove(effect_id)
+	
+	if to_remove.size() > 0:
+		self.added_or_removed.emit(self._effects.values())
 
 func before_actor_death(actor):
 	var to_remove = []
@@ -142,7 +152,9 @@ func before_actor_death(actor):
 			
 			if effect.marked_for_removal:
 				to_remove.append(effect.get_id())
-			
+	
+	if to_remove.size() > 0:
+		self.added_or_removed.emit(self._effects.values())
 
 func after_actor_death(actor):
 	var to_remove = []
@@ -155,3 +167,6 @@ func after_actor_death(actor):
 				
 	for effect_id in to_remove:
 		self.remove(effect_id)
+	
+	if to_remove.size() > 0:
+		self.added_or_removed.emit(self._effects.values())

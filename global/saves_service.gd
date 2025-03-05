@@ -50,8 +50,17 @@ func get_file_previews() -> Array:
 		
 		var filename = SAVE_FOLDER.path_join(SAVE_NAME_TEMPLATE % i)
 		if FileAccess.file_exists(filename):
-			save_filenames.push_back(filename)
+			save_filenames.push_back({
+				"index": i,
+				"file": filename
+			})
 		else:
-			save_filenames.push_back(null)
+			save_filenames.push_back({
+				"index": i,
+				"file": null
+			})
 	
 	return save_filenames
+
+func has_file_with_data() -> bool:
+	return get_file_previews().any(func (it): return it != null)

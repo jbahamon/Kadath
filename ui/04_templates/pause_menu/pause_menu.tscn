@@ -1,12 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://c3okprgd6vbwj"]
+[gd_scene load_steps=11 format=3 uid="uid://c3okprgd6vbwj"]
 
 [ext_resource type="Script" path="res://ui/02_molecules/keyboard_based_tab_container/keyboard_based_tab_container.gd" id="2_i7pxu"]
 [ext_resource type="PackedScene" uid="uid://cu30gjjhspgly" path="res://ui/04_templates/settings_menu/settings_menu.tscn" id="3"]
+[ext_resource type="FontFile" uid="uid://60oeotvtq5qv" path="res://ui/01_atoms/assets/fonts/By Wuchta/Letterstyle(1).ttf" id="3_7xxew"]
 [ext_resource type="PackedScene" uid="uid://bxtqflr2vn3o4" path="res://ui/03_organisms/party_submenu/party_submenu.tscn" id="4"]
 [ext_resource type="Script" path="res://ui/04_templates/settings_menu/settings.gd" id="5"]
 [ext_resource type="PackedScene" uid="uid://cakm1eb2hb4hh" path="res://ui/03_organisms/item_submenu/item_submenu.tscn" id="5_jjqat"]
 [ext_resource type="Script" path="res://ui/04_templates/pause_menu/pause_menu.gd" id="7"]
 [ext_resource type="StyleBox" uid="uid://brc46g1cj5k2v" path="res://ui/01_atoms/panel/panel.tres" id="9_rtvui"]
+[ext_resource type="PackedScene" uid="uid://c2opuixudajq" path="res://ui/02_molecules/help_bar/help_bar.tscn" id="9_sno00"]
 [ext_resource type="Texture2D" uid="uid://dxwh6a1rauvnx" path="res://ui/01_atoms/assets/icons/By ssugmi/icon-settings.png" id="18"]
 
 [node name="PauseMenu" type="MarginContainer"]
@@ -28,6 +30,8 @@ layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("2_i7pxu")
 tab_alignment = 1
+font = ExtResource("3_7xxew")
+font_size = 15
 
 [node name="Party" parent="Container/PauseMenuTabs" instance=ExtResource("4")]
 visible = false
@@ -50,23 +54,8 @@ controls_text = "[ {ui_left} ]/[ {ui_right} ] : Select  [ {ui_cancel} ]: Close  
 [node name="SettingsMenu" parent="Container/PauseMenuTabs/Settings" instance=ExtResource("3")]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="Container"]
+[node name="HelpBar" parent="Container" instance=ExtResource("9_sno00")]
 layout_mode = 2
-size_flags_vertical = 4
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Container/PanelContainer"]
-layout_mode = 2
-
-[node name="Help" type="Label" parent="Container/PanelContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Some help text"
-
-[node name="Controls" type="Label" parent="Container/PanelContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Some help text"
-horizontal_alignment = 2
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="exit_submenu" from="Container/PauseMenuTabs/Party" to="Container/PauseMenuTabs" method="focus_current_tab"]

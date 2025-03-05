@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://c4a8xbe0oyhu0"]
+
+[ext_resource type="Texture2D" uid="uid://d8vw3ht765ra" path="res://battle/fx/sparkle_big.png" id="1_sq74r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xltjf"]
+atlas = ExtResource("1_sq74r")
+region = Rect2(0, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3x7u6"]
+atlas = ExtResource("1_sq74r")
+region = Rect2(15, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_teiq3"]
+atlas = ExtResource("1_sq74r")
+region = Rect2(30, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ryry0"]
+atlas = ExtResource("1_sq74r")
+region = Rect2(45, 0, 15, 15)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xltjf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3x7u6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_teiq3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ryry0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]

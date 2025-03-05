@@ -1,3 +1,6 @@
+DownedStatus
+StatusEffect
+SpriteFrames
 Hit
 Weapon
 Equipment
@@ -10,5 +13,3 @@ HealingItem
 StyleBoxEmpty
 StyleBoxTexture
 StyleBoxLine
-StyleBoxFlat
-CharacterStats

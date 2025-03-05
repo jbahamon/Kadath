@@ -152,21 +152,6 @@ description = "Power up any attack this party member performs during their next 
 position = Vector2(0, -10)
 shape = SubResource("CapsuleShape2D_itmqi")
 
-[node name="South" type="Marker2D" parent="Battler/Hitspots" index="0"]
-position = Vector2(0, 8)
-
-[node name="North" type="Marker2D" parent="Battler/Hitspots" index="1"]
-position = Vector2(0, -12)
-
-[node name="Center" type="Marker2D" parent="Battler/Hitspots" index="2"]
-position = Vector2(0, -18)
-
-[node name="West" type="Marker2D" parent="Battler/Hitspots" index="3"]
-position = Vector2(-14, 1)
-
-[node name="East" type="Marker2D" parent="Battler/Hitspots" index="4"]
-position = Vector2(14, 1)
-
 [node name="ChargeParticles" type="CPUParticles2D" parent="Battler" index="5"]
 visible = false
 material = SubResource("CanvasItemMaterial_imn63")
@@ -193,6 +178,21 @@ visible = false
 z_index = 1
 sprite_frames = SubResource("SpriteFrames_t71ki")
 frame_progress = 0.505766
+
+[node name="South" type="Marker2D" parent="Battler/Hitspots" index="0"]
+position = Vector2(0, 8)
+
+[node name="North" type="Marker2D" parent="Battler/Hitspots" index="1"]
+position = Vector2(0, -12)
+
+[node name="Center" type="Marker2D" parent="Battler/Hitspots" index="2"]
+position = Vector2(0, -18)
+
+[node name="West" type="Marker2D" parent="Battler/Hitspots" index="3"]
+position = Vector2(-14, 1)
+
+[node name="East" type="Marker2D" parent="Battler/Hitspots" index="4"]
+position = Vector2(14, 1)
 
 [editable path="Battler"]
 [editable path="Battler/Actions/Skill/CrescentBlast/AreaOfEffect"]

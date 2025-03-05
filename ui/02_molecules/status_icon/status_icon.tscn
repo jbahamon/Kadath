@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://k0uxfgu4f6u5"]
+
+[ext_resource type="Script" path="res://ui/02_molecules/status_icon/status_icon.gd" id="1_oo3qp"]
+[ext_resource type="SpriteFrames" uid="uid://c5ebbvtd414e" path="res://battle/fx/status/def_up.tres" id="1_yu1m5"]
+
+[node name="StatusIcon" type="Control"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_oo3qp")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("1_yu1m5")
+autoplay = "default"
+frame_progress = 0.718455
+centered = false

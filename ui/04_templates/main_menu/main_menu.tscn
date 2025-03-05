@@ -1,10 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://c56yhf5p381ns"]
+[gd_scene load_steps=13 format=3 uid="uid://c56yhf5p381ns"]
 
 [ext_resource type="PackedScene" uid="uid://cu30gjjhspgly" path="res://ui/04_templates/settings_menu/settings_menu.tscn" id="1"]
-[ext_resource type="PackedScene" uid="uid://kjfr6yr534rp" path="res://ui/04_templates/saves_menu/saves_popup.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://kjfr6yr534rp" path="res://ui/04_templates/saves_menu/saves_menu.tscn" id="2"]
 [ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="3"]
-[ext_resource type="Script" path="res://ui/04_templates/main_menu/settings_popup.gd" id="4_8kpic"]
+[ext_resource type="Script" path="res://ui/04_templates/main_menu/title_screen.gd" id="3_8tfpf"]
+[ext_resource type="AudioStream" uid="uid://7h4bw2b6rinh" path="res://sound/music/Eclipse/Aether's Dawn (Without Cello).ogg" id="3_a3f4q"]
+[ext_resource type="FontFile" uid="uid://7rvrjv6h33bx" path="res://ui/01_atoms/assets/fonts/By Valiegraphie/Uncial_WIP.ttf" id="4_1ryse"]
+[ext_resource type="FontFile" uid="uid://60oeotvtq5qv" path="res://ui/01_atoms/assets/fonts/By Wuchta/Letterstyle(1).ttf" id="4_748ct"]
 [ext_resource type="Script" path="res://ui/04_templates/main_menu/main_menu.gd" id="5"]
+[ext_resource type="PackedScene" uid="uid://j77euw727jqq" path="res://ui/04_templates/credits/credits.tscn" id="6_513fe"]
+[ext_resource type="AudioStream" uid="uid://biqsf23fc0cbi" path="res://sound/ui/blops/High - Kenney.wav" id="6_erdj7"]
+[ext_resource type="PackedScene" uid="uid://c2opuixudajq" path="res://ui/02_molecules/help_bar/help_bar.tscn" id="6_m5ktf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rfrve"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
@@ -18,73 +30,143 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color(0, 0, 0.14902, 1)
 
-[node name="Main Menu" type="VBoxContainer" parent="."]
+[node name="MainContainer" type="VBoxContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1.0
-offset_right = -21.5946
-offset_bottom = -17.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = ExtResource("3")
 alignment = 1
 script = ExtResource("5")
-popup_path = NodePath("../PopupPanel")
+music = ExtResource("3_a3f4q")
 
-[node name="Title" type="Label" parent="Main Menu"]
+[node name="TitleScreen" type="VBoxContainer" parent="MainContainer"]
 layout_mode = 2
-text = "The Dream-Quest of Unknown Kadath"
-horizontal_alignment = 1
+size_flags_vertical = 3
+alignment = 1
+script = ExtResource("3_8tfpf")
 
-[node name="VBoxContainer" type="HBoxContainer" parent="Main Menu"]
+[node name="TitleContainer" type="HBoxContainer" parent="MainContainer/TitleScreen"]
+layout_mode = 2
+
+[node name="Filler" type="Control" parent="MainContainer/TitleScreen/TitleContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/TitleScreen/TitleContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="Subtitle" type="RichTextLabel" parent="MainContainer/TitleScreen/TitleContainer/VBoxContainer"]
+texture_filter = 1
+clip_contents = false
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.376471, 0.192157, 0.411765, 1)
+theme_override_fonts/normal_font = ExtResource("4_748ct")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = " [wave rate=20.0 level=5 connected=1]Dream Quest:[/wave]"
+fit_content = true
+scroll_active = false
+
+[node name="Title" type="RichTextLabel" parent="MainContainer/TitleScreen/TitleContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.188235, 0.611765, 0.560784, 1)
+theme_override_fonts/normal_font = ExtResource("4_1ryse")
+theme_override_font_sizes/normal_font_size = 128
+bbcode_enabled = true
+text = "To Unknown Kadath"
+fit_content = true
+
+[node name="Filler2" type="Control" parent="MainContainer/TitleScreen/TitleContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.15
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/TitleScreen"]
 layout_mode = 2
 alignment = 1
 
-[node name="Menu Options" type="VBoxContainer" parent="Main Menu/VBoxContainer"]
+[node name="Menu Options" type="VBoxContainer" parent="MainContainer/TitleScreen/HBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Continue Game" type="Button" parent="Main Menu/VBoxContainer/Menu Options"]
+[node name="Continue Game" type="Button" parent="MainContainer/TitleScreen/HBoxContainer/Menu Options"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../Quit")
+focus_neighbor_bottom = NodePath("../New Game")
 text = "Continue Game"
 
-[node name="New Game" type="Button" parent="Main Menu/VBoxContainer/Menu Options"]
+[node name="New Game" type="Button" parent="MainContainer/TitleScreen/HBoxContainer/Menu Options"]
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../Settings")
 text = "New Game"
 
-[node name="Settings" type="Button" parent="Main Menu/VBoxContainer/Menu Options"]
+[node name="Settings" type="Button" parent="MainContainer/TitleScreen/HBoxContainer/Menu Options"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../New Game")
+focus_neighbor_bottom = NodePath("../Credits")
 mouse_filter = 2
 text = "Settings"
 
-[node name="Quit" type="Button" parent="Main Menu/VBoxContainer/Menu Options"]
+[node name="Credits" type="Button" parent="MainContainer/TitleScreen/HBoxContainer/Menu Options"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Settings")
+focus_neighbor_bottom = NodePath("../Quit")
+mouse_filter = 2
+text = "Credits"
+
+[node name="Quit" type="Button" parent="MainContainer/TitleScreen/HBoxContainer/Menu Options"]
 layout_mode = 2
 mouse_filter = 2
 text = "Quit"
 
-[node name="Popups" type="Node" parent="Main Menu"]
-
-[node name="Saves" parent="Main Menu/Popups" instance=ExtResource("2")]
+[node name="SettingsMenu" parent="MainContainer" instance=ExtResource("1")]
 visible = false
-
-[node name="Settings" type="PopupPanel" parent="Main Menu/Popups"]
-theme = ExtResource("3")
-script = ExtResource("4_8kpic")
-
-[node name="SettingsMenu" parent="Main Menu/Popups/Settings" instance=ExtResource("1")]
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 100.0
-offset_bottom = 100.0
+layout_mode = 2
 mouse_filter = 2
 
-[connection signal="pressed" from="Main Menu/VBoxContainer/Menu Options/Continue Game" to="Main Menu" method="_on_Continue_Game_pressed"]
-[connection signal="pressed" from="Main Menu/VBoxContainer/Menu Options/New Game" to="Main Menu" method="_on_New_Game_pressed"]
-[connection signal="pressed" from="Main Menu/VBoxContainer/Menu Options/Settings" to="Main Menu" method="_on_Settings_pressed"]
-[connection signal="pressed" from="Main Menu/VBoxContainer/Menu Options/Quit" to="Main Menu" method="_on_Quit_pressed"]
-[connection signal="about_to_popup" from="Main Menu/Popups/Settings" to="Main Menu/Popups/Settings" method="on_about_to_popup"]
-[connection signal="exit" from="Main Menu/Popups/Settings/SettingsMenu" to="Main Menu/Popups/Settings" method="hide"]
+[node name="SavesMenu" parent="MainContainer" instance=ExtResource("2")]
+visible = false
+layout_mode = 2
+
+[node name="Credits" parent="MainContainer" instance=ExtResource("6_513fe")]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HelpBar" parent="MainContainer" instance=ExtResource("6_m5ktf")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_rfrve")
+
+[node name="UIControlPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+bus = &"UI"
+
+[node name="UINotificationPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("6_erdj7")
+bus = &"UI"
+
+[node name="BGMPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"BGM"
+
+[connection signal="focus_entered" from="MainContainer/TitleScreen/HBoxContainer/Menu Options/Continue Game" to="MainContainer" method="_on_continue_game_focus_entered"]
+[connection signal="pressed" from="MainContainer/TitleScreen/HBoxContainer/Menu Options/Continue Game" to="MainContainer" method="_on_Continue_Game_pressed"]
+[connection signal="focus_entered" from="MainContainer/TitleScreen/HBoxContainer/Menu Options/New Game" to="MainContainer" method="_on_new_game_focus_entered"]
+[connection signal="pressed" from="MainContainer/TitleScreen/HBoxContainer/Menu Options/New Game" to="MainContainer" method="_on_New_Game_pressed"]
+[connection signal="focus_entered" from="MainContainer/TitleScreen/HBoxContainer/Menu Options/Settings" to="MainContainer" method="_on_settings_focus_entered"]
+[connection signal="pressed" from="MainContainer/TitleScreen/HBoxContainer/Menu Options/Settings" to="MainContainer" method="_on_Settings_pressed"]
+[connection signal="focus_entered" from="MainContainer/TitleScreen/HBoxContainer/Menu Options/Credits" to="MainContainer" method="_on_credits_focus_entered"]
+[connection signal="pressed" from="MainContainer/TitleScreen/HBoxContainer/Menu Options/Credits" to="MainContainer" method="_on_Credits_pressed"]
+[connection signal="focus_entered" from="MainContainer/TitleScreen/HBoxContainer/Menu Options/Quit" to="MainContainer" method="_on_quit_focus_entered"]
+[connection signal="pressed" from="MainContainer/TitleScreen/HBoxContainer/Menu Options/Quit" to="MainContainer" method="_on_Quit_pressed"]
+[connection signal="exit" from="MainContainer/SettingsMenu" to="MainContainer" method="_on_menu_exited"]
+[connection signal="exit" from="MainContainer/Credits" to="MainContainer" method="_on_menu_exited"]

@@ -32,7 +32,6 @@ var focus_in_tree = false
 @onready var hold_run_checkbox: CheckBox = $CenterContainer/Settings/RunBehaviorContainer/Hold
 @onready var toggle_run_checkbox: CheckBox = $CenterContainer/Settings/RunBehaviorContainer/Toggle
 
-@onready var sample_player: AudioStreamPlayer = $AudioStreamPlayer
 @export var sfx_sample: AudioStream
 
 func _init():
@@ -45,9 +44,16 @@ func _ready():
 	self.sfx_volume.set_value_no_signal(SettingsService.volume[&"SFX"])
 	self.ui_volume.set_value_no_signal(SettingsService.volume[&"UI"])
 	
-	self.music_volume.focus_entered.connect(UIService.play_focus_sound)
-	self.sfx_volume.focus_entered.connect(UIService.play_focus_sound)
-	self.ui_volume.focus_entered.connect(UIService.play_focus_sound)
+	self.music_volume.focus_entered.connect(self.on_slider_focused.bind("Raise or lower the music volume."))
+	self.sfx_volume.focus_entered.connect(self.on_slider_focused.bind("Raise or lower the sound effect volume."))
+	self.ui_volume.focus_entered.connect(self.on_slider_focused.bind("Raise or lower the interface sound volume."))
+	self.text_speed.focus_entered.connect(self.on_slider_focused.bind("Change dialogue text speed."))
+	self.text_speed.focus_exited.connect(UIService.end_text_speed_demo)
+	self.enable_shake_checkbox.focus_entered.connect(self.on_checkbox_focused.bind("Enable/disable camera shaking in battles and cutscenes."))
+	self.enable_flash_checkbox.focus_entered.connect(self.on_checkbox_focused.bind("Enable/disable camera flashing in battles and cutscenes."))
+	
+	self.hold_run_checkbox.focus_entered.connect(self.on_toggle_focused.bind("Hold [ {action_run} ] to run.".format(VarsService.strings)))
+	self.toggle_run_checkbox.focus_entered.connect(self.on_toggle_focused.bind("Press [ {action_run} ] to toggle between walking and running.".format(VarsService.strings)))
 	
 	buttons = {}
 	for action in labels.keys():
@@ -67,8 +73,9 @@ func _ready():
 	
 	self.text_speed.set_value_no_signal(SettingsService.text_speed)
 	
-	# FIXME is this needed for the main menu
-	# self.on_grab_focus()
+	self.enable_shake_checkbox.pressed.connect(UIService.play_interaction_sound)
+	self.enable_flash_checkbox.pressed.connect(UIService.play_interaction_sound)
+
 	
 func add_input_option(action: String, label_text: String):
 	add_label(label_text)
@@ -89,6 +96,8 @@ func add_button(action: String):
 		var keycode = InputMap.action_get_events(action)[0].keycode
 		button.text = "<%s>" % OS.get_keycode_string(keycode)
 	
+	button.focus_entered.connect(self.on_binding_focused)
+	button.pressed.connect(UIService.play_focus_sound)
 	button.pressed.connect(self._button_pressed.bind(action))
 	grid.add_child(button)
 	
@@ -152,14 +161,26 @@ func _on_ListenForInputPopup_key_pressed(action: String, event: InputEventKey):
 	buttons[action].grab_focus()
 	buttons[action].grab_click_focus()
 	buttons[action].text = "<%s>" % OS.get_keycode_string(event.keycode)
+	UIService.play_interaction_sound()
 
 func _unhandled_input(event):
 	if event.is_action_pressed(&"ui_cancel") and self.get_parent().visible:
 		self.exit.emit()
 		self.get_viewport().set_input_as_handled()
 		self.set_process_unhandled_input(false)
-		
-		
+
+func show_menu():
+	self.show()
+	self.on_grab_focus()
+	self.set_process_unhandled_input(true)
+
+func hide_menu():
+	self.hide()
+	self.set_process_unhandled_input(false)
+
+func update_menu():
+	pass
+
 func on_grab_focus():
 	var first_element = $CenterContainer/Settings/VolumeSliders/MusicVolumeSlider
 
@@ -178,6 +199,10 @@ func update_ui_volume(value):
 	UIService.play_focus_sound()
 	SettingsService.update_volume(&"UI", self.ui_volume.value)
 	
+func update_text_speed(value):
+	UIService.start_text_speed_demo()
+	SettingsService.update_text_speed(value)
+
 func update_run_behavior(value):
 	SettingsService.update_run_behavior(value)
 
@@ -186,3 +211,28 @@ func update_enable_shake(toggled_on: bool) -> void:
 
 func update_enable_flash(toggled_on: bool) -> void:
 	SettingsService.update_enable_flashing(toggled_on)
+
+func on_slider_focused(help_text):
+	UIService.play_focus_sound()
+	UIService.set_menu_help(
+		help_text,
+		"[ {ui_up} ]/[ {ui_down} ] : Move [ {ui_left} ]/[ {ui_right} ] : Increase/Decrease [ {ui_cancel} ] : Return"
+	)
+
+func on_checkbox_focused(help_text):
+	UIService.set_menu_help(
+		help_text,
+		"[ {ui_up} ]/[ {ui_down} ] : Move [ {ui_cancel} ] : Return [ {ui_accept} ] : Toggle"
+	)
+
+func on_binding_focused():
+	UIService.set_menu_help(
+		"Change a specific control binding.",
+		"[ {ui_up} ]/[ {ui_down} ]/[ {ui_left} ]/[ {ui_right} ] : Move [ {ui_cancel} ] : Return [ {ui_accept} ] : Change"
+	)
+
+func on_toggle_focused(help_text):
+	UIService.set_menu_help(
+		help_text,
+		"[ {ui_up} ]/[ {ui_down} ]/[ {ui_left} ]/[ {ui_right} ] : Move [ {ui_cancel} ] : Return [ {ui_accept} ] : Select"
+	)

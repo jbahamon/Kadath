@@ -4,7 +4,7 @@ signal exit_submenu
 
 const select_controls = "[ {ui_up} ]/[ {ui_down} ] : Select  [ {ui_cancel} ]: Return  [ {ui_accept} ]: Confirm"
 
-var ItemEntry = preload("res://ui/02_molecules/item_entry/item_entry.tscn")
+var ItemEntry = preload("res://ui/02_molecules/item_list_item/item_list_item.tscn")
 var PartyMemberListItem = preload("res://ui/02_molecules/party_member_list_item/party_member_list_item.tscn")
 
 @export var icon: Texture2D 

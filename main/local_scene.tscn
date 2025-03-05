@@ -5,7 +5,7 @@
 [ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="4"]
 [ext_resource type="Script" path="res://ui/04_templates/pause_menu/menu_popup.gd" id="6"]
 [ext_resource type="Script" path="res://main/local_scene.gd" id="7"]
-[ext_resource type="PackedScene" uid="uid://kjfr6yr534rp" path="res://ui/04_templates/saves_menu/saves_popup.tscn" id="8"]
+[ext_resource type="PackedScene" uid="uid://kjfr6yr534rp" path="res://ui/04_templates/saves_menu/saves_menu.tscn" id="8"]
 [ext_resource type="PackedScene" uid="uid://bo1y3b4btisvv" path="res://ui/04_templates/dialogue_box/dialogue_box.tscn" id="8_pwmoh"]
 [ext_resource type="PackedScene" uid="uid://bg7hnqo1b5c6m" path="res://main/player_proxy.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://ex17k532alby" path="res://ui/04_templates/battle_ui/battle_ui.tscn" id="11_42lm3"]
@@ -157,7 +157,6 @@ visible = false
 [node name="DialogueLayer" type="CanvasLayer" parent="."]
 
 [node name="Dialogue" parent="DialogueLayer" instance=ExtResource("8_pwmoh")]
-characters_per_second = 25.0
 skip_speed_factor = 5.0
 
 [node name="MenuLayer" type="CanvasLayer" parent="."]
@@ -259,8 +258,6 @@ stream = ExtResource("11_pu83y")
 bus = &"UI"
 
 [connection signal="cancel" from="MenuLayer/MenuPopup/PauseMenu/Container/PauseMenuTabs" to="MenuLayer/MenuPopup" method="_on_pause_menu_tabs_cancel"]
-[connection signal="about_to_popup" from="MenuLayer/SavesPopup" to="." method="_on_menu_about_to_show"]
-[connection signal="popup_hide" from="MenuLayer/SavesPopup" to="." method="_on_menu_popup_hide"]
 
 [editable path="SubViewportContainer/SubViewport/World/PlayerProxy"]
 [editable path="MenuLayer/MenuPopup/PauseMenu"]

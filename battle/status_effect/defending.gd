@@ -1,6 +1,8 @@
 extends StatusEffect
 
+var defend_icon = preload("res://battle/fx/status/def_up.tres")
 func _init():
+	self.icon = defend_icon
 	self.physical_defense_modifier = 0.5
 	self.magic_defense_modifier = 0.5
 	self.trigger = StatusEffect.Trigger.TURN_START | StatusEffect.Trigger.BEFORE_ACTOR_DEATH

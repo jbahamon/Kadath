@@ -33,11 +33,13 @@ func get_turn(current_actors: Array) -> Turn:
 				else:
 					break
 
+
 	var turn = Turn.new()
 	turn.actor = actor
 	turn.action = action
 	self.interface.set_info_text(null)
 	self.interface.hide_options()
+	UIService.play_interaction_sound()
 
 	return turn
 

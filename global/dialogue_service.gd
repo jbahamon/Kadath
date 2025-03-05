@@ -1,15 +1,9 @@
 extends Node
 
-const BASE_TEXT_SPEED = 10.0
-const TEXT_SPEED_FACTOR = 2.5
-
 var dialogue_box
 var narration_layer
 var current_dialogue: DialogueResource
 var current_responses: Array = []
-
-var characters_per_second = 15.0
-
 
 func initialize(init_dialogue_box, init_narration_layer):
 	self.dialogue_box = init_dialogue_box
@@ -23,9 +17,6 @@ func exit():
 	
 func load_location_dialogues(location: Location):
 	self.current_dialogue = location.story
-
-func set_text_speed(speed: int):
-	self.dialogue_box.characters_per_second = BASE_TEXT_SPEED + speed * TEXT_SPEED_FACTOR
 	
 func add_response(response):
 	self.current_responses.append(response)
@@ -40,7 +31,6 @@ func open_dialogue(dialogue_id: String) -> Array:
 		var dialogue_line: DialogueLine = await self.current_dialogue.get_next_dialogue_line(dialogue_id)
 		if dialogue_line == null:
 			break
-		
 		var strings = VarsService.strings
 		var text = dialogue_line.text.format(strings) # this might not be needed later
 		
@@ -53,12 +43,14 @@ func open_dialogue(dialogue_id: String) -> Array:
 				"text": text
 			})
 			
+			
 			dialogue_box.queue_dialogue_lines(dialogue_lines)
 			
 			# Note that this doesn't handle skipped cutscenes. We establish that 
 			# cutscenes involving user input should be unskippable. If needed, break up the 
 			# cutscene as needed to limit the unskippable part.
 			var response: DialogueResponse = await dialogue_box.response_chosen
+			
 			dialogue_lines = []
 			dialogue_id = response.next_id
 		else:
@@ -76,6 +68,7 @@ func open_dialogue(dialogue_id: String) -> Array:
 	else:
 		dialogue_box.close_dialogue_box()
 		return self.current_responses
+	
 
 func pause_dialogue():
 	dialogue_box.pause()
@@ -94,5 +87,14 @@ func narrate(dialogue_id: String) -> void:
 
 	await narration_layer.narrate(dialogue_line.text.format(VarsService.strings))
 
+func tween_text(text_container, text: String):
+	text_container.set_text(text)
+	var tween = self.get_tree().create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	
+	var time = text_container.get_total_character_count() / SettingsService.text_speed
+	tween.tween_method(text_container.set_visible_ratio, 0.0, 1.0, time)
+	tween.play()
+	return tween
+	
 func skip_narration():
 	narration_layer.skip()

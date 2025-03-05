@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://caki3n35ds5sk"]
+[gd_scene load_steps=8 format=3 uid="uid://caki3n35ds5sk"]
 
 [ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="1"]
 [ext_resource type="Script" path="res://ui/02_molecules/party_member_stats/party_member_stats.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://j8a0ncohd3ms" path="res://ui/01_atoms/assets/icons/By John Ivess/small-icon-accessory.png" id="3"]
+[ext_resource type="FontFile" uid="uid://60oeotvtq5qv" path="res://ui/01_atoms/assets/fonts/By Wuchta/Letterstyle(1).ttf" id="3_at0bu"]
 [ext_resource type="Texture2D" uid="uid://dkgwdhrjgti27" path="res://party/carter/menu_sprite.png" id="3_enf6o"]
 [ext_resource type="Texture2D" uid="uid://c1rsm0d2w3045" path="res://ui/01_atoms/assets/icons/By John Ivess/small-icon-armor.png" id="5"]
 [ext_resource type="Texture2D" uid="uid://c0df7sioi4vge" path="res://ui/01_atoms/assets/icons/By John Ivess/small-icon-sword.png" id="6"]
@@ -25,8 +26,17 @@ script = ExtResource("2")
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="VBoxContainer"]
+[node name="StatsTitle" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="StatsLabel" type="Label" parent="VBoxContainer/StatsTitle"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_at0bu")
+theme_override_font_sizes/font_size = 15
 text = "Stats"
 
 [node name="SummaryContainer" type="HBoxContainer" parent="VBoxContainer"]
@@ -153,8 +163,17 @@ size_flags_horizontal = 3
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="Label3" type="Label" parent="VBoxContainer"]
+[node name="EquipmentTitle" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="EquipmentLabel" type="Label" parent="VBoxContainer/EquipmentTitle"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_at0bu")
+theme_override_font_sizes/font_size = 15
 text = "Equipment"
 
 [node name="EquipmentContainer" type="HBoxContainer" parent="VBoxContainer"]
@@ -273,9 +292,18 @@ size_flags_horizontal = 3
 [node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="SpecialCommandLabel" type="Label" parent="VBoxContainer"]
+[node name="SpecialCommandTitle" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="SpecialCommandLabel" type="Label" parent="VBoxContainer/SpecialCommandTitle"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_at0bu")
+theme_override_font_sizes/font_size = 15
 text = "Special Command: Analyze"
 vertical_alignment = 1
 

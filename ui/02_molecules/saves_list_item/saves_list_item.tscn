@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://dy540dymd3k6k"]
+
+[ext_resource type="Script" path="res://ui/02_molecules/saves_list_item/saves_list_item.gd" id="1_8pgpg"]
+
+[node name="SavesListItem" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8pgpg")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Button"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Button/MarginContainer"]
+layout_mode = 2

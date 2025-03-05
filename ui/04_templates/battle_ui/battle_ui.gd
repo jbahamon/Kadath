@@ -2,7 +2,7 @@ extends MarginContainer
 
 class_name BattleUI
 
-var ItemEntry = preload("res://ui/02_molecules/item_entry/item_entry.tscn")
+var ItemEntry = preload("res://ui/02_molecules/item_list_item/item_list_item.tscn")
 
 @onready var party_status = $VBoxContainer/PartyStatusContainer/PartyStatus
 @onready var options = $VBoxContainer/OptionsContainer

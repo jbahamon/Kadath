@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://kjfr6yr534rp"]
+
+[ext_resource type="Script" path="res://ui/04_templates/saves_menu/saves_menu.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://brhpxl8pukdr" path="res://ui/03_organisms/select_list/select_list.tscn" id="2_rgwue"]
+[ext_resource type="Script" path="res://ui/04_templates/saves_menu/confirm_popup.gd" id="4"]
+
+[node name="SavesMenu" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("2")
+
+[node name="SelectList" parent="." instance=ExtResource("2_rgwue")]
+layout_mode = 2
+focused_if_visible = true
+
+[node name="ConfirmationPopup" type="PopupPanel" parent="."]
+script = ExtResource("4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ConfirmationPopup"]
+offset_right = 246.0
+offset_bottom = 100.0
+alignment = 1
+
+[node name="Label" type="Label" parent="ConfirmationPopup/VBoxContainer"]
+layout_mode = 2
+text = "Overwrite selected file?"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ConfirmationPopup/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Yes" type="Button" parent="ConfirmationPopup/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+text = "Yes"
+
+[node name="No" type="Button" parent="ConfirmationPopup/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+text = "No"
+
+[connection signal="pressed" from="ConfirmationPopup/VBoxContainer/HBoxContainer/Yes" to="ConfirmationPopup" method="_on_Yes_pressed"]
+[connection signal="pressed" from="ConfirmationPopup/VBoxContainer/HBoxContainer/No" to="ConfirmationPopup" method="_on_No_pressed"]

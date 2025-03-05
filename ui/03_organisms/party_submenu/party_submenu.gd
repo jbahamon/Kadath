@@ -57,7 +57,9 @@ func on_item_requested(item_class, party_member: PartyMember):
 	
 	if items.size() > 0:
 		await item_list.done
-	
+		UIService.play_interaction_sound()
+	else:
+		UIService.play_error_sound()
 	await self.set_party_list_mode()
 	
 	self.party_member_stats.set_process_unhandled_input(true)

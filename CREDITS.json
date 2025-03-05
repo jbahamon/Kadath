@@ -14,7 +14,7 @@
 		"author_url": "https://ivess.itch.io/",
 		"asset_name": "Ivess's Fantasy RPG Icons Pack",
 		"asset_url": "https://ivess.itch.io/ivess-fantasy-rpg-icon-pack",
-		"asset_usage": "Equipment icons"
+		"asset_usage": "Equipment and battle icons"
 	},
 	
 	{
@@ -24,6 +24,15 @@
 		"asset_name": "Skill Icons Set",
 		"asset_url": "https://quintino-pixels.itch.io/free-pixel-art-skill-icons-pack",
 		"asset_usage": "Equipment icons"
+	},
+	
+	{
+		"category": "graphics",
+		"author_name": "Quintino Pixels",
+		"author_url": "https://quintino-pixels.itch.io/",
+		"asset_name": "Free Assorted Icons",
+		"asset_url": "https://quintino-pixels.itch.io/assorted-icons",
+		"asset_usage": "Battle Icons, included for future use"
 	},
 	
 	{
@@ -87,9 +96,18 @@
 		"author_url": "https://srtoasty.itch.io/",
 		"asset_name": "UI assets pack 2 :)",
 		"asset_url": "https://srtoasty.itch.io/ui-assets-pack-2",
-		"asset_usage": "UI elements included for potential future use"
+		"asset_usage": "Dialogue advance indicator"
 	},
 	
+	
+	{
+		"category": "graphics",
+		"author_name": "kgpaints",
+		"author_url": "https://linktr.ee/kgpaints",
+		"asset_name": "Too Much Ink",
+		"asset_url": "https://kgpaints.itch.io/too-much-ink",
+		"asset_usage": "Font included for potential future use"
+	},
 	
 	{
 		"category": "graphics",
@@ -111,9 +129,18 @@
 	
 	{
 		"category": "sounds",
+		"author_name": "Rhodyn",
+		"author_url": "https://rhodyn.itch.io/",
+		"asset_name": "Eclipse | Aether's Dawn (Without Cello)",
+		"asset_url": "https://rhodyn.itch.io/eclipse",
+		"asset_usage": "Title screen BGM"
+	},
+	
+	{
+		"category": "sounds",
 		"author_name": "Juhani Junkala",
 		"author_url": "https://www.youtube.com/@subspaceaudio6850",
-		"asset_name": "JRPG Pack 5 Action",
+		"asset_name": "JRPG Pack 5 Action | Army Approaching",
 		"asset_url": "https://opengameart.org/content/jrpg-pack-5-action",
 		"asset_usage": "Prologue BGM"
 	},
@@ -123,7 +150,7 @@
 		"author_name": "Original music by Marllon Silva (xDeviruchi)",
 		"author_literal": true,
 		"author_url": "https://www.youtube.com/xdeviruchi",
-		"asset_name": "16-Bit Fantasy & Adventure Music Pack",
+		"asset_name": "16-Bit Fantasy & Adventure Music Pack | Decisive Battle 1 - Don't Be Afraid ",
 		"asset_url": "https://xdeviruchi.itch.io/16-bit-fantasy-adventure-music-pack",
 		"asset_usage": "Thymiaterion battle BGM"
 	},
@@ -321,6 +348,7 @@
 		"author_name": "colorsCrimsonTears",
 		"author_url": "https://freesound.org/people/colorsCrimsonTears/",
 		"asset_name": "Various sounds",
+		"asset_url": "https://freesound.org/people/colorsCrimsonTears/#sounds",
 		"asset_usage": "Various battle sound effects"
 	},
 	

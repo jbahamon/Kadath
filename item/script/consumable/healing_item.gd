@@ -8,11 +8,15 @@ enum RecoveryMode {
 	ABSOLUTE,
 	PERCENTAGE
 }
+
 @export var recovery_mode: RecoveryMode = RecoveryMode.ABSOLUTE
 @export var energy_recovery_mode: RecoveryMode = RecoveryMode.ABSOLUTE
 @export var health: int = 0
 @export var energy: int = 0
 @export var status_effects: Array[String] = []
+@export var battle_offset: Vector2
+@export var battle_fx: SpriteFrames
+@export var battle_fx_duration = -1.0
 
 func use(targets: Array):
 	
@@ -48,13 +52,19 @@ func use_in_battle(targets: Array):
 		FXService.play_sfx(recovery_sound)
 	else:
 		FXService.play_sfx_at(recovery_sound, targets[0].global_position)
-		
+	
 	for target in targets:
 		lambdas.append(
 			func (): 
 				var orientation = target.current_orientation
 				target.set_orientation(Vector2.DOWN)
 				target.play_anim("spin")
+				FXService.play_gfx_at(
+					self.battle_fx, 
+					target.global_position, 
+					self.battle_offset, 
+					self.battle_fx_duration
+				)
 				await target.get_tree().create_timer(0.75).timeout
 				target.play_anim("idle")
 				# await show_effects

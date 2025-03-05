@@ -1,12 +1,20 @@
 extends BattleAction
 
-const base_use_sound = preload("res://sound/fx/item/Default - harvey656.wav")
+const base_use_sound: AudioStream = preload("res://sound/fx/item/Default - harvey656.wav")
+const sparkle_scene = preload("res://battle/fx/item_sparkle.tscn") 
 
 var item = null
 var targets = null
 var currently_highlighted_targets = null
 var stored_materials = []
+var sparkle: AnimatedSprite2D
+var particles: CPUParticles2D
 
+func _init() -> void:
+	self.sparkle = sparkle_scene.instantiate()
+	self.particles = sparkle.get_node("Particles")
+	self.sparkle.visible = false
+	
 func reset():
 	self.item = null
 	self.targets = null
@@ -49,9 +57,25 @@ func pop_parameter() -> bool:
 	
 func execute(actor):
 	actor.play_anim("use_item")
-	await actor.get_tree().create_timer(0.25).timeout
+	# TODO Note that this action is not in the tree, so we have to move the sparkle to the actor
+	await actor.get_tree().create_timer(0.3).timeout
 	FXService.play_sfx_at(self.base_use_sound, actor.global_position)
-	await actor.get_tree().create_timer(0.65).timeout
+	
+	actor.add_child(self.sparkle)
+	self.sparkle.visible = true
+	self.particles.emitting = true
+	
+	self.sparkle.offset = Vector2(-7, -47)
+	self.particles.position = Vector2(0, -40)
+
+	var tween = actor.get_tree().create_tween().set_parallel(true)
+	tween.tween_property(self.sparkle, "offset", Vector2(-7, -97), 0.75)
+	tween.tween_property(particles, "position", Vector2(0.5, -90.5), 0.75)
+	await tween.finished
+	particles.emitting = false
+	self.sparkle.visible = false
+	actor.remove_child(self.sparkle)
+
 	var used 
 	if not self.item.needs_targets():
 		used = await self.item.use_in_battle()

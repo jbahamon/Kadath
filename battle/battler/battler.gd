@@ -82,6 +82,7 @@ func _ready():
 	assert(self.anim_path)
 	self.anim = get_node(self.anim_path)
 	self.toast.position = self.toast_offset
+	self.status_effects.added_or_removed.connect($StatusGrid.set_statuses)
 	self.reset_stats()
 	
 func reset_stats():
@@ -92,6 +93,7 @@ func initialize(ui: BattleUI):
 	self.ai.interface = ui
 
 func free():
+	self.status_effects.added_or_removed.disconnect($StatusGrid.set_statuses)
 	self.status_effects._destroy()
 	super.free()
 	

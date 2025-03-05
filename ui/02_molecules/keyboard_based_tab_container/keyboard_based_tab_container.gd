@@ -15,10 +15,8 @@ const default_modulate = Color("#FFFFFF")
 @export var hover_tab: StyleBox
 @export var focused_tab: StyleBox
 
-@export var normal_font_color: Color
-@export var clicked_font_color: Color
-@export var disabled_font_color: Color
-@export var focused_font_color: Color
+@export var font: Font
+@export var font_size: int
 
 @export var content_style: StyleBox
 
@@ -94,6 +92,9 @@ func build_tab_button_for(child: Control):
 	
 	var button = Button.new()
 	button.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
+	button.add_theme_font_override("font", font)
+	button.add_theme_font_size_override("font_size", font_size)
 	
 	if normal_tab != null:
 		button.add_theme_stylebox_override("normal", normal_tab)

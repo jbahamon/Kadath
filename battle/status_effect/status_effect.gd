@@ -9,6 +9,7 @@ enum Trigger {
 	REMOVE = 32,
 }
 
+var icon: SpriteFrames
 var trigger = 0
 var speed_modifier: float = 1.0
 var physical_defense_modifier: float = 1.0
@@ -16,6 +17,7 @@ var physical_attack_modifier: float = 1.0
 var magic_defense_modifier: float = 1.0
 var magic_attack_modifier: float = 1.0
 var marked_for_removal = false
+
 
 func get_id() -> String:
 	return ""

@@ -1,6 +1,6 @@
 extends BattleAction
 
-var Charged = preload("res://party/carter/status_effect/charged.gd")
+var Channeled = preload("res://party/carter/status_effect/channeled.gd")
 
 @export var charge_sound: AudioStream
 
@@ -28,7 +28,7 @@ func execute(actor):
 	particles.emitting = true
 	
 	await actor.get_tree().create_timer(3.0).timeout
-	actor.battler.status_effects.add(Charged.new())
+	actor.battler.status_effects.add(Channeled.new())
 	actor.play_anim("battle_idle")
 	particles.visible = false
 	particles.emitting = false

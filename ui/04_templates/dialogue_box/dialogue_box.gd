@@ -4,7 +4,6 @@ signal response_chosen(response)
 signal closed
 
 @export var open_sound: AudioStream
-@export var characters_per_second = 15.0
 @export var skip_speed_factor = 2.0
 
 @onready var source = $Source
@@ -27,7 +26,7 @@ var timer
 var remaining_time
 
 func _ready():
-	self.close_dialogue(false)
+	self.close_dialogue()
 
 func _unhandled_input(event):
 	match current_state:
@@ -40,26 +39,31 @@ func _unhandled_input(event):
 				self.get_viewport().set_input_as_handled()
 
 		State.WAITING_FOR_INPUT:
+			
 			if self.current_responses.size() == 0:
 				if event.is_action_pressed(&"ui_accept") or event.is_action_pressed(&"ui_cancel"):
 					self.show_next_line()
 					self.get_viewport().set_input_as_handled()
+					UIService.play_focus_sound()
 			else:
 				if event.is_action_pressed(&"ui_accept"):
 					self.choose_response()
 					self.show_next_line()
 					self.get_viewport().set_input_as_handled()
+					UIService.play_interaction_sound()
 				if event.is_action_pressed(&"ui_down"):
 					self.point_to_response(posmod(self.current_highlighted_response + 1, self.current_responses.size()))
 					self.get_viewport().set_input_as_handled()
+					UIService.play_focus_sound()
 				elif event.is_action_pressed(&"ui_up"):
 					self.point_to_response(posmod(self.current_highlighted_response - 1, self.current_responses.size()))
 					self.get_viewport().set_input_as_handled()
+					UIService.play_focus_sound()
 				elif event.is_action_pressed(&"ui_cancel"):
 					self.point_to_response(0)
 					self.get_viewport().set_input_as_handled()
+					UIService.play_focus_sound()
 
-				
 
 func queue_dialogue_lines(dialogue_lines: Array):
 	self.lines_queue.append_array(dialogue_lines)
@@ -118,13 +122,8 @@ func choose_response():
 
 func set_text(line: Dictionary):
 	source.set_text(line["source"])
-	content.set_text(line["text"])
 	current_state = State.ADVANCING
-	
-	self.tween = self.get_tree().create_tween()
-	var time = content.get_total_character_count() / self.characters_per_second
-	tween.tween_method(self.content.set_visible_ratio, 0.0, 1.0, time)
-	tween.play()
+	self.tween = DialogueService.tween_text(content, line["text"])
 	await tween.finished
 	
 	# During the await, the content could have been paused and skipped (so it was closed), 
@@ -132,18 +131,16 @@ func set_text(line: Dictionary):
 	if self.current_state == State.ADVANCING:
 		content.set_advance_indicator_visibility(true)
 		current_state = State.WAITING_FOR_INPUT
-
+	
 func open_dialogue():
 	self.set_process_unhandled_input(true)
-	self.show()
 	UIService.play_focus_sound()
+	self.show()
 	self.show_next_line()
 	
-func close_dialogue(play_sound=true):
+func close_dialogue():
 	self.set_process_unhandled_input(false)
 	self.hide()
-	if play_sound:
-		UIService.play_focus_sound()
 	self.current_state = State.CLOSED
 	self.closed.emit()
 
@@ -185,4 +182,4 @@ func skip():
 			pass
 		State.CLOSED:
 			pass
-	self.close_dialogue(false)
+	self.close_dialogue()

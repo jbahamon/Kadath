@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dtaxhpmmjspek"]
+[gd_scene load_steps=8 format=3 uid="uid://dtaxhpmmjspek"]
 
 [ext_resource type="Script" path="res://battle/battler/battler.gd" id="1"]
 [ext_resource type="Resource" uid="uid://cdcbv6worc83n" path="res://battle/battler/placeholder_stats.tres" id="2_04g3y"]
 [ext_resource type="Script" path="res://battle/battle_rewards.gd" id="3"]
+[ext_resource type="PackedScene" uid="uid://84p8mfqdop2l" path="res://ui/03_organisms/status_grid/status_grid.tscn" id="4_xb1rc"]
 [ext_resource type="Script" path="res://battle/battler/hitspots.gd" id="5_5au3e"]
 [ext_resource type="PackedScene" uid="uid://32gtywhjjdwk" path="res://ui/02_molecules/toast/toast.tscn" id="5_sffqa"]
 
@@ -18,6 +19,8 @@ stats = ExtResource("2_04g3y")
 rewards = SubResource("1")
 
 [node name="Actions" type="Node" parent="."]
+
+[node name="StatusGrid" parent="." instance=ExtResource("4_xb1rc")]
 
 [node name="Toast" parent="." instance=ExtResource("5_sffqa")]
 z_index = 10

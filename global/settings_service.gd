@@ -20,7 +20,7 @@ var volume = {
 	
 }
 
-var text_speed = 2
+var text_speed = 60.0
 var toggle_run = false
 
 var config_file: ConfigFile
@@ -29,7 +29,6 @@ var timer: Timer
 var enable_screen_shake = true
 var enable_flashing = true
 
-#TODO: maybe use merge if settings get too big
 func _init():
 	if not load_config():
 		create_config()
@@ -58,9 +57,8 @@ func load_config() -> bool:
 			AudioServer.get_bus_index(bus_name), 
 			linear_to_db(linear_volume)
 		)
-	
-		
-	text_speed = config_file.get_value("ui", "text_speed", 2)
+
+	self.text_speed = config_file.get_value("ui", "text_speed", 60)
 	return true
 	
 func create_config():
@@ -81,7 +79,7 @@ func create_config():
 			linear_to_db(0.5)
 		)
 		
-	config_file.set_value("ui", "text_speed", text_speed)
+	config_file.set_value("ui", "text_speed", self.text_speed)
 	config_file.save(CONFIG_FILE_NAME)
 
 func update_inputs():
@@ -101,7 +99,6 @@ func update_run_behavior(should_toggle_run):
 func update_text_speed(new_text_speed):
 	self.text_speed = new_text_speed
 	config_file.set_value("ui", "text_speed", self.text_speed)
-	DialogueService.set_text_speed(new_text_speed)
 	self.save_file()
 
 func update_volume(bus_name, volume_value):

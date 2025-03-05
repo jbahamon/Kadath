@@ -1,3 +1,9 @@
+res://battle/status_effect
+res://party/carter/status_effect
+res://battle/fx/status
+res://ui/02_molecules
+res://battle/fx
+res://ui/02_molecules/help_bar
 res://ui/01_atoms/assets/icons/original
 res://npc/lib
 C:/Users/Jorge/Documents/Godot/Kadath/sound/music/LUShvalleySound
@@ -14,9 +20,3 @@ res://item/resource/equipment
 res://utils/material
 res://npc/enemy/acolyte
 res://battle/action
-res://npc/enemy/sentry
-res://npc/lib/anim
-res://location/000_prologue_kadath/object
-res://location/000_prologue_kadath/tile
-res://ui/03_organisms/skill_costs
-res://location/999_tests

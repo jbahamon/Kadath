@@ -1,0 +1,53 @@
+[gd_resource type="SpriteFrames" load_steps=8 format=3 uid="uid://cudcsadr47ebp"]
+
+[ext_resource type="Texture2D" uid="uid://d4elfncy8lyd4" path="res://battle/fx/ascending_node.png" id="1_qbed0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ru1xg"]
+atlas = ExtResource("1_qbed0")
+region = Rect2(0, 0, 24, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vvxm0"]
+atlas = ExtResource("1_qbed0")
+region = Rect2(24, 0, 24, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_txw76"]
+atlas = ExtResource("1_qbed0")
+region = Rect2(48, 0, 24, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rv8fl"]
+atlas = ExtResource("1_qbed0")
+region = Rect2(72, 0, 24, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_scd45"]
+atlas = ExtResource("1_qbed0")
+region = Rect2(96, 0, 24, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1or45"]
+atlas = ExtResource("1_qbed0")
+region = Rect2(120, 0, 24, 30)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ru1xg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vvxm0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_txw76")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rv8fl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_scd45")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1or45")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]

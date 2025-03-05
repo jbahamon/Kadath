@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://ui/04_templates/dialogue_box/dialogue_box.gd" id="1_y25qy"]
 [ext_resource type="AudioStream" uid="uid://biqsf23fc0cbi" path="res://sound/ui/blops/High - Kenney.wav" id="2_7c3mh"]
-[ext_resource type="PackedScene" uid="uid://bw0gl4jgbt7fi" path="res://ui/02_molecules/dialog_source/dialog_source.tscn" id="2_exnik"]
-[ext_resource type="PackedScene" uid="uid://b8h7mj2g47i5t" path="res://ui/02_molecules/dialog_box/dialog_box.tscn" id="3_bjf7l"]
+[ext_resource type="PackedScene" uid="uid://bw0gl4jgbt7fi" path="res://ui/02_molecules/dialogue_source/dialogue_source.tscn" id="2_exnik"]
+[ext_resource type="PackedScene" uid="uid://b8h7mj2g47i5t" path="res://ui/02_molecules/dialogue_content/dialogue_content.tscn" id="3_bjf7l"]
 
 [node name="DialogueBox" type="VBoxContainer"]
 anchors_preset = 15

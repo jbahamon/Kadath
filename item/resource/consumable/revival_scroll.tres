@@ -1,5 +1,6 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bt6mq1oatcvne"]
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bt6mq1oatcvne"]
 
+[ext_resource type="SpriteFrames" uid="uid://cudcsadr47ebp" path="res://battle/fx/ascending_node.tres" id="1_ahcwc"]
 [ext_resource type="Script" path="res://item/script/consumable/revival_scroll.gd" id="1_hdfe3"]
 
 [resource]
@@ -9,6 +10,9 @@ energy_recovery_mode = 0
 health = 50
 energy = 0
 status_effects = Array[String](["downed"])
+battle_offset = Vector2(0, -50)
+battle_fx = ExtResource("1_ahcwc")
+battle_fx_duration = 1.2
 id = "revival_scroll"
 display_name = "Revival Scroll"
 description = "Offers minor healing, but can bring back a downed ally."
