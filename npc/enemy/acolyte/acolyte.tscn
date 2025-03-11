@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cebhopaolaguc"]
+[gd_scene load_steps=33 format=3 uid="uid://cebhopaolaguc"]
 
 [ext_resource type="PackedScene" uid="uid://c17hneqpuil0l" path="res://npc/lib/base_npc.tscn" id="1_nqevg"]
 [ext_resource type="Script" path="res://npc/lib/enemy.gd" id="2_mtvfo"]
@@ -9,9 +9,10 @@
 [ext_resource type="Script" path="res://npc/enemy/acolyte/attack.gd" id="6_wx6wh"]
 [ext_resource type="Script" path="res://npc/enemy/acolyte/consume.gd" id="7_2l1cy"]
 [ext_resource type="Material" uid="uid://c48122ffiwrbb" path="res://utils/material/uniform_add.tres" id="7_kw41m"]
+[ext_resource type="AudioStream" uid="uid://drbiocqq5bbf0" path="res://sound/fx/scream/Alien - JuhaniJunkala.wav" id="8_0sv0c"]
 [ext_resource type="Script" path="res://npc/enemy/acolyte/ai.gd" id="8_10wdh"]
 [ext_resource type="Script" path="res://battle/hit.gd" id="8_clbpf"]
-[ext_resource type="AudioStream" uid="uid://da68ffkklud3o" path="res://sound/fx/magic/explosion/Mid - YourPalRob.wav" id="8_cxney"]
+[ext_resource type="AudioStream" uid="uid://dp6nlterbqxsy" path="res://sound/fx/whoosh/Long - KronBits.wav" id="8_pfe7r"]
 [ext_resource type="Shader" path="res://utils/material/highlight.gdshader" id="10_27jul"]
 [ext_resource type="Texture2D" uid="uid://dcxojxbnjqa6e" path="res://npc/enemy/acolyte/tendrils.png" id="11_g1knc"]
 [ext_resource type="AudioStream" uid="uid://cbeps10r2yhs4" path="res://sound/fx/recovery/Default - ReincarnatedEchoes.wav" id="11_rtvnq"]
@@ -40,7 +41,7 @@ shake_time = 0.0
 shake_duration = 0.5
 shake_amplitude = Vector2(8, 0)
 shake_time_scale = 2.0
-hit_sound = ExtResource("8_cxney")
+hit_sound = ExtResource("8_pfe7r")
 hit_sound_time = 0.0
 miss_sound_time = 0.0
 palfx_material = SubResource("ShaderMaterial_v5nwd")
@@ -156,6 +157,7 @@ rewards = ExtResource("6_vex3f")
 [node name="Consume" type="Node" parent="Battler/Actions" index="0"]
 script = ExtResource("7_2l1cy")
 sacrifice_hit = SubResource("Resource_agsw1")
+sacrifice_scream = ExtResource("8_0sv0c")
 heal_sound = ExtResource("11_rtvnq")
 display_name = "Consume"
 
@@ -166,24 +168,24 @@ sliming_sound = ExtResource("13_sxgva")
 droning_sound = ExtResource("15_ne3ma")
 display_name = "Attack"
 
-[node name="AI" parent="Battler" index="2"]
+[node name="AI" parent="Battler" index="3"]
 script = ExtResource("8_10wdh")
 
 [node name="CollisionShape2D" parent="Battler/Hitbox" index="0"]
 position = Vector2(0, -15)
 shape = SubResource("CapsuleShape2D_h6312")
 
-[node name="South" type="Marker2D" parent="Battler/Hitspots" index="0"]
-position = Vector2(0, 8)
-
-[node name="Center" type="Marker2D" parent="Battler/Hitspots" index="1"]
-position = Vector2(0, -14)
-
 [node name="Tendrils" type="AnimatedSprite2D" parent="Battler" index="5"]
 visible = false
 z_index = 2
 sprite_frames = SubResource("SpriteFrames_io120")
 animation = &"windup"
+
+[node name="South" type="Marker2D" parent="Battler/Hitspots" index="0"]
+position = Vector2(0, 8)
+
+[node name="Center" type="Marker2D" parent="Battler/Hitspots" index="1"]
+position = Vector2(0, -14)
 
 [node name="BumpCollision" parent="." index="2"]
 visible = false

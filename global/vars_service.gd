@@ -5,8 +5,12 @@ const VERTICAL_ORIENTATION_BIAS = 1.1
 var loaded_slot = -1
 var starting_location_name = "000_prologue_kadath"
 var starting_room_name = "01_entrance"
+
 var strings: Dictionary = {}
 var current_flags: Dictionary = {}
+
+var scan_level: int = 1
+var scanned_enemies: Dictionary = {}
 
 func _init():
 	self.add_to_group("save")
@@ -40,3 +44,5 @@ func round_orientation_with_bias(orientation: Vector2):
 	else:
 		return Vector2.DOWN if orientation.y > 0 else Vector2.UP
 	
+func scan_enemy(enemy_id: String):
+	self.scanned_enemies[enemy_id] = true

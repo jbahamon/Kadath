@@ -41,10 +41,13 @@ func do_battle():
 			self.update_preview()
 		var turn = await current_actor.battler.ai.get_turn(self.actors)
 		self.ui.hide_timeline()
+		
+		# Small pause for usabilty/not making it feel like it's too fast
+		await ui.get_tree().create_timer(0.2).timeout
 		await turn.play()
 		
 		await self.check_deaths_and_reactions()
-			
+
 		for observer in self.observers[BattleService.Event.TURN_END]:
 			await observer.on_turn_end(current_actor)
 			

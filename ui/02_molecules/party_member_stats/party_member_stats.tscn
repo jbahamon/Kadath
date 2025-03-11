@@ -292,14 +292,14 @@ size_flags_horizontal = 3
 [node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="SpecialCommandTitle" type="MarginContainer" parent="VBoxContainer"]
+[node name="UniqueCommandTitle" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="SpecialCommandLabel" type="Label" parent="VBoxContainer/SpecialCommandTitle"]
+[node name="UniqueCommandLabel" type="Label" parent="VBoxContainer/UniqueCommandTitle"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("3_at0bu")
@@ -307,11 +307,12 @@ theme_override_font_sizes/font_size = 15
 text = "Special Command: Analyze"
 vertical_alignment = 1
 
-[node name="CommandDescription" type="Label" parent="VBoxContainer"]
+[node name="UniqueCommandDescription" type="RichTextLabel" parent="VBoxContainer"]
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
-text = "Obtains information about enemies: health, vulnerabilities, behavior and other information."
-vertical_alignment = 1
+bbcode_enabled = true
+text = "Obtains information about enemies: health, vulnerabilities, behavior and other information. "
+scroll_active = false
 
 [connection signal="pressed" from="VBoxContainer/EquipmentContainer/Equipment/WeaponName" to="." method="on_weapon_clicked"]
 [connection signal="pressed" from="VBoxContainer/EquipmentContainer/Equipment/ArmorName" to="." method="on_armor_clicked"]

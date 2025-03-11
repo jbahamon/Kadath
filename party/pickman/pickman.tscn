@@ -216,6 +216,7 @@ growth = ExtResource("2_attsm")
 experience = 2
 icon = ExtResource("3_psao1")
 menu_texture = ExtResource("4_svurb")
+unique_command = NodePath("Battler/Actions/Feast")
 starting_weapon_id = "old_tombstone"
 starting_armor_id = "ruby_braces"
 
@@ -232,6 +233,7 @@ description = "Attack with your equipped weapon"
 script = ExtResource("5_beduq")
 hit = SubResource("Resource_jh7if")
 heal_sound = ExtResource("11_7c63i")
+long_description = "Deal reduced damage to an enemy to recover some HP/SP."
 display_name = "Feast"
 description = "Deal reduced damage to an enemy to recover some HP/SP."
 
@@ -263,6 +265,12 @@ energy_cost = 10
 position = Vector2(0, -13)
 shape = SubResource("CapsuleShape2D_7ecgo")
 
+[node name="Weapon" parent="Battler" index="5" instance=ExtResource("13_6c0bp")]
+visible = false
+sprite_frames = SubResource("SpriteFrames_wewa7")
+animation = &"slam"
+offset = Vector2(0, -18)
+
 [node name="South" type="Marker2D" parent="Battler/Hitspots" index="0"]
 position = Vector2(0, 8)
 
@@ -278,15 +286,8 @@ position = Vector2(-14, 1)
 [node name="East" type="Marker2D" parent="Battler/Hitspots" index="4"]
 position = Vector2(14, 1)
 
-[node name="Weapon" parent="Battler" index="5" instance=ExtResource("13_6c0bp")]
-visible = false
-sprite_frames = SubResource("SpriteFrames_wewa7")
-animation = &"slam"
-offset = Vector2(0, -18)
-
 [node name="Anim" parent="." index="1" instance=ExtResource("4_pfdmg")]
 use_parent_material = true
-animation_names = Array[String](["idle", "walk", "run", "attack", "jump_back", "hit", "battle_idle/healthy", "battle_idle/tired", "interact", "downed", "crit", "crit_start", "taxing_touch", "slam_start", "slam_jump", "slam_hit", "feast", "attack"])
 
 [editable path="Battler"]
 [editable path="Battler/Actions/Skill/SlabSlam/LineOfEffect"]

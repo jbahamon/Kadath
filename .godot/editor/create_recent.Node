@@ -1,14 +1,15 @@
+RichTextLabel
+MarginContainer
+Node
 AnimatedSprite2D
 Control
 TextureRect
 GridContainer
 Node2D
 CPUParticles2D
-MarginContainer
 HBoxContainer
 VBoxContainer
 Label
 Button
 MenuBar
 AudioStreamPlayer
-RichTextLabel

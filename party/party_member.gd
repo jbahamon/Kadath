@@ -41,6 +41,7 @@ const PARTY_IN_BATTLE_ID = {
 @export var experience: int : set = _set_experience
 @export var icon: Texture2D
 @export var menu_texture: Texture2D
+@export var unique_command: NodePath
 
 @export var starting_weapon_id: String
 @export var starting_armor_id: String

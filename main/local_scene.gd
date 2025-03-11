@@ -48,10 +48,11 @@ func move_to_starting_room():
 		SavesService.load_game_data(VarsService.loaded_slot)
 		VarsService.loaded_slot = -1
 	else:
+		VarsService.scan_level = 2
 		# Note: move start_game to the above when doing the cutscene intro
 		await EnvironmentService.update_whereabouts(
-			"000_prologue_kadath", 
-			"02_hub",
+			"999_tests", 
+			"battle",
 			Vector2(0, 0),
 			Vector2.UP,
 			{

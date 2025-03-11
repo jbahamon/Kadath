@@ -3,8 +3,8 @@
 [ext_resource type="TileSet" uid="uid://b15m77bx602kw" path="res://location/000_prologue_kadath/tile/onyx_temple.tres" id="1_pgy5n"]
 [ext_resource type="Script" path="res://location/lib/script/location/location_room.gd" id="1_sqx0k"]
 [ext_resource type="PackedScene" uid="uid://k1y4abtqqro7" path="res://location/lib/script/object/battle_spot.tscn" id="3_7js0j"]
+[ext_resource type="PackedScene" uid="uid://cebhopaolaguc" path="res://npc/enemy/acolyte/acolyte.tscn" id="3_rqdpa"]
 [ext_resource type="Script" path="res://location/lib/script/object/enemy_spot.gd" id="4_0er7e"]
-[ext_resource type="PackedScene" uid="uid://ihknndack3n4" path="res://npc/enemy/thymiaterion/thymiaterion.tscn" id="5_crprv"]
 
 [node name="battle" type="Node2D"]
 y_sort_enabled = true
@@ -19,8 +19,21 @@ tile_map_data = PackedByteArray("AAD5//b/BgAAAAAAAAD5//f/BgAAAAAAAAD5//j/BgAAAAA
 tile_set = ExtResource("1_pgy5n")
 y_sort_origin = -16
 
-[node name="Thymiaterion" parent="." instance=ExtResource("5_crprv")]
-position = Vector2(-1, -41)
+[node name="Acolyte4" parent="." instance=ExtResource("3_rqdpa")]
+position = Vector2(38, -7)
+battle_on_contact = true
+
+[node name="Acolyte" parent="." instance=ExtResource("3_rqdpa")]
+position = Vector2(-30, -4)
+battle_on_contact = true
+
+[node name="Acolyte3" parent="." instance=ExtResource("3_rqdpa")]
+position = Vector2(-81, -13)
+battle_on_contact = true
+
+[node name="Acolyte2" parent="." instance=ExtResource("3_rqdpa")]
+position = Vector2(86, -14)
+battle_on_contact = true
 
 [node name="BattleSpot" parent="." instance=ExtResource("3_7js0j")]
 position = Vector2(0, -40)

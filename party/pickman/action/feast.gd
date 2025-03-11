@@ -5,6 +5,7 @@ extends "res://battle/action/simple_single_target.gd"
 @export var energy_gain_factor = 0.1
 @export var hit: Hit
 @export var heal_sound: AudioStream
+@export var long_description: String
 
 var unlocking_ids = {
 	"" : ""

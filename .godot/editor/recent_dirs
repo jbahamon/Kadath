@@ -1,3 +1,5 @@
+res://sound/fx/charge
+res://sound/fx/slash
 res://battle/status_effect
 res://party/carter/status_effect
 res://battle/fx/status
@@ -18,5 +20,3 @@ res://party/carter
 res://npc/enemy/thymiaterion
 res://item/resource/equipment
 res://utils/material
-res://npc/enemy/acolyte
-res://battle/action

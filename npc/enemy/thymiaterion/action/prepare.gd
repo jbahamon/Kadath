@@ -14,3 +14,4 @@ func pop_parameter():
 	
 func execute(_actor):
 	await BattleService.announce(self.description, UIService.PROMPT_WAIT_TIME)
+	self.reset()

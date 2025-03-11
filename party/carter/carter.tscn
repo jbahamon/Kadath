@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://76qafquuir4k"]
+[gd_scene load_steps=30 format=3 uid="uid://76qafquuir4k"]
 
 [ext_resource type="PackedScene" uid="uid://bomxx7doloqmu" path="res://party/party_member.tscn" id="1_tjmem"]
 [ext_resource type="Resource" uid="uid://1ulgpa1j7pky" path="res://party/carter/growth.tres" id="2_jpdcx"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://party/carter/skill/charge.gd" id="8_m04rn"]
 [ext_resource type="Script" path="res://battle/hit.gd" id="8_u204t"]
 [ext_resource type="Texture2D" uid="uid://dn6j26nefycu5" path="res://party/carter/charge_particle.png" id="9_gqyon"]
+[ext_resource type="Script" path="res://party/carter/action/analyse.gd" id="10_d3obn"]
 [ext_resource type="PackedScene" uid="uid://cchn13mhn8gxu" path="res://battle/action/util/projectile.tscn" id="10_ib2sa"]
 [ext_resource type="Texture2D" uid="uid://i5fn63spd1aj" path="res://party/carter/blast_projectile.png" id="10_w08ur"]
 [ext_resource type="AudioStream" uid="uid://uottfqh0eivc" path="res://sound/fx/charge/Short Magic Charge - KronBits.wav" id="11_afuqa"]
@@ -24,8 +25,8 @@
 [sub_resource type="Resource" id="Resource_l5rln"]
 script = ExtResource("8_u204t")
 animation_only = false
-fixed_damage = false
-base_damage = 1.0
+fixed_damage = true
+base_damage = 7
 type = 0
 anim_time = 0.0
 anim_duration = 0.45
@@ -107,11 +108,11 @@ unlocked = true
 experience = 1
 icon = ExtResource("3_q1d6i")
 menu_texture = ExtResource("4_y6us3")
+unique_command = NodePath("Battler/Actions/Identify")
 starting_weapon_id = "scimitar"
 starting_armor_id = "sturdy_vest"
 
 [node name="Anim" parent="." index="0" instance=ExtResource("4_n1l83")]
-animation_names = Array[String](["idle", "walk", "run", "attack", "jump_back", "hit", "battle_idle/healthy", "battle_idle/tired", "downed", "interact", "crit_start", "crit", "charge", "blast"])
 
 [node name="Battler" parent="." index="1"]
 anim_path = NodePath("../Anim")
@@ -121,6 +122,13 @@ script = ExtResource("6_vud1e")
 hit = SubResource("Resource_l5rln")
 display_name = "Attack"
 description = "Attack with your equipped weapon"
+
+[node name="Identify" type="Node" parent="Battler/Actions" index="1"]
+script = ExtResource("10_d3obn")
+long_description = "Gathers information about an enemy type, such as [color=light_sky_blue]hit points[/color] and [color=light_sky_blue]behavior[/color].
+Information is shown [color=light_sky_blue]when targeting enemies of that type[/color] from that point on."
+display_name = "Identify"
+description = "Gather information about an enemy."
 
 [node name="CrescentBlast" type="Node" parent="Battler/Actions/Skill" index="0"]
 script = ExtResource("5_8d58u")

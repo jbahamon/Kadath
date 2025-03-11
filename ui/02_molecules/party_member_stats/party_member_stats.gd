@@ -22,6 +22,9 @@ signal focus_released
 @onready var speed_value: Label = $VBoxContainer/SummaryContainer/Stats/SpeedValue
 @onready var luck_value: Label = $VBoxContainer/SummaryContainer/Stats/LuckValue
 
+@onready var unique_command_label: Label = $VBoxContainer/UniqueCommandTitle/UniqueCommandLabel
+@onready var unique_command_description: RichTextLabel = $VBoxContainer/UniqueCommandDescription
+
 var party_member
 
 var selected_property: String = ""
@@ -68,6 +71,11 @@ func update_ui_info():
 	magic_defense_value.text = str(battler.stats.magic_defense)
 	speed_value.text = str(battler.stats.speed)
 	luck_value.text = str(battler.stats.luck)
+	
+	var unique_command = party_member.get_node(party_member.unique_command)
+	unique_command_label.text = "Special Command: %s" % unique_command.display_name
+	unique_command_description.text = unique_command.long_description
+	
 
 func element_has_focus() -> bool:
 	return (weapon_name.has_focus() or 

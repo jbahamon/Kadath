@@ -2,6 +2,7 @@ extends BattleAction
 
 const blurb = "Consume"
 @export var sacrifice_hit: Hit
+@export var sacrifice_scream: AudioStream
 @export var heal_sound: AudioStream
 var sacrifice
 var allies
@@ -34,9 +35,12 @@ func execute(actor):
 	var remaining_hp = self.sacrifice.health
 	sacrifice_hit.base_damage = remaining_hp
 	
+	(func ():
+		await actor.get_tree().create_timer(1.2).timeout
+		FXService.play_sfx_at(self.sacrifice_scream, self.sacrifice.global_position)
+	).call()
 	await self.sacrifice.take_hit(actor, sacrifice_hit)
 	self.sacrifice.battler.health = 0
-	
 	var heals = allies.map(
 		func(ally): return func (): await ally.heal(remaining_hp, true)
 	)

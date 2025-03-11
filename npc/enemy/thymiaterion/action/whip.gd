@@ -13,12 +13,16 @@ func execute(actor):
 	
 	await actor.move_to([target_position.x, target_position.y], 120)
 	
+	actor.play_anim("tongue_out")
+	await get_tree().create_timer(0.53).timeout
 	actor.play_anim("whip")
-	await get_tree().create_timer(1.8).timeout
+	
 	
 	await DoAll.new([
-		func(): await get_tree().create_timer(1.03).timeout,
-		func(): await self.target.take_hit(actor, hit)
+		func(): await get_tree().create_timer(0.95).timeout,
+		func(): 
+			await get_tree().create_timer(0.25).timeout
+			await self.target.take_hit(actor, hit)
 	]).execute()
 	
 	if target_position.x > original_position.x:

@@ -27,7 +27,8 @@ func execute(actor):
 	var original_position = actor.global_position
 	var is_crit = randf() < actor.equipped_weapon.crit_chance
 	
-	self.hit.base_damage = actor.battler.physical_attack * (1.5 if is_crit else 2.0)
+	if not self.hit.fixed_damage:
+		self.hit.base_damage = actor.battler.physical_attack * (1.5 if is_crit else 2.0)
 	
 	await self.move_to_target(
 		actor, 

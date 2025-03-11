@@ -10,6 +10,7 @@ func _ready() -> void:
 	self.consume = parent.get_node("Actions/Consume")
 
 func choose_action(actor, actors: Array):
+	return self.consume
 	if actor.health < floor(actor.max_health/2) and actor.get_allies(actors).size() > 1:
 		return self.attack if (randi() % 100) > 80 else self.consume
 	else:

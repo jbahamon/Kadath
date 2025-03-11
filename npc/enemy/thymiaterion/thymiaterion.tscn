@@ -1,7 +1,8 @@
-[gd_scene load_steps=53 format=3 uid="uid://ihknndack3n4"]
+[gd_scene load_steps=54 format=3 uid="uid://ihknndack3n4"]
 
 [ext_resource type="PackedScene" uid="uid://c17hneqpuil0l" path="res://npc/lib/base_npc.tscn" id="1_q5d36"]
 [ext_resource type="Script" path="res://npc/lib/boss.gd" id="2_vhqlt"]
+[ext_resource type="AudioStream" uid="uid://dhdxf4nhk8224" path="res://sound/fx/scream/High Pitched - KronBits.wav" id="3_lcm8l"]
 [ext_resource type="Texture2D" uid="uid://i0fxdua2akyb" path="res://npc/enemy/thymiaterion/icon.png" id="3_rflw6"]
 [ext_resource type="PackedScene" uid="uid://b8t81sm0y5b4o" path="res://npc/enemy/thymiaterion/anim.tscn" id="4_ifidb"]
 [ext_resource type="PackedScene" uid="uid://dtaxhpmmjspek" path="res://battle/battler/battler.tscn" id="5_2gha7"]
@@ -273,6 +274,7 @@ position = Vector2(0, 0)
 collision_layer = 24
 collision_mask = 1
 script = ExtResource("2_vhqlt")
+scream_sound = ExtResource("3_lcm8l")
 battle_on_contact = true
 enemy_id = "thymiaterion"
 icon = ExtResource("3_rflw6")
@@ -318,25 +320,13 @@ hit = SubResource("Resource_snqd0")
 chew_sound = ExtResource("21_s5p7s")
 description = "Devouring Void"
 
-[node name="AI" parent="Battler" index="2"]
+[node name="AI" parent="Battler" index="3"]
 script = ExtResource("11_ikq4e")
 change_material = SubResource("ShaderMaterial_fi27y")
 
 [node name="CollisionShape2D" parent="Battler/Hitbox" index="0"]
 position = Vector2(0, -34)
 shape = SubResource("CapsuleShape2D_tv2y7")
-
-[node name="South" type="Marker2D" parent="Battler/Hitspots" index="0"]
-position = Vector2(0, 8)
-
-[node name="Center" type="Marker2D" parent="Battler/Hitspots" index="1"]
-position = Vector2(0, -20)
-
-[node name="West" type="Marker2D" parent="Battler/Hitspots" index="2"]
-position = Vector2(-40, 1)
-
-[node name="East" type="Marker2D" parent="Battler/Hitspots" index="3"]
-position = Vector2(40, 1)
 
 [node name="Projectile" parent="Battler" index="5" instance=ExtResource("13_k444w")]
 visible = false
@@ -364,6 +354,18 @@ visible = false
 z_index = 1
 position = Vector2(0, 90)
 sprite_frames = SubResource("SpriteFrames_le483")
+
+[node name="South" type="Marker2D" parent="Battler/Hitspots" index="0"]
+position = Vector2(0, 8)
+
+[node name="Center" type="Marker2D" parent="Battler/Hitspots" index="1"]
+position = Vector2(0, -20)
+
+[node name="West" type="Marker2D" parent="Battler/Hitspots" index="2"]
+position = Vector2(-40, 1)
+
+[node name="East" type="Marker2D" parent="Battler/Hitspots" index="3"]
+position = Vector2(40, 1)
 
 [node name="BumpCollision" parent="." index="2"]
 disabled = true
