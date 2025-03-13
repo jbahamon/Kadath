@@ -1,3 +1,6 @@
+Popup
+PopupPanel
+Sprite2D
 RichTextLabel
 MarginContainer
 Node
@@ -10,6 +13,3 @@ CPUParticles2D
 HBoxContainer
 VBoxContainer
 Label
-Button
-MenuBar
-AudioStreamPlayer

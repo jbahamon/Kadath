@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cv1tgaq14kih"
+path="res://.godot/imported/Shortest - Kenney.wav-668e99340289ad43d908f0d22ab914ab.sample"
+
+[deps]
+
+source_file="res://sound/fx/scratch/Shortest - Kenney.wav"
+dest_files=["res://.godot/imported/Shortest - Kenney.wav-668e99340289ad43d908f0d22ab914ab.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

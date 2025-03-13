@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bq2b66vmiocgp"
+path="res://.godot/imported/Short - MadameBerry.wav-43887982b3708f916c7a5470a2a2b2bd.sample"
+
+[deps]
+
+source_file="res://sound/fx/hit/Short - MadameBerry.wav"
+dest_files=["res://.godot/imported/Short - MadameBerry.wav-43887982b3708f916c7a5470a2a2b2bd.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

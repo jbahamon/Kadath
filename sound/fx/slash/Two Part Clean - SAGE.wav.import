@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://br4wdh8hmf5oq"
+path="res://.godot/imported/Two Part Clean - SAGE.wav-9f33449823ea48f1ab8b932bd5d80faf.sample"
+
+[deps]
+
+source_file="res://sound/fx/slash/Two Part Clean - SAGE.wav"
+dest_files=["res://.godot/imported/Two Part Clean - SAGE.wav-9f33449823ea48f1ab8b932bd5d80faf.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

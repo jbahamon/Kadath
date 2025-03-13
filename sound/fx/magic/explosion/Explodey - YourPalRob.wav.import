@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://drtvp4rs6l5cl"
+path="res://.godot/imported/Explodey - YourPalRob.wav-86f4b9839996e55adc84219d88aa78d5.sample"
+
+[deps]
+
+source_file="res://sound/fx/magic/explosion/Explodey - YourPalRob.wav"
+dest_files=["res://.godot/imported/Explodey - YourPalRob.wav-86f4b9839996e55adc84219d88aa78d5.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

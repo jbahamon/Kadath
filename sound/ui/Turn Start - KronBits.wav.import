@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://2dt6unegvfp2"
+path="res://.godot/imported/Turn Start - KronBits.wav-9a76712ca99f8012ba047560c4c87a3a.sample"
+
+[deps]
+
+source_file="res://sound/ui/Turn Start - KronBits.wav"
+dest_files=["res://.godot/imported/Turn Start - KronBits.wav-9a76712ca99f8012ba047560c4c87a3a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

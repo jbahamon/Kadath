@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://drbiocqq5bbf0"
+path="res://.godot/imported/Alien - JuhaniJunkala.wav-c79231e8be29b253551ec2a94a877441.sample"
+
+[deps]
+
+source_file="res://sound/fx/scream/Alien - JuhaniJunkala.wav"
+dest_files=["res://.godot/imported/Alien - JuhaniJunkala.wav-c79231e8be29b253551ec2a94a877441.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://di7wtmrx7jsha"
+path="res://.godot/imported/Mid Light Clean - colorsCrimsonTears.wav-db8eafb573ba2f8ec28c1a6af45a816c.sample"
+
+[deps]
+
+source_file="res://sound/fx/slash/Mid Light Clean - colorsCrimsonTears.wav"
+dest_files=["res://.godot/imported/Mid Light Clean - colorsCrimsonTears.wav-db8eafb573ba2f8ec28c1a6af45a816c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ck1hnd0gv60ou"
+path="res://.godot/imported/Strong - VOiD1Gaming.wav-54459a7a4b8037e5e3f93155f56f4ec5.sample"
+
+[deps]
+
+source_file="res://sound/fx/hit/Strong - VOiD1Gaming.wav"
+dest_files=["res://.godot/imported/Strong - VOiD1Gaming.wav-54459a7a4b8037e5e3f93155f56f4ec5.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

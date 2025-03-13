@@ -67,6 +67,7 @@ animations = [{
 [node name="Sentry" instance=ExtResource("1_vbu6h")]
 enemy_id = "sentry"
 icon = ExtResource("2_2k4kj")
+height = 35
 enemy_info = "A simple construct. Attacks indiscriminately."
 base_display_name = "Sentry"
 
@@ -81,12 +82,18 @@ script = ExtResource("5_5ijqc")
 hit = SubResource("Resource_1sln2")
 shoot_sound = ExtResource("10_yt064")
 
-[node name="AI" parent="Battler" index="2"]
+[node name="AI" parent="Battler" index="3"]
 script = ExtResource("4_bs2dh")
 
 [node name="CollisionShape2D" parent="Battler/Hitbox" index="0"]
 position = Vector2(0, -12)
 shape = SubResource("CapsuleShape2D_w7pdr")
+
+[node name="Projectile" parent="Battler" index="5" instance=ExtResource("7_885q8")]
+visible = false
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_3nu6t")
+frame_progress = 0.485089
 
 [node name="South" type="Marker2D" parent="Battler/Hitspots" index="0"]
 position = Vector2(0, 17)
@@ -102,12 +109,6 @@ position = Vector2(-20, 12)
 
 [node name="East" type="Marker2D" parent="Battler/Hitspots" index="4"]
 position = Vector2(20, 12)
-
-[node name="Projectile" parent="Battler" index="5" instance=ExtResource("7_885q8")]
-visible = false
-z_index = 1
-sprite_frames = SubResource("SpriteFrames_3nu6t")
-frame_progress = 0.485089
 
 [node name="CollisionShape2D" parent="InteractableArea" index="0"]
 position = Vector2(0, -10)

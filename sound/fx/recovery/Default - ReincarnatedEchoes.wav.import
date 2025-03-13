@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cbeps10r2yhs4"
+path="res://.godot/imported/Default - ReincarnatedEchoes.wav-271f08599b2251d136a8629a30a8f3db.sample"
+
+[deps]
+
+source_file="res://sound/fx/recovery/Default - ReincarnatedEchoes.wav"
+dest_files=["res://.godot/imported/Default - ReincarnatedEchoes.wav-271f08599b2251d136a8629a30a8f3db.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ciohw2uc3041j"
+path="res://.godot/imported/Explodey - Rosalila Studio.wav-7340b1d6c4595ca4d139d34f966d34ec.sample"
+
+[deps]
+
+source_file="res://sound/fx/hit/Explodey - Rosalila Studio.wav"
+dest_files=["res://.godot/imported/Explodey - Rosalila Studio.wav-7340b1d6c4595ca4d139d34f966d34ec.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

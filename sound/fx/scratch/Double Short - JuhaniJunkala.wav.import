@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://75x8hmnabi18"
+path="res://.godot/imported/Double Short - JuhaniJunkala.wav-1f257be47b92e309ee10b1dcd41f0667.sample"
+
+[deps]
+
+source_file="res://sound/fx/scratch/Double Short - JuhaniJunkala.wav"
+dest_files=["res://.godot/imported/Double Short - JuhaniJunkala.wav-1f257be47b92e309ee10b1dcd41f0667.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

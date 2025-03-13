@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dgd8iedc0td6b"
+path="res://.godot/imported/Short Deep - YourPalRob.wav-9c88a6da601eb8b6871fa10a4af57dac.sample"
+
+[deps]
+
+source_file="res://sound/fx/explosion/Short Deep - YourPalRob.wav"
+dest_files=["res://.godot/imported/Short Deep - YourPalRob.wav-9c88a6da601eb8b6871fa10a4af57dac.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bj84bbveyq1d3"
+path="res://.godot/imported/Default - CoffeeBat.wav-957fc011c9ca9c79ebeded216d49954d.sample"
+
+[deps]
+
+source_file="res://sound/fx/flee/Default - CoffeeBat.wav"
+dest_files=["res://.godot/imported/Default - CoffeeBat.wav-957fc011c9ca9c79ebeded216d49954d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

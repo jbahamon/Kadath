@@ -47,6 +47,7 @@ script = ExtResource("2_x8f4g")
 battle_on_contact = true
 enemy_id = "torchere"
 icon = ExtResource("3_h48do")
+height = 37
 enemy_info = "This amalgam of bronze and marble is resilient, but simple-minded."
 base_display_name = "Torchère"
 
@@ -64,7 +65,7 @@ walk_speed = 80
 jump_back_speed = 80
 hit = SubResource("Resource_m2jmt")
 
-[node name="AI" parent="Battler" index="2"]
+[node name="AI" parent="Battler" index="3"]
 script = ExtResource("6_hhc2v")
 
 [node name="CollisionShape2D" parent="Battler/Hitbox" index="0"]

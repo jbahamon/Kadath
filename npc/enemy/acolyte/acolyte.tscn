@@ -144,6 +144,7 @@ script = ExtResource("2_mtvfo")
 battle_on_contact = false
 enemy_id = "acolyte"
 icon = ExtResource("3_grxgs")
+height = 36
 enemy_info = "Something unpleasant hides under those clothes. Willing to sacrifice a companion to heal the rest."
 base_display_name = "Acolyte"
 

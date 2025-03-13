@@ -26,6 +26,7 @@ enum Event {
 
 var loop
 var ui: BattleUI
+var info_popup: Popup
 
 var current_battle_parameters = null
 var common_action_options = {}
@@ -34,8 +35,9 @@ func _init():
 	self.loop = BattleLoop.new()
 	self.init_common_action_options()
 
-func initialize(init_ui: BattleUI):
+func initialize(init_ui: BattleUI, init_info_popup):
 	self.ui = init_ui
+	self.info_popup = init_info_popup
 
 func exit():
 	self.ui = null
@@ -496,3 +498,8 @@ func stop_observe_event(event: Event, observer):
 func notify_death(actor):
 	if current_battle_parameters != null:
 		self.loop.pending_deaths.push_back(actor)
+
+
+func show_enemy_info(actor):
+	self.info_popup.update(actor)
+	await UIService.handle_popup(self.info_popup, true, 0.4, false)

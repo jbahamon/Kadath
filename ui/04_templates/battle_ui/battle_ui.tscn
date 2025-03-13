@@ -71,7 +71,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 
 [node name="EnemyInfo" parent="VBoxContainer/OptionsContainer" instance=ExtResource("7_gtig5")]
-custom_minimum_size = Vector2(20, 0)
+custom_minimum_size = Vector2(495, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0

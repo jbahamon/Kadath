@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bojiuydt7dm8s"
+path="res://.godot/imported/Harsh Short - JuhaniJunkala.wav-3a6408d1e2f9ef70f59784f7886b4bfc.sample"
+
+[deps]
+
+source_file="res://sound/fx/whoosh/Harsh Short - JuhaniJunkala.wav"
+dest_files=["res://.godot/imported/Harsh Short - JuhaniJunkala.wav-3a6408d1e2f9ef70f59784f7886b4bfc.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

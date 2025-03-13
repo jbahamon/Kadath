@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d1gypqn8460mi"
+path="res://.godot/imported/Mid Bloody - nekoninja.wav-52a38c82ce152d1275fa18e0d6c53596.sample"
+
+[deps]
+
+source_file="res://sound/fx/slash/Mid Bloody - nekoninja.wav"
+dest_files=["res://.godot/imported/Mid Bloody - nekoninja.wav-52a38c82ce152d1275fa18e0d6c53596.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=true
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

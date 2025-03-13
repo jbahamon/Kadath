@@ -278,6 +278,7 @@ scream_sound = ExtResource("3_lcm8l")
 battle_on_contact = true
 enemy_id = "thymiaterion"
 icon = ExtResource("3_rflw6")
+height = 75
 enemy_info = "This huge statue seems to mix single-target shots and a quake that hits everyone."
 base_display_name = "Thymiaterion"
 dialogue_name = "????"

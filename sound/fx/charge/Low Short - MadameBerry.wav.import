@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://tvxig8l7bd42"
+path="res://.godot/imported/Low Short - MadameBerry.wav-9e68c00127dec0209d03d77bc78336d4.sample"
+
+[deps]
+
+source_file="res://sound/fx/charge/Low Short - MadameBerry.wav"
+dest_files=["res://.godot/imported/Low Short - MadameBerry.wav-9e68c00127dec0209d03d77bc78336d4.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

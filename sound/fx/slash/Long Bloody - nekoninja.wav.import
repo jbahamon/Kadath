@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cfdnv65cy25hj"
+path="res://.godot/imported/Long Bloody - nekoninja.wav-124e68a0ec50915a88151d25dab88f04.sample"
+
+[deps]
+
+source_file="res://sound/fx/slash/Long Bloody - nekoninja.wav"
+dest_files=["res://.godot/imported/Long Bloody - nekoninja.wav-124e68a0ec50915a88151d25dab88f04.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=true
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

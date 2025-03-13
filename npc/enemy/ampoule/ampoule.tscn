@@ -78,6 +78,7 @@ script = ExtResource("2_y1sju")
 battle_on_contact = false
 enemy_id = "ampoule"
 icon = ExtResource("3_sr5ss")
+height = 53
 enemy_info = "Filled with a suspicious liquid. Attempts to absorb nutrients to repair itself."
 base_display_name = "Ampoule"
 
@@ -98,10 +99,10 @@ heal_sound = ExtResource("11_5i8ek")
 script = ExtResource("6_xyght")
 hit = SubResource("Resource_kodc5")
 
-[node name="Toast" parent="Battler" index="1"]
+[node name="Toast" parent="Battler" index="2"]
 position = Vector2(0, -45)
 
-[node name="AI" parent="Battler" index="2"]
+[node name="AI" parent="Battler" index="3"]
 script = ExtResource("5_4cvli")
 
 [node name="CollisionShape2D" parent="Battler/Hitbox" index="0"]

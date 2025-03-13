@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjjk83547rwcg"]
+
+[ext_resource type="Script" path="res://ui/04_templates/battle_ui/scan_result_popup.gd" id="1_mcse3"]
+[ext_resource type="PackedScene" uid="uid://oqul5liq5pdc" path="res://ui/03_organisms/enemy_info/enemy_info.tscn" id="2_v2ngo"]
+
+[node name="ScanResultPopup" type="Popup"]
+size = Vector2i(600, 136)
+visible = true
+script = ExtResource("1_mcse3")
+
+[node name="EnemyInfo" parent="." instance=ExtResource("2_v2ngo")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2

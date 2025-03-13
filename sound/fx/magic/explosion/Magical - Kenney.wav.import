@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dgox5q5n3kpp2"
+path="res://.godot/imported/Magical - Kenney.wav-ae12a2ac21eb62ba4b2cc06670d78cb6.sample"
+
+[deps]
+
+source_file="res://sound/fx/magic/explosion/Magical - Kenney.wav"
+dest_files=["res://.godot/imported/Magical - Kenney.wav-ae12a2ac21eb62ba4b2cc06670d78cb6.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

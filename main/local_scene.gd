@@ -4,7 +4,13 @@ class_name LocalScene
 func _ready() -> void:
 	
 	# These initializations don't depend on anything, so they can go in any order
-	BattleService.initialize($BattleUILayer/BattleUI)
+	CutsceneService.initialize(
+		$PopupLayer/CutscenePausePopup
+	)
+	BattleService.initialize(
+		$BattleUILayer/BattleUI, 
+		$PopupLayer/ScanResult
+	)
 	CameraService.initialize(
 		$SubViewportContainer/SubViewport/World/PlayerProxy/Camera2D,
 		$SubViewportContainer/SubViewport

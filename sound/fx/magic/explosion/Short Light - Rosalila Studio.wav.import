@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bekjefcp88a7i"
+path="res://.godot/imported/Short Light - Rosalila Studio.wav-542f7ad196f4abcc3d2a47940e9b2959.sample"
+
+[deps]
+
+source_file="res://sound/fx/magic/explosion/Short Light - Rosalila Studio.wav"
+dest_files=["res://.godot/imported/Short Light - Rosalila Studio.wav-542f7ad196f4abcc3d2a47940e9b2959.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

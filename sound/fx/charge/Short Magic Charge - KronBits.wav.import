@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://uottfqh0eivc"
+path="res://.godot/imported/Short Magic Charge - KronBits.wav-76009ec0e34da2031dcbaa46fd5afa44.sample"
+
+[deps]
+
+source_file="res://sound/fx/charge/Short Magic Charge - KronBits.wav"
+dest_files=["res://.godot/imported/Short Magic Charge - KronBits.wav-76009ec0e34da2031dcbaa46fd5afa44.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

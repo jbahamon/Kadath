@@ -1,7 +1,6 @@
 extends Node
 
-var CutsceneParser = preload("res://utils/cutscene_manager/cutscene_parser.gd")	
-var CutscenePausePopup = preload("res://ui/04_templates/cutscene_pause_dialog/cutscene_pause_dialog.tscn")
+var CutsceneParser = preload("res://utils/cutscene_manager/cutscene_parser.gd")
 var parser
 var pause_dialog: Window
 var current_cutscene = null
@@ -10,17 +9,20 @@ var popup: Popup
 
 func _init():
 	self.parser = CutsceneParser.new()
-	self.popup = CutscenePausePopup.instantiate()
+	
 
 func _ready():
 	self.set_process_unhandled_input(false)
-	
+
+func initialize(init_cutscene_popup):
+	self.popup = init_cutscene_popup
+		
 func _unhandled_input(event):
 	assert(self.current_cutscene != null)
 	if event.is_action_pressed("ui_menu"):
 		self.pause_cutscene()
 		self.get_viewport().set_input_as_handled()
-		
+
 func play_cutscene_from_file(cutscene_file_name: String, options: Dictionary = {}):
 	var cutscene_instruction = parser.parse_cutscene_from_file(cutscene_file_name)
 	await self.play_cutscene(cutscene_instruction, options)
@@ -69,7 +71,7 @@ func pause_cutscene():
 	
 	var bg: ColorRect = FXService.get_layer("CUTSCENE_PAUSE")
 	bg.visible = true
-	UIService.show_popup(self.popup)
+	UIService.handle_popup(self.popup, true)
 	
 	if await self.popup.skip_chosen:
 		skip_cutscene()

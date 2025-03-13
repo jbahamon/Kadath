@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bfspsw5rbqtew"
+path="res://.godot/imported/Laser Small - Kenney.wav-2ec3077d0be59568c8a921b587203bd1.sample"
+
+[deps]
+
+source_file="res://sound/fx/shoot/Laser Small - Kenney.wav"
+dest_files=["res://.godot/imported/Laser Small - Kenney.wav-2ec3077d0be59568c8a921b587203bd1.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

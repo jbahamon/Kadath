@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://xmm5o0o7psij"
+path="res://.godot/imported/Ascending - DASK.wav-8abac05ed919ad710f42b66b36c160ce.sample"
+
+[deps]
+
+source_file="res://sound/fx/charge/Ascending - DASK.wav"
+dest_files=["res://.godot/imported/Ascending - DASK.wav-8abac05ed919ad710f42b66b36c160ce.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

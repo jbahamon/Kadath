@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://76qafquuir4k"]
+[gd_scene load_steps=32 format=3 uid="uid://76qafquuir4k"]
 
 [ext_resource type="PackedScene" uid="uid://bomxx7doloqmu" path="res://party/party_member.tscn" id="1_tjmem"]
 [ext_resource type="Resource" uid="uid://1ulgpa1j7pky" path="res://party/carter/growth.tres" id="2_jpdcx"]
@@ -14,10 +14,12 @@
 [ext_resource type="Script" path="res://party/carter/skill/charge.gd" id="8_m04rn"]
 [ext_resource type="Script" path="res://battle/hit.gd" id="8_u204t"]
 [ext_resource type="Texture2D" uid="uid://dn6j26nefycu5" path="res://party/carter/charge_particle.png" id="9_gqyon"]
-[ext_resource type="Script" path="res://party/carter/action/analyse.gd" id="10_d3obn"]
+[ext_resource type="Script" path="res://party/carter/action/identify.gd" id="10_d3obn"]
 [ext_resource type="PackedScene" uid="uid://cchn13mhn8gxu" path="res://battle/action/util/projectile.tscn" id="10_ib2sa"]
 [ext_resource type="Texture2D" uid="uid://i5fn63spd1aj" path="res://party/carter/blast_projectile.png" id="10_w08ur"]
+[ext_resource type="AudioStream" uid="uid://bataanejiirh5" path="res://sound/fx/magic/heal/Heal - colorsCrimsonTears.wav" id="11_5rsy8"]
 [ext_resource type="AudioStream" uid="uid://uottfqh0eivc" path="res://sound/fx/charge/Short Magic Charge - KronBits.wav" id="11_afuqa"]
+[ext_resource type="Texture2D" uid="uid://d4lud1t33vyvt" path="res://party/carter/action/identify.png" id="11_pd33i"]
 [ext_resource type="AudioStream" uid="uid://slj7vubis1w4" path="res://sound/fx/scratch/Short - JuhaniJunkala.wav" id="12_8jthm"]
 [ext_resource type="AudioStream" uid="uid://dgox5q5n3kpp2" path="res://sound/fx/magic/explosion/Magical - Kenney.wav" id="13_d4bhm"]
 [ext_resource type="AudioStream" uid="uid://ruyhjiabko6l" path="res://sound/fx/charge/Long Magic Charge - KronBits.wav" id="17_1sv2e"]
@@ -127,8 +129,17 @@ description = "Attack with your equipped weapon"
 script = ExtResource("10_d3obn")
 long_description = "Gathers information about an enemy type, such as [color=light_sky_blue]hit points[/color] and [color=light_sky_blue]behavior[/color].
 Information is shown [color=light_sky_blue]when targeting enemies of that type[/color] from that point on."
+success_sound = ExtResource("11_5rsy8")
+base_offset = Vector2(-10, -40)
 display_name = "Identify"
 description = "Gather information about an enemy."
+
+[node name="MagnifyingGlass" type="Sprite2D" parent="Battler/Actions/Identify" index="0"]
+visible = false
+z_index = 2
+texture = ExtResource("11_pd33i")
+centered = false
+offset = Vector2(-10, -40)
 
 [node name="CrescentBlast" type="Node" parent="Battler/Actions/Skill" index="0"]
 script = ExtResource("5_8d58u")

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b6g8wgsmryxu0"
+path="res://.godot/imported/Long - CoffeeBat.wav-567b85e7c01602ed16758246be7edafe.sample"
+
+[deps]
+
+source_file="res://sound/fx/scream/Long - CoffeeBat.wav"
+dest_files=["res://.godot/imported/Long - CoffeeBat.wav-567b85e7c01602ed16758246be7edafe.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

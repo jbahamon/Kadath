@@ -1,15 +1,14 @@
 [gd_scene load_steps=2 format=3 uid="uid://ba44sap453kmu"]
 
-[ext_resource type="Script" path="res://ui/04_templates/cutscene_pause_dialog/cutscene_pause_dialog.gd" id="1_2l3kd"]
+[ext_resource type="Script" path="res://ui/04_templates/cutscene_pause_popup/cutscene_pause_popup.gd" id="1_l48rq"]
 
-
-[node name="CutscenePauseDialog" type="Popup"]
+[node name="CutscenePausePopup" type="Popup"]
 transparent_bg = true
 position = Vector2i(0, 36)
 size = Vector2i(333, 105)
 visible = true
 transparent = true
-script = ExtResource("1_2l3kd")
+script = ExtResource("1_l48rq")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchors_preset = 15

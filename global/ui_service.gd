@@ -96,14 +96,9 @@ func _unhandled_input(event) -> void:
 	if event.is_action_pressed("ui_menu"): 
 		self.opening_menu = true
 		self.menu_popup.get_child(0).initialize()
-		self.__handle_popup(menu_popup, true, 1)
+		self.handle_popup(menu_popup, true, 1)
 		self.get_viewport().set_input_as_handled()
 		self.opening_menu = false
-		
-func show_popup(popup_node: Window, pause_tree=true):
-	self.popup_layer.add_child(popup_node)
-	await self.__handle_popup(popup_node, pause_tree)
-	self.popup_layer.call_deferred("remove_child", popup_node)
 
 func play_notification(sound):
 	self.notification_player.stream = sound
@@ -111,14 +106,15 @@ func play_notification(sound):
 	return self.notification_player
 
 func show_save_menu() -> void:
-	self.__handle_popup(menu_popup, true)
+	self.handle_popup(menu_popup, true)
 	
-func __handle_popup(popup_node: Window, pause_tree, ratio=null):
+func handle_popup(popup_node: Window, pause_tree, ratio=null, play_sound=true):
 	if pause_tree:
 		InputService.enter_menu_mode()
 	
-	self.notification_player.stream = open_popup_sound
-	self.notification_player.play()
+	if play_sound:
+		self.notification_player.stream = open_popup_sound
+		self.notification_player.play()
 	
 	if ratio == null:
 		popup_node.popup_centered()
