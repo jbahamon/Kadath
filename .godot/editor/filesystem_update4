@@ -35,3 +35,5 @@ res://ui/04_templates/cutscene_pause_popup/cutscene_pause_dialog.tscn
 res://ui/04_templates/cutscene_pause_popup/cutscene_pause_popup.tscn
 res://ui/04_templates/battle_ui/scan_result_popup.gd
 res://npc/enemy/acolyte/ai.gd
+res://ui/03_organisms/enemy_info/enemy_info.gd
+res://ui/02_molecules/party_member_stats/party_member_stats.tscn

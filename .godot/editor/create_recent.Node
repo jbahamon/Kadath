@@ -1,8 +1,10 @@
+MarginContainer
+HBoxContainer
+Label
 Popup
 PopupPanel
 Sprite2D
 RichTextLabel
-MarginContainer
 Node
 AnimatedSprite2D
 Control
@@ -10,6 +12,3 @@ TextureRect
 GridContainer
 Node2D
 CPUParticles2D
-HBoxContainer
-VBoxContainer
-Label

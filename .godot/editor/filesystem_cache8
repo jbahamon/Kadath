@@ -1,5 +1,5 @@
 c693a20e708c4e09bfa9edf12a750cf8
-::res://::1741824934
+::res://::1741835525
 CREDITS.json::JSON::-1::1741149239::0::1::::<><>::
 default_bus_layout.tres::AudioBusLayout::8710969540777317543::1741824934::0::1::::<><>::
 icon.png::CompressedTexture2D::4466587032338247328::1731725898::1731726399::1::::<><>::
@@ -304,10 +304,10 @@ location.tres::Resource::-1::1731725898::0::1::::<><>::res://location/lib/script
 room_template.tscn::PackedScene::6711197427561942958::1731725898::0::1::::<><>::res://location/lib/script/location/location_room.gd
 ::res://location/lib/template/story/::1731725898
 raw.tres::Resource::-1::1731725898::0::1::::<><>::res://addons/EXP-System-Dialog/Resource_EditorStory/EXP_EditorStory.gd
-::res://main/::1741824928
+::res://main/::1741835495
 inventory.gd::GDScript::-1::1733239860::0::1::::Inventory<>RefCounted<>::
 local_scene.gd::GDScript::-1::1741818313::0::1::::LocalScene<>Node2D<>::
-local_scene.tscn::PackedScene::6691906044308556220::1741824928::0::1::::<><>::uid://c3okprgd6vbwj::::res://ui/04_templates/pause_menu/pause_menu.tscn<>uid://dqln0csi71ji8::::res://ui/01_atoms/assets/icons/original/interaction_indicator.png<>uid://cgihxoevv7qgc::::res://ui/01_atoms/theme.tres<>uid://bjjk83547rwcg::::res://ui/04_templates/battle_ui/scan_result_popup.tscn<>res://ui/04_templates/pause_menu/menu_popup.gd<>res://main/local_scene.gd<>uid://kjfr6yr534rp::::res://ui/04_templates/saves_menu/saves_menu.tscn<>uid://bo1y3b4btisvv::::res://ui/04_templates/dialogue_box/dialogue_box.tscn<>uid://bg7hnqo1b5c6m::::res://main/player_proxy.tscn<>uid://ex17k532alby::::res://ui/04_templates/battle_ui/battle_ui.tscn<>uid://biqsf23fc0cbi::::res://sound/ui/blops/High - Kenney.wav<>uid://ba44sap453kmu::::res://ui/04_templates/cutscene_pause_popup/cutscene_pause_popup.tscn<>res://main/narration_layer.gd
+local_scene.tscn::PackedScene::6691906044308556220::1741835495::0::1::::<><>::uid://c3okprgd6vbwj::::res://ui/04_templates/pause_menu/pause_menu.tscn<>uid://dqln0csi71ji8::::res://ui/01_atoms/assets/icons/original/interaction_indicator.png<>uid://cgihxoevv7qgc::::res://ui/01_atoms/theme.tres<>uid://bjjk83547rwcg::::res://ui/04_templates/battle_ui/scan_result_popup.tscn<>res://ui/04_templates/pause_menu/menu_popup.gd<>res://main/local_scene.gd<>uid://kjfr6yr534rp::::res://ui/04_templates/saves_menu/saves_menu.tscn<>uid://bo1y3b4btisvv::::res://ui/04_templates/dialogue_box/dialogue_box.tscn<>uid://bg7hnqo1b5c6m::::res://main/player_proxy.tscn<>uid://ex17k532alby::::res://ui/04_templates/battle_ui/battle_ui.tscn<>uid://biqsf23fc0cbi::::res://sound/ui/blops/High - Kenney.wav<>uid://ba44sap453kmu::::res://ui/04_templates/cutscene_pause_popup/cutscene_pause_popup.tscn<>res://main/narration_layer.gd
 narration_layer.gd::GDScript::-1::1732660321::0::1::::<>CanvasLayer<>::
 player_proxy.gd::GDScript::-1::1741149239::0::1::::PlayerProxy<>CharacterBody2D<>::
 player_proxy.tscn::PackedScene::2874062931106041074::1739481301::0::1::::<><>::res://main/player_proxy.gd
@@ -345,7 +345,7 @@ stats.tres::Resource/CharacterStats::1217396725766633429::1741740433::0::1::::<>
 shadow_critter.png::CompressedTexture2D::7189584102289302718::1731725898::1731726399::1::::<><>::
 shadow_critter.tscn::PackedScene::4998169793001667746::1741149239::0::1::::<><>::uid://co4ecuc835bk6::::res://npc/lib/enemy.tscn<>res://battle/action/attack.tscn<>res://battle/ai/random_ai.gd<>res://npc/enemy/shadow_critter/shadow_critter_stats.tres<>uid://3huenc8ltgbh::::res://npc/lib/anim/simple_npc_anim.tscn
 shadow_critter_stats.tres::Resource::-1::1731725898::0::1::::<><>::res://party/character_stats.gd
-::res://npc/enemy/thymiaterion/::1741824927
+::res://npc/enemy/thymiaterion/::1741835470
 ai.gd::GDScript::-1::1741149239::0::1::::<>BattlerAI<>::
 anim.gd::GDScript::-1::1734642707::0::1::::<>Marker2D<>::
 anim.tscn::PackedScene::4743926757605220604::1741655850::0::1::::<><>::res://npc/enemy/thymiaterion/anim.gd<>uid://rcfyijuewhqe::::res://npc/enemy/thymiaterion/thymiaterion.png
@@ -354,7 +354,7 @@ icon.png::CompressedTexture2D::613465039681630601::1731725898::1733594517::1::::
 projectile.png::CompressedTexture2D::7146276377017514363::1734573002::1734573170::1::::<><>::
 projectile_trail.png::CompressedTexture2D::7086402560424130328::1734573015::1734573170::1::::<><>::
 thymiaterion.png::CompressedTexture2D::1197685976377187952::1741476260::1741476262::1::::<><>::
-thymiaterion.tscn::PackedScene::576592466072169463::1741824927::0::1::::<><>::uid://c17hneqpuil0l::::res://npc/lib/base_npc.tscn<>res://npc/lib/boss.gd<>uid://dhdxf4nhk8224::::res://sound/fx/scream/High Pitched - KronBits.wav<>uid://i0fxdua2akyb::::res://npc/enemy/thymiaterion/icon.png<>uid://b8t81sm0y5b4o::::res://npc/enemy/thymiaterion/anim.tscn<>uid://dtaxhpmmjspek::::res://battle/battler/battler.tscn<>res://npc/enemy/thymiaterion/action/shoot.gd<>res://npc/enemy/thymiaterion/action/jump.gd<>uid://c48122ffiwrbb::::res://utils/material/uniform_add.tres<>res://npc/enemy/thymiaterion/action/whip.gd<>res://battle/hit.gd<>res://npc/enemy/thymiaterion/action/counter.gd<>uid://cnxcr63hb0yvy::::res://sound/fx/hit/Long Low - Owlish.wav<>res://npc/enemy/thymiaterion/action/chew.gd<>res://npc/enemy/thymiaterion/action/prepare.gd<>res://npc/enemy/thymiaterion/ai.gd<>uid://bt8tfh3wrprlt::::res://sound/fx/shoot/Starfall - KronBits.wav<>res://npc/enemy/thymiaterion/action/beam.gd<>uid://cnak34od31obi::::res://sound/fx/hit/Basic - Rosalila Studio.wav<>uid://cchn13mhn8gxu::::res://battle/action/util/projectile.tscn<>uid://bonrytymjwsto::::res://sound/fx/hit/Short Slap - Spring Spring.wav<>uid://c82yel13pptcd::::res://npc/enemy/thymiaterion/projectile.png<>uid://c77yarfa7vsom::::res://npc/enemy/thymiaterion/projectile_trail.png<>res://utils/material/uniform_add.gdshader<>uid://3aixhsb313oh::::res://sound/fx/hit/Long Explodey - JuhaniJunkala.wav<>uid://cuaphveq6enwc::::res://npc/enemy/thymiaterion/beam.png<>uid://di7wtmrx7jsha::::res://sound/fx/slash/Mid Light Clean - colorsCrimsonTears.wav<>uid://bq2b66vmiocgp::::res://sound/fx/hit/Short - MadameBerry.wav
+thymiaterion.tscn::PackedScene::576592466072169463::1741835470::0::1::::<><>::uid://c17hneqpuil0l::::res://npc/lib/base_npc.tscn<>res://npc/lib/boss.gd<>uid://dhdxf4nhk8224::::res://sound/fx/scream/High Pitched - KronBits.wav<>uid://i0fxdua2akyb::::res://npc/enemy/thymiaterion/icon.png<>uid://b8t81sm0y5b4o::::res://npc/enemy/thymiaterion/anim.tscn<>uid://dtaxhpmmjspek::::res://battle/battler/battler.tscn<>res://npc/enemy/thymiaterion/action/shoot.gd<>res://npc/enemy/thymiaterion/action/jump.gd<>uid://c48122ffiwrbb::::res://utils/material/uniform_add.tres<>res://npc/enemy/thymiaterion/action/whip.gd<>res://battle/hit.gd<>res://npc/enemy/thymiaterion/action/counter.gd<>uid://cnxcr63hb0yvy::::res://sound/fx/hit/Long Low - Owlish.wav<>res://npc/enemy/thymiaterion/action/chew.gd<>res://npc/enemy/thymiaterion/action/prepare.gd<>res://npc/enemy/thymiaterion/ai.gd<>uid://bt8tfh3wrprlt::::res://sound/fx/shoot/Starfall - KronBits.wav<>res://npc/enemy/thymiaterion/action/beam.gd<>uid://cnak34od31obi::::res://sound/fx/hit/Basic - Rosalila Studio.wav<>uid://cchn13mhn8gxu::::res://battle/action/util/projectile.tscn<>uid://bonrytymjwsto::::res://sound/fx/hit/Short Slap - Spring Spring.wav<>uid://c82yel13pptcd::::res://npc/enemy/thymiaterion/projectile.png<>uid://c77yarfa7vsom::::res://npc/enemy/thymiaterion/projectile_trail.png<>res://utils/material/uniform_add.gdshader<>uid://3aixhsb313oh::::res://sound/fx/hit/Long Explodey - JuhaniJunkala.wav<>uid://cuaphveq6enwc::::res://npc/enemy/thymiaterion/beam.png<>uid://di7wtmrx7jsha::::res://sound/fx/slash/Mid Light Clean - colorsCrimsonTears.wav<>uid://bq2b66vmiocgp::::res://sound/fx/hit/Short - MadameBerry.wav
 ::res://npc/enemy/thymiaterion/action/::1741644592
 beam.gd::GDScript::-1::1741149239::0::1::::<>BattleAction<>::
 chew.gd::GDScript::-1::1741149239::0::1::::<>BattleAction<>::
@@ -416,19 +416,19 @@ vision.gd::GDScript::-1::1731725898::0::1::::<>BattleAction<>::
 ::res://party/alex/skill/::1741149239
 crescent_blast.gd::GDScript::-1::1741149239::0::1::::<>BattleAction<>::
 forceful_slash.gd::GDScript::-1::1741149239::0::1::::<>BattleAction<>::
-::res://party/carter/::1741824927
-anim.tscn::PackedScene::1397778303601026024::1741824926::0::1::::<><>::res://npc/lib/anim/character_anim.gd<>uid://8wps7xhl5m8v::::res://party/carter/spritesheet.png
+::res://party/carter/::1741835469
+anim.tscn::PackedScene::1397778303601026024::1741835469::0::1::::<><>::res://npc/lib/anim/character_anim.gd<>uid://8wps7xhl5m8v::::res://party/carter/spritesheet.png
 aoe.png::CompressedTexture2D::8439331501483665413::1741149239::1741243627::1::::<><>::
 blast_projectile.png::CompressedTexture2D::623770554327057081::1741149239::1741243627::1::::<><>::
-carter.tscn::PackedScene::2311010466946544424::1741824927::0::1::::<><>::uid://bomxx7doloqmu::::res://party/party_member.tscn<>uid://1ulgpa1j7pky::::res://party/carter/growth.tres<>uid://cahhrhysueqlh::::res://party/carter/icon.png<>uid://t6dg7lnwshho::::res://party/carter/anim.tscn<>uid://dkgwdhrjgti27::::res://party/carter/menu_sprite.png<>res://party/carter/skill/crescent_blast.gd<>uid://ttxcbt6u2yh3::::res://battle/action/util/area_of_effect.tscn<>res://battle/action/party_member_attack.gd<>uid://drjfpr601ic6g::::res://sound/fx/slash/Light Bloody - nekoninja.wav<>uid://c48122ffiwrbb::::res://utils/material/uniform_add.tres<>uid://dsics6xs4ns1r::::res://party/carter/aoe.png<>res://party/carter/skill/charge.gd<>res://battle/hit.gd<>uid://dn6j26nefycu5::::res://party/carter/charge_particle.png<>res://party/carter/action/identify.gd<>uid://cchn13mhn8gxu::::res://battle/action/util/projectile.tscn<>uid://i5fn63spd1aj::::res://party/carter/blast_projectile.png<>uid://bataanejiirh5::::res://sound/fx/magic/heal/Heal - colorsCrimsonTears.wav<>uid://uottfqh0eivc::::res://sound/fx/charge/Short Magic Charge - KronBits.wav<>uid://d4lud1t33vyvt::::res://party/carter/action/identify.png<>uid://slj7vubis1w4::::res://sound/fx/scratch/Short - JuhaniJunkala.wav<>uid://dgox5q5n3kpp2::::res://sound/fx/magic/explosion/Magical - Kenney.wav<>uid://ruyhjiabko6l::::res://sound/fx/charge/Long Magic Charge - KronBits.wav
+carter.tscn::PackedScene::2311010466946544424::1741835469::0::1::::<><>::uid://bomxx7doloqmu::::res://party/party_member.tscn<>uid://1ulgpa1j7pky::::res://party/carter/growth.tres<>uid://cahhrhysueqlh::::res://party/carter/icon.png<>uid://t6dg7lnwshho::::res://party/carter/anim.tscn<>uid://dkgwdhrjgti27::::res://party/carter/menu_sprite.png<>res://party/carter/skill/crescent_blast.gd<>uid://ttxcbt6u2yh3::::res://battle/action/util/area_of_effect.tscn<>res://battle/action/party_member_attack.gd<>uid://drjfpr601ic6g::::res://sound/fx/slash/Light Bloody - nekoninja.wav<>uid://c48122ffiwrbb::::res://utils/material/uniform_add.tres<>uid://dsics6xs4ns1r::::res://party/carter/aoe.png<>res://party/carter/skill/charge.gd<>res://battle/hit.gd<>uid://dn6j26nefycu5::::res://party/carter/charge_particle.png<>res://party/carter/action/identify.gd<>uid://cchn13mhn8gxu::::res://battle/action/util/projectile.tscn<>uid://i5fn63spd1aj::::res://party/carter/blast_projectile.png<>uid://bataanejiirh5::::res://sound/fx/magic/heal/Heal - colorsCrimsonTears.wav<>uid://uottfqh0eivc::::res://sound/fx/charge/Short Magic Charge - KronBits.wav<>uid://d4lud1t33vyvt::::res://party/carter/action/identify.png<>uid://slj7vubis1w4::::res://sound/fx/scratch/Short - JuhaniJunkala.wav<>uid://dgox5q5n3kpp2::::res://sound/fx/magic/explosion/Magical - Kenney.wav<>uid://ruyhjiabko6l::::res://sound/fx/charge/Long Magic Charge - KronBits.wav
 charge_emission_mask.png::CompressedTexture2D::1620613079735762686::1741149239::1741243627::1::::<><>::
 charge_particle.png::CompressedTexture2D::8136309046615589150::1741149239::1741243627::1::::<><>::
 growth.tres::Resource/GrowthStats::1866876880398773624::1741743462::0::1::::<><>::res://party/growth_stats.gd
 icon.png::CompressedTexture2D::4787747794693866461::1731725898::1731726399::1::::<><>::
 menu_sprite.png::CompressedTexture2D::7874878279549382446::1732509057::1732509062::1::::<><>::
 spritesheet.png::CompressedTexture2D::2362592766437816807::1741717771::1741717772::1::::<><>::
-::res://party/carter/action/::1741819286
-identify.gd::GDScript::-1::1741819286::0::1::::<>BattleAction<>::
+::res://party/carter/action/::1741835495
+identify.gd::GDScript::-1::1741835495::0::1::::<>BattleAction<>::
 identify.png::CompressedTexture2D::9218667765382794597::1741729245::1741729246::1::::<><>::
 ::res://party/carter/skill/::1741149239
 charge.gd::GDScript::-1::1741149239::0::1::::<>BattleAction<>::
@@ -575,10 +575,10 @@ Turn Start - KronBits.wav::AudioStreamWAV::1902501964702719989::1566079904::1741
 High - Kenney.wav::AudioStreamWAV::2982064773317449658::1739376715::1741244414::1::::<><>::
 Low - Owlish.wav::AudioStreamWAV::1297331359573666661::1739477315::1741244414::1::::<><>::
 Mid - Kenney.wav::AudioStreamWAV::8120616305025411959::1739553721::1741244414::1::::<><>::
-::res://sound/ui/interaction/::1741834908
+::res://sound/ui/interaction/::1741835525
 Button Press - zipdisq.wav::AudioStreamWAV::6870078070016166444::1724536526::1741244414::1::::<><>::
 Error - Leohpaz.wav::AudioStreamWAV::2727927582422232953::1643893961::1741244414::1::::<><>::
-Scan - Owlstorm.wav::AudioStreamWAV::8304648248435479654::1739477315::1741834928::1::::<><>::
+Scan - Owlish.wav::AudioStreamWAV::8304648248435479654::1739477315::1741835526::1::::<><>::
 ::res://sound/ui/notification/::1741244414
 Soft Fanfare - KronBits.wav::AudioStreamWAV::1764256927340494855::1563444312::1741244414::1::::<><>::
 ::res://ui/::1731725899
@@ -891,9 +891,9 @@ timeline_item.tscn::PackedScene::3214568426269246949::1741149240::0::1::::<><>::
 toast.gd::GDScript::-1::1731725899::0::1::::<>Node2D<>::
 toast.tscn::PackedScene::2021425348141846074::1741145847::0::1::::<><>::res://ui/02_molecules/toast/toast.gd<>uid://cgihxoevv7qgc::::res://ui/01_atoms/theme.tres
 ::res://ui/03_organisms/::1741149240
-::res://ui/03_organisms/enemy_info/::1741824929
+::res://ui/03_organisms/enemy_info/::1741835471
 enemy_info.gd::GDScript::-1::1741651890::0::1::::<>PanelContainer<>::
-enemy_info.tscn::PackedScene::1016909431665107156::1741824929::0::1::::<><>::res://ui/03_organisms/enemy_info/enemy_info.gd
+enemy_info.tscn::PackedScene::1016909431665107156::1741835471::0::1::::<><>::res://ui/03_organisms/enemy_info/enemy_info.gd
 ::res://ui/03_organisms/item_select_panel/::1741149240
 item_select_panel.gd::GDScript::-1::1732559139::0::1::::<>MarginContainer<>::
 item_select_panel.tscn::PackedScene::449493499792448724::1741149240::0::1::::<><>::res://ui/03_organisms/item_select_panel/item_select_panel.gd<>uid://cgihxoevv7qgc::::res://ui/01_atoms/theme.tres
@@ -916,20 +916,20 @@ status_grid.tscn::PackedScene::2377069119748928829::1741149240::0::1::::<><>::re
 timeline.gd::GDScript::-1::1741149240::0::1::::<>HBoxContainer<>::
 timeline.tscn::PackedScene::3535690997282111114::1741149240::0::1::::<><>::res://ui/03_organisms/timeline/timeline.gd
 ::res://ui/04_templates/::1741818103
-::res://ui/04_templates/battle_ui/::1741824929
+::res://ui/04_templates/battle_ui/::1741835471
 battle_ui.gd::GDScript::-1::1741815604::0::1::::BattleUI<>MarginContainer<>::
 battle_ui.tscn::PackedScene::329872422998308758::1741804486::0::1::::<><>::res://ui/04_templates/battle_ui/battle_ui.gd<>uid://cgihxoevv7qgc::::res://ui/01_atoms/theme.tres<>uid://bqmykxfryt4p7::::res://ui/03_organisms/timeline/timeline.tscn<>uid://oyekfni30vws::::res://ui/03_organisms/skill_costs/skill_costs.tscn<>uid://oqul5liq5pdc::::res://ui/03_organisms/enemy_info/enemy_info.tscn<>uid://daewnnjw7jcqa::::res://ui/01_atoms/assets/textures/By HenrySoftware/Sprite/ArrowEast.png<>uid://brhpxl8pukdr::::res://ui/03_organisms/select_list/select_list.tscn<>uid://bnihqcw4rnk07::::res://ui/04_templates/battle_ui/party_status.tscn
 multi_target_option.gd::GDScript::-1::1731725899::0::1::::<>RefCounted<>::
 party_status.gd::GDScript::-1::1731725899::0::1::::<>BoxContainer<>::
 party_status.tscn::PackedScene::3315844405045109682::1741149240::0::1::::<><>::res://ui/04_templates/battle_ui/party_status.gd<>uid://crjmxm0ml1eek::::res://ui/02_molecules/party_member_summary/party_member_summary.tscn
 scan_result_popup.gd::GDScript::-1::1741818746::0::1::::<>Popup<>::
-scan_result_popup.tscn::PackedScene::3037367295707476938::1741824929::0::1::::<><>::res://ui/04_templates/battle_ui/scan_result_popup.gd<>uid://oqul5liq5pdc::::res://ui/03_organisms/enemy_info/enemy_info.tscn
+scan_result_popup.tscn::PackedScene::3037367295707476938::1741835471::0::1::::<><>::res://ui/04_templates/battle_ui/scan_result_popup.gd<>uid://oqul5liq5pdc::::res://ui/03_organisms/enemy_info/enemy_info.tscn
 ::res://ui/04_templates/credits/::1741149240
 credits.gd::GDScript::-1::1741149240::0::1::::<>MarginContainer<>::
 credits.tscn::PackedScene::699710853760334084::1741149240::0::1::::<><>::res://ui/04_templates/credits/credits.gd<>uid://7rvrjv6h33bx::::res://ui/01_atoms/assets/fonts/By Valiegraphie/Uncial_WIP.ttf<>uid://60oeotvtq5qv::::res://ui/01_atoms/assets/fonts/By Wuchta/Letterstyle(1).ttf
-::res://ui/04_templates/cutscene_pause_popup/::1741824929
+::res://ui/04_templates/cutscene_pause_popup/::1741835471
 cutscene_pause_popup.gd::GDScript::-1::1731725899::0::1::::<>Popup<>::
-cutscene_pause_popup.tscn::PackedScene::2448080600172246260::1741824929::0::1::::<><>::res://ui/04_templates/cutscene_pause_popup/cutscene_pause_popup.gd
+cutscene_pause_popup.tscn::PackedScene::2448080600172246260::1741835471::0::1::::<><>::res://ui/04_templates/cutscene_pause_popup/cutscene_pause_popup.gd
 ::res://ui/04_templates/dialogue_box/::1741149240
 dialogue_box.gd::GDScript::-1::1741149240::0::1::::<>VBoxContainer<>::
 dialogue_box.tscn::PackedScene::3424245623680680823::1741149240::0::1::::<><>::res://ui/04_templates/dialogue_box/dialogue_box.gd<>uid://biqsf23fc0cbi::::res://sound/ui/blops/High - Kenney.wav<>uid://bw0gl4jgbt7fi::::res://ui/02_molecules/dialogue_source/dialogue_source.tscn<>uid://b8h7mj2g47i5t::::res://ui/02_molecules/dialogue_content/dialogue_content.tscn
@@ -982,12 +982,12 @@ shake.gd::GDScript::-1::1741149240::0::1::::<>CutsceneInstruction<>::
 simultaneous.gd::GDScript::-1::1731725899::0::1::::<>CutsceneInstruction<>::
 start_dialogue.gd::GDScript::-1::1731725899::0::1::::<>CutsceneInstruction<>::
 wait.gd::GDScript::-1::1731725899::0::1::::<>CutsceneInstruction<>::
-::res://utils/material/::1741824929
-blend_add.gdshader::Shader::-1::1741824929::0::1::::<><>::
-boss_dissolve.gdshader::Shader::-1::1741824929::0::1::::<><>::
-dissolve.gdshader::Shader::-1::1741824929::0::1::::<><>::
+::res://utils/material/::1741835495
+blend_add.gdshader::Shader::-1::1741835495::0::1::::<><>::
+boss_dissolve.gdshader::Shader::-1::1741835495::0::1::::<><>::
+dissolve.gdshader::Shader::-1::1741835495::0::1::::<><>::
 dissolve.tres::ShaderMaterial::3451634194460213830::1731725899::0::1::::<><>::res://utils/material/dissolve.gdshader
-highlight.gdshader::Shader::-1::1741824929::0::1::::<><>::
+highlight.gdshader::Shader::-1::1741835495::0::1::::<><>::
 highlight.tres::ShaderMaterial::3242753369625923603::1741743462::0::1::::<><>::res://utils/material/highlight.gdshader
-uniform_add.gdshader::Shader::-1::1741824929::0::1::::<><>::
+uniform_add.gdshader::Shader::-1::1741835495::0::1::::<><>::
 uniform_add.tres::ShaderMaterial::6878070583113702263::1741743462::0::1::::<><>::res://utils/material/uniform_add.gdshader

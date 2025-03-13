@@ -502,4 +502,4 @@ func notify_death(actor):
 
 func show_enemy_info(actor):
 	self.info_popup.update(actor)
-	await UIService.handle_popup(self.info_popup, true, 0.4, false)
+	await UIService.handle_popup(self.info_popup, true, null, false)

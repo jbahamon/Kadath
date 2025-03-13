@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://76qafquuir4k"]
+[gd_scene load_steps=33 format=3 uid="uid://76qafquuir4k"]
 
 [ext_resource type="PackedScene" uid="uid://bomxx7doloqmu" path="res://party/party_member.tscn" id="1_tjmem"]
 [ext_resource type="Resource" uid="uid://1ulgpa1j7pky" path="res://party/carter/growth.tres" id="2_jpdcx"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://i5fn63spd1aj" path="res://party/carter/blast_projectile.png" id="10_w08ur"]
 [ext_resource type="AudioStream" uid="uid://bataanejiirh5" path="res://sound/fx/magic/heal/Heal - colorsCrimsonTears.wav" id="11_5rsy8"]
 [ext_resource type="AudioStream" uid="uid://uottfqh0eivc" path="res://sound/fx/charge/Short Magic Charge - KronBits.wav" id="11_afuqa"]
+[ext_resource type="AudioStream" uid="uid://dqk3lw5e20ec1" path="res://sound/ui/interaction/Scan - Owlish.wav" id="11_c2j5y"]
 [ext_resource type="Texture2D" uid="uid://d4lud1t33vyvt" path="res://party/carter/action/identify.png" id="11_pd33i"]
 [ext_resource type="AudioStream" uid="uid://slj7vubis1w4" path="res://sound/fx/scratch/Short - JuhaniJunkala.wav" id="12_8jthm"]
 [ext_resource type="AudioStream" uid="uid://dgox5q5n3kpp2" path="res://sound/fx/magic/explosion/Magical - Kenney.wav" id="13_d4bhm"]
@@ -129,6 +130,7 @@ description = "Attack with your equipped weapon"
 script = ExtResource("10_d3obn")
 long_description = "Gathers information about an enemy type, such as [color=light_sky_blue]hit points[/color] and [color=light_sky_blue]behavior[/color].
 Information is shown [color=light_sky_blue]when targeting enemies of that type[/color] from that point on."
+scan_sound = ExtResource("11_c2j5y")
 success_sound = ExtResource("11_5rsy8")
 base_offset = Vector2(-10, -40)
 display_name = "Identify"

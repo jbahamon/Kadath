@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://oqul5liq5pdc" path="res://ui/03_organisms/enemy_info/enemy_info.tscn" id="2_v2ngo"]
 
 [node name="ScanResultPopup" type="Popup"]
-size = Vector2i(600, 136)
+size = Vector2i(600, 273)
 visible = true
 script = ExtResource("1_mcse3")
 
@@ -16,3 +16,12 @@ offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
+show_name = true
+
+[node name="MarginContainer" parent="EnemyInfo" index="0"]
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[editable path="EnemyInfo"]

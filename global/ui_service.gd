@@ -106,7 +106,7 @@ func play_notification(sound):
 	return self.notification_player
 
 func show_save_menu() -> void:
-	self.handle_popup(menu_popup, true)
+	self.handle_popup(save_popup, true)
 	
 func handle_popup(popup_node: Window, pause_tree, ratio=null, play_sound=true):
 	if pause_tree:
@@ -117,7 +117,7 @@ func handle_popup(popup_node: Window, pause_tree, ratio=null, play_sound=true):
 		self.notification_player.play()
 	
 	if ratio == null:
-		popup_node.popup_centered()
+		popup_node.popup_centered_clamped(Vector2.ONE, 0.2)
 	else:
 		popup_node.popup_centered_ratio(ratio)
 		

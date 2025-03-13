@@ -1,8 +1,12 @@
 extends PanelContainer
 
-@onready var hp_data: Label = $VBoxContainer/HBoxContainer/HPData
-@onready var summary: Label = $VBoxContainer/Summary
-@onready var matchups_section: Control = $VBoxContainer/GridContainer
+@export var show_name = false
+
+@onready var actor_name: Label = $MarginContainer/VBoxContainer/HBoxContainer/Name
+
+@onready var hp_data: Label = $MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/HPData
+@onready var summary: Label = $MarginContainer/VBoxContainer/Summary
+@onready var matchups_section: Control = $MarginContainer/VBoxContainer/GridContainer
 
 @onready var weakness_label: Label
 @onready var weakness_list: Label
@@ -25,7 +29,8 @@ func update(actor):
 	if VarsService.scan_level > 0:
 		self.show()
 		hp_data.text = "%s / %s" % [actor.battler.health, actor.battler.stats.max_health]
-		
+		self.actor_name.text = actor.base_display_name if "base_display_name" in actor else actor.display_name
+	
 	if VarsService.scan_level > 1:
 		self.summary.show()
 		self.summary.text = actor.enemy_info
@@ -35,6 +40,7 @@ func update(actor):
 		# TODO implement this at some point ;)
 	
 func reset():
+	self.actor_name.visible = self.show_name
 	self.summary.hide()
 	self.matchups_section.hide()
 	self.hide()

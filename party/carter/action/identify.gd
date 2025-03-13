@@ -1,8 +1,9 @@
 extends "res://battle/action/simple_single_target.gd"
 
 @export_multiline var long_description: String
+@export var scan_sound: AudioStream
 @export var success_sound: AudioStream
-@export var radius: int = 8
+@export var radius: int = 16
 @export  var base_offset: Vector2
 @onready var glass: Sprite2D = $MagnifyingGlass
 
@@ -14,6 +15,7 @@ func execute(actor):
 	
 	self.remove_child(glass)
 	room.add_child(glass)
+	FXService.play_sfx_at(scan_sound, self.target.global_position + Vector2(0, -self.target.height/2.0))
 	glass.position = self.target.global_position
 	var tween: Tween = actor.get_tree().create_tween()
 	tween.tween_method(self.set_angle, -PI/2.0, 7*PI/2.0, 1.6)
@@ -29,4 +31,4 @@ func execute(actor):
 	self.reset()
 	
 func set_angle(angle):
-	self.glass.offset = self.base_offset + Vector2.DOWN.rotated(angle) * self.radius
+	self.glass.offset = Vector2(self.base_offset.x, -self.target.height/2.0) + Vector2.DOWN.rotated(angle) * self.radius
