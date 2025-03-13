@@ -5,13 +5,14 @@ var PartyMemberListItem = preload("res://ui/02_molecules/party_member_list_item/
 signal exit_submenu
 
 const party_member_help = "Choose a party member to change their equipment."
-const party_member_controls = "[ {ui_up} ]/[ {ui_down} ] : Select  [ {ui_cancel} ]: Return  [ {ui_accept} ]: Confirm"
+const party_member_controls = "[{ui_up}]/[{ui_down}]: Select [{ui_cancel}]: Return [{ui_accept}]: Confirm"
 
 const item_help = "Choose the item to equip."
-const item_controls = "[ {ui_up} ]/[ {ui_down} ] : Select  [ {ui_cancel} ]: Return  [ {ui_accept} ]: Confirm"
+const item_controls = "[{ui_up}]/[{ui_down}]: Select [{ui_cancel}]: Return [{ui_accept}]: Confirm"
 
 @onready var item_list = $VBoxContainer/HBoxContainer/ItemList
-@onready var party_list = $VBoxContainer/HBoxContainer/PartyList
+@onready var party_container = $VBoxContainer/HBoxContainer/VBoxContainer
+@onready var party_list = $VBoxContainer/HBoxContainer/VBoxContainer/PartyList
 @onready var party_member_stats = $VBoxContainer/HBoxContainer/PartyMemberStats
 @onready var party_details_separator = $VBoxContainer/HBoxContainer/VSeparator
 @onready var details_items_separator = $VBoxContainer/HBoxContainer/VSeparator2
@@ -28,7 +29,7 @@ func set_party_list_mode():
 	# item_list.element_focused.disconnect(party_member_stats.on_item_focused)
 	party_details_separator.visible = true
 	details_items_separator.visible = false
-	party_list.visible = true
+	party_container.visible = true
 	item_list.visible = false
 	
 func set_item_mode():
@@ -37,7 +38,7 @@ func set_item_mode():
 	party_member_stats.set_process_unhandled_input(false)
 	party_details_separator.visible = false
 	details_items_separator.visible = true
-	party_list.visible = false
+	party_container.visible = false
 	item_list.visible = true
 	item_list.on_grab_focus()
 	

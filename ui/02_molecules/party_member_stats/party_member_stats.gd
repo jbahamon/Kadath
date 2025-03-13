@@ -130,7 +130,7 @@ func on_item_selected(item):
 func on_grab_focus():
 	UIService.set_menu_help(
 		"Choose the equipment to change.",
-		"[ {ui_up} ]/[ {ui_down} ] : Select  [ {ui_cancel} ]: Return  [ {ui_accept} ]: Confirm"
+		"[{ui_up}]/[{ui_down}]: Select [{ui_cancel}]: Return [{ui_accept}]: Confirm"
 	)
 
 	if selected_button != null:

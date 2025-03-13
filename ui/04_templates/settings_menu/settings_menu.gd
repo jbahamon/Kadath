@@ -26,8 +26,8 @@ var focus_in_tree = false
 @onready var input_popup: Popup = $Popups/ListenForInputPopup
 @onready var text_speed: Slider = $CenterContainer/Settings/UISliders/TextSpeedSlider
 
-@onready var enable_shake_checkbox: CheckBox = $CenterContainer/Settings/EnableShake
-@onready var enable_flash_checkbox: CheckBox = $CenterContainer/Settings/EnableFlash
+@onready var enable_shake_checkbox: CheckBox = $CenterContainer/Settings/VideoCheckBoxes/EnableShake
+@onready var enable_flash_checkbox: CheckBox = $CenterContainer/Settings/VideoCheckBoxes/EnableFlash
 
 @onready var hold_run_checkbox: CheckBox = $CenterContainer/Settings/RunBehaviorContainer/Hold
 @onready var toggle_run_checkbox: CheckBox = $CenterContainer/Settings/RunBehaviorContainer/Toggle
@@ -52,8 +52,8 @@ func _ready():
 	self.enable_shake_checkbox.focus_entered.connect(self.on_checkbox_focused.bind("Enable/disable camera shaking in battles and cutscenes."))
 	self.enable_flash_checkbox.focus_entered.connect(self.on_checkbox_focused.bind("Enable/disable camera flashing in battles and cutscenes."))
 	
-	self.hold_run_checkbox.focus_entered.connect(self.on_toggle_focused.bind("Hold [ {action_run} ] to run.".format(VarsService.strings)))
-	self.toggle_run_checkbox.focus_entered.connect(self.on_toggle_focused.bind("Press [ {action_run} ] to toggle between walking and running.".format(VarsService.strings)))
+	self.hold_run_checkbox.focus_entered.connect(self.on_toggle_focused.bind("Hold [{action_run}] to run.".format(VarsService.strings)))
+	self.toggle_run_checkbox.focus_entered.connect(self.on_toggle_focused.bind("Press [{action_run}] to toggle between walking and running.".format(VarsService.strings)))
 	
 	buttons = {}
 	for action in labels.keys():
@@ -216,23 +216,23 @@ func on_slider_focused(help_text):
 	UIService.play_focus_sound()
 	UIService.set_menu_help(
 		help_text,
-		"[ {ui_up} ]/[ {ui_down} ] : Move [ {ui_left} ]/[ {ui_right} ] : Increase/Decrease [ {ui_cancel} ] : Return"
+		"[{ui_up}]/[{ui_down}]: Move [{ui_left}]/[{ui_right}]: Increase/Decrease [{ui_cancel}]: Return"
 	)
 
 func on_checkbox_focused(help_text):
 	UIService.set_menu_help(
 		help_text,
-		"[ {ui_up} ]/[ {ui_down} ] : Move [ {ui_cancel} ] : Return [ {ui_accept} ] : Toggle"
+		"[{ui_up}]/[{ui_down}]: Move [{ui_cancel}]: Return [{ui_accept}]: Toggle"
 	)
 
 func on_binding_focused():
 	UIService.set_menu_help(
 		"Change a specific control binding.",
-		"[ {ui_up} ]/[ {ui_down} ]/[ {ui_left} ]/[ {ui_right} ] : Move [ {ui_cancel} ] : Return [ {ui_accept} ] : Change"
+		"[{ui_up}]/[{ui_down}]/[{ui_left}]/[{ui_right}]: Move [{ui_cancel}]: Return [{ui_accept}]: Change"
 	)
 
 func on_toggle_focused(help_text):
 	UIService.set_menu_help(
 		help_text,
-		"[ {ui_up} ]/[ {ui_down} ]/[ {ui_left} ]/[ {ui_right} ] : Move [ {ui_cancel} ] : Return [ {ui_accept} ] : Select"
+		"[{ui_up}]/[{ui_down}]/[{ui_left}]/[{ui_right}]: Move [{ui_cancel}]: Return [{ui_accept}]: Select"
 	)

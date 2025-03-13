@@ -1687,7 +1687,7 @@ centered = false
 offset = Vector2(-30, -43)
 hframes = 6
 vframes = 51
-frame = 204
+frame = 12
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("21")

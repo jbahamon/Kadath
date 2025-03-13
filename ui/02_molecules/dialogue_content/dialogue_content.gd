@@ -19,7 +19,7 @@ func set_advance_indicator_visibility(val: bool):
 	if val:
 		var advance_keycode = InputMap.action_get_events(&"ui_accept")[0].keycode
 		var cancel_keycode = InputMap.action_get_events(&"ui_cancel")[0].keycode
-		indicator_label.text = "[pulse freq=1.0 color=#ffffff40 ease=-2.0][ %s ] / [ %s ][/pulse]" % [
+		indicator_label.text = "[pulse freq=1.0 color=#ffffff40 ease=-2.0][%s]/[%s][/pulse]" % [
 			OS.get_keycode_string(advance_keycode),
 			OS.get_keycode_string(cancel_keycode),
 		]

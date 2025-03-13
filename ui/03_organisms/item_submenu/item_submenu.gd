@@ -2,7 +2,7 @@ extends PanelContainer
 
 signal exit_submenu
 
-const select_controls = "[ {ui_up} ]/[ {ui_down} ] : Select  [ {ui_cancel} ]: Return  [ {ui_accept} ]: Confirm"
+const select_controls = "[{ui_up}]/[{ui_down}]: Select [{ui_cancel}]: Return [{ui_accept}]: Confirm"
 
 var ItemEntry = preload("res://ui/02_molecules/item_list_item/item_list_item.tscn")
 var PartyMemberListItem = preload("res://ui/02_molecules/party_member_list_item/party_member_list_item.tscn")
@@ -12,14 +12,15 @@ var PartyMemberListItem = preload("res://ui/02_molecules/party_member_list_item/
 @export var controls_text: String
 
 @onready var categories: Container = $VBoxContainer/HBoxContainer/Categories
-@onready var first_category: Button = $VBoxContainer/HBoxContainer/Categories.get_children()[0]
+@onready var first_category: Button = $VBoxContainer/HBoxContainer/Categories.get_children()[1]
 
 @onready var consumables_button: Button = $VBoxContainer/HBoxContainer/Categories/Consumables
 @onready var equipment_button: Button = $VBoxContainer/HBoxContainer/Categories/Equipment
 @onready var key_items_button: Button = $VBoxContainer/HBoxContainer/Categories/KeyItems
 
-@onready var items = $VBoxContainer/HBoxContainer/Items
-@onready var party_list = $VBoxContainer/HBoxContainer/PartyList
+
+@onready var items = $VBoxContainer/HBoxContainer/ItemsContainer/Items
+@onready var party_list = $VBoxContainer/HBoxContainer/PartyContainer/PartyList
 
 var inventory: Inventory
 var current_category = null
@@ -46,7 +47,6 @@ func reset_controls(reset_categories = true):
 		self.current_category = null
 	
 	self.update_shown_items()
-	
 	
 func on_grab_focus():
 	self.first_category.button_pressed = true

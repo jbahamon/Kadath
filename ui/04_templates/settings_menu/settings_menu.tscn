@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://ui/04_templates/settings_menu/settings_menu.gd" id="2"]
 [ext_resource type="Script" path="res://ui/04_templates/settings_menu/listen_for_input_popup.gd" id="3"]
 [ext_resource type="AudioStream" uid="uid://bxvelfr4dar0c" path="res://sound/fx/slash/Mid Clean - colorsCrimsonTears.wav" id="3_abf3p"]
-[ext_resource type="StyleBox" uid="uid://brc46g1cj5k2v" path="res://ui/01_atoms/panel/panel.tres" id="3_yfoi0"]
+[ext_resource type="FontFile" uid="uid://c8fvau54sblb1" path="res://ui/01_atoms/assets/fonts/By Wuchta/Letterstyle(1).otf" id="4_vtv80"]
 
 [node name="SettingsMenu" type="ScrollContainer"]
 anchors_preset = 15
@@ -29,6 +29,8 @@ size_flags_vertical = 3
 
 [node name="VolumeLabel" type="Label" parent="CenterContainer/Settings"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("4_vtv80")
+theme_override_font_sizes/font_size = 15
 text = "Audio"
 
 [node name="VolumeSliders" type="GridContainer" parent="CenterContainer/Settings"]
@@ -82,26 +84,34 @@ layout_mode = 2
 
 [node name="VideoLabel" type="Label" parent="CenterContainer/Settings"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("4_vtv80")
+theme_override_font_sizes/font_size = 15
 text = "Video
 "
 
-[node name="EnableShake" type="CheckBox" parent="CenterContainer/Settings"]
+[node name="VideoCheckBoxes" type="HBoxContainer" parent="CenterContainer/Settings"]
 layout_mode = 2
-focus_neighbor_left = NodePath(".")
-mouse_filter = 2
-text = "Enable screen shake"
+alignment = 1
 
-[node name="EnableFlash" type="CheckBox" parent="CenterContainer/Settings"]
+[node name="EnableShake" type="CheckBox" parent="CenterContainer/Settings/VideoCheckBoxes"]
 layout_mode = 2
 focus_neighbor_left = NodePath(".")
 mouse_filter = 2
-text = "Enable flashing effects"
+text = "Screen shake"
+
+[node name="EnableFlash" type="CheckBox" parent="CenterContainer/Settings/VideoCheckBoxes"]
+layout_mode = 2
+focus_neighbor_left = NodePath(".")
+mouse_filter = 2
+text = "Flashing effects"
 
 [node name="HSeparator3" type="HSeparator" parent="CenterContainer/Settings"]
 layout_mode = 2
 
 [node name="UILabel" type="Label" parent="CenterContainer/Settings"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("4_vtv80")
+theme_override_font_sizes/font_size = 15
 text = "Interface"
 
 [node name="UISliders" type="GridContainer" parent="CenterContainer/Settings"]
@@ -130,6 +140,8 @@ layout_mode = 2
 
 [node name="ControlsLabel" type="Label" parent="CenterContainer/Settings"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("4_vtv80")
+theme_override_font_sizes/font_size = 15
 text = "Controls"
 
 [node name="InputVBox" type="VBoxContainer" parent="CenterContainer/Settings"]
@@ -176,21 +188,17 @@ size = Vector2i(1280, 760)
 exclusive = true
 always_on_top = true
 theme = ExtResource("1")
-theme_override_styles/panel = ExtResource("3_yfoi0")
 
 [node name="ListenForInputPopup" type="PopupPanel" parent="Popups"]
 size = Vector2i(230, 100)
 exclusive = true
 always_on_top = true
 theme = ExtResource("1")
-theme_override_styles/panel = ExtResource("3_yfoi0")
 script = ExtResource("3")
 
 [node name="PressKeyLabel" type="Label" parent="Popups/ListenForInputPopup"]
-offset_left = 13.0
-offset_top = 13.0
-offset_right = 217.0
-offset_bottom = 87.0
+offset_right = 241.0
+offset_bottom = 100.0
 size_flags_horizontal = 13
 size_flags_vertical = 12
 text = "Press key for \"Up\"..."
@@ -200,8 +208,8 @@ vertical_alignment = 1
 [connection signal="value_changed" from="CenterContainer/Settings/VolumeSliders/MusicVolumeSlider" to="." method="update_music_volume"]
 [connection signal="value_changed" from="CenterContainer/Settings/VolumeSliders/SFXVolumeSlider" to="." method="update_sfx_volume"]
 [connection signal="value_changed" from="CenterContainer/Settings/VolumeSliders/UIVolumeSlider" to="." method="update_ui_volume"]
-[connection signal="toggled" from="CenterContainer/Settings/EnableShake" to="." method="update_enable_shake"]
-[connection signal="toggled" from="CenterContainer/Settings/EnableFlash" to="." method="update_enable_flash"]
+[connection signal="toggled" from="CenterContainer/Settings/VideoCheckBoxes/EnableShake" to="." method="update_enable_shake"]
+[connection signal="toggled" from="CenterContainer/Settings/VideoCheckBoxes/EnableFlash" to="." method="update_enable_flash"]
 [connection signal="value_changed" from="CenterContainer/Settings/UISliders/TextSpeedSlider" to="." method="update_text_speed"]
 [connection signal="toggled" from="CenterContainer/Settings/RunBehaviorContainer/Toggle" to="." method="update_run_behavior"]
 [connection signal="about_to_popup" from="Popups/BlockClicksPopup" to="Popups/BlockClicksPopup" method="on_about_to_popup"]

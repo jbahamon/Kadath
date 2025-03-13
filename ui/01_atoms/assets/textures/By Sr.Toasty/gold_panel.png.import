@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://biy4imd1y161q"
-path="res://.godot/imported/UI books & more.png-29e56323dbc1b67e4778f8f502774438.ctex"
+uid="uid://dofjsdo7mmrwx"
+path="res://.godot/imported/gold_panel.png-493212025e635107e18bfba7b0e18950.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/01_atoms/assets/textures/By Sta.Toasty/UI books & more.png"
-dest_files=["res://.godot/imported/UI books & more.png-29e56323dbc1b67e4778f8f502774438.ctex"]
+source_file="res://ui/01_atoms/assets/textures/By Sr.Toasty/gold_panel.png"
+dest_files=["res://.godot/imported/gold_panel.png-493212025e635107e18bfba7b0e18950.ctex"]
 
 [params]
 

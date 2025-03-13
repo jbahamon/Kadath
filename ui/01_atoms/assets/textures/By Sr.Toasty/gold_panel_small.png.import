@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5xfe0e35e01j"
-path="res://.godot/imported/Time & weather.png-f25961abf9f40a8a3b4f04137c439069.ctex"
+uid="uid://b38j0dfbnr78r"
+path="res://.godot/imported/gold_panel_small.png-c173e95cd4b3357231859adbc84ec5d6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/01_atoms/assets/textures/By Sta.Toasty/Time & weather.png"
-dest_files=["res://.godot/imported/Time & weather.png-f25961abf9f40a8a3b4f04137c439069.ctex"]
+source_file="res://ui/01_atoms/assets/textures/By Sr.Toasty/gold_panel_small.png"
+dest_files=["res://.godot/imported/gold_panel_small.png-c173e95cd4b3357231859adbc84ec5d6.ctex"]
 
 [params]
 

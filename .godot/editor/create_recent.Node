@@ -1,6 +1,7 @@
-MarginContainer
-HBoxContainer
+VBoxContainer
 Label
+HBoxContainer
+MarginContainer
 Popup
 PopupPanel
 Sprite2D
@@ -11,4 +12,3 @@ Control
 TextureRect
 GridContainer
 Node2D
-CPUParticles2D

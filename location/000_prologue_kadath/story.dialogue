@@ -31,25 +31,25 @@ Carter: I must.
 => END
 
 ~ starting_instructions
-Move around with [ {ui_up} ]/[ {ui_left} ]/[ {ui_down} ]/[ {ui_right} ]. You can interact with individuals and objects with [ {ui_accept} ], and cancel with [ {ui_cancel} ]. Run with [ {action_run} ]
+Move around with [{ui_up}]/[{ui_left}]/[{ui_down}]/[{ui_right}]. You can interact with individuals and objects with [{ui_accept}], and cancel with [{ui_cancel}]. Run with [{action_run}]
 => END
 
 ~ idle_pickman
-Pickman: Go ahead. I'll join you once I've made sure these guys are OK. If you're in a hurry, use [ {action_run} ] to move faster.
+Pickman: Go ahead. I'll join you once I've made sure these guys are OK. If you're in a hurry, use [{action_run}] to move faster.
 => END 
 
 ~ idle_left_ghoul
 if EntitiesService.party.is_unlocked(PartyMember.Id.PICKMAN):
-	Ghoul: We stay here. If you disoriented, open menu with [ {ui_menu} ] and check or change controls.
+	Ghoul: We stay here. If you disoriented, open menu with [{ui_menu}] and check or change controls.
 else:
-	Ghoul: Everything still spinning... If you disoriented, open menu with [ {ui_menu} ] and check or change controls.
+	Ghoul: Everything still spinning... If you disoriented, open menu with [{ui_menu}] and check or change controls.
 => END
 
 ~ idle_right_ghoul
 if EntitiesService.party.is_unlocked(PartyMember.Id.PICKMAN):
-	Ghoul: Maybe others come. We wait for them. Be careful... Remember you can open menu with [ {ui_menu} ] and use items for heal.
+	Ghoul: Maybe others come. We wait for them. Be careful... Remember you can open menu with [{ui_menu}] and use items for heal.
 else:
-	Ghoul: One second we riding, next we thrown here. If you hurt, you can open menu with [ {ui_menu} ] and use items for heal.
+	Ghoul: One second we riding, next we thrown here. If you hurt, you can open menu with [{ui_menu}] and use items for heal.
 => END 
 
 ~ pickman_catch_up
@@ -100,20 +100,6 @@ Carter: Pickman!
 ~ pushing_barrier
 This is not the time to retreat. The journey to this place has been long and hard, and it's time to face the gods.
 => END
-
-~ guard_ghoul
-Ghoul: We'll guard the entrance... Y-You go ahead...
-Ghoul: B-by the way, if you want to change the controls, you can open the menu with [{ui_menu}] and head to the Settings section.
-=> END
-
-~ guard_ghoul_2
-Ghoul: So this is K-Kadath...? I-I think I'll stay here and guard the rear...
-Ghoul: O-oh, remember you can change between walking and running by holding [{action_run}].
-=> END
-
-~ pickman_waiting
-Pickman: Go ahead, then. We're still recovering from the landing.
-=> END!
 
 ~ barrier
 Carter: There must be a way to remove these. We should check the neighboring rooms.

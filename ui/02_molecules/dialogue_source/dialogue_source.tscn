@@ -1,14 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://bw0gl4jgbt7fi"]
+[gd_scene load_steps=5 format=3 uid="uid://bw0gl4jgbt7fi"]
 
 [ext_resource type="Script" path="res://ui/02_molecules/dialogue_source/dialogue_source.gd" id="1_mlvvw"]
 [ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="1_yt6ah"]
+[ext_resource type="StyleBox" uid="uid://bo85aikp7llh4" path="res://ui/01_atoms/panel/panel_gold_small.tres" id="2_qrjg0"]
+[ext_resource type="FontFile" uid="uid://c8fvau54sblb1" path="res://ui/01_atoms/assets/fonts/By Wuchta/Letterstyle(1).otf" id="3_6mxq2"]
 
-
-[node name="DialogSource" type="PanelContainer"]
+[node name="DialogueSource" type="PanelContainer"]
 offset_right = 206.0
 offset_bottom = 54.0
 size_flags_horizontal = 0
 theme = ExtResource("1_yt6ah")
+theme_override_styles/panel = ExtResource("2_qrjg0")
 script = ExtResource("1_mlvvw")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -18,8 +20,10 @@ theme_override_constants/margin_top = 5
 [node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer"]
 clip_contents = false
 layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("3_6mxq2")
+theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
-text = "Somethinga aaaaaa"
+text = "Somethinga"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0

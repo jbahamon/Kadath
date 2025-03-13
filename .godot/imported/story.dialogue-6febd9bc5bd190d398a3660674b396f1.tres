@@ -1,25 +1,23 @@
 [gd_resource type="Resource" script_class="DialogueResource" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_resource.gd" id="1_uv4v2"]
+[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_resource.gd" id="1_qhqip"]
 
 [resource]
-script = ExtResource("1_uv4v2")
+script = ExtResource("1_qhqip")
 using_states = PackedStringArray()
 titles = {
 "after_boss": "69",
-"after_chalice_activation": "135",
-"barrier": "119",
+"after_chalice_activation": "121",
+"barrier": "105",
 "carter_call": "81",
-"chalice": "123",
-"chalice_done": "139",
+"chalice": "109",
+"chalice_done": "125",
 "entrance_carter_1": "25",
 "entrance_carter_2": "30",
 "entrance_ghoul1": "13",
 "entrance_ghoul2": "17",
 "entrance_pickman": "21",
 "gods_callout": "73",
-"guard_ghoul": "105",
-"guard_ghoul_2": "110",
 "idle_left_ghoul": "42",
 "idle_pickman": "38",
 "idle_right_ghoul": "49",
@@ -30,7 +28,6 @@ titles = {
 "pickman_catch_up": "56",
 "pickman_join": "65",
 "pickman_recruit": "60",
-"pickman_waiting": "115",
 "pickman_warning": "77",
 "pushing_barrier": "101",
 "starting_instructions": "34"
@@ -71,110 +68,14 @@ lines = {
 "104": {
 "id": "104",
 "next_id": "105",
-"text": "guard_ghoul",
-"type": &"title"
-},
-"105": {
-"character": "Ghoul",
-"character_replacements": Array[Dictionary]([]),
-"id": "105",
-"next_id": "106",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "We'll guard the entrance... Y-You go ahead...",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "We'll guard the entrance... Y-You go ahead...",
-"type": &"dialogue"
-},
-"106": {
-"character": "Ghoul",
-"character_replacements": Array[Dictionary]([]),
-"id": "106",
-"next_id": "107",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "B-by the way, if you want to change the controls, you can open the menu with [{ui_menu}] and head to the Settings section.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "B-by the way, if you want to change the controls, you can open the menu with [{ui_menu}] and head to the Settings section.",
-"type": &"dialogue"
-},
-"107": {
-"id": "107",
-"is_snippet": false,
-"next_id": "end",
-"type": &"goto"
-},
-"109": {
-"id": "109",
-"next_id": "110",
-"text": "guard_ghoul_2",
-"type": &"title"
-},
-"110": {
-"character": "Ghoul",
-"character_replacements": Array[Dictionary]([]),
-"id": "110",
-"next_id": "111",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "So this is K-Kadath...? I-I think I'll stay here and guard the rear...",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "So this is K-Kadath...? I-I think I'll stay here and guard the rear...",
-"type": &"dialogue"
-},
-"111": {
-"character": "Ghoul",
-"character_replacements": Array[Dictionary]([]),
-"id": "111",
-"next_id": "112",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "O-oh, remember you can change between walking and running by holding [{action_run}].",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "O-oh, remember you can change between walking and running by holding [{action_run}].",
-"type": &"dialogue"
-},
-"112": {
-"id": "112",
-"is_snippet": false,
-"next_id": "end",
-"type": &"goto"
-},
-"114": {
-"id": "114",
-"next_id": "115",
-"text": "pickman_waiting",
-"type": &"title"
-},
-"115": {
-"character": "Pickman",
-"character_replacements": Array[Dictionary]([]),
-"id": "115",
-"next_id": "116",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "Go ahead, then. We're still recovering from the landing.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "Go ahead, then. We're still recovering from the landing.",
-"type": &"dialogue"
-},
-"116": {
-"id": "116",
-"is_snippet": false,
-"next_id": "end!",
-"type": &"goto"
-},
-"118": {
-"id": "118",
-"next_id": "119",
 "text": "barrier",
 "type": &"title"
 },
-"119": {
+"105": {
 "character": "Carter",
 "character_replacements": Array[Dictionary]([]),
-"id": "119",
-"next_id": "120",
+"id": "105",
+"next_id": "106",
 "notes": "",
 "tags": PackedStringArray(),
 "text": "There must be a way to remove these. We should check the neighboring rooms.",
@@ -182,29 +83,23 @@ lines = {
 "translation_key": "There must be a way to remove these. We should check the neighboring rooms.",
 "type": &"dialogue"
 },
-"12": {
-"id": "12",
-"next_id": "13",
-"text": "entrance_ghoul1",
-"type": &"title"
-},
-"120": {
-"id": "120",
+"106": {
+"id": "106",
 "is_snippet": false,
 "next_id": "end!",
 "type": &"goto"
 },
-"122": {
-"id": "122",
-"next_id": "123",
+"108": {
+"id": "108",
+"next_id": "109",
 "text": "chalice",
 "type": &"title"
 },
-"123": {
+"109": {
 "character": "",
 "character_replacements": Array[Dictionary]([]),
-"id": "123",
-"next_id": "125",
+"id": "109",
+"next_id": "111",
 "notes": "",
 "tags": PackedStringArray(),
 "text": "There is a curious glyph on the chalice. It seems to be pulsing with some sort of energy.",
@@ -212,11 +107,11 @@ lines = {
 "translation_key": "There is a curious glyph on the chalice. It seems to be pulsing with some sort of energy.",
 "type": &"dialogue"
 },
-"125": {
+"111": {
 "character": "",
 "character_replacements": Array[Dictionary]([]),
-"id": "125",
-"next_id": "126",
+"id": "111",
+"next_id": "112",
 "notes": "",
 "tags": PackedStringArray(),
 "text": "Touch the glyph?",
@@ -224,22 +119,22 @@ lines = {
 "translation_key": "Touch the glyph?",
 "type": &"dialogue"
 },
-"126": {
+"112": {
 "character": "",
 "character_replacements": Array[Dictionary]([]),
-"id": "126",
-"next_id": "127",
-"next_id_after": "132",
+"id": "112",
+"next_id": "113",
+"next_id_after": "118",
 "notes": "",
-"responses": PackedStringArray("126", "129"),
+"responses": PackedStringArray("112", "115"),
 "tags": PackedStringArray(),
 "text": "Yes",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "Yes",
 "type": &"response"
 },
-"127": {
-"id": "127",
+"113": {
+"id": "113",
 "mutation": {
 "expression": Array[Dictionary]([{
 "type": "variable",
@@ -256,29 +151,29 @@ lines = {
 }]),
 "is_blocking": true
 },
-"next_id": "128",
-"parent_id": "126",
+"next_id": "114",
+"parent_id": "112",
 "type": &"mutation"
 },
-"128": {
+"114": {
 "character": "",
 "character_replacements": Array[Dictionary]([]),
-"id": "128",
-"next_id": "132",
+"id": "114",
+"next_id": "118",
 "notes": "",
-"parent_id": "126",
+"parent_id": "112",
 "tags": PackedStringArray(),
 "text": "You lean forward and touch the glyph.",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "You lean forward and touch the glyph.",
 "type": &"dialogue"
 },
-"129": {
+"115": {
 "character": "",
 "character_replacements": Array[Dictionary]([]),
-"id": "129",
-"next_id": "130",
-"next_id_after": "132",
+"id": "115",
+"next_id": "116",
+"next_id_after": "118",
 "notes": "",
 "tags": PackedStringArray(),
 "text": "No",
@@ -286,20 +181,8 @@ lines = {
 "translation_key": "No",
 "type": &"response"
 },
-"13": {
-"character": "Ghoul",
-"character_replacements": Array[Dictionary]([]),
-"id": "13",
-"next_id": "14",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "Ough! Not how I imagine arrival...",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "Ough! Not how I imagine arrival...",
-"type": &"dialogue"
-},
-"130": {
-"id": "130",
+"116": {
+"id": "116",
 "mutation": {
 "expression": Array[Dictionary]([{
 "type": "variable",
@@ -316,40 +199,46 @@ lines = {
 }]),
 "is_blocking": true
 },
-"next_id": "131",
-"parent_id": "129",
+"next_id": "117",
+"parent_id": "115",
 "type": &"mutation"
 },
-"131": {
+"117": {
 "character": "",
 "character_replacements": Array[Dictionary]([]),
-"id": "131",
-"next_id": "132",
+"id": "117",
+"next_id": "118",
 "notes": "",
-"parent_id": "129",
+"parent_id": "115",
 "tags": PackedStringArray(),
 "text": "Maybe later.",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "Maybe later.",
 "type": &"dialogue"
 },
-"132": {
-"id": "132",
+"118": {
+"id": "118",
 "is_snippet": false,
 "next_id": "end",
 "type": &"goto"
 },
-"134": {
-"id": "134",
-"next_id": "135",
+"12": {
+"id": "12",
+"next_id": "13",
+"text": "entrance_ghoul1",
+"type": &"title"
+},
+"120": {
+"id": "120",
+"next_id": "121",
 "text": "after_chalice_activation",
 "type": &"title"
 },
-"135": {
+"121": {
 "character": "",
 "character_replacements": Array[Dictionary]([]),
-"id": "135",
-"next_id": "136",
+"id": "121",
+"next_id": "122",
 "notes": "",
 "tags": PackedStringArray(),
 "text": "Something seems to have changed.",
@@ -357,23 +246,23 @@ lines = {
 "translation_key": "Something seems to have changed.",
 "type": &"dialogue"
 },
-"136": {
-"id": "136",
+"122": {
+"id": "122",
 "is_snippet": false,
 "next_id": "end",
 "type": &"goto"
 },
-"138": {
-"id": "138",
-"next_id": "139",
+"124": {
+"id": "124",
+"next_id": "125",
 "text": "chalice_done",
 "type": &"title"
 },
-"139": {
+"125": {
 "character": "",
 "character_replacements": Array[Dictionary]([]),
-"id": "139",
-"next_id": "140",
+"id": "125",
+"next_id": "126",
 "notes": "",
 "tags": PackedStringArray(),
 "text": "The chalice is filled with a red liquid.",
@@ -381,14 +270,26 @@ lines = {
 "translation_key": "The chalice is filled with a red liquid.",
 "type": &"dialogue"
 },
-"14": {
-"id": "14",
+"126": {
+"id": "126",
 "is_snippet": false,
 "next_id": "end",
 "type": &"goto"
 },
-"140": {
-"id": "140",
+"13": {
+"character": "Ghoul",
+"character_replacements": Array[Dictionary]([]),
+"id": "13",
+"next_id": "14",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "Ough! Not how I imagine arrival...",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Ough! Not how I imagine arrival...",
+"type": &"dialogue"
+},
+"14": {
+"id": "14",
 "is_snippet": false,
 "next_id": "end",
 "type": &"goto"
@@ -514,9 +415,9 @@ lines = {
 "next_id": "35",
 "notes": "",
 "tags": PackedStringArray(),
-"text": "Move around with [ {ui_up} ]/[ {ui_left} ]/[ {ui_down} ]/[ {ui_right} ]. You can interact with individuals and objects with [ {ui_accept} ], and cancel with [ {ui_cancel} ]. Run with [ {action_run} ]",
+"text": "Move around with [{ui_up}]/[{ui_left}]/[{ui_down}]/[{ui_right}]. You can interact with individuals and objects with [{ui_accept}], and cancel with [{ui_cancel}]. Run with [{action_run}]",
 "text_replacements": Array[Dictionary]([]),
-"translation_key": "Move around with [ {ui_up} ]/[ {ui_left} ]/[ {ui_down} ]/[ {ui_right} ]. You can interact with individuals and objects with [ {ui_accept} ], and cancel with [ {ui_cancel} ]. Run with [ {action_run} ]",
+"translation_key": "Move around with [{ui_up}]/[{ui_left}]/[{ui_down}]/[{ui_right}]. You can interact with individuals and objects with [{ui_accept}], and cancel with [{ui_cancel}]. Run with [{action_run}]",
 "type": &"dialogue"
 },
 "35": {
@@ -538,9 +439,9 @@ lines = {
 "next_id": "39",
 "notes": "",
 "tags": PackedStringArray(),
-"text": "Go ahead. I'll join you once I've made sure these guys are OK. If you're in a hurry, use [ {action_run} ] to move faster.",
+"text": "Go ahead. I'll join you once I've made sure these guys are OK. If you're in a hurry, use [{action_run}] to move faster.",
 "text_replacements": Array[Dictionary]([]),
-"translation_key": "Go ahead. I'll join you once I've made sure these guys are OK. If you're in a hurry, use [ {action_run} ] to move faster.",
+"translation_key": "Go ahead. I'll join you once I've made sure these guys are OK. If you're in a hurry, use [{action_run}] to move faster.",
 "type": &"dialogue"
 },
 "39": {
@@ -608,9 +509,9 @@ lines = {
 "notes": "",
 "parent_id": "42",
 "tags": PackedStringArray(),
-"text": "We stay here. If you disoriented, open menu with [ {ui_menu} ] and check or change controls.",
+"text": "We stay here. If you disoriented, open menu with [{ui_menu}] and check or change controls.",
 "text_replacements": Array[Dictionary]([]),
-"translation_key": "We stay here. If you disoriented, open menu with [ {ui_menu} ] and check or change controls.",
+"translation_key": "We stay here. If you disoriented, open menu with [{ui_menu}] and check or change controls.",
 "type": &"dialogue"
 },
 "44": {
@@ -628,9 +529,9 @@ lines = {
 "notes": "",
 "parent_id": "44",
 "tags": PackedStringArray(),
-"text": "Everything still spinning... If you disoriented, open menu with [ {ui_menu} ] and check or change controls.",
+"text": "Everything still spinning... If you disoriented, open menu with [{ui_menu}] and check or change controls.",
 "text_replacements": Array[Dictionary]([]),
-"translation_key": "Everything still spinning... If you disoriented, open menu with [ {ui_menu} ] and check or change controls.",
+"translation_key": "Everything still spinning... If you disoriented, open menu with [{ui_menu}] and check or change controls.",
 "type": &"dialogue"
 },
 "46": {
@@ -704,9 +605,9 @@ lines = {
 "notes": "",
 "parent_id": "49",
 "tags": PackedStringArray(),
-"text": "Maybe others come. We wait for them. Be careful... Remember you can open menu with [ {ui_menu} ] and use items for heal.",
+"text": "Maybe others come. We wait for them. Be careful... Remember you can open menu with [{ui_menu}] and use items for heal.",
 "text_replacements": Array[Dictionary]([]),
-"translation_key": "Maybe others come. We wait for them. Be careful... Remember you can open menu with [ {ui_menu} ] and use items for heal.",
+"translation_key": "Maybe others come. We wait for them. Be careful... Remember you can open menu with [{ui_menu}] and use items for heal.",
 "type": &"dialogue"
 },
 "51": {
@@ -724,9 +625,9 @@ lines = {
 "notes": "",
 "parent_id": "51",
 "tags": PackedStringArray(),
-"text": "One second we riding, next we thrown here. If you hurt, you can open menu with [ {ui_menu} ] and use items for heal.",
+"text": "One second we riding, next we thrown here. If you hurt, you can open menu with [{ui_menu}] and use items for heal.",
 "text_replacements": Array[Dictionary]([]),
-"translation_key": "One second we riding, next we thrown here. If you hurt, you can open menu with [ {ui_menu} ] and use items for heal.",
+"translation_key": "One second we riding, next we thrown here. If you hurt, you can open menu with [{ui_menu}] and use items for heal.",
 "type": &"dialogue"
 },
 "53": {
@@ -1057,25 +958,25 @@ Carter: I must.
 => END
 
 ~ starting_instructions
-Move around with [ {ui_up} ]/[ {ui_left} ]/[ {ui_down} ]/[ {ui_right} ]. You can interact with individuals and objects with [ {ui_accept} ], and cancel with [ {ui_cancel} ]. Run with [ {action_run} ]
+Move around with [{ui_up}]/[{ui_left}]/[{ui_down}]/[{ui_right}]. You can interact with individuals and objects with [{ui_accept}], and cancel with [{ui_cancel}]. Run with [{action_run}]
 => END
 
 ~ idle_pickman
-Pickman: Go ahead. I'll join you once I've made sure these guys are OK. If you're in a hurry, use [ {action_run} ] to move faster.
+Pickman: Go ahead. I'll join you once I've made sure these guys are OK. If you're in a hurry, use [{action_run}] to move faster.
 => END 
 
 ~ idle_left_ghoul
 if EntitiesService.party.is_unlocked(PartyMember.Id.PICKMAN):
-	Ghoul: We stay here. If you disoriented, open menu with [ {ui_menu} ] and check or change controls.
+	Ghoul: We stay here. If you disoriented, open menu with [{ui_menu}] and check or change controls.
 else:
-	Ghoul: Everything still spinning... If you disoriented, open menu with [ {ui_menu} ] and check or change controls.
+	Ghoul: Everything still spinning... If you disoriented, open menu with [{ui_menu}] and check or change controls.
 => END
 
 ~ idle_right_ghoul
 if EntitiesService.party.is_unlocked(PartyMember.Id.PICKMAN):
-	Ghoul: Maybe others come. We wait for them. Be careful... Remember you can open menu with [ {ui_menu} ] and use items for heal.
+	Ghoul: Maybe others come. We wait for them. Be careful... Remember you can open menu with [{ui_menu}] and use items for heal.
 else:
-	Ghoul: One second we riding, next we thrown here. If you hurt, you can open menu with [ {ui_menu} ] and use items for heal.
+	Ghoul: One second we riding, next we thrown here. If you hurt, you can open menu with [{ui_menu}] and use items for heal.
 => END 
 
 ~ pickman_catch_up
@@ -1126,20 +1027,6 @@ Carter: Pickman!
 ~ pushing_barrier
 This is not the time to retreat. The journey to this place has been long and hard, and it's time to face the gods.
 => END
-
-~ guard_ghoul
-Ghoul: We'll guard the entrance... Y-You go ahead...
-Ghoul: B-by the way, if you want to change the controls, you can open the menu with [{ui_menu}] and head to the Settings section.
-=> END
-
-~ guard_ghoul_2
-Ghoul: So this is K-Kadath...? I-I think I'll stay here and guard the rear...
-Ghoul: O-oh, remember you can change between walking and running by holding [{action_run}].
-=> END
-
-~ pickman_waiting
-Pickman: Go ahead, then. We're still recovering from the landing.
-=> END!
 
 ~ barrier
 Carter: There must be a way to remove these. We should check the neighboring rooms.

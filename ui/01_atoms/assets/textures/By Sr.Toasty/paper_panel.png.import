@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cld2iljgba3no"
-path="res://.godot/imported/UI cooking.png-b14e33a6a230e350536fce81b1696af0.ctex"
+uid="uid://cpob3gfhabuxl"
+path="res://.godot/imported/paper_panel.png-daa077aa1173a5794e389a5a36721aab.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/01_atoms/assets/textures/By Sta.Toasty/UI cooking.png"
-dest_files=["res://.godot/imported/UI cooking.png-b14e33a6a230e350536fce81b1696af0.ctex"]
+source_file="res://ui/01_atoms/assets/textures/By Sr.Toasty/paper_panel.png"
+dest_files=["res://.godot/imported/paper_panel.png-daa077aa1173a5794e389a5a36721aab.ctex"]
 
 [params]
 

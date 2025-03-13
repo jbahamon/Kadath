@@ -41,7 +41,7 @@ func start():
 func prompt(text: String):
 	var advance_keycode = InputMap.action_get_events(&"ui_accept")[0].keycode
 	var cancel_keycode = InputMap.action_get_events(&"ui_cancel")[0].keycode
-	var advance_indicator = "[pulse freq=1.0 color=#ffffff40 ease=-2.0][ %s ] / [ %s ][/pulse]" % [ 
+	var advance_indicator = "[pulse freq=1.0 color=#ffffff40 ease=-2.0][%s]/[%s][/pulse]" % [ 
 		OS.get_keycode_string(advance_keycode),
 		OS.get_keycode_string(cancel_keycode) 
 	]

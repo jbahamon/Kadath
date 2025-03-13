@@ -1,0 +1,11 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://b1gbvvciiqd2y"]
+
+[ext_resource type="Texture2D" uid="uid://dofjsdo7mmrwx" path="res://ui/01_atoms/assets/textures/By Sr.Toasty/gold_panel.png" id="1_d2xs3"]
+
+[resource]
+texture = ExtResource("1_d2xs3")
+texture_margin_left = 26.0
+texture_margin_top = 26.0
+texture_margin_right = 26.0
+texture_margin_bottom = 26.0
+region_rect = Rect2(0, 0, 92, 92)

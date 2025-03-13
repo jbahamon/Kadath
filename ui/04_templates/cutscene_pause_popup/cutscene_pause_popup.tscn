@@ -5,7 +5,7 @@
 [node name="CutscenePausePopup" type="Popup"]
 transparent_bg = true
 position = Vector2i(0, 36)
-size = Vector2i(333, 105)
+size = Vector2i(333, 112)
 visible = true
 transparent = true
 script = ExtResource("1_l48rq")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c3okprgd6vbwj"]
+[gd_scene load_steps=10 format=3 uid="uid://c3okprgd6vbwj"]
 
 [ext_resource type="Script" path="res://ui/02_molecules/keyboard_based_tab_container/keyboard_based_tab_container.gd" id="2_i7pxu"]
 [ext_resource type="PackedScene" uid="uid://cu30gjjhspgly" path="res://ui/04_templates/settings_menu/settings_menu.tscn" id="3"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://ui/04_templates/settings_menu/settings.gd" id="5"]
 [ext_resource type="PackedScene" uid="uid://cakm1eb2hb4hh" path="res://ui/03_organisms/item_submenu/item_submenu.tscn" id="5_jjqat"]
 [ext_resource type="Script" path="res://ui/04_templates/pause_menu/pause_menu.gd" id="7"]
-[ext_resource type="StyleBox" uid="uid://brc46g1cj5k2v" path="res://ui/01_atoms/panel/panel.tres" id="9_rtvui"]
 [ext_resource type="PackedScene" uid="uid://c2opuixudajq" path="res://ui/02_molecules/help_bar/help_bar.tscn" id="9_sno00"]
 [ext_resource type="Texture2D" uid="uid://dxwh6a1rauvnx" path="res://ui/01_atoms/assets/icons/By ssugmi/icon-settings.png" id="18"]
 
@@ -36,7 +35,6 @@ font_size = 15
 [node name="Party" parent="Container/PauseMenuTabs" instance=ExtResource("4")]
 visible = false
 layout_mode = 2
-theme_override_styles/panel = ExtResource("9_rtvui")
 
 [node name="Items" parent="Container/PauseMenuTabs" instance=ExtResource("5_jjqat")]
 visible = false
@@ -49,7 +47,7 @@ size_flags_vertical = 3
 script = ExtResource("5")
 icon = ExtResource("18")
 help_text = "Change the game's controls and other settings."
-controls_text = "[ {ui_left} ]/[ {ui_right} ] : Select  [ {ui_cancel} ]: Close  [ {ui_accept} ]: Confirm"
+controls_text = "[{ui_left}]/[{ui_right}]: Select [{ui_cancel}]: Close [{ui_accept}]: Confirm"
 
 [node name="SettingsMenu" parent="Container/PauseMenuTabs/Settings" instance=ExtResource("3")]
 layout_mode = 2

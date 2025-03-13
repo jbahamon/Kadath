@@ -51,7 +51,7 @@ func show_menu():
 	
 	UIService.set_menu_help(
 		"",
-		"[ {ui_up} ]/[ {ui_down} ] : Scroll  [ {ui_cancel} ]: Return to main menu"
+		"[{ui_up}]/[{ui_down}]: Scroll [{ui_cancel}]: Return to main menu"
 	)
 	
 	self.show()

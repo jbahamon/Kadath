@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bxtqflr2vn3o4"]
+[gd_scene load_steps=10 format=3 uid="uid://bxtqflr2vn3o4"]
 
 [ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="1"]
 [ext_resource type="PackedScene" uid="uid://brhpxl8pukdr" path="res://ui/03_organisms/select_list/select_list.tscn" id="2"]
 [ext_resource type="Script" path="res://ui/03_organisms/party_submenu/party_submenu.gd" id="4"]
+[ext_resource type="FontFile" uid="uid://c8fvau54sblb1" path="res://ui/01_atoms/assets/fonts/By Wuchta/Letterstyle(1).otf" id="4_ecnw7"]
 [ext_resource type="Texture2D" uid="uid://chqcjur8n17ah" path="res://ui/01_atoms/assets/icons/By ssugmi/icon-party.png" id="6"]
 [ext_resource type="PackedScene" uid="uid://caki3n35ds5sk" path="res://ui/02_molecules/party_member_stats/party_member_stats.tscn" id="8"]
 
@@ -21,7 +22,7 @@ theme = ExtResource("1")
 script = ExtResource("4")
 icon = ExtResource("6")
 help_text = "Check your party's stats and equipment."
-controls_text = "[ {ui_left} ]/[ {ui_right} ] : Select  [ {ui_cancel} ]: Close  [ {ui_accept} ]: Confirm"
+controls_text = "[{ui_left}]/[{ui_right}]: Select [{ui_cancel}]: Close [{ui_accept}]: Confirm"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -32,7 +33,16 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
-[node name="PartyList" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2")]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ecnw7")
+theme_override_font_sizes/font_size = 15
+text = "Party"
+
+[node name="PartyList" parent="VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_stretch_ratio = 0.5
@@ -60,14 +70,11 @@ args_for_null_element = {
 }
 focused_if_visible = true
 
-[node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
-layout_mode = 2
-
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
-[connection signal="cancel" from="VBoxContainer/HBoxContainer/PartyList" to="." method="_on_party_list_cancel"]
-[connection signal="element_focused" from="VBoxContainer/HBoxContainer/PartyList" to="VBoxContainer/HBoxContainer/PartyMemberStats" method="on_party_member_focused"]
-[connection signal="element_selected" from="VBoxContainer/HBoxContainer/PartyList" to="VBoxContainer/HBoxContainer/PartyMemberStats" method="on_party_member_selected"]
-[connection signal="focus_entered" from="VBoxContainer/HBoxContainer/PartyList" to="." method="on_grab_focus"]
+[connection signal="cancel" from="VBoxContainer/HBoxContainer/VBoxContainer/PartyList" to="." method="_on_party_list_cancel"]
+[connection signal="element_focused" from="VBoxContainer/HBoxContainer/VBoxContainer/PartyList" to="VBoxContainer/HBoxContainer/PartyMemberStats" method="on_party_member_focused"]
+[connection signal="element_selected" from="VBoxContainer/HBoxContainer/VBoxContainer/PartyList" to="VBoxContainer/HBoxContainer/PartyMemberStats" method="on_party_member_selected"]
+[connection signal="focus_entered" from="VBoxContainer/HBoxContainer/VBoxContainer/PartyList" to="." method="on_grab_focus"]
 [connection signal="focus_released" from="VBoxContainer/HBoxContainer/PartyMemberStats" to="." method="on_grab_focus"]
 [connection signal="item_requested" from="VBoxContainer/HBoxContainer/PartyMemberStats" to="." method="on_item_requested"]
 [connection signal="element_selected" from="VBoxContainer/HBoxContainer/ItemList" to="VBoxContainer/HBoxContainer/PartyMemberStats" method="on_item_selected"]

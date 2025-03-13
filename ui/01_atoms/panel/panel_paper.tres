@@ -1,0 +1,13 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://c5vndmp1dd1ld"]
+
+[ext_resource type="Texture2D" uid="uid://cpob3gfhabuxl" path="res://ui/01_atoms/assets/textures/By Sr.Toasty/paper_panel.png" id="1_a4su3"]
+
+[resource]
+texture = ExtResource("1_a4su3")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 5.70295
+texture_margin_bottom = 6.24347
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+region_rect = Rect2(0, 0, 48, 48)

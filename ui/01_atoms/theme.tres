@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=19 format=3 uid="uid://cgihxoevv7qgc"]
+[gd_resource type="Theme" load_steps=20 format=3 uid="uid://cgihxoevv7qgc"]
 
 [ext_resource type="StyleBox" path="res://ui/01_atoms/tab/hover.tres" id="1"]
 [ext_resource type="StyleBox" path="res://ui/01_atoms/separator/hseparator.tres" id="2"]
@@ -7,10 +7,11 @@
 [ext_resource type="StyleBox" uid="uid://hhap5amcl75c" path="res://ui/01_atoms/button/pressed.tres" id="3_30qyx"]
 [ext_resource type="FontFile" uid="uid://b18nnc0hwkegw" path="res://ui/01_atoms/assets/fonts/By Adigun/Irishalini.ttf" id="5"]
 [ext_resource type="StyleBox" path="res://ui/01_atoms/separator/vseparator.tres" id="6"]
+[ext_resource type="StyleBox" uid="uid://b1gbvvciiqd2y" path="res://ui/01_atoms/panel/panel_gold.tres" id="8_0ini7"]
 [ext_resource type="StyleBox" path="res://ui/01_atoms/input/input.tres" id="9"]
 [ext_resource type="StyleBox" path="res://ui/01_atoms/input/input-focus.tres" id="11"]
+[ext_resource type="FontFile" uid="uid://cvxv4vo48sw6a" path="res://ui/01_atoms/assets/fonts/By Helena Zhang/DepartureMono-Regular.otf" id="14_7q2ks"]
 [ext_resource type="StyleBox" path="res://ui/01_atoms/tab/focused.tres" id="29"]
-[ext_resource type="StyleBox" uid="uid://brc46g1cj5k2v" path="res://ui/01_atoms/panel/panel.tres" id="30"]
 [ext_resource type="StyleBox" path="res://ui/01_atoms/tab/disabled.tres" id="31"]
 [ext_resource type="StyleBox" path="res://ui/01_atoms/tab/normal.tres" id="32"]
 
@@ -90,10 +91,20 @@ cache/0/40/0/kerning_overrides/30/0 = Vector2(0, 0)
 cache/0/40/0/kerning_overrides/50/0 = Vector2(0, 0)
 cache/0/40/0/kerning_overrides/20/0 = Vector2(0, 0)
 cache/0/40/0/kerning_overrides/40/0 = Vector2(0, 0)
+cache/0/14/0/ascent = 0.0
+cache/0/14/0/descent = 0.0
+cache/0/14/0/underline_position = 0.0
+cache/0/14/0/underline_thickness = 0.0
+cache/0/14/0/scale = 1.0
+cache/0/18/0/ascent = 0.0
+cache/0/18/0/descent = 0.0
+cache/0/18/0/underline_position = 0.0
+cache/0/18/0/underline_thickness = 0.0
+cache/0/18/0/scale = 1.0
 
 [resource]
-default_font = ExtResource("5")
-default_font_size = 30
+default_font = ExtResource("14_7q2ks")
+default_font_size = 18
 Button/colors/font_color = Color(1, 1, 1, 1)
 Button/colors/font_color_disabled = Color(0.831373, 0.831373, 0.831373, 0.568627)
 Button/colors/font_color_hover = Color(0, 1, 1, 1)
@@ -114,7 +125,7 @@ Button/constants/h_separation = 6
 Button/constants/hseparation = 6
 Button/constants/icon_max_width = 0
 Button/constants/outline_size = 10
-Button/fonts/font = ExtResource("5")
+Button/fonts/font = ExtResource("14_7q2ks")
 Button/styles/disabled = SubResource("StyleBoxEmpty_2ojet")
 Button/styles/focus = ExtResource("2_q717b")
 Button/styles/hover = ExtResource("2_q717b")
@@ -135,8 +146,8 @@ LineEdit/constants/minimum_spaces = 12
 LineEdit/constants/outline_size = 10
 LineEdit/styles/focus = ExtResource("11")
 LineEdit/styles/normal = ExtResource("9")
-Panel/styles/panel = ExtResource("30")
-PanelContainer/styles/panel = ExtResource("30")
+Panel/styles/panel = ExtResource("8_0ini7")
+PanelContainer/styles/panel = ExtResource("8_0ini7")
 PopupPanel/styles/panel = SubResource("StyleBoxEmpty_2pq4c")
 ProgressBar/styles/background = SubResource("StyleBoxEmpty_30gon")
 ProgressBar/styles/fill = SubResource("StyleBoxFlat_vxdk2")
@@ -154,7 +165,7 @@ TabBar/constants/top_margin = 24
 TabBar/fonts/font = SubResource("1")
 TabBar/styles/button = ExtResource("32")
 TabBar/styles/button_pressed = ExtResource("1")
-TabBar/styles/panel = ExtResource("30")
+TabBar/styles/panel = ExtResource("8_0ini7")
 TabBar/styles/tab_bg = ExtResource("32")
 TabBar/styles/tab_disabled = ExtResource("31")
 TabBar/styles/tab_fg = ExtResource("29")
@@ -169,7 +180,7 @@ TabContainer/constants/outline_size = 10
 TabContainer/constants/side_margin = 8
 TabContainer/constants/top_margin = 24
 TabContainer/fonts/font = SubResource("1")
-TabContainer/styles/panel = ExtResource("30")
+TabContainer/styles/panel = ExtResource("8_0ini7")
 TabContainer/styles/tab_bg = ExtResource("32")
 TabContainer/styles/tab_disabled = ExtResource("31")
 TabContainer/styles/tab_fg = ExtResource("29")

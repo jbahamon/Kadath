@@ -54,29 +54,29 @@ func _on_menu_exited():
 func _on_continue_game_focus_entered() -> void:
 	UIService.set_menu_help(
 		"Continue a previously saved game.",
-		"[ {ui_up} ]/[ {ui_down} ] : Select  [ {ui_accept} ]: Confirm"
+		"[{ui_up}]/[{ui_down}]: Select [{ui_accept}]: Confirm"
 	)
 
 func _on_new_game_focus_entered() -> void:
 	UIService.set_menu_help(
 		"Start a new game.",
-		"[ {ui_up} ]/[ {ui_down} ] : Select  [ {ui_accept} ]: Confirm"
+		"[{ui_up}]/[{ui_down}]: Select [{ui_accept}]: Confirm"
 	)
 
 func _on_settings_focus_entered() -> void:
 	UIService.set_menu_help(
 		"Change controls and other settings.",
-		"[ {ui_up} ]/[ {ui_down} ] : Select  [ {ui_accept} ]: Confirm"
+		"[{ui_up}]/[{ui_down}]: Select [{ui_accept}]: Confirm"
 	)
 
 func _on_credits_focus_entered() -> void:
 	UIService.set_menu_help(
 		"Check the game's credits.",
-		"[ {ui_up} ]/[ {ui_down} ] : Select  [ {ui_accept} ]: Confirm"
+		"[{ui_up}]/[{ui_down}]: Select [{ui_accept}]: Confirm"
 	)
 
 func _on_quit_focus_entered() -> void:
 	UIService.set_menu_help(
 		"Exit the game.",
-		"[ {ui_up} ]/[ {ui_down} ] : Select  [ {ui_accept} ]: Confirm"
+		"[{ui_up}]/[{ui_down}]: Select [{ui_accept}]: Confirm"
 	)

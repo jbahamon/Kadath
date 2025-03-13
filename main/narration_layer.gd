@@ -30,7 +30,7 @@ func narrate(text):
 		return
 	
 	var advance_input = OS.get_keycode_string(InputMap.action_get_events(&"ui_accept")[0].keycode)
-	advance_label.text = "[ %s ] Advance" % advance_input
+	advance_label.text = "[%s] Advance" % advance_input
 	advance_label.show()
 	self.set_process_unhandled_input(true)
 	await self.advance
