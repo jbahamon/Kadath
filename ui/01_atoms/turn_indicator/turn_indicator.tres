@@ -1,0 +1,11 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://2e6vplaicmrv"]
+
+[ext_resource type="Texture2D" uid="uid://dms8x5fbq7br" path="res://ui/01_atoms/assets/textures/By Androx/turn_indicator.png" id="1_clibm"]
+
+[resource]
+texture = ExtResource("1_clibm")
+texture_margin_left = 9.0
+texture_margin_top = 9.0
+texture_margin_right = 9.0
+texture_margin_bottom = 9.0
+region_rect = Rect2(0, 0, 24, 24)

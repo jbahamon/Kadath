@@ -4,21 +4,21 @@ class_name BattleUI
 
 var ItemEntry = preload("res://ui/02_molecules/item_list_item/item_list_item.tscn")
 
-@onready var party_status = $VBoxContainer/PartyStatusContainer/PartyStatus
-@onready var options = $VBoxContainer/OptionsContainer
+@onready var party_status = $UIContainer/ContentContainer/BattleStatusContainer/PartyStatus
+@onready var options = $UIContainer/ContentContainer/OptionsContainer/Options
 
-@onready var options_title_container = $VBoxContainer/TitleContainer
-@onready var options_title: Label = $VBoxContainer/TitleContainer/OptionsTitle/Label
-@onready var options_list = $VBoxContainer/OptionsContainer/OptionsList
+@onready var options_title_container = $UIContainer/ContentContainer/OptionsContainer/TitleContainer
+@onready var options_title: Label = $UIContainer/ContentContainer/OptionsContainer/TitleContainer/OptionsTitle/Label
+@onready var options_list = $UIContainer/ContentContainer/OptionsContainer/Options/OptionsList
 
-@onready var skill_costs = $VBoxContainer/OptionsContainer/SkillCosts
-@onready var enemy_info = $VBoxContainer/OptionsContainer/EnemyInfo
-@onready var timeline = $VBoxContainer/Timeline
+@onready var skill_costs = $UIContainer/ContentContainer/OptionsContainer/Options/SkillCosts
+@onready var enemy_info = $UIContainer/ContentContainer/OptionsContainer/Options/EnemyInfo
+@onready var timeline = $UIContainer/ContentContainer/BattleStatusContainer/Timeline
 
-@onready var info_panel = $VBoxContainer/InfoPanel
-@onready var info_label = $VBoxContainer/InfoPanel/HBoxContainer/InfoLabel
-@onready var advance_label = $VBoxContainer/InfoPanel/HBoxContainer/AdvanceIndicator
-@onready var advance_icon = $VBoxContainer/InfoPanel/HBoxContainer/AdvanceIcon
+@onready var info_panel = $UIContainer/InfoPanel
+@onready var info_label = $UIContainer/InfoPanel/HBoxContainer/InfoLabel
+@onready var advance_label = $UIContainer/InfoPanel/HBoxContainer/AdvanceIndicator
+@onready var advance_icon = $UIContainer/InfoPanel/HBoxContainer/AdvanceIcon
 
 signal option_selected(option)
 signal prompt_closed
@@ -36,6 +36,7 @@ func start():
 	self.options_title_container.visible = false
 	self.options.visible = false
 	self.options_list.set_process_unhandled_input(false)
+	self.timeline.hide()
 	self.show()
 		
 func prompt(text: String):
@@ -206,8 +207,8 @@ func request_targets(targeting_type, action, actor, actors: Array, request_promp
 	
 	return self.option_selected
 
-func update_preview(actors: Array):
-	self.timeline.update_preview(actors)
+func update_preview(current_actor, next_actors: Array):
+	self.timeline.update_preview(current_actor, next_actors)
 	self.timeline.modulate = Color.WHITE
 	
 func update_player_state():

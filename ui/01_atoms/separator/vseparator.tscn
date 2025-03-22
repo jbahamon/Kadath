@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ba11cpbmtrr24"]
+
+[ext_resource type="StyleBox" uid="uid://444leou28vgu" path="res://ui/01_atoms/separator/vseparator_crimson.tres" id="1_jw3u1"]
+
+[node name="VSeparator" type="Panel"]
+custom_minimum_size = Vector2(9, 0)
+size_flags_horizontal = 4
+theme_override_styles/panel = ExtResource("1_jw3u1")

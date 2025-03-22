@@ -1,0 +1,15 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://vx5l3bk6pdpg"]
+
+[ext_resource type="Texture2D" uid="uid://giqgh6yi3m7l" path="res://ui/01_atoms/assets/textures/By Androx/scroll_grabber.png" id="1_nety6"]
+
+[resource]
+content_margin_left = 15.0
+content_margin_right = 15.0
+texture = ExtResource("1_nety6")
+texture_margin_left = 10.0
+texture_margin_top = 20.0
+texture_margin_right = 10.0
+texture_margin_bottom = 20.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+region_rect = Rect2(0, 0, 30, 96)

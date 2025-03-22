@@ -1,0 +1,11 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://mvm33hpcshk3"]
+
+[ext_resource type="Texture2D" uid="uid://dpojxka865mox" path="res://ui/01_atoms/assets/textures/By Androx/scroll.png" id="1_datvu"]
+
+[resource]
+content_margin_left = 15.0
+content_margin_right = 15.0
+texture = ExtResource("1_datvu")
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+region_rect = Rect2(0, 0, 30, 128)

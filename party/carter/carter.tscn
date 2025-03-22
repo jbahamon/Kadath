@@ -168,6 +168,7 @@ script = ExtResource("8_m04rn")
 charge_sound = ExtResource("17_1sv2e")
 display_name = "Eldritch Channeling"
 description = "Power up any attack this party member performs during their next turn."
+energy_cost = 25
 
 [node name="CollisionShape2D" parent="Battler/Hitbox" index="0"]
 position = Vector2(0, -10)

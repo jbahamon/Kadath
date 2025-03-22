@@ -1,12 +1,50 @@
-[gd_scene load_steps=2 format=3 uid="uid://bqmykxfryt4p7"]
+[gd_scene load_steps=9 format=3 uid="uid://bqmykxfryt4p7"]
 
 [ext_resource type="Script" path="res://ui/03_organisms/timeline/timeline.gd" id="1_wm4c0"]
+[ext_resource type="PackedScene" uid="uid://bl2fqcakxb5yf" path="res://ui/02_molecules/timeline_item/timeline_item.tscn" id="2_e3j53"]
+[ext_resource type="Texture2D" uid="uid://btwxlpbctac6g" path="res://ui/01_atoms/assets/textures/By Sr.Toasty/horizontal_arrow.png" id="3_82x4e"]
+[ext_resource type="Script" path="res://ui/01_atoms/animated_texture/animated_texture.gd" id="4_etxie"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_w5it1"]
+atlas = ExtResource("3_82x4e")
+region = Rect2(0, 0, 27, 42)
 
-[node name="Timeline" type="HBoxContainer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[sub_resource type="AtlasTexture" id="AtlasTexture_ubeo2"]
+atlas = ExtResource("3_82x4e")
+region = Rect2(0, 0, 27, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dmife"]
+atlas = ExtResource("3_82x4e")
+region = Rect2(27, 0, 27, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sqc3l"]
+atlas = ExtResource("3_82x4e")
+region = Rect2(81, 0, 27, 42)
+
+[node name="Timeline" type="PanelContainer"]
+offset_right = 32.0
+offset_bottom = 32.0
 script = ExtResource("1_wm4c0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="CurrentActorIcon" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_e3j53")]
+layout_mode = 2
+
+[node name="ActiveIcon" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_w5it1")
+script = ExtResource("4_etxie")
+atlases = Array[AtlasTexture]([SubResource("AtlasTexture_ubeo2"), SubResource("AtlasTexture_dmife"), SubResource("AtlasTexture_w5it1"), SubResource("AtlasTexture_sqc3l")])
+time_per_frame = 0.25
+
+[node name="Container" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 3

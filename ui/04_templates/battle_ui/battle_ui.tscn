@@ -15,78 +15,27 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource("3")
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
 script = ExtResource("1")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="UIContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="InfoPanel" type="PanelContainer" parent="UIContainer"]
 layout_mode = 2
 
-[node name="Timeline" parent="VBoxContainer" instance=ExtResource("3_81xqm")]
+[node name="HBoxContainer" type="HBoxContainer" parent="UIContainer/InfoPanel"]
 layout_mode = 2
 
-[node name="PartyStatusContainer" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="Spacer" type="Control" parent="VBoxContainer/PartyStatusContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PartyStatus" parent="VBoxContainer/PartyStatusContainer" instance=ExtResource("9_v5mha")]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-
-[node name="Spacer" type="Control" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="TitleContainer" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="OptionsTitle" type="PanelContainer" parent="VBoxContainer/TitleContainer"]
-custom_minimum_size = Vector2(500, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="Label" type="Label" parent="VBoxContainer/TitleContainer/OptionsTitle"]
-layout_mode = 2
-text = "Select your character"
-
-[node name="OptionsContainer" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 8
-
-[node name="OptionsList" parent="VBoxContainer/OptionsContainer" instance=ExtResource("9")]
-custom_minimum_size = Vector2(500, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 2
-size_flags_stretch_ratio = 0.1
-focused_if_visible = true
-
-[node name="SkillCosts" parent="VBoxContainer/OptionsContainer" instance=ExtResource("6_qp326")]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="EnemyInfo" parent="VBoxContainer/OptionsContainer" instance=ExtResource("7_gtig5")]
-custom_minimum_size = Vector2(495, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-
-[node name="InfoPanel" type="PanelContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/InfoPanel"]
-layout_mode = 2
-
-[node name="InfoLabel" type="Label" parent="VBoxContainer/InfoPanel/HBoxContainer"]
+[node name="InfoLabel" type="Label" parent="UIContainer/InfoPanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="AdvanceIndicator" type="RichTextLabel" parent="VBoxContainer/InfoPanel/HBoxContainer"]
+[node name="AdvanceIndicator" type="RichTextLabel" parent="UIContainer/InfoPanel/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 bbcode_enabled = true
@@ -99,12 +48,82 @@ hint_underlined = false
 deselect_on_focus_loss_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="AdvanceIcon" type="TextureRect" parent="VBoxContainer/InfoPanel/HBoxContainer"]
+[node name="AdvanceIcon" type="TextureRect" parent="UIContainer/InfoPanel/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 texture = ExtResource("8_k6qne")
 stretch_mode = 3
 
-[connection signal="cancel" from="VBoxContainer/OptionsContainer/OptionsList" to="." method="on_cancel"]
-[connection signal="element_focused" from="VBoxContainer/OptionsContainer/OptionsList" to="." method="on_option_focused"]
-[connection signal="element_selected" from="VBoxContainer/OptionsContainer/OptionsList" to="." method="on_option_selected"]
+[node name="ContentContainer" type="HBoxContainer" parent="UIContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="OptionsContainer" type="VBoxContainer" parent="UIContainer/ContentContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="Spacer" type="Control" parent="UIContainer/ContentContainer/OptionsContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.16
+
+[node name="TitleContainer" type="HBoxContainer" parent="UIContainer/ContentContainer/OptionsContainer"]
+layout_mode = 2
+
+[node name="OptionsTitle" type="PanelContainer" parent="UIContainer/ContentContainer/OptionsContainer/TitleContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="UIContainer/ContentContainer/OptionsContainer/TitleContainer/OptionsTitle"]
+layout_mode = 2
+text = "Select your character"
+
+[node name="Options" type="HBoxContainer" parent="UIContainer/ContentContainer/OptionsContainer"]
+custom_minimum_size = Vector2(0, 260)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="OptionsList" parent="UIContainer/ContentContainer/OptionsContainer/Options" instance=ExtResource("9")]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+size_flags_stretch_ratio = 0.1
+focused_if_visible = true
+
+[node name="SkillCosts" parent="UIContainer/ContentContainer/OptionsContainer/Options" instance=ExtResource("6_qp326")]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="EnemyInfo" parent="UIContainer/ContentContainer/OptionsContainer/Options" instance=ExtResource("7_gtig5")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="BattleStatusContainer" type="VBoxContainer" parent="UIContainer/ContentContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Timeline" parent="UIContainer/ContentContainer/BattleStatusContainer" instance=ExtResource("3_81xqm")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="Spacer" type="Control" parent="UIContainer/ContentContainer/BattleStatusContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PartyStatus" parent="UIContainer/ContentContainer/BattleStatusContainer" instance=ExtResource("9_v5mha")]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[connection signal="cancel" from="UIContainer/ContentContainer/OptionsContainer/Options/OptionsList" to="." method="on_cancel"]
+[connection signal="element_focused" from="UIContainer/ContentContainer/OptionsContainer/Options/OptionsList" to="." method="on_option_focused"]
+[connection signal="element_selected" from="UIContainer/ContentContainer/OptionsContainer/Options/OptionsList" to="." method="on_option_selected"]

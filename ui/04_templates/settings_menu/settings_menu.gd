@@ -75,7 +75,9 @@ func _ready():
 	
 	self.enable_shake_checkbox.pressed.connect(UIService.play_interaction_sound)
 	self.enable_flash_checkbox.pressed.connect(UIService.play_interaction_sound)
-
+	
+	self.hold_run_checkbox.pressed.connect(UIService.play_interaction_sound)
+	self.toggle_run_checkbox.pressed.connect(UIService.play_interaction_sound)
 	
 func add_input_option(action: String, label_text: String):
 	add_label(label_text)
@@ -200,6 +202,7 @@ func update_ui_volume(value):
 	SettingsService.update_volume(&"UI", self.ui_volume.value)
 	
 func update_text_speed(value):
+	UIService.play_focus_sound()
 	UIService.start_text_speed_demo()
 	SettingsService.update_text_speed(value)
 

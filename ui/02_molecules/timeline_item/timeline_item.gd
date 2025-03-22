@@ -2,7 +2,7 @@ extends PanelContainer
 
 const highlight_material = preload("res://utils/material/highlight.tres")
 
-@onready var icon: TextureRect = $TextureRect
+@onready var icon: TextureRect = $Icon
 @onready var label: Label = $Label
 
 var battle_actor_id

@@ -4,10 +4,12 @@ var PartyScene = preload("res://party/party.tscn")
 
 var party: Party = null
 var proxy: PlayerProxy = null
+var battle_turn_indicator = null
 var interaction_indicator = null
 
-func initialize(init_proxy: PlayerProxy, init_interaction_indicator):
+func initialize(init_proxy: PlayerProxy, init_interaction_indicator, init_battle_turn_indicator):
 	self.interaction_indicator = init_interaction_indicator
+	self.battle_turn_indicator = init_battle_turn_indicator
 
 	self.party = PartyScene.instantiate()
 	self.party.add_to_group("save")

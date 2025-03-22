@@ -1,3 +1,6 @@
+StyleBoxTexture
+AtlasTexture
+AnimatedTexture
 DownedStatus
 StatusEffect
 SpriteFrames
@@ -9,7 +12,3 @@ BattleRewards
 ShaderMaterial
 TileSet
 Location
-HealingItem
-StyleBoxEmpty
-StyleBoxTexture
-StyleBoxLine

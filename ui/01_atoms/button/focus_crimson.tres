@@ -1,0 +1,14 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://otu74tqlyo21"]
+
+[ext_resource type="Texture2D" uid="uid://sg61t6h4e2mf" path="res://ui/01_atoms/assets/textures/By Androx/focus.png" id="1_1eaod"]
+
+[resource]
+texture = ExtResource("1_1eaod")
+texture_margin_left = 38.0
+texture_margin_top = 18.0
+texture_margin_right = 38.0
+texture_margin_bottom = 18.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+region_rect = Rect2(0, 0, 68, 26)
+draw_center = false

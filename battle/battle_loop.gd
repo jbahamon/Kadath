@@ -5,11 +5,10 @@ const BattleEndState = preload("res://battle/battle_end_state.gd")
 # status damage, etc) and win/lose conditions
 
 var actors: Array
-var preview_size: int = 6
-var preview: Array
+var preview_size: int = 5
 var turn_queue := TurnQueue.new()
 var pending_deaths = []
-var reset_preview := false
+
 var ui: BattleUI
 var battle_end_state 
 
@@ -18,8 +17,6 @@ var observers = {}
 func initialize(init_actors: Array, init_ui: BattleUI):
 	self.actors = init_actors
 	self.ui = init_ui
-	
-	preview = []
 	turn_queue.reset()
 	
 	for actor in actors:
@@ -38,9 +35,14 @@ func do_battle():
 			await observer.on_turn_start(current_actor)
 		
 		if current_actor is PartyMember:
-			self.update_preview()
+			self.update_preview(current_actor)
+			
+			EntitiesService.battle_turn_indicator.global_position = current_actor.global_position - Vector2(13, 36)
+			EntitiesService.battle_turn_indicator.visible = true
+
 		var turn = await current_actor.battler.ai.get_turn(self.actors)
 		self.ui.hide_timeline()
+		EntitiesService.battle_turn_indicator.visible = false
 		
 		# Small pause for usabilty/not making it feel like it's too fast
 		await ui.get_tree().create_timer(0.2).timeout
@@ -128,14 +130,14 @@ func on_actor_death(actor):
 	for observer in self.observers[BattleService.Event.BEFORE_ACTOR_DEATH]:
 		await observer.after_actor_death(actor)
 	
-	self.update_preview()
+	# self.update_preview()
 	
 func add_rewards(rewards: BattleRewards):
 	self.battle_end_state.add_rewards(rewards)
 		
-func update_preview():
-	self.preview = self.turn_queue.get_preview(self.preview_size)
-	self.ui.update_preview(self.preview)
+func update_preview(current_actor):
+	var preview = self.turn_queue.get_preview(self.preview_size)
+	self.ui.update_preview(current_actor, preview)
 
 func delay_actor(actor, delay):
 	self.turn_queue.add_charge(actor, delay)

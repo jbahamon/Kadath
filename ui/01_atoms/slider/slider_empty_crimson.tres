@@ -1,0 +1,14 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://putqx3b23fac"]
+
+[ext_resource type="Texture2D" uid="uid://ni1vnn5yrsfh" path="res://ui/01_atoms/assets/textures/By Androx/slider_empty.png" id="1_f2vu8"]
+
+[resource]
+texture = ExtResource("1_f2vu8")
+texture_margin_left = 30.0
+texture_margin_top = 8.0
+texture_margin_right = 30.0
+texture_margin_bottom = 8.0
+expand_margin_top = 4.0
+expand_margin_bottom = 4.0
+region_rect = Rect2(0, 0, 68, 24)
+draw_center = false

@@ -18,7 +18,8 @@ func _ready() -> void:
 	DialogueService.initialize($DialogueLayer/Dialogue, $NarrationLayer)
 	EntitiesService.initialize(
 		$SubViewportContainer/SubViewport/World/PlayerProxy,
-		$SubViewportContainer/SubViewport/World/InteractionIndicator
+		$SubViewportContainer/SubViewport/World/InteractionIndicator,
+		$SubViewportContainer/SubViewport/World/BattleTurnIndicator
 		
 	)
 	EnvironmentService.initialize($SubViewportContainer/SubViewport/World)

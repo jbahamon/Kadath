@@ -1,0 +1,13 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://444leou28vgu"]
+
+[ext_resource type="Texture2D" uid="uid://bxg4pabx8o0xs" path="res://ui/01_atoms/assets/textures/By Androx/separator_vertical.png" id="1_licfs"]
+
+[resource]
+texture = ExtResource("1_licfs")
+texture_margin_left = 1.0
+texture_margin_top = 34.0
+texture_margin_right = 1.0
+texture_margin_bottom = 35.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+region_rect = Rect2(0, 0, 1, 59)

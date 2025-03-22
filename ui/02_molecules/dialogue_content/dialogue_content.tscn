@@ -1,22 +1,21 @@
-[gd_scene load_steps=9 format=3 uid="uid://b8h7mj2g47i5t"]
+[gd_scene load_steps=8 format=3 uid="uid://b8h7mj2g47i5t"]
 
 [ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="1_aedsi"]
 [ext_resource type="Script" path="res://ui/02_molecules/dialogue_content/dialogue_content.gd" id="2_6mdiq"]
-[ext_resource type="StyleBox" uid="uid://bo85aikp7llh4" path="res://ui/01_atoms/panel/panel_gold_small.tres" id="2_sx72j"]
 [ext_resource type="Texture2D" uid="uid://81cn5npbfnoh" path="res://ui/01_atoms/assets/textures/By Sr.Toasty/advance_indicator.png" id="3_wx5vl"]
-[ext_resource type="Script" path="res://ui/02_molecules/dialogue_content/advance_indicator.gd" id="4_c3dqb"]
+[ext_resource type="Script" path="res://ui/01_atoms/animated_texture/animated_texture.gd" id="4_c3dqb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tp4gs"]
 atlas = ExtResource("3_wx5vl")
-region = Rect2(0, 0, 24, 18)
+region = Rect2(0, 0, 36, 27)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8n8c2"]
 atlas = ExtResource("3_wx5vl")
-region = Rect2(24, 0, 24, 18)
+region = Rect2(36, 0, 36, 27)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u5fuk"]
 atlas = ExtResource("3_wx5vl")
-region = Rect2(48, 0, 24, 18)
+region = Rect2(72, 0, 36, 27)
 
 [node name="DialogueContent" type="PanelContainer"]
 custom_minimum_size = Vector2(0, 130)
@@ -29,7 +28,6 @@ offset_bottom = 13.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_aedsi")
-theme_override_styles/panel = ExtResource("2_sx72j")
 script = ExtResource("2_6mdiq")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]

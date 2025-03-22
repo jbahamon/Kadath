@@ -76,7 +76,7 @@ func update_raycast():
 
 func update_input_vector():
 	var old_input_vector = input_vector
-
+	
 	input_vector = Vector2(
 			Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
 			Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")

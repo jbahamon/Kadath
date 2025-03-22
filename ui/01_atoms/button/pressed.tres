@@ -2,10 +2,13 @@
 
 [resource]
 bg_color = Color(0.6, 0.6, 0.6, 0.737255)
-border_width_left = 6
-border_width_top = 6
-border_width_right = 6
-border_width_bottom = 6
-border_color = Color(0.6, 0.6, 0.6, 0.737255)
-corner_detail = 1
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.6, 0.6, 0.6, 0)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 anti_aliasing = false

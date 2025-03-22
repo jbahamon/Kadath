@@ -3,11 +3,10 @@
 [ext_resource type="Script" path="res://ui/04_templates/battle_ui/party_status.gd" id="1_p1qhq"]
 [ext_resource type="PackedScene" uid="uid://crjmxm0ml1eek" path="res://ui/02_molecules/party_member_summary/party_member_summary.tscn" id="2_epvoo"]
 
-
 [node name="PartyStatus" type="VBoxContainer"]
 offset_right = 580.0
 offset_bottom = 101.0
-theme_override_constants/separation = 20
+theme_override_constants/separation = 9
 alignment = 2
 script = ExtResource("1_p1qhq")
 

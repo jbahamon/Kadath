@@ -24,6 +24,3 @@ func clear():
 	for child in children:
 		container.remove_child(child)
 		child.queue_free()
-	
-	
-	
