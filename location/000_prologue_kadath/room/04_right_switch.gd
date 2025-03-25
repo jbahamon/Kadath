@@ -17,7 +17,7 @@ func _on_chalice_player_interaction(proxy: PlayerProxy):
 	await self.move_player_to_chalice(proxy)
 	
 	if VarsService.get_flag("kadath.right_barrier"):
-		await DialogueService.open_dialogue("chalice_right_done")
+		await DialogueService.open_dialogue("chalice_done")
 		
 	else:
 		await self.attempt_chalice_interaction(proxy)

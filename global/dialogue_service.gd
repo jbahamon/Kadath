@@ -66,7 +66,7 @@ func open_dialogue(dialogue_id: String) -> Array:
 		await dialogue_box.closed
 		return self.current_responses
 	else:
-		dialogue_box.close_dialogue_box()
+		dialogue_box.close_dialogue()
 		return self.current_responses
 	
 

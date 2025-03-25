@@ -12,7 +12,7 @@ func execute(actor):
 	var previous_material = actor.material
 	actor.material = highlight_material
 	actor.battler.spend_energy(self.energy_cost)
-	
+	actor.set_orientation(actor.global_position.direction_to(self.target.global_position))
 	actor.play_anim("blast")
 	var targets = await self.area_of_effect.get_actors_at(self.target.global_position)
 	FXService.play_sfx_at(self.charge_sound, actor.global_position)

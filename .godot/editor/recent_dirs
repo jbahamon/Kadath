@@ -1,3 +1,4 @@
+res://location/000_prologue_kadath/object
 res://ui/01_atoms/turn_indicator
 res://ui/01_atoms/assets/textures/By Sr.Toasty
 res://ui/01_atoms/scroll
@@ -19,4 +20,3 @@ C:/Users/Jorge/Documents/Godot/Kadath/sound/music/BertCole
 res://global
 C:/Users/Jorge/Documents/Godot/Kadath/location/000_prologue_kadath/cutscene
 C:/Users/Jorge/Documents/Godot/Kadath
-res://battle/action/util

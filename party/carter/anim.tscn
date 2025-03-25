@@ -1666,7 +1666,7 @@ states/use_item/position = Vector2(495, 408.85)
 states/walk/node = SubResource("18")
 states/walk/position = Vector2(573, 149)
 transitions = ["idle", "walk", SubResource("19"), "walk", "idle", SubResource("20"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_hbppg"), "walk", "run", SubResource("AnimationNodeStateMachineTransition_5f7a7"), "run", "walk", SubResource("AnimationNodeStateMachineTransition_0csje"), "walk", "attack", SubResource("AnimationNodeStateMachineTransition_q212s"), "attack", "jump_back", SubResource("AnimationNodeStateMachineTransition_23l0q"), "idle", "battle_idle", SubResource("AnimationNodeStateMachineTransition_bdym5"), "battle_idle", "idle", SubResource("AnimationNodeStateMachineTransition_ib0q3"), "battle_idle", "hit", SubResource("AnimationNodeStateMachineTransition_soyxa"), "hit", "battle_idle", SubResource("AnimationNodeStateMachineTransition_5rqxq"), "walk", "battle_idle", SubResource("AnimationNodeStateMachineTransition_4oigb"), "battle_idle", "walk", SubResource("AnimationNodeStateMachineTransition_jv6vr"), "jump_back", "battle_idle", SubResource("AnimationNodeStateMachineTransition_xxony"), "downed", "battle_idle", SubResource("AnimationNodeStateMachineTransition_u6vhm"), "battle_idle", "downed", SubResource("AnimationNodeStateMachineTransition_b2ofx"), "interact", "idle", SubResource("AnimationNodeStateMachineTransition_5gxb6"), "idle", "interact", SubResource("AnimationNodeStateMachineTransition_df83w"), "idle", "spin", SubResource("AnimationNodeStateMachineTransition_4nt87"), "spin", "idle", SubResource("AnimationNodeStateMachineTransition_xtafi"), "battle_idle", "use_item", SubResource("AnimationNodeStateMachineTransition_snssf"), "use_item", "battle_idle", SubResource("AnimationNodeStateMachineTransition_oos7f"), "crit_start", "crit", SubResource("AnimationNodeStateMachineTransition_773s8"), "battle_idle", "crit_start", SubResource("AnimationNodeStateMachineTransition_807un"), "crit", "jump_back", SubResource("AnimationNodeStateMachineTransition_cujo4"), "battle_idle", "charge", SubResource("AnimationNodeStateMachineTransition_jg8lw"), "charge", "battle_idle", SubResource("AnimationNodeStateMachineTransition_34ae4"), "battle_idle", "blast", SubResource("AnimationNodeStateMachineTransition_iypgn"), "blast", "battle_idle", SubResource("AnimationNodeStateMachineTransition_4334f"), "defend", "battle_idle", SubResource("AnimationNodeStateMachineTransition_wty2d"), "battle_idle", "defend", SubResource("AnimationNodeStateMachineTransition_drhk3"), "battle_idle", "identify", SubResource("AnimationNodeStateMachineTransition_7mjnm"), "identify", "battle_idle", SubResource("AnimationNodeStateMachineTransition_3re13")]
-graph_offset = Vector2(57, 162.395)
+graph_offset = Vector2(57, 232.756)
 
 [node name="Anim" type="Marker2D"]
 use_parent_material = true
@@ -1687,7 +1687,7 @@ centered = false
 offset = Vector2(-30, -43)
 hframes = 6
 vframes = 51
-frame = 12
+frame = 265
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("21")
@@ -1696,7 +1696,7 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/attack/blend_position = Vector2(-0.256311, -0.191489)
 parameters/battle_idle/healthy/blend_position = Vector2(0, 0)
 parameters/battle_idle/tired/blend_position = Vector2(0, 0)
-parameters/blast/blend_position = Vector2(-0.576699, 0.265957)
+parameters/blast/blend_position = Vector2(1.09814, -0.0212766)
 parameters/charge/blend_position = Vector2(-0.598058, 0.0851064)
 parameters/crit/blend_position = Vector2(0, 0)
 parameters/crit_start/blend_position = Vector2(0, 0)

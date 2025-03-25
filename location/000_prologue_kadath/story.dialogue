@@ -96,13 +96,32 @@ Carter: Pickman!
 #  Interactions
 # ===============
 
+~ lamp
+Though there is no wind in here, these eery flames continuously dance and flicker.
+=> END!
+
+~ cauldron
+The halls are permeated by a sort of phosphorescence. These lamps are for purely decorative purposes. Perhaps ritualistic.
+=> END!
+
+~ statue_disabled
+A statue with dog-like twin heads, holding an amphora. 
+=> END!
+
+~ statue_enabled
+A double-headed statue. Its amphora is pouring a suspicious red liquid.
+=> END!
+
+~ acolyte_remains
+Blood stained clothes. All that remains of a willing participant in a ritual sacrifice.
+=> END!
 
 ~ pushing_barrier
 This is not the time to retreat. The journey to this place has been long and hard, and it's time to face the gods.
 => END
 
 ~ barrier
-Carter: There must be a way to remove these. We should check the neighboring rooms.
+Carter: An abyss leading to unknown depths. These statues, though, seem to be connected to the adjacent rooms.
 => END!
 
 ~ chalice

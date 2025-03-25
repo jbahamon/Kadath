@@ -1,17 +1,19 @@
 [gd_resource type="Resource" script_class="DialogueResource" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_resource.gd" id="1_qhqip"]
+[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_resource.gd" id="1_akq5r"]
 
 [resource]
-script = ExtResource("1_qhqip")
+script = ExtResource("1_akq5r")
 using_states = PackedStringArray()
 titles = {
+"acolyte_remains": "116",
 "after_boss": "69",
-"after_chalice_activation": "121",
-"barrier": "105",
+"after_chalice_activation": "140",
+"barrier": "124",
 "carter_call": "81",
-"chalice": "109",
-"chalice_done": "125",
+"cauldron": "104",
+"chalice": "128",
+"chalice_done": "144",
 "entrance_carter_1": "25",
 "entrance_carter_2": "30",
 "entrance_ghoul1": "13",
@@ -21,6 +23,7 @@ titles = {
 "idle_left_ghoul": "42",
 "idle_pickman": "38",
 "idle_right_ghoul": "49",
+"lamp": "100",
 "narration_1": "5",
 "narration_2": "9",
 "nyarlathotep_1": "85",
@@ -29,8 +32,10 @@ titles = {
 "pickman_join": "65",
 "pickman_recruit": "60",
 "pickman_warning": "77",
-"pushing_barrier": "101",
-"starting_instructions": "34"
+"pushing_barrier": "120",
+"starting_instructions": "34",
+"statue_disabled": "108",
+"statue_enabled": "112"
 }
 character_names = PackedStringArray("Ghoul", "Pickman", "Carter", "????")
 first_title = "5"
@@ -42,16 +47,136 @@ lines = {
 "type": &"goto"
 },
 "100": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
 "id": "100",
 "next_id": "101",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "Though there is no wind in here, these eery flames continuously dance and flicker.",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Though there is no wind in here, these eery flames continuously dance and flicker.",
+"type": &"dialogue"
+},
+"101": {
+"id": "101",
+"is_snippet": false,
+"next_id": "end!",
+"type": &"goto"
+},
+"103": {
+"id": "103",
+"next_id": "104",
+"text": "cauldron",
+"type": &"title"
+},
+"104": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
+"id": "104",
+"next_id": "105",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "The halls are permeated by a sort of phosphorescence. These lamps are for purely decorative purposes. Perhaps ritualistic.",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "The halls are permeated by a sort of phosphorescence. These lamps are for purely decorative purposes. Perhaps ritualistic.",
+"type": &"dialogue"
+},
+"105": {
+"id": "105",
+"is_snippet": false,
+"next_id": "end!",
+"type": &"goto"
+},
+"107": {
+"id": "107",
+"next_id": "108",
+"text": "statue_disabled",
+"type": &"title"
+},
+"108": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
+"id": "108",
+"next_id": "109",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "A statue with dog-like twin heads, holding an amphora.",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "A statue with dog-like twin heads, holding an amphora.",
+"type": &"dialogue"
+},
+"109": {
+"id": "109",
+"is_snippet": false,
+"next_id": "end!",
+"type": &"goto"
+},
+"111": {
+"id": "111",
+"next_id": "112",
+"text": "statue_enabled",
+"type": &"title"
+},
+"112": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
+"id": "112",
+"next_id": "113",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "A double-headed statue. Its amphora is pouring a suspicious red liquid.",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "A double-headed statue. Its amphora is pouring a suspicious red liquid.",
+"type": &"dialogue"
+},
+"113": {
+"id": "113",
+"is_snippet": false,
+"next_id": "end!",
+"type": &"goto"
+},
+"115": {
+"id": "115",
+"next_id": "116",
+"text": "acolyte_remains",
+"type": &"title"
+},
+"116": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
+"id": "116",
+"next_id": "117",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "Blood stained clothes. All that remains of a willing participant in a ritual sacrifice.",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Blood stained clothes. All that remains of a willing participant in a ritual sacrifice.",
+"type": &"dialogue"
+},
+"117": {
+"id": "117",
+"is_snippet": false,
+"next_id": "end!",
+"type": &"goto"
+},
+"119": {
+"id": "119",
+"next_id": "120",
 "text": "pushing_barrier",
 "type": &"title"
 },
-"101": {
+"12": {
+"id": "12",
+"next_id": "13",
+"text": "entrance_ghoul1",
+"type": &"title"
+},
+"120": {
 "character": "",
 "character_replacements": Array[Dictionary]([]),
-"id": "101",
-"next_id": "102",
+"id": "120",
+"next_id": "121",
 "notes": "",
 "tags": PackedStringArray(),
 "text": "This is not the time to retreat. The journey to this place has been long and hard, and it's time to face the gods.",
@@ -59,47 +184,47 @@ lines = {
 "translation_key": "This is not the time to retreat. The journey to this place has been long and hard, and it's time to face the gods.",
 "type": &"dialogue"
 },
-"102": {
-"id": "102",
+"121": {
+"id": "121",
 "is_snippet": false,
 "next_id": "end",
 "type": &"goto"
 },
-"104": {
-"id": "104",
-"next_id": "105",
+"123": {
+"id": "123",
+"next_id": "124",
 "text": "barrier",
 "type": &"title"
 },
-"105": {
+"124": {
 "character": "Carter",
 "character_replacements": Array[Dictionary]([]),
-"id": "105",
-"next_id": "106",
+"id": "124",
+"next_id": "125",
 "notes": "",
 "tags": PackedStringArray(),
-"text": "There must be a way to remove these. We should check the neighboring rooms.",
+"text": "An abyss leading to unknown depths. These statues, though, seem to be connected to the adjacent rooms.",
 "text_replacements": Array[Dictionary]([]),
-"translation_key": "There must be a way to remove these. We should check the neighboring rooms.",
+"translation_key": "An abyss leading to unknown depths. These statues, though, seem to be connected to the adjacent rooms.",
 "type": &"dialogue"
 },
-"106": {
-"id": "106",
+"125": {
+"id": "125",
 "is_snippet": false,
 "next_id": "end!",
 "type": &"goto"
 },
-"108": {
-"id": "108",
-"next_id": "109",
+"127": {
+"id": "127",
+"next_id": "128",
 "text": "chalice",
 "type": &"title"
 },
-"109": {
+"128": {
 "character": "",
 "character_replacements": Array[Dictionary]([]),
-"id": "109",
-"next_id": "111",
+"id": "128",
+"next_id": "130",
 "notes": "",
 "tags": PackedStringArray(),
 "text": "There is a curious glyph on the chalice. It seems to be pulsing with some sort of energy.",
@@ -107,11 +232,23 @@ lines = {
 "translation_key": "There is a curious glyph on the chalice. It seems to be pulsing with some sort of energy.",
 "type": &"dialogue"
 },
-"111": {
+"13": {
+"character": "Ghoul",
+"character_replacements": Array[Dictionary]([]),
+"id": "13",
+"next_id": "14",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "Ough! Not how I imagine arrival...",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Ough! Not how I imagine arrival...",
+"type": &"dialogue"
+},
+"130": {
 "character": "",
 "character_replacements": Array[Dictionary]([]),
-"id": "111",
-"next_id": "112",
+"id": "130",
+"next_id": "131",
 "notes": "",
 "tags": PackedStringArray(),
 "text": "Touch the glyph?",
@@ -119,22 +256,22 @@ lines = {
 "translation_key": "Touch the glyph?",
 "type": &"dialogue"
 },
-"112": {
+"131": {
 "character": "",
 "character_replacements": Array[Dictionary]([]),
-"id": "112",
-"next_id": "113",
-"next_id_after": "118",
+"id": "131",
+"next_id": "132",
+"next_id_after": "137",
 "notes": "",
-"responses": PackedStringArray("112", "115"),
+"responses": PackedStringArray("131", "134"),
 "tags": PackedStringArray(),
 "text": "Yes",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "Yes",
 "type": &"response"
 },
-"113": {
-"id": "113",
+"132": {
+"id": "132",
 "mutation": {
 "expression": Array[Dictionary]([{
 "type": "variable",
@@ -151,29 +288,29 @@ lines = {
 }]),
 "is_blocking": true
 },
-"next_id": "114",
-"parent_id": "112",
+"next_id": "133",
+"parent_id": "131",
 "type": &"mutation"
 },
-"114": {
+"133": {
 "character": "",
 "character_replacements": Array[Dictionary]([]),
-"id": "114",
-"next_id": "118",
+"id": "133",
+"next_id": "137",
 "notes": "",
-"parent_id": "112",
+"parent_id": "131",
 "tags": PackedStringArray(),
 "text": "You lean forward and touch the glyph.",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "You lean forward and touch the glyph.",
 "type": &"dialogue"
 },
-"115": {
+"134": {
 "character": "",
 "character_replacements": Array[Dictionary]([]),
-"id": "115",
-"next_id": "116",
-"next_id_after": "118",
+"id": "134",
+"next_id": "135",
+"next_id_after": "137",
 "notes": "",
 "tags": PackedStringArray(),
 "text": "No",
@@ -181,8 +318,8 @@ lines = {
 "translation_key": "No",
 "type": &"response"
 },
-"116": {
-"id": "116",
+"135": {
+"id": "135",
 "mutation": {
 "expression": Array[Dictionary]([{
 "type": "variable",
@@ -199,46 +336,46 @@ lines = {
 }]),
 "is_blocking": true
 },
-"next_id": "117",
-"parent_id": "115",
+"next_id": "136",
+"parent_id": "134",
 "type": &"mutation"
 },
-"117": {
+"136": {
 "character": "",
 "character_replacements": Array[Dictionary]([]),
-"id": "117",
-"next_id": "118",
+"id": "136",
+"next_id": "137",
 "notes": "",
-"parent_id": "115",
+"parent_id": "134",
 "tags": PackedStringArray(),
 "text": "Maybe later.",
 "text_replacements": Array[Dictionary]([]),
 "translation_key": "Maybe later.",
 "type": &"dialogue"
 },
-"118": {
-"id": "118",
+"137": {
+"id": "137",
 "is_snippet": false,
 "next_id": "end",
 "type": &"goto"
 },
-"12": {
-"id": "12",
-"next_id": "13",
-"text": "entrance_ghoul1",
-"type": &"title"
-},
-"120": {
-"id": "120",
-"next_id": "121",
+"139": {
+"id": "139",
+"next_id": "140",
 "text": "after_chalice_activation",
 "type": &"title"
 },
-"121": {
+"14": {
+"id": "14",
+"is_snippet": false,
+"next_id": "end",
+"type": &"goto"
+},
+"140": {
 "character": "",
 "character_replacements": Array[Dictionary]([]),
-"id": "121",
-"next_id": "122",
+"id": "140",
+"next_id": "141",
 "notes": "",
 "tags": PackedStringArray(),
 "text": "Something seems to have changed.",
@@ -246,23 +383,23 @@ lines = {
 "translation_key": "Something seems to have changed.",
 "type": &"dialogue"
 },
-"122": {
-"id": "122",
+"141": {
+"id": "141",
 "is_snippet": false,
 "next_id": "end",
 "type": &"goto"
 },
-"124": {
-"id": "124",
-"next_id": "125",
+"143": {
+"id": "143",
+"next_id": "144",
 "text": "chalice_done",
 "type": &"title"
 },
-"125": {
+"144": {
 "character": "",
 "character_replacements": Array[Dictionary]([]),
-"id": "125",
-"next_id": "126",
+"id": "144",
+"next_id": "145",
 "notes": "",
 "tags": PackedStringArray(),
 "text": "The chalice is filled with a red liquid.",
@@ -270,26 +407,8 @@ lines = {
 "translation_key": "The chalice is filled with a red liquid.",
 "type": &"dialogue"
 },
-"126": {
-"id": "126",
-"is_snippet": false,
-"next_id": "end",
-"type": &"goto"
-},
-"13": {
-"character": "Ghoul",
-"character_replacements": Array[Dictionary]([]),
-"id": "13",
-"next_id": "14",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "Ough! Not how I imagine arrival...",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "Ough! Not how I imagine arrival...",
-"type": &"dialogue"
-},
-"14": {
-"id": "14",
+"145": {
+"id": "145",
 "is_snippet": false,
 "next_id": "end",
 "type": &"goto"
@@ -923,6 +1042,12 @@ lines = {
 "is_snippet": false,
 "next_id": "end",
 "type": &"goto"
+},
+"99": {
+"id": "99",
+"next_id": "100",
+"text": "lamp",
+"type": &"title"
 }
 }
 raw_text = "# ===============
@@ -1023,13 +1148,32 @@ Carter: Pickman!
 #  Interactions
 # ===============
 
+~ lamp
+Though there is no wind in here, these eery flames continuously dance and flicker.
+=> END!
+
+~ cauldron
+The halls are permeated by a sort of phosphorescence. These lamps are for purely decorative purposes. Perhaps ritualistic.
+=> END!
+
+~ statue_disabled
+A statue with dog-like twin heads, holding an amphora. 
+=> END!
+
+~ statue_enabled
+A double-headed statue. Its amphora is pouring a suspicious red liquid.
+=> END!
+
+~ acolyte_remains
+Blood stained clothes. All that remains of a willing participant in a ritual sacrifice.
+=> END!
 
 ~ pushing_barrier
 This is not the time to retreat. The journey to this place has been long and hard, and it's time to face the gods.
 => END
 
 ~ barrier
-Carter: There must be a way to remove these. We should check the neighboring rooms.
+Carter: An abyss leading to unknown depths. These statues, though, seem to be connected to the adjacent rooms.
 => END!
 
 ~ chalice

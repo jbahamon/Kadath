@@ -55,11 +55,11 @@ func play_cutscene(cutscene_instruction, options):
 	
 	bg.visible = false
 		
-	var enable_input_on_finish = options.get("enable_input_on_finish")
-	var proxy_mode_on_finish = options.get("proxy_mode_on_finish")
+	var end_enable_input = options.get("end_enable_input")
+	var end_proxy_mode = options.get("end_proxy_mode")
 	
-	InputService.input_enabled = was_input_enabled if enable_input_on_finish == null else enable_input_on_finish
-	proxy.set_mode(prev_proxy_mode if proxy_mode_on_finish == null else proxy_mode_on_finish)
+	InputService.input_enabled = was_input_enabled if end_enable_input == null else end_enable_input
+	proxy.set_mode(prev_proxy_mode if end_proxy_mode == null else end_proxy_mode)
 	party.set_physics_process(was_party_physics_enabled)
 	if was_party_physics_enabled:
 		party.reset_movement()

@@ -499,7 +499,6 @@ func notify_death(actor):
 	if current_battle_parameters != null:
 		self.loop.pending_deaths.push_back(actor)
 
-
 func show_enemy_info(actor):
 	self.info_popup.update(actor)
 	await UIService.handle_popup(self.info_popup, true, null, false)

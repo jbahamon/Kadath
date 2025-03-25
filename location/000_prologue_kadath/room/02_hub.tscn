@@ -1,12 +1,14 @@
-[gd_scene load_steps=46 format=4 uid="uid://bfd8bve0jvodl"]
+[gd_scene load_steps=52 format=4 uid="uid://bfd8bve0jvodl"]
 
 [ext_resource type="TileSet" uid="uid://b15m77bx602kw" path="res://location/000_prologue_kadath/tile/onyx_temple.tres" id="1_anh51"]
 [ext_resource type="Script" path="res://location/000_prologue_kadath/room/02_hub.gd" id="2_nhaa6"]
 [ext_resource type="PackedScene" uid="uid://k1y4abtqqro7" path="res://location/lib/script/object/battle_spot.tscn" id="3_tglgf"]
 [ext_resource type="Script" path="res://location/lib/script/object/enemy_spot.gd" id="4_pfasm"]
 [ext_resource type="PackedScene" uid="uid://sfld8pt3bwlw" path="res://location/lib/script/object/warp.tscn" id="5_3ltby"]
+[ext_resource type="Script" path="res://location/lib/script/object/description_area.gd" id="6_t0a4b"]
 [ext_resource type="PackedScene" uid="uid://cv5wwoeq1pjb7" path="res://party/pickman/anim.tscn" id="7_hj33k"]
 [ext_resource type="PackedScene" uid="uid://ds2ji50aao08o" path="res://npc/lib/movement/path_movement.tscn" id="10_k3y1y"]
+[ext_resource type="Script" path="res://location/000_prologue_kadath/object/statue.gd" id="13_epnrs"]
 [ext_resource type="PackedScene" uid="uid://dpc8xvvcbyotf" path="res://npc/enemy/sentry/sentry.tscn" id="13_qq2j6"]
 [ext_resource type="PackedScene" uid="uid://qscnhsk7b4m7" path="res://npc/lib/simple_ghoul_npc.tscn" id="14_onopi"]
 [ext_resource type="PackedScene" uid="uid://bngh72w54kdq0" path="res://npc/enemy/torchere/torchere.tscn" id="15_ww8nm"]
@@ -18,6 +20,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5uf5q"]
 size = Vector2(128, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mbaw1"]
+size = Vector2(32, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_isc2h"]
 size = Vector2(66, 34)
@@ -39,6 +44,17 @@ point_count = 5
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(8, 8)
+
+[sub_resource type="GDScript" id="2"]
+script/source = "extends Area2D
+
+@onready var parent = get_parent()
+
+
+func on_player_interaction(player):
+	parent.on_player_interaction(player)
+	
+"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0c4dq"]
 size = Vector2(80, 18)
@@ -143,6 +159,9 @@ animations = [{
 "speed": 6.6
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3mrus"]
+size = Vector2(18, 20)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_eow8m"]
 atlas = ExtResource("19_vnvd8")
 region = Rect2(0, 0, 42, 47)
@@ -209,6 +228,9 @@ animations = [{
 "name": &"flowing-full",
 "speed": 5.0
 }]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fxbcp"]
+size = Vector2(32, 38)
 
 [node name="Room" type="Node2D"]
 y_sort_enabled = true
@@ -287,14 +309,24 @@ position = Vector2(24, -40)
 script = ExtResource("4_pfasm")
 
 [node name="Barrier" type="StaticBody2D" parent="."]
-visible = false
-position = Vector2(0, -96)
+position = Vector2(0, -64)
 collision_layer = 2
 collision_mask = 3
-metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Barrier"]
+position = Vector2(0, -32)
 shape = SubResource("RectangleShape2D_5uf5q")
+
+[node name="InteractableArea" type="Area2D" parent="Barrier"]
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+monitorable = false
+script = ExtResource("6_t0a4b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Barrier/InteractableArea"]
+position = Vector2(0, -32)
+shape = SubResource("RectangleShape2D_mbaw1")
 
 [node name="Warp" parent="." instance=ExtResource("5_3ltby")]
 position = Vector2(-26, 400)
@@ -353,6 +385,9 @@ metadata/_edit_group_ = true
 [node name="BumpCollision" parent="NPCPickman" index="0"]
 shape = SubResource("1")
 disabled = true
+
+[node name="InteractableArea" parent="NPCPickman" index="1"]
+script = SubResource("2")
 
 [node name="CollisionShape2D" parent="NPCPickman/InteractableArea" index="0"]
 disabled = true
@@ -424,32 +459,100 @@ autoplay = "default"
 frame_progress = 0.773481
 offset = Vector2(0.5, -20)
 
-[node name="Cauldron" type="AnimatedSprite2D" parent="."]
-position = Vector2(-34, -65)
+[node name="Cauldron" type="StaticBody2D" parent="."]
+position = Vector2(-34, -50)
+collision_layer = 4
+collision_mask = 3
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Cauldron"]
+position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_l4i18")
 autoplay = "default"
 frame_progress = 0.755698
 
-[node name="Statue" type="AnimatedSprite2D" parent="."]
-position = Vector2(-64, -85)
-sprite_frames = SubResource("SpriteFrames_5j751")
-autoplay = "default"
-centered = false
-offset = Vector2(0, -47)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cauldron"]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_3mrus")
 
-[node name="Statue2" type="AnimatedSprite2D" parent="."]
-position = Vector2(22, -85)
-sprite_frames = SubResource("SpriteFrames_5j751")
-autoplay = "default"
-centered = false
-offset = Vector2(0, -47)
-flip_h = true
+[node name="Area2D" type="Area2D" parent="Cauldron"]
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+monitorable = false
+script = ExtResource("6_t0a4b")
+dialogue_name = "cauldron"
 
-[node name="Cauldron2" type="AnimatedSprite2D" parent="."]
-position = Vector2(32, -65)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cauldron/Area2D"]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_3mrus")
+
+[node name="Cauldron2" type="StaticBody2D" parent="."]
+position = Vector2(34, -50)
+collision_layer = 4
+collision_mask = 3
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Cauldron2"]
+position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_l4i18")
 autoplay = "default"
-frame_progress = 0.797901
+frame_progress = 0.755698
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cauldron2"]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_3mrus")
+
+[node name="Area2D" type="Area2D" parent="Cauldron2"]
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+monitorable = false
+script = ExtResource("6_t0a4b")
+dialogue_name = "cauldron"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cauldron2/Area2D"]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_3mrus")
+
+[node name="Statue" type="AnimatedSprite2D" parent="."]
+position = Vector2(-51, -85)
+sprite_frames = SubResource("SpriteFrames_5j751")
+autoplay = "default"
+centered = false
+offset = Vector2(-13, -47)
+
+[node name="Area2D" type="Area2D" parent="Statue"]
+position = Vector2(0, -10)
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+monitorable = false
+script = ExtResource("13_epnrs")
+flag_name = "kadath.left_barrier"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Statue/Area2D"]
+position = Vector2(3, -14)
+shape = SubResource("RectangleShape2D_fxbcp")
+
+[node name="Statue2" type="AnimatedSprite2D" parent="."]
+position = Vector2(51, -85)
+sprite_frames = SubResource("SpriteFrames_5j751")
+autoplay = "default"
+centered = false
+offset = Vector2(-29, -47)
+flip_h = true
+
+[node name="Area2D" type="Area2D" parent="Statue2"]
+position = Vector2(0, -10)
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+monitorable = false
+script = ExtResource("13_epnrs")
+flag_name = "kadath.right_barrier"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Statue2/Area2D"]
+position = Vector2(-3, -14)
+shape = SubResource("RectangleShape2D_fxbcp")
 
 [node name="Bridge" type="Sprite2D" parent="."]
 visible = false

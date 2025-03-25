@@ -1,6 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://oqd23qr312pb"]
+[gd_scene load_steps=3 format=3 uid="uid://dxawpundec0oc"]
 
-[ext_resource type="Script" path="res://location/lib/script/object/interactable_wall.gd" id="1"]
+[sub_resource type="GDScript" id="GDScript_syvsr"]
+script/source = "extends Area2D
+
+signal player_interaction(proxy)
+
+func on_player_interaction(proxy: PlayerProxy):
+	self.player_interaction.emit(proxy)
+	
+"
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(24, 16)
@@ -9,7 +17,7 @@ size = Vector2(24, 16)
 position = Vector2(0, -143)
 collision_layer = 8
 collision_mask = 0
-script = ExtResource("1")
+script = SubResource("GDScript_syvsr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1)

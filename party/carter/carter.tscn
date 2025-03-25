@@ -128,8 +128,8 @@ description = "Attack with your equipped weapon"
 
 [node name="Identify" type="Node" parent="Battler/Actions" index="1"]
 script = ExtResource("10_d3obn")
-long_description = "Gathers information about an enemy type, such as [color=light_sky_blue]hit points[/color] and [color=light_sky_blue]behavior[/color].
-Information is shown [color=light_sky_blue]when targeting enemies of that type[/color] from that point on."
+long_description = "Permanently obtains information about an enemy, such as [color=light_sky_blue]hit points[/color] and [color=light_sky_blue]behavior[/color].
+Information is shown [color=light_sky_blue]whenever that type of enemy is targeted[/color]."
 scan_sound = ExtResource("11_c2j5y")
 success_sound = ExtResource("11_5rsy8")
 base_offset = Vector2(-10, -40)

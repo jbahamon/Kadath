@@ -22,11 +22,22 @@ func execute(actor):
 	glass.visible = true 
 	await tween.finished
 	
+	var was_already_scanned = VarsService.scanned_enemies.get(enemy_id, false)
 	VarsService.scan_enemy(enemy_id)
+	
 	glass.visible = false
+	room.remove_child(glass)
+	self.add_child(glass)
+	
 	UIService.play_notification(self.success_sound)
+	if was_already_scanned:
+		BattleService.announce("Enemy has already been scanned!")
 	await BattleService.show_enemy_info(self.target)
+	
+	if was_already_scanned:
+		BattleService.announce("")
 	await actor.get_tree().create_timer(0.5).timeout
+	
 	actor.play_anim("battle_idle")
 	self.reset()
 	

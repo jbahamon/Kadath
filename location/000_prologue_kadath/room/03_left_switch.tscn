@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://location/000_prologue_kadath/room/03_left_switch.gd" id="2_ujnkk"]
 [ext_resource type="PackedScene" uid="uid://k1y4abtqqro7" path="res://location/lib/script/object/battle_spot.tscn" id="3_1t0fu"]
 [ext_resource type="AudioStream" uid="uid://c56uv6545srpr" path="res://sound/fx/magic/debuff/Short - Leohpaz.wav" id="3_1w2ir"]
-[ext_resource type="PackedScene" uid="uid://md0rlcmosnxr" path="res://location/lib/script/object/interactable_object.tscn" id="3_ggdln"]
+[ext_resource type="PackedScene" uid="uid://md0rlcmosnxr" path="res://location/lib/script/object/simple_interactable_object.tscn" id="3_ggdln"]
 [ext_resource type="PackedScene" uid="uid://sfld8pt3bwlw" path="res://location/lib/script/object/warp.tscn" id="3_tvha1"]
 [ext_resource type="AudioStream" uid="uid://d1gypqn8460mi" path="res://sound/fx/slash/Mid Bloody - nekoninja.wav" id="4_0kopi"]
 [ext_resource type="Script" path="res://location/lib/script/object/enemy_spot.gd" id="4_30dgk"]

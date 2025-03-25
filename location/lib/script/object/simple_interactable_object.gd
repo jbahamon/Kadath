@@ -1,4 +1,6 @@
-extends Area2D
+extends Node
+
+class_name InteractableObject
 
 signal player_interaction(proxy)
 
