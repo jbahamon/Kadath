@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bl2fqcakxb5yf"]
 
-[ext_resource type="Script" path="res://ui/02_molecules/timeline_item/timeline_item.gd" id="1_tmgn2"]
+[ext_resource type="Script" uid="uid://pp7bem8jyim" path="res://ui/02_molecules/timeline_item/timeline_item.gd" id="1_tmgn2"]
 [ext_resource type="Texture2D" uid="uid://56sux2p3oroq" path="res://npc/enemy/sentry/icon.png" id="2_cs6nb"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7aay6"]

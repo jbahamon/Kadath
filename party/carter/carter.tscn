@@ -1,20 +1,22 @@
-[gd_scene load_steps=33 format=3 uid="uid://76qafquuir4k"]
+[gd_scene load_steps=38 format=3 uid="uid://76qafquuir4k"]
 
 [ext_resource type="PackedScene" uid="uid://bomxx7doloqmu" path="res://party/party_member.tscn" id="1_tjmem"]
 [ext_resource type="Resource" uid="uid://1ulgpa1j7pky" path="res://party/carter/growth.tres" id="2_jpdcx"]
 [ext_resource type="Texture2D" uid="uid://cahhrhysueqlh" path="res://party/carter/icon.png" id="3_q1d6i"]
 [ext_resource type="PackedScene" uid="uid://t6dg7lnwshho" path="res://party/carter/anim.tscn" id="4_n1l83"]
 [ext_resource type="Texture2D" uid="uid://dkgwdhrjgti27" path="res://party/carter/menu_sprite.png" id="4_y6us3"]
-[ext_resource type="Script" path="res://party/carter/skill/crescent_blast.gd" id="5_8d58u"]
+[ext_resource type="Script" uid="uid://cybv2blefxvtt" path="res://party/carter/skill/crescent_blast.gd" id="5_8d58u"]
 [ext_resource type="PackedScene" uid="uid://ttxcbt6u2yh3" path="res://battle/action/util/area_of_effect.tscn" id="5_8ec5k"]
-[ext_resource type="Script" path="res://battle/action/party_member_attack.gd" id="6_vud1e"]
+[ext_resource type="Script" uid="uid://bqm0bcp2df3qd" path="res://party/carter/breakdown/breakdown_status.gd" id="5_rpyxs"]
+[ext_resource type="Shader" uid="uid://dwgti8q3h5v5c" path="res://party/carter/breakdown/breakdown.gdshader" id="6_pfrcv"]
+[ext_resource type="Script" uid="uid://deb0u7u646bui" path="res://battle/action/party_member_attack.gd" id="6_vud1e"]
 [ext_resource type="AudioStream" uid="uid://drjfpr601ic6g" path="res://sound/fx/slash/Light Bloody - nekoninja.wav" id="7_t7ac3"]
 [ext_resource type="Material" uid="uid://c48122ffiwrbb" path="res://utils/material/uniform_add.tres" id="7_wnelk"]
 [ext_resource type="Texture2D" uid="uid://dsics6xs4ns1r" path="res://party/carter/aoe.png" id="8_bncje"]
-[ext_resource type="Script" path="res://party/carter/skill/charge.gd" id="8_m04rn"]
-[ext_resource type="Script" path="res://battle/hit.gd" id="8_u204t"]
+[ext_resource type="Script" uid="uid://ccfyc1ruhekgc" path="res://party/carter/skill/charge.gd" id="8_m04rn"]
+[ext_resource type="Script" uid="uid://ca234sc5bry72" path="res://battle/hit.gd" id="8_u204t"]
 [ext_resource type="Texture2D" uid="uid://dn6j26nefycu5" path="res://party/carter/charge_particle.png" id="9_gqyon"]
-[ext_resource type="Script" path="res://party/carter/action/identify.gd" id="10_d3obn"]
+[ext_resource type="Script" uid="uid://c6oao2amjscmf" path="res://party/carter/action/identify.gd" id="10_d3obn"]
 [ext_resource type="PackedScene" uid="uid://cchn13mhn8gxu" path="res://battle/action/util/projectile.tscn" id="10_ib2sa"]
 [ext_resource type="Texture2D" uid="uid://i5fn63spd1aj" path="res://party/carter/blast_projectile.png" id="10_w08ur"]
 [ext_resource type="AudioStream" uid="uid://bataanejiirh5" path="res://sound/fx/magic/heal/Heal - colorsCrimsonTears.wav" id="11_5rsy8"]
@@ -24,13 +26,16 @@
 [ext_resource type="AudioStream" uid="uid://slj7vubis1w4" path="res://sound/fx/scratch/Short - JuhaniJunkala.wav" id="12_8jthm"]
 [ext_resource type="AudioStream" uid="uid://dgox5q5n3kpp2" path="res://sound/fx/magic/explosion/Magical - Kenney.wav" id="13_d4bhm"]
 [ext_resource type="AudioStream" uid="uid://ruyhjiabko6l" path="res://sound/fx/charge/Long Magic Charge - KronBits.wav" id="17_1sv2e"]
+[ext_resource type="Script" uid="uid://cen8v7tbps0w0" path="res://party/carter/breakdown/breakdown_ai.gd" id="22_674t4"]
+[ext_resource type="Script" uid="uid://bq0fh01j4twpn" path="res://party/carter/breakdown/breakdown_manager.gd" id="27_ufhal"]
 
 [sub_resource type="Resource" id="Resource_l5rln"]
 script = ExtResource("8_u204t")
 animation_only = false
-fixed_damage = true
-base_damage = 7
+fixed_damage = false
+base_damage = 4.0
 type = 0
+energy_drain = 0
 anim_time = 0.0
 anim_duration = 0.45
 spark_time = 0.0
@@ -51,8 +56,9 @@ toast_time = 0.3
 script = ExtResource("8_u204t")
 animation_only = false
 fixed_damage = false
-base_damage = 0
-type = 8
+base_damage = 5.0
+type = 7
+energy_drain = 0
 anim_time = 0.0
 anim_duration = 0.45
 spark_time = 0.0
@@ -103,15 +109,22 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ufhal"]
+shader = ExtResource("6_pfrcv")
+shader_parameter/frequency = 0.5
+shader_parameter/outline_color = Color(1, 0, 0, 1)
+shader_parameter/shake_intensity = 0.45
+
 [node name="Carter" instance=ExtResource("1_tjmem")]
 id = 128
 display_name = "Carter"
 growth = ExtResource("2_jpdcx")
 unlocked = true
-experience = 1
+experience = 25000
 icon = ExtResource("3_q1d6i")
 menu_texture = ExtResource("4_y6us3")
 unique_command = NodePath("Battler/Actions/Identify")
+breakdown_status = ExtResource("5_rpyxs")
 starting_weapon_id = "scimitar"
 starting_armor_id = "sturdy_vest"
 
@@ -145,15 +158,14 @@ offset = Vector2(-10, -40)
 
 [node name="CrescentBlast" type="Node" parent="Battler/Actions/Skill" index="0"]
 script = ExtResource("5_8d58u")
-power = 100.0
-aoe_power = 1.0
+aoe_power = 2.0
 charge_sound = ExtResource("11_afuqa")
 throw_sound = ExtResource("12_8jthm")
 explosion_sound = ExtResource("13_d4bhm")
 main_hit = SubResource("Resource_nu6sb")
 display_name = "Crescent Blast"
 description = "A magical slash that explodes in an area."
-energy_cost = 20
+energy_cost = 35
 
 [node name="AreaOfEffect" parent="Battler/Actions/Skill/CrescentBlast" index="0" instance=ExtResource("5_8ec5k")]
 
@@ -180,11 +192,11 @@ material = SubResource("CanvasItemMaterial_imn63")
 position = Vector2(0, -15)
 emitting = false
 amount = 3
+texture = ExtResource("9_gqyon")
 lifetime = 0.8
 speed_scale = 2.0
 explosiveness = 0.5
 fixed_fps = 30
-texture = ExtResource("9_gqyon")
 emission_shape = 4
 emission_points = PackedVector2Array(-20, -5, -20, -4, -20, -3, -20, -2, -20, -1, -20, 0, -20, 1, -20, 2, -20, 3, -20, 4, -19, -8, -19, -7, -19, -6, -19, -5, -19, -4, -19, -3, -19, -2, -19, -1, -19, 0, -19, 1, -19, 2, -19, 3, -19, 4, -19, 5, -19, 6, -19, 7, -18, -10, -18, -9, -18, -8, -18, -7, -18, -6, -18, -5, -18, 4, -18, 5, -18, 6, -18, 7, -18, 8, -18, 9, -17, -11, -17, -10, -17, -9, -17, -8, -17, 7, -17, 8, -17, 9, -17, 10, -16, -13, -16, -12, -16, -11, -16, -10, -16, 9, -16, 10, -16, 11, -16, 12, -15, -14, -15, -13, -15, -12, -15, -11, -15, 10, -15, 11, -15, 12, -15, 13, -14, -15, -14, -14, -14, -13, -14, 12, -14, 13, -14, 14, -13, -16, -13, -15, -13, -14, -13, 13, -13, 14, -13, 15, -12, -16, -12, -15, -12, 14, -12, 15, -11, -17, -11, -16, -11, -15, -11, 14, -11, 15, -11, 16, -10, -18, -10, -17, -10, -16, -10, 15, -10, 16, -10, 17, -9, -18, -9, -17, -9, 16, -9, 17, -8, -19, -8, -18, -8, -17, -8, 16, -8, 17, -8, 18, -7, -19, -7, -18, -7, 17, -7, 18, -6, -19, -6, -18, -6, 17, -6, 18, -5, -20, -5, -19, -5, -18, -5, 17, -5, 18, -5, 19, -4, -20, -4, -19, -4, 18, -4, 19, -3, -20, -3, -19, -3, 18, -3, 19, -2, -20, -2, -19, -2, 18, -2, 19, -1, -20, -1, -19, -1, 18, -1, 19, 0, -20, 0, -19, 0, 18, 0, 19, 1, -20, 1, -19, 1, 18, 1, 19, 2, -20, 2, -19, 2, 18, 2, 19, 3, -20, 3, -19, 3, 18, 3, 19, 4, -20, 4, -19, 4, -18, 4, 17, 4, 18, 4, 19, 5, -19, 5, -18, 5, 17, 5, 18, 6, -19, 6, -18, 6, 17, 6, 18, 7, -19, 7, -18, 7, -17, 7, 16, 7, 17, 7, 18, 8, -18, 8, -17, 8, 16, 8, 17, 9, -18, 9, -17, 9, -16, 9, 15, 9, 16, 9, 17, 10, -17, 10, -16, 10, -15, 10, 14, 10, 15, 10, 16, 11, -16, 11, -15, 11, 14, 11, 15, 12, -16, 12, -15, 12, -14, 12, 13, 12, 14, 12, 15, 13, -15, 13, -14, 13, -13, 13, 12, 13, 13, 13, 14, 14, -14, 14, -13, 14, -12, 14, -11, 14, 10, 14, 11, 14, 12, 14, 13, 15, -13, 15, -12, 15, -11, 15, -10, 15, 9, 15, 10, 15, 11, 15, 12, 16, -11, 16, -10, 16, -9, 16, -8, 16, 7, 16, 8, 16, 9, 16, 10, 17, -10, 17, -9, 17, -8, 17, -7, 17, -6, 17, -5, 17, 4, 17, 5, 17, 6, 17, 7, 17, 8, 17, 9, 18, -8, 18, -7, 18, -6, 18, -5, 18, -4, 18, -3, 18, -2, 18, -1, 18, 0, 18, 1, 18, 2, 18, 3, 18, 4, 18, 5, 18, 6, 18, 7, 19, -5, 19, -4, 19, -3, 19, -2, 19, -1, 19, 0, 19, 1, 19, 2, 19, 3, 19, 4)
 emission_colors = PackedColorArray()
@@ -215,6 +227,22 @@ position = Vector2(-14, 1)
 
 [node name="East" type="Marker2D" parent="Battler/Hitspots" index="4"]
 position = Vector2(14, 1)
+
+[node name="BreakdownManager" type="Node2D" parent="." index="2"]
+use_parent_material = true
+script = ExtResource("27_ufhal")
+breakdown_material = SubResource("ShaderMaterial_ufhal")
+
+[node name="Particles" type="CPUParticles2D" parent="BreakdownManager" index="0"]
+position = Vector2(0, -10)
+emitting = false
+emission_shape = 3
+emission_rect_extents = Vector2(10, 10)
+gravity = Vector2(0, -98)
+color = Color(0.886773, 0.206095, 0.197871, 1)
+
+[node name="AI" type="Node" parent="BreakdownManager" index="1"]
+script = ExtResource("22_674t4")
 
 [editable path="Battler"]
 [editable path="Battler/Actions/Skill/CrescentBlast/AreaOfEffect"]

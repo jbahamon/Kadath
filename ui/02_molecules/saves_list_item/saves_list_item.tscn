@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dy540dymd3k6k"]
 
-[ext_resource type="Script" path="res://ui/02_molecules/saves_list_item/saves_list_item.gd" id="1_8pgpg"]
+[ext_resource type="Script" uid="uid://gnjvd0i6v6dv" path="res://ui/02_molecules/saves_list_item/saves_list_item.gd" id="1_8pgpg"]
 
 [node name="SavesListItem" type="MarginContainer"]
 anchors_preset = 15

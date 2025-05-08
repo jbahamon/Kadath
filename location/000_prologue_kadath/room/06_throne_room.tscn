@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=4 uid="uid://gfl45nh8g4k7"]
 
 [ext_resource type="TileSet" uid="uid://b15m77bx602kw" path="res://location/000_prologue_kadath/tile/onyx_temple.tres" id="1_02d6h"]
-[ext_resource type="Script" path="res://location/000_prologue_kadath/room/06_throne_room.gd" id="2_xd66w"]
+[ext_resource type="Script" uid="uid://ccogo0nwspykd" path="res://location/000_prologue_kadath/room/06_throne_room.gd" id="2_xd66w"]
 [ext_resource type="PackedScene" uid="uid://qscnhsk7b4m7" path="res://npc/lib/simple_ghoul_npc.tscn" id="3_qvvke"]
 [ext_resource type="PackedScene" uid="uid://cv5wwoeq1pjb7" path="res://party/pickman/anim.tscn" id="4_3ov1t"]
 [ext_resource type="Texture2D" uid="uid://c5oigs2jtc778" path="res://location/000_prologue_kadath/object/horrorterror.png" id="5_yj61u"]

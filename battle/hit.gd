@@ -22,8 +22,9 @@ enum Element {
 
 @export_group("Damage")
 @export var fixed_damage = false
-@export var base_damage: int = 0
+@export var base_damage: float = 0
 @export var type: Element = Element.NONE
+@export var energy_drain: int = 0
 
 @export_group("Animation")
 @export var anim_time: float = 0
@@ -54,4 +55,13 @@ enum Element {
 @export_group("Toast")
 @export var toast_time = 0.3
 
+var offensive_damage_factor: float = 1.0
 var effective_damage: int
+var effective_energy_drain: int
+
+var potential_damage: float:
+	get:
+		if self.fixed_damage:
+			return self.base_damage
+		return base_damage * offensive_damage_factor
+			

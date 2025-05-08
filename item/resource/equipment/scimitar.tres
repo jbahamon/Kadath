@@ -1,11 +1,18 @@
 [gd_resource type="Resource" script_class="Weapon" load_steps=2 format=3 uid="uid://c3whei6s88pkp"]
 
-[ext_resource type="Script" path="res://item/script/equipment/weapon.gd" id="1_qnd8o"]
+[ext_resource type="Script" uid="uid://dlgcyllt1785i" path="res://item/script/equipment/weapon.gd" id="1_qnd8o"]
 
 [resource]
 script = ExtResource("1_qnd8o")
-attack = 30
+crit_chance = 0.25
 equippable_by = 128
+health_bonus = 0
+energy_bonus = 0
+attack_bonus = 45
+defense_bonus = 0
+magic_attack_bonus = 0
+magic_defense_bonus = 0
+speed_bonus = 0
 id = "scimitar"
 display_name = "Scimitar"
 description = "A sword with a sharp, curved blade."

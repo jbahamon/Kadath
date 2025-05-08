@@ -33,13 +33,13 @@ func execute(actor):
 	self.reset()
 
 func shoot_beam(actor):
+	self.hit.offensive_damage_factor = self.default_offensive_damage_factor(actor.battler, self.hit)
+	
 	beam.visible = true
 	beam.play(&"default")
 	
 	await DoAll.new([
-		func():
-			#await get_tree().create_timer(0.3).timeout
-			await FXService.env_shake(2.0, Vector2(16, 16), 1.0).shake_finished,
+		FXService.env_shake(2.0, Vector2(16, 16), 1.0).shake_finished,
 		func():
 			await beam.animation_finished
 			actor.play_anim("close_eye")

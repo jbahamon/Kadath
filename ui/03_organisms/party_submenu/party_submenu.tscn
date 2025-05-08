@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="1"]
 [ext_resource type="PackedScene" uid="uid://brhpxl8pukdr" path="res://ui/03_organisms/select_list/select_list.tscn" id="2"]
-[ext_resource type="Script" path="res://ui/03_organisms/party_submenu/party_submenu.gd" id="4"]
+[ext_resource type="Script" uid="uid://b2hq5myqveb4i" path="res://ui/03_organisms/party_submenu/party_submenu.gd" id="4"]
 [ext_resource type="FontFile" uid="uid://c8fvau54sblb1" path="res://ui/01_atoms/assets/fonts/By Wuchta/Letterstyle(1).otf" id="4_ecnw7"]
 [ext_resource type="Texture2D" uid="uid://chqcjur8n17ah" path="res://ui/01_atoms/assets/icons/By ssugmi/icon-party.png" id="6"]
 [ext_resource type="PackedScene" uid="uid://caki3n35ds5sk" path="res://ui/02_molecules/party_member_stats/party_member_stats.tscn" id="8"]
@@ -35,6 +35,7 @@ alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 16
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2

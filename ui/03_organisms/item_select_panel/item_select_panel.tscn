@@ -1,8 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://gn0dewtnv3ee"]
 
-[ext_resource type="Script" path="res://ui/03_organisms/item_select_panel/item_select_panel.gd" id="1"]
+[ext_resource type="Script" uid="uid://wmm0hop3fski" path="res://ui/03_organisms/item_select_panel/item_select_panel.gd" id="1"]
 [ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="2"]
-
 
 [node name="ItemSelectPanel" type="MarginContainer"]
 anchors_preset = 15

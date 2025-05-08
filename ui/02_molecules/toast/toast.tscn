@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://32gtywhjjdwk"]
 
-[ext_resource type="Script" path="res://ui/02_molecules/toast/toast.gd" id="1_2gv2i"]
+[ext_resource type="Script" uid="uid://c5w3sej1em5hh" path="res://ui/02_molecules/toast/toast.gd" id="1_2gv2i"]
 [ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="2_g2bs7"]
 
 [sub_resource type="Animation" id="Animation_k3k1w"]
@@ -38,8 +38,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yiyao"]
 _data = {
-"default": SubResource("Animation_k3k1w"),
-"toast": SubResource("Animation_fitsy")
+&"default": SubResource("Animation_k3k1w"),
+&"toast": SubResource("Animation_fitsy")
 }
 
 [node name="Toast" type="Node2D"]

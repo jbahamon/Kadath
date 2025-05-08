@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://brhpxl8pukdr"]
 
-[ext_resource type="Script" path="res://ui/03_organisms/select_list/select_list.gd" id="1"]
+[ext_resource type="Script" uid="uid://csqyix7bn0k11" path="res://ui/03_organisms/select_list/select_list.gd" id="1"]
 
 [node name="SelectList" type="PanelContainer"]
 anchors_preset = 15

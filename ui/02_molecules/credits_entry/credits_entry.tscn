@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://byygevy0ads50"]
 
-[ext_resource type="Script" path="res://ui/02_molecules/credits_entry/credits_entry.gd" id="1_uxhhn"]
+[ext_resource type="Script" uid="uid://ddq143tg7uxgm" path="res://ui/02_molecules/credits_entry/credits_entry.gd" id="1_uxhhn"]
 
 [node name="MarginContainer" type="MarginContainer"]
 anchors_preset = 15

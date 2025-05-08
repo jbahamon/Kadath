@@ -1,6 +1,6 @@
 [gd_scene load_steps=46 format=3 uid="uid://c1qvuen3txcsn"]
 
-[ext_resource type="Script" path="res://npc/lib/anim/character_anim.gd" id="1_0wndg"]
+[ext_resource type="Script" uid="uid://cp4ww8nq2gt" path="res://npc/lib/anim/character_anim.gd" id="1_0wndg"]
 [ext_resource type="Texture2D" uid="uid://ccxp1qxrgvxdf" path="res://npc/enemy/torchere/torchere.png" id="2_fkfqe"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_txyh7"]
@@ -348,18 +348,18 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fxrwm"]
 _data = {
-"attack_east": SubResource("Animation_ifeg2"),
-"attack_north": SubResource("Animation_ccw1a"),
-"attack_south": SubResource("Animation_c7krm"),
-"attack_west": SubResource("Animation_0let8"),
-"idle_east": SubResource("Animation_p6mbw"),
-"idle_north": SubResource("Animation_n53fj"),
-"idle_south": SubResource("Animation_kiwwi"),
-"idle_west": SubResource("Animation_6gli4"),
-"walk_east": SubResource("Animation_v4tpb"),
-"walk_north": SubResource("Animation_a7vyv"),
-"walk_south": SubResource("Animation_nwry6"),
-"walk_west": SubResource("Animation_4wjim")
+&"attack_east": SubResource("Animation_ifeg2"),
+&"attack_north": SubResource("Animation_ccw1a"),
+&"attack_south": SubResource("Animation_c7krm"),
+&"attack_west": SubResource("Animation_0let8"),
+&"idle_east": SubResource("Animation_p6mbw"),
+&"idle_north": SubResource("Animation_n53fj"),
+&"idle_south": SubResource("Animation_kiwwi"),
+&"idle_west": SubResource("Animation_6gli4"),
+&"walk_east": SubResource("Animation_v4tpb"),
+&"walk_north": SubResource("Animation_a7vyv"),
+&"walk_south": SubResource("Animation_nwry6"),
+&"walk_west": SubResource("Animation_4wjim")
 }
 
 [node name="Anim" type="Marker2D"]

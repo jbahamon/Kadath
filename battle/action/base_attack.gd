@@ -24,6 +24,8 @@ func get_next_parameter_signature():
 		return null
 
 func execute(actor):
+	self.hit.offensive_damage_factor = self.default_offensive_damage_factor(actor.battler, self.hit)
+	
 	var original_position = actor.global_position
 	
 	await self.move_to_target(actor, target, walk_speed, walk_anim)

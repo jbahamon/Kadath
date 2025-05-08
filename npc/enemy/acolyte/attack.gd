@@ -6,6 +6,8 @@ extends "res://battle/action/simple_single_target.gd"
 @export var droning_sound: AudioStream
 	
 func execute(actor):
+	self.hit.offensive_damage_factor = self.default_offensive_damage_factor(actor.battler, self.hit)
+	
 	actor.play_anim("attack")
 	await actor.get_tree().create_timer(0.2)
 	

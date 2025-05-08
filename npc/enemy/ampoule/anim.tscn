@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://d0rd160lh4msk"]
 
-[ext_resource type="Script" path="res://npc/lib/anim/non_turning_anim.gd" id="1_erlgy"]
+[ext_resource type="Script" uid="uid://b4gb2rtrc52xq" path="res://npc/lib/anim/non_turning_anim.gd" id="1_erlgy"]
 [ext_resource type="Texture2D" uid="uid://bla2kyf47v4os" path="res://npc/enemy/ampoule/ampoule.png" id="2_tgeeh"]
 
 [sub_resource type="Animation" id="Animation_yjqcn"]
@@ -110,12 +110,12 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gwp5b"]
 _data = {
-"clamp": SubResource("Animation_yjqcn"),
-"die": SubResource("Animation_aa4uq"),
-"die_start": SubResource("Animation_dldmr"),
-"grab": SubResource("Animation_dtfrq"),
-"idle": SubResource("Animation_hbp26"),
-"walk": SubResource("Animation_th6v8")
+&"clamp": SubResource("Animation_yjqcn"),
+&"die": SubResource("Animation_aa4uq"),
+&"die_start": SubResource("Animation_dldmr"),
+&"grab": SubResource("Animation_dtfrq"),
+&"idle": SubResource("Animation_hbp26"),
+&"walk": SubResource("Animation_th6v8")
 }
 
 [node name="Anim" type="Marker2D"]

@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxvuajgtptpoh"]
+
+[ext_resource type="Script" uid="uid://5b430lq304pc" path="res://ui/03_organisms/game_over_screen/game_over_screen.gd" id="1_ue1ne"]
+[ext_resource type="FontFile" uid="uid://7rvrjv6h33bx" path="res://ui/01_atoms/assets/fonts/By Valiegraphie/Uncial_WIP.ttf" id="2_egivq"]
+
+[node name="GameOverScreen" type="MarginContainer"]
+process_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ue1ne")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_egivq")
+theme_override_font_sizes/font_size = 64
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TryAgain" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+text = "Try again"
+
+[node name="LoadSave" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+text = "Return to previous save"
+
+[node name="ToTitle" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+text = "Return to title screen"
+
+[connection signal="pressed" from="VBoxContainer/ToTitle" to="." method="on_to_title_pressed"]

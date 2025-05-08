@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ds2ji50aao08o"]
 
-[ext_resource type="Script" path="res://npc/lib/movement/path_movement.gd" id="1"]
+[ext_resource type="Script" uid="uid://uo5wp7y2x5lg" path="res://npc/lib/movement/path_movement.gd" id="1"]
 
 [node name="PathMovement" type="Node"]
 script = ExtResource("1")

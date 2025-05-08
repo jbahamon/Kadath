@@ -1,13 +1,13 @@
 [gd_scene load_steps=24 format=4 uid="uid://ip7anni7emmc"]
 
 [ext_resource type="TileSet" uid="uid://b15m77bx602kw" path="res://location/000_prologue_kadath/tile/onyx_temple.tres" id="1_eenkp"]
-[ext_resource type="Script" path="res://location/000_prologue_kadath/room/05_boss_room.gd" id="2_0db23"]
+[ext_resource type="Script" uid="uid://bgmr41pf62h43" path="res://location/000_prologue_kadath/room/05_boss_room.gd" id="2_0db23"]
 [ext_resource type="AudioStream" uid="uid://cnxcr63hb0yvy" path="res://sound/fx/hit/Long Low - Owlish.wav" id="2_5e214"]
 [ext_resource type="PackedScene" uid="uid://sfld8pt3bwlw" path="res://location/lib/script/object/warp.tscn" id="3_eyb6e"]
 [ext_resource type="AudioStream" uid="uid://6arpovbpwg0m" path="res://sound/fx/object/JDSherbert - Drag.wav" id="3_ql7o6"]
 [ext_resource type="PackedScene" uid="uid://k1y4abtqqro7" path="res://location/lib/script/object/battle_spot.tscn" id="5_jdwon"]
 [ext_resource type="PackedScene" uid="uid://ihknndack3n4" path="res://npc/enemy/thymiaterion/thymiaterion.tscn" id="6_2020d"]
-[ext_resource type="Script" path="res://location/lib/script/object/enemy_spot.gd" id="6_mblpi"]
+[ext_resource type="Script" uid="uid://bec3lquo8ddbs" path="res://location/lib/script/object/enemy_spot.gd" id="6_mblpi"]
 [ext_resource type="Texture2D" uid="uid://jjuk5n1nrjr" path="res://location/000_prologue_kadath/object/right_door.png" id="8_lox2j"]
 [ext_resource type="Texture2D" uid="uid://colu5a43monrs" path="res://location/000_prologue_kadath/object/left_door.png" id="9_33mal"]
 [ext_resource type="Texture2D" uid="uid://bf8vls8u5sbww" path="res://location/000_prologue_kadath/object/torch-sheet.png" id="10_q5ylt"]
@@ -65,8 +65,8 @@ resource_name = "default"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rk4g2"]
 _data = {
-"boss_enter": SubResource("Animation_jk7fo"),
-"default": SubResource("Animation_q7lv6")
+&"boss_enter": SubResource("Animation_jk7fo"),
+&"default": SubResource("Animation_q7lv6")
 }
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n5ert"]
@@ -190,7 +190,7 @@ position = Vector2(0, -128)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_rk4g2")
+&"": SubResource("AnimationLibrary_rk4g2")
 }
 autoplay = "default"
 

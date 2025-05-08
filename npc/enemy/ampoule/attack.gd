@@ -1,12 +1,14 @@
 extends "res://battle/action/simple_single_target.gd"
 
-@export var normal_attack_factor = 1.0
 @export var hit: Hit
 	
 func execute(actor):
+	self.hit.offensive_damage_factor = self.default_offensive_damage_factor(actor.battler, self.hit)
+	
 	# walk to target
 	var original_position = actor.global_position
 	var center = target.battler.get_hitspot("Center")
+	
 	var target_position = target.global_position + Vector2(0, 2)
 	actor.z_index = 3
 	

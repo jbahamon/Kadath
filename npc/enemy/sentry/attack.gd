@@ -5,6 +5,7 @@ extends "res://battle/action/simple_single_target.gd"
 @export var shoot_sound: AudioStream
 
 func execute(actor):
+	self.hit.offensive_damage_factor = self.default_offensive_damage_factor(actor.battler, self.hit)
 	
 	actor.play_anim("attack")
 	

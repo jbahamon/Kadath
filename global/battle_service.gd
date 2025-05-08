@@ -28,7 +28,11 @@ var loop
 var ui: BattleUI
 var info_popup: Popup
 
-var current_battle_parameters = null
+var in_battle: bool:
+	get:
+		return current_battle_parameters != null
+		
+var current_battle_parameters
 var common_action_options = {}
 
 func _init():
@@ -36,6 +40,7 @@ func _init():
 	self.init_common_action_options()
 
 func initialize(init_ui: BattleUI, init_info_popup):
+	self.current_battle_parameters = null
 	self.ui = init_ui
 	self.info_popup = init_info_popup
 
@@ -71,7 +76,7 @@ func init_common_action_options():
 	self.common_action_options["escape"] = escape
 	
 func start_mook_battle(settings: Dictionary):
-	if self.current_battle_parameters != null: 
+	if self.in_battle: 
 		return
 		
 	var rect: Rect2i = CameraService.get_visible_rect()
@@ -83,7 +88,7 @@ func start_mook_battle(settings: Dictionary):
 	self.start_battle(mooks, settings)
 
 func start_battle(enemies: Array, settings: Dictionary):
-	if self.current_battle_parameters != null:
+	if self.in_battle:
 		return
 	
 	self.current_battle_parameters = {
@@ -151,8 +156,10 @@ func start_battle(enemies: Array, settings: Dictionary):
 			party.set_physics_process(false)
 			FXService.get_layer("MIX").color = Color(0,0,0,0)
 			await FadeOverlay.new("MIX", Color.BLACK, 3.0).execute(get_tree(), FadeOverlay.ExecutionMode.PLAY)
-			SceneSwitcher.current_scene.exit()
-			SceneSwitcher.go_to_scene("res://ui/04_templates/other/demo_end.tscn")
+			var game_over = load("res://ui/03_organisms/game_over_screen/game_over_screen.tscn").instantiate()
+			UIService.popup_layer.add_child(game_over)
+			
+			
 			print("game over :(")
 			
 	self.current_battle_parameters = null
@@ -312,6 +319,7 @@ func set_up_battle_positions(battle_spot, party_actors: Array, non_party_actors:
 	await CutsceneService.play_custom_cutscene(cutscene_lines, {"pausable": false})
 	
 func get_closest_to(choices, current_position: Vector2):
+	# TODO Move this to its own utils?
 	var current_choice = null
 	var current_distance = INF
 	for choice in choices:
@@ -385,7 +393,7 @@ func resume_non_participants(end_proxy_mode):
 func try_escape() -> bool:
 	var player_speeds = []
 	var enemy_speeds = []
-	
+
 	for actor in self.loop.actors:
 		if not actor.is_alive:
 			continue
@@ -411,7 +419,7 @@ func try_escape() -> bool:
 	return randf() < probability
 	
 func mark_battle_as_escaped():
-	assert(self.current_battle_parameters != null)
+	assert(self.in_battle)
 	self.loop.mark_battle_as_escaped()
 	
 func deal_rewards(rewards: BattleRewards):
@@ -482,6 +490,7 @@ func announce(text: String, wait_time: float=0.0):
 	self.ui.set_info_text(text)
 	if wait_time > 0:
 		await get_tree().create_timer(wait_time).timeout
+		self.ui.set_info_text("")
 
 func get_party_actors():
 	return self.loop.actors.filter(func (it): return it is PartyMember)
@@ -496,9 +505,12 @@ func stop_observe_event(event: Event, observer):
 	self.loop.stop_observe_event(event, observer)
 
 func notify_death(actor):
-	if current_battle_parameters != null:
+	if self.in_battle:
 		self.loop.pending_deaths.push_back(actor)
 
 func show_enemy_info(actor):
 	self.info_popup.update(actor)
 	await UIService.handle_popup(self.info_popup, true, null, false)
+
+func update_player_state():
+	self.ui.update_player_state()

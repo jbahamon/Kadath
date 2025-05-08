@@ -6,7 +6,7 @@ func _on_body_entered(body):
 	if not body is PlayerProxy:
 		return
 		
-	self.call_deferred("push_back", body.position, body.get_movement_speed())
+	self.call_deferred("push_back", body.position, body.walk_speed)
 	
 func push_back(original_position: Vector2, speed: float):
 	var target_position = Vector2(original_position.x, limit)

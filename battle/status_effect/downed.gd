@@ -11,5 +11,6 @@ func get_id() -> String:
 func on_add(owner):
 	BattleService.remove_from_queue(owner.get_parent())
 	
-func on_remove(owner):
-	BattleService.add_to_queue(owner.get_parent())
+func on_remove(owner, battle_ended):
+	if battle_ended:
+		BattleService.add_to_queue(owner.get_parent())

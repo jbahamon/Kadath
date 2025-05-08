@@ -16,4 +16,3 @@ func initialize(party_members: Array):
 func update():
 	for control in self.get_children():
 		control.update()
-

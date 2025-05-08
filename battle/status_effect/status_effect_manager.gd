@@ -2,44 +2,33 @@ class_name StatusEffectManager
 
 signal added_or_removed(effects)
 
-var size:
+var size: int:
 	get:
 		return self._effects.size()
 		
-var physical_attack_modifier:
+var attack_modifier: float:
 	get:
-		var modifier = 1.0
-		for effect in self._effects.values():
-			modifier *= effect.physical_attack_modifier
-		return modifier
+		return self._effects.values().reduce(func(accum, status): return accum * status.attack_modifier, 1.0)
 	
-var physical_defense_modifier:
+var defense_modifier: float:
 	get:
-		var modifier = 1.0
-		for effect in self._effects.values():
-			modifier *= effect.physical_defense_modifier
-		return modifier
+		return self._effects.values().reduce(func(accum, status): return accum * status.defense_modifier, 1.0)
 
-var magic_attack_modifier:
+var magic_attack_modifier: float:
 	get:
-		var modifier = 1.0
-		for effect in self._effects.values():
-			modifier *= effect.magic_attack_modifier
-		return modifier
+		return self._effects.values().reduce(func(accum, status): return accum * status.magic_attack_modifier, 1.0)
 	
-var magic_defense_modifier:
+var magic_defense_modifier: float:
 	get:
-		var modifier = 1.0
-		for effect in self._effects.values():
-			modifier *= effect.magic_defense_modifier
-		return modifier
+		return self._effects.values().reduce(func(accum, status): return accum * status.magic_defense_modifier, 1.0)
 		
-var speed_modifier:
+var speed_modifier: float:
 	get:
-		var modifier = 1.0
-		for effect in self._effects.values():
-			modifier *= effect.speed_modifier
-		return modifier
+		return self._effects.values().reduce(func(accum, status): return accum * status.speed_modifier, 1.0)
+
+var targeting_changed: bool:
+	get:
+		return self._effects.values().any(func(it): return it.changes_targeting)
 
 var _effects: Dictionary
 var owner
@@ -49,14 +38,23 @@ var turn_end_triggers = 0
 var before_death_triggers = 0
 var after_death_triggers = 0
 
-func _init(init_owner):
+func _init(init_owner):	
 	self._effects = {}
 	self.owner = init_owner
 
 func _destroy():
 	self.owner = null
 
+func get_vulnerability(hit: Hit):
+	return self._effects.values().reduce(func(accum, status): return accum * status.get_vulnerability(hit), 1.0)
+	
+func has(status_id: String):
+	return status_id in _effects
+	
 func clear():
+	for effect in _effects.values():
+		if effect.trigger & StatusEffect.Trigger.REMOVE:
+			await effect.on_remove(self.owner, true)
 	self._effects = {}
 	
 func add(new_effect: StatusEffect):
@@ -98,7 +96,7 @@ func remove(effect_id: String):
 		return false
 	
 	if effect.trigger & StatusEffect.Trigger.REMOVE:
-		effect.on_remove(self.owner)
+		await effect.on_remove(self.owner, false)
 	
 	self._effects.erase(effect_id)
 	
@@ -124,7 +122,7 @@ func on_turn_start(turn_actor):
 				to_remove.append(effect.get_id())
 			
 	for effect_id in to_remove:
-		self.remove(effect_id)
+		await self.remove(effect_id)
 		
 	if to_remove.size() > 0:
 		self.added_or_removed.emit(self._effects.values())
@@ -139,7 +137,7 @@ func on_turn_end(turn_actor):
 				to_remove.append(effect.get_id())
 			
 	for effect_id in to_remove:
-		self.remove(effect_id)
+		await self.remove(effect_id)
 	
 	if to_remove.size() > 0:
 		self.added_or_removed.emit(self._effects.values())
@@ -166,7 +164,20 @@ func after_actor_death(actor):
 				to_remove.append(effect.get_id())
 				
 	for effect_id in to_remove:
-		self.remove(effect_id)
+		await self.remove(effect_id)
 	
 	if to_remove.size() > 0:
 		self.added_or_removed.emit(self._effects.values())
+
+func get_allies(actors: Array):
+	return self._get_best_retargeter().get_allies(owner.get_parent(), actors)
+	
+func get_enemies(actors: Array):
+	return _get_best_retargeter().get_enemies(owner.get_parent(), actors)
+
+func _get_best_retargeter():
+	var best_retargeter = null
+	for effect in self._effects.values():
+		if effect.changes_targeting and (best_retargeter == null or effect.retargeting_priority > best_retargeter.retargeting_priority):
+			best_retargeter = effect
+	return best_retargeter

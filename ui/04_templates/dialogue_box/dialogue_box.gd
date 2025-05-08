@@ -39,7 +39,6 @@ func _unhandled_input(event):
 				self.get_viewport().set_input_as_handled()
 
 		State.WAITING_FOR_INPUT:
-			
 			if self.current_responses.size() == 0:
 				if event.is_action_pressed(&"ui_accept") or event.is_action_pressed(&"ui_cancel"):
 					self.show_next_line()
@@ -173,6 +172,8 @@ func resume():
 			pass
 
 func skip():
+	self.lines_queue = []
+	self.current_responses = []
 	match current_state:
 		State.ADVANCING:
 			if tween != null:

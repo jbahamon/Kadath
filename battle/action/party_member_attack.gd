@@ -24,12 +24,13 @@ func get_next_parameter_signature():
 		return null
 
 func execute(actor):
+	
 	var original_position = actor.global_position
-	var is_crit = randf() < actor.equipped_weapon.crit_chance
+	var is_crit = false #randf() < actor.equipped_weapon.crit_chance
 	
 	if not self.hit.fixed_damage:
-		self.hit.base_damage = actor.battler.physical_attack * (1.5 if is_crit else 2.0)
-	
+		self.hit.offensive_damage_factor = self.default_offensive_damage_factor(actor.battler, self.hit) * (1.5 if is_crit else 1.0)
+		
 	await self.move_to_target(
 		actor, 
 		target, 
@@ -47,16 +48,11 @@ func execute(actor):
 			actor.play_anim("jump_back")
 			await actor.move_to([original_position.x, original_position.y], jump_back_speed)
 			actor.play_anim("battle_idle")
-			
-			var enemies: Array = BattleService.get_non_party_actors() if actor is PartyMember else BattleService.get_party_actors()
-			var enemy_center = enemies.reduce(func(accum, curr_actor): return accum + curr_actor.global_position, Vector2.ZERO) / enemies.size()
-			actor.set_orientation(actor.global_position.direction_to(enemy_center))
 	]
 	
 	if is_crit:
 		actions.append(
-			func(): 
-				await FXService.env_shake(1, Vector2(3, 8), crit_hit_time/2.0).shake_finished
+			FXService.env_shake(1, Vector2(3, 8), crit_hit_time/2.0).shake_finished
 		)
 	await DoAll.new(actions).execute()
 	

@@ -28,7 +28,7 @@ func use(targets: Array):
 			var recovery = self.health if self.recovery_mode == RecoveryMode.ABSOLUTE else int(round(target.health * self.health / 100.0))
 			target.heal(recovery)
 			lambdas.append(
-				func (): await target.show_toast(str(recovery), Color.LIGHT_GREEN)
+				target.show_toast(str(recovery), Color.LIGHT_GREEN)
 			)
 		await DoAll.new(lambdas).execute()
 	
@@ -38,8 +38,7 @@ func use(targets: Array):
 			var recovery = self.energy if self.recovery_mode == RecoveryMode.ABSOLUTE else int(round(target.energy * self.energy / 100.0))
 			target.recover_energy(recovery)
 			lambdas.append(
-				func ():
-					await target.show_toast(str(recovery), Color.LIGHT_SKY_BLUE)
+				target.show_toast(str(recovery), Color.LIGHT_SKY_BLUE)
 			)
 		await DoAll.new(lambdas).execute()
 
@@ -69,7 +68,7 @@ func use_in_battle(targets: Array):
 				target.play_anim("idle")
 				# await show_effects
 				for status_effect in self.status_effects: 
-					target.battler.status_effects.remove(status_effect)
+					await target.battler.status_effects.remove(status_effect)
 			
 				if self.health != 0:
 					var recovery = self.health if self.recovery_mode == RecoveryMode.ABSOLUTE else int(round(target.health * self.health / 100.0))

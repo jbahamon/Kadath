@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://k1y4abtqqro7"]
 
-[ext_resource type="Script" path="res://location/lib/script/object/battle_spot.gd" id="1"]
+[ext_resource type="Script" uid="uid://cqlr7rqm0hyq2" path="res://location/lib/script/object/battle_spot.gd" id="1"]
 
 [node name="BattleSpot" type="Marker2D" groups=["battle_spot"]]
 script = ExtResource("1")

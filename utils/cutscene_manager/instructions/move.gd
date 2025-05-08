@@ -15,8 +15,8 @@ func execute(_tree: SceneTree, mode: ExecutionMode):
 		await entity.move_to(self.position, self.speed)
 	else:
 		entity.global_position = Vector2(
-			position[0] if position[0] != null else entity.global_position.x,
-			position[1] if position[1] != null else entity.global_position.y
+			position[0] if not is_nan(position[0]) else entity.global_position.x,
+			position[1] if not is_nan(position[1]) else entity.global_position.y
 		)
 
 func skip(_tree: SceneTree):

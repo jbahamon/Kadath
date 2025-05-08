@@ -5,6 +5,7 @@ extends Node2D
 
 class_name Battler
 
+const MARIGOLD = Color("FF8E00")
 const uniform_add: Material = preload("res://utils/material/uniform_add.tres")
 
 @export var anim_path: NodePath
@@ -15,6 +16,7 @@ const uniform_add: Material = preload("res://utils/material/uniform_add.tres")
 
 @onready var actions = $Actions
 @onready var ai: BattlerAI = $AI
+@onready var status_grid: Node = $StatusGrid
 @onready var toast: Node2D = $Toast
 @onready var hitbox: Area2D = $Hitbox
 @onready var hitspots: Node = $Hitspots
@@ -23,7 +25,7 @@ var anim: Node
 var status_effects = StatusEffectManager.new(self)
 var pending_reaction = null
 
-var health: int
+var health: int: set = set_health
 var energy: int : set = set_energy
 
 var is_alive: bool : 
@@ -32,45 +34,48 @@ var is_alive: bool :
 
 var level: int
 
-var physical_attack: float:
+var attack: float:
 	get:
 		var parent = self.get_parent()
 		if parent is PartyMember:
-			return (self.stats.attack * 0.7 + 
-				parent.physical_attack_bonus * 0.3) 
+				return (self.stats.attack + parent.attack_bonus) * self.status_effects.attack_modifier
 		else:
-			return self.stats.attack 
+			return self.stats.attack * self.status_effects.attack_modifier
 
-var physical_defense: float:
+var defense: float:
 	get:
 		var parent = self.get_parent()
 		if parent is PartyMember:
-			return self.stats.defense + parent.physical_armor
+			return clamp((self.stats.defense + parent.defense_bonus) * self.status_effects.defense_modifier, 0.0, 255.0)
 		else:
-			return self.stats.defense
+			return clamp(self.stats.defense * self.status_effects.defense_modifier, 0.0, 255.0)
 			
 
 var magic_attack: float:
 	get:
 		var parent = self.get_parent()
 		if parent is PartyMember:
-			return self.stats.magic_attack + parent.physical_armor
+			return (self.stats.magic_attack + parent.magic_attack_bonus) * self.status_effects.magic_attack_modifier
 		else:
-			return self.stats.magic_attack
+			return self.stats.magic_attack * self.status_effects.magic_attack_modifier
 
 
 var magic_defense: float:
 	get:
 		var parent = self.get_parent()
 		if parent is PartyMember:
-			return self.stats.magic_defense + parent.magic_armor
+			return clamp((self.stats.magic_defense + parent.magic_defense_bonus) * self.status_effects.magic_defense_modifier, 0.0, 255.0)
 		else:
-			return self.stats.magic_defense
+			return clamp(self.stats.magic_defense * self.status_effects.magic_defense_modifier, 0.0, 255.0)
 			
 		
 var speed: float:
 	get:
-		return self.stats.speed * self.status_effects.speed_modifier
+		var parent = self.get_parent()
+		if parent is PartyMember:
+			return (self.stats.speed + parent.speed_bonus) * self.status_effects.speed_modifier
+		else:
+			return self.stats.speed * self.status_effects.speed_modifier
 
 var display_name: String:
 	get:
@@ -83,7 +88,6 @@ func _ready():
 	self.anim = get_node(self.anim_path)
 	self.toast.position = self.toast_offset
 	self.status_effects.added_or_removed.connect($StatusGrid.set_statuses)
-	self.reset_stats()
 	
 func reset_stats():
 	health = self.stats.max_health
@@ -98,33 +102,67 @@ func free():
 	super.free()
 	
 func take_damage(damage: int):
+	var parent = self.get_parent() 
+	var max_health = self.stats.max_health if parent is not PartyMember else parent.max_health
+	
 	var prev_health = health
-	health = clamp(health - damage, 0, self.stats.max_health)
+	health = clamp(health - damage, 0, max_health)
+	
+	if BattleService.in_battle and parent is PartyMember:
+		BattleService.update_player_state()
+	
 	return prev_health - health
 
+func set_health(value: int):
+	var parent = self.get_parent()
+	var max_health = self.stats.max_health if parent is not PartyMember else parent.max_health
+	health = clamp(value, 0, max_health)
+	if BattleService.in_battle and parent is PartyMember:
+		BattleService.update_player_state()
+
 func spend_energy(amount: int):
-	energy = clamp(energy - amount, 0, self.stats.max_energy)
+	var parent = self.get_parent() 
+	var max_energy = self.stats.max_energy if parent is not PartyMember else parent.max_energy
+	var prev_energy = energy
+	energy = clamp(energy - amount, 0, max_energy)
+	
+	if BattleService.in_battle and parent is PartyMember:
+		BattleService.update_player_state()
+		
+	return prev_energy - energy
 
 func set_energy(value: int):
-	energy = clamp(value, 0, self.stats.max_energy)
+	var parent = self.get_parent() 
+	var max_energy = self.stats.max_energy if parent is not PartyMember else parent.max_energy
+	energy = clamp(value, 0, max_energy)
+	if BattleService.in_battle and parent is PartyMember:
+		BattleService.update_player_state()
 	
 func show_toast(text: String, color: Color=Color.WHITE):
-	await self.toast.show_toast(text, color)
+	return self.toast.show_toast(text, color)
+
+func get_vulnerability(hit: Hit) -> float:
+	return self.status_effects.get_vulnerability(hit)
 
 func take_hit(actor, hit: Hit, in_battle: bool = true):
 	var parent = self.get_parent()
 	var damage
+	var energy_drain
 	var actual_damage = 0
-	
+	var actual_energy_drain = 0
 	if not hit.animation_only:
+		energy_drain = hit.energy_drain
 		if hit.fixed_damage:
-			damage = hit.base_damage 
+			damage = int(hit.base_damage)
 		else:
-			damage = hit.base_damage * self.get_damage_modifier(hit) 
-			damage = ceil(damage + randf_range(1, damage * 0.2))
+			damage = hit.potential_damage * self.get_damage_modifier(hit) * self.get_vulnerability(hit)
+			damage = int(ceil(damage + randf_range(1, damage * 0.2)))
 			
 		actual_damage = self.take_damage(damage)
 		
+		if hit.energy_drain > 0:
+			actual_energy_drain = self.spend_energy(hit.energy_drain)
+			
 	if in_battle:
 		var hit_events = []
 		var tree = self.get_tree()
@@ -182,7 +220,13 @@ func take_hit(actor, hit: Hit, in_battle: bool = true):
 						await tree.create_timer(hit.toast_time).timeout
 					self.toast.position = self.toast_offset
 					await self.toast.show_toast(str(damage))
+					if energy_drain > 0:
+						await tree.create_timer(0.2).timeout
+						self.toast.position = self.toast_offset
+						await self.toast.show_toast(str(energy_drain), MARIGOLD	)
+						
 			)
+				
 		
 		await DoAll.new(hit_events).execute()
 		
@@ -192,32 +236,29 @@ func take_hit(actor, hit: Hit, in_battle: bool = true):
 			BattleService.notify_death(get_parent())
 
 	hit.effective_damage = actual_damage
+	hit.effective_energy_drain = actual_energy_drain
 	
 func heal(amount: int, in_battle: bool = true):
+	self.take_damage(-amount)
 	if in_battle:
 		self.toast.position = self.toast_offset
-		await self.toast.show_toast(str(amount), Color.LIGHT_GREEN)
-	
-	self.take_damage(-amount)
+		return self.toast.show_toast(str(amount), Color.LIGHT_GREEN)
 	
 func recover_energy(amount: int, in_battle: bool = true):
+	self.spend_energy(-amount)
 	if in_battle:
 		self.toast.position = self.toast_offset
-		await self.toast.show_toast(str(amount), Color.STEEL_BLUE)
-	
-	self.spend_energy(-amount)
+		return self.toast.show_toast(str(amount), Color.STEEL_BLUE)
+
 	
 func get_damage_modifier(hit: Hit):
-	var defense: float
-	var mul: float
+	var hit_defense: float
 	if hit.type == Hit.Element.PHYSICAL:
-		defense = self.physical_defense
-		mul = self.status_effects.physical_defense_modifier
+		hit_defense = self.defense
 	else:
-		defense = self.magic_defense
-		mul = self.status_effects.magic_defense_modifier
+		hit_defense = self.magic_defense
 		
-	return (202 - min(defense, 200))/202 * mul
+	return (1 - hit_defense/255.0)
 	
 func get_action_options() -> Array:
 	var parent = self.get_parent()
@@ -226,7 +267,7 @@ func get_action_options() -> Array:
 		
 		options = actions.get_children()
 		
-		# options.push_front(BattleService.common_action_options["lose"])
+		options.push_front(BattleService.common_action_options["lose"])
 		# options.push_front(BattleService.common_action_options["win"])
 		options.push_back(BattleService.common_action_options["item"])
 		options.push_back(BattleService.common_action_options["defend"])
@@ -259,6 +300,11 @@ func on_battle_start():
 	self.hitbox.set_deferred("monitorable", true)
 	
 func on_battle_end():
+	if get_parent() is PartyMember:
+		self.health = max(1, self.health)
+		self.energy = max(1, self.energy)
+
+	self.status_grid.clear()
 	self.status_effects.clear()
 	self.hitbox.set_deferred("monitorable", false)
 

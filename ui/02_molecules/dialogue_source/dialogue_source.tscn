@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bw0gl4jgbt7fi"]
 
-[ext_resource type="Script" path="res://ui/02_molecules/dialogue_source/dialogue_source.gd" id="1_mlvvw"]
+[ext_resource type="Script" uid="uid://chmys017yxm8p" path="res://ui/02_molecules/dialogue_source/dialogue_source.gd" id="1_mlvvw"]
 [ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="1_yt6ah"]
 [ext_resource type="FontFile" uid="uid://c8fvau54sblb1" path="res://ui/01_atoms/assets/fonts/By Wuchta/Letterstyle(1).otf" id="3_6mxq2"]
 
@@ -18,10 +18,11 @@ theme_override_constants/margin_top = 5
 [node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer"]
 clip_contents = false
 layout_mode = 2
+theme_override_constants/line_separation = 0
 theme_override_fonts/normal_font = ExtResource("3_6mxq2")
-theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/normal_font_size = 15
 bbcode_enabled = true
-text = "Somethinga"
+text = "Ñyärlathotep"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0

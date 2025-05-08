@@ -53,4 +53,4 @@ func recover_energy(amount: int):
 	self.update()
 	
 func show_toast(text: String, color: Color = Color.WHITE):
-	await self.toast.show_toast(text, color)
+	return self.toast.show_toast(text, color)

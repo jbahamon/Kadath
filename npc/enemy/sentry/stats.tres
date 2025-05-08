@@ -1,15 +1,14 @@
 [gd_resource type="Resource" script_class="CharacterStats" load_steps=2 format=3 uid="uid://rlyl1hog6ic0"]
 
-[ext_resource type="Script" path="res://party/character_stats.gd" id="1"]
+[ext_resource type="Script" uid="uid://fv1hjw5irs7n" path="res://party/character_stats.gd" id="1"]
 
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1")
-max_health = 1
-max_energy = 0
-attack = 1
-defense = 1
+max_health = 200
+max_energy = 1
+attack = 20
+defense = 127
 magic_attack = 1
-magic_defense = 1
-luck = 1
-speed = 15
+magic_defense = 64
+speed = 50

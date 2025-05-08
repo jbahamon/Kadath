@@ -59,8 +59,7 @@ func get_file_previews() -> Array:
 				"index": i,
 				"file": null
 			})
-	
 	return save_filenames
 
 func has_file_with_data() -> bool:
-	return get_file_previews().any(func (it): return it != null)
+	return get_file_previews().any(func (it): return it["file"] != null)

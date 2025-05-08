@@ -47,8 +47,10 @@ func attempt_chalice_interaction(proxy: PlayerProxy):
 	if responses[0] == RESPONSE_YES:
 		EntitiesService.party.set_physics_process(false)
 		await proxy.play_anim("interact")
-		await get_tree().create_timer(0.6).timeout
+		await get_tree().create_timer(1.0).timeout
 		await proxy.play_anim("idle")
+		await get_tree().physics_frame
+		EntitiesService.party.clear_movement_buffers()
 		EntitiesService.party.set_physics_process(true)
 		await self.drop_enemies()
 		await BattleService.start_battle(
@@ -66,6 +68,7 @@ func attempt_chalice_interaction(proxy: PlayerProxy):
 		proxy.set_mode(PlayerProxy.ProxyMode.GAMEPLAY)
 	else:
 		EntitiesService.party.set_physics_process(true)
+		
 func drop_enemies():
 	for ampoule in [$Ampoule1, $Ampoule2, $Ampoule3,]:
 		await get_tree().create_timer(0.5).timeout

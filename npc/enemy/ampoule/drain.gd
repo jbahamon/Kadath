@@ -1,13 +1,14 @@
 extends "res://battle/action/simple_single_target.gd"
 
 const blurb = "Phlebotomy"
-@export var normal_attack_factor = 0.75
 @export var heal_factor = 1
 @export var hit: Hit
 @export var drain_sound: AudioStream
 @export var heal_sound: AudioStream
 
 func execute(actor):
+	self.hit.offensive_damage_factor = self.default_offensive_damage_factor(actor.battler, self.hit)
+	
 	# walk to target
 	BattleService.announce(self.blurb)
 	var original_position = actor.global_position
@@ -21,7 +22,7 @@ func execute(actor):
 	
 	await DoAll.new([
 		func (): await self.move_to_target(actor, target_position, 140, "idle"),
-		func (): await tween.finished
+		tween.finished
 	]).execute()
 	
 	actor.play_anim("grab")
@@ -33,15 +34,15 @@ func execute(actor):
 		func(): 
 			await tree.create_timer(0.3).timeout
 			self.target.play_anim("hit")
-			FXService.play_sfx_at(self.drain_sound, actor.position)
-			FXService.play_sfx_at(self.heal_sound, actor.global_position),
+			await tree.create_timer(0.1).timeout
+			FXService.play_sfx_at(self.drain_sound, actor.position),
 		func():
 			await self.target.take_hit(actor, hit)
 	]).execute()
 
 	await tree.create_timer(0.3).timeout
 	actor.battler.toast_offset.y += y_offset
-	
+	FXService.play_sfx_at(self.heal_sound, actor.global_position)
 	await actor.heal(ceil(self.heal_factor * hit.effective_damage))
 	BattleService.announce("")
 	self.target.play_anim(idle_anim)

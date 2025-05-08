@@ -1,19 +1,21 @@
-[gd_scene load_steps=25 format=3 uid="uid://c2luykmp4iss7"]
+[gd_scene load_steps=27 format=3 uid="uid://c2luykmp4iss7"]
 
 [ext_resource type="PackedScene" uid="uid://c3okprgd6vbwj" path="res://ui/04_templates/pause_menu/pause_menu.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://s88423us72at" path="res://ui/01_atoms/assets/textures/By Sr.Toasty/interaction_indicator.png" id="3_7y4lr"]
 [ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="4"]
 [ext_resource type="PackedScene" uid="uid://bjjk83547rwcg" path="res://ui/04_templates/battle_ui/scan_result_popup.tscn" id="4_5wcl5"]
+[ext_resource type="Material" uid="uid://bmg2w6n04njn4" path="res://utils/material/highlight.tres" id="4_660b1"]
 [ext_resource type="StyleBox" uid="uid://2e6vplaicmrv" path="res://ui/01_atoms/turn_indicator/turn_indicator.tres" id="4_mek1e"]
-[ext_resource type="Script" path="res://ui/04_templates/pause_menu/menu_popup.gd" id="6"]
-[ext_resource type="Script" path="res://main/local_scene.gd" id="7"]
+[ext_resource type="Script" uid="uid://cdyjura2ynb1f" path="res://ui/04_templates/pause_menu/menu_popup.gd" id="6"]
+[ext_resource type="Script" uid="uid://byi43u3dfxuu0" path="res://main/local_scene.gd" id="7"]
 [ext_resource type="PackedScene" uid="uid://kjfr6yr534rp" path="res://ui/04_templates/saves_menu/saves_menu.tscn" id="8"]
 [ext_resource type="PackedScene" uid="uid://bo1y3b4btisvv" path="res://ui/04_templates/dialogue_box/dialogue_box.tscn" id="8_pwmoh"]
 [ext_resource type="PackedScene" uid="uid://bg7hnqo1b5c6m" path="res://main/player_proxy.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://ex17k532alby" path="res://ui/04_templates/battle_ui/battle_ui.tscn" id="11_42lm3"]
 [ext_resource type="AudioStream" uid="uid://biqsf23fc0cbi" path="res://sound/ui/blops/High - Kenney.wav" id="11_pu83y"]
 [ext_resource type="PackedScene" uid="uid://ba44sap453kmu" path="res://ui/04_templates/cutscene_pause_popup/cutscene_pause_popup.tscn" id="12_ucc44"]
-[ext_resource type="Script" path="res://main/narration_layer.gd" id="16_6ypov"]
+[ext_resource type="FontFile" uid="uid://c8fvau54sblb1" path="res://ui/01_atoms/assets/fonts/By Wuchta/Letterstyle(1).otf" id="13_pjkmk"]
+[ext_resource type="Script" uid="uid://f8mdcamolnht" path="res://main/narration_layer.gd" id="16_6ypov"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cdlsc"]
 atlas = ExtResource("3_7y4lr")
@@ -90,13 +92,14 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_e58ng"]
 _data = {
-"fade_from_black": SubResource("1"),
-"fade_to_black": SubResource("2")
+&"fade_from_black": SubResource("1"),
+&"fade_to_black": SubResource("2")
 }
 
 [node name="LocalScene" type="Node2D"]
 texture_filter = 1
 script = ExtResource("7")
+debug = true
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 offset_left = 1.0
@@ -149,6 +152,7 @@ offset = Vector2(-6, -40)
 [node name="BattleTurnIndicator" type="Panel" parent="SubViewportContainer/SubViewport/World"]
 visible = false
 z_index = 2
+material = ExtResource("4_660b1")
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -167,7 +171,7 @@ material = SubResource("4")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color(1, 1, 1, 0)
+color = Color(0, 0, 0, 1)
 
 [node name="Add" type="ColorRect" parent="SubViewportContainer/SubViewport/OverlayLayer"]
 material = SubResource("3")
@@ -179,7 +183,7 @@ color = Color(0, 0, 0, 0)
 [node name="LocalCutscene" type="AnimationPlayer" parent="SubViewportContainer/SubViewport"]
 root_node = NodePath("../../..")
 libraries = {
-"": SubResource("AnimationLibrary_e58ng")
+&"": SubResource("AnimationLibrary_e58ng")
 }
 
 [node name="BattleUILayer" type="CanvasLayer" parent="."]
@@ -196,9 +200,7 @@ skip_speed_factor = 5.0
 process_mode = 3
 
 [node name="MenuPopup" type="PopupPanel" parent="MenuLayer"]
-transparent_bg = true
 size = Vector2i(347, 324)
-transparent = true
 script = ExtResource("6")
 
 [node name="PauseMenu" parent="MenuLayer/MenuPopup" instance=ExtResource("3")]
@@ -237,14 +239,17 @@ theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
 [node name="NarrationText" type="RichTextLabel" parent="NarrationLayer/VBox/Margin"]
+clip_contents = false
 layout_mode = 2
 theme = ExtResource("4")
 theme_type_variation = &"HeaderLarge"
-theme_override_font_sizes/normal_font_size = 50
+theme_override_constants/line_separation = 21
+theme_override_fonts/normal_font = ExtResource("13_pjkmk")
+theme_override_font_sizes/normal_font_size = 25
 bbcode_enabled = true
-text = "Once there was a little boy"
 fit_content = true
 scroll_active = false
+visible_characters_behavior = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="NarrationLayer"]
 anchors_preset = 15
@@ -263,20 +268,20 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 
 [node name="Label" type="Label" parent="NarrationLayer/MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 text = "[A] Continue"
 
-[node name="CutscenePauseBG" type="ColorRect" parent="NarrationLayer"]
+[node name="PopupLayer" type="CanvasLayer" parent="."]
+process_mode = 2
+
+[node name="CutscenePauseBG" type="ColorRect" parent="PopupLayer"]
 process_mode = 2
 visible = false
-material = SubResource("4")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color(0.976471, 0, 0, 0.501961)
-
-[node name="PopupLayer" type="CanvasLayer" parent="."]
-process_mode = 2
+color = Color(0, 0, 0, 0.741176)
 
 [node name="CutscenePausePopup" parent="PopupLayer" instance=ExtResource("12_ucc44")]
 visible = false

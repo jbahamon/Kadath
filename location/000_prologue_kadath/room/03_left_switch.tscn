@@ -1,20 +1,21 @@
-[gd_scene load_steps=28 format=4 uid="uid://bifjpvxmoufbc"]
+[gd_scene load_steps=31 format=4 uid="uid://bifjpvxmoufbc"]
 
 [ext_resource type="TileSet" uid="uid://b15m77bx602kw" path="res://location/000_prologue_kadath/tile/onyx_temple.tres" id="1_5f0on"]
 [ext_resource type="AudioStream" uid="uid://dy55vatd4y6yk" path="res://sound/fx/scream/Mid High - harvey656.wav" id="2_cpq12"]
-[ext_resource type="Script" path="res://location/000_prologue_kadath/room/03_left_switch.gd" id="2_ujnkk"]
+[ext_resource type="Script" uid="uid://djegv1nh08lxa" path="res://location/000_prologue_kadath/room/03_left_switch.gd" id="2_ujnkk"]
 [ext_resource type="PackedScene" uid="uid://k1y4abtqqro7" path="res://location/lib/script/object/battle_spot.tscn" id="3_1t0fu"]
 [ext_resource type="AudioStream" uid="uid://c56uv6545srpr" path="res://sound/fx/magic/debuff/Short - Leohpaz.wav" id="3_1w2ir"]
 [ext_resource type="PackedScene" uid="uid://md0rlcmosnxr" path="res://location/lib/script/object/simple_interactable_object.tscn" id="3_ggdln"]
 [ext_resource type="PackedScene" uid="uid://sfld8pt3bwlw" path="res://location/lib/script/object/warp.tscn" id="3_tvha1"]
 [ext_resource type="AudioStream" uid="uid://d1gypqn8460mi" path="res://sound/fx/slash/Mid Bloody - nekoninja.wav" id="4_0kopi"]
-[ext_resource type="Script" path="res://location/lib/script/object/enemy_spot.gd" id="4_30dgk"]
+[ext_resource type="Script" uid="uid://bec3lquo8ddbs" path="res://location/lib/script/object/enemy_spot.gd" id="4_30dgk"]
 [ext_resource type="SpriteFrames" uid="uid://cc6woheb28lq4" path="res://location/000_prologue_kadath/object/chalice.tres" id="4_la3y1"]
 [ext_resource type="PackedScene" uid="uid://ds2ji50aao08o" path="res://npc/lib/movement/path_movement.tscn" id="5_mhkg2"]
 [ext_resource type="PackedScene" uid="uid://cebhopaolaguc" path="res://npc/enemy/acolyte/acolyte.tscn" id="6_f620e"]
 [ext_resource type="Texture2D" uid="uid://bf8vls8u5sbww" path="res://location/000_prologue_kadath/object/torch-sheet.png" id="8_l6n1l"]
 [ext_resource type="Texture2D" uid="uid://bjb72qbk85an4" path="res://location/000_prologue_kadath/object/altar.png" id="9_ylodu"]
 [ext_resource type="Texture2D" uid="uid://ds02jgkdx275m" path="res://npc/enemy/acolyte/acolyte.png" id="10_276df"]
+[ext_resource type="PackedScene" uid="uid://bt35aynhxly1" path="res://location/lib/script/object/description_area.tscn" id="14_urhk2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8v1t3"]
 size = Vector2(60, 31)
@@ -84,7 +85,13 @@ animations = [{
 "speed": 6.6
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xklqw"]
+size = Vector2(32, 32)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_60jtm"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_urhk2"]
 size = Vector2(32, 32)
 
 [node name="Room" type="Node2D"]
@@ -162,6 +169,7 @@ shape = SubResource("RectangleShape2D_8v1t3")
 position = Vector2(0, -24)
 sprite_frames = ExtResource("4_la3y1")
 autoplay = "default"
+frame_progress = 0.946364
 
 [node name="Warp" parent="." instance=ExtResource("3_tvha1")]
 position = Vector2(0, 40)
@@ -190,7 +198,7 @@ custom_movement = NodePath("PathMovement")
 metadata/_edit_group_ = true
 
 [node name="PathMovement" parent="LeftAcolyte1" instance=ExtResource("5_mhkg2")]
-speed = 40
+speed = 30
 starting_target_idx = 1
 path_2D_path = NodePath("../../LeftPath")
 
@@ -201,7 +209,7 @@ custom_movement = NodePath("PathMovement")
 metadata/_edit_group_ = true
 
 [node name="PathMovement" parent="LeftAcolyte2" instance=ExtResource("5_mhkg2")]
-speed = 40
+speed = 30
 starting_target_idx = 4
 path_2D_path = NodePath("../../LeftPath")
 
@@ -212,7 +220,7 @@ custom_movement = NodePath("PathMovement")
 metadata/_edit_group_ = true
 
 [node name="PathMovement" parent="RightAcolyte1" instance=ExtResource("5_mhkg2")]
-speed = 40
+speed = 30
 starting_target_idx = 1
 path_2D_path = NodePath("../../RightPath")
 
@@ -223,7 +231,7 @@ custom_movement = NodePath("PathMovement")
 metadata/_edit_group_ = true
 
 [node name="PathMovement" parent="RightAcolyte2" instance=ExtResource("5_mhkg2")]
-speed = 40
+speed = 30
 starting_target_idx = 3
 path_2D_path = NodePath("../../RightPath")
 
@@ -244,6 +252,13 @@ collision_layer = 4
 collision_mask = 3
 metadata/_edit_group_ = true
 
+[node name="DescriptionArea" parent="Altar" instance=ExtResource("14_urhk2")]
+dialogue_name = "acolyte_remains"
+
+[node name="CollisionShape2D" parent="Altar/DescriptionArea" index="0"]
+shape = SubResource("RectangleShape2D_xklqw")
+disabled = true
+
 [node name="Sprite2D" type="Sprite2D" parent="Altar"]
 texture = ExtResource("9_ylodu")
 
@@ -255,6 +270,13 @@ position = Vector2(32, -144)
 collision_layer = 4
 collision_mask = 3
 metadata/_edit_group_ = true
+
+[node name="DescriptionArea" parent="Altar2" instance=ExtResource("14_urhk2")]
+dialogue_name = "acolyte_remains"
+
+[node name="CollisionShape2D" parent="Altar2/DescriptionArea" index="0"]
+shape = SubResource("RectangleShape2D_urhk2")
+disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Altar2"]
 texture = ExtResource("9_ylodu")
@@ -289,3 +311,5 @@ frame = 10
 [editable path="BattleSpot"]
 [editable path="Chalice"]
 [editable path="Warp"]
+[editable path="Altar/DescriptionArea"]
+[editable path="Altar2/DescriptionArea"]

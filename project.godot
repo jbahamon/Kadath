@@ -13,7 +13,7 @@ config_version=5
 config/name="Kadath"
 config/version="0.1.0"
 run/main_scene="res://ui/04_templates/main_menu/main_menu.tscn"
-config/features=PackedStringArray("4.3")
+config/features=PackedStringArray("4.4")
 config/icon="res://icon.png"
 
 [autoload]
@@ -37,14 +37,14 @@ MusicService="*res://global/music_service.gd"
 
 [dialogue_manager]
 
-general/wrap_lines=true
+editor/wrap_long_lines=true
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="viewport"
-window/canvas_textures/default_texture_filter=0
+window/canvas_textures/default_texture_filter=1
 
 [editor_plugins]
 
@@ -136,7 +136,7 @@ ui_menu={
 }
 action_run={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":88,"physical_keycode":0,"key_label":0,"unicode":120,"location":0,"echo":false,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194325,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
 
@@ -146,7 +146,7 @@ pointing/emulate_mouse_from_touch=false
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://location/000_prologue_kadath/story.dialogue")
+locale/translations_pot_files=PackedStringArray("res://location/000_prologue_kadath/story.dialogue", "res://global/resources/global_dialogue.dialogue")
 
 [layer_names]
 
@@ -161,7 +161,7 @@ locale/translations_pot_files=PackedStringArray("res://location/000_prologue_kad
 
 textures/canvas_textures/default_texture_filter=0
 anti_aliasing/screen_space_roughness_limiter/enabled=false
-environment/defaults/default_clear_color=Color(0.729412, 0.192157, 0.945098, 1)
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
 2d/snapping/use_gpu_pixel_snap=true

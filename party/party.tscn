@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://d2fira8jrokg5"]
 
-[ext_resource type="Script" path="res://party/party.gd" id="1"]
+[ext_resource type="Script" uid="uid://d2okft71by82q" path="res://party/party.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://76qafquuir4k" path="res://party/carter/carter.tscn" id="2_3qwyy"]
 [ext_resource type="PackedScene" uid="uid://jekjd0u7io0t" path="res://party/alex/alex.tscn" id="2_rtt04"]
 [ext_resource type="PackedScene" uid="uid://dehii02b2xc8o" path="res://party/pickman/pickman.tscn" id="3_sov78"]
@@ -9,7 +9,6 @@
 script = ExtResource("1")
 
 [node name="Carter" parent="." instance=ExtResource("2_3qwyy")]
-experience = 27
 
 [node name="Alex" parent="." instance=ExtResource("2_rtt04")]
 visible = false
@@ -20,3 +19,4 @@ experience = 100
 [node name="Pickman" parent="." instance=ExtResource("3_sov78")]
 visible = false
 unlocked = true
+experience = 25000

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c2u7o86sfl255"]
 
-[ext_resource type="Script" path="res://location/lib/script/location/location_room.gd" id="1_jhm1c"]
+[ext_resource type="Script" uid="uid://dun2kramhf6eb" path="res://location/lib/script/location/location_room.gd" id="1_jhm1c"]
 
 [node name="Room" type="TileMap"]
 y_sort_enabled = true

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ba44sap453kmu"]
 
-[ext_resource type="Script" path="res://ui/04_templates/cutscene_pause_popup/cutscene_pause_popup.gd" id="1_l48rq"]
+[ext_resource type="Script" uid="uid://rnl64n1drmgf" path="res://ui/04_templates/cutscene_pause_popup/cutscene_pause_popup.gd" id="1_l48rq"]
 
 [node name="CutscenePausePopup" type="Popup"]
 transparent_bg = true

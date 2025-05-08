@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bjjk83547rwcg"]
 
-[ext_resource type="Script" path="res://ui/04_templates/battle_ui/scan_result_popup.gd" id="1_mcse3"]
+[ext_resource type="Script" uid="uid://c0vsgpxcnuny1" path="res://ui/04_templates/battle_ui/scan_result_popup.gd" id="1_mcse3"]
 [ext_resource type="PackedScene" uid="uid://oqul5liq5pdc" path="res://ui/03_organisms/enemy_info/enemy_info.tscn" id="2_v2ngo"]
 
 [node name="ScanResultPopup" type="Popup"]
@@ -23,5 +23,7 @@ theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
+
+[connection signal="about_to_popup" from="." to="." method="_on_about_to_popup"]
 
 [editable path="EnemyInfo"]

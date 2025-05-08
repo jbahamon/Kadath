@@ -22,8 +22,8 @@ enum TargetType {
 
 const highlight_material = preload("res://utils/material/highlight.tres")
 
-func is_disabled(actor):
-	return actor is PartyMember and actor.battler.energy < self.energy_cost
+func is_disabled(_actor):
+	return false
 
 func unlock():
 	self.unlocked = true
@@ -115,3 +115,9 @@ func shoot_projectile(actor, projectile, projectile_options: Dictionary):
 	room.remove_child(projectile)
 	actor.battler.add_child(projectile)
 	
+func default_offensive_damage_factor(battler: Battler, hit: Hit):
+	if hit.type == Hit.Element.PHYSICAL or hit.type == Hit.Element.NONE:
+		return battler.attack
+	else:
+		print(battler.magic_attack)
+		return battler.magic_attack

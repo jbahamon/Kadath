@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bnihqcw4rnk07"]
 
-[ext_resource type="Script" path="res://ui/04_templates/battle_ui/party_status.gd" id="1_p1qhq"]
-[ext_resource type="PackedScene" uid="uid://crjmxm0ml1eek" path="res://ui/02_molecules/party_member_summary/party_member_summary.tscn" id="2_epvoo"]
+[ext_resource type="Script" uid="uid://djvcc2udmv44b" path="res://ui/04_templates/battle_ui/party_status.gd" id="1_p1qhq"]
+[ext_resource type="PackedScene" uid="uid://crjmxm0ml1eek" path="res://ui/02_molecules/party_member_status/party_member_status.tscn" id="2_epvoo"]
 
 [node name="PartyStatus" type="VBoxContainer"]
 offset_right = 580.0

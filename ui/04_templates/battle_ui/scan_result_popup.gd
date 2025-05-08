@@ -2,8 +2,10 @@ extends Popup
 
 func _init():
 	self.popup_window = false
+
+func _ready():
 	self.set_process_unhandled_input(false)
-	
+
 func _on_about_to_popup():
 	self.set_process_unhandled_input(true)
 

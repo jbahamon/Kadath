@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Location" load_steps=4 format=3 uid="uid://diydigghs5ihy"]
 
-[ext_resource type="Script" path="res://location/lib/script/location/location.gd" id="1"]
+[ext_resource type="Script" uid="uid://ghsj8j43pjst" path="res://location/lib/script/location/location.gd" id="1"]
 [ext_resource type="AudioStream" uid="uid://dklxvs2wxhqcq" path="res://sound/music/JuhaniJunkala/Army Approaching.ogg" id="1_m2mk7"]
 [ext_resource type="Resource" uid="uid://bxidhava46oov" path="res://location/000_prologue_kadath/story.dialogue" id="2_fbwdy"]
 

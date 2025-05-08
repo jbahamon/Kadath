@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Location" load_steps=5 format=3 uid="uid://dcia24k0p4wdt"]
 
-[ext_resource type="Script" path="res://location/lib/script/location/location.gd" id="1_4p4lo"]
+[ext_resource type="Script" uid="uid://ghsj8j43pjst" path="res://location/lib/script/location/location.gd" id="1_4p4lo"]
 [ext_resource type="AudioStream" uid="uid://c5jfwyixsoaaw" path="res://sound/music/BertCole/If It's a Fight You Want.ogg" id="1_e0rs3"]
-[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_resource.gd" id="2_x7gpr"]
+[ext_resource type="Script" uid="uid://dbs4435dsf3ry" path="res://addons/dialogue_manager/dialogue_resource.gd" id="2_x7gpr"]
 
 [sub_resource type="Resource" id="Resource_ddgk3"]
 script = ExtResource("2_x7gpr")

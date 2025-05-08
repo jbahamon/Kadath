@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://b8h7mj2g47i5t"]
 
 [ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="1_aedsi"]
-[ext_resource type="Script" path="res://ui/02_molecules/dialogue_content/dialogue_content.gd" id="2_6mdiq"]
+[ext_resource type="Script" uid="uid://cu5kcdivivinx" path="res://ui/02_molecules/dialogue_content/dialogue_content.gd" id="2_6mdiq"]
 [ext_resource type="Texture2D" uid="uid://81cn5npbfnoh" path="res://ui/01_atoms/assets/textures/By Sr.Toasty/advance_indicator.png" id="3_wx5vl"]
-[ext_resource type="Script" path="res://ui/01_atoms/animated_texture/animated_texture.gd" id="4_c3dqb"]
+[ext_resource type="Script" uid="uid://d2ukb2mfqh642" path="res://ui/01_atoms/animated_texture/animated_texture.gd" id="4_c3dqb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tp4gs"]
 atlas = ExtResource("3_wx5vl")

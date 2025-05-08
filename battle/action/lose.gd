@@ -33,3 +33,6 @@ func execute(actor):
 	var hits = self.targets.map(func(target): return func(): await target.take_hit(actor, hit))
 	await DoAll.new(hits).execute()
 	self.reset()
+
+func highlight_option(_current_action, _options):
+	pass

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bt3ek76an68f7"]
 
-[ext_resource type="Script" path="res://ui/02_molecules/item_list_item/item_list_item.gd" id="2"]
+[ext_resource type="Script" uid="uid://6xcs8jo03l2s" path="res://ui/02_molecules/item_list_item/item_list_item.gd" id="2"]
 
 [node name="ItemEntry" type="MarginContainer"]
 anchors_preset = 10

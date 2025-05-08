@@ -1,0 +1,30 @@
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://bt6mq1oatcvne"]
+
+[ext_resource type="SpriteFrames" uid="uid://cudcsadr47ebp" path="res://battle/fx/ascending_node.tres" id="1_ahcwc"]
+[ext_resource type="SpriteFrames" uid="uid://cldywdam55ae4" path="res://battle/fx/heal.tres" id="1_vt2up"]
+[ext_resource type="AudioStream" uid="uid://cen1dp6gxoi6f" path="res://sound/fx/charge/Low Long - Chequered Ink.wav" id="2_l6xk2"]
+[ext_resource type="Script" uid="uid://cwigwl7fpytb8" path="res://item/script/consumable/revival_item.gd" id="3_l6xk2"]
+
+[resource]
+script = ExtResource("3_l6xk2")
+revival_symbol = ExtResource("1_ahcwc")
+symbol_offset = Vector2(0, -50)
+symbol_duration = 1.2
+channel_sound = ExtResource("2_l6xk2")
+recovery_mode = 0
+energy_recovery_mode = 1
+health = 25
+energy = 0
+status_effects = Array[String](["downed"])
+battle_offset = Vector2(0, -30)
+battle_fx = ExtResource("1_vt2up")
+battle_fx_duration = 0.875
+id = "007_reanimation_scroll"
+display_name = "Reanimation Scroll"
+description = "A parchment bearing a revival spell. Revives an ally with 25% HP."
+max_amount = 99
+category = 0
+target_type = 5
+usable_in_menu = false
+usable_in_battle = true
+consumed_after_use = true

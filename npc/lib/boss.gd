@@ -1,4 +1,4 @@
-extends "res://npc/lib/enemy.gd"
+extends Enemy
 
 @export var scream_sound: AudioStream
 var blend_add_shader = preload("res://utils/material/blend_add.gdshader")
@@ -20,7 +20,6 @@ func die(mode: CutsceneInstruction.ExecutionMode):
 		shine_tween.tween_property(shine_material, "shader_parameter/add", Vector4(1.0, 1.0, 1.0, 0.0), 1.5)
 		await shine_tween.finished
 		
-		
 		FXService.shake(self.anim, 3, Vector2(4, 0), 1.0, FXService.DecayMode.NONE)
 		var dissolve_material = ShaderMaterial.new()
 		dissolve_material.shader = boss_dissolve_shader
@@ -35,8 +34,5 @@ func die(mode: CutsceneInstruction.ExecutionMode):
 		dissolve_tween.tween_interval(0.3)
 		FXService.play_sfx_at(self.explosion_sound, self.global_position)
 		await dissolve_tween.finished
-		
-		
-		
 		
 	self.queue_free()

@@ -13,8 +13,8 @@ func execute(_tree: SceneTree, _mode: ExecutionMode):
 	
 	if self.target is Array:
 		target_position = Vector2(
-			target[0] if target[0] != null else entity.global_position.x,
-			target[1] if target[1] != null else entity.global_position.y
+			target[0] if not is_nan(target[0]) else entity.global_position.x,
+			target[1] if not is_nan(target[1]) else entity.global_position.y
 		)
 	else:
 		var target_entity: Node2D = EntitiesService.get_entity(self.target)

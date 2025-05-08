@@ -52,7 +52,7 @@ func start(shake_duration: float, shake_amplitude: Vector2, time_scale_factor: f
 	self.duration = shake_duration
 	self.time_scale = 500 * time_scale_factor
 	self.noise.seed = randi()
-	self.decay = 1.0/shake_duration if decay_mode == DecayMode.LINEAR else 0
+	self.decay = 1.0/shake_duration if decay_mode == DecayMode.LINEAR else 0.0
 	self.amplitude = shake_amplitude
 	self.trauma = 1.0
 	

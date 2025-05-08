@@ -18,3 +18,4 @@ func _to_string():
 func skip(_tree: SceneTree):
 	if self.timer != null:
 		self.timer.timeout.emit()
+	

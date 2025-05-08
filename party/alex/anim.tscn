@@ -1,6 +1,6 @@
 [gd_scene load_steps=48 format=3 uid="uid://dpj24nx6wivha"]
 
-[ext_resource type="Script" path="res://npc/lib/anim/character_anim.gd" id="1_iilho"]
+[ext_resource type="Script" uid="uid://cp4ww8nq2gt" path="res://npc/lib/anim/character_anim.gd" id="1_iilho"]
 [ext_resource type="Texture2D" uid="uid://csnh5h03npwmv" path="res://party/alex/spritesheet.png" id="2_7x33y"]
 
 [sub_resource type="Animation" id="Animation_aq4sd"]
@@ -277,22 +277,22 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gdtcw"]
 _data = {
-"battle_idle_down": SubResource("Animation_aq4sd"),
-"battle_idle_left": SubResource("Animation_g4hwa"),
-"battle_idle_right": SubResource("Animation_j4nk8"),
-"battle_idle_up": SubResource("Animation_51hy3"),
-"idle_down": SubResource("1"),
-"idle_left": SubResource("2"),
-"idle_right": SubResource("3"),
-"idle_up": SubResource("4"),
-"run_down": SubResource("Animation_fwqct"),
-"run_left": SubResource("Animation_77yoj"),
-"run_right": SubResource("Animation_so8t1"),
-"run_up": SubResource("Animation_177ut"),
-"walk_down": SubResource("5"),
-"walk_left": SubResource("6"),
-"walk_right": SubResource("7"),
-"walk_up": SubResource("8")
+&"battle_idle_down": SubResource("Animation_aq4sd"),
+&"battle_idle_left": SubResource("Animation_g4hwa"),
+&"battle_idle_right": SubResource("Animation_j4nk8"),
+&"battle_idle_up": SubResource("Animation_51hy3"),
+&"idle_down": SubResource("1"),
+&"idle_left": SubResource("2"),
+&"idle_right": SubResource("3"),
+&"idle_up": SubResource("4"),
+&"run_down": SubResource("Animation_fwqct"),
+&"run_left": SubResource("Animation_77yoj"),
+&"run_right": SubResource("Animation_so8t1"),
+&"run_up": SubResource("Animation_177ut"),
+&"walk_down": SubResource("5"),
+&"walk_left": SubResource("6"),
+&"walk_right": SubResource("7"),
+&"walk_up": SubResource("8")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ogdas"]

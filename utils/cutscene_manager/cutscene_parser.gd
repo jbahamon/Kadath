@@ -267,7 +267,7 @@ func parse_instruction(stack: Array, instruction_name: String, args: String):
 			var offset = song_match.get_string("Offset")
 			
 			instruction = PlayMusic.new(
-				"res://sound/music/%s.ogg" % song if song != "NONE" else null,
+				"res://sound/music/%s.ogg" % song if song != "NONE" else "",
 				parse_float(offset) if offset != null else 0.0
 			)
 			
@@ -278,7 +278,7 @@ func parse_instruction(stack: Array, instruction_name: String, args: String):
 			var position = sound_match.get_string("Position")
 			
 			instruction = PlaySound.new(
-				"res://sound/%s" % stream,
+				"res://sound/%s.wav" % stream,
 				channel,
 				self.parse_vector2(position) if position != null else null
 			)
@@ -352,8 +352,8 @@ func parse_vector2_opt(array_string: String):
 	
 	if position_match != null:
 		return [
-			float(position_match.get_string("X")) if position_match.get_string("X").strip_edges() != "_" else null,
-			float(position_match.get_string("Y")) if position_match.get_string("Y").strip_edges() != "_" else null
+			float(position_match.get_string("X")) if position_match.get_string("X").strip_edges() != "_" else NAN,
+			float(position_match.get_string("Y")) if position_match.get_string("Y").strip_edges() != "_" else NAN
 		]
 	else:
 		return null

@@ -1,11 +1,15 @@
 [gd_resource type="Resource" script_class="InventoryItem" load_steps=2 format=3 uid="uid://gryh2hubkg83"]
 
-[ext_resource type="Script" path="res://item/script/inventory_item.gd" id="1"]
+[ext_resource type="Script" uid="uid://bwqmkl5la7lnc" path="res://item/script/inventory_item.gd" id="1"]
 
 [resource]
 script = ExtResource("1")
 id = "amulet"
-name = "Amulet"
+display_name = ""
 description = "A mysterious amulet given to you by the Priests of the Cavern of Flame. Seems to help understanding different languages."
 max_amount = 1
 category = 2
+target_type = 4
+usable_in_menu = false
+usable_in_battle = false
+consumed_after_use = true

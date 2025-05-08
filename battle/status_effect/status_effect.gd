@@ -12,15 +12,18 @@ enum Trigger {
 var icon: SpriteFrames
 var trigger = 0
 var speed_modifier: float = 1.0
-var physical_defense_modifier: float = 1.0
-var physical_attack_modifier: float = 1.0
+var defense_modifier: float = 1.0
+var attack_modifier: float = 1.0
 var magic_defense_modifier: float = 1.0
 var magic_attack_modifier: float = 1.0
 var marked_for_removal = false
-
+var changes_targeting = false
 
 func get_id() -> String:
 	return ""
 	
 func refresh(_effect: StatusEffect):
 	pass
+	
+func get_vulnerability(_hit: Hit):
+	return 1.0

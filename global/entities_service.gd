@@ -15,8 +15,9 @@ func initialize(init_proxy: PlayerProxy, init_interaction_indicator, init_battle
 	self.party.add_to_group("save")
 	
 	# Starting equipment for prologue
-	self.party.inventory.set_item("potion", 10)
-	self.party.inventory.set_item("revival_scroll", 40)
+	self.party.inventory.set_item("002_potent_draught", 10)
+	self.party.inventory.set_item("004_calming_balsam", 10)
+	self.party.inventory.set_item("007_reanimation_scroll", 5)
 	self.add_child(party)
 
 	self.proxy = init_proxy
@@ -49,9 +50,10 @@ func get_room_entity(entity_name: String):
 	
 	if room == null:
 		return null
-		
-	var object = room.get_node_or_null("./" + entity_name)
 	
+	
+	var object = room.get_node_or_null("./" + entity_name)
+
 	return object
 
 func get_active_party_members():

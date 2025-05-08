@@ -35,10 +35,13 @@ func _ready():
 func on_proxy_enter(_proxy: PlayerProxy):
 	self.set_physics_process(true)
 	self.reset_movement()
+
+func clear_movement_buffers():
+	self.movement_pointers.fill(0)
 	
 func reset_movement():
 	var leader = self.get_leader()
-	self.movement_pointers.fill(0)
+	self.clear_movement_buffers()
 	
 	# This is a bit of a weird fix.
 	# The proxy doesn't update the proxied entity's position right away. 

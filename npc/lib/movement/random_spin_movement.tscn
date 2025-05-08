@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b23q2fs7p7owa"]
 
-[ext_resource type="Script" path="res://npc/lib/movement/random_spin_movement.gd" id="1_pf56c"]
+[ext_resource type="Script" uid="uid://bqn0hmee2c8xd" path="res://npc/lib/movement/random_spin_movement.gd" id="1_pf56c"]
 
 [node name="RandomSpinMovement" type="Node"]
 script = ExtResource("1_pf56c")

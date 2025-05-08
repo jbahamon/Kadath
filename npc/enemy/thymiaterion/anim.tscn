@@ -1,6 +1,6 @@
 [gd_scene load_steps=57 format=3 uid="uid://b8t81sm0y5b4o"]
 
-[ext_resource type="Script" path="res://npc/enemy/thymiaterion/anim.gd" id="1_gh5iw"]
+[ext_resource type="Script" uid="uid://cp5h1jslh7vv4" path="res://npc/enemy/thymiaterion/anim.gd" id="1_gh5iw"]
 [ext_resource type="Texture2D" uid="uid://rcfyijuewhqe" path="res://npc/enemy/thymiaterion/thymiaterion.png" id="2_id4eq"]
 
 [sub_resource type="Animation" id="Animation_0qmuu"]
@@ -270,20 +270,20 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gwp5b"]
 _data = {
-"RESET": SubResource("Animation_0qmuu"),
-"chew": SubResource("Animation_jvvon"),
-"close_eye": SubResource("Animation_o3dnm"),
-"idle": SubResource("Animation_hbp26"),
-"idle_2": SubResource("Animation_pxi15"),
-"jump": SubResource("Animation_38m6e"),
-"open_eye": SubResource("Animation_vfdhw"),
-"open_mouth": SubResource("Animation_r672d"),
-"tongue_out": SubResource("Animation_w7g5m"),
-"walk_left": SubResource("Animation_a7oqx"),
-"walk_left_2": SubResource("Animation_128uv"),
-"walk_right": SubResource("Animation_1c7u3"),
-"walk_right_2": SubResource("Animation_a1ouw"),
-"whip": SubResource("Animation_qb1bc")
+&"RESET": SubResource("Animation_0qmuu"),
+&"chew": SubResource("Animation_jvvon"),
+&"close_eye": SubResource("Animation_o3dnm"),
+&"idle": SubResource("Animation_hbp26"),
+&"idle_2": SubResource("Animation_pxi15"),
+&"jump": SubResource("Animation_38m6e"),
+&"open_eye": SubResource("Animation_vfdhw"),
+&"open_mouth": SubResource("Animation_r672d"),
+&"tongue_out": SubResource("Animation_w7g5m"),
+&"walk_left": SubResource("Animation_a7oqx"),
+&"walk_left_2": SubResource("Animation_128uv"),
+&"walk_right": SubResource("Animation_1c7u3"),
+&"walk_right_2": SubResource("Animation_a1ouw"),
+&"whip": SubResource("Animation_qb1bc")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_swsxt"]
@@ -434,7 +434,7 @@ vframes = 10
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")
 libraries = {
-"": SubResource("AnimationLibrary_gwp5b")
+&"": SubResource("AnimationLibrary_gwp5b")
 }
 autoplay = "idle"
 

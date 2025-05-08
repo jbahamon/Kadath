@@ -25,9 +25,9 @@ func _ready():
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed :
-		if event.is_action_pressed("ui_down"):
+		if event.is_action_pressed("ui_down", true):
 			scroll.set_v_scroll(scroll.get_v_scroll() + SCROLL_STEP)
-		elif event.is_action_pressed("ui_up"):
+		elif event.is_action_pressed("ui_up", true):
 			scroll.set_v_scroll(scroll.get_v_scroll() - SCROLL_STEP)
 		
 
@@ -44,8 +44,6 @@ func hide_menu():
 
 func show_menu():
 	self.scroll.scroll_vertical = 0
-	self.containers["graphics"].grab_focus()
-	self.containers["graphics"].grab_click_focus()
 	UIService.play_focus_sound()
 	self.set_process_unhandled_input(true)
 	
@@ -57,6 +55,6 @@ func show_menu():
 	self.show()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_cancel"): 
+	if event.is_action_pressed("ui_cancel") and self.is_visible(): 
 		self.exit.emit()
 		self.get_viewport().set_input_as_handled()

@@ -3,6 +3,8 @@ extends "res://battle/action/simple_single_target.gd"
 @export var hit: Hit
 
 func execute(actor):
+	self.hit.offensive_damage_factor = self.default_offensive_damage_factor(actor.battler, self.hit)
+	
 	var original_position = actor.global_position
 	var target_position = Vector2(target.global_position.x, original_position.y)
 	
@@ -19,7 +21,7 @@ func execute(actor):
 	
 	
 	await DoAll.new([
-		func(): await get_tree().create_timer(0.95).timeout,
+		get_tree().create_timer(0.95).timeout,
 		func(): 
 			await get_tree().create_timer(0.25).timeout
 			await self.target.take_hit(actor, hit)

@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=4 uid="uid://drpy2qjgqwmt7"]
 
 [ext_resource type="TileSet" uid="uid://b15m77bx602kw" path="res://location/000_prologue_kadath/tile/onyx_temple.tres" id="1_yo2kw"]
-[ext_resource type="Script" path="res://location/000_prologue_kadath/room/01_entrance.gd" id="2_kwr6c"]
-[ext_resource type="Script" path="res://location/lib/script/object/warp.gd" id="3_r0i0m"]
-[ext_resource type="Script" path="res://location/000_prologue_kadath/object/pushing_barrier.gd" id="4_60pw0"]
+[ext_resource type="Script" uid="uid://ct487mss0xg3p" path="res://location/000_prologue_kadath/room/01_entrance.gd" id="2_kwr6c"]
+[ext_resource type="Script" uid="uid://bt0nvh7cwt50f" path="res://location/lib/script/object/warp.gd" id="3_r0i0m"]
+[ext_resource type="Script" uid="uid://gc01md558lwq" path="res://location/000_prologue_kadath/object/pushing_barrier.gd" id="4_60pw0"]
 [ext_resource type="PackedScene" uid="uid://qscnhsk7b4m7" path="res://npc/lib/simple_ghoul_npc.tscn" id="5_t4523"]
 [ext_resource type="PackedScene" uid="uid://cgvqjsoj5bl6b" path="res://npc/lib/anim/ghoul_anim.tscn" id="6_vs25p"]
 [ext_resource type="PackedScene" uid="uid://cv5wwoeq1pjb7" path="res://party/pickman/anim.tscn" id="7_i8cuo"]

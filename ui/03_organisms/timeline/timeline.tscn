@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://bqmykxfryt4p7"]
 
-[ext_resource type="Script" path="res://ui/03_organisms/timeline/timeline.gd" id="1_wm4c0"]
+[ext_resource type="Script" uid="uid://1i10abpq2hkc" path="res://ui/03_organisms/timeline/timeline.gd" id="1_wm4c0"]
 [ext_resource type="PackedScene" uid="uid://bl2fqcakxb5yf" path="res://ui/02_molecules/timeline_item/timeline_item.tscn" id="2_e3j53"]
 [ext_resource type="Texture2D" uid="uid://btwxlpbctac6g" path="res://ui/01_atoms/assets/textures/By Sr.Toasty/horizontal_arrow.png" id="3_82x4e"]
-[ext_resource type="Script" path="res://ui/01_atoms/animated_texture/animated_texture.gd" id="4_etxie"]
+[ext_resource type="Script" uid="uid://d2ukb2mfqh642" path="res://ui/01_atoms/animated_texture/animated_texture.gd" id="4_etxie"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w5it1"]
 atlas = ExtResource("3_82x4e")

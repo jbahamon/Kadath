@@ -14,4 +14,4 @@ func show_toast(text: String, color: Color = Color.WHITE):
 	var tween = get_tree().create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.tween_property(self.label, "position:y", -rise_length, 0.5)
 	animation_player.play("toast")
-	await animation_player.animation_finished
+	return animation_player.animation_finished

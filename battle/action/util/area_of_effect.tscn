@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://ttxcbt6u2yh3"]
 
-[ext_resource type="Script" path="res://battle/action/util/area_of_effect.gd" id="1_yakg2"]
+[ext_resource type="Script" uid="uid://22ktlmm1d10g" path="res://battle/action/util/area_of_effect.gd" id="1_yakg2"]
 
 [sub_resource type="Gradient" id="Gradient_y4o0m"]
 interpolation_mode = 1

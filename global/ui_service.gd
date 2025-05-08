@@ -90,7 +90,6 @@ func exit():
 	self.menu_popup = null
 	self.save_popup = null
 	self.notification_player = null
-	self.focus_player = null
 	
 func _unhandled_input(event) -> void:
 	if event.is_action_pressed("ui_menu"): 

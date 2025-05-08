@@ -1,11 +1,17 @@
 [gd_resource type="Resource" script_class="Armor" load_steps=2 format=3 uid="uid://vp14fn3wu7kr"]
 
-[ext_resource type="Script" path="res://item/script/equipment/armor.gd" id="1_doqop"]
+[ext_resource type="Script" uid="uid://s23ytvkqv22q" path="res://item/script/equipment/armor.gd" id="1_doqop"]
 
 [resource]
 script = ExtResource("1_doqop")
-defense = 35
+defense = 55
+magic_defense = 15
 equippable_by = 128
+attack_bonus = 0
+defense_bonus = 45
+magic_attack_bonus = 50
+magic_defense_bonus = 35
+speed_bonus = 0
 id = "sturdy_vest"
 display_name = "Sturdy Vest"
 description = "Inganok yak materials make this vest quite durable."

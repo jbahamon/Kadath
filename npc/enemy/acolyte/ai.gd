@@ -10,8 +10,8 @@ func _ready() -> void:
 	self.consume = parent.get_node("Actions/Consume")
 
 func choose_action(actor, actors: Array):
-	if actor.health < floor(actor.max_health/2) and actor.get_allies(actors).size() > 1:
-		return self.attack if (randi() % 100) > 80 else self.consume
+	if actor.health < floor(actor.max_health/2) and TargetUtil.one_ally(actor, actors).size() > 1:
+		return self.attack if randf()  > 0.7 else self.consume
 	else:
 		return self.attack
 
@@ -19,7 +19,8 @@ func fill_action_parameters(action: BattleAction, actor, actors: Array):
 	if action == self.consume:
 		var min_dist = INF
 		var sacrifice = null
-		for ally in actor.get_allies(actors).filter(func(other_actor): return other_actor.is_alive):
+		var allies = TargetUtil.one_ally(actor, actors)
+		for ally in allies:
 			if ally == actor:
 				continue
 			var dist = actor.global_position.distance_squared_to(ally.global_position)
@@ -27,10 +28,10 @@ func fill_action_parameters(action: BattleAction, actor, actors: Array):
 				min_dist = dist
 				sacrifice = ally
 				
-		action.allies = actor.get_allies(actors).filter(
-			func(other_actor): return other_actor.is_alive and other_actor != sacrifice
+		action.allies = allies.filter(
+			func(other_actor): return other_actor != sacrifice
 		)
 		
 		action.sacrifice = sacrifice
 	else:
-		action.target = actor.get_enemies(TargetUtil.one_enemy(actor, actors)).pick_random()
+		action.target = TargetUtil.one_enemy(actor, actors).pick_random()

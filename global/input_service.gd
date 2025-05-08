@@ -11,6 +11,8 @@ func initialize(init_scene: Node):
 	self.scene = init_scene
 	
 func exit():
+	if get_tree().paused:
+		get_tree().paused = false
 	self.scene = null
 
 func enter_menu_mode() -> void:

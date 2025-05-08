@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://oyekfni30vws"]
 
-[ext_resource type="Script" path="res://ui/03_organisms/skill_costs/skill_costs.gd" id="1_gb1ow"]
+[ext_resource type="Script" uid="uid://ucjv0bxvybue" path="res://ui/03_organisms/skill_costs/skill_costs.gd" id="1_gb1ow"]
 [ext_resource type="Texture2D" uid="uid://df0sy0xr60rtd" path="res://party/pickman/icon.png" id="2_8g364"]
 
 [node name="SkillCosts" type="PanelContainer"]

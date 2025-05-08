@@ -1,6 +1,7 @@
-[gd_scene load_steps=184 format=3 uid="uid://t6dg7lnwshho"]
+[gd_scene load_steps=186 format=3 uid="uid://t6dg7lnwshho"]
 
-[ext_resource type="Script" path="res://npc/lib/anim/character_anim.gd" id="1_mfe0q"]
+[ext_resource type="Script" uid="uid://cp4ww8nq2gt" path="res://npc/lib/anim/character_anim.gd" id="1_mfe0q"]
+[ext_resource type="Shader" uid="uid://dwgti8q3h5v5c" path="res://party/carter/breakdown/breakdown.gdshader" id="2_lb7xu"]
 [ext_resource type="Texture2D" uid="uid://8wps7xhl5m8v" path="res://party/carter/spritesheet.png" id="2_se6io"]
 
 [sub_resource type="Animation" id="Animation_bghb4"]
@@ -51,7 +52,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.266667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [Vector2i(0, 34), Vector2i(1, 34)]
+"values": [Vector2i(0, 35), Vector2i(1, 35)]
 }
 
 [sub_resource type="Animation" id="Animation_ahq2e"]
@@ -68,7 +69,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.266667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [Vector2i(0, 35), Vector2i(1, 35)]
+"values": [Vector2i(0, 36), Vector2i(1, 36)]
 }
 
 [sub_resource type="Animation" id="Animation_aq4sd"]
@@ -799,6 +800,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_wauqw"]
 resource_name = "interact_north"
 length = 0.266669
+loop_mode = 1
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1015,7 +1017,7 @@ tracks/0/path = NodePath("Sprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.75),
+"times": PackedFloat32Array(0, 0.2, 0.75),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [Vector2i(0, 2), Vector2i(2, 12), Vector2i(0, 2)]
@@ -1095,70 +1097,76 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gdtcw"]
 _data = {
-"attack_east": SubResource("Animation_bghb4"),
-"attack_north": SubResource("Animation_8o2ea"),
-"attack_south": SubResource("Animation_2quch"),
-"attack_west": SubResource("Animation_ahq2e"),
-"battle_idle_east": SubResource("Animation_aq4sd"),
-"battle_idle_north": SubResource("Animation_51hy3"),
-"battle_idle_south": SubResource("Animation_j4nk8"),
-"battle_idle_west": SubResource("Animation_g4hwa"),
-"battle_tired_east": SubResource("Animation_71rew"),
-"battle_tired_north": SubResource("Animation_22l6v"),
-"battle_tired_south": SubResource("Animation_7teqt"),
-"battle_tired_west": SubResource("Animation_x4df5"),
-"blast_east": SubResource("Animation_qi8lw"),
-"blast_north": SubResource("Animation_cdbje"),
-"blast_south": SubResource("Animation_rymg7"),
-"blast_west": SubResource("Animation_t0q6i"),
-"charge_east": SubResource("Animation_0lx20"),
-"charge_north": SubResource("Animation_yf44b"),
-"charge_south": SubResource("Animation_ymmjv"),
-"charge_west": SubResource("Animation_beqn6"),
-"crit_east": SubResource("Animation_8y5b7"),
-"crit_north": SubResource("Animation_grxak"),
-"crit_south": SubResource("Animation_k7xsn"),
-"crit_start_east": SubResource("Animation_cf0vb"),
-"crit_start_north": SubResource("Animation_jw3b1"),
-"crit_start_south": SubResource("Animation_ueekw"),
-"crit_start_west": SubResource("Animation_0etep"),
-"crit_west": SubResource("Animation_mo6rd"),
-"defend_east": SubResource("Animation_2mirt"),
-"defend_north": SubResource("Animation_vv6q4"),
-"defend_south": SubResource("Animation_efooj"),
-"defend_west": SubResource("Animation_54fxj"),
-"downed_east": SubResource("Animation_ka3lx"),
-"downed_north": SubResource("Animation_mfu3t"),
-"downed_south": SubResource("Animation_7ll2g"),
-"downed_west": SubResource("Animation_i53ig"),
-"hit_east": SubResource("Animation_b3k23"),
-"hit_north": SubResource("Animation_4wns2"),
-"hit_south": SubResource("Animation_4p4qi"),
-"hit_west": SubResource("Animation_fvrf7"),
-"identify": SubResource("Animation_ky4qo"),
-"idle_east": SubResource("2"),
-"idle_north": SubResource("3"),
-"idle_south": SubResource("1"),
-"idle_west": SubResource("4"),
-"interact_east": SubResource("Animation_ll4h5"),
-"interact_north": SubResource("Animation_wauqw"),
-"interact_south": SubResource("Animation_w6xa4"),
-"interact_west": SubResource("Animation_npx2t"),
-"jump_back_east": SubResource("Animation_t30xg"),
-"jump_back_north": SubResource("Animation_tfgy1"),
-"jump_back_south": SubResource("Animation_fh30d"),
-"jump_back_west": SubResource("Animation_xwghp"),
-"run_east": SubResource("Animation_bnqbg"),
-"run_north": SubResource("Animation_eed27"),
-"run_south": SubResource("Animation_wjtjm"),
-"run_west": SubResource("Animation_o7v78"),
-"spin": SubResource("Animation_kg4ya"),
-"use_item": SubResource("Animation_r4gmf"),
-"walk_east": SubResource("6"),
-"walk_north": SubResource("7"),
-"walk_south": SubResource("5"),
-"walk_west": SubResource("8")
+&"attack_east": SubResource("Animation_bghb4"),
+&"attack_north": SubResource("Animation_8o2ea"),
+&"attack_south": SubResource("Animation_2quch"),
+&"attack_west": SubResource("Animation_ahq2e"),
+&"battle_idle_east": SubResource("Animation_aq4sd"),
+&"battle_idle_north": SubResource("Animation_51hy3"),
+&"battle_idle_south": SubResource("Animation_j4nk8"),
+&"battle_idle_west": SubResource("Animation_g4hwa"),
+&"battle_tired_east": SubResource("Animation_71rew"),
+&"battle_tired_north": SubResource("Animation_22l6v"),
+&"battle_tired_south": SubResource("Animation_7teqt"),
+&"battle_tired_west": SubResource("Animation_x4df5"),
+&"blast_east": SubResource("Animation_qi8lw"),
+&"blast_north": SubResource("Animation_cdbje"),
+&"blast_south": SubResource("Animation_rymg7"),
+&"blast_west": SubResource("Animation_t0q6i"),
+&"charge_east": SubResource("Animation_0lx20"),
+&"charge_north": SubResource("Animation_yf44b"),
+&"charge_south": SubResource("Animation_ymmjv"),
+&"charge_west": SubResource("Animation_beqn6"),
+&"crit_east": SubResource("Animation_8y5b7"),
+&"crit_north": SubResource("Animation_grxak"),
+&"crit_south": SubResource("Animation_k7xsn"),
+&"crit_start_east": SubResource("Animation_cf0vb"),
+&"crit_start_north": SubResource("Animation_jw3b1"),
+&"crit_start_south": SubResource("Animation_ueekw"),
+&"crit_start_west": SubResource("Animation_0etep"),
+&"crit_west": SubResource("Animation_mo6rd"),
+&"defend_east": SubResource("Animation_2mirt"),
+&"defend_north": SubResource("Animation_vv6q4"),
+&"defend_south": SubResource("Animation_efooj"),
+&"defend_west": SubResource("Animation_54fxj"),
+&"downed_east": SubResource("Animation_ka3lx"),
+&"downed_north": SubResource("Animation_mfu3t"),
+&"downed_south": SubResource("Animation_7ll2g"),
+&"downed_west": SubResource("Animation_i53ig"),
+&"hit_east": SubResource("Animation_b3k23"),
+&"hit_north": SubResource("Animation_4wns2"),
+&"hit_south": SubResource("Animation_4p4qi"),
+&"hit_west": SubResource("Animation_fvrf7"),
+&"identify": SubResource("Animation_ky4qo"),
+&"idle_east": SubResource("2"),
+&"idle_north": SubResource("3"),
+&"idle_south": SubResource("1"),
+&"idle_west": SubResource("4"),
+&"interact_east": SubResource("Animation_ll4h5"),
+&"interact_north": SubResource("Animation_wauqw"),
+&"interact_south": SubResource("Animation_w6xa4"),
+&"interact_west": SubResource("Animation_npx2t"),
+&"jump_back_east": SubResource("Animation_t30xg"),
+&"jump_back_north": SubResource("Animation_tfgy1"),
+&"jump_back_south": SubResource("Animation_fh30d"),
+&"jump_back_west": SubResource("Animation_xwghp"),
+&"run_east": SubResource("Animation_bnqbg"),
+&"run_north": SubResource("Animation_eed27"),
+&"run_south": SubResource("Animation_wjtjm"),
+&"run_west": SubResource("Animation_o7v78"),
+&"spin": SubResource("Animation_kg4ya"),
+&"use_item": SubResource("Animation_r4gmf"),
+&"walk_east": SubResource("6"),
+&"walk_north": SubResource("7"),
+&"walk_south": SubResource("5"),
+&"walk_west": SubResource("8")
 }
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lb7xu"]
+shader = ExtResource("2_lb7xu")
+shader_parameter/frequency = 1.0
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/shake_intensity = 1.0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n82ft"]
 animation = &"attack_south"
@@ -1666,7 +1674,7 @@ states/use_item/position = Vector2(495, 408.85)
 states/walk/node = SubResource("18")
 states/walk/position = Vector2(573, 149)
 transitions = ["idle", "walk", SubResource("19"), "walk", "idle", SubResource("20"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_hbppg"), "walk", "run", SubResource("AnimationNodeStateMachineTransition_5f7a7"), "run", "walk", SubResource("AnimationNodeStateMachineTransition_0csje"), "walk", "attack", SubResource("AnimationNodeStateMachineTransition_q212s"), "attack", "jump_back", SubResource("AnimationNodeStateMachineTransition_23l0q"), "idle", "battle_idle", SubResource("AnimationNodeStateMachineTransition_bdym5"), "battle_idle", "idle", SubResource("AnimationNodeStateMachineTransition_ib0q3"), "battle_idle", "hit", SubResource("AnimationNodeStateMachineTransition_soyxa"), "hit", "battle_idle", SubResource("AnimationNodeStateMachineTransition_5rqxq"), "walk", "battle_idle", SubResource("AnimationNodeStateMachineTransition_4oigb"), "battle_idle", "walk", SubResource("AnimationNodeStateMachineTransition_jv6vr"), "jump_back", "battle_idle", SubResource("AnimationNodeStateMachineTransition_xxony"), "downed", "battle_idle", SubResource("AnimationNodeStateMachineTransition_u6vhm"), "battle_idle", "downed", SubResource("AnimationNodeStateMachineTransition_b2ofx"), "interact", "idle", SubResource("AnimationNodeStateMachineTransition_5gxb6"), "idle", "interact", SubResource("AnimationNodeStateMachineTransition_df83w"), "idle", "spin", SubResource("AnimationNodeStateMachineTransition_4nt87"), "spin", "idle", SubResource("AnimationNodeStateMachineTransition_xtafi"), "battle_idle", "use_item", SubResource("AnimationNodeStateMachineTransition_snssf"), "use_item", "battle_idle", SubResource("AnimationNodeStateMachineTransition_oos7f"), "crit_start", "crit", SubResource("AnimationNodeStateMachineTransition_773s8"), "battle_idle", "crit_start", SubResource("AnimationNodeStateMachineTransition_807un"), "crit", "jump_back", SubResource("AnimationNodeStateMachineTransition_cujo4"), "battle_idle", "charge", SubResource("AnimationNodeStateMachineTransition_jg8lw"), "charge", "battle_idle", SubResource("AnimationNodeStateMachineTransition_34ae4"), "battle_idle", "blast", SubResource("AnimationNodeStateMachineTransition_iypgn"), "blast", "battle_idle", SubResource("AnimationNodeStateMachineTransition_4334f"), "defend", "battle_idle", SubResource("AnimationNodeStateMachineTransition_wty2d"), "battle_idle", "defend", SubResource("AnimationNodeStateMachineTransition_drhk3"), "battle_idle", "identify", SubResource("AnimationNodeStateMachineTransition_7mjnm"), "identify", "battle_idle", SubResource("AnimationNodeStateMachineTransition_3re13")]
-graph_offset = Vector2(57, 232.756)
+graph_offset = Vector2(57, 22.5981)
 
 [node name="Anim" type="Marker2D"]
 use_parent_material = true
@@ -1675,19 +1683,20 @@ animation_names = Array[String](["idle", "walk", "run", "attack", "jump_back", "
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_gdtcw")
+&"": SubResource("AnimationLibrary_gdtcw")
 }
 autoplay = "idle_south"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
+material = SubResource("ShaderMaterial_lb7xu")
 use_parent_material = true
 texture = ExtResource("2_se6io")
 centered = false
 offset = Vector2(-30, -43)
 hframes = 6
 vframes = 51
-frame = 265
+frame = 12
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("21")

@@ -1,185 +1,89 @@
-[gd_scene load_steps=6 format=3 uid="uid://cu30gjjhspgly"]
+[gd_scene load_steps=9 format=3 uid="uid://cu30gjjhspgly"]
 
 [ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="1"]
-[ext_resource type="Script" path="res://ui/04_templates/settings_menu/settings_menu.gd" id="2"]
-[ext_resource type="Script" path="res://ui/04_templates/settings_menu/listen_for_input_popup.gd" id="3"]
-[ext_resource type="AudioStream" uid="uid://bxvelfr4dar0c" path="res://sound/fx/slash/Mid Clean - colorsCrimsonTears.wav" id="3_abf3p"]
+[ext_resource type="Script" uid="uid://cmeg1pbyisx8s" path="res://ui/04_templates/settings_menu/settings_menu.gd" id="2"]
+[ext_resource type="Script" uid="uid://ca0jcapmd4bqx" path="res://ui/04_templates/settings_menu/listen_for_input_popup.gd" id="3"]
 [ext_resource type="FontFile" uid="uid://c8fvau54sblb1" path="res://ui/01_atoms/assets/fonts/By Wuchta/Letterstyle(1).otf" id="4_vtv80"]
+[ext_resource type="PackedScene" uid="uid://h7fnf0wq8gja" path="res://ui/03_organisms/audio_video_settings_submenu/audio_video_settings_submenu.tscn" id="4_wfqad"]
+[ext_resource type="StyleBox" uid="uid://c7y2d4gnnbp5m" path="res://ui/01_atoms/panel/panel_crimson_solid.tres" id="5_i7mb3"]
+[ext_resource type="PackedScene" uid="uid://t0tclns0vf5s" path="res://ui/03_organisms/interface_settings_submenu/interface_settings_submenu.tscn" id="5_islbd"]
+[ext_resource type="PackedScene" uid="uid://c0hwnrs6ki8nk" path="res://ui/03_organisms/controls_settings_submenu/controls_settings_submenu.tscn" id="6_wfqad"]
 
-[node name="SettingsMenu" type="ScrollContainer"]
+[node name="SettingsMenu" type="MarginContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1")
-follow_focus = true
 script = ExtResource("2")
-sfx_sample = ExtResource("3_abf3p")
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 
-[node name="Settings" type="VBoxContainer" parent="CenterContainer"]
+[node name="Categories" type="VBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-alignment = 1
 
-[node name="VolumeLabel" type="Label" parent="CenterContainer/Settings"]
+[node name="Label" type="Label" parent="HBoxContainer/Categories"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_vtv80")
 theme_override_font_sizes/font_size = 15
-text = "Audio"
+text = "Categories"
 
-[node name="VolumeSliders" type="GridContainer" parent="CenterContainer/Settings"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-columns = 2
-
-[node name="MusicVolumeLabel" type="Label" parent="CenterContainer/Settings/VolumeSliders"]
-layout_mode = 2
-text = "Music Volume:"
-
-[node name="MusicVolumeSlider" type="HSlider" parent="CenterContainer/Settings/VolumeSliders"]
-layout_mode = 2
-size_flags_horizontal = 3
-focus_neighbor_top = NodePath(".")
-mouse_filter = 2
-max_value = 1.0
-step = 0.05
-tick_count = 11
-
-[node name="SFXVolumeLabel" type="Label" parent="CenterContainer/Settings/VolumeSliders"]
-layout_mode = 2
-text = "SFX Volume:"
-
-[node name="SFXVolumeSlider" type="HSlider" parent="CenterContainer/Settings/VolumeSliders"]
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_filter = 2
-max_value = 1.0
-step = 0.05
-tick_count = 11
-
-[node name="UIVolumeLabel" type="Label" parent="CenterContainer/Settings/VolumeSliders"]
-layout_mode = 2
-text = "UI Volume:"
-
-[node name="UIVolumeSlider" type="HSlider" parent="CenterContainer/Settings/VolumeSliders"]
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_filter = 2
-max_value = 1.0
-step = 0.05
-tick_count = 11
-
-[node name="HSeparator2" type="HSeparator" parent="CenterContainer/Settings"]
+[node name="Control" type="Control" parent="HBoxContainer/Categories"]
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
-[node name="VideoLabel" type="Label" parent="CenterContainer/Settings"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_vtv80")
-theme_override_font_sizes/font_size = 15
-text = "Video
-"
-
-[node name="VideoCheckBoxes" type="HBoxContainer" parent="CenterContainer/Settings"]
-layout_mode = 2
-alignment = 1
-
-[node name="EnableShake" type="CheckBox" parent="CenterContainer/Settings/VideoCheckBoxes"]
+[node name="AudioVideo" type="Button" parent="HBoxContainer/Categories"]
 layout_mode = 2
 focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../Controls")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../Interface")
 mouse_filter = 2
-text = "Screen shake"
+toggle_mode = true
+text = "Audio & Video"
 
-[node name="EnableFlash" type="CheckBox" parent="CenterContainer/Settings/VideoCheckBoxes"]
+[node name="Interface" type="Button" parent="HBoxContainer/Categories"]
 layout_mode = 2
-focus_neighbor_left = NodePath("../EnableShake")
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../AudioVideo")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../Controls")
 mouse_filter = 2
-text = "Flashing effects"
-
-[node name="HSeparator3" type="HSeparator" parent="CenterContainer/Settings"]
-layout_mode = 2
-
-[node name="UILabel" type="Label" parent="CenterContainer/Settings"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_vtv80")
-theme_override_font_sizes/font_size = 15
+toggle_mode = true
 text = "Interface"
 
-[node name="UISliders" type="GridContainer" parent="CenterContainer/Settings"]
+[node name="Controls" type="Button" parent="HBoxContainer/Categories"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-columns = 2
-
-[node name="Text Speed" type="Label" parent="CenterContainer/Settings/UISliders"]
-layout_mode = 2
-text = "Text Speed:"
-
-[node name="TextSpeedSlider" type="HSlider" parent="CenterContainer/Settings/UISliders"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../Interface")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../AudioVideo")
 mouse_filter = 2
-min_value = 20.0
-max_value = 120.0
-step = 10.0
-value = 70.0
-tick_count = 11
-
-[node name="HSeparator" type="HSeparator" parent="CenterContainer/Settings"]
-layout_mode = 2
-
-[node name="ControlsLabel" type="Label" parent="CenterContainer/Settings"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_vtv80")
-theme_override_font_sizes/font_size = 15
+toggle_mode = true
 text = "Controls"
 
-[node name="InputVBox" type="VBoxContainer" parent="CenterContainer/Settings"]
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Content" type="VBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(1000, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="ConfigureLabel" type="Label" parent="CenterContainer/Settings/InputVBox"]
-layout_mode = 2
-text = "You can use your mouse for this."
-
-[node name="InputControls" type="GridContainer" parent="CenterContainer/Settings/InputVBox"]
-layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 3
-theme = ExtResource("1")
-theme_override_constants/h_separation = 2
-theme_override_constants/v_separation = 2
-columns = 4
 
-[node name="RunBehaviorContainer" type="HBoxContainer" parent="CenterContainer/Settings"]
+[node name="AudioVideo" parent="HBoxContainer/Content" instance=ExtResource("4_wfqad")]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CenterContainer/Settings/RunBehaviorContainer"]
+[node name="Interface" parent="HBoxContainer/Content" instance=ExtResource("5_islbd")]
+visible = false
 layout_mode = 2
-text = "Run button behavior:"
 
-[node name="Hold" type="CheckBox" parent="CenterContainer/Settings/RunBehaviorContainer"]
+[node name="Controls" parent="HBoxContainer/Content" instance=ExtResource("6_wfqad")]
+visible = false
 layout_mode = 2
-size_flags_horizontal = 3
-focus_neighbor_left = NodePath(".")
-focus_neighbor_right = NodePath("../Toggle")
-mouse_filter = 2
-text = "Hold"
-
-[node name="Toggle" type="CheckBox" parent="CenterContainer/Settings/RunBehaviorContainer"]
-layout_mode = 2
-focus_neighbor_left = NodePath("../Hold")
-focus_neighbor_right = NodePath(".")
-mouse_filter = 2
-text = "Toggle"
 
 [node name="Popups" type="Node" parent="."]
 
@@ -191,29 +95,29 @@ always_on_top = true
 theme = ExtResource("1")
 
 [node name="ListenForInputPopup" type="PopupPanel" parent="Popups"]
-size = Vector2i(230, 100)
+size = Vector2i(265, 100)
 exclusive = true
 always_on_top = true
 theme = ExtResource("1")
+theme_override_styles/panel = ExtResource("5_i7mb3")
 script = ExtResource("3")
 
 [node name="PressKeyLabel" type="Label" parent="Popups/ListenForInputPopup"]
-offset_right = 241.0
-offset_bottom = 100.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 257.0
+offset_bottom = 84.0
 size_flags_horizontal = 13
 size_flags_vertical = 12
 text = "Press key for \"Up\"..."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="value_changed" from="CenterContainer/Settings/VolumeSliders/MusicVolumeSlider" to="." method="update_music_volume"]
-[connection signal="value_changed" from="CenterContainer/Settings/VolumeSliders/SFXVolumeSlider" to="." method="update_sfx_volume"]
-[connection signal="value_changed" from="CenterContainer/Settings/VolumeSliders/UIVolumeSlider" to="." method="update_ui_volume"]
-[connection signal="toggled" from="CenterContainer/Settings/VideoCheckBoxes/EnableShake" to="." method="update_enable_shake"]
-[connection signal="toggled" from="CenterContainer/Settings/VideoCheckBoxes/EnableFlash" to="." method="update_enable_flash"]
-[connection signal="value_changed" from="CenterContainer/Settings/UISliders/TextSpeedSlider" to="." method="update_text_speed"]
-[connection signal="toggled" from="CenterContainer/Settings/RunBehaviorContainer/Toggle" to="." method="update_run_behavior"]
+[connection signal="done" from="HBoxContainer/Content/AudioVideo" to="." method="_on_content_done"]
+[connection signal="done" from="HBoxContainer/Content/Interface" to="." method="_on_content_done"]
+[connection signal="done" from="HBoxContainer/Content/Controls" to="." method="_on_content_done"]
+[connection signal="input_request" from="HBoxContainer/Content/Controls" to="." method="_on_controls_input_request"]
 [connection signal="about_to_popup" from="Popups/BlockClicksPopup" to="Popups/BlockClicksPopup" method="on_about_to_popup"]
 [connection signal="about_to_popup" from="Popups/ListenForInputPopup" to="Popups/ListenForInputPopup" method="on_about_to_popup"]
 [connection signal="focus_exited" from="Popups/ListenForInputPopup" to="Popups/ListenForInputPopup" method="_on_focus_exited"]
-[connection signal="key_pressed" from="Popups/ListenForInputPopup" to="." method="_on_ListenForInputPopup_key_pressed"]
+[connection signal="key_pressed" from="Popups/ListenForInputPopup" to="HBoxContainer/Content/Controls" method="_on_listen_for_input_popup_key_pressed"]

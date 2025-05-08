@@ -30,14 +30,19 @@ PLAY_ANIM LeftGhoul hit
 SET_POSITION LeftGhoul TO (0, 0)
 LOOK LeftGhoul RIGHT
 SHOW LeftGhoul
-PLAY_SOUND "fx/hit/Mid Low Reverb - JuhaniJunkala.wav" IN SFX AT (0, 0)
-MOVE LeftGhoul TO (-24, -96) AT 150
-PLAY_ANIM LeftGhoul crouch
+
 SIMULTANEOUS
 	SHAKE CAMERA FOR 0.75 STR (4,4) TIME_SCALE 1
-	PLAY_SOUND "fx/scratch/Double Short - JuhaniJunkala.wav" IN SFX AT (-24, -96)
+	PLAY_SOUND "fx/hit/Mid Low Reverb - JuhaniJunkala" IN SFX AT (0, 0)
+	MOVE LeftGhoul TO (-24, -96) AT 150
+END
+
+PLAY_ANIM LeftGhoul crouch
+SIMULTANEOUS
+	PLAY_SOUND "fx/scratch/Double Short - JuhaniJunkala" IN SFX AT (-24, -96)
 	MOVE LeftGhoul TO (-32, -128) AT 30
 END
+
 START_DIALOGUE entrance_ghoul1
 PLAY_ANIM LeftGhoul idle
 LOOK LeftGhoul DOWN
@@ -46,16 +51,21 @@ PLAY_ANIM RightGhoul hit
 SET_POSITION RightGhoul TO (8, -16)
 LOOK RightGhoul LEFT
 SHOW RightGhoul
-PLAY_SOUND "fx/hit/Mid Low Reverb - JuhaniJunkala.wav" IN SFX AT (0, 0)
-MOVE RightGhoul TO (32, -112) AT 150
+
+SIMULTANEOUS
+	SHAKE CAMERA FOR 0.75 STR (4,4) TIME_SCALE 1
+	PLAY_SOUND "fx/hit/Mid Low Reverb - JuhaniJunkala" IN SFX AT (0, 0)
+	MOVE RightGhoul TO (32, -112) AT 150
+END
+
 LOOK LeftGhoul RIGHT
 PLAY_ANIM RightGhoul crouch
 
 SIMULTANEOUS
-	SHAKE CAMERA FOR 0.75 STR (4,4) TIME_SCALE 1
-	PLAY_SOUND "/fx/scratch/Double Short - JuhaniJunkala.wav" IN SFX AT (32, -112)
+	PLAY_SOUND "/fx/scratch/Double Short - JuhaniJunkala" IN SFX AT (32, -112)
 	MOVE RightGhoul TO (40, -144) AT 30
 END
+
 PLAY_ANIM RightGhoul idle
 START_DIALOGUE entrance_ghoul2
 
@@ -65,12 +75,22 @@ LOOK NPCPickman DOWN
 SHOW NPCPickman
 LOOK LeftGhoul DOWN
 LOOK RightGhoul DOWN
-MOVE NPCPickman TO (-16, -144) AT 150
+
+SIMULTANEOUS
+	MOVE NPCPickman TO (-16, -144) AT 150
+	SHAKE CAMERA FOR 0.75 STR (4,4) TIME_SCALE 1
+	PLAY_SOUND "fx/hit/Mid Low Reverb - JuhaniJunkala" IN SFX AT (-16, 0)
+END
+
 LOOK LeftGhoul RIGHT
 LOOK RightGhoul LEFT
 PLAY_ANIM NPCPickman jump_back
-PLAY_SOUND "fx/hit/Short Slap - Spring Spring.wav" IN SFX AT (-16, -144)
-MOVE NPCPickman TO (-16, -176) AT 30
+
+SIMULTANEOUS
+	PLAY_SOUND "/fx/scratch/Double Short - JuhaniJunkala" IN SFX AT (-16, -144)
+	MOVE NPCPickman TO (-16, -176) AT 30
+END
+
 PLAY_ANIM NPCPickman idle
 START_DIALOGUE entrance_pickman
 
@@ -80,21 +100,31 @@ LOOK PROXY DOWN
 SHOW Carter
 LOOK LeftGhoul DOWN
 LOOK RightGhoul DOWN
-MOVE PROXY TO (0, -96) AT 150
+
+SIMULTANEOUS
+	SHAKE CAMERA FOR 0.75 STR (4,4) TIME_SCALE 1
+	PLAY_SOUND "fx/hit/Mid Low Reverb - JuhaniJunkala" IN SFX AT (0, 0)
+	MOVE PROXY TO (0, -96) AT 150
+END
+
 LOOK LeftGhoul RIGHT
 LOOK RightGhoul LEFT
 PLAY_ANIM PROXY jump_back
-PLAY_SOUND "fx/hit/Short Slap - Spring Spring.wav" IN SFX AT (0, -96)
-MOVE PROXY TO (0, -128) AT 30
-PLAY_ANIM PROXY idle
-START_DIALOGUE entrance_carter_1
-LOOK PROXY UP
-START_DIALOGUE entrance_carter_2
 
-SIMULTANEOUS 
-	MOVE_CAMERA TO PROXY IN 1
-	START_DIALOGUE starting_instructions
+SIMULTANEOUS
+	PLAY_SOUND "/fx/scratch/Double Short - JuhaniJunkala" IN SFX AT (0, -96)
+	MOVE PROXY TO (0, -128) AT 30
 END
+	
+PLAY_ANIM PROXY idle
+MOVE_CAMERA TO PROXY IN 0.5
+START_DIALOGUE entrance_carter_1
+MOVE_CAMERA TO NPCPickman IN 0.5
+START_DIALOGUE entrance_carter_2
+LOOK PROXY UP
+MOVE_CAMERA TO PROXY IN 0.5
+START_DIALOGUE entrance_carter_3
+START_DIALOGUE starting_instructions
 
 ASSIGN_CAMERA PROXY
 ENABLE_COLLISIONS PROXY

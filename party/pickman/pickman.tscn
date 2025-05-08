@@ -1,19 +1,20 @@
-[gd_scene load_steps=37 format=3 uid="uid://dehii02b2xc8o"]
+[gd_scene load_steps=48 format=3 uid="uid://dehii02b2xc8o"]
 
 [ext_resource type="PackedScene" uid="uid://bomxx7doloqmu" path="res://party/party_member.tscn" id="1_puo4q"]
 [ext_resource type="Resource" uid="uid://efimamnfjman" path="res://party/pickman/growth.tres" id="2_attsm"]
 [ext_resource type="Texture2D" uid="uid://df0sy0xr60rtd" path="res://party/pickman/icon.png" id="3_psao1"]
-[ext_resource type="Script" path="res://party/pickman/skill/taxing_touch.gd" id="4_col3m"]
+[ext_resource type="Script" uid="uid://cg2i25prvlkl2" path="res://party/pickman/skill/taxing_touch.gd" id="4_col3m"]
 [ext_resource type="PackedScene" uid="uid://cv5wwoeq1pjb7" path="res://party/pickman/anim.tscn" id="4_pfdmg"]
 [ext_resource type="Texture2D" uid="uid://tfj36aej8dy4" path="res://party/pickman/menu_sprite_alt.png" id="4_svurb"]
-[ext_resource type="Script" path="res://party/pickman/skill/slab_slam.gd" id="5_5kqwp"]
-[ext_resource type="Script" path="res://battle/action/party_member_attack.gd" id="5_88ji1"]
-[ext_resource type="Script" path="res://party/pickman/action/feast.gd" id="5_beduq"]
+[ext_resource type="Script" uid="uid://qh0h38dh041l" path="res://party/pickman/skill/slab_slam.gd" id="5_5kqwp"]
+[ext_resource type="Script" uid="uid://deb0u7u646bui" path="res://battle/action/party_member_attack.gd" id="5_88ji1"]
+[ext_resource type="Script" uid="uid://cuuaihoa5k6yg" path="res://party/pickman/action/feast.gd" id="5_beduq"]
+[ext_resource type="Script" uid="uid://cvx0bkshi05ob" path="res://party/pickman/breakdown/breakdown_status.gd" id="5_gkt37"]
 [ext_resource type="AudioStream" uid="uid://2uv1lnv2x7w8" path="res://sound/fx/hit/Mid Low Rising  - JuhaniJunkala.wav" id="6_6nf0o"]
 [ext_resource type="PackedScene" uid="uid://dwx2sfgjttusb" path="res://battle/action/util/line_of_effect.tscn" id="6_8tf6q"]
 [ext_resource type="Material" uid="uid://c48122ffiwrbb" path="res://utils/material/uniform_add.tres" id="7_gtc6k"]
-[ext_resource type="Shader" path="res://utils/material/uniform_add.gdshader" id="8_2lvfg"]
-[ext_resource type="Script" path="res://battle/hit.gd" id="9_vg70b"]
+[ext_resource type="Shader" uid="uid://ciyt4dpcux2hp" path="res://utils/material/uniform_add.gdshader" id="8_2lvfg"]
+[ext_resource type="Script" uid="uid://ca234sc5bry72" path="res://battle/hit.gd" id="9_vg70b"]
 [ext_resource type="AudioStream" uid="uid://cbeps10r2yhs4" path="res://sound/fx/recovery/Default - ReincarnatedEchoes.wav" id="11_7c63i"]
 [ext_resource type="AudioStream" uid="uid://bxvelfr4dar0c" path="res://sound/fx/slash/Mid Clean - colorsCrimsonTears.wav" id="12_6tu3v"]
 [ext_resource type="PackedScene" uid="uid://cchn13mhn8gxu" path="res://battle/action/util/projectile.tscn" id="13_6c0bp"]
@@ -22,13 +23,20 @@
 [ext_resource type="AudioStream" uid="uid://bojiuydt7dm8s" path="res://sound/fx/whoosh/Harsh Short - JuhaniJunkala.wav" id="16_spx3k"]
 [ext_resource type="AudioStream" uid="uid://38nt6e7wplf1" path="res://sound/fx/whoosh/Mid Ascending - MadameBerry.wav" id="17_0ybgc"]
 [ext_resource type="AudioStream" uid="uid://b8b8awqask8bq" path="res://sound/fx/hit/Mid Deep - KronBits.wav" id="18_n1fsx"]
+[ext_resource type="Script" uid="uid://csf5b62foda0t" path="res://party/pickman/breakdown/breakdown_ai.gd" id="23_wy2w2"]
+[ext_resource type="Script" uid="uid://b23afow3cexq6" path="res://party/pickman/breakdown/breakdown_manager.gd" id="24_dtuu3"]
+[ext_resource type="Script" uid="uid://dkeuyf83xp6qh" path="res://party/pickman/breakdown/self_hit.gd" id="24_p66fx"]
+[ext_resource type="Script" uid="uid://b7tf80y1cihwg" path="res://party/pickman/breakdown/double_edged.gd" id="25_a8w6i"]
+[ext_resource type="Shader" uid="uid://bacro5hmxiebm" path="res://party/pickman/breakdown/breakdown.gdshader" id="25_dtuu3"]
+[ext_resource type="AudioStream" uid="uid://di7wtmrx7jsha" path="res://sound/fx/slash/Mid Light Clean - colorsCrimsonTears.wav" id="25_uiucn"]
 
 [sub_resource type="Resource" id="Resource_fbkg1"]
 script = ExtResource("9_vg70b")
 animation_only = false
-fixed_damage = true
-base_damage = 1.0
+fixed_damage = false
+base_damage = 4.0
 type = 0
+energy_drain = 0
 anim_time = 0.0
 anim_duration = 0.45
 spark_time = 0.0
@@ -49,8 +57,9 @@ toast_time = 0.3
 script = ExtResource("9_vg70b")
 animation_only = false
 fixed_damage = false
-base_damage = 0
+base_damage = 1.5
 type = 8
+energy_drain = 0
 anim_time = 0.0
 anim_duration = 0.2
 spark_time = 0.0
@@ -75,21 +84,22 @@ shader_parameter/add = Color(0.392157, 0.392157, 0, 0)
 script = ExtResource("9_vg70b")
 animation_only = false
 fixed_damage = false
-base_damage = 0
+base_damage = 2.0
 type = 0
-anim_time = 0.3
+energy_drain = 0
+anim_time = 0.4
 anim_duration = 0.367
 spark_time = 0.0
 spark_offset = Vector2(0, 0)
-shake_time = 0.0
+shake_time = 0.4
 shake_duration = 0.5
 shake_amplitude = Vector2(8, 0)
-shake_time_scale = 2.0
+shake_time_scale = 3.0
 hit_sound = ExtResource("12_6tu3v")
-hit_sound_time = 0.3
+hit_sound_time = 0.4
 miss_sound_time = 0.0
 palfx_material = SubResource("ShaderMaterial_it3w0")
-palfx_time = 0.3
+palfx_time = 0.4
 palfx_duration = 0.7
 toast_time = 0.45
 
@@ -97,8 +107,9 @@ toast_time = 0.45
 script = ExtResource("9_vg70b")
 animation_only = true
 fixed_damage = false
-base_damage = 0
+base_damage = 0.0
 type = 8
+energy_drain = 0
 anim_time = 0.0
 anim_duration = 0.2
 spark_time = 0.0
@@ -119,8 +130,9 @@ toast_time = 0.3
 script = ExtResource("9_vg70b")
 animation_only = false
 fixed_damage = false
-base_damage = 0
-type = 6
+base_damage = 6.0
+type = 0
+energy_drain = 0
 anim_time = 0.0
 anim_duration = 0.45
 spark_time = 0.0
@@ -140,8 +152,9 @@ toast_time = 0.3
 script = ExtResource("9_vg70b")
 animation_only = false
 fixed_damage = false
-base_damage = 0
-type = 6
+base_damage = 4.0
+type = 0
+energy_drain = 0
 anim_time = 0.0
 anim_duration = 0.45
 spark_time = 0.0
@@ -209,6 +222,64 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qm3yp"]
+shader = ExtResource("25_dtuu3")
+shader_parameter/luminosity = Color(0.162012, 0.335113, 0.0531181, 1)
+shader_parameter/frequency = 1.0
+shader_parameter/outline_color = Color(0.434803, 0.179139, 0.741824, 1)
+
+[sub_resource type="Resource" id="Resource_gkt37"]
+script = ExtResource("9_vg70b")
+animation_only = false
+fixed_damage = false
+base_damage = 3.0
+type = 0
+energy_drain = 0
+anim_time = 0.0
+anim_duration = 0.45
+spark_time = 0.0
+spark_offset = Vector2(0, 0)
+shake_time = 0.0
+shake_duration = 0.5
+shake_amplitude = Vector2(8, 0)
+shake_time_scale = 2.0
+hit_sound = ExtResource("25_uiucn")
+hit_sound_time = 0.0
+miss_sound_time = 0.0
+palfx_material = ExtResource("7_gtc6k")
+palfx_time = 0.0
+palfx_duration = 0.3
+toast_time = 0.3
+metadata/_custom_type_script = "uid://ca234sc5bry72"
+
+[sub_resource type="Resource" id="Resource_a8w6i"]
+script = ExtResource("9_vg70b")
+animation_only = false
+fixed_damage = false
+base_damage = 2.0
+type = 0
+energy_drain = 0
+anim_time = 0.0
+anim_duration = 0.45
+spark_time = 0.0
+spark_offset = Vector2(0, 0)
+shake_time = 0.0
+shake_duration = 0.5
+shake_amplitude = Vector2(8, 0)
+shake_time_scale = 2.0
+hit_sound = ExtResource("25_uiucn")
+hit_sound_time = 0.0
+miss_sound_time = 0.0
+palfx_material = ExtResource("7_gtc6k")
+palfx_time = 0.0
+palfx_duration = 0.3
+toast_time = 0.3
+metadata/_custom_type_script = "uid://ca234sc5bry72"
+
+[sub_resource type="Gradient" id="Gradient_dtuu3"]
+offsets = PackedFloat32Array(0.185185, 0.712963, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.386364, 0.386364, 0.386364, 1, 0, 0, 0, 1)
+
 [node name="Pickman" instance=ExtResource("1_puo4q")]
 id = 16
 display_name = "Pickman"
@@ -217,6 +288,7 @@ experience = 2
 icon = ExtResource("3_psao1")
 menu_texture = ExtResource("4_svurb")
 unique_command = NodePath("Battler/Actions/Feast")
+breakdown_status = ExtResource("5_gkt37")
 starting_weapon_id = "old_tombstone"
 starting_armor_id = "ruby_braces"
 
@@ -231,15 +303,16 @@ description = "Attack with your equipped weapon"
 
 [node name="Feast" type="Node" parent="Battler/Actions" index="1"]
 script = ExtResource("5_beduq")
+heal_factor = 1.0
 hit = SubResource("Resource_jh7if")
 heal_sound = ExtResource("11_7c63i")
-long_description = "Deal reduced damage to an enemy to recover some HP/SP."
+long_description = "Deal minor damage to an enemy to recover some HP and SP."
 display_name = "Feast"
 description = "Deal reduced damage to an enemy to recover some HP/SP."
 
 [node name="TaxingTouch" type="Node" parent="Battler/Actions/Skill" index="0"]
 script = ExtResource("4_col3m")
-damage_factor = 0.75
+delay = 50
 hit = SubResource("Resource_nr4ru")
 display_name = "Taxing Touch"
 description = "Damage an enemy and impair its movement. Their next action will be delayed."
@@ -247,8 +320,6 @@ energy_cost = 10
 
 [node name="SlabSlam" type="Node" parent="Battler/Actions/Skill" index="1"]
 script = ExtResource("5_5kqwp")
-power = 10.0
-line_power = 5.0
 channel_sound = ExtResource("15_1ocom")
 throw_sound = ExtResource("16_spx3k")
 jump_sound = ExtResource("17_0ybgc")
@@ -288,6 +359,36 @@ position = Vector2(14, 1)
 
 [node name="Anim" parent="." index="1" instance=ExtResource("4_pfdmg")]
 use_parent_material = true
+
+[node name="BreakdownManager" type="Node2D" parent="." index="2"]
+script = ExtResource("24_dtuu3")
+breakdown_material = SubResource("ShaderMaterial_qm3yp")
+
+[node name="AI" type="Node" parent="BreakdownManager" index="0"]
+script = ExtResource("23_wy2w2")
+metadata/_custom_type_script = "uid://cfaj5of5o0eks"
+
+[node name="SelfHit" type="Node" parent="BreakdownManager/AI" index="0"]
+script = ExtResource("24_p66fx")
+hit = SubResource("Resource_gkt37")
+metadata/_custom_type_script = "uid://cfqlch6ugjaf1"
+
+[node name="DoubleEdged" type="Node" parent="BreakdownManager/AI" index="1"]
+script = ExtResource("25_a8w6i")
+hit = SubResource("Resource_a8w6i")
+metadata/_custom_type_script = "uid://cfqlch6ugjaf1"
+
+[node name="Particles" type="CPUParticles2D" parent="BreakdownManager" index="1"]
+visible = false
+position = Vector2(0, -18)
+emission_shape = 4
+emission_points = PackedVector2Array(-20, -5, -20, -4, -20, -3, -20, -2, -20, -1, -20, 0, -20, 1, -20, 2, -20, 3, -20, 4, -19, -8, -19, -7, -19, -6, -19, -5, -19, -4, -19, -3, -19, -2, -19, -1, -19, 0, -19, 1, -19, 2, -19, 3, -19, 4, -19, 5, -19, 6, -19, 7, -18, -10, -18, -9, -18, -8, -18, -7, -18, -6, -18, -5, -18, 4, -18, 5, -18, 6, -18, 7, -18, 8, -18, 9, -17, -11, -17, -10, -17, -9, -17, -8, -17, 7, -17, 8, -17, 9, -17, 10, -16, -13, -16, -12, -16, -11, -16, -10, -16, 9, -16, 10, -16, 11, -16, 12, -15, -14, -15, -13, -15, -12, -15, -11, -15, 10, -15, 11, -15, 12, -15, 13, -14, -15, -14, -14, -14, -13, -14, 12, -14, 13, -14, 14, -13, -16, -13, -15, -13, -14, -13, 13, -13, 14, -13, 15, -12, -16, -12, -15, -12, 14, -12, 15, -11, -17, -11, -16, -11, -15, -11, 14, -11, 15, -11, 16, -10, -18, -10, -17, -10, -16, -10, 15, -10, 16, -10, 17, -9, -18, -9, -17, -9, 16, -9, 17, -8, -19, -8, -18, -8, -17, -8, 16, -8, 17, -8, 18, -7, -19, -7, -18, -7, 17, -7, 18, -6, -19, -6, -18, -6, 17, -6, 18, -5, -20, -5, -19, -5, -18, -5, 17, -5, 18, -5, 19, -4, -20, -4, -19, -4, 18, -4, 19, -3, -20, -3, -19, -3, 18, -3, 19, -2, -20, -2, -19, -2, 18, -2, 19, -1, -20, -1, -19, -1, 18, -1, 19, 0, -20, 0, -19, 0, 18, 0, 19, 1, -20, 1, -19, 1, 18, 1, 19, 2, -20, 2, -19, 2, 18, 2, 19, 3, -20, 3, -19, 3, 18, 3, 19, 4, -20, 4, -19, 4, -18, 4, 17, 4, 18, 4, 19, 5, -19, 5, -18, 5, 17, 5, 18, 6, -19, 6, -18, 6, 17, 6, 18, 7, -19, 7, -18, 7, -17, 7, 16, 7, 17, 7, 18, 8, -18, 8, -17, 8, 16, 8, 17, 9, -18, 9, -17, 9, -16, 9, 15, 9, 16, 9, 17, 10, -17, 10, -16, 10, -15, 10, 14, 10, 15, 10, 16, 11, -16, 11, -15, 11, 14, 11, 15, 12, -16, 12, -15, 12, -14, 12, 13, 12, 14, 12, 15, 13, -15, 13, -14, 13, -13, 13, 12, 13, 13, 13, 14, 14, -14, 14, -13, 14, -12, 14, -11, 14, 10, 14, 11, 14, 12, 14, 13, 15, -13, 15, -12, 15, -11, 15, -10, 15, 9, 15, 10, 15, 11, 15, 12, 16, -11, 16, -10, 16, -9, 16, -8, 16, 7, 16, 8, 16, 9, 16, 10, 17, -10, 17, -9, 17, -8, 17, -7, 17, -6, 17, -5, 17, 4, 17, 5, 17, 6, 17, 7, 17, 8, 17, 9, 18, -8, 18, -7, 18, -6, 18, -5, 18, -4, 18, -3, 18, -2, 18, -1, 18, 0, 18, 1, 18, 2, 18, 3, 18, 4, 18, 5, 18, 6, 18, 7, 19, -5, 19, -4, 19, -3, 19, -2, 19, -1, 19, 0, 19, 1, 19, 2, 19, 3, 19, 4)
+emission_colors = PackedColorArray()
+gravity = Vector2(0, 0)
+radial_accel_min = -30.0
+radial_accel_max = -30.0
+color = Color(0.643857, 0.451979, 0.958747, 1)
+color_ramp = SubResource("Gradient_dtuu3")
 
 [editable path="Battler"]
 [editable path="Battler/Actions/Skill/SlabSlam/LineOfEffect"]

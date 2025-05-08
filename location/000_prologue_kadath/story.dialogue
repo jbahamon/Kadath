@@ -23,15 +23,18 @@ Pickman: Everyone else is gone...
 
 ~ entrance_carter_1
 Carter: At last, we have arrived. Let us finish this.
-Pickman: Still want to do this?
 => END
 
 ~ entrance_carter_2
+Pickman: Still want to do this?
+=> END
+
+~ entrance_carter_3
 Carter: I must.
 => END
 
 ~ starting_instructions
-Move around with [{ui_up}]/[{ui_left}]/[{ui_down}]/[{ui_right}]. You can interact with individuals and objects with [{ui_accept}], and cancel with [{ui_cancel}]. Run with [{action_run}]
+Move around with [{ui_up}]/[{ui_left}]/[{ui_down}]/[{ui_right}]. You can interact with individuals and objects with [{ui_accept}], and cancel with [{ui_cancel}]. Run with [{action_run}].
 => END
 
 ~ idle_pickman
@@ -101,7 +104,7 @@ Though there is no wind in here, these eery flames continuously dance and flicke
 => END!
 
 ~ cauldron
-The halls are permeated by a sort of phosphorescence. These lamps are for purely decorative purposes. Perhaps ritualistic.
+The halls are permeated by a sort of phosphorescence. These lamps are purely for decorative purposes. Perhaps ritualistic.
 => END!
 
 ~ statue_disabled
@@ -113,7 +116,7 @@ A double-headed statue. Its amphora is pouring a suspicious red liquid.
 => END!
 
 ~ acolyte_remains
-Blood stained clothes. All that remains of a willing participant in a ritual sacrifice.
+Blood-stained clothes. All that remains of a willing participant in a ritual sacrifice.
 => END!
 
 ~ pushing_barrier

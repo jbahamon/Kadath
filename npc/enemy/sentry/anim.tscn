@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cgc5b4s47chs0"]
 
-[ext_resource type="Script" path="res://npc/lib/anim/non_turning_anim.gd" id="1_g611a"]
+[ext_resource type="Script" uid="uid://b4gb2rtrc52xq" path="res://npc/lib/anim/non_turning_anim.gd" id="1_g611a"]
 [ext_resource type="Texture2D" uid="uid://cn7o7tftooxpt" path="res://npc/enemy/sentry/sentry.png" id="2_qdfl1"]
 
 [sub_resource type="Animation" id="Animation_p4ctn"]
@@ -59,9 +59,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gwp5b"]
 _data = {
-"attack": SubResource("Animation_p4ctn"),
-"idle": SubResource("Animation_hbp26"),
-"walk": SubResource("Animation_oqr35")
+&"attack": SubResource("Animation_p4ctn"),
+&"idle": SubResource("Animation_hbp26"),
+&"walk": SubResource("Animation_oqr35")
 }
 
 [node name="Anim" type="Marker2D"]

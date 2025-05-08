@@ -1,6 +1,6 @@
 [gd_scene load_steps=212 format=3 uid="uid://cv5wwoeq1pjb7"]
 
-[ext_resource type="Script" path="res://npc/lib/anim/character_anim.gd" id="1_ibgvo"]
+[ext_resource type="Script" uid="uid://cp4ww8nq2gt" path="res://npc/lib/anim/character_anim.gd" id="1_ibgvo"]
 [ext_resource type="Texture2D" uid="uid://dlvuo81uss6l2" path="res://party/pickman/spritesheet - alt.png" id="2_oruxv"]
 
 [sub_resource type="Animation" id="Animation_qarlf"]
@@ -364,6 +364,74 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [Vector2i(0, 39), Vector2i(1, 39)]
+}
+
+[sub_resource type="Animation" id="Animation_gnxd5"]
+resource_name = "defend_east"
+length = 0.9
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(1, 29)]
+}
+
+[sub_resource type="Animation" id="Animation_wqqst"]
+resource_name = "defend_north"
+length = 0.9
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 29)]
+}
+
+[sub_resource type="Animation" id="Animation_2e71w"]
+resource_name = "defend_south"
+length = 0.9
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(2, 29)]
+}
+
+[sub_resource type="Animation" id="Animation_ry7mt"]
+resource_name = "defend_west"
+length = 0.9
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(3, 29)]
 }
 
 [sub_resource type="Animation" id="Animation_r77ty"]
@@ -1151,7 +1219,7 @@ tracks/0/path = NodePath("Sprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.9),
+"times": PackedFloat32Array(0, 0.2, 0.9),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [Vector2i(0, 2), Vector2i(2, 12), Vector2i(0, 2)]
@@ -1229,151 +1297,83 @@ tracks/0/keys = {
 "values": [Vector2i(0, 7), Vector2i(1, 7), Vector2i(2, 7), Vector2i(3, 7), Vector2i(4, 7), Vector2i(5, 7)]
 }
 
-[sub_resource type="Animation" id="Animation_wqqst"]
-resource_name = "defend_north"
-length = 0.9
-step = 0.0166667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(0, 29)]
-}
-
-[sub_resource type="Animation" id="Animation_gnxd5"]
-resource_name = "defend_east"
-length = 0.9
-step = 0.0166667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(1, 29)]
-}
-
-[sub_resource type="Animation" id="Animation_2e71w"]
-resource_name = "defend_south"
-length = 0.9
-step = 0.0166667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(2, 29)]
-}
-
-[sub_resource type="Animation" id="Animation_ry7mt"]
-resource_name = "defend_west"
-length = 0.9
-step = 0.0166667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(3, 29)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gdtcw"]
 _data = {
-"RESET": SubResource("Animation_qarlf"),
-"attack_east": SubResource("Animation_8o2ea"),
-"attack_north": SubResource("Animation_ahq2e"),
-"attack_south": SubResource("Animation_bghb4"),
-"attack_west": SubResource("Animation_2quch"),
-"battle_idle_east": SubResource("Animation_aq4sd"),
-"battle_idle_north": SubResource("Animation_51hy3"),
-"battle_idle_south": SubResource("Animation_j4nk8"),
-"battle_idle_west": SubResource("Animation_g4hwa"),
-"battle_tired_east": SubResource("Animation_x08jw"),
-"battle_tired_north": SubResource("Animation_562xw"),
-"battle_tired_south": SubResource("Animation_eqsab"),
-"battle_tired_west": SubResource("Animation_6in78"),
-"crit_east": SubResource("Animation_vrc2y"),
-"crit_north": SubResource("Animation_25igp"),
-"crit_south": SubResource("Animation_boyo7"),
-"crit_start_east": SubResource("Animation_0pw8s"),
-"crit_start_north": SubResource("Animation_duua0"),
-"crit_start_south": SubResource("Animation_exus2"),
-"crit_start_west": SubResource("Animation_o34jg"),
-"crit_west": SubResource("Animation_nes51"),
-"defend_east": SubResource("Animation_gnxd5"),
-"defend_north": SubResource("Animation_wqqst"),
-"defend_south": SubResource("Animation_2e71w"),
-"defend_west": SubResource("Animation_ry7mt"),
-"downed_east": SubResource("Animation_r77ty"),
-"downed_north": SubResource("Animation_aat5u"),
-"downed_south": SubResource("Animation_lko33"),
-"downed_west": SubResource("Animation_cnl2q"),
-"feast_east": SubResource("Animation_kitb8"),
-"feast_north": SubResource("Animation_otdjf"),
-"feast_south": SubResource("Animation_3v3dr"),
-"feast_west": SubResource("Animation_7vwhr"),
-"hit_east": SubResource("Animation_pj83c"),
-"hit_north": SubResource("Animation_tgbha"),
-"hit_south": SubResource("Animation_f2qhq"),
-"hit_west": SubResource("Animation_e68a5"),
-"idle_east": SubResource("2"),
-"idle_north": SubResource("3"),
-"idle_south": SubResource("1"),
-"idle_west": SubResource("4"),
-"interact_east": SubResource("Animation_4lyty"),
-"interact_north": SubResource("Animation_omrtw"),
-"interact_south": SubResource("Animation_uu176"),
-"interact_west": SubResource("Animation_egjvf"),
-"jump_back_east": SubResource("Animation_t30xg"),
-"jump_back_north": SubResource("Animation_tfgy1"),
-"jump_back_south": SubResource("Animation_fh30d"),
-"jump_back_west": SubResource("Animation_xwghp"),
-"run_east": SubResource("Animation_bnqbg"),
-"run_north": SubResource("Animation_eed27"),
-"run_south": SubResource("Animation_wjtjm"),
-"run_west": SubResource("Animation_o7v78"),
-"slam_hit_east": SubResource("Animation_3ajpj"),
-"slam_hit_north": SubResource("Animation_r8cce"),
-"slam_hit_south": SubResource("Animation_hk1ph"),
-"slam_hit_west": SubResource("Animation_tmaie"),
-"slam_jump_east": SubResource("Animation_sgryv"),
-"slam_jump_north": SubResource("Animation_t8adi"),
-"slam_jump_south": SubResource("Animation_pgv5m"),
-"slam_jump_west": SubResource("Animation_j2043"),
-"slam_start_east": SubResource("Animation_jocuo"),
-"slam_start_north": SubResource("Animation_uxc5s"),
-"slam_start_south": SubResource("Animation_1ri0l"),
-"slam_start_west": SubResource("Animation_krfsa"),
-"spin": SubResource("Animation_ya6d0"),
-"taxing_touch_east": SubResource("Animation_r2sxs"),
-"taxing_touch_north": SubResource("Animation_vg0tm"),
-"taxing_touch_south": SubResource("Animation_x7c4o"),
-"taxing_touch_west": SubResource("Animation_lkc7v"),
-"use_item": SubResource("Animation_0imr7"),
-"walk_east": SubResource("6"),
-"walk_north": SubResource("7"),
-"walk_south": SubResource("5"),
-"walk_west": SubResource("8")
+&"RESET": SubResource("Animation_qarlf"),
+&"attack_east": SubResource("Animation_8o2ea"),
+&"attack_north": SubResource("Animation_ahq2e"),
+&"attack_south": SubResource("Animation_bghb4"),
+&"attack_west": SubResource("Animation_2quch"),
+&"battle_idle_east": SubResource("Animation_aq4sd"),
+&"battle_idle_north": SubResource("Animation_51hy3"),
+&"battle_idle_south": SubResource("Animation_j4nk8"),
+&"battle_idle_west": SubResource("Animation_g4hwa"),
+&"battle_tired_east": SubResource("Animation_x08jw"),
+&"battle_tired_north": SubResource("Animation_562xw"),
+&"battle_tired_south": SubResource("Animation_eqsab"),
+&"battle_tired_west": SubResource("Animation_6in78"),
+&"crit_east": SubResource("Animation_vrc2y"),
+&"crit_north": SubResource("Animation_25igp"),
+&"crit_south": SubResource("Animation_boyo7"),
+&"crit_start_east": SubResource("Animation_0pw8s"),
+&"crit_start_north": SubResource("Animation_duua0"),
+&"crit_start_south": SubResource("Animation_exus2"),
+&"crit_start_west": SubResource("Animation_o34jg"),
+&"crit_west": SubResource("Animation_nes51"),
+&"defend_east": SubResource("Animation_gnxd5"),
+&"defend_north": SubResource("Animation_wqqst"),
+&"defend_south": SubResource("Animation_2e71w"),
+&"defend_west": SubResource("Animation_ry7mt"),
+&"downed_east": SubResource("Animation_r77ty"),
+&"downed_north": SubResource("Animation_aat5u"),
+&"downed_south": SubResource("Animation_lko33"),
+&"downed_west": SubResource("Animation_cnl2q"),
+&"feast_east": SubResource("Animation_kitb8"),
+&"feast_north": SubResource("Animation_otdjf"),
+&"feast_south": SubResource("Animation_3v3dr"),
+&"feast_west": SubResource("Animation_7vwhr"),
+&"hit_east": SubResource("Animation_pj83c"),
+&"hit_north": SubResource("Animation_tgbha"),
+&"hit_south": SubResource("Animation_f2qhq"),
+&"hit_west": SubResource("Animation_e68a5"),
+&"idle_east": SubResource("2"),
+&"idle_north": SubResource("3"),
+&"idle_south": SubResource("1"),
+&"idle_west": SubResource("4"),
+&"interact_east": SubResource("Animation_4lyty"),
+&"interact_north": SubResource("Animation_omrtw"),
+&"interact_south": SubResource("Animation_uu176"),
+&"interact_west": SubResource("Animation_egjvf"),
+&"jump_back_east": SubResource("Animation_t30xg"),
+&"jump_back_north": SubResource("Animation_tfgy1"),
+&"jump_back_south": SubResource("Animation_fh30d"),
+&"jump_back_west": SubResource("Animation_xwghp"),
+&"run_east": SubResource("Animation_bnqbg"),
+&"run_north": SubResource("Animation_eed27"),
+&"run_south": SubResource("Animation_wjtjm"),
+&"run_west": SubResource("Animation_o7v78"),
+&"slam_hit_east": SubResource("Animation_3ajpj"),
+&"slam_hit_north": SubResource("Animation_r8cce"),
+&"slam_hit_south": SubResource("Animation_hk1ph"),
+&"slam_hit_west": SubResource("Animation_tmaie"),
+&"slam_jump_east": SubResource("Animation_sgryv"),
+&"slam_jump_north": SubResource("Animation_t8adi"),
+&"slam_jump_south": SubResource("Animation_pgv5m"),
+&"slam_jump_west": SubResource("Animation_j2043"),
+&"slam_start_east": SubResource("Animation_jocuo"),
+&"slam_start_north": SubResource("Animation_uxc5s"),
+&"slam_start_south": SubResource("Animation_1ri0l"),
+&"slam_start_west": SubResource("Animation_krfsa"),
+&"spin": SubResource("Animation_ya6d0"),
+&"taxing_touch_east": SubResource("Animation_r2sxs"),
+&"taxing_touch_north": SubResource("Animation_vg0tm"),
+&"taxing_touch_south": SubResource("Animation_x7c4o"),
+&"taxing_touch_west": SubResource("Animation_lkc7v"),
+&"use_item": SubResource("Animation_0imr7"),
+&"walk_east": SubResource("6"),
+&"walk_north": SubResource("7"),
+&"walk_south": SubResource("5"),
+&"walk_west": SubResource("8")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n82ft"]
@@ -1967,7 +1967,7 @@ animation_names = Array[String](["idle", "walk", "run", "attack", "jump_back", "
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_gdtcw")
+&"": SubResource("AnimationLibrary_gdtcw")
 }
 autoplay = "idle_south"
 

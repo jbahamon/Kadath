@@ -4,8 +4,6 @@
 extends Node2D
 class_name PartyMember
 
-var PartyMemberSummary = preload("res://ui/02_molecules/party_member_summary/party_member_summary.tscn")
-
 signal move_to_done
 
 enum Id {
@@ -42,6 +40,7 @@ const PARTY_IN_BATTLE_ID = {
 @export var icon: Texture2D
 @export var menu_texture: Texture2D
 @export var unique_command: NodePath
+@export var breakdown_status: GDScript
 
 @export var starting_weapon_id: String
 @export var starting_armor_id: String
@@ -51,17 +50,16 @@ var equipped_weapon: Weapon
 var equipped_armor: Armor
 var equipped_accessory: Accessory
 
-
 var current_orientation = Vector2.DOWN
 var velocity: Vector2 = Vector2.ZERO
 
 var max_health:
 	get:
-		return self.battler.stats.max_health
+		return self.battler.stats.max_health + self.health_bonus
 
 var max_energy:
 	get:
-		return self.battler.stats.max_energy
+		return self.battler.stats.max_energy + self.energy_bonus
 
 var health:
 	get:
@@ -77,22 +75,62 @@ var level: int:
 			return -1
 		
 		return battler.stats.level
-	
-var physical_attack_bonus: float:
+
+var health_bonus: float:
 	get:
-		return float(equipped_weapon.attack if equipped_weapon != null else 0)
-	
-var physical_armor: float:
+		return (
+			float(equipped_weapon.health_bonus if equipped_weapon != null else 0) +
+			float(equipped_armor.health_bonus if equipped_armor != null else 0) +
+			float(equipped_accessory.health_bonus if equipped_accessory != null else 0)
+		)
+		
+var energy_bonus: float:
 	get:
-		return float(
-			(equipped_armor.defense if equipped_armor != null else 0)
+		return (
+			float(equipped_weapon.energy_bonus if equipped_weapon != null else 0) +
+			float(equipped_armor.energy_bonus if equipped_armor != null else 0) +
+			float(equipped_accessory.energy_bonus if equipped_accessory != null else 0)
+		)	
+var attack_bonus: float:
+	get:
+		return (
+			float(equipped_weapon.attack_bonus if equipped_weapon != null else 0) +
+			float(equipped_armor.attack_bonus if equipped_armor != null else 0) +
+			float(equipped_accessory.attack_bonus if equipped_accessory != null else 0)
 		)
 	
-var magic_armor: float:
+var defense_bonus: float:
 	get:
 		return float(
-			(equipped_armor.magic_defense if equipped_armor != null else 0)
+			float(equipped_weapon.defense_bonus if equipped_weapon != null else 0) +
+			float(equipped_armor.defense_bonus if equipped_armor != null else 0) +
+			float(equipped_accessory.defense_bonus if equipped_accessory != null else 0)
 		)
+
+var magic_attack_bonus: float:
+	get:
+		return float(
+			float(equipped_weapon.magic_attack_bonus if equipped_weapon != null else 0) +
+			float(equipped_armor.magic_attack_bonus if equipped_armor != null else 0) +
+			float(equipped_accessory.magic_attack_bonus if equipped_accessory != null else 0)
+		)
+
+var magic_defense_bonus: float:
+	get:
+		return float(
+			float(equipped_weapon.magic_defense_bonus if equipped_weapon != null else 0) +
+			float(equipped_armor.magic_defense_bonus if equipped_armor != null else 0) +
+			float(equipped_accessory.magic_defense_bonus if equipped_accessory != null else 0)
+		)
+
+var speed_bonus: float:
+	get:
+		return float(
+			float(equipped_weapon.speed_bonus if equipped_weapon != null else 0) +
+			float(equipped_armor.speed_bonus if equipped_armor != null else 0) +
+			float(equipped_accessory.speed_bonus if equipped_accessory != null else 0)
+		)
+
 
 var is_alive: bool :
 	get:
@@ -105,8 +143,9 @@ var in_battle_id: String:
 var move_timer
 
 func _ready():
-	assert(growth)
+	
 	self.set_physics_process(false)
+	growth.initialize()
 	battler.stats = growth.create_stats(experience)
 	battler.reset_stats()
 	
@@ -146,9 +185,9 @@ func save(save_data: SaveData):
 	save_data.data[SAVE_KEY] = {
 		"display_name": display_name,
 		"unlocked": unlocked,
-		"equipped_weapon": equipped_weapon.id if equipped_weapon != null else null,
-		"equipped_armor": equipped_armor.id if equipped_armor != null else null,
-		"equipped_accessory": equipped_accessory.id if equipped_accessory != null else null,
+		"equipped_weapon": equipped_weapon.id if equipped_weapon != null else "",
+		"equipped_armor": equipped_armor.id if equipped_armor != null else "",
+		"equipped_accessory": equipped_accessory.id if equipped_accessory != null else "",
 		"experience": experience,
 		"health": battler.health,
 		"energy": battler.energy,
@@ -176,30 +215,29 @@ func load_game_data(save_data: SaveData):
 func unlock_skill(skill_id: String):
 	self.find_child("Battler/Actions/Skill/%s".format(skill_id)).unlock()
 
-func instance_ui_control():
-	var control = PartyMemberSummary.instantiate()
-	control.party_member = self
-	return control
-
 # Methods for battles	
 	
 func get_allies(actors: Array):
+	if self.battler.status_effects.targeting_changed:
+		return self.battler.status_effects.get_allies(actors)
 	return actors.filter(func(actor): return actor is PartyMember)
 	
 func get_enemies(actors: Array):
+	if self.battler.status_effects.targeting_changed:
+		return self.battler.status_effects.get_enemies(actors)
 	return actors.filter(func(actor): return not actor is PartyMember)
 	
 func take_hit(actor, hit: Hit, in_battle: bool = true):
 	return await self.battler.take_hit(actor, hit, in_battle)
 
 func heal(amount: int, in_battle: bool = true):
-	await self.battler.heal(amount, in_battle)
+	return self.battler.heal(amount, in_battle)
 	
 func recover_energy(amount: int, in_battle: bool = true):
-	await self.battler.recover_energy(amount, in_battle)
+	return self.battler.recover_energy(amount, in_battle)
 	
 func show_toast(text: String, color: Color=Color.WHITE):
-	await self.battler.show_toast(text, color)	
+	return self.battler.show_toast(text, color)	
 
 func get_current_anim():
 	return self.anim.get_current_anim()
@@ -262,3 +300,16 @@ func on_battle_start():
 
 func on_battle_end():
 	self.battler.on_battle_end()
+
+func on_equipment_updated():
+	if self.battler.health > self.max_health:
+		self.battler.set_health(self.battler.health)
+	if self.battler.energy > self.max_energy:
+		self.battler.set_energy(self.battler.energy)
+
+func start_breakdown():
+	await $BreakdownManager.start()
+
+func stop_breakdown(battle_ended):
+	await $BreakdownManager.stop(battle_ended)
+	

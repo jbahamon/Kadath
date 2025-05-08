@@ -57,16 +57,17 @@ func pop_parameter() -> bool:
 	
 func execute(actor):
 	actor.play_anim("use_item")
-	# TODO Note that this action is not in the tree, so we have to move the sparkle to the actor
-	await actor.get_tree().create_timer(0.3).timeout
+	await actor.get_tree().create_timer(0.4).timeout
 	FXService.play_sfx_at(self.base_use_sound, actor.global_position)
 	
 	actor.add_child(self.sparkle)
+	self.particles.restart()
+
+	self.sparkle.offset = Vector2(-7, -57)
+	self.particles.position = Vector2(0, -50)
+
 	self.sparkle.visible = true
 	self.particles.emitting = true
-	
-	self.sparkle.offset = Vector2(-7, -47)
-	self.particles.position = Vector2(0, -40)
 
 	var tween = actor.get_tree().create_tween().set_parallel(true)
 	tween.tween_property(self.sparkle, "offset", Vector2(-7, -97), 0.75)
@@ -94,13 +95,16 @@ func execute(actor):
 	self.reset()
 
 func highlight_option(_actor, option):
-	if option is Array or self.item == null or not self.item.needs_targets():
+	if self.item == null: # this is an item option
+		BattleService.announce(ItemService.id_to_item(option[0]).description)
+	
+	if option is Array or not self.item.needs_targets():
 		return
 
 	if self.currently_highlighted_targets 	!= option:
 		self.stop_highlight()
 		self.start_highlight(option)
-		
+			
 func start_highlight(option):
 	self.currently_highlighted_targets = option
 	

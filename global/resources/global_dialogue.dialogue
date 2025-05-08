@@ -1,0 +1,17 @@
+~ carter_breakdown
+% Carter: Get away from me, you disgusting beasts!
+% Carter: Misshapen, delirious monstrosity!
+% Carter: You're all morbid blasphemies against Nature!
+=> END
+
+~ pickman_breakdown_attack
+% Pickman: My fellow fallen ghouls... I might be seeing you soon.
+% Pickman: Only death awaits us, it seems.
+% Pickman: There's no way out of this.
+=> END
+
+~ pickman_breakdown_hurt
+% Pickman: So many ghouls have perished in this quest... It's my fault, isn't it?
+% Pickman: If only I was... better... 
+% Pickman: My penance, for leading so many into death.
+=> END

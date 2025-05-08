@@ -1,6 +1,5 @@
 extends "res://battle/action/simple_single_target.gd"
 
-@export var normal_attack_factor = 0.5
 @export var heal_factor = 0.75
 @export var energy_gain_factor = 0.1
 @export var hit: Hit
@@ -17,7 +16,7 @@ func execute(actor):
 	actor.play_anim("feast")
 	await get_tree().create_timer(0.4).timeout
 	
-	hit.base_damage = actor.battler.physical_attack * self.normal_attack_factor
+	self.hit.offensive_damage_factor = self.default_offensive_damage_factor(actor.battler, hit)
 	await self.target.take_hit(actor, hit)
 	actor.play_anim("battle_idle")
 	# For balance, we could make it so it heals less with each use. 

@@ -15,7 +15,8 @@ func show_menu():
 		new_game_button.focus_neighbor_top = new_game_button.get_path_to(continue_button)
 	self.show()
 	
-	button.focus_entered.disconnect(UIService.play_focus_sound)
+	if button.focus_entered.is_connected(UIService.play_focus_sound):
+		button.focus_entered.disconnect(UIService.play_focus_sound)
 	button.grab_focus()
 	button.grab_click_focus()
 	button.focus_entered.connect(UIService.play_focus_sound)
@@ -25,3 +26,8 @@ func hide_menu():
 
 func update_menu():
 	pass
+	
+func disable_buttons():
+	for button in get_node("HBoxContainer/Menu Options").get_children():
+		if button.has_focus():
+			button.release_focus()

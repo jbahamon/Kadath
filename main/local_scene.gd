@@ -1,6 +1,7 @@
 extends Node2D
 class_name LocalScene
 
+@export var debug: bool
 func _ready() -> void:
 	
 	# These initializations don't depend on anything, so they can go in any order
@@ -29,7 +30,7 @@ func _ready() -> void:
 			"MIX": $SubViewportContainer/SubViewport/OverlayLayer/Mix,
 			"ADD": $SubViewportContainer/SubViewport/OverlayLayer/Add,
 			"CAMERA_BG": $SubViewportContainer/SubViewport/BGLayer/CameraBG,
-			"CUTSCENE_PAUSE": $NarrationLayer/CutscenePauseBG
+			"CUTSCENE_PAUSE": $PopupLayer/CutscenePauseBG
 		}
 	)
 	UIService.initialize(
@@ -51,23 +52,41 @@ func _ready() -> void:
 	EntitiesService.bind_proxy()
 	
 func move_to_starting_room():
+	
+	
 	if VarsService.loaded_slot >= 0:
 		SavesService.load_game_data(VarsService.loaded_slot)
 		VarsService.loaded_slot = -1
 	else:
 		VarsService.scan_level = 2
 		# Note: move start_game to the above when doing the cutscene intro
-		await EnvironmentService.update_whereabouts(
-			"000_prologue_kadath", #"999_tests", 
-			"05_boss_room",
-			Vector2(0, 0),
-			Vector2.UP,
-			{
-				"fade": false,
-				"play_bgm": false,
-				"end_proxy_state": PlayerProxy.ProxyMode.GAMEPLAY
-			}
-		)
+		
+		if self.debug:
+			
+			await EnvironmentService.update_whereabouts(
+				"999_tests", 
+				"battle",
+				
+				Vector2(0, 0),
+				Vector2.UP,
+				{
+					"fade": false,
+					"play_bgm": false,
+					"end_proxy_state": PlayerProxy.ProxyMode.GAMEPLAY,
+				}
+			)
+		else:
+			await EnvironmentService.update_whereabouts(
+				"000_prologue_kadath", 
+				"01_entrance",
+				Vector2(0, 0),
+				Vector2.UP,
+				{
+					"fade": false,
+					"play_bgm": false,
+					"end_proxy_state": PlayerProxy.ProxyMode.CUTSCENE,
+				}
+			)
 	
 func exit():
 	BattleService.exit()

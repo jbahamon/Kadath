@@ -2,7 +2,7 @@ PLAY_ANIM PROXY idle
 START_DIALOGUE pickman_catch_up
 LOOK PROXY DOWN
 CALL ROOM spawn_pickman
-WALK NPCPickman TO (_, 92) AT 60
+RUN NPCPickman TO (_, 92) AT 90
 START_DIALOGUE pickman_recruit
 WALK NPCPickman TO (_, 70) AT 60
 SIMULTANEOUS
@@ -12,6 +12,5 @@ END
 
 SIMULTANEOUS
 	START_DIALOGUE pickman_join
-	SEQUENTIAL
-		WAIT 0.7
-		CALL ROOM play_fanfare
+	PLAY_SOUND "ui/notification/Mysterious Fanfare - jerry berumen" IN UI
+END

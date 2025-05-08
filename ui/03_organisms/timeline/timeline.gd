@@ -6,6 +6,11 @@ var TimelineItem = preload("res://ui/02_molecules/timeline_item/timeline_item.ts
 @onready var container = $VBoxContainer/Container
 
 func highlight(highlighted_items):
+	if current_actor_icon.battle_actor_id in highlighted_items:
+		current_actor_icon.highlight()
+	else:
+		current_actor_icon.stop_highlight()
+	
 	for timeline_item in self.container.get_children():
 		if timeline_item.battle_actor_id in highlighted_items:
 			timeline_item.highlight()

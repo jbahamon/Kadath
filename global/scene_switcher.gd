@@ -1,20 +1,39 @@
 extends Node
 
-var current_scene = null
+signal scene_loaded
+
+var current_loading_path = ""
 
 func _ready():
-	var root = get_tree().get_root()
-	current_scene = root.get_child(root.get_child_count() - 1)
+	self.process_mode = Node.PROCESS_MODE_ALWAYS
+	self.set_process(false)
 	
-func go_to_scene(path):
-	call_deferred("_deferred_go_to_scene", path)
-	
-func _deferred_go_to_scene(path):
-	current_scene.free()
-	
-	var s = ResourceLoader.load(path)
-	
-	current_scene = s.instantiate()
-	
-	get_tree().get_root().add_child(current_scene)
-	get_tree().set_current_scene(current_scene)
+func load_scene(path):
+	self.current_loading_path = path
+	ResourceLoader.load_threaded_request(path)
+	set_process(true)
+
+func _process(_delta):
+	match ResourceLoader.load_threaded_get_status(self.current_loading_path):
+		ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED:
+			set_process(false)
+			self.scene_loaded.emit()
+			return
+		ResourceLoader.ThreadLoadStatus.THREAD_LOAD_INVALID_RESOURCE:
+			print("resouce invalid: %s" % self.current_loading_path)
+			get_tree().quit()
+			return
+		ResourceLoader.ThreadLoadStatus.THREAD_LOAD_FAILED:
+			print("load failed: %s" % self.current_loading_path)
+			get_tree().quit()
+			return
+		ResourceLoader.ThreadLoadStatus.THREAD_LOAD_IN_PROGRESS:
+			return
+
+func change_scene():
+	var resource = ResourceLoader.load_threaded_get(self.current_loading_path)
+	self.current_loading_path = ""
+	var current_scene = get_tree().current_scene
+	if "exit" in current_scene:
+		current_scene.exit()
+	get_tree().change_scene_to_packed(resource)

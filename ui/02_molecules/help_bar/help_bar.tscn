@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c2opuixudajq"]
 
-[ext_resource type="Script" path="res://ui/02_molecules/help_bar/help_bar.gd" id="1_b12js"]
+[ext_resource type="Script" uid="uid://bvotvqykvyogg" path="res://ui/02_molecules/help_bar/help_bar.gd" id="1_b12js"]
 
 [node name="HelpBar" type="PanelContainer"]
 size_flags_vertical = 4

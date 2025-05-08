@@ -4,9 +4,11 @@ class_name RandomAI
 
 
 func choose_action(actor, _actors: Array):
-	var options = actor.battler.get_action_options()
+	var options: Array = actor.battler.get_action_options().filter(
+		func(option): return not option.is_disabled(actor)
+	)
 	while true:
-		var action = options[0]
+		var action = options.pick_random()
 		if action is CompositeBattleOption:
 			options = action.get_options().filter(
 				func(option): return not option.is_disabled(actor)
@@ -35,6 +37,6 @@ func get_action_parameter(actor, action: BattleAction, actors: Array, argument_s
 	match argument_signature["type"]:
 		BattleAction.ActionArgument.TARGET:
 			var targets = action.get_targets(argument_signature["targeting_type"], actor, actors)
-			return targets[0]
-		BattleAction.ActionArgument.ITEM:
+			return targets.pick_random()
+		_:
 			assert(false) #,"not yet implemented!")

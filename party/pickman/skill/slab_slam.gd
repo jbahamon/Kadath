@@ -1,9 +1,5 @@
 extends "res://battle/action/line_to_target.gd"
 
-
-@export var power: float
-@export var line_power: float
-
 @export var channel_sound: AudioStream
 @export var throw_sound: AudioStream
 @export var jump_sound: AudioStream
@@ -99,9 +95,8 @@ func jump_back(actor, original_position, weapon_offset):
 	actor.play_anim("battle_idle")
 
 func do_hits(actor, targets):
-	main_hit.base_damage = (actor.battler.stats.level + actor.battler.stats.magic_attack) * self.power
-
-	secondary_hit.base_damage = (actor.battler.stats.level + actor.battler.stats.magic_attack) * self.line_power
+	main_hit.offensive_damage_factor = self.default_offensive_damage_factor(actor.battler, main_hit)
+	secondary_hit.offensive_damage_factor = self.default_offensive_damage_factor(actor.battler, secondary_hit)
 			
 	var hits = [
 		func (): await self.target.take_hit(actor, main_hit)

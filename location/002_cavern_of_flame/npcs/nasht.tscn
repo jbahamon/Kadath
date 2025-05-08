@@ -1,19 +1,19 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=5 format=3 uid="uid://dlvfp6gw5ylce"]
 
 [ext_resource type="PackedScene" uid="uid://c17hneqpuil0l" path="res://npc/lib/base_npc.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://cpnhesu82pyxs" path="res://location/002_cavern_of_flame/npcs/nasht-sheet.png" id="2"]
-[ext_resource type="Script" path="res://location/002_cavern_of_flame/npcs/nasht.gd" id="3"]
+[ext_resource type="Script" uid="uid://6kjmsxmjrup5" path="res://location/002_cavern_of_flame/npcs/nasht.gd" id="3"]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
+[sub_resource type="AnimationNodeStateMachinePlayback" id="1"]
 
-[node name="Nasht" instance=ExtResource( 1 )]
-script = ExtResource( 3 )
-sprite_sheet = ExtResource( 2 )
+[node name="Nasht" instance=ExtResource("1")]
+script = ExtResource("3")
+sprite_sheet = ExtResource("2")
 dialog_name = "nasht"
 
 [node name="Sprite2D" parent="." index="0"]
 frame = 1
 
 [node name="AnimationTree" parent="." index="3"]
-parameters/playback = SubResource( 1 )
-parameters/idle/blend_position = Vector2( -0.0704012, -0.534483 )
+parameters/playback = SubResource("1")
+parameters/idle/blend_position = Vector2(-0.0704012, -0.534483)

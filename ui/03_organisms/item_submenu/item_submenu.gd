@@ -12,7 +12,7 @@ var PartyMemberListItem = preload("res://ui/02_molecules/party_member_list_item/
 @export var controls_text: String
 
 @onready var categories: Container = $VBoxContainer/HBoxContainer/Categories
-@onready var first_category: Button = $VBoxContainer/HBoxContainer/Categories.get_children()[1]
+@onready var first_category: Button = $VBoxContainer/HBoxContainer/Categories.get_children()[2]
 
 @onready var consumables_button: Button = $VBoxContainer/HBoxContainer/Categories/Consumables
 @onready var equipment_button: Button = $VBoxContainer/HBoxContainer/Categories/Equipment
@@ -21,6 +21,7 @@ var PartyMemberListItem = preload("res://ui/02_molecules/party_member_list_item/
 
 @onready var items = $VBoxContainer/HBoxContainer/ItemsContainer/Items
 @onready var party_list = $VBoxContainer/HBoxContainer/PartyContainer/PartyList
+@onready var item_description = $VBoxContainer/HBoxContainer/ItemsContainer/ItemDescription
 
 var inventory: Inventory
 var current_category = null
@@ -82,6 +83,7 @@ func _on_key_items_focus_entered():
 	self._on_category_focused(ItemService.ItemCategory.KEY)
 
 func _on_category_focused(category: ItemService.ItemCategory):
+	self.item_description.text = ""
 	self.current_category = category
 	self.update_shown_items()
 
@@ -99,7 +101,8 @@ func is_focus_on_categories():
 
 func _on_items_element_focused(ui_element):
 	var item = ItemService.id_to_item(ui_element.item_id)
-	UIService.set_menu_help(item.description, select_controls)
+	UIService.set_menu_help("", select_controls)
+	self.item_description.text = item.description
 
 func _on_items_element_selected(ui_element):
 	self.selected_item = ui_element

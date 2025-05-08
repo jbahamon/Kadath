@@ -3,11 +3,11 @@
 [ext_resource type="PackedScene" uid="uid://bomxx7doloqmu" path="res://party/party_member.tscn" id="1_0oesc"]
 [ext_resource type="Resource" uid="uid://b4nbxe88mk82q" path="res://party/base_growth.tres" id="2_baeor"]
 [ext_resource type="Texture2D" uid="uid://c7iv4j4yioinv" path="res://party/alex/icon.png" id="3_qyy1i"]
-[ext_resource type="Script" path="res://party/alex/skill/crescent_blast.gd" id="4_e2q1k"]
-[ext_resource type="Script" path="res://party/alex/skill/forceful_slash.gd" id="5_cliwo"]
+[ext_resource type="Script" uid="uid://bgo72c6mvhwx0" path="res://party/alex/skill/crescent_blast.gd" id="4_e2q1k"]
+[ext_resource type="Script" uid="uid://cbotvphewy65u" path="res://party/alex/skill/forceful_slash.gd" id="5_cliwo"]
 [ext_resource type="PackedScene" uid="uid://dpj24nx6wivha" path="res://party/alex/anim.tscn" id="5_de00w"]
 [ext_resource type="PackedScene" uid="uid://ttxcbt6u2yh3" path="res://battle/action/util/area_of_effect.tscn" id="5_lilye"]
-[ext_resource type="Script" path="res://party/alex/action/vision.gd" id="6_8uisi"]
+[ext_resource type="Script" uid="uid://fhojw00mhjyp" path="res://party/alex/action/vision.gd" id="6_8uisi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8u0il"]
 radius = 50.0

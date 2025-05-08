@@ -6,6 +6,7 @@ func get_turn(current_actors: Array) -> Turn:
 	var actor = battler.get_parent()
 	var action = null
 	var state = "waiting_for_action"
+	
 	self.interface.reset_options_stack()
 	var options = battler.get_action_options()
 	
@@ -13,7 +14,11 @@ func get_turn(current_actors: Array) -> Turn:
 	
 	UIService.opening_menu = true
 	UIService.play_notification(BattleService.turn_start_sound)
+	self.interface.show_timeline()
 	
+	EntitiesService.battle_turn_indicator.global_position = actor.global_position - Vector2(13, 36)
+	EntitiesService.battle_turn_indicator.visible = true
+
 	self.interface.set_options({
 		"title": "What will %s do?" % battler.get_parent().display_name,
 		"options": options
@@ -39,8 +44,10 @@ func get_turn(current_actors: Array) -> Turn:
 	turn.action = action
 	self.interface.set_info_text(null)
 	self.interface.hide_options()
+	self.interface.hide_timeline()
 	UIService.play_interaction_sound()
-
+	
+	EntitiesService.battle_turn_indicator.visible = false
 	return turn
 
 

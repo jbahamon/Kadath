@@ -29,8 +29,10 @@ func reset() -> void:
 func is_empty() -> bool:
 	return self._elements.size() == 0
 
-func add(actor):
+func add(actor, random_starting_charge=false):
 	var element = TurnQueueElement.new(actor)
+	if random_starting_charge:
+		element.remaining_charge = randi_range(0, CHARGE_TO_ACT)
 	_elements.append(element)
 	
 func erase(actor):

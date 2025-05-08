@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://caki3n35ds5sk"]
 
 [ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="1"]
-[ext_resource type="Script" path="res://ui/02_molecules/party_member_stats/party_member_stats.gd" id="2"]
+[ext_resource type="Script" uid="uid://mgcvax7vx2hg" path="res://ui/02_molecules/party_member_stats/party_member_stats.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://j8a0ncohd3ms" path="res://ui/01_atoms/assets/icons/By John Ivess/small-icon-accessory.png" id="3"]
 [ext_resource type="FontFile" uid="uid://60oeotvtq5qv" path="res://ui/01_atoms/assets/fonts/By Wuchta/Letterstyle(1).ttf" id="3_at0bu"]
 [ext_resource type="Texture2D" uid="uid://dkgwdhrjgti27" path="res://party/carter/menu_sprite.png" id="3_enf6o"]
@@ -28,8 +28,6 @@ layout_mode = 2
 
 [node name="StatsTitle" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
@@ -49,7 +47,11 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Sprite" type="TextureRect" parent="VBoxContainer/SummaryContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/SummaryContainer"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+
+[node name="Sprite" type="TextureRect" parent="VBoxContainer/SummaryContainer/CenterContainer"]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
@@ -73,18 +75,23 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 size_flags_stretch_ratio = 4.0
-columns = 4
+columns = 5
 
 [node name="HPLabel" type="Label" parent="VBoxContainer/SummaryContainer/Stats"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Max HP
-"
+size_flags_vertical = 0
+text = "Max HP"
 
 [node name="HPValue" type="Label" parent="VBoxContainer/SummaryContainer/Stats"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "10"
+
+[node name="Spacer" type="Label" parent="VBoxContainer/SummaryContainer/Stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "   "
 
 [node name="EPLabel" type="Label" parent="VBoxContainer/SummaryContainer/Stats"]
 layout_mode = 2
@@ -106,6 +113,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "10"
 
+[node name="Spacer2" type="Label" parent="VBoxContainer/SummaryContainer/Stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "   "
+
 [node name="MagicAttackLabel" type="Label" parent="VBoxContainer/SummaryContainer/Stats"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -125,6 +137,11 @@ text = "Defense"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "10"
+
+[node name="Spacer3" type="Label" parent="VBoxContainer/SummaryContainer/Stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "   "
 
 [node name="MagicDefenseLabel" type="Label" parent="VBoxContainer/SummaryContainer/Stats"]
 layout_mode = 2
@@ -146,16 +163,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "10"
 
-[node name="LuckLabel" type="Label" parent="VBoxContainer/SummaryContainer/Stats"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Luck"
-
-[node name="LuckValue" type="Label" parent="VBoxContainer/SummaryContainer/Stats"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "10"
-
 [node name="RightFiller" type="Control" parent="VBoxContainer/SummaryContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -165,7 +172,6 @@ layout_mode = 2
 
 [node name="EquipmentTitle" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
@@ -217,6 +223,7 @@ action_mode = 0
 text = "Wooden Stick"
 
 [node name="WeaponStats" type="Label" parent="VBoxContainer/EquipmentContainer/Equipment"]
+custom_minimum_size = Vector2(315, 0)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
@@ -249,6 +256,7 @@ action_mode = 0
 text = "Leather Armor"
 
 [node name="ArmorStats" type="Label" parent="VBoxContainer/EquipmentContainer/Equipment"]
+custom_minimum_size = Vector2(315, 0)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
@@ -281,9 +289,13 @@ toggle_mode = true
 action_mode = 0
 text = "--"
 
-[node name="Control" type="Control" parent="VBoxContainer/EquipmentContainer/Equipment"]
+[node name="AccessoryStats" type="Label" parent="VBoxContainer/EquipmentContainer/Equipment"]
+custom_minimum_size = Vector2(315, 0)
 layout_mode = 2
+size_flags_horizontal = 5
 size_flags_vertical = 3
+text = "15"
+vertical_alignment = 1
 
 [node name="RightFiller" type="Control" parent="VBoxContainer/EquipmentContainer"]
 layout_mode = 2
@@ -294,7 +306,6 @@ layout_mode = 2
 
 [node name="UniqueCommandTitle" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
@@ -302,17 +313,21 @@ theme_override_constants/margin_bottom = 4
 [node name="UniqueCommandLabel" type="Label" parent="VBoxContainer/UniqueCommandTitle"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/line_spacing = 0
 theme_override_fonts/font = ExtResource("3_at0bu")
 theme_override_font_sizes/font_size = 15
 text = "Special Command: Analyze"
 vertical_alignment = 1
 
 [node name="UniqueCommandDescription" type="RichTextLabel" parent="VBoxContainer"]
-custom_minimum_size = Vector2(100, 50)
+custom_minimum_size = Vector2(100, 60)
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.75
 bbcode_enabled = true
 text = "Obtains information about enemies: health, vulnerabilities, behavior and other information. "
 scroll_active = false
+vertical_alignment = 1
 
 [connection signal="pressed" from="VBoxContainer/EquipmentContainer/Equipment/WeaponName" to="." method="on_weapon_clicked"]
 [connection signal="pressed" from="VBoxContainer/EquipmentContainer/Equipment/ArmorName" to="." method="on_armor_clicked"]

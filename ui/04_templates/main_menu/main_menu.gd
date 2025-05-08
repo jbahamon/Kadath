@@ -36,7 +36,16 @@ func _on_Quit_pressed():
 	get_tree().quit()
 
 func _on_New_Game_pressed():
-	SceneSwitcher.go_to_scene("res://main/local_scene.tscn")
+	title_menu.disable_buttons()
+	SceneSwitcher.load_scene("res://main/local_scene.tscn")
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "modulate", Color.BLACK, 0.5)
+	await DoAll.new([
+		SceneSwitcher.scene_loaded,
+		tween.finished
+	]).execute()
+	
+	SceneSwitcher.change_scene()
 
 func _on_Continue_Game_pressed():
 	self.switch_to_menu(saves_menu)

@@ -1,9 +1,10 @@
+SpriteFrames
+DialogueResource
 StyleBoxTexture
 AtlasTexture
 AnimatedTexture
 DownedStatus
 StatusEffect
-SpriteFrames
 Hit
 Weapon
 Equipment
@@ -11,4 +12,3 @@ Armor
 BattleRewards
 ShaderMaterial
 TileSet
-Location

@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="HealingItem" load_steps=3 format=3 uid="uid://bh7kksqadvwqn"]
+
+[ext_resource type="SpriteFrames" uid="uid://cldywdam55ae4" path="res://battle/fx/heal.tres" id="1_4hq3o"]
+[ext_resource type="Script" uid="uid://cmq6ancmxfutp" path="res://item/script/consumable/healing_item.gd" id="2_5ochn"]
+
+[resource]
+script = ExtResource("2_5ochn")
+recovery_mode = 0
+energy_recovery_mode = 1
+health = 0
+energy = 100
+status_effects = Array[String]([])
+battle_offset = Vector2(0, -30)
+battle_fx = ExtResource("1_4hq3o")
+battle_fx_duration = -1.0
+id = "006_archaick_balsam"
+display_name = "Archaick Balsam"
+description = "A substance with a rapturous fragrance. Fully recovers SP."
+max_amount = 99
+category = 0
+target_type = 0
+usable_in_menu = true
+usable_in_battle = true
+consumed_after_use = true

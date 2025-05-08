@@ -6,6 +6,8 @@ extends "res://battle/action/simple_single_target.gd"
 @export var hit: Hit
 
 func execute(actor):
+	self.hit.offensive_damage_factor = self.default_offensive_damage_factor(actor.battler, self.hit)
+	
 	await get_tree().create_timer(0.525).timeout
 	var origin = actor.global_position + Vector2(0, -80)
 	var destination = target.battler.get_hitspot("Center")

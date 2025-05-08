@@ -32,7 +32,7 @@ func execute(actor):
 	BattleService.announce(self.blurb)
 	actor.play_anim("attack")
 	
-	var remaining_hp = self.sacrifice.health
+	var remaining_hp: int = self.sacrifice.health
 	sacrifice_hit.base_damage = remaining_hp
 	
 	(func ():

@@ -61,6 +61,6 @@ func get_all_files(path: String, file_ext := "", files := []):
 class ItemSorter:
 	static func sort_ascending(a: InventoryItem, b: InventoryItem):
 		if a.category != b.category:
-			return a.get_class() < b.get_class()
+			return a.category < b.category
 		else:
-			return a.name < b.name
+			return a.id < b.id

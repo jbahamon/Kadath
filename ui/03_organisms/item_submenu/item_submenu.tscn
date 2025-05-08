@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://cakm1eb2hb4hh"]
 
-[ext_resource type="Script" path="res://ui/03_organisms/item_submenu/item_submenu.gd" id="1"]
+[ext_resource type="Script" uid="uid://b0dy1a07k1r6m" path="res://ui/03_organisms/item_submenu/item_submenu.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dy4u72rn5jlrr" path="res://ui/01_atoms/assets/icons/By ssugmi/icon-items.png" id="3"]
 [ext_resource type="FontFile" uid="uid://c8fvau54sblb1" path="res://ui/01_atoms/assets/fonts/By Wuchta/Letterstyle(1).otf" id="3_5xk2j"]
 [ext_resource type="Texture2D" uid="uid://chqcjur8n17ah" path="res://ui/01_atoms/assets/icons/By ssugmi/icon-party.png" id="3_hpny6"]
@@ -24,9 +24,9 @@ layout_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/separation = 0
 
 [node name="Categories" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/Categories"]
@@ -34,6 +34,10 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_5xk2j")
 theme_override_font_sizes/font_size = 15
 text = "Categories"
+
+[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer/Categories"]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
 
 [node name="Consumables" type="Button" parent="VBoxContainer/HBoxContainer/Categories"]
 layout_mode = 2
@@ -89,6 +93,10 @@ theme_override_fonts/font = ExtResource("3_5xk2j")
 theme_override_font_sizes/font_size = 15
 text = "Items"
 
+[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer/ItemsContainer"]
+custom_minimum_size = Vector2(0, 14)
+layout_mode = 2
+
 [node name="Items" parent="VBoxContainer/HBoxContainer/ItemsContainer" instance=ExtResource("5_fp8y3")]
 layout_mode = 2
 size_flags_stretch_ratio = 3.0
@@ -98,6 +106,14 @@ toggle = true
 
 [node name="VBoxContainer" parent="VBoxContainer/HBoxContainer/ItemsContainer/Items/ScrollContainer" index="0"]
 theme_override_constants/separation = 0
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/HBoxContainer/ItemsContainer"]
+layout_mode = 2
+
+[node name="ItemDescription" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/ItemsContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+scroll_active = false
 
 [node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2

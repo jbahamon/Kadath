@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://c72m6bvkalkqd"]
 
 [ext_resource type="PackedScene" uid="uid://c17hneqpuil0l" path="res://npc/lib/base_npc.tscn" id="1_ashb3"]
-[ext_resource type="Script" path="res://npc/lib/anim/character_anim.gd" id="2_f2m44"]
+[ext_resource type="Script" uid="uid://cp4ww8nq2gt" path="res://npc/lib/anim/character_anim.gd" id="2_f2m44"]
 
 [sub_resource type="Animation" id="19"]
 resource_name = "idle_left"
@@ -133,14 +133,14 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kejjc"]
 _data = {
-"idle_left": SubResource("19"),
-"idle_right": SubResource("20"),
-"idle_south": SubResource("18"),
-"idle_up": SubResource("21"),
-"walk_down": SubResource("22"),
-"walk_left": SubResource("23"),
-"walk_right": SubResource("24"),
-"walk_up": SubResource("25")
+&"idle_left": SubResource("19"),
+&"idle_right": SubResource("20"),
+&"idle_south": SubResource("18"),
+&"idle_up": SubResource("21"),
+&"walk_down": SubResource("22"),
+&"walk_left": SubResource("23"),
+&"walk_right": SubResource("24"),
+&"walk_up": SubResource("25")
 }
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_e115m"]

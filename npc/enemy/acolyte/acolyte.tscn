@@ -1,24 +1,36 @@
-[gd_scene load_steps=33 format=3 uid="uid://cebhopaolaguc"]
+[gd_scene load_steps=35 format=3 uid="uid://cebhopaolaguc"]
 
 [ext_resource type="PackedScene" uid="uid://c17hneqpuil0l" path="res://npc/lib/base_npc.tscn" id="1_nqevg"]
-[ext_resource type="Script" path="res://npc/lib/enemy.gd" id="2_mtvfo"]
+[ext_resource type="Script" uid="uid://33lwrid7ce6j" path="res://npc/lib/enemy.gd" id="2_mtvfo"]
 [ext_resource type="Texture2D" uid="uid://dc35jxbalkxg4" path="res://npc/enemy/acolyte/icon.png" id="3_grxgs"]
 [ext_resource type="PackedScene" uid="uid://dtaxhpmmjspek" path="res://battle/battler/battler.tscn" id="3_hxf52"]
 [ext_resource type="PackedScene" uid="uid://ckj6m5dbs657x" path="res://npc/enemy/acolyte/anim.tscn" id="4_dgo87"]
+[ext_resource type="Script" uid="uid://fv1hjw5irs7n" path="res://party/character_stats.gd" id="6_hsfuq"]
 [ext_resource type="Resource" uid="uid://dlkfog15bgvgh" path="res://npc/lib/empty_rewards.tres" id="6_vex3f"]
-[ext_resource type="Script" path="res://npc/enemy/acolyte/attack.gd" id="6_wx6wh"]
-[ext_resource type="Script" path="res://npc/enemy/acolyte/consume.gd" id="7_2l1cy"]
+[ext_resource type="Script" uid="uid://b2v1xx4tbhtdw" path="res://npc/enemy/acolyte/attack.gd" id="6_wx6wh"]
+[ext_resource type="Script" uid="uid://c1n71rjhcw06d" path="res://npc/enemy/acolyte/consume.gd" id="7_2l1cy"]
 [ext_resource type="Material" uid="uid://c48122ffiwrbb" path="res://utils/material/uniform_add.tres" id="7_kw41m"]
 [ext_resource type="AudioStream" uid="uid://drbiocqq5bbf0" path="res://sound/fx/scream/Alien - JuhaniJunkala.wav" id="8_0sv0c"]
-[ext_resource type="Script" path="res://npc/enemy/acolyte/ai.gd" id="8_10wdh"]
-[ext_resource type="Script" path="res://battle/hit.gd" id="8_clbpf"]
+[ext_resource type="Script" uid="uid://cv7h5yxds65t0" path="res://npc/enemy/acolyte/ai.gd" id="8_10wdh"]
+[ext_resource type="Script" uid="uid://ca234sc5bry72" path="res://battle/hit.gd" id="8_clbpf"]
 [ext_resource type="AudioStream" uid="uid://dp6nlterbqxsy" path="res://sound/fx/whoosh/Long - KronBits.wav" id="8_pfe7r"]
-[ext_resource type="Shader" path="res://utils/material/highlight.gdshader" id="10_27jul"]
+[ext_resource type="Shader" uid="uid://c1og3bv6r0yp0" path="res://utils/material/highlight.gdshader" id="10_27jul"]
 [ext_resource type="Texture2D" uid="uid://dcxojxbnjqa6e" path="res://npc/enemy/acolyte/tendrils.png" id="11_g1knc"]
 [ext_resource type="AudioStream" uid="uid://cbeps10r2yhs4" path="res://sound/fx/recovery/Default - ReincarnatedEchoes.wav" id="11_rtvnq"]
 [ext_resource type="AudioStream" uid="uid://di7wtmrx7jsha" path="res://sound/fx/slash/Mid Light Clean - colorsCrimsonTears.wav" id="13_ncq2p"]
 [ext_resource type="AudioStream" uid="uid://b5ax2nln8b8pn" path="res://sound/fx/creep/Slimy - Kenney.wav" id="13_sxgva"]
 [ext_resource type="AudioStream" uid="uid://tvxig8l7bd42" path="res://sound/fx/charge/Low Short - MadameBerry.wav" id="15_ne3ma"]
+
+[sub_resource type="Resource" id="Resource_dumc4"]
+script = ExtResource("6_hsfuq")
+max_health = 320
+max_energy = 0
+attack = 20
+defense = 127
+magic_attack = 45
+magic_defense = 64
+speed = 35
+metadata/_custom_type_script = "uid://fv1hjw5irs7n"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v5nwd"]
 shader = ExtResource("10_27jul")
@@ -31,8 +43,9 @@ shader_parameter/base_add = Color(0.309804, 0.137255, 0.309804, 0)
 script = ExtResource("8_clbpf")
 animation_only = false
 fixed_damage = true
-base_damage = 0
+base_damage = 0.0
 type = 8
+energy_drain = 0
 anim_time = 0.0
 anim_duration = 1.5
 spark_time = 0.0
@@ -53,8 +66,9 @@ toast_time = 1.3
 script = ExtResource("8_clbpf")
 animation_only = false
 fixed_damage = false
-base_damage = 0
+base_damage = 2.0
 type = 7
+energy_drain = 5
 anim_time = 0.0
 anim_duration = 0.45
 spark_time = 0.0
@@ -139,7 +153,6 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pt4tg"]
 
 [node name="Acolyte" groups=["enemy"] instance=ExtResource("1_nqevg")]
-position = Vector2(0, 0)
 script = ExtResource("2_mtvfo")
 battle_on_contact = false
 enemy_id = "acolyte"
@@ -153,6 +166,8 @@ use_parent_material = true
 
 [node name="Battler" parent="." index="1" instance=ExtResource("3_hxf52")]
 anim_path = NodePath("..")
+stats = SubResource("Resource_dumc4")
+turn_order_icon = ExtResource("3_grxgs")
 rewards = ExtResource("6_vex3f")
 
 [node name="Consume" type="Node" parent="Battler/Actions" index="0"]
@@ -167,7 +182,8 @@ script = ExtResource("6_wx6wh")
 hit = SubResource("Resource_6ha7t")
 sliming_sound = ExtResource("13_sxgva")
 droning_sound = ExtResource("15_ne3ma")
-display_name = "Attack"
+display_name = "Tendrils"
+description = ""
 
 [node name="AI" parent="Battler" index="3"]
 script = ExtResource("8_10wdh")

@@ -1,1053 +1,1036 @@
 [gd_resource type="Resource" script_class="DialogueResource" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_resource.gd" id="1_akq5r"]
+[ext_resource type="Script" uid="uid://dbs4435dsf3ry" path="res://addons/dialogue_manager/dialogue_resource.gd" id="1_da363"]
 
 [resource]
-script = ExtResource("1_akq5r")
+script = ExtResource("1_da363")
 using_states = PackedStringArray()
 titles = {
-"acolyte_remains": "116",
-"after_boss": "69",
-"after_chalice_activation": "140",
-"barrier": "124",
-"carter_call": "81",
-"cauldron": "104",
-"chalice": "128",
-"chalice_done": "144",
-"entrance_carter_1": "25",
-"entrance_carter_2": "30",
-"entrance_ghoul1": "13",
-"entrance_ghoul2": "17",
-"entrance_pickman": "21",
-"gods_callout": "73",
-"idle_left_ghoul": "42",
-"idle_pickman": "38",
-"idle_right_ghoul": "49",
-"lamp": "100",
-"narration_1": "5",
-"narration_2": "9",
-"nyarlathotep_1": "85",
-"nyarlathotep_2": "92",
-"pickman_catch_up": "56",
-"pickman_join": "65",
-"pickman_recruit": "60",
-"pickman_warning": "77",
-"pushing_barrier": "120",
-"starting_instructions": "34",
-"statue_disabled": "108",
-"statue_enabled": "112"
+"acolyte_remains": "118",
+"after_boss": "71",
+"after_chalice_activation": "142",
+"barrier": "126",
+"carter_call": "83",
+"cauldron": "106",
+"chalice": "130",
+"chalice_done": "146",
+"entrance_carter_1": "24",
+"entrance_carter_2": "28",
+"entrance_carter_3": "32",
+"entrance_ghoul1": "12",
+"entrance_ghoul2": "16",
+"entrance_pickman": "20",
+"gods_callout": "75",
+"idle_left_ghoul": "44",
+"idle_pickman": "40",
+"idle_right_ghoul": "51",
+"lamp": "102",
+"narration_1": "4",
+"narration_2": "8",
+"nyarlathotep_1": "87",
+"nyarlathotep_2": "94",
+"pickman_catch_up": "58",
+"pickman_join": "67",
+"pickman_recruit": "62",
+"pickman_warning": "79",
+"pushing_barrier": "122",
+"starting_instructions": "36",
+"statue_disabled": "110",
+"statue_enabled": "114"
 }
 character_names = PackedStringArray("Ghoul", "Pickman", "Carter", "????")
-first_title = "5"
+first_title = "3"
 lines = {
-"10": {
-"id": "10",
-"is_snippet": false,
-"next_id": "end",
-"type": &"goto"
+"0": {
+&"id": "0",
+&"next_id": "3",
+&"type": ""
 },
-"100": {
-"character": "",
-"character_replacements": Array[Dictionary]([]),
-"id": "100",
-"next_id": "101",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "Though there is no wind in here, these eery flames continuously dance and flicker.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "Though there is no wind in here, these eery flames continuously dance and flicker.",
-"type": &"dialogue"
+"10": {
+&"id": "10",
+&"next_id": "11",
+&"type": ""
 },
 "101": {
-"id": "101",
-"is_snippet": false,
-"next_id": "end!",
-"type": &"goto"
+&"id": "101",
+&"next_id": "102",
+&"type": "title"
+},
+"102": {
+&"id": "102",
+&"next_id": "103",
+&"text": "Though there is no wind in here, these eery flames continuously dance and flicker.",
+&"type": "dialogue"
 },
 "103": {
-"id": "103",
-"next_id": "104",
-"text": "cauldron",
-"type": &"title"
+&"id": "103",
+&"is_snippet": false,
+&"next_id": "end!",
+&"next_id_after": "",
+&"type": "goto"
 },
 "104": {
-"character": "",
-"character_replacements": Array[Dictionary]([]),
-"id": "104",
-"next_id": "105",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "The halls are permeated by a sort of phosphorescence. These lamps are for purely decorative purposes. Perhaps ritualistic.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "The halls are permeated by a sort of phosphorescence. These lamps are for purely decorative purposes. Perhaps ritualistic.",
-"type": &"dialogue"
+&"id": "104",
+&"next_id": "105",
+&"type": ""
 },
 "105": {
-"id": "105",
-"is_snippet": false,
-"next_id": "end!",
-"type": &"goto"
+&"id": "105",
+&"next_id": "106",
+&"type": "title"
+},
+"106": {
+&"id": "106",
+&"next_id": "107",
+&"text": "The halls are permeated by a sort of phosphorescence. These lamps are purely for decorative purposes. Perhaps ritualistic.",
+&"type": "dialogue"
 },
 "107": {
-"id": "107",
-"next_id": "108",
-"text": "statue_disabled",
-"type": &"title"
+&"id": "107",
+&"is_snippet": false,
+&"next_id": "end!",
+&"next_id_after": "",
+&"type": "goto"
 },
 "108": {
-"character": "",
-"character_replacements": Array[Dictionary]([]),
-"id": "108",
-"next_id": "109",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "A statue with dog-like twin heads, holding an amphora.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "A statue with dog-like twin heads, holding an amphora.",
-"type": &"dialogue"
+&"id": "108",
+&"next_id": "109",
+&"type": ""
 },
 "109": {
-"id": "109",
-"is_snippet": false,
-"next_id": "end!",
-"type": &"goto"
+&"id": "109",
+&"next_id": "110",
+&"type": "title"
+},
+"11": {
+&"id": "11",
+&"next_id": "12",
+&"type": "title"
+},
+"110": {
+&"id": "110",
+&"next_id": "111",
+&"text": "A statue with dog-like twin heads, holding an amphora.",
+&"type": "dialogue"
 },
 "111": {
-"id": "111",
-"next_id": "112",
-"text": "statue_enabled",
-"type": &"title"
+&"id": "111",
+&"is_snippet": false,
+&"next_id": "end!",
+&"next_id_after": "",
+&"type": "goto"
 },
 "112": {
-"character": "",
-"character_replacements": Array[Dictionary]([]),
-"id": "112",
-"next_id": "113",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "A double-headed statue. Its amphora is pouring a suspicious red liquid.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "A double-headed statue. Its amphora is pouring a suspicious red liquid.",
-"type": &"dialogue"
+&"id": "112",
+&"next_id": "113",
+&"type": ""
 },
 "113": {
-"id": "113",
-"is_snippet": false,
-"next_id": "end!",
-"type": &"goto"
+&"id": "113",
+&"next_id": "114",
+&"type": "title"
+},
+"114": {
+&"id": "114",
+&"next_id": "115",
+&"text": "A double-headed statue. Its amphora is pouring a suspicious red liquid.",
+&"type": "dialogue"
 },
 "115": {
-"id": "115",
-"next_id": "116",
-"text": "acolyte_remains",
-"type": &"title"
+&"id": "115",
+&"is_snippet": false,
+&"next_id": "end!",
+&"next_id_after": "",
+&"type": "goto"
 },
 "116": {
-"character": "",
-"character_replacements": Array[Dictionary]([]),
-"id": "116",
-"next_id": "117",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "Blood stained clothes. All that remains of a willing participant in a ritual sacrifice.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "Blood stained clothes. All that remains of a willing participant in a ritual sacrifice.",
-"type": &"dialogue"
+&"id": "116",
+&"next_id": "117",
+&"type": ""
 },
 "117": {
-"id": "117",
-"is_snippet": false,
-"next_id": "end!",
-"type": &"goto"
+&"id": "117",
+&"next_id": "118",
+&"type": "title"
+},
+"118": {
+&"id": "118",
+&"next_id": "119",
+&"text": "Blood-stained clothes. All that remains of a willing participant in a ritual sacrifice.",
+&"type": "dialogue"
 },
 "119": {
-"id": "119",
-"next_id": "120",
-"text": "pushing_barrier",
-"type": &"title"
+&"id": "119",
+&"is_snippet": false,
+&"next_id": "end!",
+&"next_id_after": "",
+&"type": "goto"
 },
 "12": {
-"id": "12",
-"next_id": "13",
-"text": "entrance_ghoul1",
-"type": &"title"
+&"character": "Ghoul",
+&"id": "12",
+&"next_id": "13",
+&"text": "Ough! Not how I imagine arrival...",
+&"type": "dialogue"
 },
 "120": {
-"character": "",
-"character_replacements": Array[Dictionary]([]),
-"id": "120",
-"next_id": "121",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "This is not the time to retreat. The journey to this place has been long and hard, and it's time to face the gods.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "This is not the time to retreat. The journey to this place has been long and hard, and it's time to face the gods.",
-"type": &"dialogue"
+&"id": "120",
+&"next_id": "121",
+&"type": ""
 },
 "121": {
-"id": "121",
-"is_snippet": false,
-"next_id": "end",
-"type": &"goto"
+&"id": "121",
+&"next_id": "122",
+&"type": "title"
+},
+"122": {
+&"id": "122",
+&"next_id": "123",
+&"text": "This is not the time to retreat. The journey to this place has been long and hard, and it's time to face the gods.",
+&"type": "dialogue"
 },
 "123": {
-"id": "123",
-"next_id": "124",
-"text": "barrier",
-"type": &"title"
+&"id": "123",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
 },
 "124": {
-"character": "Carter",
-"character_replacements": Array[Dictionary]([]),
-"id": "124",
-"next_id": "125",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "An abyss leading to unknown depths. These statues, though, seem to be connected to the adjacent rooms.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "An abyss leading to unknown depths. These statues, though, seem to be connected to the adjacent rooms.",
-"type": &"dialogue"
+&"id": "124",
+&"next_id": "125",
+&"type": ""
 },
 "125": {
-"id": "125",
-"is_snippet": false,
-"next_id": "end!",
-"type": &"goto"
+&"id": "125",
+&"next_id": "126",
+&"type": "title"
+},
+"126": {
+&"character": "Carter",
+&"id": "126",
+&"next_id": "127",
+&"text": "An abyss leading to unknown depths. These statues, though, seem to be connected to the adjacent rooms.",
+&"type": "dialogue"
 },
 "127": {
-"id": "127",
-"next_id": "128",
-"text": "chalice",
-"type": &"title"
+&"id": "127",
+&"is_snippet": false,
+&"next_id": "end!",
+&"next_id_after": "",
+&"type": "goto"
 },
 "128": {
-"character": "",
-"character_replacements": Array[Dictionary]([]),
-"id": "128",
-"next_id": "130",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "There is a curious glyph on the chalice. It seems to be pulsing with some sort of energy.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "There is a curious glyph on the chalice. It seems to be pulsing with some sort of energy.",
-"type": &"dialogue"
+&"id": "128",
+&"next_id": "129",
+&"type": ""
+},
+"129": {
+&"id": "129",
+&"next_id": "130",
+&"type": "title"
 },
 "13": {
-"character": "Ghoul",
-"character_replacements": Array[Dictionary]([]),
-"id": "13",
-"next_id": "14",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "Ough! Not how I imagine arrival...",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "Ough! Not how I imagine arrival...",
-"type": &"dialogue"
+&"id": "13",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
 },
 "130": {
-"character": "",
-"character_replacements": Array[Dictionary]([]),
-"id": "130",
-"next_id": "131",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "Touch the glyph?",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "Touch the glyph?",
-"type": &"dialogue"
+&"id": "130",
+&"next_id": "132",
+&"text": "There is a curious glyph on the chalice. It seems to be pulsing with some sort of energy.",
+&"type": "dialogue"
 },
 "131": {
-"character": "",
-"character_replacements": Array[Dictionary]([]),
-"id": "131",
-"next_id": "132",
-"next_id_after": "137",
-"notes": "",
-"responses": PackedStringArray("131", "134"),
-"tags": PackedStringArray(),
-"text": "Yes",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "Yes",
-"type": &"response"
+&"id": "131",
+&"next_id": "132",
+&"type": ""
 },
 "132": {
-"id": "132",
-"mutation": {
-"expression": Array[Dictionary]([{
-"type": "variable",
-"value": "DialogueService"
-}, {
-"type": "dot"
-}, {
-"function": "add_response",
-"type": &"function",
-"value": Array[Array]([Array[Dictionary]([{
-"type": "string",
-"value": "yes"
-}])])
-}]),
-"is_blocking": true
-},
-"next_id": "133",
-"parent_id": "131",
-"type": &"mutation"
+&"id": "132",
+&"next_id": "133",
+&"text": "Touch the glyph?",
+&"type": "dialogue"
 },
 "133": {
-"character": "",
-"character_replacements": Array[Dictionary]([]),
-"id": "133",
-"next_id": "137",
-"notes": "",
-"parent_id": "131",
-"tags": PackedStringArray(),
-"text": "You lean forward and touch the glyph.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "You lean forward and touch the glyph.",
-"type": &"dialogue"
+&"id": "133",
+&"next_id": "134",
+&"responses": PackedStringArray("133", "136"),
+&"text": "Yes",
+&"type": "response"
 },
 "134": {
-"character": "",
-"character_replacements": Array[Dictionary]([]),
-"id": "134",
-"next_id": "135",
-"next_id_after": "137",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "No",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "No",
-"type": &"response"
-},
-"135": {
-"id": "135",
-"mutation": {
-"expression": Array[Dictionary]([{
-"type": "variable",
-"value": "DialogueService"
+&"id": "134",
+&"mutation": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "DialogueService"
 }, {
-"type": "dot"
+&"i": 18,
+&"type": &"dot"
 }, {
-"function": "add_response",
-"type": &"function",
-"value": Array[Array]([Array[Dictionary]([{
-"type": "string",
-"value": "no"
+&"function": "add_response",
+&"i": 19,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 32,
+&"type": &"string",
+&"value": "yes"
+}, {
+&"i": 37,
+&"type": &"parens_close"
 }])])
 }]),
-"is_blocking": true
+&"is_blocking": true
 },
-"next_id": "136",
-"parent_id": "134",
-"type": &"mutation"
+&"next_id": "135",
+&"type": "mutation"
+},
+"135": {
+&"id": "135",
+&"next_id": "139",
+&"text": "You lean forward and touch the glyph.",
+&"type": "dialogue"
 },
 "136": {
-"character": "",
-"character_replacements": Array[Dictionary]([]),
-"id": "136",
-"next_id": "137",
-"notes": "",
-"parent_id": "134",
-"tags": PackedStringArray(),
-"text": "Maybe later.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "Maybe later.",
-"type": &"dialogue"
+&"id": "136",
+&"next_id": "137",
+&"text": "No",
+&"type": "response"
 },
 "137": {
-"id": "137",
-"is_snippet": false,
-"next_id": "end",
-"type": &"goto"
+&"id": "137",
+&"mutation": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "DialogueService"
+}, {
+&"i": 18,
+&"type": &"dot"
+}, {
+&"function": "add_response",
+&"i": 19,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 32,
+&"type": &"string",
+&"value": "no"
+}, {
+&"i": 36,
+&"type": &"parens_close"
+}])])
+}]),
+&"is_blocking": true
+},
+&"next_id": "138",
+&"type": "mutation"
+},
+"138": {
+&"id": "138",
+&"next_id": "139",
+&"text": "Maybe later.",
+&"type": "dialogue"
 },
 "139": {
-"id": "139",
-"next_id": "140",
-"text": "after_chalice_activation",
-"type": &"title"
+&"id": "139",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
 },
 "14": {
-"id": "14",
-"is_snippet": false,
-"next_id": "end",
-"type": &"goto"
+&"id": "14",
+&"next_id": "15",
+&"type": ""
 },
 "140": {
-"character": "",
-"character_replacements": Array[Dictionary]([]),
-"id": "140",
-"next_id": "141",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "Something seems to have changed.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "Something seems to have changed.",
-"type": &"dialogue"
+&"id": "140",
+&"next_id": "141",
+&"type": ""
 },
 "141": {
-"id": "141",
-"is_snippet": false,
-"next_id": "end",
-"type": &"goto"
+&"id": "141",
+&"next_id": "142",
+&"type": "title"
+},
+"142": {
+&"id": "142",
+&"next_id": "143",
+&"text": "Something seems to have changed.",
+&"type": "dialogue"
 },
 "143": {
-"id": "143",
-"next_id": "144",
-"text": "chalice_done",
-"type": &"title"
+&"id": "143",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
 },
 "144": {
-"character": "",
-"character_replacements": Array[Dictionary]([]),
-"id": "144",
-"next_id": "145",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "The chalice is filled with a red liquid.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "The chalice is filled with a red liquid.",
-"type": &"dialogue"
+&"id": "144",
+&"next_id": "145",
+&"type": ""
 },
 "145": {
-"id": "145",
-"is_snippet": false,
-"next_id": "end",
-"type": &"goto"
+&"id": "145",
+&"next_id": "146",
+&"type": "title"
+},
+"146": {
+&"id": "146",
+&"next_id": "147",
+&"text": "The chalice is filled with a red liquid.",
+&"type": "dialogue"
+},
+"147": {
+&"id": "147",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"148": {
+&"id": "148",
+&"next_id": "149",
+&"type": ""
+},
+"149": {
+&"id": "149",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"15": {
+&"id": "15",
+&"next_id": "16",
+&"type": "title"
 },
 "16": {
-"id": "16",
-"next_id": "17",
-"text": "entrance_ghoul2",
-"type": &"title"
+&"character": "Ghoul",
+&"id": "16",
+&"next_id": "17",
+&"text": "Ugh... What happen? Where others?",
+&"type": "dialogue"
 },
 "17": {
-"character": "Ghoul",
-"character_replacements": Array[Dictionary]([]),
-"id": "17",
-"next_id": "18",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "Ugh... What happen? Where others?",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "Ugh... What happen? Where others?",
-"type": &"dialogue"
+&"id": "17",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
 },
 "18": {
-"id": "18",
-"is_snippet": false,
-"next_id": "end",
-"type": &"goto"
+&"id": "18",
+&"next_id": "19",
+&"type": ""
+},
+"19": {
+&"id": "19",
+&"next_id": "20",
+&"type": "title"
 },
 "20": {
-"id": "20",
-"next_id": "21",
-"text": "entrance_pickman",
-"type": &"title"
+&"character": "Pickman",
+&"id": "20",
+&"next_id": "21",
+&"text": "Everyone else is gone...",
+&"type": "dialogue"
 },
 "21": {
-"character": "Pickman",
-"character_replacements": Array[Dictionary]([]),
-"id": "21",
-"next_id": "22",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "Everyone else is gone...",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "Everyone else is gone...",
-"type": &"dialogue"
+&"id": "21",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
 },
 "22": {
-"id": "22",
-"is_snippet": false,
-"next_id": "end",
-"type": &"goto"
+&"id": "22",
+&"next_id": "23",
+&"type": ""
+},
+"23": {
+&"id": "23",
+&"next_id": "24",
+&"type": "title"
 },
 "24": {
-"id": "24",
-"next_id": "25",
-"text": "entrance_carter_1",
-"type": &"title"
+&"character": "Carter",
+&"id": "24",
+&"next_id": "25",
+&"text": "At last, we have arrived. Let us finish this.",
+&"type": "dialogue"
 },
 "25": {
-"character": "Carter",
-"character_replacements": Array[Dictionary]([]),
-"id": "25",
-"next_id": "26",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "At last, we have arrived. Let us finish this.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "At last, we have arrived. Let us finish this.",
-"type": &"dialogue"
+&"id": "25",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
 },
 "26": {
-"character": "Pickman",
-"character_replacements": Array[Dictionary]([]),
-"id": "26",
-"next_id": "27",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "Still want to do this?",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "Still want to do this?",
-"type": &"dialogue"
+&"id": "26",
+&"next_id": "27",
+&"type": ""
 },
 "27": {
-"id": "27",
-"is_snippet": false,
-"next_id": "end",
-"type": &"goto"
+&"id": "27",
+&"next_id": "28",
+&"type": "title"
+},
+"28": {
+&"character": "Pickman",
+&"id": "28",
+&"next_id": "29",
+&"text": "Still want to do this?",
+&"type": "dialogue"
 },
 "29": {
-"id": "29",
-"next_id": "30",
-"text": "entrance_carter_2",
-"type": &"title"
+&"id": "29",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"3": {
+&"id": "3",
+&"next_id": "4",
+&"type": "title"
 },
 "30": {
-"character": "Carter",
-"character_replacements": Array[Dictionary]([]),
-"id": "30",
-"next_id": "31",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "I must.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "I must.",
-"type": &"dialogue"
+&"id": "30",
+&"next_id": "31",
+&"type": ""
 },
 "31": {
-"id": "31",
-"is_snippet": false,
-"next_id": "end",
-"type": &"goto"
+&"id": "31",
+&"next_id": "32",
+&"type": "title"
+},
+"32": {
+&"character": "Carter",
+&"id": "32",
+&"next_id": "33",
+&"text": "I must.",
+&"type": "dialogue"
 },
 "33": {
-"id": "33",
-"next_id": "34",
-"text": "starting_instructions",
-"type": &"title"
+&"id": "33",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
 },
 "34": {
-"character": "",
-"character_replacements": Array[Dictionary]([]),
-"id": "34",
-"next_id": "35",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "Move around with [{ui_up}]/[{ui_left}]/[{ui_down}]/[{ui_right}]. You can interact with individuals and objects with [{ui_accept}], and cancel with [{ui_cancel}]. Run with [{action_run}]",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "Move around with [{ui_up}]/[{ui_left}]/[{ui_down}]/[{ui_right}]. You can interact with individuals and objects with [{ui_accept}], and cancel with [{ui_cancel}]. Run with [{action_run}]",
-"type": &"dialogue"
+&"id": "34",
+&"next_id": "35",
+&"type": ""
 },
 "35": {
-"id": "35",
-"is_snippet": false,
-"next_id": "end",
-"type": &"goto"
+&"id": "35",
+&"next_id": "36",
+&"type": "title"
+},
+"36": {
+&"id": "36",
+&"next_id": "37",
+&"text": "Move around with [{ui_up}]/[{ui_left}]/[{ui_down}]/[{ui_right}]. You can interact with individuals and objects with [{ui_accept}], and cancel with [{ui_cancel}]. Run with [{action_run}].",
+&"type": "dialogue"
 },
 "37": {
-"id": "37",
-"next_id": "38",
-"text": "idle_pickman",
-"type": &"title"
+&"id": "37",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
 },
 "38": {
-"character": "Pickman",
-"character_replacements": Array[Dictionary]([]),
-"id": "38",
-"next_id": "39",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "Go ahead. I'll join you once I've made sure these guys are OK. If you're in a hurry, use [{action_run}] to move faster.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "Go ahead. I'll join you once I've made sure these guys are OK. If you're in a hurry, use [{action_run}] to move faster.",
-"type": &"dialogue"
+&"id": "38",
+&"next_id": "39",
+&"type": ""
 },
 "39": {
-"id": "39",
-"is_snippet": false,
-"next_id": "end",
-"type": &"goto"
+&"id": "39",
+&"next_id": "40",
+&"type": "title"
 },
 "4": {
-"id": "4",
-"next_id": "5",
-"text": "narration_1",
-"type": &"title"
+&"id": "4",
+&"next_id": "5",
+&"text": "\"Three times Randolph Carter dreamed of the marvellous city, and three times was he snatched away while still he paused on the high terrace above it.\"",
+&"type": "dialogue"
+},
+"40": {
+&"character": "Pickman",
+&"id": "40",
+&"next_id": "41",
+&"text": "Go ahead. I'll join you once I've made sure these guys are OK. If you're in a hurry, use [{action_run}] to move faster.",
+&"type": "dialogue"
 },
 "41": {
-"id": "41",
-"next_id": "42",
-"text": "idle_left_ghoul",
-"type": &"title"
+&"id": "41",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
 },
 "42": {
-"condition": {
-"expression": Array[Dictionary]([{
-"type": "variable",
-"value": "EntitiesService"
-}, {
-"type": "dot"
-}, {
-"type": "variable",
-"value": "party"
-}, {
-"type": "dot"
-}, {
-"function": "is_unlocked",
-"type": &"function",
-"value": Array[Array]([Array[Dictionary]([{
-"type": "variable",
-"value": "PartyMember"
-}, {
-"type": "dot"
-}, {
-"type": "variable",
-"value": "Id"
-}, {
-"type": "dot"
-}, {
-"type": "variable",
-"value": "PICKMAN"
-}])])
-}, {
-"type": "colon"
-}])
-},
-"id": "42",
-"next_conditional_id": "44",
-"next_id": "43",
-"next_id_after": "46",
-"type": &"condition"
+&"id": "42",
+&"next_id": "43",
+&"type": ""
 },
 "43": {
-"character": "Ghoul",
-"character_replacements": Array[Dictionary]([]),
-"id": "43",
-"next_id": "46",
-"notes": "",
-"parent_id": "42",
-"tags": PackedStringArray(),
-"text": "We stay here. If you disoriented, open menu with [{ui_menu}] and check or change controls.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "We stay here. If you disoriented, open menu with [{ui_menu}] and check or change controls.",
-"type": &"dialogue"
+&"id": "43",
+&"next_id": "44",
+&"type": "title"
 },
 "44": {
-"id": "44",
-"next_conditional_id": "46",
-"next_id": "45",
-"next_id_after": "46",
-"type": &"condition"
-},
-"45": {
-"character": "Ghoul",
-"character_replacements": Array[Dictionary]([]),
-"id": "45",
-"next_id": "46",
-"notes": "",
-"parent_id": "44",
-"tags": PackedStringArray(),
-"text": "Everything still spinning... If you disoriented, open menu with [{ui_menu}] and check or change controls.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "Everything still spinning... If you disoriented, open menu with [{ui_menu}] and check or change controls.",
-"type": &"dialogue"
-},
-"46": {
-"id": "46",
-"is_snippet": false,
-"next_id": "end",
-"type": &"goto"
-},
-"48": {
-"id": "48",
-"next_id": "49",
-"text": "idle_right_ghoul",
-"type": &"title"
-},
-"49": {
-"condition": {
-"expression": Array[Dictionary]([{
-"type": "variable",
-"value": "EntitiesService"
+&"condition": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "EntitiesService"
 }, {
-"type": "dot"
+&"i": 18,
+&"type": &"dot"
 }, {
-"type": "variable",
-"value": "party"
+&"i": 19,
+&"type": &"variable",
+&"value": "party"
 }, {
-"type": "dot"
+&"i": 24,
+&"type": &"dot"
 }, {
-"function": "is_unlocked",
-"type": &"function",
-"value": Array[Array]([Array[Dictionary]([{
-"type": "variable",
-"value": "PartyMember"
+&"function": "is_unlocked",
+&"i": 25,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 37,
+&"type": &"variable",
+&"value": "PartyMember"
 }, {
-"type": "dot"
+&"i": 48,
+&"type": &"dot"
 }, {
-"type": "variable",
-"value": "Id"
+&"i": 49,
+&"type": &"variable",
+&"value": "Id"
 }, {
-"type": "dot"
+&"i": 51,
+&"type": &"dot"
 }, {
-"type": "variable",
-"value": "PICKMAN"
+&"i": 52,
+&"type": &"variable",
+&"value": "PICKMAN"
+}, {
+&"i": 59,
+&"type": &"parens_close"
 }])])
-}, {
-"type": "colon"
 }])
 },
-"id": "49",
-"next_conditional_id": "51",
-"next_id": "50",
-"next_id_after": "53",
-"type": &"condition"
+&"id": "44",
+&"next_id": "45",
+&"next_id_after": "48",
+&"next_sibling_id": "46",
+&"type": "condition"
+},
+"45": {
+&"character": "Ghoul",
+&"id": "45",
+&"next_id": "48",
+&"text": "We stay here. If you disoriented, open menu with [{ui_menu}] and check or change controls.",
+&"type": "dialogue"
+},
+"46": {
+&"condition": {},
+&"id": "46",
+&"next_id": "47",
+&"next_id_after": "48",
+&"type": "condition"
+},
+"47": {
+&"character": "Ghoul",
+&"id": "47",
+&"next_id": "48",
+&"text": "Everything still spinning... If you disoriented, open menu with [{ui_menu}] and check or change controls.",
+&"type": "dialogue"
+},
+"48": {
+&"id": "48",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"49": {
+&"id": "49",
+&"next_id": "50",
+&"type": ""
 },
 "5": {
-"character": "",
-"character_replacements": Array[Dictionary]([]),
-"id": "5",
-"next_id": "6",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "\"Three times Randolph Carter dreamed of the marvellous city, and three times was he snatched away while still he paused on the high terrace above it.\"",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "\"Three times Randolph Carter dreamed of the marvellous city, and three times was he snatched away while still he paused on the high terrace above it.\"",
-"type": &"dialogue"
+&"id": "5",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
 },
 "50": {
-"character": "Ghoul",
-"character_replacements": Array[Dictionary]([]),
-"id": "50",
-"next_id": "53",
-"notes": "",
-"parent_id": "49",
-"tags": PackedStringArray(),
-"text": "Maybe others come. We wait for them. Be careful... Remember you can open menu with [{ui_menu}] and use items for heal.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "Maybe others come. We wait for them. Be careful... Remember you can open menu with [{ui_menu}] and use items for heal.",
-"type": &"dialogue"
+&"id": "50",
+&"next_id": "51",
+&"type": "title"
 },
 "51": {
-"id": "51",
-"next_conditional_id": "53",
-"next_id": "52",
-"next_id_after": "53",
-"type": &"condition"
+&"condition": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "EntitiesService"
+}, {
+&"i": 18,
+&"type": &"dot"
+}, {
+&"i": 19,
+&"type": &"variable",
+&"value": "party"
+}, {
+&"i": 24,
+&"type": &"dot"
+}, {
+&"function": "is_unlocked",
+&"i": 25,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 37,
+&"type": &"variable",
+&"value": "PartyMember"
+}, {
+&"i": 48,
+&"type": &"dot"
+}, {
+&"i": 49,
+&"type": &"variable",
+&"value": "Id"
+}, {
+&"i": 51,
+&"type": &"dot"
+}, {
+&"i": 52,
+&"type": &"variable",
+&"value": "PICKMAN"
+}, {
+&"i": 59,
+&"type": &"parens_close"
+}])])
+}])
+},
+&"id": "51",
+&"next_id": "52",
+&"next_id_after": "55",
+&"next_sibling_id": "53",
+&"type": "condition"
 },
 "52": {
-"character": "Ghoul",
-"character_replacements": Array[Dictionary]([]),
-"id": "52",
-"next_id": "53",
-"notes": "",
-"parent_id": "51",
-"tags": PackedStringArray(),
-"text": "One second we riding, next we thrown here. If you hurt, you can open menu with [{ui_menu}] and use items for heal.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "One second we riding, next we thrown here. If you hurt, you can open menu with [{ui_menu}] and use items for heal.",
-"type": &"dialogue"
+&"character": "Ghoul",
+&"id": "52",
+&"next_id": "55",
+&"text": "Maybe others come. We wait for them. Be careful... Remember you can open menu with [{ui_menu}] and use items for heal.",
+&"type": "dialogue"
 },
 "53": {
-"id": "53",
-"is_snippet": false,
-"next_id": "end",
-"type": &"goto"
+&"condition": {},
+&"id": "53",
+&"next_id": "54",
+&"next_id_after": "55",
+&"type": "condition"
+},
+"54": {
+&"character": "Ghoul",
+&"id": "54",
+&"next_id": "55",
+&"text": "One second we riding, next we thrown here. If you hurt, you can open menu with [{ui_menu}] and use items for heal.",
+&"type": "dialogue"
 },
 "55": {
-"id": "55",
-"next_id": "56",
-"text": "pickman_catch_up",
-"type": &"title"
+&"id": "55",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
 },
 "56": {
-"character": "Pickman",
-"character_replacements": Array[Dictionary]([]),
-"id": "56",
-"next_id": "57",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "Wait!",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "Wait!",
-"type": &"dialogue"
+&"id": "56",
+&"next_id": "57",
+&"type": ""
 },
 "57": {
-"id": "57",
-"is_snippet": false,
-"next_id": "end",
-"type": &"goto"
+&"id": "57",
+&"next_id": "58",
+&"type": "title"
+},
+"58": {
+&"character": "Pickman",
+&"id": "58",
+&"next_id": "59",
+&"text": "Wait!",
+&"type": "dialogue"
 },
 "59": {
-"id": "59",
-"next_id": "60",
-"text": "pickman_recruit",
-"type": &"title"
+&"id": "59",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
 },
 "6": {
-"id": "6",
-"is_snippet": false,
-"next_id": "end",
-"type": &"goto"
+&"id": "6",
+&"next_id": "7",
+&"type": ""
 },
 "60": {
-"character": "Pickman",
-"character_replacements": Array[Dictionary]([]),
-"id": "60",
-"next_id": "61",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "Looks like we're not alone.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "Looks like we're not alone.",
-"type": &"dialogue"
+&"id": "60",
+&"next_id": "61",
+&"type": ""
 },
 "61": {
-"character": "Pickman",
-"character_replacements": Array[Dictionary]([]),
-"id": "61",
-"next_id": "62",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "The others will stay at the entrance, but you'll have a better chance with me by your side.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "The others will stay at the entrance, but you'll have a better chance with me by your side.",
-"type": &"dialogue"
+&"id": "61",
+&"next_id": "62",
+&"type": "title"
 },
 "62": {
-"id": "62",
-"is_snippet": false,
-"next_id": "end",
-"type": &"goto"
+&"character": "Pickman",
+&"id": "62",
+&"next_id": "63",
+&"text": "Looks like we're not alone.",
+&"type": "dialogue"
+},
+"63": {
+&"character": "Pickman",
+&"id": "63",
+&"next_id": "64",
+&"text": "The others will stay at the entrance, but you'll have a better chance with me by your side.",
+&"type": "dialogue"
 },
 "64": {
-"id": "64",
-"next_id": "65",
-"text": "pickman_join",
-"type": &"title"
+&"id": "64",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
 },
 "65": {
-"character": "",
-"character_replacements": Array[Dictionary]([]),
-"id": "65",
-"next_id": "66",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "Pickman joined your party!",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "Pickman joined your party!",
-"type": &"dialogue"
+&"id": "65",
+&"next_id": "66",
+&"type": ""
 },
 "66": {
-"id": "66",
-"is_snippet": false,
-"next_id": "end",
-"type": &"goto"
+&"id": "66",
+&"next_id": "67",
+&"type": "title"
+},
+"67": {
+&"id": "67",
+&"next_id": "68",
+&"text": "Pickman joined your party!",
+&"type": "dialogue"
 },
 "68": {
-"id": "68",
-"next_id": "69",
-"text": "after_boss",
-"type": &"title"
+&"id": "68",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
 },
 "69": {
-"character": "Carter",
-"character_replacements": Array[Dictionary]([]),
-"id": "69",
-"next_id": "70",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "Let's go.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "Let's go.",
-"type": &"dialogue"
+&"id": "69",
+&"next_id": "70",
+&"type": ""
+},
+"7": {
+&"id": "7",
+&"next_id": "8",
+&"type": "title"
 },
 "70": {
-"id": "70",
-"is_snippet": false,
-"next_id": "end",
-"type": &"goto"
+&"id": "70",
+&"next_id": "71",
+&"type": "title"
+},
+"71": {
+&"character": "Carter",
+&"id": "71",
+&"next_id": "72",
+&"text": "Let's go.",
+&"type": "dialogue"
 },
 "72": {
-"id": "72",
-"next_id": "73",
-"text": "gods_callout",
-"type": &"title"
+&"id": "72",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
 },
 "73": {
-"character": "Carter",
-"character_replacements": Array[Dictionary]([]),
-"id": "73",
-"next_id": "74",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "Gods of Earth! Cease your hiding and grant me passage to the Sunset City.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "Gods of Earth! Cease your hiding and grant me passage to the Sunset City.",
-"type": &"dialogue"
+&"id": "73",
+&"next_id": "74",
+&"type": ""
 },
 "74": {
-"id": "74",
-"is_snippet": false,
-"next_id": "end",
-"type": &"goto"
+&"id": "74",
+&"next_id": "75",
+&"type": "title"
+},
+"75": {
+&"character": "Carter",
+&"id": "75",
+&"next_id": "76",
+&"text": "Gods of Earth! Cease your hiding and grant me passage to the Sunset City.",
+&"type": "dialogue"
 },
 "76": {
-"id": "76",
-"next_id": "77",
-"text": "pickman_warning",
-"type": &"title"
+&"id": "76",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
 },
 "77": {
-"character": "Pickman",
-"character_replacements": Array[Dictionary]([]),
-"id": "77",
-"next_id": "78",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "Wait. Something's wrong. The Other Gods, their messeng-",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "Wait. Something's wrong. The Other Gods, their messeng-",
-"type": &"dialogue"
+&"id": "77",
+&"next_id": "78",
+&"type": ""
 },
 "78": {
-"id": "78",
-"is_snippet": false,
-"next_id": "end",
-"type": &"goto"
+&"id": "78",
+&"next_id": "79",
+&"type": "title"
+},
+"79": {
+&"character": "Pickman",
+&"id": "79",
+&"next_id": "80",
+&"text": "Wait. Something's wrong. The Other Gods, their messeng-",
+&"type": "dialogue"
 },
 "8": {
-"id": "8",
-"next_id": "9",
-"text": "narration_2",
-"type": &"title"
+&"id": "8",
+&"next_id": "9",
+&"text": "\"He resolved to find the gods on unknown Kadath in the cold waste, wherever that might be, and to win from them the sight and remembrance and shelter of the marvellous sunset city.\"",
+&"type": "dialogue"
 },
 "80": {
-"id": "80",
-"next_id": "81",
-"text": "carter_call",
-"type": &"title"
+&"id": "80",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
 },
 "81": {
-"character": "Carter",
-"character_replacements": Array[Dictionary]([]),
-"id": "81",
-"next_id": "82",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "Pickman!",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "Pickman!",
-"type": &"dialogue"
+&"id": "81",
+&"next_id": "82",
+&"type": ""
 },
 "82": {
-"id": "82",
-"is_snippet": false,
-"next_id": "end",
-"type": &"goto"
+&"id": "82",
+&"next_id": "83",
+&"type": "title"
+},
+"83": {
+&"character": "Carter",
+&"id": "83",
+&"next_id": "84",
+&"text": "Pickman!",
+&"type": "dialogue"
 },
 "84": {
-"id": "84",
-"next_id": "85",
-"text": "nyarlathotep_1",
-"type": &"title"
+&"id": "84",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
 },
 "85": {
-"character": "????",
-"character_replacements": Array[Dictionary]([]),
-"id": "85",
-"next_id": "86",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "Randolph Carter.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "Randolph Carter.",
-"type": &"dialogue"
+&"id": "85",
+&"next_id": "86",
+&"type": ""
 },
 "86": {
-"character": "????",
-"character_replacements": Array[Dictionary]([]),
-"id": "86",
-"next_id": "87",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "You have come to see the Great Ones, whom it is unlawful for men to see.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "You have come to see the Great Ones, whom it is unlawful for men to see.",
-"type": &"dialogue"
+&"id": "86",
+&"next_id": "87",
+&"type": "title"
 },
 "87": {
-"character": "????",
-"character_replacements": Array[Dictionary]([]),
-"id": "87",
-"next_id": "88",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "Watchers have spoken of this thing, and the Other Gods have grunted as they rolled and tumbled mindlessly to the sound of thin flutes in the black ultimate void, where broods the daemon-sultan whose name no lips dare speak aloud.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "Watchers have spoken of this thing, and the Other Gods have grunted as they rolled and tumbled mindlessly to the sound of thin flutes in the black ultimate void, where broods the daemon-sultan whose name no lips dare speak aloud.",
-"type": &"dialogue"
+&"character": "????",
+&"id": "87",
+&"next_id": "88",
+&"text": "Randolph Carter.",
+&"type": "dialogue"
 },
 "88": {
-"character": "????",
-"character_replacements": Array[Dictionary]([]),
-"id": "88",
-"next_id": "89",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "Because of YOU, Earth has no longer any gods that are gods.",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "Because of YOU, Earth has no longer any gods that are gods.",
-"type": &"dialogue"
+&"character": "????",
+&"id": "88",
+&"next_id": "89",
+&"text": "You have come to see the Great Ones, whom it is unlawful for men to see.",
+&"type": "dialogue"
 },
 "89": {
-"id": "89",
-"is_snippet": false,
-"next_id": "end",
-"type": &"goto"
+&"character": "????",
+&"id": "89",
+&"next_id": "90",
+&"text": "Watchers have spoken of this thing, and the Other Gods have grunted as they rolled and tumbled mindlessly to the sound of thin flutes in the black ultimate void, where broods the daemon-sultan whose name no lips dare speak aloud.",
+&"type": "dialogue"
 },
 "9": {
-"character": "",
-"character_replacements": Array[Dictionary]([]),
-"id": "9",
-"next_id": "10",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "\"He resolved to find the gods on unknown Kadath in the cold waste, wherever that might be, and to win from them the sight and remembrance and shelter of the marvellous sunset city.\"",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "\"He resolved to find the gods on unknown Kadath in the cold waste, wherever that might be, and to win from them the sight and remembrance and shelter of the marvellous sunset city.\"",
-"type": &"dialogue"
+&"id": "9",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"90": {
+&"character": "????",
+&"id": "90",
+&"next_id": "91",
+&"text": "Because of YOU, Earth has no longer any gods that are gods.",
+&"type": "dialogue"
 },
 "91": {
-"id": "91",
-"next_id": "92",
-"text": "nyarlathotep_2",
-"type": &"title"
+&"id": "91",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
 },
 "92": {
-"character": "????",
-"character_replacements": Array[Dictionary]([]),
-"id": "92",
-"next_id": "93",
-"notes": "",
-"tags": PackedStringArray(),
-"text": "[shake rate=20.0 level=5 connected=1]And only the Other Gods from outer space hold sway on unremembered Kadath.[/shake]",
-"text_replacements": Array[Dictionary]([]),
-"translation_key": "[shake rate=20.0 level=5 connected=1]And only the Other Gods from outer space hold sway on unremembered Kadath.[/shake]",
-"type": &"dialogue"
+&"id": "92",
+&"next_id": "93",
+&"type": ""
 },
 "93": {
-"id": "93",
-"is_snippet": false,
-"next_id": "end",
-"type": &"goto"
+&"id": "93",
+&"next_id": "94",
+&"type": "title"
 },
-"99": {
-"id": "99",
-"next_id": "100",
-"text": "lamp",
-"type": &"title"
+"94": {
+&"character": "????",
+&"id": "94",
+&"next_id": "95",
+&"text": "[shake rate=20.0 level=5 connected=1]And only the Other Gods from outer space hold sway on unremembered Kadath.[/shake]",
+&"type": "dialogue"
+},
+"95": {
+&"id": "95",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"96": {
+&"id": "96",
+&"next_id": "101",
+&"type": ""
 }
 }
 raw_text = "# ===============
@@ -1075,15 +1058,18 @@ Pickman: Everyone else is gone...
 
 ~ entrance_carter_1
 Carter: At last, we have arrived. Let us finish this.
-Pickman: Still want to do this?
 => END
 
 ~ entrance_carter_2
+Pickman: Still want to do this?
+=> END
+
+~ entrance_carter_3
 Carter: I must.
 => END
 
 ~ starting_instructions
-Move around with [{ui_up}]/[{ui_left}]/[{ui_down}]/[{ui_right}]. You can interact with individuals and objects with [{ui_accept}], and cancel with [{ui_cancel}]. Run with [{action_run}]
+Move around with [{ui_up}]/[{ui_left}]/[{ui_down}]/[{ui_right}]. You can interact with individuals and objects with [{ui_accept}], and cancel with [{ui_cancel}]. Run with [{action_run}].
 => END
 
 ~ idle_pickman
@@ -1153,7 +1139,7 @@ Though there is no wind in here, these eery flames continuously dance and flicke
 => END!
 
 ~ cauldron
-The halls are permeated by a sort of phosphorescence. These lamps are for purely decorative purposes. Perhaps ritualistic.
+The halls are permeated by a sort of phosphorescence. These lamps are purely for decorative purposes. Perhaps ritualistic.
 => END!
 
 ~ statue_disabled
@@ -1165,7 +1151,7 @@ A double-headed statue. Its amphora is pouring a suspicious red liquid.
 => END!
 
 ~ acolyte_remains
-Blood stained clothes. All that remains of a willing participant in a ritual sacrifice.
+Blood-stained clothes. All that remains of a willing participant in a ritual sacrifice.
 => END!
 
 ~ pushing_barrier
@@ -1196,4 +1182,4 @@ Something seems to have changed.
 The chalice is filled with a red liquid.
 => END
 "
-metadata/dialogue_manager_version = "2.44.0"
+metadata/dialogue_manager_version = "3.5.1"

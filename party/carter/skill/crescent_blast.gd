@@ -1,6 +1,5 @@
 extends "res://battle/action/aoe_on_target.gd"
 
-@export var power: float
 @export var aoe_power: float
 @export var charge_sound: AudioStream
 @export var throw_sound: AudioStream
@@ -9,6 +8,8 @@ extends "res://battle/action/aoe_on_target.gd"
 @onready var projectile: AnimatedSprite2D = get_node("../../../BlastProjectile")
 
 func execute(actor):
+	self.main_hit.offensive_damage_factor = self.default_offensive_damage_factor(actor.battler, self.main_hit)
+	
 	var previous_material = actor.material
 	actor.material = highlight_material
 	actor.battler.spend_energy(self.energy_cost)
@@ -20,8 +21,6 @@ func execute(actor):
 	
 	var actor_party_member = actor is PartyMember
 	
-	main_hit.base_damage = (actor.battler.stats.level + actor.battler.stats.magic_attack) * self.power
-	
 	var hits = [
 		func (): await self.target.take_hit(actor, main_hit)
 	]
@@ -30,8 +29,9 @@ func execute(actor):
 	).map(
 		func (aoe_target):
 			var hit = Hit.new()
-			hit.type = Hit.Element.METAL
-			hit.base_damage = (actor.battler.stats.level + actor.battler.stats.magic_attack) * self.aoe_power
+			hit.type = Hit.Element.CHAOS
+			hit.base_damage = self.aoe_power
+			hit.offensive_damage_factor = self.default_offensive_damage_factor(actor.battler, hit)
 			return func (): 
 				await aoe_target.take_hit(actor, hit)
 		

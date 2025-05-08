@@ -1,8 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ciub4py4t7tpa"]
 
-[ext_resource type="Script" path="res://ui/02_molecules/keyboard_based_tab_container/keyboard_based_tab_container.gd" id="1"]
+[ext_resource type="Script" uid="uid://lp56anh2l3d" path="res://ui/02_molecules/keyboard_based_tab_container/keyboard_based_tab_container.gd" id="1"]
 [ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="2"]
-
 
 [node name="KeyboardBasedTabContainer" type="VBoxContainer"]
 anchors_preset = 15

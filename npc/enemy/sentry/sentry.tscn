@@ -4,13 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://56sux2p3oroq" path="res://npc/enemy/sentry/icon.png" id="2_2k4kj"]
 [ext_resource type="PackedScene" uid="uid://cgc5b4s47chs0" path="res://npc/enemy/sentry/anim.tscn" id="2_571aw"]
 [ext_resource type="Resource" uid="uid://rlyl1hog6ic0" path="res://npc/enemy/sentry/stats.tres" id="3_l4u5g"]
-[ext_resource type="Script" path="res://battle/ai/random_ai.gd" id="4_bs2dh"]
-[ext_resource type="Script" path="res://npc/enemy/sentry/attack.gd" id="5_5ijqc"]
+[ext_resource type="Script" uid="uid://dfjdlwb0ygcyo" path="res://battle/ai/random_ai.gd" id="4_bs2dh"]
+[ext_resource type="Script" uid="uid://bnd7yp34g1ip4" path="res://npc/enemy/sentry/attack.gd" id="5_5ijqc"]
 [ext_resource type="Resource" uid="uid://dlkfog15bgvgh" path="res://npc/lib/empty_rewards.tres" id="5_ll8bj"]
 [ext_resource type="PackedScene" uid="uid://cchn13mhn8gxu" path="res://battle/action/util/projectile.tscn" id="7_885q8"]
 [ext_resource type="Material" uid="uid://c48122ffiwrbb" path="res://utils/material/uniform_add.tres" id="7_h305g"]
 [ext_resource type="AudioStream" uid="uid://bq2b66vmiocgp" path="res://sound/fx/hit/Short - MadameBerry.wav" id="7_hyyc1"]
-[ext_resource type="Script" path="res://battle/hit.gd" id="8_bp5c2"]
+[ext_resource type="Script" uid="uid://ca234sc5bry72" path="res://battle/hit.gd" id="8_bp5c2"]
 [ext_resource type="Texture2D" uid="uid://c1rb64dwco3s6" path="res://npc/enemy/sentry/projectile.png" id="8_csw5i"]
 [ext_resource type="AudioStream" uid="uid://b4njyu8hefq3c" path="res://sound/fx/shoot/Short Beam - Kenney.wav" id="10_yt064"]
 
@@ -18,8 +18,9 @@
 script = ExtResource("8_bp5c2")
 animation_only = false
 fixed_damage = false
-base_damage = 10
+base_damage = 2.0
 type = 0
+energy_drain = 0
 anim_time = 0.0
 anim_duration = 0.45
 spark_time = 0.0

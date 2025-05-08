@@ -13,7 +13,6 @@ class_name CharacterStats
 @export var defense: int = 1
 @export var magic_attack: int = 1
 @export var magic_defense: int = 1
-@export var luck: int = 1
 @export var speed: int = 1
 
 var level: int

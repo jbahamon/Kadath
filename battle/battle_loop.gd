@@ -21,7 +21,7 @@ func initialize(init_actors: Array, init_ui: BattleUI):
 	
 	for actor in actors:
 		actor.battler.initialize(init_ui)
-		turn_queue.add(actor)
+		turn_queue.add(actor, true)
 
 	for event in BattleService.Event.values():
 		observers[event] = []
@@ -33,15 +33,10 @@ func do_battle():
 		var current_actor = self.turn_queue.get_current_actor()
 		for observer in self.observers[BattleService.Event.TURN_START]:
 			await observer.on_turn_start(current_actor)
-		
-		if current_actor is PartyMember:
-			self.update_preview(current_actor)
 			
-			EntitiesService.battle_turn_indicator.global_position = current_actor.global_position - Vector2(13, 36)
-			EntitiesService.battle_turn_indicator.visible = true
-
+		self.update_preview(current_actor)
 		var turn = await current_actor.battler.ai.get_turn(self.actors)
-		self.ui.hide_timeline()
+		
 		EntitiesService.battle_turn_indicator.visible = false
 		
 		# Small pause for usabilty/not making it feel like it's too fast
@@ -49,11 +44,11 @@ func do_battle():
 		await turn.play()
 		
 		await self.check_deaths_and_reactions()
-
+		await self.check_breakdowns()
+		
 		for observer in self.observers[BattleService.Event.TURN_END]:
 			await observer.on_turn_end(current_actor)
 			
-		self.ui.update_player_state()
 		if is_battle_won():
 			var party_actors = actors.filter(func(actor): return actor is PartyMember)
 			self.battle_end_state.party_actors = party_actors
@@ -74,9 +69,14 @@ func do_battle():
 				else:
 					self.battle_end_state.party_actors.append(actor)
 			break
-			
-			
-		
+		else:
+			var party_members = self.actors.filter(func (it): return it.is_alive and it is PartyMember)
+			var enemies = self.actors.filter(func (it): return it.is_alive and it is not PartyMember)
+			for actor in self.actors.filter(func (it): return it.is_alive):
+				var opponents = enemies if actor is PartyMember else party_members
+				var target = BattleService.get_closest_to(opponents, actor.global_position)
+				actor.set_orientation(actor.global_position.direction_to(target.global_position))
+
 	self.turn_queue.reset()
 	
 	for key in self.observers:
@@ -116,7 +116,7 @@ func on_actor_death(actor):
 	# No revival should happen here
 	for observer in self.observers[BattleService.Event.BEFORE_ACTOR_DEATH]:
 		await observer.before_actor_death(actor)
-	
+		
 	if actor is PartyMember:
 		actor.play_anim("downed")
 		actor.battler.status_effects.add(DownedStatus.new())
@@ -153,10 +153,21 @@ func check_deaths_and_reactions():
 				break
 			should_continue = true
 			await self.on_actor_death(actor)
-		
+			
 		# Then reactions
 		for actor in actors:
 			if actor.battler.pending_reaction != null and actor.battler.is_alive:
 				should_continue = true
 				await actor.battler.pending_reaction.execute(actor, actors)
 				actor.battler.pending_reaction = null
+
+func check_breakdowns():
+
+	for actor in actors:
+		if (
+			actor is PartyMember and 
+			actor.is_alive and 
+			actor.energy <= 0 and 
+			not actor.battler.status_effects.has("breakdown")
+		):
+			await actor.battler.status_effects.add(actor.breakdown_status.new())

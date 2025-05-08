@@ -13,7 +13,10 @@ func execute():
 	self._completed = false
 	
 	if self.instructions.size() == 1:
-		await self.instructions[0].call()
+		if self.instructions[0] is Callable:
+			await self.instructions[0].call()
+		else:
+			await self.instructions[0]
 		self.done.emit()
 		self._completed = true
 	else:
@@ -26,7 +29,10 @@ func execute():
 		await self.done
 		
 func _call_instruction(instruction) -> void:
-	await instruction.call()
+	if instruction is Callable:
+		await instruction.call()
+	else:
+		await instruction
 	self._pending.erase(instruction)
 	
 	if self._pending.is_empty() and not self._completed:

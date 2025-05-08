@@ -1,6 +1,6 @@
 [gd_scene load_steps=48 format=3 uid="uid://cgvqjsoj5bl6b"]
 
-[ext_resource type="Script" path="res://npc/lib/anim/character_anim.gd" id="1_ta0ve"]
+[ext_resource type="Script" uid="uid://cp4ww8nq2gt" path="res://npc/lib/anim/character_anim.gd" id="1_ta0ve"]
 [ext_resource type="Texture2D" uid="uid://co444tm2p2o0s" path="res://npc/ghoul_npc.png" id="2_xqgpw"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_elg2o"]
@@ -392,22 +392,22 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fxrwm"]
 _data = {
-"crouch_east": SubResource("Animation_ytc5h"),
-"crouch_north": SubResource("Animation_axgvu"),
-"crouch_south": SubResource("Animation_ay85p"),
-"crouch_west": SubResource("Animation_hdamy"),
-"hit_east": SubResource("Animation_14he7"),
-"hit_north": SubResource("Animation_rpesf"),
-"hit_south": SubResource("Animation_mv7ku"),
-"hit_west": SubResource("Animation_o2ibl"),
-"idle_east": SubResource("Animation_eh1ju"),
-"idle_north": SubResource("Animation_rxwbq"),
-"idle_south": SubResource("Animation_v4tpb"),
-"idle_west": SubResource("Animation_3wqdt"),
-"walk_east": SubResource("Animation_ou6dq"),
-"walk_north": SubResource("Animation_a7vyv"),
-"walk_south": SubResource("Animation_nwry6"),
-"walk_west": SubResource("Animation_leod2")
+&"crouch_east": SubResource("Animation_ytc5h"),
+&"crouch_north": SubResource("Animation_axgvu"),
+&"crouch_south": SubResource("Animation_ay85p"),
+&"crouch_west": SubResource("Animation_hdamy"),
+&"hit_east": SubResource("Animation_14he7"),
+&"hit_north": SubResource("Animation_rpesf"),
+&"hit_south": SubResource("Animation_mv7ku"),
+&"hit_west": SubResource("Animation_o2ibl"),
+&"idle_east": SubResource("Animation_eh1ju"),
+&"idle_north": SubResource("Animation_rxwbq"),
+&"idle_south": SubResource("Animation_v4tpb"),
+&"idle_west": SubResource("Animation_3wqdt"),
+&"walk_east": SubResource("Animation_ou6dq"),
+&"walk_north": SubResource("Animation_a7vyv"),
+&"walk_south": SubResource("Animation_nwry6"),
+&"walk_west": SubResource("Animation_leod2")
 }
 
 [node name="Anim" type="Marker2D"]

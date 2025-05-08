@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://caunckd5wf0og"]
 
-[ext_resource type="Script" path="res://npc/lib/movement/npc_movement.gd" id="1_140bn"]
+[ext_resource type="Script" uid="uid://ud6lee6r0de" path="res://npc/lib/movement/npc_movement.gd" id="1_140bn"]
 
 [node name="NPCMovement" type="Node"]
 script = ExtResource("1_140bn")

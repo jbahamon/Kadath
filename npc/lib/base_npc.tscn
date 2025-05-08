@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c17hneqpuil0l"]
 
-[ext_resource type="Script" path="res://npc/lib/base_npc.gd" id="1_jrxdt"]
-[ext_resource type="Script" path="res://location/lib/script/object/description_area.gd" id="2_jtfdw"]
+[ext_resource type="Script" uid="uid://8x70ossqidag" path="res://npc/lib/base_npc.gd" id="1_jrxdt"]
+[ext_resource type="Script" uid="uid://osbp8ytjl0ga" path="res://location/lib/script/object/simple_interactable_object.gd" id="2_6qm6n"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(8, 8)
@@ -10,7 +10,6 @@ size = Vector2(8, 8)
 size = Vector2(8, 8)
 
 [node name="BaseNPC" type="CharacterBody2D" groups=["npc"]]
-position = Vector2(162.58, 87.1959)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_jrxdt")
@@ -24,8 +23,10 @@ collision_layer = 8
 collision_mask = 0
 monitoring = false
 monitorable = false
-script = ExtResource("2_jtfdw")
+script = ExtResource("2_6qm6n")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableArea"]
 position = Vector2(0, -7)
 shape = SubResource("3")
+
+[connection signal="player_interaction" from="InteractableArea" to="." method="on_player_interaction"]

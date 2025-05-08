@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://ex17k532alby"]
 
-[ext_resource type="Script" path="res://ui/04_templates/battle_ui/battle_ui.gd" id="1"]
+[ext_resource type="Script" uid="uid://crsyyn42w1j42" path="res://ui/04_templates/battle_ui/battle_ui.gd" id="1"]
 [ext_resource type="Theme" uid="uid://cgihxoevv7qgc" path="res://ui/01_atoms/theme.tres" id="3"]
 [ext_resource type="PackedScene" uid="uid://bqmykxfryt4p7" path="res://ui/03_organisms/timeline/timeline.tscn" id="3_81xqm"]
 [ext_resource type="PackedScene" uid="uid://oyekfni30vws" path="res://ui/03_organisms/skill_costs/skill_costs.tscn" id="6_qp326"]
@@ -15,10 +15,10 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource("3")
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 script = ExtResource("1")
 
 [node name="UIContainer" type="VBoxContainer" parent="."]
@@ -106,7 +106,7 @@ size_flags_vertical = 0
 
 [node name="BattleStatusContainer" type="VBoxContainer" parent="UIContainer/ContentContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 10
 alignment = 1
 
 [node name="Timeline" parent="UIContainer/ContentContainer/BattleStatusContainer" instance=ExtResource("3_81xqm")]

@@ -1,12 +1,12 @@
 [gd_scene load_steps=10 format=3 uid="uid://c3okprgd6vbwj"]
 
-[ext_resource type="Script" path="res://ui/02_molecules/keyboard_based_tab_container/keyboard_based_tab_container.gd" id="2_i7pxu"]
+[ext_resource type="Script" uid="uid://lp56anh2l3d" path="res://ui/02_molecules/keyboard_based_tab_container/keyboard_based_tab_container.gd" id="2_i7pxu"]
 [ext_resource type="PackedScene" uid="uid://cu30gjjhspgly" path="res://ui/04_templates/settings_menu/settings_menu.tscn" id="3"]
 [ext_resource type="FontFile" uid="uid://60oeotvtq5qv" path="res://ui/01_atoms/assets/fonts/By Wuchta/Letterstyle(1).ttf" id="3_7xxew"]
 [ext_resource type="PackedScene" uid="uid://bxtqflr2vn3o4" path="res://ui/03_organisms/party_submenu/party_submenu.tscn" id="4"]
-[ext_resource type="Script" path="res://ui/04_templates/settings_menu/settings.gd" id="5"]
+[ext_resource type="Script" uid="uid://cvbavm8b4l103" path="res://ui/04_templates/settings_menu/settings.gd" id="5"]
 [ext_resource type="PackedScene" uid="uid://cakm1eb2hb4hh" path="res://ui/03_organisms/item_submenu/item_submenu.tscn" id="5_jjqat"]
-[ext_resource type="Script" path="res://ui/04_templates/pause_menu/pause_menu.gd" id="7"]
+[ext_resource type="Script" uid="uid://4puhfb6fyftn" path="res://ui/04_templates/pause_menu/pause_menu.gd" id="7"]
 [ext_resource type="PackedScene" uid="uid://c2opuixudajq" path="res://ui/02_molecules/help_bar/help_bar.tscn" id="9_sno00"]
 [ext_resource type="Texture2D" uid="uid://dxwh6a1rauvnx" path="res://ui/01_atoms/assets/icons/By ssugmi/icon-settings.png" id="18"]
 

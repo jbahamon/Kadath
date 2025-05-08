@@ -1,0 +1,97 @@
+[gd_scene load_steps=3 format=3 uid="uid://h7fnf0wq8gja"]
+
+[ext_resource type="Script" uid="uid://cu2nij4hagw4g" path="res://ui/03_organisms/audio_video_settings_submenu/audio_video_settings_submenu.gd" id="1_aeesx"]
+[ext_resource type="FontFile" uid="uid://c8fvau54sblb1" path="res://ui/01_atoms/assets/fonts/By Wuchta/Letterstyle(1).otf" id="1_sfcbh"]
+
+[node name="AudioVideo" type="VBoxContainer"]
+custom_minimum_size = Vector2(600, 0)
+size_flags_vertical = 4
+theme_override_constants/separation = 30
+script = ExtResource("1_aeesx")
+
+[node name="VolumeLabel" type="Label" parent="."]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_sfcbh")
+theme_override_font_sizes/font_size = 15
+text = "Audio"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VolumeSliders" type="GridContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="MusicVolumeLabel" type="Label" parent="HBoxContainer/VolumeSliders"]
+layout_mode = 2
+text = "Music Volume:"
+
+[node name="MusicVolumeSlider" type="HSlider" parent="HBoxContainer/VolumeSliders"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_top = NodePath(".")
+mouse_filter = 2
+max_value = 1.0
+step = 0.05
+tick_count = 11
+
+[node name="SFXVolumeLabel" type="Label" parent="HBoxContainer/VolumeSliders"]
+layout_mode = 2
+text = "SFX Volume:"
+
+[node name="SFXVolumeSlider" type="HSlider" parent="HBoxContainer/VolumeSliders"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+max_value = 1.0
+step = 0.05
+tick_count = 11
+
+[node name="UIVolumeLabel" type="Label" parent="HBoxContainer/VolumeSliders"]
+layout_mode = 2
+text = "UI Volume:"
+
+[node name="UIVolumeSlider" type="HSlider" parent="HBoxContainer/VolumeSliders"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+max_value = 1.0
+step = 0.05
+tick_count = 11
+
+[node name="HSeparator2" type="HSeparator" parent="."]
+layout_mode = 2
+
+[node name="VideoLabel" type="Label" parent="."]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_sfcbh")
+theme_override_font_sizes/font_size = 15
+text = "Video"
+
+[node name="VideoCheckBoxes" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="EnableShake" type="CheckBox" parent="VideoCheckBoxes"]
+layout_mode = 2
+focus_neighbor_left = NodePath(".")
+mouse_filter = 2
+text = "Screen shake"
+
+[node name="EnableFlash" type="CheckBox" parent="VideoCheckBoxes"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../EnableShake")
+mouse_filter = 2
+text = "Flashing effects"
+
+[connection signal="value_changed" from="HBoxContainer/VolumeSliders/MusicVolumeSlider" to="." method="update_music_volume"]
+[connection signal="value_changed" from="HBoxContainer/VolumeSliders/SFXVolumeSlider" to="." method="update_sfx_volume"]
+[connection signal="value_changed" from="HBoxContainer/VolumeSliders/UIVolumeSlider" to="." method="update_ui_volume"]
+[connection signal="toggled" from="VideoCheckBoxes/EnableShake" to="." method="update_enable_shake"]
+[connection signal="toggled" from="VideoCheckBoxes/EnableFlash" to="." method="update_enable_flash"]

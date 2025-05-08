@@ -42,8 +42,6 @@ func _on_boss_trigger_body_entered(body):
 		"end_proxy_mode": PlayerProxy.ProxyMode.GAMEPLAY,
 		"pausable": false,
 	})
-	
-	print("hello")
 
 func play_fall_sound():
 	FXService.play_sfx_at(self.fall_sound, $Thymiaterion.global_position)

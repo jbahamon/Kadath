@@ -1,4 +1,13 @@
+res://ui/03_organisms/game_over_screen
+res://battle/fx/status
+res://party/pickman/breakdown
+res://global/resources
+res://party/carter
 res://location/000_prologue_kadath/object
+res://ui/03_organisms/controls_settings_submenu
+res://ui/03_organisms/interface_settings_submenu
+res://ui/03_organisms/audio_video_settings_submenu
+res://utils/material
 res://ui/01_atoms/turn_indicator
 res://ui/01_atoms/assets/textures/By Sr.Toasty
 res://ui/01_atoms/scroll
@@ -9,14 +18,9 @@ res://sound/fx/charge
 res://sound/fx/slash
 res://battle/status_effect
 res://party/carter/status_effect
-res://battle/fx/status
 res://ui/02_molecules
 res://battle/fx
-res://ui/02_molecules/help_bar
-res://ui/01_atoms/assets/icons/original
-res://npc/lib
 C:/Users/Jorge/Documents/Godot/Kadath/sound/music/LUShvalleySound
 C:/Users/Jorge/Documents/Godot/Kadath/sound/music/BertCole
-res://global
 C:/Users/Jorge/Documents/Godot/Kadath/location/000_prologue_kadath/cutscene
 C:/Users/Jorge/Documents/Godot/Kadath

@@ -51,6 +51,12 @@ func _physics_process(_delta) -> void:
 	if self.current_mode == ProxyMode.GAMEPLAY:
 		var input_vector_changed = update_input_vector()
 		
+		if SettingsService.toggle_run:
+			if Input.is_action_just_pressed("action_run"):
+				self.is_running = not self.is_running
+		else:
+			self.is_running = Input.is_action_pressed("action_run")
+			
 		if input_vector_changed:
 			update_velocity()
 			update_orientation()
@@ -63,7 +69,7 @@ func _physics_process(_delta) -> void:
 
 func update_velocity() -> void:
 	if input_vector != Vector2.ZERO:
-		velocity = input_vector.normalized() * get_movement_speed()
+		velocity = input_vector.normalized() * (self.run_speed if self.is_running else self.walk_speed)
 	else:
 		velocity = Vector2.ZERO
 		
@@ -83,15 +89,6 @@ func update_input_vector():
 	) if self.is_processing_unhandled_input() else Vector2.ZERO
 		
 	return old_input_vector == input_vector
-
-func get_movement_speed() -> float:
-	if SettingsService.toggle_run:
-		if Input.is_action_just_pressed("action_run"):
-			self.is_running = not self.is_running
-	else:
-		self.is_running = Input.is_action_pressed("action_run")
-
-	return self.run_speed if self.is_running else self.walk_speed
 
 func update_animation() -> void:
 	if not self.target:

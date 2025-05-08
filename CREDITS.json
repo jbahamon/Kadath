@@ -50,7 +50,7 @@
 		"author_url": "https://henrysoftware.itch.io/",
 		"asset_name": "Godot Pixel Interface",
 		"asset_url": "https://henrysoftware.itch.io/godot-pixel-interface",
-		"asset_usage": "Various UI elements and fonts"
+		"asset_usage": "Various UI elements"
 	},
 	
 	{
@@ -78,7 +78,7 @@
 		"author_url": "https://wuchta.itch.io/",
 		"asset_name": "Letterstyle - font",
 		"asset_url": "https://wuchta.itch.io/letterstyle",
-		"asset_usage": "Game title font"
+		"asset_usage": "Narration and headings font"
 	},
 	
 	{
@@ -99,33 +99,6 @@
 		"asset_usage": "UI Panels, Dialogue advance indicator"
 	},
 	
-	
-	{
-		"category": "graphics",
-		"author_name": "kgpaints",
-		"author_url": "https://linktr.ee/kgpaints",
-		"asset_name": "Too Much Ink",
-		"asset_url": "https://kgpaints.itch.io/too-much-ink",
-		"asset_usage": "Font included for potential future use"
-	},
-	
-	{
-		"category": "graphics",
-		"author_name": "kgpaints",
-		"author_url": "https://linktr.ee/kgpaints",
-		"asset_name": "Too Much Ink",
-		"asset_url": "https://kgpaints.itch.io/too-much-ink",
-		"asset_usage": "Font included for potential future use"
-	},
-	
-	{
-		"category": "graphics",
-		"author_name": "Adigun Azikiwe Polack",
-		"author_url": "https://x.com/AdigunPolack",
-		"asset_name": "Eromantique",
-		"asset_url": "https://x.com/AdigunPolack/status/1361565671033868290",
-		"asset_usage": "Font included for potential future use"
-	},
 	
 	{
 		"category": "sounds",
@@ -240,6 +213,17 @@
 		"asset_url": "https://kronbits.itch.io/freesfx",
 		"asset_usage": "Various battle sound effects"
 	},
+	
+	
+	{
+		"category": "sounds",
+		"author_name": "jerry.berumen",
+		"author_url": "https://bit.ly/m/jerry-wav",
+		"asset_name": "User Interface fanfare end reached success victory finished",
+		"asset_url": "https://freesound.org/people/jerry.berumen/sounds/772763/",
+		"asset_usage": "Fanfare sound"
+	},
+	
 	
 	{
 		"category": "sounds",
@@ -378,6 +362,15 @@
 		"author_url": "http://www.kenney.nl/",
 		"asset_name": "Kenney Game Assets All-in-1",
 		"asset_url": "https://kenney.itch.io/kenney-game-assets",
+		"asset_usage": "Various battle sound effects"
+	},
+	
+	{
+		"category": "sounds",
+		"author_name": "Chequered Ink",
+		"author_url": "https://chequered.ink/",
+		"asset_name": "Bumper Audio Pack",
+		"asset_url": "https://ci.itch.io/bumper-audio-pack",
 		"asset_usage": "Various battle sound effects"
 	},
 	

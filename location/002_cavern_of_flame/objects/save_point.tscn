@@ -1,32 +1,44 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=7 format=3 uid="uid://d2c0pjqevww7e"]
 
-[ext_resource path="res://location/002_cavern_of_flame/objects/save-point2.png" type="Texture2D" id=1]
-[ext_resource path="res://location/002_cavern_of_flame/objects/save-point1.png" type="Texture2D" id=2]
-[ext_resource path="res://location/002_cavern_of_flame/objects/save-point3.png" type="Texture2D" id=3]
-[ext_resource path="res://location/002_cavern_of_flame/objects/save_point.gd" type="Script" id=4]
+[ext_resource type="Texture2D" uid="uid://be1ajfa6xrjty" path="res://location/002_cavern_of_flame/objects/save-point2.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://be2ab83bshv4w" path="res://location/002_cavern_of_flame/objects/save-point1.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://rxeu586nny0p" path="res://location/002_cavern_of_flame/objects/save-point3.png" id="3"]
+[ext_resource type="Script" uid="uid://dpdl8ydhdbyfo" path="res://location/002_cavern_of_flame/objects/save_point.gd" id="4"]
 
-[sub_resource type="SpriteFrames" id=1]
-animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 1 ), ExtResource( 3 ), ExtResource( 1 ) ],
+[sub_resource type="SpriteFrames" id="1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1")
+}],
 "loop": true,
-"name": "default",
+"name": &"default",
 "speed": 2.2
-} ]
+}]
 
-[sub_resource type="RectangleShape2D" id=2]
-size = Vector2( 10.9678, 9.88343 )
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(10.9678, 9.88343)
 
 [node name="SavePoint" type="StaticBody2D"]
 collision_layer = 8
 collision_mask = 7
-script = ExtResource( 4 )
+script = ExtResource("4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2( 1.52588e-05, -20.2165 )
-frames = SubResource( 1 )
+position = Vector2(1.52588e-05, -20.2165)
+frames = SubResource("1")
 frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -0.19841, -9.72283 )
-shape = SubResource( 2 )
+position = Vector2(-0.19841, -9.72283)
+shape = SubResource("2")

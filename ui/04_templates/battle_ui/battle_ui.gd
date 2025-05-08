@@ -120,6 +120,9 @@ func hide_options():
 	options_list.release_focus()
 	options_list.set_process_unhandled_input(false)
 
+func show_timeline():
+	self.timeline.modulate = Color.WHITE
+
 func hide_timeline():
 	self.timeline.modulate = Color.TRANSPARENT
 	
@@ -137,7 +140,7 @@ func on_option_focused(option):
 	enemy_info.hide()
 	
 	if option is PartyMember or option is BaseNPC:
-		self.timeline.highlight({option.display_name: true})
+		self.timeline.highlight({option.in_battle_id: true})
 		
 		if option is BaseNPC:
 			enemy_info.show()
@@ -146,7 +149,7 @@ func on_option_focused(option):
 	elif option is Array and option.size() > 0 and (option[0] is PartyMember or option[0] is BaseNPC):
 		var highlights = {}
 		for actor in options:
-			highlights[actor.display_name] = true
+			highlights[actor.in_battle_id] = true
 		self.timeline.highlight(highlights)
 	elif option is BattleAction:
 		self.timeline.highlight({})
@@ -207,9 +210,8 @@ func request_targets(targeting_type, action, actor, actors: Array, request_promp
 	
 	return self.option_selected
 
-func update_preview(current_actor, next_actors: Array):
-	self.timeline.update_preview(current_actor, next_actors)
-	self.timeline.modulate = Color.WHITE
+func update_preview(actor, next_actors: Array):
+	self.timeline.update_preview(actor, next_actors)
 	
 func update_player_state():
 	party_status.update()

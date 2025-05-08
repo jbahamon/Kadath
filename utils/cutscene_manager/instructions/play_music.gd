@@ -8,7 +8,7 @@ func _init(init_song_path, init_offset: float):
 	self.offset = init_offset
 	
 func execute(_tree: SceneTree, _mode: ExecutionMode):
-	if song_path == null:
+	if song_path == "":
 		MusicService.stop()
 		return
 	

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dwx2sfgjttusb"]
 
-[ext_resource type="Script" path="res://battle/action/util/line_of_effect.gd" id="1_j0n2e"]
+[ext_resource type="Script" uid="uid://c4ncxfc2vek2a" path="res://battle/action/util/line_of_effect.gd" id="1_j0n2e"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3hhld"]
 radius = 5.0

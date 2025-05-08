@@ -2,6 +2,7 @@ extends Node
 
 var dialogue_box
 var narration_layer
+var global_dialogue: DialogueResource = preload("res://global/resources/global_dialogue.dialogue")
 var current_dialogue: DialogueResource
 var current_responses: Array = []
 
@@ -10,7 +11,6 @@ func initialize(init_dialogue_box, init_narration_layer):
 	self.narration_layer = init_narration_layer
 
 func exit():
-	#self.dialogue = null
 	self.narration_layer = null
 	self.current_dialogue = null
 	self.current_responses = []
@@ -20,15 +20,21 @@ func load_location_dialogues(location: Location):
 	
 func add_response(response):
 	self.current_responses.append(response)
+
+func open_global_dialogue(dialogue_id: String, ) -> Array:
+	return await self._open_dialogue(dialogue_id, self.global_dialogue) 
 	
 func open_dialogue(dialogue_id: String) -> Array:
+	return await self._open_dialogue(dialogue_id, self.current_dialogue) 
+	
+func _open_dialogue(dialogue_id: String, dialogue_resource: DialogueResource) -> Array:
 	self.current_responses = []
 	var dialogue_lines = []
 	
 	# Branching dialogue shall be implemented as needed
 	
 	while dialogue_id:
-		var dialogue_line: DialogueLine = await self.current_dialogue.get_next_dialogue_line(dialogue_id)
+		var dialogue_line: DialogueLine = await dialogue_resource.get_next_dialogue_line(dialogue_id)
 		if dialogue_line == null:
 			break
 		var strings = VarsService.strings

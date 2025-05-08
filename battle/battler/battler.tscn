@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://dtaxhpmmjspek"]
 
-[ext_resource type="Script" path="res://battle/battler/battler.gd" id="1"]
+[ext_resource type="Script" uid="uid://cu2p2vw2dhwr" path="res://battle/battler/battler.gd" id="1"]
 [ext_resource type="Resource" uid="uid://cdcbv6worc83n" path="res://battle/battler/placeholder_stats.tres" id="2_04g3y"]
-[ext_resource type="Script" path="res://battle/battle_rewards.gd" id="3"]
+[ext_resource type="Script" uid="uid://b2g2l33unqd32" path="res://battle/battle_rewards.gd" id="3"]
 [ext_resource type="PackedScene" uid="uid://84p8mfqdop2l" path="res://ui/03_organisms/status_grid/status_grid.tscn" id="4_xb1rc"]
-[ext_resource type="Script" path="res://battle/battler/hitspots.gd" id="5_5au3e"]
+[ext_resource type="Script" uid="uid://k7y2vtre5u5m" path="res://battle/battler/hitspots.gd" id="5_5au3e"]
 [ext_resource type="PackedScene" uid="uid://32gtywhjjdwk" path="res://ui/02_molecules/toast/toast.tscn" id="5_sffqa"]
 [ext_resource type="FontFile" uid="uid://cvxv4vo48sw6a" path="res://ui/01_atoms/assets/fonts/By Helena Zhang/DepartureMono-Regular.otf" id="6_lw6um"]
 
