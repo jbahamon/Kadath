@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bomxx7doloqmu"]
 
-[ext_resource type="Script" uid="uid://trtpmu56lohu" path="res://party/party_member.gd" id="1"]
+[ext_resource type="Script" uid="uid://trtpmu56lohu" path="res://party/lib/party_member.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://dtaxhpmmjspek" path="res://battle/battler/battler.tscn" id="2"]
 [ext_resource type="Script" uid="uid://brpey6sluntv1" path="res://battle/ai/player_input.gd" id="3"]
 [ext_resource type="Script" uid="uid://g3uodhibvrcm" path="res://battle/action/skill.gd" id="4_8ihmo"]

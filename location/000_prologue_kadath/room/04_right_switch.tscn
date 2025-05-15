@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=4 uid="uid://cjysovi6kmyqe"]
+[gd_scene load_steps=21 format=4 uid="uid://cjysovi6kmyqe"]
 
 [ext_resource type="TileSet" uid="uid://b15m77bx602kw" path="res://location/000_prologue_kadath/tile/onyx_temple.tres" id="1_owgss"]
 [ext_resource type="AudioStream" uid="uid://ddj4wnlc32vxg" path="res://sound/fx/fall/Short - Kenney.wav" id="2_gbakt"]
 [ext_resource type="Script" uid="uid://dpwewpfdiqxku" path="res://location/000_prologue_kadath/room/04_right_switch.gd" id="2_ialqx"]
+[ext_resource type="AudioStream" uid="uid://cnxcr63hb0yvy" path="res://sound/fx/hit/Long Low - Owlish.wav" id="3_coy2p"]
 [ext_resource type="PackedScene" uid="uid://sfld8pt3bwlw" path="res://location/lib/script/object/warp.tscn" id="3_s64wm"]
 [ext_resource type="PackedScene" uid="uid://md0rlcmosnxr" path="res://location/lib/script/object/simple_interactable_object.tscn" id="4_x6bw5"]
 [ext_resource type="SpriteFrames" uid="uid://cc6woheb28lq4" path="res://location/000_prologue_kadath/object/chalice.tres" id="5_3hkxi"]
@@ -72,6 +73,7 @@ y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("2_ialqx")
 drop_sound = ExtResource("2_gbakt")
+bridge_sound = ExtResource("3_coy2p")
 room_id = "04_right_switch"
 used_rect = Rect2i(-112, -272, 224, 304)
 

@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://6y0sa7uffe2e" path="res://npc/enemy/thymiaterion/action/jump.gd" id="6_uy2te"]
 [ext_resource type="Material" uid="uid://c48122ffiwrbb" path="res://utils/material/uniform_add.tres" id="7_ofsbi"]
 [ext_resource type="Script" uid="uid://b425iaevn00r4" path="res://npc/enemy/thymiaterion/action/whip.gd" id="7_q7jpk"]
-[ext_resource type="Script" uid="uid://fv1hjw5irs7n" path="res://party/character_stats.gd" id="7_s7g1g"]
+[ext_resource type="Script" uid="uid://fv1hjw5irs7n" path="res://party/lib/character_stats.gd" id="7_s7g1g"]
 [ext_resource type="Script" uid="uid://ca234sc5bry72" path="res://battle/hit.gd" id="8_3rnnk"]
 [ext_resource type="Script" uid="uid://bj0e8mw8bbvbu" path="res://npc/enemy/thymiaterion/action/counter.gd" id="8_sm7w2"]
 [ext_resource type="AudioStream" uid="uid://cnxcr63hb0yvy" path="res://sound/fx/hit/Long Low - Owlish.wav" id="9_2mf5u"]

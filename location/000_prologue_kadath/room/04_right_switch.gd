@@ -6,6 +6,7 @@ const RESPONSE_YES = "yes"
 @onready var chalice = $Chalice
 
 @export var drop_sound: AudioStream
+@export var bridge_sound: AudioStream
 
 func setup():
 	if VarsService.get_flag("kadath.right_barrier"):
@@ -64,6 +65,7 @@ func attempt_chalice_interaction(proxy: PlayerProxy):
 		await EnvironmentService.fade_out()
 		self.solve_room()
 		await EnvironmentService.fade_in()
+		await FXService.play_sfx(self.bridge_sound).finished
 		await DialogueService.open_dialogue("after_chalice_activation")
 		proxy.set_mode(PlayerProxy.ProxyMode.GAMEPLAY)
 	else:

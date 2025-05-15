@@ -158,7 +158,6 @@ func take_hit(actor, hit: Hit, in_battle: bool = true):
 			damage = hit.potential_damage * self.get_damage_modifier(hit) * self.get_vulnerability(hit)
 			damage = int(ceil(damage + randf_range(1, damage * 0.2)))
 			
-		actual_damage = self.take_damage(damage)
 		
 		if hit.energy_drain > 0:
 			actual_energy_drain = self.spend_energy(hit.energy_drain)
@@ -219,6 +218,7 @@ func take_hit(actor, hit: Hit, in_battle: bool = true):
 					if hit.toast_time > 0:
 						await tree.create_timer(hit.toast_time).timeout
 					self.toast.position = self.toast_offset
+					actual_damage = self.take_damage(damage)
 					await self.toast.show_toast(str(damage))
 					if energy_drain > 0:
 						await tree.create_timer(0.2).timeout
@@ -234,7 +234,8 @@ func take_hit(actor, hit: Hit, in_battle: bool = true):
 			self.ai.check_reactions(parent, actor, hit, BattleService.get_actors())
 		else:
 			BattleService.notify_death(get_parent())
-
+	else:
+		actual_damage = self.take_damage(damage)
 	hit.effective_damage = actual_damage
 	hit.effective_energy_drain = actual_energy_drain
 	
@@ -267,7 +268,7 @@ func get_action_options() -> Array:
 		
 		options = actions.get_children()
 		
-		options.push_front(BattleService.common_action_options["lose"])
+		# options.push_front(BattleService.common_action_options["lose"])
 		# options.push_front(BattleService.common_action_options["win"])
 		options.push_back(BattleService.common_action_options["item"])
 		options.push_back(BattleService.common_action_options["defend"])

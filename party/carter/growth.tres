@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="GrowthStats" load_steps=10 format=3 uid="uid://1ulgpa1j7pky"]
 
-[ext_resource type="Script" uid="uid://bpgrs2lfm7ai1" path="res://party/growth_stats.gd" id="1_0m6s2"]
+[ext_resource type="Script" uid="uid://bpgrs2lfm7ai1" path="res://party/lib/growth_stats.gd" id="1_0m6s2"]
 
 [sub_resource type="Curve" id="1"]
 _limits = [0.0, 99.0, 0.0, 50.0]

@@ -72,7 +72,7 @@ layout_mode = 2
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_ivw60")
 theme_override_font_sizes/font_size = 15
-text = "Sound"
+text = "Other"
 
 [node name="Title2" type="Label" parent="ScrollContainer/VBox"]
 layout_mode = 2

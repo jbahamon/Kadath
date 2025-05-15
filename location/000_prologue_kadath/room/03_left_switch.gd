@@ -3,6 +3,7 @@ extends LocationRoom
 @export var found_sound: AudioStream
 @export var teleport_sound: AudioStream
 @export var slash_sound: AudioStream
+@export var bridge_sound: AudioStream
 @onready var circuit_layer = $Circuit
 @onready var chalice = $Chalice
 var failures = 0
@@ -68,10 +69,12 @@ func interact_with_chalice(proxy: PlayerProxy):
 		EntitiesService.party.set_physics_process(true)
 		VarsService.set_flag("kadath.left_barrier", true)
 		await EnvironmentService.fade_out()
+		await get_tree().create_timer(0.2).timeout
 		await FXService.play_sfx_at(self.slash_sound, Vector2(0,0)).finished
 		await get_tree().create_timer(0.5).timeout
 		self.solve_room()
 		await EnvironmentService.fade_in()
+		await FXService.play_sfx(self.bridge_sound).finished
 		await DialogueService.open_dialogue("after_chalice_activation")
 	else:
 		EntitiesService.party.set_physics_process(true)

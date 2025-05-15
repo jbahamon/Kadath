@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bwa4s06ml7ii5" path="res://npc/enemy/ampoule/icon.png" id="3_sr5ss"]
 [ext_resource type="Script" uid="uid://dfjdlwb0ygcyo" path="res://battle/ai/random_ai.gd" id="5_4cvli"]
 [ext_resource type="Resource" uid="uid://dlkfog15bgvgh" path="res://npc/lib/empty_rewards.tres" id="6_51ses"]
-[ext_resource type="Script" uid="uid://fv1hjw5irs7n" path="res://party/character_stats.gd" id="6_tw8fj"]
+[ext_resource type="Script" uid="uid://fv1hjw5irs7n" path="res://party/lib/character_stats.gd" id="6_tw8fj"]
 [ext_resource type="Script" uid="uid://bufngrxhoapop" path="res://npc/enemy/ampoule/attack.gd" id="6_xyght"]
 [ext_resource type="Material" uid="uid://c48122ffiwrbb" path="res://utils/material/uniform_add.tres" id="7_8q5jg"]
 [ext_resource type="Script" uid="uid://5q0ckc5fqj0q" path="res://npc/enemy/ampoule/drain.gd" id="7_oec2r"]

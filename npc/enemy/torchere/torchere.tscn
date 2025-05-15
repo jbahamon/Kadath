@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bs4rf2sdoppyh" path="res://npc/enemy/torchere/icon.png" id="3_h48do"]
 [ext_resource type="PackedScene" uid="uid://c1qvuen3txcsn" path="res://npc/enemy/torchere/anim.tscn" id="3_j4650"]
 [ext_resource type="PackedScene" uid="uid://dtaxhpmmjspek" path="res://battle/battler/battler.tscn" id="3_rrahi"]
-[ext_resource type="Script" uid="uid://fv1hjw5irs7n" path="res://party/character_stats.gd" id="6_6ytai"]
+[ext_resource type="Script" uid="uid://fv1hjw5irs7n" path="res://party/lib/character_stats.gd" id="6_6ytai"]
 [ext_resource type="Script" uid="uid://dfjdlwb0ygcyo" path="res://battle/ai/random_ai.gd" id="6_hhc2v"]
 [ext_resource type="Resource" uid="uid://dlkfog15bgvgh" path="res://npc/lib/empty_rewards.tres" id="6_lqr72"]
 [ext_resource type="Script" uid="uid://5p7scfdoqyhq" path="res://battle/action/base_attack.gd" id="6_mwfm3"]

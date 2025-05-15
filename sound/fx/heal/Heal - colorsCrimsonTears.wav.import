@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bataanejiirh5"
-path="res://.godot/imported/Heal - colorsCrimsonTears.wav-c3717e4d0520c2cf617290b11d2729fc.sample"
+path="res://.godot/imported/Heal - colorsCrimsonTears.wav-b625e28646fb5947780bbfcda1e5ce1d.sample"
 
 [deps]
 
-source_file="res://sound/fx/magic/heal/Heal - colorsCrimsonTears.wav"
-dest_files=["res://.godot/imported/Heal - colorsCrimsonTears.wav-c3717e4d0520c2cf617290b11d2729fc.sample"]
+source_file="res://sound/fx/heal/Heal - colorsCrimsonTears.wav"
+dest_files=["res://.godot/imported/Heal - colorsCrimsonTears.wav-b625e28646fb5947780bbfcda1e5ce1d.sample"]
 
 [params]
 

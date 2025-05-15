@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://c1kt4880hvdre"
-path="res://.godot/imported/Reverb - JuhaniJunkala.wav-55f64edf2cff5090c87b4f13c9434eba.sample"
+path="res://.godot/imported/Reverb - JuhaniJunkala.wav-246c909ad9417694b83de39d728d7a92.sample"
 
 [deps]
 
-source_file="res://sound/fx/magic/heal/Reverb - JuhaniJunkala.wav"
-dest_files=["res://.godot/imported/Reverb - JuhaniJunkala.wav-55f64edf2cff5090c87b4f13c9434eba.sample"]
+source_file="res://sound/fx/heal/Reverb - JuhaniJunkala.wav"
+dest_files=["res://.godot/imported/Reverb - JuhaniJunkala.wav-246c909ad9417694b83de39d728d7a92.sample"]
 
 [params]
 

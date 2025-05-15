@@ -1,8 +1,8 @@
-[gd_scene load_steps=31 format=4 uid="uid://bifjpvxmoufbc"]
+[gd_scene load_steps=32 format=4 uid="uid://bifjpvxmoufbc"]
 
 [ext_resource type="TileSet" uid="uid://b15m77bx602kw" path="res://location/000_prologue_kadath/tile/onyx_temple.tres" id="1_5f0on"]
-[ext_resource type="AudioStream" uid="uid://dy55vatd4y6yk" path="res://sound/fx/scream/Mid High - harvey656.wav" id="2_cpq12"]
 [ext_resource type="Script" uid="uid://djegv1nh08lxa" path="res://location/000_prologue_kadath/room/03_left_switch.gd" id="2_ujnkk"]
+[ext_resource type="AudioStream" uid="uid://drbiocqq5bbf0" path="res://sound/fx/scream/Alien - JuhaniJunkala.wav" id="2_urhk2"]
 [ext_resource type="PackedScene" uid="uid://k1y4abtqqro7" path="res://location/lib/script/object/battle_spot.tscn" id="3_1t0fu"]
 [ext_resource type="AudioStream" uid="uid://c56uv6545srpr" path="res://sound/fx/magic/debuff/Short - Leohpaz.wav" id="3_1w2ir"]
 [ext_resource type="PackedScene" uid="uid://md0rlcmosnxr" path="res://location/lib/script/object/simple_interactable_object.tscn" id="3_ggdln"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://bec3lquo8ddbs" path="res://location/lib/script/object/enemy_spot.gd" id="4_30dgk"]
 [ext_resource type="SpriteFrames" uid="uid://cc6woheb28lq4" path="res://location/000_prologue_kadath/object/chalice.tres" id="4_la3y1"]
 [ext_resource type="PackedScene" uid="uid://ds2ji50aao08o" path="res://npc/lib/movement/path_movement.tscn" id="5_mhkg2"]
+[ext_resource type="AudioStream" uid="uid://cnxcr63hb0yvy" path="res://sound/fx/hit/Long Low - Owlish.wav" id="5_xklqw"]
 [ext_resource type="PackedScene" uid="uid://cebhopaolaguc" path="res://npc/enemy/acolyte/acolyte.tscn" id="6_f620e"]
 [ext_resource type="Texture2D" uid="uid://bf8vls8u5sbww" path="res://location/000_prologue_kadath/object/torch-sheet.png" id="8_l6n1l"]
 [ext_resource type="Texture2D" uid="uid://bjb72qbk85an4" path="res://location/000_prologue_kadath/object/altar.png" id="9_ylodu"]
@@ -98,9 +99,10 @@ size = Vector2(32, 32)
 y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("2_ujnkk")
-found_sound = ExtResource("2_cpq12")
+found_sound = ExtResource("2_urhk2")
 teleport_sound = ExtResource("3_1w2ir")
 slash_sound = ExtResource("4_0kopi")
+bridge_sound = ExtResource("5_xklqw")
 room_id = "03_left_switch"
 used_rect = Rect2i(-112, -480, 224, 512)
 

@@ -21,7 +21,7 @@ func choose_action(_actor, _actors: Array):
 		match turn_counter:
 			0:
 				turn_counter += 1
-				return self.chew
+				return self.shoot
 			1: 
 				turn_counter += 1
 				return self.shoot

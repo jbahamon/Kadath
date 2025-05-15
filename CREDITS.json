@@ -375,6 +375,15 @@
 	},
 	
 	{
+		"category": "sounds",
+		"author_name": "Diablo Luna",
+		"author_url": "https://pudretediablo.itch.io/",
+		"asset_name": "16 Bits Monsters Growls",
+		"asset_url": "https://pudretediablo.itch.io/16bits-monsters-growls",
+		"asset_usage": "Various battle sound effects"
+	},
+	
+	{
 		"category": "code",
 		"author_name": "GDQuest",
 		"author_url": "https://www.gdquest.com/",
@@ -414,6 +423,6 @@
 		"asset_name": "LabChirp",
 		"asset_url": "https://labbed.net/software/labchirp/",
 		"asset_usage": "Various battle sound effects"
-	},
+	}
 	
 ]

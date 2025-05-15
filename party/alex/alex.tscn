@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://jekjd0u7io0t"]
 
-[ext_resource type="PackedScene" uid="uid://bomxx7doloqmu" path="res://party/party_member.tscn" id="1_0oesc"]
-[ext_resource type="Resource" uid="uid://b4nbxe88mk82q" path="res://party/base_growth.tres" id="2_baeor"]
+[ext_resource type="PackedScene" uid="uid://bomxx7doloqmu" path="res://party/lib/party_member.tscn" id="1_0oesc"]
+[ext_resource type="Resource" uid="uid://b4nbxe88mk82q" path="res://party/lib/base_growth.tres" id="2_baeor"]
 [ext_resource type="Texture2D" uid="uid://c7iv4j4yioinv" path="res://party/alex/icon.png" id="3_qyy1i"]
 [ext_resource type="Script" uid="uid://bgo72c6mvhwx0" path="res://party/alex/skill/crescent_blast.gd" id="4_e2q1k"]
 [ext_resource type="Script" uid="uid://cbotvphewy65u" path="res://party/alex/skill/forceful_slash.gd" id="5_cliwo"]
