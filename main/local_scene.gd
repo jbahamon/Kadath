@@ -64,8 +64,8 @@ func move_to_starting_room():
 		if self.debug:
 			
 			await EnvironmentService.update_whereabouts(
-				"999_tests", 
-				"battle",
+				"000_prologue_kadath", 
+				"05_boss_room",
 				
 				Vector2(0, 0),
 				Vector2.UP,
@@ -75,6 +75,7 @@ func move_to_starting_room():
 					"end_proxy_state": PlayerProxy.ProxyMode.GAMEPLAY,
 				}
 			)
+			FXService.get_layer("MIX").color = Color(Color.BLACK, 0.0)
 		else:
 			await EnvironmentService.update_whereabouts(
 				"000_prologue_kadath", 

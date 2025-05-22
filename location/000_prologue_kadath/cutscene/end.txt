@@ -1,43 +1,40 @@
-# Onyx doors open
-# CALL Door open
+# Carter shows he's determined, then we change rooms
 PLAY_ANIM PROXY idle
 START_DIALOGUE after_boss
-# Party walks up , fade to black, change room
 
 SET_OVERLAY MIX TO (0,0,0,0.0)
 FADE_OVERLAY MIX TO (0,0,0,1.0) IN 1
 
-# Party walks up to the center of the room, but nobody's to be seen
 SET_ROOM 06_throne_room
-PLAY_MUSIC "NONE"
 SET_POSITION PROXY TO (0, 112)
 CALL ROOM lock_pickman
 
+# We walk into the room. Carter calls the gods out
 SIMULTANEOUS 
 	FADE_OVERLAY MIX TO (0,0,0,0.0) IN 1
 	WALK PROXY TO (0, 48) AT 25
 	WALK NPCPickman TO (32, 80) AT 25
 END
-
 START_DIALOGUE gods_callout
 
+# Room starts darkening, Pickman is ejected
 SIMULTANEOUS
 	FADE_OVERLAY MIX TO (0,0,0, 0.3) IN 1
+	AWAIT ROOM fade_music
 END
-
 LOOK NPCPickman LEFT
-START_DIALOGUE pickman_warning
+SIMULTANEOUS
+	START_DIALOGUE pickman_warning
+END
 
 SIMULTANEOUS
 	LOOK PROXY RIGHT
 	AWAIT ROOM fade_companion
 	START_DIALOGUE carter_call
 END
-
 CALL NPCPickman queue_free
 
 SIMULTANEOUS
-	AWAIT ROOM darken_room
 	START_DIALOGUE nyarlathotep_1
 	SEQUENTIAL
 		WAIT 1
@@ -46,12 +43,9 @@ SIMULTANEOUS
 END
 
 SIMULTANEOUS
-	AWAIT ROOM show_spooks
+	AWAIT ROOM nyarla_walk
 	START_DIALOGUE nyarlathotep_2
+	AWAIT ROOM dissolve_room
 END
 
-SET_OVERLAY MIX TO (0,0,0, 1.0)
-
 WAIT 1
-
-CALL ROOM show_title_card

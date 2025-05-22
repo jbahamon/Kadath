@@ -1,4 +1,4 @@
-res://ui/02_molecules/credits_entry/credits_entry.tscn
+res://main/local_scene.tscn
 res://ui/01_atoms/theme.tres
 res://utils/material/uniform_add.gdshader
 res://utils/material/uniform_add.tres
@@ -18,8 +18,14 @@ res://ui/01_atoms/turn_indicator/turn_indicator.tres
 res://utils/material/soft_blink.gdshader
 res://utils/material/soft_blink.tres
 res://location/000_prologue_kadath/tile/onyx_temple.tres
-res://location/000_prologue_kadath/object/chalice.tres
-res://npc/enemy/ampoule/attack.gd
+res://utils/material/burn_out.gdshader
+res://utils/material/burn_out.tres
 res://utils/material/blend_add.gdshader
 res://utils/material/boss_dissolve.gdshader
-res://CREDITS.json
+res://utils/material/glitch.gdshader
+res://location/000_prologue_kadath/cutscene/end.txt
+res://location/000_prologue_kadath/room/06_throne_room.tscn
+res://location/000_prologue_kadath/room/06_throne_room.gd
+res://location/000_prologue_kadath/room/05_boss_room.tscn
+res://party/pickman/anim.tscn
+res://battle/battler/battler.gd

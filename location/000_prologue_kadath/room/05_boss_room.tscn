@@ -164,6 +164,7 @@ shape = SubResource("RectangleShape2D_5avj4")
 [node name="BossTrigger" type="Area2D" parent="."]
 position = Vector2(0, -86)
 collision_layer = 0
+monitoring = false
 monitorable = false
 metadata/_edit_group_ = true
 
@@ -187,6 +188,7 @@ script = ExtResource("6_mblpi")
 [node name="Thymiaterion" parent="." instance=ExtResource("6_2020d")]
 visible = false
 position = Vector2(0, -128)
+battle_on_contact = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

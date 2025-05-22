@@ -1,0 +1,21 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://de0k3cmut00ms"]
+
+[ext_resource type="Shader" uid="uid://belell123ebq2" path="res://utils/material/glitch.gdshader" id="1_w6prd"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_w6prd"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_q1f8g"]
+noise = SubResource("FastNoiseLite_w6prd")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5lh5e"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ubrkq"]
+noise = SubResource("FastNoiseLite_5lh5e")
+
+[resource]
+shader = ExtResource("1_w6prd")
+shader_parameter/frame_size = Vector2(0, 0)
+shader_parameter/noise_tex_normal = SubResource("NoiseTexture2D_ubrkq")
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_q1f8g")
+shader_parameter/progress = 0.0
+shader_parameter/strength = 1.0

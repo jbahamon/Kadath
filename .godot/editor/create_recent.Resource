@@ -1,3 +1,4 @@
+ShaderMaterial
 SpriteFrames
 DialogueResource
 StyleBoxTexture
@@ -10,5 +11,4 @@ Weapon
 Equipment
 Armor
 BattleRewards
-ShaderMaterial
 TileSet

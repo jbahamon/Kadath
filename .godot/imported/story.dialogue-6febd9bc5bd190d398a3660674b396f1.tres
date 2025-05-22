@@ -6,14 +6,14 @@
 script = ExtResource("1_da363")
 using_states = PackedStringArray()
 titles = {
-"acolyte_remains": "118",
+"acolyte_remains": "121",
 "after_boss": "71",
-"after_chalice_activation": "142",
-"barrier": "126",
+"after_chalice_activation": "145",
+"barrier": "129",
 "carter_call": "83",
-"cauldron": "106",
-"chalice": "130",
-"chalice_done": "146",
+"cauldron": "109",
+"chalice": "133",
+"chalice_done": "149",
 "entrance_carter_1": "24",
 "entrance_carter_2": "28",
 "entrance_carter_3": "32",
@@ -24,19 +24,20 @@ titles = {
 "idle_left_ghoul": "44",
 "idle_pickman": "40",
 "idle_right_ghoul": "51",
-"lamp": "102",
+"lamp": "105",
 "narration_1": "4",
 "narration_2": "8",
 "nyarlathotep_1": "87",
-"nyarlathotep_2": "94",
+"nyarlathotep_2": "91",
+"nyarlathotep_3": "97",
 "pickman_catch_up": "58",
 "pickman_join": "67",
 "pickman_recruit": "62",
 "pickman_warning": "79",
-"pushing_barrier": "122",
+"pushing_barrier": "125",
 "starting_instructions": "36",
-"statue_disabled": "110",
-"statue_enabled": "114"
+"statue_disabled": "113",
+"statue_enabled": "117"
 }
 character_names = PackedStringArray("Ghoul", "Pickman", "Carter", "????")
 first_title = "3"
@@ -51,56 +52,39 @@ lines = {
 &"next_id": "11",
 &"type": ""
 },
-"101": {
-&"id": "101",
-&"next_id": "102",
-&"type": "title"
-},
-"102": {
-&"id": "102",
-&"next_id": "103",
-&"text": "Though there is no wind in here, these eery flames continuously dance and flicker.",
-&"type": "dialogue"
-},
-"103": {
-&"id": "103",
-&"is_snippet": false,
-&"next_id": "end!",
-&"next_id_after": "",
-&"type": "goto"
-},
 "104": {
 &"id": "104",
 &"next_id": "105",
-&"type": ""
+&"type": "title"
 },
 "105": {
 &"id": "105",
 &"next_id": "106",
-&"type": "title"
+&"text": "Though there is no wind in here, these eery flames continuously dance and flicker.",
+&"type": "dialogue"
 },
 "106": {
 &"id": "106",
-&"next_id": "107",
-&"text": "The halls are permeated by a sort of phosphorescence. These lamps are purely for decorative purposes. Perhaps ritualistic.",
-&"type": "dialogue"
-},
-"107": {
-&"id": "107",
 &"is_snippet": false,
 &"next_id": "end!",
 &"next_id_after": "",
 &"type": "goto"
 },
+"107": {
+&"id": "107",
+&"next_id": "108",
+&"type": ""
+},
 "108": {
 &"id": "108",
 &"next_id": "109",
-&"type": ""
+&"type": "title"
 },
 "109": {
 &"id": "109",
 &"next_id": "110",
-&"type": "title"
+&"text": "The halls are permeated by a sort of phosphorescence. These lamps are purely for decorative purposes. Perhaps ritualistic.",
+&"type": "dialogue"
 },
 "11": {
 &"id": "11",
@@ -109,62 +93,61 @@ lines = {
 },
 "110": {
 &"id": "110",
-&"next_id": "111",
-&"text": "A statue with dog-like twin heads, holding an amphora.",
-&"type": "dialogue"
-},
-"111": {
-&"id": "111",
 &"is_snippet": false,
 &"next_id": "end!",
 &"next_id_after": "",
 &"type": "goto"
+},
+"111": {
+&"id": "111",
+&"next_id": "112",
+&"type": ""
 },
 "112": {
 &"id": "112",
 &"next_id": "113",
-&"type": ""
+&"type": "title"
 },
 "113": {
 &"id": "113",
 &"next_id": "114",
-&"type": "title"
+&"text": "A statue with dog-like twin heads, holding an amphora.",
+&"type": "dialogue"
 },
 "114": {
 &"id": "114",
-&"next_id": "115",
-&"text": "A double-headed statue. Its amphora is pouring a suspicious red liquid.",
-&"type": "dialogue"
-},
-"115": {
-&"id": "115",
 &"is_snippet": false,
 &"next_id": "end!",
 &"next_id_after": "",
 &"type": "goto"
+},
+"115": {
+&"id": "115",
+&"next_id": "116",
+&"type": ""
 },
 "116": {
 &"id": "116",
 &"next_id": "117",
-&"type": ""
+&"type": "title"
 },
 "117": {
 &"id": "117",
 &"next_id": "118",
-&"type": "title"
+&"text": "A double-headed statue. Its amphora is pouring a suspicious red liquid.",
+&"type": "dialogue"
 },
 "118": {
 &"id": "118",
-&"next_id": "119",
-&"text": "Blood-stained clothes. All that remains of a willing participant in a ritual sacrifice.",
-&"type": "dialogue"
-},
-"119": {
-&"id": "119",
 &"is_snippet": false,
 &"next_id": "end!",
 &"next_id_after": "",
 &"type": "goto"
+},
+"119": {
+&"id": "119",
+&"next_id": "120",
+&"type": ""
 },
 "12": {
 &"character": "Ghoul",
@@ -176,59 +159,60 @@ lines = {
 "120": {
 &"id": "120",
 &"next_id": "121",
-&"type": ""
+&"type": "title"
 },
 "121": {
 &"id": "121",
 &"next_id": "122",
-&"type": "title"
+&"text": "Blood-stained clothes. All that remains of a willing participant in a ritual sacrifice.",
+&"type": "dialogue"
 },
 "122": {
 &"id": "122",
-&"next_id": "123",
-&"text": "This is not the time to retreat. The journey to this place has been long and hard, and it's time to face the gods.",
-&"type": "dialogue"
-},
-"123": {
-&"id": "123",
-&"is_snippet": false,
-&"next_id": "end",
-&"next_id_after": "",
-&"type": "goto"
-},
-"124": {
-&"id": "124",
-&"next_id": "125",
-&"type": ""
-},
-"125": {
-&"id": "125",
-&"next_id": "126",
-&"type": "title"
-},
-"126": {
-&"character": "Carter",
-&"id": "126",
-&"next_id": "127",
-&"text": "An abyss leading to unknown depths. These statues, though, seem to be connected to the adjacent rooms.",
-&"type": "dialogue"
-},
-"127": {
-&"id": "127",
 &"is_snippet": false,
 &"next_id": "end!",
 &"next_id_after": "",
 &"type": "goto"
 },
+"123": {
+&"id": "123",
+&"next_id": "124",
+&"type": ""
+},
+"124": {
+&"id": "124",
+&"next_id": "125",
+&"type": "title"
+},
+"125": {
+&"id": "125",
+&"next_id": "126",
+&"text": "This is not the time to retreat. The journey to this place has been long and hard, and it's time to face the gods.",
+&"type": "dialogue"
+},
+"126": {
+&"id": "126",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"127": {
+&"id": "127",
+&"next_id": "128",
+&"type": ""
+},
 "128": {
 &"id": "128",
 &"next_id": "129",
-&"type": ""
+&"type": "title"
 },
 "129": {
+&"character": "Carter",
 &"id": "129",
 &"next_id": "130",
-&"type": "title"
+&"text": "An abyss leading to unknown depths. These statues, though, seem to be connected to the adjacent rooms.",
+&"type": "dialogue"
 },
 "13": {
 &"id": "13",
@@ -239,9 +223,10 @@ lines = {
 },
 "130": {
 &"id": "130",
-&"next_id": "132",
-&"text": "There is a curious glyph on the chalice. It seems to be pulsing with some sort of energy.",
-&"type": "dialogue"
+&"is_snippet": false,
+&"next_id": "end!",
+&"next_id_after": "",
+&"type": "goto"
 },
 "131": {
 &"id": "131",
@@ -251,18 +236,34 @@ lines = {
 "132": {
 &"id": "132",
 &"next_id": "133",
-&"text": "Touch the glyph?",
-&"type": "dialogue"
+&"type": "title"
 },
 "133": {
 &"id": "133",
-&"next_id": "134",
-&"responses": PackedStringArray("133", "136"),
-&"text": "Yes",
-&"type": "response"
+&"next_id": "135",
+&"text": "There is a curious glyph on the chalice. It seems to be pulsing with some sort of energy.",
+&"type": "dialogue"
 },
 "134": {
 &"id": "134",
+&"next_id": "135",
+&"type": ""
+},
+"135": {
+&"id": "135",
+&"next_id": "136",
+&"text": "Touch the glyph?",
+&"type": "dialogue"
+},
+"136": {
+&"id": "136",
+&"next_id": "137",
+&"responses": PackedStringArray("136", "139"),
+&"text": "Yes",
+&"type": "response"
+},
+"137": {
+&"id": "137",
 &"mutation": {
 &"expression": Array[Dictionary]([{
 &"i": 3,
@@ -286,23 +287,28 @@ lines = {
 }]),
 &"is_blocking": true
 },
-&"next_id": "135",
+&"next_id": "138",
 &"type": "mutation"
 },
-"135": {
-&"id": "135",
-&"next_id": "139",
+"138": {
+&"id": "138",
+&"next_id": "142",
 &"text": "You lean forward and touch the glyph.",
 &"type": "dialogue"
 },
-"136": {
-&"id": "136",
-&"next_id": "137",
+"139": {
+&"id": "139",
+&"next_id": "140",
 &"text": "No",
 &"type": "response"
 },
-"137": {
-&"id": "137",
+"14": {
+&"id": "14",
+&"next_id": "15",
+&"type": ""
+},
+"140": {
+&"id": "140",
 &"mutation": {
 &"expression": Array[Dictionary]([{
 &"i": 3,
@@ -326,89 +332,84 @@ lines = {
 }]),
 &"is_blocking": true
 },
-&"next_id": "138",
-&"type": "mutation"
-},
-"138": {
-&"id": "138",
-&"next_id": "139",
-&"text": "Maybe later.",
-&"type": "dialogue"
-},
-"139": {
-&"id": "139",
-&"is_snippet": false,
-&"next_id": "end",
-&"next_id_after": "",
-&"type": "goto"
-},
-"14": {
-&"id": "14",
-&"next_id": "15",
-&"type": ""
-},
-"140": {
-&"id": "140",
 &"next_id": "141",
-&"type": ""
+&"type": "mutation"
 },
 "141": {
 &"id": "141",
 &"next_id": "142",
-&"type": "title"
+&"text": "Maybe later.",
+&"type": "dialogue"
 },
 "142": {
 &"id": "142",
-&"next_id": "143",
-&"text": "Something seems to have changed.",
-&"type": "dialogue"
-},
-"143": {
-&"id": "143",
 &"is_snippet": false,
 &"next_id": "end",
 &"next_id_after": "",
 &"type": "goto"
+},
+"143": {
+&"id": "143",
+&"next_id": "144",
+&"type": ""
 },
 "144": {
 &"id": "144",
 &"next_id": "145",
-&"type": ""
+&"type": "title"
 },
 "145": {
 &"id": "145",
 &"next_id": "146",
-&"type": "title"
+&"text": "Something seems to have changed.",
+&"type": "dialogue"
 },
 "146": {
 &"id": "146",
-&"next_id": "147",
-&"text": "The chalice is filled with a red liquid.",
-&"type": "dialogue"
-},
-"147": {
-&"id": "147",
 &"is_snippet": false,
 &"next_id": "end",
 &"next_id_after": "",
 &"type": "goto"
+},
+"147": {
+&"id": "147",
+&"next_id": "148",
+&"type": ""
 },
 "148": {
 &"id": "148",
 &"next_id": "149",
-&"type": ""
+&"type": "title"
 },
 "149": {
 &"id": "149",
-&"is_snippet": false,
-&"next_id": "end",
-&"next_id_after": "",
-&"type": "goto"
+&"next_id": "150",
+&"text": "The chalice is filled with a red liquid.",
+&"type": "dialogue"
 },
 "15": {
 &"id": "15",
 &"next_id": "16",
 &"type": "title"
+},
+"150": {
+&"id": "150",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"151": {
+&"id": "151",
+&"next_id": "152",
+&"type": ""
+},
+"152": {
+&"id": "152",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
 },
 "16": {
 &"character": "Ghoul",
@@ -887,7 +888,7 @@ lines = {
 &"character": "Carter",
 &"id": "75",
 &"next_id": "76",
-&"text": "Gods of Earth! Cease your hiding and grant me passage to the Sunset City.",
+&"text": "Gods of Earth! Cease your hiding and grant me passage to the Sunset City!",
 &"type": "dialogue"
 },
 "76": {
@@ -969,18 +970,16 @@ lines = {
 &"type": "dialogue"
 },
 "88": {
-&"character": "????",
 &"id": "88",
-&"next_id": "89",
-&"text": "You have come to see the Great Ones, whom it is unlawful for men to see.",
-&"type": "dialogue"
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
 },
 "89": {
-&"character": "????",
 &"id": "89",
 &"next_id": "90",
-&"text": "Watchers have spoken of this thing, and the Other Gods have grunted as they rolled and tumbled mindlessly to the sound of thin flutes in the black ultimate void, where broods the daemon-sultan whose name no lips dare speak aloud.",
-&"type": "dialogue"
+&"type": ""
 },
 "9": {
 &"id": "9",
@@ -990,46 +989,65 @@ lines = {
 &"type": "goto"
 },
 "90": {
-&"character": "????",
 &"id": "90",
 &"next_id": "91",
+&"type": "title"
+},
+"91": {
+&"character": "????",
+&"id": "91",
+&"next_id": "92",
+&"text": "You have come to see the Great Ones, whom it is unlawful for men to see.",
+&"type": "dialogue"
+},
+"92": {
+&"character": "????",
+&"id": "92",
+&"next_id": "93",
+&"text": "Watchers have spoken of this thing, and the Other Gods have grunted as they rolled and tumbled mindlessly to the sound of thin flutes in the black ultimate void, where broods the daemon-sultan whose name no lips dare speak aloud.",
+&"type": "dialogue"
+},
+"93": {
+&"character": "????",
+&"id": "93",
+&"next_id": "94",
 &"text": "Because of YOU, Earth has no longer any gods that are gods.",
 &"type": "dialogue"
 },
-"91": {
-&"id": "91",
+"94": {
+&"id": "94",
 &"is_snippet": false,
 &"next_id": "end",
 &"next_id_after": "",
 &"type": "goto"
-},
-"92": {
-&"id": "92",
-&"next_id": "93",
-&"type": ""
-},
-"93": {
-&"id": "93",
-&"next_id": "94",
-&"type": "title"
-},
-"94": {
-&"character": "????",
-&"id": "94",
-&"next_id": "95",
-&"text": "[shake rate=20.0 level=5 connected=1]And only the Other Gods from outer space hold sway on unremembered Kadath.[/shake]",
-&"type": "dialogue"
 },
 "95": {
 &"id": "95",
+&"next_id": "96",
+&"type": ""
+},
+"96": {
+&"id": "96",
+&"next_id": "97",
+&"type": "title"
+},
+"97": {
+&"character": "????",
+&"id": "97",
+&"next_id": "98",
+&"text": "[shake rate=20.0 level=5 connected=1]And only the Other Gods from outer space hold sway on unremembered Kadath.[/shake]",
+&"type": "dialogue"
+},
+"98": {
+&"id": "98",
 &"is_snippet": false,
 &"next_id": "end",
 &"next_id_after": "",
 &"type": "goto"
 },
-"96": {
-&"id": "96",
-&"next_id": "101",
+"99": {
+&"id": "99",
+&"next_id": "104",
 &"type": ""
 }
 }
@@ -1108,7 +1126,7 @@ Carter: Let's go.
 => END
 
 ~ gods_callout
-Carter: Gods of Earth! Cease your hiding and grant me passage to the Sunset City.
+Carter: Gods of Earth! Cease your hiding and grant me passage to the Sunset City!
 => END
 
 ~ pickman_warning
@@ -1121,12 +1139,15 @@ Carter: Pickman!
 
 ~ nyarlathotep_1
 ????: Randolph Carter.
+=> END
+
+~ nyarlathotep_2
 ????: You have come to see the Great Ones, whom it is unlawful for men to see. 
 ????: Watchers have spoken of this thing, and the Other Gods have grunted as they rolled and tumbled mindlessly to the sound of thin flutes in the black ultimate void, where broods the daemon-sultan whose name no lips dare speak aloud.
 ????: Because of YOU, Earth has no longer any gods that are gods.
 => END
 
-~ nyarlathotep_2
+~ nyarlathotep_3
 ????: [shake rate=20.0 level=5 connected=1]And only the Other Gods from outer space hold sway on unremembered Kadath.[/shake]
 => END
 

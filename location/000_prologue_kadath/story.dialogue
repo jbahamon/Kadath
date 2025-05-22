@@ -73,7 +73,7 @@ Carter: Let's go.
 => END
 
 ~ gods_callout
-Carter: Gods of Earth! Cease your hiding and grant me passage to the Sunset City.
+Carter: Gods of Earth! Cease your hiding and grant me passage to the Sunset City!
 => END
 
 ~ pickman_warning
@@ -86,12 +86,15 @@ Carter: Pickman!
 
 ~ nyarlathotep_1
 ????: Randolph Carter.
+=> END
+
+~ nyarlathotep_2
 ????: You have come to see the Great Ones, whom it is unlawful for men to see. 
 ????: Watchers have spoken of this thing, and the Other Gods have grunted as they rolled and tumbled mindlessly to the sound of thin flutes in the black ultimate void, where broods the daemon-sultan whose name no lips dare speak aloud.
 ????: Because of YOU, Earth has no longer any gods that are gods.
 => END
 
-~ nyarlathotep_2
+~ nyarlathotep_3
 ????: [shake rate=20.0 level=5 connected=1]And only the Other Gods from outer space hold sway on unremembered Kadath.[/shake]
 => END
 

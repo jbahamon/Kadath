@@ -1,6 +1,9 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bpf8578yxyhji"]
 
-[ext_resource type="Shader" path="res://utils/material/dissolve.gdshader" id="1_5ubtp"]
+[ext_resource type="Shader" uid="uid://be0bfo6nm6aac" path="res://utils/material/dissolve.gdshader" id="1_5ubtp"]
 
 [resource]
 shader = ExtResource("1_5ubtp")
+shader_parameter/tint_color = Color(1, 0, 0, 1)
+shader_parameter/intensity = 0.5
+shader_parameter/progress = 0.0
