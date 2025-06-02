@@ -148,7 +148,6 @@ func take_hit(actor, hit: Hit, in_battle: bool = true):
 	var parent = self.get_parent()
 	var damage
 	var energy_drain
-	var actual_energy_drain = 0
 	if not hit.animation_only:
 		energy_drain = hit.energy_drain
 		if hit.fixed_damage:
@@ -156,10 +155,6 @@ func take_hit(actor, hit: Hit, in_battle: bool = true):
 		else:
 			damage = hit.potential_damage * self.get_damage_modifier(hit) * self.get_vulnerability(hit)
 			damage = int(ceil(damage + randf_range(1, damage * 0.2)))
-			
-		
-		if hit.energy_drain > 0:
-			actual_energy_drain = self.spend_energy(hit.energy_drain)
 			
 	if in_battle:
 		var hit_events = []
@@ -222,8 +217,8 @@ func take_hit(actor, hit: Hit, in_battle: bool = true):
 					if energy_drain > 0:
 						await tree.create_timer(0.2).timeout
 						self.toast.position = self.toast_offset
-						await self.toast.show_toast(str(energy_drain), MARIGOLD	)
-						
+						hit.effective_energy_drain = self.spend_energy(energy_drain)
+						await self.toast.show_toast(str(energy_drain), MARIGOLD)
 			)
 				
 		
@@ -235,7 +230,7 @@ func take_hit(actor, hit: Hit, in_battle: bool = true):
 			BattleService.notify_death(get_parent())
 	else:
 		hit.effective_damage = self.take_damage(damage)
-	hit.effective_energy_drain = actual_energy_drain
+		hit.effective_energy_drain = self.spend_energy(energy_drain)
 	
 func heal(amount: int, in_battle: bool = true):
 	self.take_damage(-amount)

@@ -556,6 +556,7 @@ position = Vector2(-3, -14)
 shape = SubResource("RectangleShape2D_fxbcp")
 
 [node name="Bridge" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(0, -128)
 texture = ExtResource("17_wsu4k")
 centered = false

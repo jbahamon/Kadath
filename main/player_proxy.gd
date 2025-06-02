@@ -153,8 +153,8 @@ func move_to(move_target: Array, speed):
 	self.set_mode(ProxyMode.CUTSCENE)
 	
 	var target_position = Vector2(
-		move_target[0] if move_target[0] != null else self.global_position.x,
-		move_target[1] if move_target[1] != null else self.global_position.y
+		move_target[0] if !is_nan(move_target[0]) else self.global_position.x,
+		move_target[1] if !is_nan(move_target[1]) else self.global_position.y
 	)
 	var time = max((self.global_position - target_position).length()/speed - 1/30.0, 0)
 	

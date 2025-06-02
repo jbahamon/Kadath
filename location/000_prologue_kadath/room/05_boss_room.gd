@@ -1,6 +1,5 @@
 extends LocationRoom
 
-
 @export var fall_sound: AudioStream
 @export var open_sound: AudioStream
 @onready var animation_player = $AnimationPlayer
@@ -12,7 +11,14 @@ func setup():
 func _on_north_gate_body_entered(body):
 	if not body is PlayerProxy:
 		return
-	CutsceneService.play_cutscene_from_file("res://location/000_prologue_kadath/cutscene/end.txt")
+	CutsceneService.play_cutscene_from_file(
+		"res://location/000_prologue_kadath/cutscene/end.txt",
+		{
+			"end_paused": true,
+			"end_enable_input": false,
+			"end_proxy_mode": PlayerProxy.ProxyMode.NOT_THERE,
+		}
+	)
 
 
 func _on_boss_trigger_body_entered(body):

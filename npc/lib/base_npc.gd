@@ -133,8 +133,8 @@ func start_auto_movement():
 func move_to(target: Array, speed = WALK_SPEED):
 	assert(speed > 0)
 	var target_position = Vector2(
-		target[0] if target[0] != null else self.global_position.x,
-		target[1] if target[1] != null else self.global_position.y
+		target[0] if !is_nan(target[0]) else self.global_position.x,
+		target[1] if !is_nan(target[1]) else self.global_position.y
 	)
 	var was_processing_physics = self.is_physics_processing()
 	
@@ -154,8 +154,8 @@ func pause_move_to():
 
 func resume_move_to(target: Array, speed):
 	var target_position = Vector2(
-		target[0] if target[0] != null else self.global_position.x,
-		target[1] if target[1] != null else self.global_position.y
+		target[0] if !is_nan(target[0]) else self.global_position.x,
+		target[1] if !is_nan(target[1]) else self.global_position.y
 	)
 	var time = (self.global_position - target_position).length()/speed
 	

@@ -28,6 +28,7 @@ func save(save_data: SaveData) -> void:
 	}
 
 func add(item_id: String, amount: int = 1) -> void:
+	
 	var max_amount = ItemService.id_to_item(item_id).max_amount
 	if item_id in amounts:
 		amounts[item_id] = min(amounts[item_id] + amount, max_amount)

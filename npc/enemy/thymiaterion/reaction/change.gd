@@ -9,7 +9,7 @@ func _init(material: Material) -> void:
 func is_triggered_by(actor, _hit, _actors):
 	return (
 		not actor.battler.ai.second_phase and 
-		actor.battler.health < floor(0.75 * actor.battler.stats.max_health)
+		actor.battler.health < floor(0.7 * actor.battler.stats.max_health)
 	)
 
 func execute(actor, _actors):

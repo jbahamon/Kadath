@@ -539,7 +539,7 @@ lines = {
 "36": {
 &"id": "36",
 &"next_id": "37",
-&"text": "Move around with [{ui_up}]/[{ui_left}]/[{ui_down}]/[{ui_right}]. You can interact with individuals and objects with [{ui_accept}], and cancel with [{ui_cancel}]. Run with [{action_run}].",
+&"text": "Move around with [color=cyan][{ui_up}]/[{ui_left}]/[{ui_down}]/[{ui_right}][/color]. You can interact with individuals and objects with [color=cyan][{ui_accept}][/color], and cancel with [color=cyan][{ui_cancel}][/color]. Run with [color=cyan][{action_run}][/color].",
 &"type": "dialogue"
 },
 "37": {
@@ -569,7 +569,7 @@ lines = {
 &"character": "Pickman",
 &"id": "40",
 &"next_id": "41",
-&"text": "Go ahead. I'll join you once I've made sure these guys are OK. If you're in a hurry, use [{action_run}] to move faster.",
+&"text": "Go ahead. I'll join you once I've made sure these guys are OK. If you're in a hurry, use [color=cyan][{action_run}][/color] to move faster.",
 &"type": "dialogue"
 },
 "41": {
@@ -643,7 +643,7 @@ lines = {
 &"character": "Ghoul",
 &"id": "45",
 &"next_id": "48",
-&"text": "We stay here. If you disoriented, open menu with [{ui_menu}] and check or change controls.",
+&"text": "We stay here. If you disoriented, open menu with [color=cyan][{ui_menu}][/color] and check or change controls.",
 &"type": "dialogue"
 },
 "46": {
@@ -657,7 +657,7 @@ lines = {
 &"character": "Ghoul",
 &"id": "47",
 &"next_id": "48",
-&"text": "Everything still spinning... If you disoriented, open menu with [{ui_menu}] and check or change controls.",
+&"text": "Everything still spinning... If you disoriented, open menu with [color=cyan][{ui_menu}][/color] and check or change controls.",
 &"type": "dialogue"
 },
 "48": {
@@ -738,7 +738,7 @@ lines = {
 &"character": "Ghoul",
 &"id": "52",
 &"next_id": "55",
-&"text": "Maybe others come. We wait for them. Be careful... Remember you can open menu with [{ui_menu}] and use items for heal.",
+&"text": "Maybe others come. We wait for them. Be careful... Remember you can open menu with [color=cyan][{ui_menu}][/color] and use items for heal. Don't let [color=cyan]HP[/color] or [color=cyan]SP[/color] reach zero!",
 &"type": "dialogue"
 },
 "53": {
@@ -752,7 +752,7 @@ lines = {
 &"character": "Ghoul",
 &"id": "54",
 &"next_id": "55",
-&"text": "One second we riding, next we thrown here. If you hurt, you can open menu with [{ui_menu}] and use items for heal.",
+&"text": "One second we riding, next we thrown here. If you hurt, you can open menu with [color=cyan][{ui_menu}][/color] and use items for heal. Don't let [color=cyan]HP[/color] or [color=cyan]SP[/color] reach zero!",
 &"type": "dialogue"
 },
 "55": {
@@ -1087,25 +1087,25 @@ Carter: I must.
 => END
 
 ~ starting_instructions
-Move around with [{ui_up}]/[{ui_left}]/[{ui_down}]/[{ui_right}]. You can interact with individuals and objects with [{ui_accept}], and cancel with [{ui_cancel}]. Run with [{action_run}].
+Move around with [color=cyan][{ui_up}]/[{ui_left}]/[{ui_down}]/[{ui_right}][/color]. You can interact with individuals and objects with [color=cyan][{ui_accept}][/color], and cancel with [color=cyan][{ui_cancel}][/color]. Run with [color=cyan][{action_run}][/color].
 => END
 
 ~ idle_pickman
-Pickman: Go ahead. I'll join you once I've made sure these guys are OK. If you're in a hurry, use [{action_run}] to move faster.
+Pickman: Go ahead. I'll join you once I've made sure these guys are OK. If you're in a hurry, use [color=cyan][{action_run}][/color] to move faster.
 => END 
 
 ~ idle_left_ghoul
 if EntitiesService.party.is_unlocked(PartyMember.Id.PICKMAN):
-	Ghoul: We stay here. If you disoriented, open menu with [{ui_menu}] and check or change controls.
+	Ghoul: We stay here. If you disoriented, open menu with [color=cyan][{ui_menu}][/color] and check or change controls.
 else:
-	Ghoul: Everything still spinning... If you disoriented, open menu with [{ui_menu}] and check or change controls.
+	Ghoul: Everything still spinning... If you disoriented, open menu with [color=cyan][{ui_menu}][/color] and check or change controls.
 => END
 
 ~ idle_right_ghoul
 if EntitiesService.party.is_unlocked(PartyMember.Id.PICKMAN):
-	Ghoul: Maybe others come. We wait for them. Be careful... Remember you can open menu with [{ui_menu}] and use items for heal.
+	Ghoul: Maybe others come. We wait for them. Be careful... Remember you can open menu with [color=cyan][{ui_menu}][/color] and use items for heal. Don't let [color=cyan]HP[/color] or [color=cyan]SP[/color] reach zero!
 else:
-	Ghoul: One second we riding, next we thrown here. If you hurt, you can open menu with [{ui_menu}] and use items for heal.
+	Ghoul: One second we riding, next we thrown here. If you hurt, you can open menu with [color=cyan][{ui_menu}][/color] and use items for heal. Don't let [color=cyan]HP[/color] or [color=cyan]SP[/color] reach zero!
 => END 
 
 ~ pickman_catch_up

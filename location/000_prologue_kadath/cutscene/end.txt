@@ -19,27 +19,29 @@ START_DIALOGUE gods_callout
 
 # Room starts darkening, Pickman is ejected
 SIMULTANEOUS
-	FADE_OVERLAY MIX TO (0,0,0, 0.3) IN 1
-	AWAIT ROOM fade_music
-END
-LOOK NPCPickman LEFT
-SIMULTANEOUS
+	AWAIT ROOM fade_room
+	LOOK NPCPickman LEFT
 	START_DIALOGUE pickman_warning
 END
 
 SIMULTANEOUS
 	LOOK PROXY RIGHT
-	AWAIT ROOM fade_companion
-	START_DIALOGUE carter_call
+	PLAY_SOUND "/fx/magic/explosion/Explodey - YourPalRob" IN SFX AT (32, 80)
+	AWAIT ROOM fade_companion	
 END
+
+START_DIALOGUE carter_call
 CALL NPCPickman queue_free
+ASSIGN_CAMERA WORLD
 
 SIMULTANEOUS
+	PLAY_MUSIC "/JuhaniJunkala/Evil3 - Apocalypse"
 	START_DIALOGUE nyarlathotep_1
 	SEQUENTIAL
 		WAIT 1
 		LOOK PROXY UP
 	END
+	MOVE_CAMERA TO (0, 8) IN 3
 END
 
 SIMULTANEOUS
@@ -48,4 +50,17 @@ SIMULTANEOUS
 	AWAIT ROOM dissolve_room
 END
 
-WAIT 1
+SIMULTANEOUS 
+	SEQUENTIAL
+		WAIT 1
+		START_DIALOGUE nyarlathotep_3
+	END
+	PLAY_SOUND "/fx/magic/teleport/Long Ascending - Chequered Ink" IN SFX
+	AWAIT ROOM accelerate
+END
+
+SET_OVERLAY MIX TO (1.0, 1.0, 1.0, 0.0)
+FADE_OVERLAY MIX TO (1.0, 1.0, 1.0, 1.0) IN 1
+WAIT 2	
+
+CALL ROOM demo_end

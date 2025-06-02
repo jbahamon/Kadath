@@ -56,7 +56,7 @@ toast_time = 0.3
 script = ExtResource("8_u204t")
 animation_only = false
 fixed_damage = false
-base_damage = 5.0
+base_damage = 3.0
 type = 7
 energy_drain = 0
 anim_time = 0.0
@@ -165,7 +165,7 @@ explosion_sound = ExtResource("13_d4bhm")
 main_hit = SubResource("Resource_nu6sb")
 display_name = "Crescent Blast"
 description = "A magical slash that explodes in an area."
-energy_cost = 35
+energy_cost = 15
 
 [node name="AreaOfEffect" parent="Battler/Actions/Skill/CrescentBlast" index="0" instance=ExtResource("5_8ec5k")]
 
@@ -180,7 +180,7 @@ script = ExtResource("8_m04rn")
 charge_sound = ExtResource("17_1sv2e")
 display_name = "Eldritch Channeling"
 description = "Power up any attack this party member performs during their next turn."
-energy_cost = 25
+energy_cost = 10
 
 [node name="CollisionShape2D" parent="Battler/Hitbox" index="0"]
 position = Vector2(0, -10)

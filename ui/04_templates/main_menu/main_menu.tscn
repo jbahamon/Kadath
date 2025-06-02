@@ -43,6 +43,16 @@ alignment = 1
 script = ExtResource("5")
 music = ExtResource("3_a3f4q")
 
+[node name="MarginContainer" type="MarginContainer" parent="MainContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+
+[node name="Version" type="Label" parent="MainContainer/MarginContainer"]
+layout_mode = 2
+horizontal_alignment = 2
+
 [node name="TitleScreen" type="VBoxContainer" parent="MainContainer"]
 layout_mode = 2
 size_flags_vertical = 3

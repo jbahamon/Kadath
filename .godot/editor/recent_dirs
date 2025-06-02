@@ -1,7 +1,10 @@
+C:/Users/Jorge/Documents/Godot/Kadath/exports
+res://
+C:/Users/Jorge/Documents/Godot
+res://utils/material
 res://location/000_prologue_kadath/npc
 res://location/000_prologue_kadath/object
 res://npc/lib
-res://utils/material
 res://ui/03_organisms/game_over_screen
 res://battle/fx/status
 res://party/pickman/breakdown
@@ -16,11 +19,3 @@ res://ui/01_atoms/scroll
 res://ui/01_atoms/slider
 res://ui/01_atoms/separator
 res://ui/04_templates/battle_ui
-res://sound/fx/charge
-res://sound/fx/slash
-res://battle/status_effect
-res://party/carter/status_effect
-C:/Users/Jorge/Documents/Godot/Kadath/sound/music/LUShvalleySound
-C:/Users/Jorge/Documents/Godot/Kadath/sound/music/BertCole
-C:/Users/Jorge/Documents/Godot/Kadath/location/000_prologue_kadath/cutscene
-C:/Users/Jorge/Documents/Godot/Kadath

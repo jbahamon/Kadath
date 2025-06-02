@@ -1,21 +1,71 @@
-[gd_scene load_steps=15 format=4 uid="uid://gfl45nh8g4k7"]
+[gd_scene load_steps=27 format=4 uid="uid://gfl45nh8g4k7"]
 
 [ext_resource type="TileSet" uid="uid://b15m77bx602kw" path="res://location/000_prologue_kadath/tile/onyx_temple.tres" id="1_02d6h"]
-[ext_resource type="Material" uid="uid://v0benke62p45" path="res://utils/material/burn_out.tres" id="1_oba4p"]
 [ext_resource type="Script" uid="uid://ccogo0nwspykd" path="res://location/000_prologue_kadath/room/06_throne_room.gd" id="2_xd66w"]
 [ext_resource type="PackedScene" uid="uid://qscnhsk7b4m7" path="res://npc/lib/simple_ghoul_npc.tscn" id="3_qvvke"]
+[ext_resource type="Shader" uid="uid://dq38ykb58lgn5" path="res://utils/material/burn_out.gdshader" id="3_s8ixs"]
 [ext_resource type="PackedScene" uid="uid://cv5wwoeq1pjb7" path="res://party/pickman/anim.tscn" id="4_3ov1t"]
+[ext_resource type="Shader" uid="uid://btapnjswmwbrd" path="res://utils/material/v_scroll.gdshader" id="4_s8ixs"]
+[ext_resource type="Texture2D" uid="uid://c5wlu3lisloqv" path="res://location/000_prologue_kadath/object/space_bg1.png" id="4_u135h"]
+[ext_resource type="Texture2D" uid="uid://rox3o4jj302v" path="res://location/000_prologue_kadath/object/space_bg2.png" id="6_qkx4t"]
 [ext_resource type="Script" uid="uid://mt7rcvr5reat" path="res://location/000_prologue_kadath/npc/final_pickman.gd" id="6_vinsj"]
 [ext_resource type="Texture2D" uid="uid://cxp321mgak0hk" path="res://location/000_prologue_kadath/npc/nyarlathotep.png" id="7_vinsj"]
+[ext_resource type="Shader" uid="uid://bob3fe5525nq8" path="res://utils/material/explode_spritesheet.gdshader" id="8_s6ade"]
 
-[sub_resource type="Gradient" id="Gradient_oba4p"]
-offsets = PackedFloat32Array(0.0267857, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qkx4t"]
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_uvtpq"]
-gradient = SubResource("Gradient_oba4p")
-width = 426
-height = 240
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_s6ade"]
+width = 480
+height = 480
+noise = SubResource("FastNoiseLite_qkx4t")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wgv56"]
+shader = ExtResource("3_s8ixs")
+shader_parameter/NOISE_PATTERN = SubResource("NoiseTexture2D_s6ade")
+shader_parameter/progress = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1p4ka"]
+shader = ExtResource("4_s8ixs")
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/opacity = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s6ade"]
+shader = ExtResource("4_s8ixs")
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/opacity = 0.2
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_wgv56"]
+seed = 69
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1p4ka"]
+width = 76
+height = 44
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_wgv56")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_lgysr"]
+seed = 10
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5jaqd"]
+width = 76
+height = 44
+generate_mipmaps = false
+as_normal_map = true
+noise = SubResource("FastNoiseLite_lgysr")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iuk6t"]
+shader = ExtResource("8_s6ade")
+shader_parameter/frames = Vector2(6, 53)
+shader_parameter/noise_tex_normal = SubResource("NoiseTexture2D_5jaqd")
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_1p4ka")
+shader_parameter/progress = 0.0
+shader_parameter/strength = 1.0
+shader_parameter/min_x = 0.0
+shader_parameter/max_x = 1.0
+shader_parameter/min_y = -1.0
+shader_parameter/max_y = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vinsj"]
 atlas = ExtResource("7_vinsj")
@@ -83,13 +133,21 @@ tile_map_data = PackedByteArray("AAD4/wYAAAALAAIAAAD4/wUAAAALAAIAAAD4/wQAAAALAAI
 tile_set = ExtResource("1_02d6h")
 y_sort_origin = -16
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = 1
-material = ExtResource("1_oba4p")
-position = Vector2(0, -64)
-texture = SubResource("GradientTexture2D_uvtpq")
+[node name="SpaceBG" type="CanvasGroup" parent="."]
+z_index = 2
+material = SubResource("ShaderMaterial_wgv56")
+
+[node name="Stars" type="Sprite2D" parent="SpaceBG"]
+material = SubResource("ShaderMaterial_1p4ka")
+texture = ExtResource("4_u135h")
+
+[node name="Nebula" type="Sprite2D" parent="SpaceBG"]
+modulate = Color(1, 1, 1, 0.2)
+material = SubResource("ShaderMaterial_s6ade")
+texture = ExtResource("6_qkx4t")
 
 [node name="NPCPickman" parent="." instance=ExtResource("3_qvvke")]
+material = SubResource("ShaderMaterial_iuk6t")
 position = Vector2(32, 144)
 script = ExtResource("6_vinsj")
 
@@ -105,3 +163,4 @@ autoplay = "default"
 offset = Vector2(0, -25)
 
 [editable path="NPCPickman"]
+[editable path="NPCPickman/Anim"]

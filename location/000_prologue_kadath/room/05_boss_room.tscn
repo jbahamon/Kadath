@@ -164,7 +164,6 @@ shape = SubResource("RectangleShape2D_5avj4")
 [node name="BossTrigger" type="Area2D" parent="."]
 position = Vector2(0, -86)
 collision_layer = 0
-monitoring = false
 monitorable = false
 metadata/_edit_group_ = true
 

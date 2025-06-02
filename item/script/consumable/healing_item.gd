@@ -71,11 +71,11 @@ func use_in_battle(targets: Array):
 					await target.battler.status_effects.remove(status_effect)
 			
 				if self.health != 0:
-					var recovery = self.health if self.recovery_mode == RecoveryMode.ABSOLUTE else int(round(target.health * self.health / 100.0))
+					var recovery = self.health if self.recovery_mode == RecoveryMode.ABSOLUTE else int(round(target.max_health * self.health / 100.0))
 					await target.heal(recovery)
 				
 				if self.energy != 0:
-					var energy_recovery = self.energy if self.energy_recovery_mode == RecoveryMode.ABSOLUTE else int(round(target.energy * self.energy / 100.0))
+					var energy_recovery = self.energy if self.energy_recovery_mode == RecoveryMode.ABSOLUTE else int(round(target.max_energy * self.energy / 100.0))
 					await target.recover_energy(energy_recovery)
 				target.set_orientation(orientation)
 				target.play_anim("battle_idle")

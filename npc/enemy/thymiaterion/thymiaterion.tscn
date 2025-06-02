@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://ihknndack3n4"]
+[gd_scene load_steps=60 format=3 uid="uid://ihknndack3n4"]
 
 [ext_resource type="PackedScene" uid="uid://c17hneqpuil0l" path="res://npc/lib/base_npc.tscn" id="1_q5d36"]
 [ext_resource type="Script" uid="uid://1sx2nmnu3clf" path="res://npc/lib/boss.gd" id="2_vhqlt"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://b425iaevn00r4" path="res://npc/enemy/thymiaterion/action/whip.gd" id="7_q7jpk"]
 [ext_resource type="Script" uid="uid://fv1hjw5irs7n" path="res://party/lib/character_stats.gd" id="7_s7g1g"]
 [ext_resource type="Script" uid="uid://ca234sc5bry72" path="res://battle/hit.gd" id="8_3rnnk"]
+[ext_resource type="Script" uid="uid://b2g2l33unqd32" path="res://battle/battle_rewards.gd" id="8_nhygv"]
 [ext_resource type="Script" uid="uid://bj0e8mw8bbvbu" path="res://npc/enemy/thymiaterion/action/counter.gd" id="8_sm7w2"]
 [ext_resource type="AudioStream" uid="uid://cnxcr63hb0yvy" path="res://sound/fx/hit/Long Low - Owlish.wav" id="9_2mf5u"]
 [ext_resource type="Script" uid="uid://brb5lm8nvmou4" path="res://npc/enemy/thymiaterion/action/chew.gd" id="9_dmayn"]
@@ -36,20 +37,27 @@
 
 [sub_resource type="Resource" id="Resource_4sy3l"]
 script = ExtResource("7_s7g1g")
-max_health = 5000
+max_health = 2750
 max_energy = 0
-attack = 55
+attack = 85
 defense = 127
-magic_attack = 60
+magic_attack = 75
 magic_defense = 127
 speed = 55
 metadata/_custom_type_script = "uid://fv1hjw5irs7n"
+
+[sub_resource type="Resource" id="Resource_c4urv"]
+script = ExtResource("8_nhygv")
+item_amounts = {}
+experience = 0
+money = 0
+metadata/_custom_type_script = "uid://b2g2l33unqd32"
 
 [sub_resource type="Resource" id="Resource_afjib"]
 script = ExtResource("8_3rnnk")
 animation_only = false
 fixed_damage = false
-base_damage = 4.0
+base_damage = 2.5
 type = 0
 energy_drain = 0
 anim_time = 0.0
@@ -71,7 +79,7 @@ toast_time = 1.0
 script = ExtResource("8_3rnnk")
 animation_only = false
 fixed_damage = false
-base_damage = 4.0
+base_damage = 2.0
 type = 7
 energy_drain = 0
 anim_time = 0.0
@@ -96,7 +104,7 @@ animation_only = false
 fixed_damage = false
 base_damage = 2.0
 type = 8
-energy_drain = 10
+energy_drain = 5
 anim_time = 0.0
 anim_duration = 0.45
 spark_time = 0.0
@@ -117,9 +125,9 @@ toast_time = 0.3
 script = ExtResource("8_3rnnk")
 animation_only = false
 fixed_damage = false
-base_damage = 7.0
+base_damage = 4.5
 type = 7
-energy_drain = 20
+energy_drain = 10
 anim_time = 0.15
 anim_duration = 0.5
 spark_time = 0.0
@@ -140,7 +148,7 @@ toast_time = 0.5
 script = ExtResource("8_3rnnk")
 animation_only = false
 fixed_damage = false
-base_damage = 8.0
+base_damage = 5.0
 type = 0
 energy_drain = 0
 anim_time = 0.0
@@ -307,6 +315,7 @@ dialogue_name = "????"
 anim_path = NodePath("..")
 stats = SubResource("Resource_4sy3l")
 turn_order_icon = ExtResource("3_rflw6")
+rewards = SubResource("Resource_c4urv")
 
 [node name="Jump" type="Node" parent="Battler/Actions" index="0"]
 script = ExtResource("6_uy2te")

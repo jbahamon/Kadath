@@ -67,7 +67,7 @@ func _init():
 	patterns["CALL"].compile("^(?<Entity>[^ ]+) (?<FunctionName>[^ ]+)( (?<Args>.*)$|$)")
 	
 	patterns["START_DIALOGUE"] = RegEx.new()
-	patterns["START_DIALOGUE"].compile("^(?<DialogueId>[^ ]+ *).*$")
+	patterns["START_DIALOGUE"].compile("^(?<DialogueId>[^ ]+)( +AT +(?<Alignment>[^ ]+) *)?$")
 	
 	patterns["NARRATE"] = RegEx.new()
 	patterns["NARRATE"].compile("^(?<DialogueId>.+)$")
@@ -227,7 +227,7 @@ func parse_instruction(stack: Array, instruction_name: String, args: String):
 			instruction = Move.new(
 				self.parse_string(walk_match.get_string("Character")),
 				self.parse_vector2_opt(walk_match.get_string("Position")),
-				self.parse_float(speed) if speed != null else INF
+				self.parse_float(speed) if speed != '' else INF
 			)
 		CutsceneInstruction.Type.PLAY_ANIM:
 			var anim_match: RegExMatch = self.patterns["PLAY_ANIM"].search(args)
@@ -251,9 +251,12 @@ func parse_instruction(stack: Array, instruction_name: String, args: String):
 				call_match.get_string("Args").strip_edges().split(" ", false)
 			)
 		CutsceneInstruction.Type.START_DIALOGUE:
-			var dialogue_match: RegExMatch = self.patterns["START_DIALOGUE"].search(args)
+			var dialogue_match: RegExMatch = self.patterns["START_DIALOGUE"].search(args)			
+			var alignment_match = dialogue_match.get_string("Alignment")
+			var alignment = self.parse_dialogue_alignment(alignment_match) if alignment_match != '' else DialogueService.Alignment.BOTTOM
 			instruction = StartDialogue.new(
 				self.parse_string(dialogue_match.get_string("DialogueId")),
+				alignment
 			)
 		CutsceneInstruction.Type.NARRATE:
 			var narrate_match: RegExMatch = self.patterns["NARRATE"].search(args)
@@ -268,7 +271,7 @@ func parse_instruction(stack: Array, instruction_name: String, args: String):
 			
 			instruction = PlayMusic.new(
 				"res://sound/music/%s.ogg" % song if song != "NONE" else "",
-				parse_float(offset) if offset != null else 0.0
+				parse_float(offset) if offset != '' else 0.0
 			)
 			
 		CutsceneInstruction.Type.PLAY_SOUND:
@@ -280,7 +283,7 @@ func parse_instruction(stack: Array, instruction_name: String, args: String):
 			instruction = PlaySound.new(
 				"res://sound/%s.wav" % stream,
 				channel,
-				self.parse_vector2(position) if position != null else null
+				self.parse_vector2(position) if position != '' else null
 			)
 		CutsceneInstruction.Type.HIDE:
 			instruction = Call.new(
@@ -378,7 +381,7 @@ func parse_move_camera(args: String):
 	var move_match: RegExMatch = self.patterns["MOVE_CAMERA_TO_POSITION"].search(args)
 	if move_match != null:
 		time_match = move_match.get_string("Time")
-		time = self.parse_float(time_match) if time_match != null else 0.0
+		time = self.parse_float(time_match) if time_match != '' else 0.0
 		return MoveCamera.new(
 			self.parse_vector2(move_match.get_string("Position")),
 			"target_position",
@@ -388,7 +391,7 @@ func parse_move_camera(args: String):
 	move_match = self.patterns["MOVE_CAMERA_TO_ENTITY"].search(args)
 	if move_match != null:
 		time_match = move_match.get_string("Time")
-		time = self.parse_float(time_match) if time_match != null else 0.0
+		time = self.parse_float(time_match) if time_match != '' else 0.0
 		return MoveCamera.new(
 			move_match.get_string("Entity"),
 			"target_entity",
@@ -397,9 +400,21 @@ func parse_move_camera(args: String):
 		
 	move_match = self.patterns["MOVE_CAMERA_BY"].search(args)
 	time_match = move_match.get_string("Time")
-	time = self.parse_float(time_match) if time_match != null else 0.0
+	time = self.parse_float(time_match) if time_match != '' else 0.0
 	return MoveCamera.new(
 		self.parse_vector2(move_match.get_string("Displacement")),
 		"displacement",
 		time
 	)
+
+func parse_dialogue_alignment(raw_alignment: String):
+	match raw_alignment.to_upper():
+		"TOP":
+			return DialogueService.Alignment.TOP
+		"CENTER":
+			return DialogueService.Alignment.CENTER
+		"BOTTOM":
+			return DialogueService.Alignment.BOTTOM
+		_:
+			assert(false, "Incorrect alignment '%s' provided" % raw_alignment)
+			return DialogueService.Alignment.BOTTOM

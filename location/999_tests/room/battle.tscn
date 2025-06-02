@@ -10,8 +10,7 @@
 y_sort_enabled = true
 script = ExtResource("1_vqtxc")
 ep = Dictionary[String, int]({
-"Carter": 50,
-"Pickman": 1
+"Carter": 1
 })
 room_id = "battle"
 used_rect = Rect2i(-440, -300, 900, 600)

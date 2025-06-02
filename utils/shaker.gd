@@ -78,14 +78,19 @@ func resume():
 	
 func skip():
 	self.trauma = 0.0
-	if self.target == &"offset":
-		self.parent.offset = base_offset
-	else:
-		self.parent.position = base_offset
+	
+	if parent != null:
+		if self.target == &"offset":
+			parent.offset = base_offset
+		else:
+			parent.position = base_offset
+	
+	if self.shake_finished.is_connected(self._on_end):
+		self.shake_finished.emit()
+	elif parent != null:
+		parent.remove_child(self)
 		
-	self.shake_finished.emit()
 	self.time = 0
 	self.set_process(false)
-	if self.parent != null:
-		self.parent.remove_child(self)
+
 	self.queue_free()

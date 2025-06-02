@@ -9,6 +9,7 @@ extends VBoxContainer
 var current_menu: Control
 
 func _ready():
+	$MarginContainer/Version.text = "v%s" % VarsService.VERSION
 	UIService.initialize_basic(
 		$HelpBar,
 		get_node("../UIControlPlayer"),
@@ -33,9 +34,11 @@ func switch_to_menu(menu: Control):
 	self.current_menu.show_menu()
 	
 func _on_Quit_pressed():
+	UIService.play_interaction_sound()
 	get_tree().quit()
 
 func _on_New_Game_pressed():
+	UIService.play_interaction_sound()
 	title_menu.disable_buttons()
 	SceneSwitcher.load_scene("res://main/local_scene.tscn")
 	var tween = get_tree().create_tween()
@@ -48,16 +51,19 @@ func _on_New_Game_pressed():
 	SceneSwitcher.change_scene()
 
 func _on_Continue_Game_pressed():
+	UIService.play_interaction_sound()
 	self.switch_to_menu(saves_menu)
 
 func _on_Settings_pressed():
+	UIService.play_interaction_sound()
 	self.switch_to_menu(settings_menu)
 	
 func _on_Credits_pressed() -> void:
+	UIService.play_interaction_sound()
 	self.switch_to_menu(credits)
 
 func _on_menu_exited():
-	UIService.play_focus_sound()
+	UIService.play_interaction_sound()
 	self.switch_to_menu(title_menu)
 
 func _on_continue_game_focus_entered() -> void:

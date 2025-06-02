@@ -328,7 +328,7 @@ main_hit = SubResource("Resource_eq6g4")
 secondary_hit = SubResource("Resource_c51c5")
 display_name = "Slab Slam"
 description = "Throw your tombstone at a target, hitting enemies along the way."
-energy_cost = 15
+energy_cost = 20
 
 [node name="LineOfEffect" parent="Battler/Actions/Skill/SlabSlam" index="0" instance=ExtResource("6_8tf6q")]
 

@@ -29,8 +29,8 @@ point_count = 2
 
 [sub_resource type="Curve" id="6"]
 _limits = [0.0, 99.0, 0.0, 100.0]
-_data = [Vector2(0, 0), 0.0, 0.786248, 0, 1, Vector2(100, 99), 1.28835, 0.0, 1, 1]
-point_count = 2
+_data = [Vector2(0, 0), 0.0, 1.3, 0, 1, Vector2(50, 65), 1.3, 0.68, 1, 1, Vector2(100, 99), 0.68, nan, 1, 1]
+point_count = 3
 
 [sub_resource type="Curve" id="7"]
 _limits = [0.99, 2000.0, 0.0, 100.0]

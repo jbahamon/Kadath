@@ -5,7 +5,7 @@ extends LocationRoom
 
 
 func on_enter():
-	
+	EntitiesService.party.set_unlocked(PartyMember.Id.PICKMAN, true)
 	for hp_name in hp:
 		var party_member_idx = EntitiesService.party.active_members.find_custom(func (p): return p.name == hp_name)
 		if party_member_idx >= 0:

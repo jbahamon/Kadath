@@ -141,6 +141,15 @@
 	
 	{
 		"category": "sounds",
+		"author_name": "Juhani Junkala",
+		"author_url": "https://www.youtube.com/@subspaceaudio6850",
+		"asset_name": "JRPG Pack 3 Evil | Apocalypse",
+		"asset_url": "https://opengameart.org/content/jrpg-pack-3-evil",
+		"asset_usage": "Other Gods theme"
+	},
+	
+	{
+		"category": "sounds",
 		"author_name": "nekoninja",
 		"author_url": "https://freesound.org/people/nekoninja/",
 		"asset_name": "samurai slash",
@@ -423,6 +432,15 @@
 		"asset_name": "LabChirp",
 		"asset_url": "https://labbed.net/software/labchirp/",
 		"asset_usage": "Various battle sound effects"
+	},
+	
+	{
+		"category": "code",
+		"author_name": "Deep-Fold",
+		"author_url": "https://deep-fold.itch.io/",
+		"asset_name": "Pixel Space Background Generator",
+		"asset_url": "https://deep-fold.itch.io/space-background-generator",
+		"asset_usage": "Space background"
 	}
 	
 ]

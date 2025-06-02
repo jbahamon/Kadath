@@ -99,7 +99,6 @@ _data = {
 [node name="LocalScene" type="Node2D"]
 texture_filter = 1
 script = ExtResource("7")
-debug = true
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 offset_left = 1.0
@@ -204,7 +203,7 @@ size = Vector2i(347, 324)
 script = ExtResource("6")
 
 [node name="PauseMenu" parent="MenuLayer/MenuPopup" instance=ExtResource("3")]
-offset_right = 374.0
+offset_right = 1192.0
 offset_bottom = 324.0
 size_flags_horizontal = 3
 size_flags_vertical = 3

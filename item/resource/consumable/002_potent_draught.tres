@@ -7,7 +7,7 @@
 script = ExtResource("2_ry1tm")
 recovery_mode = 0
 energy_recovery_mode = 0
-health = 250
+health = 300
 energy = 0
 status_effects = Array[String]([])
 battle_offset = Vector2(0, -30)
@@ -15,7 +15,7 @@ battle_fx = ExtResource("1_fw5ym")
 battle_fx_duration = -1.0
 id = "002_potent_draught"
 display_name = "Potent Draught"
-description = "A vial filled with a opalescent liquid. Heals 200 HP."
+description = "A vial filled with a opalescent liquid. Heals 300 HP."
 max_amount = 99
 category = 0
 target_type = 0

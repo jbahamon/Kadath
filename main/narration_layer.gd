@@ -36,6 +36,10 @@ func narrate(text):
 	await self.advance
 	self.set_process_unhandled_input(false)
 	
+	if self.should_skip:
+		self.visible = false
+		return
+	
 	advance_label.hide()
 	self.fade_tween = get_tree().create_tween()
 	self.fade_tween.tween_property(label, "modulate", Color.TRANSPARENT, FADE_TIME)
@@ -49,9 +53,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 func skip():
 	self.should_skip = true
-	self.set_process_unhandled_input(false)
-	if self.fade_tween != null:
-			self.fade_tween.finished.emit()
-			self.fade_tween.kill()
+	
+	if self.is_processing_unhandled_input():
+		self.advance.emit()
+	elif self.fade_tween != null:
+		self.fade_tween.finished.emit()
+		self.fade_tween.kill()
 	
 	self.advance.emit()

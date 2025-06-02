@@ -11,24 +11,26 @@ var focus_in_tree = false
 
 @onready var current_submenu = self.audio_video
 
-@onready var audio_video_button = $HBoxContainer/Categories/AudioVideo
+@onready var audio_video_button: Button = $HBoxContainer/Categories/AudioVideo
 @onready var interface_button = $HBoxContainer/Categories/Interface
 @onready var controls_button = $HBoxContainer/Categories/Controls
 
 var categories_button_group = ButtonGroup.new()
 
+@onready var first_item_focus_binding 
 func _init():
 	self.set_process_unhandled_input(false)
+	self.first_item_focus_binding = self.focus_submenu.bind(audio_video, "Change volume and toggle certain effects.")
 	
 func _ready():
 	input_popup.popup_window = false
-	audio_video_button.connect("pressed", self.toggle_submenu.bind(audio_video))
-	interface_button.connect("pressed", self.toggle_submenu.bind(interface))
-	controls_button.connect("pressed", self.toggle_submenu.bind(controls))
+	audio_video_button.pressed.connect(self.toggle_submenu.bind(audio_video))
+	interface_button.pressed.connect(self.toggle_submenu.bind(interface))
+	controls_button.pressed.connect(self.toggle_submenu.bind(controls))
 
-	audio_video_button.connect("focus_entered", self.focus_submenu.bind(audio_video, "Change volume and toggle certain effects."))
-	interface_button.connect("focus_entered", self.focus_submenu.bind(interface, "Set text speed and other interface properties."))
-	controls_button.connect("focus_entered", self.focus_submenu.bind(controls, "Set the game's controls and other behaviors."))
+	audio_video_button.focus_entered.connect(self.first_item_focus_binding)
+	interface_button.focus_entered.connect(self.focus_submenu.bind(interface, "Set text speed and other interface properties."))
+	controls_button.focus_entered.connect(self.focus_submenu.bind(controls, "Set the game's controls and other behaviors."))
 	
 	self.audio_video_button.button_group = self.categories_button_group
 	self.interface_button.button_group = self.categories_button_group
@@ -53,8 +55,10 @@ func update_menu():
 	pass
 
 func on_grab_focus():
+	self.audio_video_button.focus_entered.disconnect(self.first_item_focus_binding)
 	self.audio_video_button.grab_click_focus()
 	self.audio_video_button.grab_focus()
+	self.audio_video_button.focus_entered.connect(self.first_item_focus_binding)
 	self.set_process_unhandled_input(true)
 	
 func update_run_behavior(value):

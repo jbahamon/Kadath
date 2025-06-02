@@ -158,8 +158,7 @@ func start_battle(enemies: Array, settings: Dictionary):
 			await FadeOverlay.new("MIX", Color.BLACK, 3.0).execute(get_tree(), FadeOverlay.ExecutionMode.PLAY)
 			var game_over = load("res://ui/03_organisms/game_over_screen/game_over_screen.tscn").instantiate()
 			UIService.popup_layer.add_child(game_over)
-			
-			
+
 			print("game over :(")
 			
 	self.current_battle_parameters = null

@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfrx2hrp5oeov"]
+
+[ext_resource type="Script" uid="uid://vwlvdlwntp0x" path="res://ui/03_organisms/demo_end_screen/demo_end_screen.gd" id="1_kp6xl"]
+[ext_resource type="FontFile" uid="uid://7rvrjv6h33bx" path="res://ui/01_atoms/assets/fonts/By Valiegraphie/Uncial_WIP.ttf" id="2_ybmtl"]
+
+[node name="DemoEndScreen" type="MarginContainer"]
+process_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kp6xl")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ybmtl")
+theme_override_font_sizes/font_size = 64
+text = "Thanks for Playing!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ToTitle" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+text = "Return to title screen"
+
+[connection signal="pressed" from="VBoxContainer/ToTitle" to="." method="on_to_title_pressed"]

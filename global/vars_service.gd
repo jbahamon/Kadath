@@ -1,5 +1,6 @@
 extends Node
 
+const VERSION = "0.1.0"
 const CREDITS_FILE = "res://CREDITS.json"
 const VERTICAL_ORIENTATION_BIAS = 1.1
 var loaded_slot = -1

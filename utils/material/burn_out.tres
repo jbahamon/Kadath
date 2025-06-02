@@ -1,14 +1,3 @@
-[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://v0benke62p45"]
-
-[ext_resource type="Shader" uid="uid://dq38ykb58lgn5" path="res://utils/material/burn_out.gdshader" id="1_nk3dk"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_nk3dk"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_r6oa2"]
-generate_mipmaps = false
-noise = SubResource("FastNoiseLite_nk3dk")
+[gd_resource type="ShaderMaterial" format=3 uid="uid://v0benke62p45"]
 
 [resource]
-shader = ExtResource("1_nk3dk")
-shader_parameter/NOISE_PATTERN = SubResource("NoiseTexture2D_r6oa2")
-shader_parameter/progress = 1.0

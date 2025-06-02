@@ -10,7 +10,11 @@ SIMULTANEOUS
 	CALL ROOM unlock_pickman
 END
 
+PLAY_MUSIC "NONE"
 SIMULTANEOUS
 	START_DIALOGUE pickman_join
 	PLAY_SOUND "ui/notification/Mysterious Fanfare - jerry berumen" IN UI
 END
+
+WAIT 1
+PLAY_MUSIC "JuhaniJunkala/Army Approaching"

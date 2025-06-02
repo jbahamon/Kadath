@@ -13,7 +13,7 @@ void fragment(){
 	} else {
 		vec3 gray = vec3(dot(luminosity, COLOR.rgb));
 		COLOR = vec4(mix(COLOR.rgb, gray, phase), COLOR.a);
-		
+
 	}
-	
+
 }

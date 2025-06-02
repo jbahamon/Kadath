@@ -24,6 +24,7 @@ func initialize(init_proxy: PlayerProxy, init_interaction_indicator, init_battle
 	self.proxy.set_mode(PlayerProxy.ProxyMode.NOT_THERE)
 	
 func exit():
+	self.party.set_physics_process(false)
 	self.party = null
 	self.proxy = null
 	

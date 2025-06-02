@@ -7,6 +7,7 @@ func on_enter():
 		VarsService.set_flag('kadath.entrance.intro', true)
 		$SouthGate.monitoring = false
 		await CutsceneService.play_cutscene_from_file('res://location/000_prologue_kadath/cutscene/intro.txt')
+		await DialogueService.open_dialogue("starting_instructions", DialogueService.Alignment.CENTER)
 		# We skip a couple physics frames to avoid detecting the player in the push zone when skipping the cutscene
 		await get_tree().physics_frame
 		await get_tree().physics_frame

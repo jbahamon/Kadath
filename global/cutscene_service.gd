@@ -7,6 +7,7 @@ var current_cutscene = null
 var pausable = true
 var popup: Popup
 
+var current_options = {}
 func _init():
 	self.parser = CutsceneParser.new()
 	
@@ -33,6 +34,7 @@ func play_custom_cutscene(instructions: Array, options: Dictionary = {}):
 	
 func play_cutscene(cutscene_instruction, options):
 	assert(self.current_cutscene == null)
+	self.current_options = options
 	self.current_cutscene = cutscene_instruction
 	self.pausable = options.get("pausable", true)
 	
@@ -64,6 +66,10 @@ func play_cutscene(cutscene_instruction, options):
 	if was_party_physics_enabled:
 		party.reset_movement()
 	self.current_cutscene = null
+	
+	if options.get("end_paused", false):
+		print("pausing after cutscene")
+		InputService.enter_menu_mode()
 
 func pause_cutscene():
 	assert(self.current_cutscene != null)
@@ -71,14 +77,22 @@ func pause_cutscene():
 	
 	var bg: ColorRect = FXService.get_layer("CUTSCENE_PAUSE")
 	bg.visible = true
-	UIService.handle_popup(self.popup, true)
 	
+	# We manually enter menu mode because exiting it depends on the outcome of 
+	# the popup AND the cutscene options
+	print("pausing before popup")
+	InputService.enter_menu_mode()
+	UIService.handle_popup(self.popup, false)
+	
+	var skipped = false
 	if await self.popup.skip_chosen:
 		skip_cutscene()
+		skipped = true
 	else:
 		resume_cutscene()
 	bg.visible = false
-	self.get_tree().paused = false
+	if not (skipped and self.current_options.get("end_paused", false)):
+		InputService.exit_menu_mode()
 	
 func resume_cutscene():
 	assert(self.current_cutscene != null)

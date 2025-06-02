@@ -5,6 +5,9 @@ var targets = null
 func reset():
 	self.targets = null
 	
+func highlight_option(_mode, _options):
+	pass
+	
 func get_next_parameter_signature():
 	if targets == null:
 		return {

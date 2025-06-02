@@ -119,5 +119,4 @@ func default_offensive_damage_factor(battler: Battler, hit: Hit):
 	if hit.type == Hit.Element.PHYSICAL or hit.type == Hit.Element.NONE:
 		return battler.attack
 	else:
-		print(battler.magic_attack)
 		return battler.magic_attack

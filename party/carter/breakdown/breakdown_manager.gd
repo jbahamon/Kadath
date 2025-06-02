@@ -17,5 +17,5 @@ func stop(battle_ended):
 	self.particles.emitting = false
 	self.particles.visible = false
 	
-	get_parent().parent.material = null
+	get_parent().material = null
 	

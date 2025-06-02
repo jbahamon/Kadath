@@ -1,5 +1,10 @@
 extends Node
 
+enum Alignment {
+	TOP = BoxContainer.ALIGNMENT_BEGIN, 
+	CENTER = BoxContainer.ALIGNMENT_CENTER,
+	BOTTOM = BoxContainer.ALIGNMENT_END,
+}
 var dialogue_box
 var narration_layer
 var global_dialogue: DialogueResource = preload("res://global/resources/global_dialogue.dialogue")
@@ -21,18 +26,18 @@ func load_location_dialogues(location: Location):
 func add_response(response):
 	self.current_responses.append(response)
 
-func open_global_dialogue(dialogue_id: String, ) -> Array:
-	return await self._open_dialogue(dialogue_id, self.global_dialogue) 
+func open_global_dialogue(dialogue_id: String, alignment=Alignment.BOTTOM) -> Array:
+	return await self._open_dialogue(dialogue_id, self.global_dialogue, alignment) 
 	
-func open_dialogue(dialogue_id: String) -> Array:
-	return await self._open_dialogue(dialogue_id, self.current_dialogue) 
+func open_dialogue(dialogue_id: String, alignment=Alignment.BOTTOM) -> Array:
+	return await self._open_dialogue(dialogue_id, self.current_dialogue, alignment) 
 	
-func _open_dialogue(dialogue_id: String, dialogue_resource: DialogueResource) -> Array:
+func _open_dialogue(dialogue_id: String, dialogue_resource: DialogueResource, alignment=Alignment.BOTTOM) -> Array:
 	self.current_responses = []
 	var dialogue_lines = []
 	
 	# Branching dialogue shall be implemented as needed
-	
+	dialogue_box.set_alignment(alignment)
 	while dialogue_id:
 		var dialogue_line: DialogueLine = await dialogue_resource.get_next_dialogue_line(dialogue_id)
 		if dialogue_line == null:
@@ -48,7 +53,6 @@ func _open_dialogue(dialogue_id: String, dialogue_resource: DialogueResource) ->
 				"responses": dialogue_line.responses,
 				"text": text
 			})
-			
 			
 			dialogue_box.queue_dialogue_lines(dialogue_lines)
 			
