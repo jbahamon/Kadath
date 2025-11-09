@@ -2,6 +2,7 @@ extends RefCounted
 class_name Inventory
 
 signal inventory_changed(change_type)
+const MAX_MONEY = 9999999
 
 enum Change {
 	ADD,
@@ -14,17 +15,19 @@ enum Change {
 const save_key = "inventory"
 var amounts = {}
 var order = []
+var money = 0
 
-@export var MAX_COINS = 9999999
 
 func load_game_data(save_data: SaveData) -> void:
+	self.money = save_data.data[save_key].get("money", 0)
 	self.amounts = save_data.data[save_key]["amounts"]
 	self.order = save_data.data[save_key]["order"]
 
-func save(save_data: SaveData) -> void:
+func save_game_data(save_data: SaveData) -> void:
 	save_data.data[save_key] = {
 		"amounts": self.amounts,
-		"order": self.order
+		"order": self.order,
+		"money": self.money,
 	}
 
 func add(item_id: String, amount: int = 1) -> void:
@@ -99,3 +102,6 @@ func sort():
 	
 	self.order = items.map(func(item): return item.id)
 	self.inventory_changed.emit(Change.SORT)
+
+func add_money(amount: int):
+	self.money = clamp(self.money + amount, 0, MAX_MONEY)

@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1")
-location_id = "prologue_kadath"
+location_id = "000_prologue_kadath"
 story = ExtResource("2_fbwdy")
 base_room_path = "res://location/000_prologue_kadath/room"
 base_bgm = ExtResource("1_m2mk7")

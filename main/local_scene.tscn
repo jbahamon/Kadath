@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c2luykmp4iss7"]
+[gd_scene load_steps=29 format=3 uid="uid://c2luykmp4iss7"]
 
 [ext_resource type="PackedScene" uid="uid://c3okprgd6vbwj" path="res://ui/04_templates/pause_menu/pause_menu.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://s88423us72at" path="res://ui/01_atoms/assets/textures/By Sr.Toasty/interaction_indicator.png" id="3_7y4lr"]
@@ -11,7 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://kjfr6yr534rp" path="res://ui/04_templates/saves_menu/saves_menu.tscn" id="8"]
 [ext_resource type="PackedScene" uid="uid://bo1y3b4btisvv" path="res://ui/04_templates/dialogue_box/dialogue_box.tscn" id="8_pwmoh"]
 [ext_resource type="PackedScene" uid="uid://bg7hnqo1b5c6m" path="res://main/player_proxy.tscn" id="9"]
+[ext_resource type="Script" uid="uid://do6ddryllvdjd" path="res://main/saves_popup.gd" id="10_sg6yq"]
 [ext_resource type="PackedScene" uid="uid://ex17k532alby" path="res://ui/04_templates/battle_ui/battle_ui.tscn" id="11_42lm3"]
+[ext_resource type="PackedScene" uid="uid://c2opuixudajq" path="res://ui/02_molecules/help_bar/help_bar.tscn" id="11_lkate"]
 [ext_resource type="AudioStream" uid="uid://biqsf23fc0cbi" path="res://sound/ui/blops/High - Kenney.wav" id="11_pu83y"]
 [ext_resource type="PackedScene" uid="uid://ba44sap453kmu" path="res://ui/04_templates/cutscene_pause_popup/cutscene_pause_popup.tscn" id="12_ucc44"]
 [ext_resource type="FontFile" uid="uid://c8fvau54sblb1" path="res://ui/01_atoms/assets/fonts/By Wuchta/Letterstyle(1).otf" id="13_pjkmk"]
@@ -99,6 +101,7 @@ _data = {
 [node name="LocalScene" type="Node2D"]
 texture_filter = 1
 script = ExtResource("7")
+debug = true
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 offset_left = 1.0
@@ -127,7 +130,7 @@ anchor_bottom = 1.0
 [node name="World" type="Node2D" parent="SubViewportContainer/SubViewport"]
 y_sort_enabled = true
 
-[node name="PlayerProxy" parent="SubViewportContainer/SubViewport/World" groups=["save"] instance=ExtResource("9")]
+[node name="PlayerProxy" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("9")]
 floor_stop_on_slope = false
 walk_speed = 80.0
 
@@ -203,7 +206,7 @@ size = Vector2i(347, 324)
 script = ExtResource("6")
 
 [node name="PauseMenu" parent="MenuLayer/MenuPopup" instance=ExtResource("3")]
-offset_right = 1192.0
+offset_right = 378.0
 offset_bottom = 324.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -211,9 +214,26 @@ size_flags_vertical = 3
 [node name="Settings" parent="MenuLayer/MenuPopup/PauseMenu/Container/PauseMenuTabs" index="2"]
 visible = false
 
-[node name="SavesPopup" parent="MenuLayer" instance=ExtResource("8")]
-visible = false
+[node name="SavesPopup" type="PopupPanel" parent="MenuLayer"]
+script = ExtResource("10_sg6yq")
+
+[node name="MarginContainer" type="MarginContainer" parent="MenuLayer/SavesPopup"]
+offset_right = 378.0
+offset_bottom = 316.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuLayer/SavesPopup/MarginContainer"]
+layout_mode = 2
+
+[node name="SavesMenu" parent="MenuLayer/SavesPopup/MarginContainer/VBoxContainer" instance=ExtResource("8")]
+layout_mode = 2
 current_mode = 0
+
+[node name="HelpBar" parent="MenuLayer/SavesPopup/MarginContainer/VBoxContainer" instance=ExtResource("11_lkate")]
+layout_mode = 2
 
 [node name="NarrationLayer" type="CanvasLayer" parent="."]
 visible = false
@@ -303,8 +323,12 @@ process_mode = 3
 stream = ExtResource("11_pu83y")
 bus = &"UI"
 
+[connection signal="about_to_popup" from="MenuLayer/MenuPopup" to="MenuLayer/MenuPopup" method="_on_about_to_popup"]
 [connection signal="cancel" from="MenuLayer/MenuPopup/PauseMenu/Container/PauseMenuTabs" to="MenuLayer/MenuPopup" method="_on_pause_menu_tabs_cancel"]
+[connection signal="about_to_popup" from="MenuLayer/SavesPopup" to="MenuLayer/SavesPopup" method="_on_about_to_popup"]
+[connection signal="cancel" from="MenuLayer/SavesPopup/MarginContainer/VBoxContainer/SavesMenu/VBoxContainer/SelectList" to="MenuLayer/SavesPopup" method="on_saving_done"]
 
 [editable path="SubViewportContainer/SubViewport/World/PlayerProxy"]
 [editable path="MenuLayer/MenuPopup/PauseMenu"]
 [editable path="MenuLayer/MenuPopup/PauseMenu/Container/PauseMenuTabs/Party"]
+[editable path="MenuLayer/SavesPopup/MarginContainer/VBoxContainer/SavesMenu"]

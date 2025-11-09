@@ -3,7 +3,7 @@ extends Node
 const VERSION = "0.1.0"
 const CREDITS_FILE = "res://CREDITS.json"
 const VERTICAL_ORIENTATION_BIAS = 1.1
-var loaded_slot = -1
+
 var starting_location_name = "000_prologue_kadath"
 var starting_room_name = "01_entrance"
 
@@ -13,17 +13,33 @@ var current_flags: Dictionary = {}
 var scan_level: int = 1
 var scanned_enemies: Dictionary = {}
 
+var alignment = 0
+
 func _init():
 	self.add_to_group("save")
 
 func load_game_data(save_data: SaveData) -> void:
 	current_flags = save_data.data["flags"]
-	strings = save_data.data["strings"]
+	strings = strings.merged(save_data.data["strings"], true)
+	scan_level = save_data.data["scan_level"]
+	scanned_enemies = save_data.data["scanned_enemies"]
+	alignment = save_data.data["alignment"]
 
-func save(save_data: SaveData) -> void:
+func save_game_data(save_data: SaveData) -> void:
 	save_data.data["flags"] = current_flags
-	save_data.data["strings"] = strings
 	
+	var filtered_strings = {}
+	
+	for k in strings.keys():
+		if k not in SettingsService.INPUT_ACTIONS:
+			filtered_strings[k] = strings[k]
+	
+	save_data.data["strings"] = filtered_strings
+	save_data.data["scan_level"] = scan_level
+	save_data.data["scanned_enemies"] = scanned_enemies
+	save_data.data["alignment"] = alignment
+
+		
 func on_action_updated(action: String, event: InputEvent) -> void:
 	if event is InputEventKey:
 		var keycode = event.get_keycode_with_modifiers()

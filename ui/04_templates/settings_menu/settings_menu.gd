@@ -68,25 +68,25 @@ func on_slider_focused(help_text):
 	UIService.play_focus_sound()
 	UIService.set_menu_help(
 		help_text,
-		"[{ui_up}]/[{ui_down}]: Move [{ui_left}]/[{ui_right}]: Increase/Decrease [{ui_cancel}]: Return"
+		"[{ui_up}]/[{ui_down}]: Select [{ui_left}]/[{ui_right}]: Increase/Decrease [{ui_cancel}]: Return"
 	)
 
 func on_checkbox_focused(help_text):
 	UIService.set_menu_help(
 		help_text,
-		"[{ui_up}]/[{ui_down}]: Move [{ui_cancel}]: Return [{ui_accept}]: Toggle"
+		"[{ui_up}]/[{ui_down}]: Select [{ui_cancel}]: Return [{ui_accept}]: Toggle"
 	)
 
 func on_toggle_focused(help_text):
 	UIService.set_menu_help(
 		help_text,
-		"[{ui_up}]/[{ui_down}]/[{ui_left}]/[{ui_right}]: Move [{ui_cancel}]: Return [{ui_accept}]: Select"
+		"[{ui_up}]/[{ui_down}]/[{ui_left}]/[{ui_right}]: Select [{ui_cancel}]: Return [{ui_accept}]: Confirm"
 	)
 
 func focus_submenu(submenu, help_text):
 	UIService.set_menu_help(
 		help_text,
-		"[{ui_up}]/[{ui_down}]: Move [{ui_cancel}]: Return [{ui_accept}]: Select"
+		"[{ui_up}]/[{ui_down}]: Select [{ui_cancel}]: Return [{ui_accept}]: Confirm"
 	)
 
 	self.current_submenu.hide()

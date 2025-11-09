@@ -137,6 +137,7 @@ func start_battle(enemies: Array, settings: Dictionary):
 				MusicService.player.stop()
 			await self.fade_and_delete_mooks(battle_end_state)
 			MusicService.play_song(previous_bgm, bgm_position)
+			self.revive_party_members(EntitiesService.party)
 			await self.tear_down_battle_positions(battle_end_state)
 			self.resume_non_participants(self.current_battle_parameters["end_proxy_mode"])
 			InputService.input_enabled = was_input_enabled
@@ -154,6 +155,8 @@ func start_battle(enemies: Array, settings: Dictionary):
 			self.ui.hide()
 			var party = EntitiesService.party
 			party.set_physics_process(false)
+			for party_actor in battle_end_state.party_actors:
+				party_actor.on_battle_end()
 			FXService.get_layer("MIX").color = Color(0,0,0,0)
 			await FadeOverlay.new("MIX", Color.BLACK, 3.0).execute(get_tree(), FadeOverlay.ExecutionMode.PLAY)
 			var game_over = load("res://ui/03_organisms/game_over_screen/game_over_screen.tscn").instantiate()
@@ -447,6 +450,7 @@ func deal_experience(party: Party, experience: int):
 		party_member.update_stats()
 		
 		if previous_level != party_member.level:
+			# TODO: internationalize prompts
 			await self.ui.prompt("%s leveled up!" % party_member.display_name)
 
 func deal_items(party: Party, loot_bag: Dictionary):
@@ -456,11 +460,10 @@ func deal_items(party: Party, loot_bag: Dictionary):
 		await self.ui.prompt("Received %s!" % item.name)
 		party.inventory.add(loot, amount)
 
-func deal_money(_party: Party, money: int):
+func deal_money(party: Party, money: int):
 	await self.ui.prompt("Received %d G!" % money)
-	# WIP
-	# party.inventory.money
-
+	party.inventory.add_money(money)
+	
 func revive_party_members(party: Party):
 	for party_member in party.get_active_members():
 		if not party_member.is_alive:

@@ -133,7 +133,7 @@ func on_toggle_focused(help_text):
 func on_binding_focused():
 	UIService.set_menu_help(
 		"Change a specific control binding.",
-		"[{ui_up}]/[{ui_down}]/[{ui_left}]/[{ui_right}]: Move [{ui_cancel}]: Return [{ui_accept}]: Change"
+		"[{ui_up}]/[{ui_down}]/[{ui_left}]/[{ui_right}]: Select [{ui_cancel}]: Return [{ui_accept}]: Change"
 	)
 
 func on_grab_focus():

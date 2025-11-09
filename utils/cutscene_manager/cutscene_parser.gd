@@ -363,13 +363,13 @@ func parse_vector2_opt(array_string: String):
 
 func parse_direction(direction_string: String) -> Vector2:
 	match direction_string.strip_edges():
-		"UP":
+		"NORTH":
 			return Vector2.UP
-		"DOWN":
+		"SOUTH":
 			return Vector2.DOWN
-		"LEFT":
+		"WEST":
 			return Vector2.LEFT
-		"RIGHT":
+		"EAST":
 			return Vector2.RIGHT
 		_:
 			return Vector2.DOWN

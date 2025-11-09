@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Location" load_steps=3 format=3 uid="uid://cob6dxccc02lk"]
+
+[ext_resource type="Script" uid="uid://ghsj8j43pjst" path="res://location/lib/script/location/location.gd" id="1_ajxta"]
+[ext_resource type="Resource" uid="uid://dvlh23vybtpnd" path="res://location/001_cavern_of_flame/story.dialogue" id="2_econt"]
+
+[resource]
+script = ExtResource("1_ajxta")
+location_id = "001_cavern_of_flame"
+story = ExtResource("2_econt")
+base_room_path = "res://location/001_cavern_of_flame/room"
+metadata/_custom_type_script = "uid://ghsj8j43pjst"

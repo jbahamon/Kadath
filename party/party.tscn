@@ -10,7 +10,7 @@ script = ExtResource("1")
 
 [node name="Carter" parent="." instance=ExtResource("2_3qwyy")]
 
-[node name="Alex" parent="." instance=ExtResource("2_rtt04")]
+[node name="MC" parent="." instance=ExtResource("2_rtt04")]
 visible = false
 y_sort_enabled = true
 unlocked = false

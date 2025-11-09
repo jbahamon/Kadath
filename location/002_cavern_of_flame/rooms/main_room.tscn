@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cp8rl20yu7io5" path="res://location/002_cavern_of_flame/objects/torch3.png" id="8"]
 [ext_resource type="Texture2D" uid="uid://bmqx1fnrqcstj" path="res://location/002_cavern_of_flame/objects/torch1.png" id="10"]
 [ext_resource type="PackedScene" uid="uid://c17hneqpuil0l" path="res://npc/lib/base_npc.tscn" id="12"]
-[ext_resource type="PackedScene" uid="uid://d2c0pjqevww7e" path="res://location/002_cavern_of_flame/objects/save_point.tscn" id="13"]
+[ext_resource type="PackedScene" uid="uid://d2c0pjqevww7e" path="res://location/001_cavern_of_flame/object/save_point.tscn" id="13"]
 [ext_resource type="PackedScene" uid="uid://dlvfp6gw5ylce" path="res://location/002_cavern_of_flame/npcs/nasht.tscn" id="14"]
 [ext_resource type="PackedScene" uid="uid://454hohwtrd81" path="res://location/002_cavern_of_flame/npcs/kaman_thah.tscn" id="15"]
 

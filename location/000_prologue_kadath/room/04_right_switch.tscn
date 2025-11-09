@@ -109,7 +109,6 @@ position = Vector2(0, 40)
 room_id = "02_hub"
 target_position = Vector2(248, -108)
 target_orientation = Vector2(0, 1)
-metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" parent="Warp" index="0"]
 position = Vector2(0, 4)

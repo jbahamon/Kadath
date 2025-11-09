@@ -1,3 +1,6 @@
+Accessory
+TileSet
+Location
 ShaderMaterial
 SpriteFrames
 DialogueResource
@@ -10,5 +13,3 @@ Hit
 Weapon
 Equipment
 Armor
-BattleRewards
-TileSet

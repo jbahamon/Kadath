@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://jekjd0u7io0t"]
+[gd_scene load_steps=10 format=3 uid="uid://jekjd0u7io0t"]
 
 [ext_resource type="PackedScene" uid="uid://bomxx7doloqmu" path="res://party/lib/party_member.tscn" id="1_0oesc"]
 [ext_resource type="Resource" uid="uid://b4nbxe88mk82q" path="res://party/lib/base_growth.tres" id="2_baeor"]
-[ext_resource type="Texture2D" uid="uid://c7iv4j4yioinv" path="res://party/alex/icon.png" id="3_qyy1i"]
 [ext_resource type="Script" uid="uid://bgo72c6mvhwx0" path="res://party/alex/skill/crescent_blast.gd" id="4_e2q1k"]
 [ext_resource type="Script" uid="uid://cbotvphewy65u" path="res://party/alex/skill/forceful_slash.gd" id="5_cliwo"]
 [ext_resource type="PackedScene" uid="uid://dpj24nx6wivha" path="res://party/alex/anim.tscn" id="5_de00w"]
@@ -16,13 +15,12 @@ radius = 50.0
 radius = 9.0
 height = 24.0
 
-[node name="Alex" instance=ExtResource("1_0oesc")]
+[node name="MC" instance=ExtResource("1_0oesc")]
 id = 1
-display_name = "Alex"
+display_name = "MC"
 growth = ExtResource("2_baeor")
 unlocked = true
 experience = 1
-icon = ExtResource("3_qyy1i")
 
 [node name="Battler" parent="." index="0"]
 anim_path = NodePath("../Anim")
@@ -43,7 +41,7 @@ script = ExtResource("5_cliwo")
 display_name = "Forceful Slash"
 description = "Attack a single enemy with a vicious slash."
 
-[node name="Vision" type="Node" parent="Battler/Actions" index="1" groups=["save"]]
+[node name="Vision" type="Node" parent="Battler/Actions" index="1"]
 script = ExtResource("6_8uisi")
 display_name = "Analyze"
 description = "Uncover enemy stats and weaknesses"

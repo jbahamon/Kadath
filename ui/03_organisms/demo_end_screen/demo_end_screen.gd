@@ -16,5 +16,5 @@ func on_to_title_pressed():
 		tween.finished
 	]).execute()
 	
-	SceneSwitcher.change_scene()
+	SceneSwitcher.switch_scene()
 	

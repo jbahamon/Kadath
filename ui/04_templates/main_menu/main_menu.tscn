@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c56yhf5p381ns"]
+[gd_scene load_steps=14 format=3 uid="uid://c56yhf5p381ns"]
 
 [ext_resource type="PackedScene" uid="uid://cu30gjjhspgly" path="res://ui/04_templates/settings_menu/settings_menu.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://kjfr6yr534rp" path="res://ui/04_templates/saves_menu/saves_menu.tscn" id="2"]
@@ -11,6 +11,12 @@
 [ext_resource type="PackedScene" uid="uid://j77euw727jqq" path="res://ui/04_templates/credits/credits.tscn" id="6_513fe"]
 [ext_resource type="AudioStream" uid="uid://biqsf23fc0cbi" path="res://sound/ui/blops/High - Kenney.wav" id="6_erdj7"]
 [ext_resource type="PackedScene" uid="uid://c2opuixudajq" path="res://ui/02_molecules/help_bar/help_bar.tscn" id="6_m5ktf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ldr0a"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rfrve"]
 content_margin_left = 20.0
@@ -151,6 +157,16 @@ theme_override_constants/margin_bottom = 100
 [node name="SavesMenu" parent="MainContainer" instance=ExtResource("2")]
 visible = false
 layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Title" parent="MainContainer/SavesMenu/VBoxContainer" index="0"]
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ldr0a")
+
+[node name="SelectList" parent="MainContainer/SavesMenu/VBoxContainer" index="1"]
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ldr0a")
 
 [node name="Credits" parent="MainContainer" instance=ExtResource("6_513fe")]
 visible = false
@@ -159,7 +175,7 @@ size_flags_vertical = 3
 
 [node name="HelpBar" parent="MainContainer" instance=ExtResource("6_m5ktf")]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 1
 size_flags_vertical = 8
 theme_override_styles/panel = SubResource("StyleBoxEmpty_rfrve")
 
@@ -186,4 +202,7 @@ bus = &"BGM"
 [connection signal="focus_entered" from="MainContainer/TitleScreen/HBoxContainer/Menu Options/Quit" to="MainContainer" method="_on_quit_focus_entered"]
 [connection signal="pressed" from="MainContainer/TitleScreen/HBoxContainer/Menu Options/Quit" to="MainContainer" method="_on_Quit_pressed"]
 [connection signal="exit" from="MainContainer/SettingsMenu" to="MainContainer" method="_on_menu_exited"]
+[connection signal="cancel" from="MainContainer/SavesMenu/VBoxContainer/SelectList" to="MainContainer" method="_on_menu_exited"]
 [connection signal="exit" from="MainContainer/Credits" to="MainContainer" method="_on_menu_exited"]
+
+[editable path="MainContainer/SavesMenu"]

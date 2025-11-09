@@ -1,3 +1,8 @@
+res://location/lib/script/object
+C:/Users/Jorge/Documents/Godot/Kadath/location/001_cavern_of_flame/cutscene
+res://party
+res://location/001_cavern_of_flame/tile
+res://location/001_cavern_of_flame
 C:/Users/Jorge/Documents/Godot/Kadath/exports
 res://
 C:/Users/Jorge/Documents/Godot
@@ -15,7 +20,3 @@ res://ui/03_organisms/interface_settings_submenu
 res://ui/03_organisms/audio_video_settings_submenu
 res://ui/01_atoms/turn_indicator
 res://ui/01_atoms/assets/textures/By Sr.Toasty
-res://ui/01_atoms/scroll
-res://ui/01_atoms/slider
-res://ui/01_atoms/separator
-res://ui/04_templates/battle_ui

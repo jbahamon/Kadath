@@ -70,7 +70,7 @@ func jump(actor):
 	await tween.finished
 	
 func fall(actor):
-	var room = EnvironmentService.get_room()
+	var room = EnvironmentService.current_room
 	room.remove_child(weapon)
 	actor.battler.add_child(weapon)
 	actor.battler.move_child(weapon, 0)

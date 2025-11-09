@@ -84,7 +84,7 @@ func shoot_projectile(actor, projectile, projectile_options: Dictionary):
 	var origin = projectile_options["origin"]
 	var destination = projectile_options["destination"]
 	var time = origin.distance_to(destination) / speed
-	var room = EnvironmentService.get_room()
+	var room = EnvironmentService.current_room
 	actor.battler.remove_child(projectile)
 	
 	room.add_child(projectile)

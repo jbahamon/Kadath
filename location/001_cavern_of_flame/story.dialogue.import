@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_14"
+type="Resource"
+uid="uid://dvlh23vybtpnd"
+path="res://.godot/imported/story.dialogue-d13cdfaee8abf693facdb22619818d89.tres"
+
+[deps]
+
+source_file="res://location/001_cavern_of_flame/story.dialogue"
+dest_files=["res://.godot/imported/story.dialogue-d13cdfaee8abf693facdb22619818d89.tres"]
+
+[params]
+
+defaults=true

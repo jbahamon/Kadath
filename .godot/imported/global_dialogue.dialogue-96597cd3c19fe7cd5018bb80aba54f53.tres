@@ -7,6 +7,7 @@ script = ExtResource("1_5j2bl")
 using_states = PackedStringArray()
 titles = {
 "carter_breakdown": "1",
+"chest": "20",
 "pickman_breakdown_attack": "7",
 "pickman_breakdown_hurt": "13"
 }
@@ -124,10 +125,13 @@ lines = {
 },
 "17": {
 &"id": "17",
-&"is_snippet": false,
-&"next_id": "end",
-&"next_id_after": "",
-&"type": "goto"
+&"next_id": "19",
+&"type": ""
+},
+"19": {
+&"id": "19",
+&"next_id": "20",
+&"type": "title"
 },
 "2": {
 &"character": "Carter",
@@ -148,6 +152,24 @@ lines = {
 }]),
 &"text": "Misshapen, delirious monstrosity!",
 &"type": "dialogue"
+},
+"20": {
+&"id": "20",
+&"next_id": "22",
+&"text": "Obtained %s!",
+&"type": "dialogue"
+},
+"21": {
+&"id": "21",
+&"next_id": "22",
+&"type": ""
+},
+"22": {
+&"id": "22",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
 },
 "3": {
 &"character": "Carter",
@@ -263,5 +285,10 @@ raw_text = "~ carter_breakdown
 % Pickman: So many ghouls have perished in this quest... It's my fault, isn't it?
 % Pickman: If only I was... better... 
 % Pickman: My penance, for leading so many into death.
-=> END"
+=> END
+
+
+~ chest
+Obtained %s!
+"
 metadata/dialogue_manager_version = "3.5.1"

@@ -25,10 +25,10 @@ const PARTY_IN_BATTLE_ID = {
 	Id.PICKMAN: "Pickman",
 	Id.KURANES: "Kuranes",
 	Id.ZKAUBA: "Zkauba",
-	Id.CARTER: "Carter",	
+	Id.CARTER: "Carter",
 }
 
-@onready var SAVE_KEY: String = "party_member_" + PARTY_IN_BATTLE_ID[self.id]
+@onready var SAVE_KEY: String = "party_member_" + PARTY_IN_BATTLE_ID[self.id].to_lower()
 @onready var anim = $Anim
 @onready var battler: Battler = $Battler
 
@@ -37,7 +37,7 @@ const PARTY_IN_BATTLE_ID = {
 @export var growth: Resource
 @export var unlocked = false
 @export var experience: int : set = _set_experience
-@export var icon: Texture2D
+
 @export var menu_texture: Texture2D
 @export var unique_command: NodePath
 @export var breakdown_status: GDScript
@@ -46,6 +46,9 @@ const PARTY_IN_BATTLE_ID = {
 @export var starting_armor_id: String
 @export var starting_accessory_id: String
 
+var icon: Texture2D:
+	get():
+		return Party.party_icons[self.id]
 var equipped_weapon: Weapon
 var equipped_armor: Armor
 var equipped_accessory: Accessory
@@ -176,11 +179,11 @@ func _set_experience(value: int):
 	experience = max(0, value)
 	update_stats()
 
-func save(save_data: SaveData):
+func save_game_data(save_data: SaveData):
 	var skills = {}
 	
-	for skill in self.battler.actions.get_node("Skills").get_children():
-		skills[skill.get_name()] = skill.unlocked
+	for skill in self.battler.actions.get_node("Skill").get_children():
+		skills[skill.name] = skill.unlocked
 	
 	save_data.data[SAVE_KEY] = {
 		"display_name": display_name,
@@ -209,8 +212,8 @@ func load_game_data(save_data: SaveData):
 	battler.health = data["health"]
 	battler.energy = data["energy"]
 	
-	for skill in self.battler.skills.get_children():
-		skill.unlocked = data["skills"][skill.get_name()]
+	for skill in self.battler.actions.get_node("Skill").get_children():
+		skill.unlocked = data["skills"][skill.name]
 
 func unlock_skill(skill_id: String):
 	self.find_child("Battler/Actions/Skill/%s".format(skill_id)).unlock()

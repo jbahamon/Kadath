@@ -128,6 +128,7 @@ texture_region_size = Vector2i(16, 64)
 11:0/0/terrains_peering_bit/left_side = 0
 0:1/0 = 0
 0:1/0/texture_origin = Vector2i(0, 24)
+0:1/0/y_sort_origin = 3
 0:1/0/terrain_set = 0
 0:1/0/terrain = 0
 0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -40, 8, -40, 8, 8, -8, 8)

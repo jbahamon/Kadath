@@ -7,7 +7,9 @@ size = Vector2(32, 10)
 
 [node name="Warp" type="Area2D"]
 collision_layer = 0
+monitorable = false
 script = ExtResource("1")
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("1")

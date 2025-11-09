@@ -1,8 +1,8 @@
 [gd_resource type="TileSet" load_steps=6 format=3 uid="uid://crs4ppfnml38p"]
 
-[ext_resource type="Script" path="res://location/lib/resource/tile/bound_walls.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://by3u2ixh5hd7" path="res://location/002_cavern_of_flame/tiles/cavern_wall.png" id="2"]
-[ext_resource type="Texture2D" uid="uid://c6uvu1dlesr7d" path="res://location/002_cavern_of_flame/tiles/cavern_floor.png" id="3"]
+[ext_resource type="Script" uid="uid://b8004b3oe4525" path="res://location/lib/resource/tile/bound_walls.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://by3u2ixh5hd7" path="res://location/001_cavern_of_flame/tile/cavern_wall.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://c6uvu1dlesr7d" path="res://location/001_cavern_of_flame/tile/cavern_floor.png" id="3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wkhrc"]
 texture = ExtResource("3")

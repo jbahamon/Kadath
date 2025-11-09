@@ -105,12 +105,6 @@ func update_orientation() -> void:
 		return
 	self.set_orientation(input_vector)
 
-func save(save_data: SaveData) -> void:
-	save_data.data["player_position"] = self.position
-
-func load_game_data(save_data: SaveData) -> void:
-	self.position = save_data.data["player_position"]
-
 func set_target(new_target: Node, force: bool = false):
 	if self.target == new_target and not force:
 		return 

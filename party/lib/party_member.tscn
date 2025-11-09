@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://brpey6sluntv1" path="res://battle/ai/player_input.gd" id="3"]
 [ext_resource type="Script" uid="uid://g3uodhibvrcm" path="res://battle/action/skill.gd" id="4_8ihmo"]
 
-[node name="PartyMember" type="Node2D" groups=["save"]]
+[node name="PartyMember" type="Node2D"]
 script = ExtResource("1")
 id = 5
 

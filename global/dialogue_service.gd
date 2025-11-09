@@ -26,13 +26,18 @@ func load_location_dialogues(location: Location):
 func add_response(response):
 	self.current_responses.append(response)
 
-func open_global_dialogue(dialogue_id: String, alignment=Alignment.BOTTOM) -> Array:
-	return await self._open_dialogue(dialogue_id, self.global_dialogue, alignment) 
+func open_global_dialogue(dialogue_id: String, alignment=Alignment.BOTTOM, format=null) -> Array:
+	return await self._open_dialogue(dialogue_id, self.global_dialogue, alignment, format) 
 	
-func open_dialogue(dialogue_id: String, alignment=Alignment.BOTTOM) -> Array:
-	return await self._open_dialogue(dialogue_id, self.current_dialogue, alignment) 
+func open_dialogue(dialogue_id: String, alignment=Alignment.BOTTOM, format=null) -> Array:
+	return await self._open_dialogue(dialogue_id, self.current_dialogue, alignment, format) 
 	
-func _open_dialogue(dialogue_id: String, dialogue_resource: DialogueResource, alignment=Alignment.BOTTOM) -> Array:
+func _open_dialogue(
+	dialogue_id: String, 
+	dialogue_resource: DialogueResource, 
+	alignment=Alignment.BOTTOM, 
+	format=null
+) -> Array:
 	self.current_responses = []
 	var dialogue_lines = []
 	
@@ -45,9 +50,14 @@ func _open_dialogue(dialogue_id: String, dialogue_resource: DialogueResource, al
 		var strings = VarsService.strings
 		var text = dialogue_line.text.format(strings) # this might not be needed later
 		
+		if format != null:
+			text = dialogue_line.format(format)
+			
 		if dialogue_line.responses.size() > 0:
 			for response in dialogue_line.responses:
 				dialogue_line.text = dialogue_line.text.format(VarsService.strings)
+				if format != null:
+					dialogue_line.text = dialogue_line.text.format(format)
 
 			dialogue_lines.append({
 				"responses": dialogue_line.responses,

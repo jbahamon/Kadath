@@ -72,21 +72,17 @@ func on_element_focused(element):
 func on_element_selected(element):
 	self.element_selected.emit(element)
 
-func on_grab_focus():
+func on_grab_focus(index=0):
+	var button
 	if toggle:
-		var button = self.button_group.get_pressed_button()
-		if button != null:
-			button.button_pressed = false
-			button.grab_focus()
-			button.grab_click_focus()
-			return
-
-	for control in container.get_children():
-		var button = control.get_button()
+		button = self.button_group.get_pressed_button()
+	else:
+		button = container.get_child(index).get_button()
+	
+	if button != null:
 		button.button_pressed = false
 		button.grab_focus()
 		button.grab_click_focus()
-		return
 	
 func element_has_focus() -> bool:
 	return container.get_children().any(

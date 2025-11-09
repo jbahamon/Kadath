@@ -4,7 +4,7 @@ extends VBoxContainer
 @onready var saves_menu = $SavesMenu
 @onready var settings_menu = $SettingsMenu
 @onready var credits = $Credits
-
+@onready var version_container = $MarginContainer
 @export var music: AudioStream
 var current_menu: Control
 
@@ -28,6 +28,7 @@ func _ready():
 	
 	
 func switch_to_menu(menu: Control):
+	version_container.visible = menu == title_menu
 	menu.update_menu()
 	self.current_menu.hide_menu()
 	self.current_menu = menu
@@ -43,12 +44,15 @@ func _on_New_Game_pressed():
 	SceneSwitcher.load_scene("res://main/local_scene.tscn")
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "modulate", Color.BLACK, 0.5)
+	# TODO show loading icon here
+	SavesService.load_time = Time.get_ticks_msec()
+	SavesService.total_playtime = 0
 	await DoAll.new([
 		SceneSwitcher.scene_loaded,
 		tween.finished
 	]).execute()
 	
-	SceneSwitcher.change_scene()
+	SceneSwitcher.switch_scene()
 
 func _on_Continue_Game_pressed():
 	UIService.play_interaction_sound()

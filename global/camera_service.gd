@@ -12,7 +12,6 @@ func exit():
 	self.sub_viewport = null
 
 func update_camera_bounds(origin: Vector2, limits: Rect2i):
-	
 	var screen_width = sub_viewport.size.x
 	var room_width = limits.end.x - limits.position.x
 	

@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="SavePreviews" load_steps=2 format=3 uid="uid://b400yxrq2bv0i"]
+
+[ext_resource type="Script" uid="uid://dqwja2bp5myt" path="res://main/save_previews.gd" id="1_qxlrf"]
+
+[resource]
+script = ExtResource("1_qxlrf")
+data = {
+0: {
+"party": [{
+"id": 128,
+"level": 50,
+"name": "Carter"
+}],
+"save_datetime": "2025-07-04 17:34:06",
+"save_spot_name": "Cavern of Flame - Sleeping Quarters",
+"total_playtime": 3883
+},
+1: {
+"party": [{
+"id": 128,
+"level": 50,
+"name": "Carter"
+}],
+"save_datetime": "2025-07-04 17:52:06",
+"save_spot_name": "Cavern of Flame - Sleeping Quarters",
+"total_playtime": 4416
+}
+}

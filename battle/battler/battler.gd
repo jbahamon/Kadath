@@ -294,10 +294,8 @@ func on_battle_start():
 	self.hitbox.set_deferred("monitorable", true)
 	
 func on_battle_end():
-	if get_parent() is PartyMember:
-		self.health = max(1, self.health)
-		self.energy = max(1, self.energy)
-
+	# FIXME should this be called for non-active party members as well?
+	self.ai.interface = null
 	self.status_grid.clear()
 	self.status_effects.clear()
 	self.hitbox.set_deferred("monitorable", false)

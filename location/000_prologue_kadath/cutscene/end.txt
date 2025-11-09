@@ -20,12 +20,12 @@ START_DIALOGUE gods_callout
 # Room starts darkening, Pickman is ejected
 SIMULTANEOUS
 	AWAIT ROOM fade_room
-	LOOK NPCPickman LEFT
+	LOOK NPCPickman WEST
 	START_DIALOGUE pickman_warning
 END
 
 SIMULTANEOUS
-	LOOK PROXY RIGHT
+	LOOK PROXY EAST
 	PLAY_SOUND "/fx/magic/explosion/Explodey - YourPalRob" IN SFX AT (32, 80)
 	AWAIT ROOM fade_companion	
 END
@@ -39,7 +39,7 @@ SIMULTANEOUS
 	START_DIALOGUE nyarlathotep_1
 	SEQUENTIAL
 		WAIT 1
-		LOOK PROXY UP
+		LOOK PROXY NORTH
 	END
 	MOVE_CAMERA TO (0, 8) IN 3
 END

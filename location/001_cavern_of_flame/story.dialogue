@@ -1,0 +1,194 @@
+# ---------------------------
+# Objects
+# ---------------------------
+
+~ closed_door
+This door is locked.
+=> END!
+
+# ---------------------------
+# Monks in corridor and hallz
+# ---------------------------
+
+~ monk_save
+Meditative Monk: The Elder Sign's light always manages to calm me down. I guess knowing my progression is being acknowledged and saved has that effect.
+Meditative Monk: And if you have an Offering, you can use it to fully heal as well. But since this one is near my room, I just rest in my bed instead.
+=> END
+
+~ monk_smalltalk_1
+PH
+
+~ monk_smalltalk_2
+Monk: I'm warming my hands here. And before you mention it, I learned my lesson about getting too close to the pillar! And my eyebrows have already grown back!
+=> END
+
+~ gift_monk_1
+if not VarsService.get_flag("cavern_of_flame.gift_1"):
+	do VarsService.set_flag("cavern_of_flame.gift_1")
+	if VarsService.get_flag("cavern_of_flame.talked_to_priests"):
+		Monk: Hi! Heard you asked for an appointment with the Priests. Here's a little good luck charm!
+	else:
+		Monk: Hi! Heard about you were leaving... Here's a little good luck charm for the road.
+	do EntitiesService.party.inventory.add("sapphire_charm")
+	Received [color=cyan]Sapphire Charm[/color]!
+Monk: Good luck, and take care, ok?
+=> END
+
+~ gift_monk_2
+if not VarsService.get_flag("cavern_of_flame.gift_2"):
+	do VarsService.set_flag("cavern_of_flame.gift_1")
+	do EntitiesService.party.inventory.add("001_healing_draught", 3)
+	Monk: Hey! I know you've been thinking about leaving, so I got you this.
+	Received 5 Healing Draughts!
+Monk: I'll be rooting for you from here!
+=> END
+
+# ---------------------------
+# Entrance guards
+# ---------------------------
+
+~ guard_priests
+if (not VarsService.get_flag("cavern_of_flame.librarian_blessing") and not    VarsService.get_flag("cavern_of_flame.librarian_blessing")):	
+	Monk: The venerable Priests have beyond this door. But they have instructed me to let you through only when you have received the blessings from both our Master Librarian and our Master of Martial Arts. Sorry, but that's what they said.
+elif not VarsService.get_flag("cavern_of_flame.librarian_blessing"):
+	Monk: I see you have obtained the Master of Martial Arts' blessing. Come back with the Master Librarian's blessing and I will let you through.
+elif not VarsService.get_flag("cavern_of_flame.fighter_blessing"):
+	Monk: I see you have obtained the Master of Martial Arts' blessing. Come back with the Master Librarian's blessing and I will let you through.
+else:
+	Monk: I see you have obtained both blessings. Go through, then. Let's not make the Priests wait.
+=> END
+
+~ guard_1
+if VarsService.get_flag("cavern_of_flame.barrier_bumped"):
+	Monk: *yawn*... Welcome to the Cavern of Flame...
+	Monk: Oh, it's you, {mc_name}. Tried leaving for the waking world again? Can't say I'm not impressed by your persistence. 
+else:
+	Monk: *yawn*... Welcome to the Cavern of Flame, passageway to the lands of Dream, traveller...
+	Monk: Oh, it's you, {mc_name}. Sorry, I'm on welcome duty today so I had very little sleep...
+=> END
+
+~ guard_2
+if not VarsService.get_flag("cavern_of_flame.item_quest_started"):
+	Monk: Hey, if you're heading out today, can you take this to my mate near the barrier? Creatures have been getting more and more aggressive as of late, so he could use this.
+	do EntitiesService.party.inventory.add("002_potent_draught")
+	do VarsService.set_flag("cavern_of_flame.item_quest_started", True)
+elif not VarsService.get_flag("cavern_of_flame.item_quest_delivered"):
+	Monk: I hope he's doing OK. He might be out of his water in his current assignment.
+elif not VarsService.get_flag("cavern_of_flame.item_quest_finished"):
+	Monk: So he's not harmed? That's good to hear.Thanks!
+else:
+	Monk: Guard duty can be so boring...
+=> END
+
+~ wall
+{mc_name}: Ouch. Still won't let me pass into the waking world.
+=> END!
+
+# ---------------------------
+# Library
+# ---------------------------
+
+~ scholar_1
+Scholar: While in the Dreamlands, spiritual dreamers sometimes remember their waking lives through dreams. That's why I think you're one of them, since you've been having these weird dreams.
+=> END
+
+~ scholar_2
+Scholar: We've been waiting for a copy of the [color=cyan]Pnakotic Manuscripts[/color] to arrive from [color=cyan]Ulthar[/color]. 
+Scholar: But with the alarming aggresion level from Dreamlands organisms, I don't know if we will ever get them...
+=> END
+
+~ scholar_3
+Scholar: The Gods of Earth disappearing? I think something like that happened some years ago... It didn't last long, though.
+=> END
+
+~ scholar_4
+Scholar: I looked up this Carter guy you mentioned the other day. Seems he was quite the proficient dreamer back in his day. I wonder what happened to him? 
+=> END
+
+
+~ scholar_5
+Monk: Physical dreamers can't just wake up by focusing, same as you. That's why I think you're one of them, since you can't seem to wake up.
+
+
+~ scholar_6
+Monk: Physical dreamers can't just wake up by focusing, same as you. That's why I think you're one of them, since you can't seem to wake up.
+
+
+
+=> END
+
+# ---------------------------
+# Training Hall
+# ---------------------------
+
+~ master
+if not VarsService.get_flag("journal_enabled"):
+	Master: You're leaving, huh. You better not get beaten up by some random vermin. You did train under me for the last year, after all.
+	Master: Here, have this. It's a journal, so you don't go around forgetting stuff, you hear me?
+	do EnvironmentService.current_room.unlock_journal()
+	Received [color=cyan]Journal[/color]. Check it in the Menu.
+	Master: If you ever fill that thing, make sure you shew me those notes.
+else:
+	Master: If you ever fill that journal, make sure you shew me those notes.
+=> END!
+
+~ apprentice_1
+Monk: T-this might sound obvious, but obtaining new weapons is meaningless if you don't equip them. I-I failed my last test 'c-cause I forgot about that...
+=> END!
+
+~ apprentice_2
+Monk: Did you know that [color=cyan]SP[/color] stands for [color=cyan]Stability Points[/color]? And, did you know that running out of those will send you into a Breakdown?
+Monk: And, and, effects vary from individual from individual, but you will basically lose control of yourself for a while. It's suuuper nasty!
+=> END!
+
+~ apprentice_3
+Monk: Always... check... the turn timeline... Oh, I'm reviewing my notes. The master will scold me if I forget these things again.
+=> END
+
+# ---------------------------
+# Travelers
+# ---------------------------
+
+
+~ traveler_1
+Dreamer: We spiritual dreamers don't really cross the barrier. We just snap back to our sleeping bodies and wake up when we approach it. That's why the Temple usually gets to keep our stuff in exchange for safe passage. Quite the lucrative deal for them, right?
+
+=> END
+
+~ traveler_2
+Dreamer: Whenever I go through the Cavern of Flame, the monks give me some supplies. I must confess, I wouldn't have made it if not for their help.
+=> END
+
+
+# ---------------------------
+# Events
+# ---------------------------
+
+
+~ wake_up
+Voice: Hey, wake up! Are you okay?
+=> END!
+
+~ woken_up
+Monk: I heard a scream.... Did something happen?
+=> END!
+
+~ after_named
+{mc_name}: I'm fine. I think it was one of those weird dreams.
+Monk: O-oh, I'm sorry to hear that. I'll let you get ready, then. The Priests will receive you today, as you requested.
+=> END!
+
+
+~ mc_reflection
+{mc_name}: A whole year and I still haven't found out much about who I am. If they can't... or won't... help me remember who I am, there's no use in staying. Let's see what the Priests have to say.
+=> END!
+	
+~ priests
+Nasht: {mc_name}. Since the day we found you, we have tried to understand your condition. Neither physical dreamer, spiritual dreamer nor dream denizen seem to describe your situation and limitations.
+Kaman-Thah: We have allowed you to stay here and help in the temple in exchange for shelter. Now, after almost a full revolution of the skies, you come to us. 
+{mc_name}: I think I might find answers in the Dreamlands. These recurring dreams about Carter and Kadath, they must mean something.
+Nasht: Randolph Carter. A worthy dreamer, yes. But it is not known whether he reached unknown Kadath in the cold waste.
+Kaman-Thah: And if he reached it, whether he managed to return in some form. This might be the death of your soul, for the Great Ones are not to be harassed with minor pleas.
+{mc_name}: If finding this dreamer won't reveal who I am or where I belong, I shall ask these questions to the Gods of Earth themselves. And if that is meant to be the end of me, so be it. Now, I humbly request passage, and your blessing.
+Nasht and Kaman-Thah: As you wish. Descend the seven hundred steps to the Gate of Deeper Slumber. Set out through the Enchanted Wood. Farewell, and may we encounter each other again.
+=> END!

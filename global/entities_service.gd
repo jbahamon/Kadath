@@ -38,7 +38,7 @@ func get_entity(entity_name: String):
 		"PROXY":
 			return self.proxy
 		"ROOM":
-			return EnvironmentService.get_room()
+			return EnvironmentService.current_room
 		"WORLD":
 			return EnvironmentService.get_world()
 		"PARTY":
@@ -47,7 +47,7 @@ func get_entity(entity_name: String):
 			return self.get_room_entity(entity_name)
 			
 func get_room_entity(entity_name: String):
-	var room = EnvironmentService.get_room()
+	var room = EnvironmentService.current_room
 	
 	if room == null:
 		return null

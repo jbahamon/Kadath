@@ -50,7 +50,7 @@ func play_sfx_at(sound: AudioStream, position: Vector2):
 
 func play_gfx_at(effect_frames: SpriteFrames, position: Vector2, offset: Vector2, duration = -1.0):
 	var effect = AnimatedSprite2D.new()
-	var room = EnvironmentService.get_room()
+	var room = EnvironmentService.current_room
 	effect.sprite_frames = effect_frames
 	room.add_child(effect)
 	effect.global_position = position

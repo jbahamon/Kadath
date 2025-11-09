@@ -1,4 +1,4 @@
-extends Node
+extends StaticBody2D
 
 class_name InteractableObject
 

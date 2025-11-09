@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bvotvqykvyogg" path="res://ui/02_molecules/help_bar/help_bar.gd" id="1_b12js"]
 
 [node name="HelpBar" type="PanelContainer"]
+size_flags_horizontal = 3
 size_flags_vertical = 4
 script = ExtResource("1_b12js")
 
@@ -11,11 +12,15 @@ layout_mode = 2
 
 [node name="Help" type="Label" parent="HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 0
 text = "Some help text"
+
+[node name="Spacer" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Controls" type="Label" parent="HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 8
 text = "Some help text"
 horizontal_alignment = 2

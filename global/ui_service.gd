@@ -33,6 +33,7 @@ func initialize_basic(
 	init_control_player: AudioStreamPlayer, 
 	init_notification_player: AudioStreamPlayer
 ):
+	
 	self.help_bar = init_help_bar
 	self.control_player = init_control_player
 	self.notification_player = init_notification_player
@@ -40,22 +41,23 @@ func initialize_basic(
 func initialize(
 	init_popup_layer: CanvasLayer, 
 	init_menu_popup: Popup, 
-	_init_save_container, 
+	init_save_popup: Popup, 
 	init_control_player, init_notification_player
 ):
 	self.initialize_basic(
 		init_menu_popup.help_bar, 
 		init_control_player, 
-		init_notification_player
+		init_notification_player,
 	)
 	
 	init_menu_popup.popup_window = false
-	# init_save_popup.popup_window = false
+	init_save_popup.popup_window = false
 	
 	self.popup_layer = init_popup_layer
 	self.menu_popup = init_menu_popup
-	# self.save_popup = init_save_popup
+	self.save_popup = init_save_popup
 	
+	self.save_popup.popup_hide.connect(self.on_close_popup)
 	self.menu_popup.popup_hide.connect(self.on_close_popup)
 	
 func connect_buttons(root):
@@ -104,8 +106,10 @@ func play_notification(sound):
 	self.notification_player.play()
 	return self.notification_player
 
-func show_save_menu() -> void:
-	self.handle_popup(save_popup, true)
+func show_save_menu(save_spot_name) -> void:
+	save_popup.set_spot_name(save_spot_name)
+	self.handle_popup(save_popup, true, 1)
+	
 	
 func handle_popup(popup_node: Window, pause_tree, ratio=null, play_sound=true):
 	if pause_tree:

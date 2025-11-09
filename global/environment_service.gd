@@ -21,9 +21,6 @@ func exit():
 func get_world():
 	return self.world
 	
-func get_room() -> LocationRoom:
-	return current_room
-
 func update_whereabouts(
 	location_id: String, 
 	room_id: String,
@@ -153,21 +150,23 @@ func push_proxy(
 	await get_tree().process_frame
 	proxy.set_mode(end_proxy_state if end_proxy_state != null else self.prev_proxy_mode)
 
-
 func load_game_data(save_data: SaveData) -> void:
 	await EnvironmentService.update_whereabouts(
 		save_data.data["location"], 
 		save_data.data["room"],
-		Vector2.ZERO,
-		Vector2.DOWN,
+		save_data.data["player_position"],
+		save_data.data["player_orientation"],
 		{
-			"fade": true
+			"fade": true,
+			"end_proxy_state": PlayerProxy.ProxyMode.GAMEPLAY,
 		}
 	)
 
-func save(save_data: SaveData) -> void:
+func save_game_data(save_data: SaveData) -> void:
 	save_data.data["location"] = self.current_location.location_id
 	save_data.data["room"] = self.current_room.room_id
+	save_data.data["player_position"] = EntitiesService.proxy.global_position
+	save_data.data["player_orientation"] = EntitiesService.proxy.current_orientation
 	
 func get_sub_viewport() -> SubViewport:
 	return self.world.get_parent()
@@ -179,3 +178,13 @@ func fade_out():
 	FXService.get_layer("MIX").color = Color(0,0,0,0)
 	await FadeOverlay.new("MIX", Color.BLACK, 0.4).execute(get_tree(), FadeOverlay.ExecutionMode.PLAY)
 	
+func reset_whereabouts():
+	self.pop_proxy()
+	
+	if current_room != null:
+		EntitiesService.on_exit_room()
+		world.remove_child(world.get_child(0))
+		current_room.queue_free()
+	
+	self.current_location = null
+	self.current_room = null

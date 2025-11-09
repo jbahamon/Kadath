@@ -1,6 +1,6 @@
 PLAY_ANIM PROXY idle
 START_DIALOGUE pickman_catch_up
-LOOK PROXY DOWN
+LOOK PROXY SOUTH
 CALL ROOM spawn_pickman
 RUN NPCPickman TO (_, 92) AT 90
 START_DIALOGUE pickman_recruit

@@ -11,7 +11,7 @@ func execute(actor):
 	actor.play_anim("identify")
 	await actor.get_tree().create_timer(0.5).timeout
 	var enemy_id = self.target.enemy_id
-	var room = EnvironmentService.get_room()
+	var room = EnvironmentService.current_room
 	
 	self.remove_child(glass)
 	room.add_child(glass)

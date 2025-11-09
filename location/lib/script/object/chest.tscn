@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://lspafanj5700"]
+
+[ext_resource type="PackedScene" uid="uid://md0rlcmosnxr" path="res://location/lib/script/object/simple_interactable_object.tscn" id="1_7pyc6"]
+[ext_resource type="Script" uid="uid://23sirbilrd6" path="res://location/lib/script/object/chest.gd" id="2_bl8e7"]
+
+[node name="Chest" instance=ExtResource("1_7pyc6")]
+script = ExtResource("2_bl8e7")
+flag_name = ""
+is_money = false
+item_id = ""
+amount = 1

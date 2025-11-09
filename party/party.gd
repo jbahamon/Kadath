@@ -7,6 +7,17 @@ extends Node
 
 class_name Party
 
+const party_icons = {
+	PartyMember.Id.ALEX: preload("res://party/alex/icon.png"),
+	PartyMember.Id.VOLKI: preload("res://party/carter/icon.png"),
+	PartyMember.Id.GRUSKA: preload("res://party/carter/icon.png"),
+	PartyMember.Id.SYLVIE: preload("res://party/carter/icon.png"),
+	PartyMember.Id.PICKMAN: preload("res://party/pickman/icon.png"),
+	PartyMember.Id.KURANES: preload("res://party/carter/icon.png"),
+	PartyMember.Id.ZKAUBA: preload("res://party/carter/icon.png"),
+	PartyMember.Id.CARTER: preload("res://party/carter/icon.png"),
+}
+
 @export var PARTY_SIZE: int = 3
 
 const inventory_save_key = "Inventory"
@@ -23,7 +34,6 @@ var movement_cache_index: int
 var movement_pointers: Array
 
 func _ready():
-	self.update_active_members()
 	self.set_physics_process(false)
 	self.movement_cache = []
 	self.movement_cache.resize(
@@ -93,14 +103,41 @@ func _physics_process(_delta):
 
 func load_game_data(save_data: SaveData) -> void:
 	inventory.load_game_data(save_data)
-	self.update_active_members()
 	
-func save(save_data: SaveData) -> void:
-	inventory.save(save_data)
+	# we load every member first
+	for party_member in self.active_members:
+		party_member.load_game_data(save_data)
+		
+	for party_member in self.get_children():
+		party_member.load_game_data(save_data)
+		
+	var i = 0
 	
-func update_active_members():
+	var ordering = {}
+	for party_member_name in save_data.data["party_order"]:
+		ordering[party_member_name] = i
+		i += 1
+		
+	self.update_active_members(ordering)
+	
+func save_game_data(save_data: SaveData) -> void:
+	inventory.save_game_data(save_data)
+	var party_order = []
+	for party_member in self.active_members:
+		party_member.save_game_data(save_data)
+		party_order.append(party_member.name)
+	for party_member in self.get_children():
+		party_member.save_game_data(save_data)
+		party_order.append(party_member.name)
+		
+	save_data.data["party_order"] = party_order
+
+func update_active_members(ordering=null):
 	var new_ordered_members = self.get_unlocked_characters()
 	var current_parent = self.active_members[0].get_parent() if self.active_members.size() > 0 else null
+	
+	if ordering != null:
+		new_ordered_members.sort_custom(func(a, b): return ordering[a.name] < ordering[b.name])
 	
 	var new_active_members = []
 	var i = 0;
@@ -174,7 +211,7 @@ func get_leader():
 	return self.active_members[0]
 
 func add_to_room():
-	var room = EnvironmentService.get_room()
+	var room = EnvironmentService.current_room
 	for i in range(self.active_members.size()):
 		room.add_child(self.active_members[self.active_members.size() - 1 - i])
 	
@@ -189,5 +226,3 @@ func get_active_members():
 
 func get_inactive_members():
 	return self.get_children()
-	
-	

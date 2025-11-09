@@ -30,8 +30,9 @@ func _process(_delta):
 		ResourceLoader.ThreadLoadStatus.THREAD_LOAD_IN_PROGRESS:
 			return
 
-func change_scene():
+func switch_scene():
 	var resource = ResourceLoader.load_threaded_get(self.current_loading_path)
+	set_process(false)
 	self.current_loading_path = ""
 	var current_scene = get_tree().current_scene
 	if "exit" in current_scene:

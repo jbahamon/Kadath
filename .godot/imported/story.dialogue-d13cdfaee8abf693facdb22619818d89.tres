@@ -1,0 +1,1738 @@
+[gd_resource type="Resource" script_class="DialogueResource" load_steps=2 format=3]
+
+[ext_resource type="Script" uid="uid://dbs4435dsf3ry" path="res://addons/dialogue_manager/dialogue_resource.gd" id="1_4uxwq"]
+
+[resource]
+script = ExtResource("1_4uxwq")
+using_states = PackedStringArray()
+titles = {
+"after_named": "176",
+"apprentice_1": "135",
+"apprentice_2": "139",
+"apprentice_3": "144",
+"closed_door": "5",
+"gift_monk_1": "25",
+"gift_monk_2": "37",
+"guard_1": "61",
+"guard_2": "70",
+"guard_priests": "50",
+"master": "124",
+"mc_reflection": "182",
+"monk_save": "13",
+"monk_smalltalk_1": "18",
+"monk_smalltalk_2": "21",
+"priests": "186",
+"scholar_1": "91",
+"scholar_2": "95",
+"scholar_3": "100",
+"scholar_4": "104",
+"scholar_5": "109",
+"scholar_6": "113",
+"traveler_1": "153",
+"traveler_2": "158",
+"wake_up": "168",
+"wall": "83",
+"woken_up": "172"
+}
+character_names = PackedStringArray("Meditative Monk", "Monk", "{mc_name}", "Scholar", "Master", "Dreamer", "Voice", "Nasht", "Kaman-Thah", "Nasht and Kaman-Thah")
+first_title = "4"
+lines = {
+"0": {
+&"id": "0",
+&"next_id": "4",
+&"type": ""
+},
+"100": {
+&"character": "Scholar",
+&"id": "100",
+&"next_id": "101",
+&"text": "The Gods of Earth disappearing? I think something like that happened some years ago... It didn't last long, though.",
+&"type": "dialogue"
+},
+"101": {
+&"id": "101",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"102": {
+&"id": "102",
+&"next_id": "103",
+&"type": ""
+},
+"103": {
+&"id": "103",
+&"next_id": "104",
+&"type": "title"
+},
+"104": {
+&"character": "Scholar",
+&"id": "104",
+&"next_id": "105",
+&"text": "I looked up this Carter guy you mentioned the other day. Seems he was quite the proficient dreamer back in his day. I wonder what happened to him?",
+&"type": "dialogue"
+},
+"105": {
+&"id": "105",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"106": {
+&"id": "106",
+&"next_id": "108",
+&"type": ""
+},
+"108": {
+&"id": "108",
+&"next_id": "109",
+&"type": "title"
+},
+"109": {
+&"character": "Monk",
+&"id": "109",
+&"next_id": "112",
+&"text": "Physical dreamers can't just wake up by focusing, same as you. That's why I think you're one of them, since you can't seem to wake up.",
+&"type": "dialogue"
+},
+"110": {
+&"id": "110",
+&"next_id": "112",
+&"type": ""
+},
+"112": {
+&"id": "112",
+&"next_id": "113",
+&"type": "title"
+},
+"113": {
+&"character": "Monk",
+&"id": "113",
+&"next_id": "117",
+&"text": "Physical dreamers can't just wake up by focusing, same as you. That's why I think you're one of them, since you can't seem to wake up.",
+&"type": "dialogue"
+},
+"114": {
+&"id": "114",
+&"next_id": "117",
+&"type": ""
+},
+"117": {
+&"id": "117",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"118": {
+&"id": "118",
+&"next_id": "123",
+&"type": ""
+},
+"12": {
+&"id": "12",
+&"next_id": "13",
+&"type": "title"
+},
+"123": {
+&"id": "123",
+&"next_id": "124",
+&"type": "title"
+},
+"124": {
+&"condition": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"not"
+}, {
+&"i": 7,
+&"type": &"variable",
+&"value": "VarsService"
+}, {
+&"i": 18,
+&"type": &"dot"
+}, {
+&"function": "get_flag",
+&"i": 19,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 28,
+&"type": &"string",
+&"value": "journal_enabled"
+}, {
+&"i": 45,
+&"type": &"parens_close"
+}])])
+}])
+},
+&"id": "124",
+&"next_id": "125",
+&"next_id_after": "132",
+&"next_sibling_id": "130",
+&"type": "condition"
+},
+"125": {
+&"character": "Master",
+&"id": "125",
+&"next_id": "126",
+&"text": "You're leaving, huh. You better not get beaten up by some random vermin. You did train under me for the last year, after all.",
+&"type": "dialogue"
+},
+"126": {
+&"character": "Master",
+&"id": "126",
+&"next_id": "127",
+&"text": "Here, have this. It's a journal, so you don't go around forgetting stuff, you hear me?",
+&"type": "dialogue"
+},
+"127": {
+&"id": "127",
+&"mutation": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "EnvironmentService"
+}, {
+&"i": 21,
+&"type": &"dot"
+}, {
+&"i": 22,
+&"type": &"variable",
+&"value": "current_room"
+}, {
+&"i": 34,
+&"type": &"dot"
+}, {
+&"function": "unlock_journal",
+&"i": 35,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 50,
+&"type": &"parens_close"
+}])])
+}]),
+&"is_blocking": true
+},
+&"next_id": "128",
+&"type": "mutation"
+},
+"128": {
+&"id": "128",
+&"next_id": "129",
+&"text": "Received [color=cyan]Journal[/color]. Check it in the Menu.",
+&"type": "dialogue"
+},
+"129": {
+&"character": "Master",
+&"id": "129",
+&"next_id": "132",
+&"text": "If you ever fill that thing, make sure you shew me those notes.",
+&"type": "dialogue"
+},
+"13": {
+&"character": "Meditative Monk",
+&"id": "13",
+&"next_id": "14",
+&"text": "The Elder Sign's light always manages to calm me down. I guess knowing my progression is being acknowledged and saved has that effect.",
+&"type": "dialogue"
+},
+"130": {
+&"condition": {},
+&"id": "130",
+&"next_id": "131",
+&"next_id_after": "132",
+&"type": "condition"
+},
+"131": {
+&"character": "Master",
+&"id": "131",
+&"next_id": "132",
+&"text": "If you ever fill that journal, make sure you shew me those notes.",
+&"type": "dialogue"
+},
+"132": {
+&"id": "132",
+&"is_snippet": false,
+&"next_id": "end!",
+&"next_id_after": "",
+&"type": "goto"
+},
+"133": {
+&"id": "133",
+&"next_id": "134",
+&"type": ""
+},
+"134": {
+&"id": "134",
+&"next_id": "135",
+&"type": "title"
+},
+"135": {
+&"character": "Monk",
+&"id": "135",
+&"next_id": "136",
+&"text": "T-this might sound obvious, but obtaining new weapons is meaningless if you don't equip them. I-I failed my last test 'c-cause I forgot about that...",
+&"type": "dialogue"
+},
+"136": {
+&"id": "136",
+&"is_snippet": false,
+&"next_id": "end!",
+&"next_id_after": "",
+&"type": "goto"
+},
+"137": {
+&"id": "137",
+&"next_id": "138",
+&"type": ""
+},
+"138": {
+&"id": "138",
+&"next_id": "139",
+&"type": "title"
+},
+"139": {
+&"character": "Monk",
+&"id": "139",
+&"next_id": "140",
+&"text": "Did you know that [color=cyan]SP[/color] stands for [color=cyan]Stability Points[/color]? And, did you know that running out of those will send you into a Breakdown?",
+&"type": "dialogue"
+},
+"14": {
+&"character": "Meditative Monk",
+&"id": "14",
+&"next_id": "15",
+&"text": "And if you have an Offering, you can use it to fully heal as well. But since this one is near my room, I just rest in my bed instead.",
+&"type": "dialogue"
+},
+"140": {
+&"character": "Monk",
+&"id": "140",
+&"next_id": "141",
+&"text": "And, and, effects vary from individual from individual, but you will basically lose control of yourself for a while. It's suuuper nasty!",
+&"type": "dialogue"
+},
+"141": {
+&"id": "141",
+&"is_snippet": false,
+&"next_id": "end!",
+&"next_id_after": "",
+&"type": "goto"
+},
+"142": {
+&"id": "142",
+&"next_id": "143",
+&"type": ""
+},
+"143": {
+&"id": "143",
+&"next_id": "144",
+&"type": "title"
+},
+"144": {
+&"character": "Monk",
+&"id": "144",
+&"next_id": "145",
+&"text": "Always... check... the turn timeline... Oh, I'm reviewing my notes. The master will scold me if I forget these things again.",
+&"type": "dialogue"
+},
+"145": {
+&"id": "145",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"146": {
+&"id": "146",
+&"next_id": "152",
+&"type": ""
+},
+"15": {
+&"id": "15",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"152": {
+&"id": "152",
+&"next_id": "153",
+&"type": "title"
+},
+"153": {
+&"character": "Dreamer",
+&"id": "153",
+&"next_id": "155",
+&"text": "We spiritual dreamers don't really cross the barrier. We just snap back to our sleeping bodies and wake up when we approach it. That's why the Temple usually gets to keep our stuff in exchange for safe passage. Quite the lucrative deal for them, right?",
+&"type": "dialogue"
+},
+"154": {
+&"id": "154",
+&"next_id": "155",
+&"type": ""
+},
+"155": {
+&"id": "155",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"156": {
+&"id": "156",
+&"next_id": "157",
+&"type": ""
+},
+"157": {
+&"id": "157",
+&"next_id": "158",
+&"type": "title"
+},
+"158": {
+&"character": "Dreamer",
+&"id": "158",
+&"next_id": "159",
+&"text": "Whenever I go through the Cavern of Flame, the monks give me some supplies. I must confess, I wouldn't have made it if not for their help.",
+&"type": "dialogue"
+},
+"159": {
+&"id": "159",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"16": {
+&"id": "16",
+&"next_id": "17",
+&"type": ""
+},
+"160": {
+&"id": "160",
+&"next_id": "167",
+&"type": ""
+},
+"167": {
+&"id": "167",
+&"next_id": "168",
+&"type": "title"
+},
+"168": {
+&"character": "Voice",
+&"id": "168",
+&"next_id": "169",
+&"text": "Hey, wake up! Are you okay?",
+&"type": "dialogue"
+},
+"169": {
+&"id": "169",
+&"is_snippet": false,
+&"next_id": "end!",
+&"next_id_after": "",
+&"type": "goto"
+},
+"17": {
+&"id": "17",
+&"next_id": "18",
+&"type": "title"
+},
+"170": {
+&"id": "170",
+&"next_id": "171",
+&"type": ""
+},
+"171": {
+&"id": "171",
+&"next_id": "172",
+&"type": "title"
+},
+"172": {
+&"character": "Monk",
+&"id": "172",
+&"next_id": "173",
+&"text": "I heard a scream.... Did something happen?",
+&"type": "dialogue"
+},
+"173": {
+&"id": "173",
+&"is_snippet": false,
+&"next_id": "end!",
+&"next_id_after": "",
+&"type": "goto"
+},
+"174": {
+&"id": "174",
+&"next_id": "175",
+&"type": ""
+},
+"175": {
+&"id": "175",
+&"next_id": "176",
+&"type": "title"
+},
+"176": {
+&"character": "{mc_name}",
+&"id": "176",
+&"next_id": "177",
+&"text": "I'm fine. I think it was one of those weird dreams.",
+&"type": "dialogue"
+},
+"177": {
+&"character": "Monk",
+&"id": "177",
+&"next_id": "178",
+&"text": "O-oh, I'm sorry to hear that. I'll let you get ready, then. The Priests will receive you today, as you requested.",
+&"type": "dialogue"
+},
+"178": {
+&"id": "178",
+&"is_snippet": false,
+&"next_id": "end!",
+&"next_id_after": "",
+&"type": "goto"
+},
+"179": {
+&"id": "179",
+&"next_id": "181",
+&"type": ""
+},
+"18": {
+&"id": "18",
+&"next_id": "20",
+&"text": "PH",
+&"type": "dialogue"
+},
+"181": {
+&"id": "181",
+&"next_id": "182",
+&"type": "title"
+},
+"182": {
+&"character": "{mc_name}",
+&"id": "182",
+&"next_id": "183",
+&"text": "A whole year and I still haven't found out much about who I am. If they can't... or won't... help me remember who I am, there's no use in staying. Let's see what the Priests have to say.",
+&"type": "dialogue"
+},
+"183": {
+&"id": "183",
+&"is_snippet": false,
+&"next_id": "end!",
+&"next_id_after": "",
+&"type": "goto"
+},
+"184": {
+&"id": "184",
+&"next_id": "185",
+&"type": ""
+},
+"185": {
+&"id": "185",
+&"next_id": "186",
+&"type": "title"
+},
+"186": {
+&"character": "Nasht",
+&"id": "186",
+&"next_id": "187",
+&"text": "{mc_name}. Since the day we found you, we have tried to understand your condition. Neither physical dreamer, spiritual dreamer nor dream denizen seem to describe your situation and limitations.",
+&"type": "dialogue"
+},
+"187": {
+&"character": "Kaman-Thah",
+&"id": "187",
+&"next_id": "188",
+&"text": "We have allowed you to stay here and help in the temple in exchange for shelter. Now, after almost a full revolution of the skies, you come to us.",
+&"type": "dialogue"
+},
+"188": {
+&"character": "{mc_name}",
+&"id": "188",
+&"next_id": "189",
+&"text": "I think I might find answers in the Dreamlands. These recurring dreams about Carter and Kadath, they must mean something.",
+&"type": "dialogue"
+},
+"189": {
+&"character": "Nasht",
+&"id": "189",
+&"next_id": "190",
+&"text": "Randolph Carter. A worthy dreamer, yes. But it is not known whether he reached unknown Kadath in the cold waste.",
+&"type": "dialogue"
+},
+"19": {
+&"id": "19",
+&"next_id": "20",
+&"type": ""
+},
+"190": {
+&"character": "Kaman-Thah",
+&"id": "190",
+&"next_id": "191",
+&"text": "And if he reached it, whether he managed to return in some form. This might be the death of your soul, for the Great Ones are not to be harassed with minor pleas.",
+&"type": "dialogue"
+},
+"191": {
+&"character": "{mc_name}",
+&"id": "191",
+&"next_id": "192",
+&"text": "If finding this dreamer won't reveal who I am or where I belong, I shall ask these questions to the Gods of Earth themselves. And if that is meant to be the end of me, so be it. Now, I humbly request passage, and your blessing.",
+&"type": "dialogue"
+},
+"192": {
+&"character": "Nasht and Kaman-Thah",
+&"id": "192",
+&"next_id": "193",
+&"text": "As you wish. Descend the seven hundred steps to the Gate of Deeper Slumber. Set out through the Enchanted Wood. Farewell, and may we encounter each other again.",
+&"type": "dialogue"
+},
+"193": {
+&"id": "193",
+&"is_snippet": false,
+&"next_id": "end!",
+&"next_id_after": "",
+&"type": "goto"
+},
+"194": {
+&"id": "194",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"20": {
+&"id": "20",
+&"next_id": "21",
+&"type": "title"
+},
+"21": {
+&"character": "Monk",
+&"id": "21",
+&"next_id": "22",
+&"text": "I'm warming my hands here. And before you mention it, I learned my lesson about getting too close to the pillar! And my eyebrows have already grown back!",
+&"type": "dialogue"
+},
+"22": {
+&"id": "22",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"23": {
+&"id": "23",
+&"next_id": "24",
+&"type": ""
+},
+"24": {
+&"id": "24",
+&"next_id": "25",
+&"type": "title"
+},
+"25": {
+&"condition": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"not"
+}, {
+&"i": 7,
+&"type": &"variable",
+&"value": "VarsService"
+}, {
+&"i": 18,
+&"type": &"dot"
+}, {
+&"function": "get_flag",
+&"i": 19,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 28,
+&"type": &"string",
+&"value": "cavern_of_flame.gift_1"
+}, {
+&"i": 52,
+&"type": &"parens_close"
+}])])
+}])
+},
+&"id": "25",
+&"next_id": "26",
+&"next_id_after": "33",
+&"type": "condition"
+},
+"26": {
+&"id": "26",
+&"mutation": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "VarsService"
+}, {
+&"i": 14,
+&"type": &"dot"
+}, {
+&"function": "set_flag",
+&"i": 15,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 24,
+&"type": &"string",
+&"value": "cavern_of_flame.gift_1"
+}, {
+&"i": 48,
+&"type": &"parens_close"
+}])])
+}]),
+&"is_blocking": true
+},
+&"next_id": "27",
+&"type": "mutation"
+},
+"27": {
+&"condition": {
+&"expression": Array[Dictionary]([{
+&"i": 4,
+&"type": &"variable",
+&"value": "VarsService"
+}, {
+&"i": 15,
+&"type": &"dot"
+}, {
+&"function": "get_flag",
+&"i": 16,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 25,
+&"type": &"string",
+&"value": "cavern_of_flame.talked_to_priests"
+}, {
+&"i": 60,
+&"type": &"parens_close"
+}])])
+}])
+},
+&"id": "27",
+&"next_id": "28",
+&"next_id_after": "31",
+&"next_sibling_id": "29",
+&"type": "condition"
+},
+"28": {
+&"character": "Monk",
+&"id": "28",
+&"next_id": "31",
+&"text": "Hi! Heard you asked for an appointment with the Priests. Here's a little good luck charm!",
+&"type": "dialogue"
+},
+"29": {
+&"condition": {},
+&"id": "29",
+&"next_id": "30",
+&"next_id_after": "31",
+&"type": "condition"
+},
+"30": {
+&"character": "Monk",
+&"id": "30",
+&"next_id": "31",
+&"text": "Hi! Heard about you were leaving... Here's a little good luck charm for the road.",
+&"type": "dialogue"
+},
+"31": {
+&"id": "31",
+&"mutation": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "EntitiesService"
+}, {
+&"i": 18,
+&"type": &"dot"
+}, {
+&"i": 19,
+&"type": &"variable",
+&"value": "party"
+}, {
+&"i": 24,
+&"type": &"dot"
+}, {
+&"i": 25,
+&"type": &"variable",
+&"value": "inventory"
+}, {
+&"i": 34,
+&"type": &"dot"
+}, {
+&"function": "add",
+&"i": 35,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 39,
+&"type": &"string",
+&"value": "sapphire_charm"
+}, {
+&"i": 55,
+&"type": &"parens_close"
+}])])
+}]),
+&"is_blocking": true
+},
+&"next_id": "32",
+&"type": "mutation"
+},
+"32": {
+&"id": "32",
+&"next_id": "33",
+&"text": "Received [color=cyan]Sapphire Charm[/color]!",
+&"type": "dialogue"
+},
+"33": {
+&"character": "Monk",
+&"id": "33",
+&"next_id": "34",
+&"text": "Good luck, and take care, ok?",
+&"type": "dialogue"
+},
+"34": {
+&"id": "34",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"35": {
+&"id": "35",
+&"next_id": "36",
+&"type": ""
+},
+"36": {
+&"id": "36",
+&"next_id": "37",
+&"type": "title"
+},
+"37": {
+&"condition": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"not"
+}, {
+&"i": 7,
+&"type": &"variable",
+&"value": "VarsService"
+}, {
+&"i": 18,
+&"type": &"dot"
+}, {
+&"function": "get_flag",
+&"i": 19,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 28,
+&"type": &"string",
+&"value": "cavern_of_flame.gift_2"
+}, {
+&"i": 52,
+&"type": &"parens_close"
+}])])
+}])
+},
+&"id": "37",
+&"next_id": "38",
+&"next_id_after": "42",
+&"type": "condition"
+},
+"38": {
+&"id": "38",
+&"mutation": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "VarsService"
+}, {
+&"i": 14,
+&"type": &"dot"
+}, {
+&"function": "set_flag",
+&"i": 15,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 24,
+&"type": &"string",
+&"value": "cavern_of_flame.gift_1"
+}, {
+&"i": 48,
+&"type": &"parens_close"
+}])])
+}]),
+&"is_blocking": true
+},
+&"next_id": "39",
+&"type": "mutation"
+},
+"39": {
+&"id": "39",
+&"mutation": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "EntitiesService"
+}, {
+&"i": 18,
+&"type": &"dot"
+}, {
+&"i": 19,
+&"type": &"variable",
+&"value": "party"
+}, {
+&"i": 24,
+&"type": &"dot"
+}, {
+&"i": 25,
+&"type": &"variable",
+&"value": "inventory"
+}, {
+&"i": 34,
+&"type": &"dot"
+}, {
+&"function": "add",
+&"i": 35,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 39,
+&"type": &"string",
+&"value": "001_healing_draught"
+}]), Array[Dictionary]([{
+&"i": 62,
+&"type": &"number",
+&"value": 3
+}, {
+&"i": 63,
+&"type": &"parens_close"
+}])])
+}]),
+&"is_blocking": true
+},
+&"next_id": "40",
+&"type": "mutation"
+},
+"4": {
+&"id": "4",
+&"next_id": "5",
+&"type": "title"
+},
+"40": {
+&"character": "Monk",
+&"id": "40",
+&"next_id": "41",
+&"text": "Hey! I know you've been thinking about leaving, so I got you this.",
+&"type": "dialogue"
+},
+"41": {
+&"id": "41",
+&"next_id": "42",
+&"text": "Received 5 Healing Draughts!",
+&"type": "dialogue"
+},
+"42": {
+&"character": "Monk",
+&"id": "42",
+&"next_id": "43",
+&"text": "I'll be rooting for you from here!",
+&"type": "dialogue"
+},
+"43": {
+&"id": "43",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"44": {
+&"id": "44",
+&"next_id": "49",
+&"type": ""
+},
+"49": {
+&"id": "49",
+&"next_id": "50",
+&"type": "title"
+},
+"5": {
+&"id": "5",
+&"next_id": "6",
+&"text": "This door is locked.",
+&"type": "dialogue"
+},
+"50": {
+&"condition": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"group",
+&"value": Array[Dictionary]([{
+&"i": 4,
+&"type": &"not"
+}, {
+&"i": 8,
+&"type": &"variable",
+&"value": "VarsService"
+}, {
+&"i": 19,
+&"type": &"dot"
+}, {
+&"function": "get_flag",
+&"i": 20,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 29,
+&"type": &"string",
+&"value": "cavern_of_flame.librarian_blessing"
+}, {
+&"i": 65,
+&"type": &"parens_close"
+}])])
+}, {
+&"i": 67,
+&"type": &"and_or",
+&"value": "and"
+}, {
+&"i": 71,
+&"type": &"not"
+}, {
+&"i": 78,
+&"type": &"variable",
+&"value": "VarsService"
+}, {
+&"i": 89,
+&"type": &"dot"
+}, {
+&"function": "get_flag",
+&"i": 90,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 99,
+&"type": &"string",
+&"value": "cavern_of_flame.librarian_blessing"
+}, {
+&"i": 135,
+&"type": &"parens_close"
+}])])
+}, {
+&"i": 136,
+&"type": &"parens_close"
+}])
+}])
+},
+&"id": "50",
+&"next_id": "51",
+&"next_id_after": "58",
+&"next_sibling_id": "52",
+&"type": "condition"
+},
+"51": {
+&"character": "Monk",
+&"id": "51",
+&"next_id": "58",
+&"text": "The venerable Priests have beyond this door. But they have instructed me to let you through only when you have received the blessings from both our Master Librarian and our Master of Martial Arts. Sorry, but that's what they said.",
+&"type": "dialogue"
+},
+"52": {
+&"condition": {
+&"expression": Array[Dictionary]([{
+&"i": 5,
+&"type": &"not"
+}, {
+&"i": 9,
+&"type": &"variable",
+&"value": "VarsService"
+}, {
+&"i": 20,
+&"type": &"dot"
+}, {
+&"function": "get_flag",
+&"i": 21,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 30,
+&"type": &"string",
+&"value": "cavern_of_flame.librarian_blessing"
+}, {
+&"i": 66,
+&"type": &"parens_close"
+}])])
+}])
+},
+&"id": "52",
+&"next_id": "53",
+&"next_id_after": "58",
+&"next_sibling_id": "54",
+&"type": "condition"
+},
+"53": {
+&"character": "Monk",
+&"id": "53",
+&"next_id": "58",
+&"text": "I see you have obtained the Master of Martial Arts' blessing. Come back with the Master Librarian's blessing and I will let you through.",
+&"type": "dialogue"
+},
+"54": {
+&"condition": {
+&"expression": Array[Dictionary]([{
+&"i": 5,
+&"type": &"not"
+}, {
+&"i": 9,
+&"type": &"variable",
+&"value": "VarsService"
+}, {
+&"i": 20,
+&"type": &"dot"
+}, {
+&"function": "get_flag",
+&"i": 21,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 30,
+&"type": &"string",
+&"value": "cavern_of_flame.fighter_blessing"
+}, {
+&"i": 64,
+&"type": &"parens_close"
+}])])
+}])
+},
+&"id": "54",
+&"next_id": "55",
+&"next_id_after": "58",
+&"next_sibling_id": "56",
+&"type": "condition"
+},
+"55": {
+&"character": "Monk",
+&"id": "55",
+&"next_id": "58",
+&"text": "I see you have obtained the Master of Martial Arts' blessing. Come back with the Master Librarian's blessing and I will let you through.",
+&"type": "dialogue"
+},
+"56": {
+&"condition": {},
+&"id": "56",
+&"next_id": "57",
+&"next_id_after": "58",
+&"type": "condition"
+},
+"57": {
+&"character": "Monk",
+&"id": "57",
+&"next_id": "58",
+&"text": "I see you have obtained both blessings. Go through, then. Let's not make the Priests wait.",
+&"type": "dialogue"
+},
+"58": {
+&"id": "58",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"59": {
+&"id": "59",
+&"next_id": "60",
+&"type": ""
+},
+"6": {
+&"id": "6",
+&"is_snippet": false,
+&"next_id": "end!",
+&"next_id_after": "",
+&"type": "goto"
+},
+"60": {
+&"id": "60",
+&"next_id": "61",
+&"type": "title"
+},
+"61": {
+&"condition": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "VarsService"
+}, {
+&"i": 14,
+&"type": &"dot"
+}, {
+&"function": "get_flag",
+&"i": 15,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 24,
+&"type": &"string",
+&"value": "cavern_of_flame.barrier_bumped"
+}, {
+&"i": 56,
+&"type": &"parens_close"
+}])])
+}])
+},
+&"id": "61",
+&"next_id": "62",
+&"next_id_after": "67",
+&"next_sibling_id": "64",
+&"type": "condition"
+},
+"62": {
+&"character": "Monk",
+&"id": "62",
+&"next_id": "63",
+&"text": "*yawn*... Welcome to the Cavern of Flame...",
+&"type": "dialogue"
+},
+"63": {
+&"character": "Monk",
+&"id": "63",
+&"next_id": "67",
+&"text": "Oh, it's you, {mc_name}. Tried leaving for the waking world again? Can't say I'm not impressed by your persistence.",
+&"type": "dialogue"
+},
+"64": {
+&"condition": {},
+&"id": "64",
+&"next_id": "65",
+&"next_id_after": "67",
+&"type": "condition"
+},
+"65": {
+&"character": "Monk",
+&"id": "65",
+&"next_id": "66",
+&"text": "*yawn*... Welcome to the Cavern of Flame, passageway to the lands of Dream, traveller...",
+&"type": "dialogue"
+},
+"66": {
+&"character": "Monk",
+&"id": "66",
+&"next_id": "67",
+&"text": "Oh, it's you, {mc_name}. Sorry, I'm on welcome duty today so I had very little sleep...",
+&"type": "dialogue"
+},
+"67": {
+&"id": "67",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"68": {
+&"id": "68",
+&"next_id": "69",
+&"type": ""
+},
+"69": {
+&"id": "69",
+&"next_id": "70",
+&"type": "title"
+},
+"7": {
+&"id": "7",
+&"next_id": "12",
+&"type": ""
+},
+"70": {
+&"condition": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"not"
+}, {
+&"i": 7,
+&"type": &"variable",
+&"value": "VarsService"
+}, {
+&"i": 18,
+&"type": &"dot"
+}, {
+&"function": "get_flag",
+&"i": 19,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 28,
+&"type": &"string",
+&"value": "cavern_of_flame.item_quest_started"
+}, {
+&"i": 64,
+&"type": &"parens_close"
+}])])
+}])
+},
+&"id": "70",
+&"next_id": "71",
+&"next_id_after": "80",
+&"next_sibling_id": "74",
+&"type": "condition"
+},
+"71": {
+&"character": "Monk",
+&"id": "71",
+&"next_id": "72",
+&"text": "Hey, if you're heading out today, can you take this to my mate near the barrier? Creatures have been getting more and more aggressive as of late, so he could use this.",
+&"type": "dialogue"
+},
+"72": {
+&"id": "72",
+&"mutation": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "EntitiesService"
+}, {
+&"i": 18,
+&"type": &"dot"
+}, {
+&"i": 19,
+&"type": &"variable",
+&"value": "party"
+}, {
+&"i": 24,
+&"type": &"dot"
+}, {
+&"i": 25,
+&"type": &"variable",
+&"value": "inventory"
+}, {
+&"i": 34,
+&"type": &"dot"
+}, {
+&"function": "add",
+&"i": 35,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 39,
+&"type": &"string",
+&"value": "002_potent_draught"
+}, {
+&"i": 59,
+&"type": &"parens_close"
+}])])
+}]),
+&"is_blocking": true
+},
+&"next_id": "73",
+&"type": "mutation"
+},
+"73": {
+&"id": "73",
+&"mutation": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "VarsService"
+}, {
+&"i": 14,
+&"type": &"dot"
+}, {
+&"function": "set_flag",
+&"i": 15,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 24,
+&"type": &"string",
+&"value": "cavern_of_flame.item_quest_started"
+}]), Array[Dictionary]([{
+&"i": 62,
+&"type": &"variable",
+&"value": "True"
+}, {
+&"i": 66,
+&"type": &"parens_close"
+}])])
+}]),
+&"is_blocking": true
+},
+&"next_id": "80",
+&"type": "mutation"
+},
+"74": {
+&"condition": {
+&"expression": Array[Dictionary]([{
+&"i": 5,
+&"type": &"not"
+}, {
+&"i": 9,
+&"type": &"variable",
+&"value": "VarsService"
+}, {
+&"i": 20,
+&"type": &"dot"
+}, {
+&"function": "get_flag",
+&"i": 21,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 30,
+&"type": &"string",
+&"value": "cavern_of_flame.item_quest_delivered"
+}, {
+&"i": 68,
+&"type": &"parens_close"
+}])])
+}])
+},
+&"id": "74",
+&"next_id": "75",
+&"next_id_after": "80",
+&"next_sibling_id": "76",
+&"type": "condition"
+},
+"75": {
+&"character": "Monk",
+&"id": "75",
+&"next_id": "80",
+&"text": "I hope he's doing OK. He might be out of his water in his current assignment.",
+&"type": "dialogue"
+},
+"76": {
+&"condition": {
+&"expression": Array[Dictionary]([{
+&"i": 5,
+&"type": &"not"
+}, {
+&"i": 9,
+&"type": &"variable",
+&"value": "VarsService"
+}, {
+&"i": 20,
+&"type": &"dot"
+}, {
+&"function": "get_flag",
+&"i": 21,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 30,
+&"type": &"string",
+&"value": "cavern_of_flame.item_quest_finished"
+}, {
+&"i": 67,
+&"type": &"parens_close"
+}])])
+}])
+},
+&"id": "76",
+&"next_id": "77",
+&"next_id_after": "80",
+&"next_sibling_id": "78",
+&"type": "condition"
+},
+"77": {
+&"character": "Monk",
+&"id": "77",
+&"next_id": "80",
+&"text": "So he's not harmed? That's good to hear.Thanks!",
+&"type": "dialogue"
+},
+"78": {
+&"condition": {},
+&"id": "78",
+&"next_id": "79",
+&"next_id_after": "80",
+&"type": "condition"
+},
+"79": {
+&"character": "Monk",
+&"id": "79",
+&"next_id": "80",
+&"text": "Guard duty can be so boring...",
+&"type": "dialogue"
+},
+"80": {
+&"id": "80",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"81": {
+&"id": "81",
+&"next_id": "82",
+&"type": ""
+},
+"82": {
+&"id": "82",
+&"next_id": "83",
+&"type": "title"
+},
+"83": {
+&"character": "{mc_name}",
+&"id": "83",
+&"next_id": "84",
+&"text": "Ouch. Still won't let me pass into the waking world.",
+&"type": "dialogue"
+},
+"84": {
+&"id": "84",
+&"is_snippet": false,
+&"next_id": "end!",
+&"next_id_after": "",
+&"type": "goto"
+},
+"85": {
+&"id": "85",
+&"next_id": "90",
+&"type": ""
+},
+"90": {
+&"id": "90",
+&"next_id": "91",
+&"type": "title"
+},
+"91": {
+&"character": "Scholar",
+&"id": "91",
+&"next_id": "92",
+&"text": "While in the Dreamlands, spiritual dreamers sometimes remember their waking lives through dreams. That's why I think you're one of them, since you've been having these weird dreams.",
+&"type": "dialogue"
+},
+"92": {
+&"id": "92",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"93": {
+&"id": "93",
+&"next_id": "94",
+&"type": ""
+},
+"94": {
+&"id": "94",
+&"next_id": "95",
+&"type": "title"
+},
+"95": {
+&"character": "Scholar",
+&"id": "95",
+&"next_id": "96",
+&"text": "We've been waiting for a copy of the [color=cyan]Pnakotic Manuscripts[/color] to arrive from [color=cyan]Ulthar[/color].",
+&"type": "dialogue"
+},
+"96": {
+&"character": "Scholar",
+&"id": "96",
+&"next_id": "97",
+&"text": "But with the alarming aggresion level from Dreamlands organisms, I don't know if we will ever get them...",
+&"type": "dialogue"
+},
+"97": {
+&"id": "97",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"98": {
+&"id": "98",
+&"next_id": "99",
+&"type": ""
+},
+"99": {
+&"id": "99",
+&"next_id": "100",
+&"type": "title"
+}
+}
+raw_text = "# ---------------------------
+# Objects
+# ---------------------------
+
+~ closed_door
+This door is locked.
+=> END!
+
+# ---------------------------
+# Monks in corridor and hallz
+# ---------------------------
+
+~ monk_save
+Meditative Monk: The Elder Sign's light always manages to calm me down. I guess knowing my progression is being acknowledged and saved has that effect.
+Meditative Monk: And if you have an Offering, you can use it to fully heal as well. But since this one is near my room, I just rest in my bed instead.
+=> END
+
+~ monk_smalltalk_1
+PH
+
+~ monk_smalltalk_2
+Monk: I'm warming my hands here. And before you mention it, I learned my lesson about getting too close to the pillar! And my eyebrows have already grown back!
+=> END
+
+~ gift_monk_1
+if not VarsService.get_flag(\"cavern_of_flame.gift_1\"):
+	do VarsService.set_flag(\"cavern_of_flame.gift_1\")
+	if VarsService.get_flag(\"cavern_of_flame.talked_to_priests\"):
+		Monk: Hi! Heard you asked for an appointment with the Priests. Here's a little good luck charm!
+	else:
+		Monk: Hi! Heard about you were leaving... Here's a little good luck charm for the road.
+	do EntitiesService.party.inventory.add(\"sapphire_charm\")
+	Received [color=cyan]Sapphire Charm[/color]!
+Monk: Good luck, and take care, ok?
+=> END
+
+~ gift_monk_2
+if not VarsService.get_flag(\"cavern_of_flame.gift_2\"):
+	do VarsService.set_flag(\"cavern_of_flame.gift_1\")
+	do EntitiesService.party.inventory.add(\"001_healing_draught\", 3)
+	Monk: Hey! I know you've been thinking about leaving, so I got you this.
+	Received 5 Healing Draughts!
+Monk: I'll be rooting for you from here!
+=> END
+
+# ---------------------------
+# Entrance guards
+# ---------------------------
+
+~ guard_priests
+if (not VarsService.get_flag(\"cavern_of_flame.librarian_blessing\") and not    VarsService.get_flag(\"cavern_of_flame.librarian_blessing\")):	
+	Monk: The venerable Priests have beyond this door. But they have instructed me to let you through only when you have received the blessings from both our Master Librarian and our Master of Martial Arts. Sorry, but that's what they said.
+elif not VarsService.get_flag(\"cavern_of_flame.librarian_blessing\"):
+	Monk: I see you have obtained the Master of Martial Arts' blessing. Come back with the Master Librarian's blessing and I will let you through.
+elif not VarsService.get_flag(\"cavern_of_flame.fighter_blessing\"):
+	Monk: I see you have obtained the Master of Martial Arts' blessing. Come back with the Master Librarian's blessing and I will let you through.
+else:
+	Monk: I see you have obtained both blessings. Go through, then. Let's not make the Priests wait.
+=> END
+
+~ guard_1
+if VarsService.get_flag(\"cavern_of_flame.barrier_bumped\"):
+	Monk: *yawn*... Welcome to the Cavern of Flame...
+	Monk: Oh, it's you, {mc_name}. Tried leaving for the waking world again? Can't say I'm not impressed by your persistence. 
+else:
+	Monk: *yawn*... Welcome to the Cavern of Flame, passageway to the lands of Dream, traveller...
+	Monk: Oh, it's you, {mc_name}. Sorry, I'm on welcome duty today so I had very little sleep...
+=> END
+
+~ guard_2
+if not VarsService.get_flag(\"cavern_of_flame.item_quest_started\"):
+	Monk: Hey, if you're heading out today, can you take this to my mate near the barrier? Creatures have been getting more and more aggressive as of late, so he could use this.
+	do EntitiesService.party.inventory.add(\"002_potent_draught\")
+	do VarsService.set_flag(\"cavern_of_flame.item_quest_started\", True)
+elif not VarsService.get_flag(\"cavern_of_flame.item_quest_delivered\"):
+	Monk: I hope he's doing OK. He might be out of his water in his current assignment.
+elif not VarsService.get_flag(\"cavern_of_flame.item_quest_finished\"):
+	Monk: So he's not harmed? That's good to hear.Thanks!
+else:
+	Monk: Guard duty can be so boring...
+=> END
+
+~ wall
+{mc_name}: Ouch. Still won't let me pass into the waking world.
+=> END!
+
+# ---------------------------
+# Library
+# ---------------------------
+
+~ scholar_1
+Scholar: While in the Dreamlands, spiritual dreamers sometimes remember their waking lives through dreams. That's why I think you're one of them, since you've been having these weird dreams.
+=> END
+
+~ scholar_2
+Scholar: We've been waiting for a copy of the [color=cyan]Pnakotic Manuscripts[/color] to arrive from [color=cyan]Ulthar[/color]. 
+Scholar: But with the alarming aggresion level from Dreamlands organisms, I don't know if we will ever get them...
+=> END
+
+~ scholar_3
+Scholar: The Gods of Earth disappearing? I think something like that happened some years ago... It didn't last long, though.
+=> END
+
+~ scholar_4
+Scholar: I looked up this Carter guy you mentioned the other day. Seems he was quite the proficient dreamer back in his day. I wonder what happened to him? 
+=> END
+
+
+~ scholar_5
+Monk: Physical dreamers can't just wake up by focusing, same as you. That's why I think you're one of them, since you can't seem to wake up.
+
+
+~ scholar_6
+Monk: Physical dreamers can't just wake up by focusing, same as you. That's why I think you're one of them, since you can't seem to wake up.
+
+
+
+=> END
+
+# ---------------------------
+# Training Hall
+# ---------------------------
+
+~ master
+if not VarsService.get_flag(\"journal_enabled\"):
+	Master: You're leaving, huh. You better not get beaten up by some random vermin. You did train under me for the last year, after all.
+	Master: Here, have this. It's a journal, so you don't go around forgetting stuff, you hear me?
+	do EnvironmentService.current_room.unlock_journal()
+	Received [color=cyan]Journal[/color]. Check it in the Menu.
+	Master: If you ever fill that thing, make sure you shew me those notes.
+else:
+	Master: If you ever fill that journal, make sure you shew me those notes.
+=> END!
+
+~ apprentice_1
+Monk: T-this might sound obvious, but obtaining new weapons is meaningless if you don't equip them. I-I failed my last test 'c-cause I forgot about that...
+=> END!
+
+~ apprentice_2
+Monk: Did you know that [color=cyan]SP[/color] stands for [color=cyan]Stability Points[/color]? And, did you know that running out of those will send you into a Breakdown?
+Monk: And, and, effects vary from individual from individual, but you will basically lose control of yourself for a while. It's suuuper nasty!
+=> END!
+
+~ apprentice_3
+Monk: Always... check... the turn timeline... Oh, I'm reviewing my notes. The master will scold me if I forget these things again.
+=> END
+
+# ---------------------------
+# Travelers
+# ---------------------------
+
+
+~ traveler_1
+Dreamer: We spiritual dreamers don't really cross the barrier. We just snap back to our sleeping bodies and wake up when we approach it. That's why the Temple usually gets to keep our stuff in exchange for safe passage. Quite the lucrative deal for them, right?
+
+=> END
+
+~ traveler_2
+Dreamer: Whenever I go through the Cavern of Flame, the monks give me some supplies. I must confess, I wouldn't have made it if not for their help.
+=> END
+
+
+# ---------------------------
+# Events
+# ---------------------------
+
+
+~ wake_up
+Voice: Hey, wake up! Are you okay?
+=> END!
+
+~ woken_up
+Monk: I heard a scream.... Did something happen?
+=> END!
+
+~ after_named
+{mc_name}: I'm fine. I think it was one of those weird dreams.
+Monk: O-oh, I'm sorry to hear that. I'll let you get ready, then. The Priests will receive you today, as you requested.
+=> END!
+
+
+~ mc_reflection
+{mc_name}: A whole year and I still haven't found out much about who I am. If they can't... or won't... help me remember who I am, there's no use in staying. Let's see what the Priests have to say.
+=> END!
+	
+~ priests
+Nasht: {mc_name}. Since the day we found you, we have tried to understand your condition. Neither physical dreamer, spiritual dreamer nor dream denizen seem to describe your situation and limitations.
+Kaman-Thah: We have allowed you to stay here and help in the temple in exchange for shelter. Now, after almost a full revolution of the skies, you come to us. 
+{mc_name}: I think I might find answers in the Dreamlands. These recurring dreams about Carter and Kadath, they must mean something.
+Nasht: Randolph Carter. A worthy dreamer, yes. But it is not known whether he reached unknown Kadath in the cold waste.
+Kaman-Thah: And if he reached it, whether he managed to return in some form. This might be the death of your soul, for the Great Ones are not to be harassed with minor pleas.
+{mc_name}: If finding this dreamer won't reveal who I am or where I belong, I shall ask these questions to the Gods of Earth themselves. And if that is meant to be the end of me, so be it. Now, I humbly request passage, and your blessing.
+Nasht and Kaman-Thah: As you wish. Descend the seven hundred steps to the Gate of Deeper Slumber. Set out through the Enchanted Wood. Farewell, and may we encounter each other again.
+=> END!"
+metadata/dialogue_manager_version = "3.5.1"

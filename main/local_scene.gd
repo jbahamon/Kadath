@@ -36,7 +36,7 @@ func _ready() -> void:
 	UIService.initialize(
 		$PopupLayer, 
 		$MenuLayer/MenuPopup, 
-		$MenuLayer/SavesPopup, 
+		$MenuLayer/SavesPopup,
 		$UIControlPlayer, 
 		$UINotificationPlayer
 	)
@@ -52,20 +52,20 @@ func _ready() -> void:
 	EntitiesService.bind_proxy()
 	
 func move_to_starting_room():
-	
-	
-	if VarsService.loaded_slot >= 0:
-		SavesService.load_game_data(VarsService.loaded_slot)
-		VarsService.loaded_slot = -1
+
+	if SavesService.loaded_slot >= 0:
+		SavesService.load_game_data(SavesService.loaded_slot)
 	else:
 		VarsService.scan_level = 2
+		EntitiesService.party.update_active_members()
+	
 		# Note: move start_game to the above when doing the cutscene intro
 		
 		if self.debug:
 			
 			await EnvironmentService.update_whereabouts(
-				"000_prologue_kadath", 
-				"05_boss_room",
+				"001_cavern_of_flame", 
+				"mc_room",
 				
 				Vector2(0, 0),
 				Vector2.UP,

@@ -1,0 +1,69 @@
+[gd_resource type="Resource" script_class="SaveData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://main/save_data.gd" id="1_kac7v"]
+
+[resource]
+script = ExtResource("1_kac7v")
+game_version = "0.1.0"
+data = {
+"alignment": 0,
+"flags": {},
+"inventory": {
+"amounts": {
+"002_potent_draught": 10,
+"004_calming_balsam": 10,
+"007_reanimation_scroll": 5
+},
+"order": ["002_potent_draught", "004_calming_balsam", "007_reanimation_scroll"]
+},
+"location": "001_cavern_of_flame",
+"party_member_alex": {
+"display_name": "Alex",
+"energy": 99,
+"equipped_accessory": "",
+"equipped_armor": "",
+"equipped_weapon": "",
+"experience": 100,
+"health": 999,
+"skills": {
+&"CrescentBlast": true,
+&"ForcefulSlash": true
+},
+"unlocked": false
+},
+"party_member_carter": {
+"display_name": "Carter",
+"energy": 99,
+"equipped_accessory": "",
+"equipped_armor": "sturdy_vest",
+"equipped_weapon": "scimitar",
+"experience": 25000,
+"health": 450,
+"skills": {
+&"Charge": true,
+&"CrescentBlast": true
+},
+"unlocked": true
+},
+"party_member_pickman": {
+"display_name": "Pickman",
+"energy": 65,
+"equipped_accessory": "",
+"equipped_armor": "ruby_braces",
+"equipped_weapon": "old_tombstone",
+"experience": 25000,
+"health": 616,
+"skills": {
+&"SlabSlam": true,
+&"TaxingTouch": true
+},
+"unlocked": false
+},
+"party_order": [&"Carter", &"Alex", &"Pickman"],
+"player_orientation": Vector2(0, -1),
+"player_position": Vector2(4.06938, -144.069),
+"room": "room_corridor",
+"scan_level": 2,
+"scanned_enemies": {},
+"strings": {}
+}
