@@ -1,13 +1,38 @@
-Kadath
-======================
+# DreamQuest: To Unknown Kadath
 
-An in-progress, Eastern-styled RPG loosely based on Lovecraft's "The Dream-Quest of Unknown Kadath".
+A 2D Eastern-styled RPG built in Godot, loosely inspired by Lovecraft's "The Dream-Quest of Unknown Kadath".
 
-Credits
-======================
+## About
 
-Graphics
-----------------------
+I like horror books. I was reading the aforementioned "The Dream-Quest of Unknown Kadath" and thought "wow, this reads like a fetch quest", "wow, this feels like someone joined the party" and so on. And having played a number of Eastern-styled RPGs I naturally started to assign mechanics, skills and such to the characters in the story. I had some experience with Godot at the time and thought: "Wait, I *can* make this into a game!". Yes, Lovecraft is a problematic character, but since his works are now public domain, why not reclaiming them? Maybe we can even use them to send a different, better message. 
+
+## Status
+
+In development! Proof-of-concept release available (v0.0.1).
+
+## Features
+
+- Turn-based battle system
+- Dialogue system (via [Dialogue Manager](https://github.com/nathanhoad/godot_dialogue_manager))
+- Basic party management
+- A neat cutscene system
+- Basic menus for items, equipment, settings
+- Rough save system
+
+## Screenshots
+
+![A battle involving Randolph Carter and the ghoul Pickman against a group of robed figures](docs/screenshot_1.png)
+
+![A battle involving Randolph Carter and the ghoul Pickman against a strange lamp with fingers for legs](docs/screenshot_2.png)
+
+## Built using:
+
+- **Engine:** Godot 4
+- **Languages:** GDScript, GDShader
+
+## Credits
+
+## Graphics
 
 Various projectiles, effects and tiles:
   Remastered Tyrian Graphics (https://lostgarden.com/2007/04/05/free-game-graphics-tyrian-ships-and-tiles/) by Daniel Cook (https://lostgarden.com/)
@@ -42,8 +67,7 @@ UI borders/corners included for potential future use:
 UI Panels, Dialogue advance indicator:
   UI assets pack 2 :) (https://srtoasty.itch.io/ui-assets-pack-2) by Sr.Toasty (https://srtoasty.itch.io/)
 
-Music and Sounds
-----------------------
+### Music and Sounds
 
 Title screen BGM:
   Eclipse | Aether's Dawn (Without Cello) (https://rhodyn.itch.io/eclipse) by Rhodyn (https://rhodyn.itch.io/)
@@ -135,8 +159,7 @@ Various battle sound effects:
 Various battle sound effects:
   16 Bits Monsters Growls (https://pudretediablo.itch.io/16bits-monsters-growls) by Diablo Luna (https://pudretediablo.itch.io/)
 
-Code
-----------------------
+### Code
 
 Various ideas for battles, inventory and other code structuring:
   Godot 4 Open RPG (https://github.com/gdquest-demos/godot-open-rpg) by GDQuest (https://www.gdquest.com/)

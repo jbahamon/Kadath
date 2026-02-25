@@ -13,7 +13,7 @@ config_version=5
 config/name="Kadath"
 config/version="0.1.0"
 run/main_scene="res://ui/04_templates/main_menu/main_menu.tscn"
-config/features=PackedStringArray("4.4")
+config/features=PackedStringArray("4.5")
 config/icon="res://icon.png"
 
 [autoload]
@@ -52,8 +52,8 @@ enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
 
 [gui]
 
-theme/custom="res://ui/01_atoms/theme.tres"
 theme/default_font_antialiasing=0
+theme/custom="res://ui/01_atoms/theme.tres"
 
 [importer_defaults]
 
