@@ -19,11 +19,11 @@ with open("out.md", "w") as out_file:
 		out_file.write(f"### {section_name}\n\n")
 
 		for item in items:
-			out_file.write(f"{item['asset_usage']}:\n\n")
+			out_file.write(f"{item['asset_usage']}:\n")
 
 			if item.get("author_literal", False):
-				out_file.write(f"\t[{item['asset_name']}]({item['asset_url']} - [{item['author_name']}]({item['author_url']})\n\n\n")
+				out_file.write(f"\t[{item['asset_name']}]({item['asset_url']}) - [{item['author_name']}]({item['author_url']})\n\n")
 			else:
-				out_file.write(f"\t[{item['asset_name']}]({item['asset_url']} by [{item['author_name']}]({item['author_url']})\n\n\n")
+				out_file.write(f"\t[{item['asset_name']}]({item['asset_url']}) by [{item['author_name']}]({item['author_url']})\n\n")
 
 
